@@ -27,7 +27,7 @@ export interface SwapsAction {
   payload?:
     | {
         chainId?: string;
-        featureFlags?: SwapsFeatureFlags;
+        featureFlags?: SwapsFeatureFlags | null;
       }
     | boolean;
 }
