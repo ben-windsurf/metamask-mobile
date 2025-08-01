@@ -49,9 +49,13 @@ export enum RPCStageTypes {
  * @param {Error | unknown} error - optional error object to be set in store
  */
 export interface iEventStage {
-  eventStage: string;
-  rpcName: string;
-  error?: Error;
+  eventStage?: string;
+  rpcName?: string;
+  error?: {
+    name?: string;
+    message?: string;
+    stack?: string;
+  };
 }
 
 /**
@@ -59,13 +63,15 @@ export interface iEventStage {
  * please extend this interface to add more supported RPC events
  */
 export interface iEventGroup {
-  signingEvent: iEventStage;
+  signingEvent?: iEventStage;
 }
+
+export interface RpcEventsState extends iEventGroup {}
 
 /**
  * Initial state of the RPC event flow
  */
-const initialState: Readonly<iEventGroup> = {
+const initialState: Readonly<RpcEventsState> = {
   signingEvent: {
     eventStage: RPCStageTypes.IDLE,
     rpcName: '',
@@ -79,12 +85,12 @@ const initialState: Readonly<iEventGroup> = {
  * @returns {iRPCFlowStage} - the new state of the sign message flow
  */
 const signMessageReducer = (
-  state = initialState,
+  state: RpcEventsState = initialState,
   action: iEventAction = {
     type: '',
     rpcName: '',
   },
-) => {
+): RpcEventsState => {
   const eventGroup: string | undefined = rpcToEventGroupMap.get(action.rpcName);
 
   if (!eventGroup || !state[eventGroup as keyof iEventGroup]) {
