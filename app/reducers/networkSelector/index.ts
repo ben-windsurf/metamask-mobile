@@ -1,4 +1,18 @@
-export const initialState = {
+export interface NetworkOnboardedState {
+  networkOnboardedState: { [key: string]: boolean };
+  networkState: {
+    showNetworkOnboarding: boolean;
+    nativeToken: string;
+    networkType: string;
+    networkUrl: string;
+  };
+  switchedNetwork: {
+    networkUrl: string;
+    networkStatus: boolean;
+  };
+}
+
+export const initialState: NetworkOnboardedState = {
   networkOnboardedState: {},
   networkState: {
     showNetworkOnboarding: false,
@@ -18,45 +32,39 @@ export const initialState = {
  * @returns
  */
 
+export interface NetworkOnboardAction {
+  nativeToken?: string;
+  networkType?: string;
+  networkUrl?: string;
+  networkStatus?: boolean;
+  showNetworkOnboarding?: boolean;
+  type: string;
+  payload?: string;
+}
+
 function networkOnboardReducer(
-  state = initialState,
-  action: {
-    nativeToken: string;
-    networkType: string;
-    networkUrl: string;
-    networkStatus: boolean;
-    showNetworkOnboarding: boolean;
-    type: string;
-    // TODO: Replace "any" with type
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload: any;
-  } = {
-    nativeToken: '',
-    networkType: '',
-    networkUrl: '',
-    networkStatus: false,
-    showNetworkOnboarding: false,
+  state: NetworkOnboardedState = initialState,
+  action: NetworkOnboardAction = {
     type: '',
-    payload: undefined,
   },
-) {
+): NetworkOnboardedState {
   switch (action.type) {
     case 'SHOW_NETWORK_ONBOARDING':
       return {
         ...state,
         networkState: {
-          showNetworkOnboarding: action.showNetworkOnboarding,
-          nativeToken: action.nativeToken,
-          networkType: action.networkType,
-          networkUrl: action.networkUrl,
+          showNetworkOnboarding: action.showNetworkOnboarding ?? false,
+          nativeToken: action.nativeToken || '',
+          networkType: action.networkType || '',
+          networkUrl: action.networkUrl || '',
         },
       };
     case 'NETWORK_SWITCHED':
       return {
         ...state,
         switchedNetwork: {
-          networkUrl: action.networkUrl,
-          networkStatus: action.networkStatus,
+          networkUrl: action.networkUrl || '',
+          networkStatus: action.networkStatus ?? false,
         },
       };
     case 'NETWORK_ONBOARDED':
@@ -70,7 +78,7 @@ function networkOnboardReducer(
         },
         networkOnboardedState: {
           ...state.networkOnboardedState,
-          [action.payload]: true,
+          [action.payload || '']: true,
         },
       };
     default:

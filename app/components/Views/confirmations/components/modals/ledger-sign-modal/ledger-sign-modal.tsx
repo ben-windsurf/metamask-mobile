@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../../reducers';
 import {
   RPCStageTypes,
-  iEventGroup,
+  RpcEventsState,
 } from '../../../../../../reducers/rpcEvents';
 import { resetEventStage } from '../../../../../../actions/rpcEvents';
 import LedgerConfirmationModal from '../../../../../UI/LedgerModals/LedgerConfirmationModal';
@@ -18,7 +18,7 @@ import styleSheet from './ledger-sign-modal.styles';
 const LedgerSignModal = () => {
   const dispatch = useDispatch();
   const { styles } = useStyles(styleSheet, {});
-  const { signingEvent }: iEventGroup = useSelector(
+  const { signingEvent }: RpcEventsState = useSelector(
     (state: RootState) => state.rpcEvents,
   );
   const { closeLedgerSignModal, deviceId } = useLedgerContext();
