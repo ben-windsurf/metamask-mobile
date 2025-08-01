@@ -3,14 +3,14 @@ import { AccountsActionType, iAccountActions } from '../../actions/accounts';
 /**
  * Interface for defining what properties will be defined in store
  */
-export interface iAccountEvent {
+export interface AccountsState {
   reloadAccounts: boolean;
 }
 
 /**
  * Initial state of the Accounts event flow
  */
-const initialState: iAccountEvent = {
+const initialState: AccountsState = {
   reloadAccounts: false,
 };
 
@@ -21,12 +21,12 @@ const initialState: iAccountEvent = {
  * @returns {iAccountEvent}: the new state of the Accounts event flow
  */
 const accountReducer = (
-  state = initialState,
+  state: AccountsState = initialState,
   action: iAccountActions = {
     type: '',
     reloadAccounts: false,
   },
-) => {
+): AccountsState => {
   switch (action.type) {
     case AccountsActionType.SET_RELOAD_ACCOUNTS:
       return {
