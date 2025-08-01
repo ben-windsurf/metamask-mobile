@@ -5,22 +5,26 @@ import {
   SetSecurityAlertsEnabled,
 } from '../../actions/experimental';
 
-const initialState = {
+export interface ExperimentalSettingsState {
+  securityAlertsEnabled: boolean;
+}
+
+const initialState: ExperimentalSettingsState = {
   securityAlertsEnabled: true,
 };
 
 const experimentalSettingsReducer = (
-  state = initialState,
+  state: ExperimentalSettingsState = initialState,
   action: {
     securityAlertsEnabled: SetSecurityAlertsEnabled;
     type: string;
   },
-) => {
+): ExperimentalSettingsState => {
   switch (action.type) {
     case ActionType.SET_SECURITY_ALERTS_ENABLED:
       return {
         ...state,
-        securityAlertsEnabled: action.securityAlertsEnabled,
+        securityAlertsEnabled: Boolean(action.securityAlertsEnabled),
       };
     default:
       return state;

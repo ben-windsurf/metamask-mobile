@@ -2,7 +2,34 @@ import { createSelector } from 'reselect';
 import { NotificationTypes } from '../../util/notifications';
 const { TRANSACTION, SIMPLE } = NotificationTypes;
 
-export const initialState = {
+export interface NotificationState {
+  notifications?: NotificationItem[];
+  notification?: NotificationItem;
+}
+
+interface NotificationItem {
+  id?: string;
+  isVisible?: boolean;
+  autodismiss?: number;
+  transaction?: Record<string, unknown>;
+  status?: string;
+  type?: string;
+  title?: string;
+  description?: string;
+}
+
+interface NotificationAction {
+  type: string;
+  id?: string;
+  transaction?: Record<string, unknown>;
+  autodismiss?: number;
+  status?: string;
+  title?: string;
+  description?: string;
+  notification?: NotificationItem;
+}
+
+export const initialState: NotificationState = {
   notifications: [],
 };
 
@@ -21,24 +48,25 @@ export const ACTIONS = {
   UPDATE_NOTIFICATION_STATUS: 'UPDATE_NOTIFICATION_STATUS',
 };
 
-const enqueue = (notifications, notification) => [
-  ...notifications,
-  notification,
-];
-const dequeue = (notifications) => notifications.slice(1);
+const enqueue = (
+  notifications: NotificationItem[],
+  notification: NotificationItem,
+): NotificationItem[] => [...notifications, notification];
+const dequeue = (notifications: NotificationItem[]): NotificationItem[] =>
+  notifications.slice(1);
 
 export const currentNotificationSelector = createSelector(
-  (
-    /** @type {import('..').RootState} */
-    state,
-  ) => state?.notifications,
-  (notifications) => notifications[0] || {},
+  (state: { notifications: NotificationState }) => state?.notifications,
+  (notifications: NotificationState) => notifications.notifications?.[0] || {},
 );
 
-const notificationReducer = (state = initialState, action) => {
-  const { notifications } = state;
+const notificationReducer = (
+  state: NotificationState,
+  action: NotificationAction = { type: '' },
+): NotificationState => {
+  if (!state) state = initialState;
+  const { notifications = [] } = state;
   switch (action.type) {
-    // make current notification isVisible props false
     case ACTIONS.HIDE_CURRENT_NOTIFICATION: {
       if (notifications[0]) {
         return {
@@ -75,7 +103,7 @@ const notificationReducer = (state = initialState, action) => {
             {
               ...notifications[index],
               ...{
-                id: action.transaction.id,
+                id: (action.transaction as { id?: string })?.id || '',
                 isVisible: true,
                 autodismiss: action.autodismiss,
                 transaction: action.transaction,
@@ -90,7 +118,7 @@ const notificationReducer = (state = initialState, action) => {
       return {
         ...state,
         notifications: enqueue(notifications, {
-          id: action.transaction.id,
+          id: (action.transaction as { id?: string })?.id || '',
           isVisible: true,
           autodismiss: action.autodismiss,
           transaction: action.transaction,
@@ -109,7 +137,7 @@ const notificationReducer = (state = initialState, action) => {
             {
               ...notifications[index],
               ...{
-                id: action.id,
+                id: action.id || '',
                 isVisible: true,
                 autodismiss: action.autodismiss,
                 title: action.title,
@@ -125,7 +153,7 @@ const notificationReducer = (state = initialState, action) => {
       return {
         ...state,
         notifications: enqueue(notifications, {
-          id: action.id,
+          id: action.id || '',
           isVisible: true,
           autodismiss: action.autodismiss,
           title: action.title,
@@ -144,7 +172,7 @@ const notificationReducer = (state = initialState, action) => {
         ...state,
         notifications: [
           ...notifications.slice(0, index),
-          action.notification,
+          action.notification || {},
           ...notifications.slice(index + 1),
         ],
       };
@@ -165,7 +193,7 @@ const notificationReducer = (state = initialState, action) => {
       return {
         ...state,
         notifications: enqueue(notifications, {
-          id: action.id,
+          id: action.id || '',
           isVisible: true,
           autodismiss: action.autodismiss || 5000,
           title: action.title,
@@ -179,7 +207,7 @@ const notificationReducer = (state = initialState, action) => {
       return {
         ...state,
         notifications: enqueue(notifications, {
-          id: action.transaction.id,
+          id: (action.transaction as { id?: string })?.id || '',
           isVisible: true,
           autodismiss: action.autodismiss || 5000,
           transaction: action.transaction,
@@ -200,4 +228,5 @@ const notificationReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default notificationReducer;

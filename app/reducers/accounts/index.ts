@@ -7,26 +7,28 @@ export interface iAccountEvent {
   reloadAccounts: boolean;
 }
 
+export interface AccountsState extends iAccountEvent {}
+
 /**
  * Initial state of the Accounts event flow
  */
-const initialState: iAccountEvent = {
+const initialState: AccountsState = {
   reloadAccounts: false,
 };
 
 /**
  * Reducer to Account relative event
- * @param {iAccountEvent} state: the state of the Accounts event flow, default to initialState
+ * @param {AccountsState} state: the state of the Accounts event flow, default to initialState
  * @param {iAccountActions} action: the action object contain type and payload to change state.
- * @returns {iAccountEvent}: the new state of the Accounts event flow
+ * @returns {AccountsState}: the new state of the Accounts event flow
  */
 const accountReducer = (
-  state = initialState,
+  state: AccountsState = initialState,
   action: iAccountActions = {
     type: '',
     reloadAccounts: false,
   },
-) => {
+): AccountsState => {
   switch (action.type) {
     case AccountsActionType.SET_RELOAD_ACCOUNTS:
       return {
