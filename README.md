@@ -12,6 +12,10 @@ To learn how to develop MetaMask-compatible applications, visit our [Developer D
 
 To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs](https://github.com/MetaMask/contributor-docs).
 
+## Recent Changes
+
+- **TypeScript Migration**: The `RootRPCMethodsUI` component has been migrated from JavaScript to TypeScript, following the project's ongoing initiative to adopt TypeScript for improved type safety and developer experience. See [Coding Guidelines](./.github/guidelines/CODING_GUIDELINES.md) for TypeScript standards.
+
 ## Documentation
 
 - [Architecture](./docs/readme/architecture.md)
@@ -25,6 +29,7 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Storybook](./docs/readme/storybook.md)
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
+- [Coding Guidelines](./.github/guidelines/CODING_GUIDELINES.md)
 
 ## Getting started
 
