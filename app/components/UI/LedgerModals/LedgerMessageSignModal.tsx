@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSignModal } from '../../../actions/modals';
 import { RootState } from '../../../reducers';
 
-import { RPCStageTypes, iEventGroup } from '../../../reducers/rpcEvents';
+import { RPCStageTypes } from '../../../reducers/rpcEvents';
 import { resetEventStage } from '../../../actions/rpcEvents';
 
 export interface LedgerMessageSignModalParams {
@@ -47,9 +47,7 @@ const LedgerMessageSignModal = () => {
   const modalRef = useRef<ReusableModalRef | null>(null);
   const { colors } = useAppThemeFromContext() || mockTheme;
   const styles = createStyles(colors);
-  const { signingEvent }: iEventGroup = useSelector(
-    (state: RootState) => state.rpcEvents,
-  );
+  const { signingEvent } = useSelector((state: RootState) => state.rpcEvents);
 
   const { onConfirmationComplete, deviceId } =
     useParams<LedgerMessageSignModalParams>();

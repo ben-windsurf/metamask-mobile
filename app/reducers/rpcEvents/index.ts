@@ -58,14 +58,14 @@ export interface iEventStage {
  * Interface for defining what properties will be defined in store
  * please extend this interface to add more supported RPC events
  */
-export interface iEventGroup {
+export interface RpcEventsState {
   signingEvent: iEventStage;
 }
 
 /**
  * Initial state of the RPC event flow
  */
-const initialState: Readonly<iEventGroup> = {
+const initialState: Readonly<RpcEventsState> = {
   signingEvent: {
     eventStage: RPCStageTypes.IDLE,
     rpcName: '',
@@ -87,7 +87,7 @@ const signMessageReducer = (
 ) => {
   const eventGroup: string | undefined = rpcToEventGroupMap.get(action.rpcName);
 
-  if (!eventGroup || !state[eventGroup as keyof iEventGroup]) {
+  if (!eventGroup || !state[eventGroup as keyof RpcEventsState]) {
     return state;
   }
 
