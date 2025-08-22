@@ -18,7 +18,7 @@ import { isSwapsAllowed } from '../../../components/UI/Swaps/utils';
 import { MetaMetricsEvents } from '../../../core/Analytics';
 import { getEther } from '../../../util/transactions';
 import { newAssetTransaction } from '../../../actions/transaction';
-import { SelectedAsset } from '../../../actions/transaction/types';
+import { AssetType } from '../confirmations/types/token';
 import { IconName } from '../../../component-library/components/Icons/Icon';
 import WalletAction from '../../../components/UI/WalletAction';
 import { useStyles } from '../../../component-library/hooks';
@@ -319,7 +319,7 @@ const WalletActions = () => {
       } else {
         dispatch(newAssetTransaction(assetToSend));
       }
-      navigateToSendPage(asset as SelectedAsset);
+      navigateToSendPage(asset as AssetType);
     });
   }, [
     closeBottomSheetAndNavigate,
