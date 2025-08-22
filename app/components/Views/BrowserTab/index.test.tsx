@@ -3,7 +3,6 @@ import renderWithProvider from '../../../util/test/renderWithProvider';
 import { backgroundState } from '../../../util/test/initial-root-state';
 import { MOCK_ACCOUNTS_CONTROLLER_STATE } from '../../../util/test/accountsControllerTestUtils';
 import BrowserTab from './BrowserTab';
-import AppConstants from '../../../core/AppConstants';
 
 const mockNavigation = {
   goBack: jest.fn(),
@@ -23,7 +22,7 @@ jest.mock('@react-navigation/native', () => {
 });
 
 const mockInitialState = {
-  browser: { activeTab: '' },
+  browser: { activeTab: 1 },
   engine: {
     backgroundState: {
       ...backgroundState,
@@ -31,7 +30,7 @@ const mockInitialState = {
     },
   },
   transaction: {
-    selectedAsset: '',
+    selectedAsset: { isETH: true, symbol: 'ETH' },
   },
 };
 
@@ -47,36 +46,13 @@ jest.mock('../../../core/Engine', () => ({
   },
 }));
 
-const mockProps = {
-  id: 1,
-  activeTab: 1,
-  defaultProtocol: 'https://',
-  selectedAddress: '0x123',
-  whitelist: [],
-  bookmarks: [],
-  searchEngine: 'Google',
-  newTab: jest.fn(),
-  addBookmark: jest.fn(),
-  addToBrowserHistory: jest.fn(),
-  addToWhitelist: jest.fn(),
-  updateTabInfo: jest.fn(),
-  showTabs: jest.fn(),
-  setOnboardingWizardStep: jest.fn(),
-  wizardStep: 1,
-  isIpfsGatewayEnabled: false,
-  chainId: '0x1',
-  isInTabsView: false,
-  initialUrl: 'https://metamask.io',
-  homePageUrl: AppConstants.HOMEPAGE_URL,
-};
-
 describe('BrowserTab', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('should render correctly', () => {
-    const { toJSON } = renderWithProvider(<BrowserTab {...mockProps} />, {
+    const { toJSON } = renderWithProvider(<BrowserTab />, {
       state: mockInitialState,
     });
     expect(toJSON()).toMatchSnapshot();

@@ -9,6 +9,6 @@ export interface BrowserState {
   whitelist: string[];
   tabs: BrowserTab[];
   favicons: FaviconItem[];
-  activeTab: string | null;
+  activeTab: number | null;
   visitedDappsByHostname: Record<string, boolean>;
 }

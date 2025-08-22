@@ -943,10 +943,8 @@ export const getRpcMethodMiddleware = ({
 
                   store.dispatch(removeBookmark(bookmark));
 
-                  const { bookmarks: updatedBookmarks } = store.getState();
-
                   if (isHomepage()) {
-                    injectHomePageScripts(updatedBookmarks);
+                    injectHomePageScripts();
                   }
 
                   res.result = {

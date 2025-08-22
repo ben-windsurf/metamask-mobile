@@ -16,7 +16,7 @@ jest.mock('../../../../core/Analytics');
 
 const mockStore = configureMockStore();
 const initialState = {
-  privacy: { approvedHosts: [] },
+  privacy: { approvedHosts: {} },
   browser: { history: [] },
   settings: {
     lockTime: 1000,

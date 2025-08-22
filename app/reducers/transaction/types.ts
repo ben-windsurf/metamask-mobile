@@ -21,6 +21,7 @@ export interface TransactionState {
   type?: string;
   proposedNonce?: string;
   nonce?: string;
+  origin?: string;
   securityAlertResponses: Record<string, SecurityAlertResponse>;
   useMax: boolean;
   maxValueMode?: boolean;

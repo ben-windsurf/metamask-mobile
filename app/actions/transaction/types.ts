@@ -1,4 +1,7 @@
 import { type Action } from 'redux';
+import { SecurityAlertResponse } from '../../components/Views/confirmations/legacy/components/BlockaidBanner/BlockaidBanner.types';
+
+export type { SecurityAlertResponse };
 
 export enum TransactionActionType {
   REHYDRATE = 'persist/REHYDRATE',
@@ -43,12 +46,6 @@ export interface TransactionData {
   selectedAsset?: SelectedAsset;
   assetType?: string;
   securityAlertResponse?: SecurityAlertResponse;
-}
-
-export interface SecurityAlertResponse {
-  result_type?: string;
-  reason?: string;
-  description?: string;
 }
 
 export type RehydrateAction = Action<TransactionActionType.REHYDRATE>;

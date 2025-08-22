@@ -1609,4 +1609,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   addToWhitelist: (url: string) => dispatch(addToWhitelist(url)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowserTab);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BrowserTab as React.ComponentType);

@@ -54,10 +54,10 @@ const browserReducer = (
               metricsEnabled: action.metricsEnabled,
               marketingEnabled: action.marketingEnabled,
             }).href,
-            id: action.id,
+            id: Number(action.id),
           },
         ],
-        activeTab: action.id,
+        activeTab: Number(action.id),
       };
     case BrowserActionType.CLOSE_ALL_TABS:
       return {
@@ -72,7 +72,7 @@ const browserReducer = (
           {
             url: action.url,
             ...(action.linkType && { linkType: action.linkType }),
-            id: action.id,
+            id: Number(action.id),
           },
         ],
       };
@@ -84,7 +84,7 @@ const browserReducer = (
     case BrowserActionType.SET_ACTIVE_TAB:
       return {
         ...state,
-        activeTab: action.id,
+        activeTab: Number(action.id),
       };
     case BrowserActionType.UPDATE_TAB:
       return {

@@ -15,7 +15,7 @@ export enum BrowserActionType {
 
 export interface BrowserTab {
   url: string;
-  id: string;
+  id: number;
   linkType?: string;
 }
 
@@ -56,20 +56,20 @@ export type CloseAllTabsAction = Action<BrowserActionType.CLOSE_ALL_TABS>;
 
 export type CreateNewTabAction = Action<BrowserActionType.CREATE_NEW_TAB> & {
   url: string;
-  id: string;
+  id: number;
   linkType?: string;
 };
 
 export type CloseTabAction = Action<BrowserActionType.CLOSE_TAB> & {
-  id: string;
+  id: number;
 };
 
 export type SetActiveTabAction = Action<BrowserActionType.SET_ACTIVE_TAB> & {
-  id: string;
+  id: number;
 };
 
 export type UpdateTabAction = Action<BrowserActionType.UPDATE_TAB> & {
-  id: string;
+  id: number;
   data: Partial<BrowserTab>;
 };
 
