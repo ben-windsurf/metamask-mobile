@@ -26,6 +26,23 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
 
+## TypeScript Migration
+
+MetaMask Mobile is undergoing an ongoing migration from JavaScript to TypeScript to improve code quality, type safety, and developer experience. The project enforces TypeScript for all new code through automated fitness functions.
+
+### Recent Migrations
+
+- **EntryScriptWeb3** (`app/core/EntryScriptWeb3.js` → `app/core/EntryScriptWeb3.ts`) - Core web3 bridge infrastructure with proper interface definitions and strict typing for file system operations
+
+### Contributing to TypeScript Migration
+
+When contributing new code:
+
+- All new files in the `app/` directory must be TypeScript (`.ts` or `.tsx`)
+- Avoid using `any` types where possible - prefer explicit typing
+- Add proper interfaces and type definitions for better code maintainability
+- Existing JavaScript files can be migrated to TypeScript as part of feature work or dedicated migration efforts
+
 ## Getting started
 
 ### Using Expo (recommended)
