@@ -3,6 +3,7 @@ import {
   TransactionAction,
   TransactionActionType,
   SelectedAsset,
+  TransactionData,
 } from '../../actions/transaction/types';
 import { TransactionState } from './types';
 
@@ -112,12 +113,16 @@ const transactionReducer = (
         const assetType = getAssetType(selectedAsset);
         action.transaction.assetType = assetType;
       }
-      const txMeta = getTxMeta(action.transaction);
+      const txMeta = getTxMeta(
+        action.transaction as Parameters<typeof getTxMeta>[0],
+      );
       return {
         ...state,
         transaction: {
           ...state.transaction,
-          ...getTxData(action.transaction),
+          ...(getTxData(
+            action.transaction as Parameters<typeof getTxData>[0],
+          ) as Partial<TransactionData>),
         },
         ...txMeta,
         securityAlertResponses: state.securityAlertResponses,
@@ -138,8 +143,10 @@ const transactionReducer = (
         symbol: 'ETH',
         assetType: 'ETH',
         selectedAsset: { isETH: true, symbol: 'ETH' },
-        ...getTxMeta(action.transaction),
-        transaction: getTxData(action.transaction),
+        ...getTxMeta(action.transaction as Parameters<typeof getTxMeta>[0]),
+        transaction: getTxData(
+          action.transaction as Parameters<typeof getTxData>[0],
+        ) as TransactionData,
       };
     case TransactionActionType.SET_TRANSACTION_SECURITY_ALERT_RESPONSE: {
       const { transactionId, securityAlertResponse } = action;

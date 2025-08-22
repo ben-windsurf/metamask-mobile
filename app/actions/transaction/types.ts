@@ -27,6 +27,8 @@ export interface SelectedAsset {
   name?: string;
   image?: string;
   balance?: string;
+  chainId?: string;
+  isNative?: boolean;
 }
 
 export interface TransactionData {
@@ -38,6 +40,9 @@ export interface TransactionData {
   value?: string;
   maxFeePerGas?: string;
   maxPriorityFeePerGas?: string;
+  selectedAsset?: SelectedAsset;
+  assetType?: string;
+  securityAlertResponse?: SecurityAlertResponse;
 }
 
 export interface SecurityAlertResponse {

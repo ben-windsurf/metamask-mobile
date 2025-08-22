@@ -38,7 +38,7 @@ const modalsReducer = (
       return {
         ...state,
         dappTransactionModalVisible:
-          action.show === null
+          action.show === null || action.show === undefined
             ? !state.dappTransactionModalVisible
             : action.show,
       };
