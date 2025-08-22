@@ -18,6 +18,7 @@ import { isSwapsAllowed } from '../../../components/UI/Swaps/utils';
 import { MetaMetricsEvents } from '../../../core/Analytics';
 import { getEther } from '../../../util/transactions';
 import { newAssetTransaction } from '../../../actions/transaction';
+import { AssetType } from '../confirmations/types/token';
 import { IconName } from '../../../component-library/components/Icons/Icon';
 import WalletAction from '../../../components/UI/WalletAction';
 import { useStyles } from '../../../component-library/hooks';
@@ -111,7 +112,12 @@ const WalletActions = () => {
   // Hook for handling non-EVM asset sending
   const assetToSend = selectedAsset?.address ? selectedAsset : nativeAsset;
   const { sendNonEvmAsset } = useSendNonEvmAsset({
-    asset: assetToSend || { chainId, address: undefined },
+    asset: assetToSend
+      ? {
+          chainId: assetToSend.chainId || chainId,
+          address: assetToSend.address,
+        }
+      : { chainId, address: undefined },
     closeModal: () => sheetRef.current?.onCloseBottomSheet(),
   });
 
@@ -287,7 +293,7 @@ const WalletActions = () => {
       const { NetworkController, MultichainNetworkController } = Engine.context;
       const networkConfiguration =
         NetworkController.getNetworkConfigurationByChainId(
-          selectedAsset.chainId,
+          selectedAsset.chainId as `0x${string}`,
         );
       const networkClientId =
         networkConfiguration?.rpcEndpoints?.[
@@ -313,7 +319,7 @@ const WalletActions = () => {
       } else {
         dispatch(newAssetTransaction(assetToSend));
       }
-      navigateToSendPage(asset);
+      navigateToSendPage(asset as AssetType);
     });
   }, [
     closeBottomSheetAndNavigate,

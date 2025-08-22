@@ -1,11 +1,9 @@
 import { ChainId } from '@metamask/controller-utils';
-import reducer, {
-  ADD_FAVORITE_COLLECTIBLE,
-  REMOVE_FAVORITE_COLLECTIBLE,
-} from './index';
+import reducer from './index';
+import { CollectiblesActionType } from '../../actions/collectibles/types';
 import mockedEngine from '../../core/__mocks__/MockedEngine';
 
-const emptyAction = { type: null };
+const emptyAction = { type: 'UNKNOWN_ACTION' } as never;
 
 const collectibleA1 = { tokenId: '101', address: '0xA' };
 const collectibleA2 = { tokenId: '102', address: '0xA' };
@@ -34,7 +32,7 @@ describe('collectibles reducer', () => {
   it('should add favorite', () => {
     const initalState = reducer(undefined, emptyAction);
     const firstState = reducer(initalState, {
-      type: ADD_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.ADD_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.mainnet,
       collectible: collectibleA1,
@@ -50,13 +48,13 @@ describe('collectibles reducer', () => {
   it('should add favorite by selectedAddress', () => {
     const initalState = reducer(undefined, emptyAction);
     const firstState = reducer(initalState, {
-      type: ADD_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.ADD_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.mainnet,
       collectible: collectibleA1,
     });
     const secondState = reducer(firstState, {
-      type: ADD_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.ADD_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressB,
       chainId: ChainId.mainnet,
       collectible: collectibleA2,
@@ -77,13 +75,13 @@ describe('collectibles reducer', () => {
   it('should add favorite by chainId', () => {
     const initalState = reducer(undefined, emptyAction);
     const firstState = reducer(initalState, {
-      type: ADD_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.ADD_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.mainnet,
       collectible: collectibleA1,
     });
     const secondState = reducer(firstState, {
-      type: ADD_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.ADD_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.sepolia,
       collectible: collectibleA2,
@@ -107,7 +105,7 @@ describe('collectibles reducer', () => {
       isNftFetchingProgress: false,
     };
     const secondState = reducer(firstState, {
-      type: REMOVE_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.REMOVE_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.mainnet,
       collectible: collectibleA1,
@@ -131,7 +129,7 @@ describe('collectibles reducer', () => {
       isNftFetchingProgress: false,
     };
     const secondState = reducer(firstState, {
-      type: REMOVE_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.REMOVE_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressB,
       chainId: ChainId.mainnet,
       collectible: collectibleB1,
@@ -158,7 +156,7 @@ describe('collectibles reducer', () => {
       isNftFetchingProgress: false,
     };
     const secondState = reducer(firstState, {
-      type: REMOVE_FAVORITE_COLLECTIBLE,
+      type: CollectiblesActionType.REMOVE_FAVORITE_COLLECTIBLE,
       selectedAddress: selectedAddressA,
       chainId: ChainId.sepolia,
       collectible: collectibleA1,

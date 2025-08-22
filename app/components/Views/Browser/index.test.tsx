@@ -779,7 +779,7 @@ describe('Browser', () => {
       );
       renderBrowserWithProps({
         route: { params: { url: null } }, // browserUrl will be null
-        tabs: [{ id: 1, url: null, image: '', isArchived: false }], // currentUrl might become homePageUrl initially
+        tabs: [{ id: '1', url: null, image: '', isArchived: false }], // currentUrl might become homePageUrl initially
       });
       expect(mockShowToast).not.toHaveBeenCalled();
     });

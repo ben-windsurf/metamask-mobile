@@ -12,6 +12,7 @@ import { ExtendedControllerMessenger } from '../../../ExtendedControllerMessenge
 import { KeyringControllerGetKeyringsByTypeAction } from '@metamask/keyring-controller';
 import { store } from '../../../../store';
 import { MetaMetrics } from '../../../Analytics';
+import { RootState } from '../../../../reducers';
 
 jest.mock('@metamask/snaps-controllers');
 
@@ -76,7 +77,7 @@ describe('SnapControllerInit', () => {
   });
 
   describe('getMnemonicSeed', () => {
-    it('returns the mnemonic seed', () => {
+    it('returns the mnemonic seed', async () => {
       const messenger = new ExtendedControllerMessenger<
         KeyringControllerGetKeyringsByTypeAction,
         never
@@ -98,10 +99,10 @@ describe('SnapControllerInit', () => {
         ],
       );
 
-      expect(getMnemonicSeed()).resolves.toBe(seed);
+      await expect(getMnemonicSeed()).resolves.toBe(seed);
     });
 
-    it('throws an error if the keyring is not available', () => {
+    it('throws an error if the keyring is not available', async () => {
       const messenger = new ExtendedControllerMessenger<
         KeyringControllerGetKeyringsByTypeAction,
         never
@@ -117,7 +118,7 @@ describe('SnapControllerInit', () => {
         () => [],
       );
 
-      expect(getMnemonicSeed()).rejects.toThrow(
+      await expect(getMnemonicSeed()).rejects.toThrow(
         'Primary keyring mnemonic unavailable.',
       );
     });
@@ -130,12 +131,18 @@ describe('SnapControllerInit', () => {
       const controllerMock = jest.mocked(SnapController);
       const getFeatureFlags = controllerMock.mock.calls[0][0].getFeatureFlags;
 
-      // @ts-expect-error: Partial mock.
       jest.mocked(store.getState).mockReturnValue({
         settings: {
+          searchEngine: 'DuckDuckGo',
+          primaryCurrency: 'ETH',
+          lockTime: -1,
+          useBlockieIcon: true,
+          hideZeroBalanceTokens: false,
           basicFunctionalityEnabled: true,
+          deepLinkModalDisabled: false,
+          showFiatOnTestnets: false,
         },
-      });
+      } as RootState);
 
       expect(getFeatureFlags()).toEqual({
         disableSnaps: false,

@@ -15,6 +15,8 @@ import { FALSE_POSITIVE_REPOST_LINE_TEST_ID } from '../../components/BlockaidBan
 import { createMockAccountsControllerState } from '../../../../../../util/test/accountsControllerTestUtils';
 import { RootState } from '../../../../../../reducers';
 import { RpcEndpointType } from '@metamask/network-controller';
+import { Reason } from '../../components/BlockaidBanner/BlockaidBanner.types';
+import { ResultType } from '../../../constants/signatures';
 import { ConfirmViewSelectorsIDs } from '../../../../../../../e2e/selectors/SendFlow/ConfirmView.selectors';
 import { updateConfirmationMetric } from '../../../../../../core/redux/slices/confirmationMetrics';
 import Engine from '../../../../../../core/Engine';
@@ -87,15 +89,14 @@ const mockInitialState: DeepPartial<RootState> = {
   },
   transaction: {
     securityAlertResponses: {
-      1: {
-        result_type: 'Malicious',
-        reason: 'blur_farming',
+      '1': {
+        result_type: ResultType.Malicious,
+        reason: Reason.blurFarming,
         providerRequestsCount: {},
         chainId: '0x1',
       },
     },
     selectedAsset: {},
-    chainId: '0x1',
     transaction: {
       from: '0x15249D1a506AFC731Ee941d0D40Cf33FacD34E58',
       to: '0xe64dD0AB5ad7e8C5F2bf6Ce75C34e187af8b920A',
@@ -328,9 +329,9 @@ describe('Confirm', () => {
     const testState = merge({}, mockInitialState, {
       transaction: {
         securityAlertResponses: {
-          1: {
-            result_type: 'Malicious',
-            reason: 'blur_farming',
+          '1': {
+            result_type: ResultType.Malicious,
+            reason: Reason.blurFarming,
             providerRequestsCount: {},
             chainId: '0x1',
           },
