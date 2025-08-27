@@ -14,7 +14,9 @@ import { createLogger } from './logger';
 const logger = createLogger({ name: 'Gestures' });
 
 /**
- * Gestures class with element stability and auto-retry
+ * Gestures class with element stability and auto-retry for E2E testing.
+ * Provides robust gesture methods with built-in retry mechanisms, stability checking,
+ * and proper error handling for both native and web elements.
  */
 export default class Gestures {
   /**
@@ -33,7 +35,7 @@ export default class Gestures {
       waitForElementToDisappear?: boolean;
     },
     point?: { x: number; y: number },
-  ) => {
+  ): Promise<void> => {
     const {
       checkStability = false,
       checkVisibility = true,
@@ -42,8 +44,9 @@ export default class Gestures {
     } = options;
 
     if (Utilities.isWebElement(await elem)) {
-      // eslint-disable-next-line jest/valid-expect, @typescript-eslint/no-explicit-any
-      await (expect(await elem) as any).toExist();
+      await (
+        expect(await elem) as unknown as Detox.Expect<Detox.IndexableWebElement>
+      ).toExist();
       await (await elem).tap();
       if (options.waitForElementToDisappear) {
         await Utilities.waitForElementToDisappear(elem);
@@ -78,8 +81,10 @@ export default class Gestures {
 
   /**
    * Tap an element with stability checking and auto-retry
+   * @param elem - The Detox or Web element to tap
+   * @param options - Configuration options for the tap gesture
    * @returns A Promise that resolves when the tap is successful
-   * @throws Will retry the operation if it fails, with retry logic handled by executeWith
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async tap(
     elem: DetoxElement | WebElement,
@@ -115,8 +120,10 @@ export default class Gestures {
    * Wait for an element to be visible and then tap it with enhanced options
    * This is the same as tap() - but with an additional delay before the tap.
    * This is useful for cases where the element might not be immediately ready for interaction.
+   * @param elem - The Detox or Web element to tap
+   * @param options - Configuration options for the tap gesture
    * @returns A Promise that resolves when the tap is successful
-   * @throws Will retry the operation if it fails, with retry logic handled by executeWith
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async waitAndTap(
     elem: DetoxElement | WebElement,
@@ -151,6 +158,9 @@ export default class Gestures {
 
   /**
    * Tap element at a specific index
+   * @param elem - The Detox element collection to tap from
+   * @param index - The index of the element to tap
+   * @param options - Configuration options for the tap gesture
    * @returns A Promise that resolves when the tap is successful
    * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
@@ -257,6 +267,8 @@ export default class Gestures {
 
   /**
    * Long press with stability checking
+   * @param elem - The Detox element to long press
+   * @param options - Configuration options for the long press gesture
    * @returns A Promise that resolves when the long press is successful
    * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
@@ -297,8 +309,11 @@ export default class Gestures {
 
   /**
    * Type text with automatic field clearing and retry
+   * @param elem - The Detox element to type text into
+   * @param text - The text to type
+   * @param options - Configuration options for text input
    * @returns A Promise that resolves when the text is successfully typed
-   * @throws Will retry the operation if it fails, with retry logic handled by executeWith
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async typeText(
     elem: DetoxElement,
@@ -392,8 +407,11 @@ export default class Gestures {
 
   /**
    * Swipe with element readiness checking
+   * @param elem - The Detox element to swipe on
+   * @param direction - The direction to swipe
+   * @param options - Configuration options for the swipe gesture
    * @returns A Promise that resolves when the swipe is successful
-   * @throws Will retry the operation if it fails, with retry logic handled by executeWith
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async swipe(
     elem: DetoxElement,
@@ -518,8 +536,11 @@ export default class Gestures {
     const start = Date.now();
     while (Date.now() - start < timeout) {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, jest/valid-expect
-        await (expect(await elem) as any).toExist();
+        await (
+          expect(
+            await elem,
+          ) as unknown as Detox.Expect<Detox.IndexableWebElement>
+        ).toExist();
         await (await elem).tap();
         return;
       } catch {

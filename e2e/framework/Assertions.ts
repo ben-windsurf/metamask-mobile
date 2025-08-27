@@ -28,8 +28,9 @@ export default class Assertions {
         const el = await detoxElement;
         const isWebElement = Utilities.isWebElement(el);
         if (isWebElement) {
-          // eslint-disable-next-line jest/valid-expect, @typescript-eslint/no-explicit-any
-          await (expect(el) as any).toExist();
+          await (
+            expect(el) as unknown as Detox.Expect<Detox.IndexableWebElement>
+          ).toExist();
         } else if (device.getPlatform() === 'ios') {
           await waitFor(el).toExist().withTimeout(100);
         } else {
@@ -64,8 +65,9 @@ export default class Assertions {
         const el = await detoxElement;
         const isWebElement = Utilities.isWebElement(el);
         if (isWebElement) {
-          // eslint-disable-next-line jest/valid-expect, @typescript-eslint/no-explicit-any
-          await (expect(el) as any).not.toExist();
+          await (
+            expect(el) as unknown as Detox.Expect<Detox.IndexableWebElement>
+          ).not.toExist();
         } else {
           await waitFor(el).not.toBeVisible().withTimeout(100);
         }
@@ -79,6 +81,11 @@ export default class Assertions {
 
   /**
    * Assert element has specific text with auto-retry
+   * @param detoxElement - The Detox element to check for text content
+   * @param text - The expected text content
+   * @param options - Configuration options for the assertion
+   * @returns Promise that resolves when element has the expected text
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async expectElementToHaveText(
     detoxElement: DetoxElement,
@@ -104,6 +111,11 @@ export default class Assertions {
 
   /**
    * Assert element does not have specific text with auto-retry
+   * @param detoxElement - The Detox element to check for absence of text content
+   * @param text - The text that should not be present
+   * @param options - Configuration options for the assertion
+   * @returns Promise that resolves when element does not have the specified text
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async expectElementToNotHaveText(
     detoxElement: DetoxElement,
@@ -129,6 +141,11 @@ export default class Assertions {
 
   /**
    * Assert element has specific label with auto-retry
+   * @param detoxElement - The Detox element to check for label
+   * @param label - The expected label value
+   * @param options - Configuration options for the assertion
+   * @returns Promise that resolves when element has the expected label
+   * @throws Will retry the operation if it fails, with retry logic handled by executeWithRetry
    */
   static async expectElementToHaveLabel(
     detoxElement: DetoxElement,
@@ -224,8 +241,9 @@ export default class Assertions {
           const el = (await Utilities.waitForReadyState(
             detoxElement,
           )) as Detox.IndexableNativeElement;
-          // eslint-disable-next-line jest/valid-expect, @typescript-eslint/no-explicit-any
-          await (expect(el) as any).toHaveToggleValue(true);
+          await (
+            expect(el) as unknown as Detox.Expect<Detox.IndexableNativeElement>
+          ).toHaveToggleValue(true);
         } catch (error) {
           // Log attributes for debugging
           throw new Error(
@@ -262,8 +280,9 @@ export default class Assertions {
           const el = (await Utilities.waitForReadyState(
             detoxElement,
           )) as Detox.IndexableNativeElement;
-          // eslint-disable-next-line jest/valid-expect, @typescript-eslint/no-explicit-any
-          await (expect(el) as any).toHaveToggleValue(false);
+          await (
+            expect(el) as unknown as Detox.Expect<Detox.IndexableNativeElement>
+          ).toHaveToggleValue(false);
         } catch (error) {
           throw new Error(
             [
@@ -369,7 +388,7 @@ export default class Assertions {
         actualObj: Record<string, unknown>,
         partialObj: Record<string, unknown>,
         path = '',
-      ) {
+      ): void {
         if (
           typeof actualObj !== 'object' ||
           typeof partialObj !== 'object' ||
@@ -500,8 +519,9 @@ export default class Assertions {
     const el = (await detoxElement) as Detox.IndexableNativeElement;
     // Use Detox's expect which has toExist method
     // Use Detox's expect syntax for element existence
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, jest/valid-expect
-    await (expect(el) as any).toExist();
+    await (
+      expect(el) as unknown as Detox.Expect<Detox.IndexableNativeElement>
+    ).toExist();
   }
 
   /**

@@ -19,7 +19,7 @@ import SoftAssert from '../../utils/SoftAssert';
 import { MockttpServer } from 'mockttp';
 import { getMockServerPort } from '../../fixtures/utils';
 import { startMockServer } from '../../api-mocking/mock-server';
-import Utilities from '../../utils/Utilities';
+import { Utilities } from '../../framework';
 
 const PASSWORD = '12345678';
 
@@ -61,12 +61,18 @@ describe(
     });
 
     it('should check that metametrics is enabled in settings', async () => {
-      await TestHelpers.delay(3000); // Wait for UI to stabilize
+      await Assertions.expectElementToBeVisible(
+        TabBarComponent.tabBarSettingButton,
+      );
       await TabBarComponent.tapSettings();
-      await TestHelpers.delay(1500); // Wait for settings to load
+      await Assertions.expectElementToBeVisible(
+        SettingsView.securityAndPrivacyButton,
+      );
       await SettingsView.tapSecurityAndPrivacy();
       await SecurityAndPrivacy.scrollToMetaMetrics();
-      await TestHelpers.delay(1500);
+      await Assertions.expectElementToBeVisible(
+        SecurityAndPrivacy.metaMetricsToggle,
+      );
       await Assertions.expectToggleToBeOn(
         SecurityAndPrivacy.metaMetricsToggle as Promise<Detox.IndexableNativeElement>,
       );
@@ -74,7 +80,7 @@ describe(
 
     it('should disable metametrics and track preference change', async () => {
       await SecurityAndPrivacy.tapMetaMetricsToggle();
-      await TestHelpers.delay(1000); // Wait for toggle action
+      await Assertions.expectElementToBeVisible(CommonView.okAlertButton);
       await CommonView.tapOkAlert();
       await Assertions.expectToggleToBeOff(
         SecurityAndPrivacy.metaMetricsToggle as Promise<Detox.IndexableNativeElement>,
@@ -105,7 +111,6 @@ describe(
 
       // Terminating the app for the next test
       await device.terminateApp();
-      await TestHelpers.delay(1500); // Wait for app termination
     });
 
     it('should relaunch and log in, verifying no new MetaMetrics events were sent', async () => {
@@ -116,8 +121,7 @@ describe(
           detoxURLBlacklistRegex: Utilities.BlacklistURLs,
         },
       });
-      await TestHelpers.delay(2000); // Wait for app launch
-
+      await Assertions.expectElementToBeVisible(LoginView.passwordInput);
       await LoginView.enterPassword(PASSWORD);
       await Assertions.expectElementToBeVisible(WalletView.container);
       // Removed delay - we already wait for wallet view to be visible
@@ -131,12 +135,18 @@ describe(
 
     it('should verify metametrics remains turned off after app restart', async () => {
       await device.disableSynchronization();
-      await TestHelpers.delay(500); // Wait for UI to stabilize
+      await Assertions.expectElementToBeVisible(
+        TabBarComponent.tabBarSettingButton,
+      );
       await TabBarComponent.tapSettings();
-      await TestHelpers.delay(500); // Wait for settings to load
+      await Assertions.expectElementToBeVisible(
+        SettingsView.securityAndPrivacyButton,
+      );
       await SettingsView.tapSecurityAndPrivacy(); // ANIMATION HERE, we need to be careful with this
 
-      await TestHelpers.delay(500); // Wait for animation
+      await Assertions.expectElementToBeVisible(
+        SecurityAndPrivacy.metaMetricsToggle,
+      );
 
       await SecurityAndPrivacy.scrollToMetaMetrics();
       await Assertions.expectToggleToBeOff(
