@@ -4,10 +4,12 @@ module.exports = {
     {
       files: ['**/*.{js,ts}'],
       rules: {
-        // E2E Framework Best Practices (starting with warnings, we will be changing to errors when the migration is complete)
+        // E2E Framework Best Practices - Migration Complete
         'no-console': 'off',
+        '@typescript-eslint/no-explicit-any': 'error',
+        '@typescript-eslint/explicit-function-return-type': 'warn',
         'no-restricted-syntax': [
-          'warn',
+          'error',
           {
             selector:
               "CallExpression[callee.object.name='TestHelpers'][callee.property.name='delay']",
@@ -21,7 +23,7 @@ module.exports = {
       files: ['**/specs/**/*.{js,ts}'],
       rules: {
         'no-restricted-syntax': [
-          'warn',
+          'error',
           {
             selector:
               "CallExpression[callee.object.name='TestHelpers'][callee.property.name='delay']",

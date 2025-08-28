@@ -11,7 +11,7 @@ import {
   getLocalTestDappPort,
   getMockServerPort,
 } from './FixtureUtils';
-import Utilities from '../../utils/Utilities';
+import { Utilities } from '../index';
 import TestHelpers from '../../helpers';
 import { startMockServer, stopMockServer } from '../../api-mocking/mock-server';
 import { AnvilSeeder } from '../../seeder/anvil-seeder';

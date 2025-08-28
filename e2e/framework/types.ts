@@ -1,5 +1,3 @@
-// Gestures
-
 import { LanguageAndLocale } from 'detox/detox';
 import { DappVariants } from './Constants';
 import { AnvilManager, Hardfork } from '../seeder/anvil-manager';
@@ -8,67 +6,128 @@ import Ganache from '../../app/util/test/ganache';
 import { Mockttp } from 'mockttp';
 import FixtureBuilder from './fixtures/FixtureBuilder';
 
+/**
+ * Base options for gesture operations
+ */
 export interface GestureOptions {
+  /** Timeout in milliseconds for the operation */
   timeout?: number;
+  /** Whether to check element stability before interaction */
   checkStability?: boolean;
+  /** Whether to check element visibility before interaction */
   checkVisibility?: boolean;
+  /** Whether to check if element is enabled before interaction */
   checkEnabled?: boolean;
-  elemDescription?: string; // For better error messages - i.e "Get Started button"
+  /** Description for better error messages (e.g., "Get Started button") */
+  elemDescription?: string;
 }
 
+/**
+ * Options for tap gesture operations
+ */
 export interface TapOptions extends GestureOptions {
-  delay?: number; // Delay before the tap action
-  waitForElementToDisappear?: boolean; // If true, waits for the element to disappear after tapping
+  /** Delay in milliseconds before the tap action */
+  delay?: number;
+  /** If true, waits for the element to disappear after tapping */
+  waitForElementToDisappear?: boolean;
 }
 
+/**
+ * Options for text input operations
+ */
 export interface TypeTextOptions extends GestureOptions {
+  /** Whether to clear the field before typing */
   clearFirst?: boolean;
+  /** Whether to hide the keyboard after typing */
   hideKeyboard?: boolean;
-  sensitive?: boolean; // If true, the text will not be logged in the test report
+  /** If true, the text will not be logged in the test report */
+  sensitive?: boolean;
 }
 
+/**
+ * Options for swipe gesture operations
+ */
 export interface SwipeOptions extends GestureOptions {
+  /** Speed of the swipe gesture */
   speed?: 'fast' | 'slow';
+  /** Percentage of the element to swipe */
   percentage?: number;
 }
 
+/**
+ * Options for long press gesture operations
+ */
 export interface LongPressOptions extends GestureOptions {
+  /** Duration of the long press in milliseconds */
   duration?: number;
 }
 
+/**
+ * Options for scroll operations
+ */
 export interface ScrollOptions extends GestureOptions {
+  /** Direction to scroll */
   direction?: 'up' | 'down' | 'left' | 'right';
+  /** Amount to scroll in pixels */
   scrollAmount?: number;
 }
 
-// Assertions
-
+/**
+ * Options for assertion operations
+ */
 export interface AssertionOptions extends RetryOptions {
+  /** Timeout in milliseconds for the assertion */
   timeout?: number;
-  description?: string; // Description for the assertion, e.g. "The Wallet View should be visible"
+  /** Description for the assertion (e.g., "The Wallet View should be visible") */
+  description?: string;
 }
 
+/**
+ * Options for retry operations
+ */
 export interface RetryOptions {
+  /** Timeout in milliseconds for the retry operation */
   timeout?: number;
+  /** Interval between retries in milliseconds */
   interval?: number;
-  description?: string; // Description for the retry operation, e.g. "tap() or "waitForReadyState()"
+  /** Description for the retry operation (e.g., "tap()" or "waitForReadyState()") */
+  description?: string;
+  /** Description of the element being operated on */
   elemDescription?: string;
+  /** Maximum number of retry attempts */
   maxRetries?: number;
 }
 
+/**
+ * Options for element stability checking
+ */
 export interface StabilityOptions {
+  /** Timeout in milliseconds for stability checking */
   timeout?: number;
+  /** Interval between stability checks in milliseconds */
   interval?: number;
+  /** Number of consecutive stable checks required */
   stableCount?: number;
 }
+/**
+ * Configuration for ramps region settings
+ */
 export interface RampsRegion {
+  /** Supported currencies in this region */
   currencies: string[];
+  /** Emoji representation of the region */
   emoji: string;
+  /** Unique identifier for the region */
   id: string;
+  /** Display name of the region */
   name: string;
+  /** Support configuration for different operations */
   support: { buy: boolean; sell: boolean; recurringBuy: boolean };
+  /** Whether this region is unsupported */
   unsupported: boolean;
+  /** Whether this region is recommended */
   recommended: boolean;
+  /** Whether this region was auto-detected */
   detected: boolean;
 }
 
@@ -195,6 +254,5 @@ export interface WithFixturesOptions {
   languageAndLocale?: LanguageAndLocale;
   permissions?: Record<string, unknown>;
   mockServerInstance?: Mockttp;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  endTestfn?: (...args: any[]) => Promise<void>;
+  endTestfn?: (options: { mockServer: Mockttp }) => Promise<void>;
 }

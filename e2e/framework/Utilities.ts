@@ -16,7 +16,9 @@ const TEST_CONFIG_DEFAULTS = {
 const logger = createLogger({ name: 'Utilities' });
 
 /**
- * Enhanced Utilities class with retry mechanisms and stability checking
+ * Utilities class with element stability and auto-retry for E2E testing.
+ * Provides robust utility methods for element interaction, waiting, and state checking
+ * with built-in retry mechanisms and proper error handling.
  */
 export default class Utilities {
   /**
@@ -136,7 +138,9 @@ export default class Utilities {
     const fallBackTimeout = 2000;
     const start = Date.now();
 
-    const getPosition = async (el: Detox.IndexableNativeElement) => {
+    const getPosition = async (
+      el: Detox.IndexableNativeElement,
+    ): Promise<{ x: number; y: number } | null> => {
       try {
         const attributes = await el.getAttributes();
         if (

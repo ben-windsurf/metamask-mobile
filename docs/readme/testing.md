@@ -8,7 +8,7 @@ yarn test:unit
 
 ## E2E Tests Overview
 
-Our end-to-end (E2E) testing strategy leverages a combination of technologies to ensure robust test coverage for our mobile applications. We use Wix/Detox for the majority of our automation tests, Appium for specific non-functional testing like app upgrades and launch times, and Bitrise as our CI platform. All tests are written in JavaScript using Jest and Cucumber frameworks.
+Our end-to-end (E2E) testing strategy leverages a combination of technologies to ensure robust test coverage for our mobile applications. We use Wix/Detox for the majority of our automation tests, Appium for specific non-functional testing like app upgrades and launch times, and Bitrise as our CI platform. All tests are written in **TypeScript** using Jest and Cucumber frameworks, providing enhanced type safety and developer experience.
 
 ### Wix/Detox Tests
 
@@ -382,6 +382,41 @@ Our CI/CD process is automated through various Bitrise pipelines, each designed 
 - **Benefits**:
   - **Faster Feedback**: Running a subset of tests on PRs provides quicker feedback, ensuring critical functionalities are validated without the overhead of executing all tests.
   - **Efficient Resource Use**: Limits resource consumption and test execution time, optimizing CI/CD pipeline performance.
+
+### E2E Framework Migration to TypeScript
+
+**🎯 Framework Migration Completed (MST-30)**
+
+Our E2E testing framework has been fully migrated from JavaScript to TypeScript, providing:
+
+- **Enhanced Type Safety**: Proper TypeScript interfaces and type casting for Detox elements
+- **Comprehensive Documentation**: TSDoc comments on all framework methods with parameter descriptions and usage examples
+- **Centralized Imports**: All framework utilities now imported from `e2e/framework/` instead of legacy `e2e/utils/`
+- **Stricter Linting**: Enhanced ESLint rules for TypeScript compliance and code quality
+
+#### Framework Structure
+
+```typescript
+// New centralized import pattern
+import { Assertions, Gestures, Matchers, Utilities } from '../framework';
+
+// Legacy pattern (removed)
+// import Assertions from '../utils/Assertions.js';
+```
+
+#### Key Framework Classes
+
+- **`Assertions`**: Element visibility, text content, and state validation with retry mechanisms
+- **`Gestures`**: Touch interactions, typing, and navigation with stability checking
+- **`Matchers`**: Element selection and identification across native and web contexts
+- **`Utilities`**: Helper functions for element stability, waiting, and test utilities
+
+#### Migration Benefits
+
+- **Type Safety**: Eliminated `any` types with proper TypeScript interfaces
+- **Better DX**: IntelliSense support and compile-time error detection
+- **Reliability**: Replaced arbitrary delays with proper element waiting mechanisms
+- **Maintainability**: Comprehensive TSDoc documentation and consistent patterns
 
 ### Framework Documentation
 

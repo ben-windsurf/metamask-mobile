@@ -17,7 +17,6 @@ import TestHelpers from '../../helpers';
 import Assertions from '../../framework/Assertions';
 import { IndexableWebElement } from 'detox/detox';
 import Utilities from '../../framework/Utilities';
-import LegacyGestures from '../../utils/Gestures';
 import { ConfirmationFooterSelectorIDs } from '../../selectors/Confirmation/ConfirmationView.selectors';
 
 export const TEST_SNAPS_URL =
@@ -152,20 +151,22 @@ class TestSnaps {
   async fillMessage(
     locator: keyof typeof TestSnapInputSelectorWebIDS,
     message: string,
-  ) {
+  ): Promise<void> {
     const webElement = Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
       TestSnapInputSelectorWebIDS[locator],
-    ) as Promise<IndexableWebElement>;
-    // New gestures currently don't support web elements
-    await LegacyGestures.typeInWebElement(webElement, message);
+    );
+    // Use Gestures.typeText which handles both native and web elements
+    await Gestures.typeText(webElement as any, message, {
+      elemDescription: `Test snap input field for ${locator}`,
+    });
   }
 
-  async approveSignRequest() {
+  async approveSignRequest(): Promise<void> {
     await Gestures.tap(this.getApproveSignRequestButton);
   }
 
-  async approveNativeConfirmation() {
+  async approveNativeConfirmation(): Promise<void> {
     await Gestures.tap(this.confirmSignatureButton);
   }
 

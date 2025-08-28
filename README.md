@@ -18,7 +18,7 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Expo Development Environment Setup](./docs/readme/expo-environment.md)
 - [Native Development Environment Setup](./docs/readme/environment.md)
 - [Build Troubleshooting](./docs/readme/troubleshooting.md)
-- [Testing](./docs/readme/testing.md)
+- [Testing](./docs/readme/testing.md) - **Now includes TypeScript E2E framework migration guide**
 - [Debugging](./docs/readme/debugging.md)
 - [Performance](./docs/readme/performance.md)
 - [API Call Logging for Debugging](./docs/readme/api-logging.md)
