@@ -19,6 +19,13 @@ interface SmartTransactionsControllerState {
   smartTransactionsState: SmartTransactionsState;
 }
 
+/**
+ * Migration 63: Updates transaction statuses for cancelled smart transactions
+ * Marks smart transactions with specific statuses (cancelled, unknown, resolved) as failed
+ * in the TransactionController to maintain consistency between controllers
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated transaction statuses
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, migrationVersion)) {
     return state;

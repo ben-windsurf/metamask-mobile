@@ -1,6 +1,11 @@
 import { getAllNetworks, isSafeChainId } from '../../util/networks';
 import { GOERLI } from '../../../app/constants/network';
 
+/**
+ * Migration 002: Validates network configuration and switches to Goerli testnet if current network has invalid chainId
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state
+ */
 export default function migrate(state) {
   const provider = state.engine.backgroundState.NetworkController.provider;
 

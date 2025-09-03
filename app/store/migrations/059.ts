@@ -10,8 +10,8 @@ import { captureException } from '@sentry/react-native';
  * Fix: The AccountsController automatically sets the selectedAddress if it is an empty string
  * Fixes issue: View fullstack trace in https://github.com/MetaMask/metamask-mobile/issues/11488
  *
- * @param state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with AccountsController selectedAccount field properly set
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 59)) {

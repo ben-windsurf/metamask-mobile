@@ -3,6 +3,13 @@ import { isSafeChainId } from '../../util/networks';
 import { GOERLI } from '../../../app/constants/network';
 import { regex } from '../../../app/util/regex';
 
+/**
+ * Migration 003: Ensures NetworkController provider has valid chainId
+ * Adds chainId to provider configuration for built-in networks and validates
+ * RPC network chainIds, switching to Goerli testnet if chainId is invalid
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated NetworkController provider
+ */
 export default function migrate(state) {
   const provider = state.engine.backgroundState.NetworkController.provider;
   const chainId = NetworksChainId[provider.type];

@@ -1,5 +1,11 @@
 import { IPFS_DEFAULT_GATEWAY_URL } from '../../../app/constants/network';
 
+/**
+ * Migration 21: Updates outdated IPFS gateway URLs to the default gateway
+ * Replaces deprecated IPFS gateways with the current default gateway URL
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated IPFS gateway
+ */
 export default function migrate(state) {
   const outdatedIpfsGateways = [
     'https://hardbin.com/ipfs/',

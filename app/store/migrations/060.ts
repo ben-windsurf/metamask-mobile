@@ -14,6 +14,12 @@ export const DEFAULT_NOTIFICATION_SERVICES_CONTROLLER = {
   subscriptionAccountsSeen: [],
 };
 
+/**
+ * Migration 60: Initialize NotificationServicesController with default state
+ * Ensures the NotificationServicesController exists in the background state with proper default values
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with NotificationServicesController initialized
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 60)) {
     return state;

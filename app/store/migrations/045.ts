@@ -4,9 +4,10 @@ import { ensureValidState } from './util';
 
 /**
  * Migration to update state of GasFeeController
+ * Sets nonRPCGasFeeApisDisabled to false to enable non-RPC gas fee APIs
  *
- * @param state Persisted Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated GasFeeController configuration
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 45)) {

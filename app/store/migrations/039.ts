@@ -2,6 +2,12 @@ import { isObject } from '@metamask/utils';
 import { captureException } from '@sentry/react-native';
 import { ensureValidState } from './util';
 
+/**
+ * Migration 39: Updates TransactionController transaction objects to use new property names
+ * Renames transaction properties: rawTransaction -> rawTx, transactionHash -> hash, transaction -> txParams
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated transaction property names
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 39)) {
     return state;

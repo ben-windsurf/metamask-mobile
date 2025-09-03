@@ -66,6 +66,14 @@ export const INFURA_CHAINS_WITH_FAILOVERS: Map<
   ],
 ]);
 
+/**
+ * Migration 81: Adds failover URLs to Infura RPC endpoints for supported chains
+ * This migration updates network configurations to include QuickNode failover URLs
+ * for Infura-based RPC endpoints on supported chains like Ethereum mainnet,
+ * Arbitrum, Avalanche, Optimism, Polygon, Base, and Linea.
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with failover URLs added to Infura RPC endpoints
+ */
 export default function migrate(state: unknown) {
   const newState = cloneDeep(state);
 

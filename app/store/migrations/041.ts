@@ -4,9 +4,10 @@ import { ensureValidState } from './util';
 
 /**
  * Migration to reset state of TokenBalancesController
+ * Resets the contractBalances property to an empty object to clear cached token balance data
  *
- * @param state Persisted Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with reset TokenBalancesController contractBalances
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 41)) {

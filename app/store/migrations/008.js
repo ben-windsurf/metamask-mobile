@@ -1,3 +1,10 @@
+/**
+ * Migration 008: Normalizes ignored tokens format in TokensController
+ * Ensures that ignored tokens are stored as arrays of token addresses (strings)
+ * rather than mixed formats of token objects or addresses
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with normalized ignored tokens format
+ */
 export default function migrate(state) {
   // This migration ensures that ignored tokens are in the correct form
   const allIgnoredTokens =

@@ -85,6 +85,13 @@ export function prepareTransaction(transaction) {
   };
 }
 
+/**
+ * Sets the security alert response for a transaction
+ *
+ * @param {string} transactionId - The ID of the transaction
+ * @param {object} securityAlertResponse - The security alert response object
+ * @returns {object} Redux action object with type and payload
+ */
 export function setTransactionSecurityAlertResponse(
   transactionId,
   securityAlertResponse,
@@ -144,6 +151,12 @@ export function setEtherTransaction(transaction) {
   };
 }
 
+/**
+ * Sets the nonce for the current transaction
+ *
+ * @param {string|number} nonce - The nonce value to set
+ * @returns {object} Redux action object with type and nonce
+ */
 export function setNonce(nonce) {
   return {
     type: 'SET_NONCE',
@@ -151,6 +164,12 @@ export function setNonce(nonce) {
   };
 }
 
+/**
+ * Sets the proposed nonce for the current transaction
+ *
+ * @param {string|number} proposedNonce - The proposed nonce value
+ * @returns {object} Redux action object with type and proposed nonce
+ */
 export function setProposedNonce(proposedNonce) {
   return {
     type: 'SET_PROPOSED_NONCE',
@@ -158,6 +177,12 @@ export function setProposedNonce(proposedNonce) {
   };
 }
 
+/**
+ * Sets the max value mode for the current transaction
+ *
+ * @param {boolean} maxValueMode - Whether to use maximum value mode
+ * @returns {object} Redux action object with type and max value mode flag
+ */
 export function setMaxValueMode(maxValueMode) {
   return {
     type: 'SET_MAX_VALUE_MODE',
@@ -165,6 +190,12 @@ export function setMaxValueMode(maxValueMode) {
   };
 }
 
+/**
+ * Sets the value for the current transaction
+ *
+ * @param {string} value - The transaction value in wei
+ * @returns {object} Redux action object with type and transaction value
+ */
 export function setTransactionValue(value) {
   return {
     type: 'SET_TRANSACTION_VALUE',

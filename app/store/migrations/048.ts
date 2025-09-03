@@ -5,8 +5,8 @@ import { ensureValidState } from './util';
 /**
  * Migration to remove contractExchangeRates and contractExchangeRatesByChainId from the state of TokenRatesController
  *
- * @param state Persisted Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with contractExchangeRates and contractExchangeRatesByChainId removed from TokenRatesController
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 48)) {

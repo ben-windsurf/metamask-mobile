@@ -2,6 +2,11 @@ import { captureException } from '@sentry/react-native';
 import { isObject } from '@metamask/utils';
 import { ensureValidState } from './util';
 
+/**
+ * Migration 56: Updates the IPFS gateway from the decommissioned Cloudflare gateway to the new default dweb.link gateway
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated IPFS gateway URL
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 56)) {
     // Increment the migration number as appropriate

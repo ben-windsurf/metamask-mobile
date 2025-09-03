@@ -15,6 +15,12 @@ export interface State {
   };
 }
 
+/**
+ * Migration 68: Updates smart transactions opt-in status and feature flags
+ * Enables smart transactions by default and tracks migration status through feature flags
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated smart transactions preferences
+ */
 export default function migrate(state: unknown) {
   if (!isObject(state)) {
     captureException(

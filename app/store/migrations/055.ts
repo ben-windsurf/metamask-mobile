@@ -64,6 +64,14 @@ function isValidUrl(url: string) {
   );
 }
 
+/**
+ * Migration 55: Consolidates network configurations by chain ID and adds built-in Infura networks
+ * This migration restructures the NetworkController state to group network configurations by chain ID,
+ * adds built-in Infura networks (mainnet, sepolia, linea-sepolia, linea-mainnet), and ensures
+ * proper handling of RPC endpoints and block explorer URLs while maintaining transaction history context.
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated NetworkController structure
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 55)) {
     return state;

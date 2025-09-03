@@ -23,6 +23,11 @@ export type OnboardingActionTypes =
   | ClearEventsAction
   | SetCompletedOnboardingAction;
 
+/**
+ * Saves an onboarding event for analytics tracking
+ * @param {[ITrackingEvent]} eventArgs - Array containing the tracking event to save
+ * @returns {SaveEventAction} Redux action object with type and event data
+ */
 export function saveOnboardingEvent(
   eventArgs: [ITrackingEvent],
 ): SaveEventAction {
@@ -32,12 +37,21 @@ export function saveOnboardingEvent(
   };
 }
 
+/**
+ * Clears all stored onboarding events from the Redux store
+ * @returns {ClearEventsAction} Redux action object to clear onboarding events
+ */
 export function clearOnboardingEvents(): ClearEventsAction {
   return {
     type: CLEAR_EVENTS,
   };
 }
 
+/**
+ * Sets the onboarding completion status in the Redux store
+ * @param {boolean} completedOnboarding - Whether the user has completed onboarding
+ * @returns {SetCompletedOnboardingAction} Redux action object with completion status
+ */
 export function setCompletedOnboarding(
   completedOnboarding: boolean,
 ): SetCompletedOnboardingAction {

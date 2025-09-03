@@ -1,10 +1,10 @@
 import { NetworkType } from '@metamask/controller-utils';
 
 /**
- * Populate the submitHistory in the TransactionController using any
+ * Migration 027: Populate the submitHistory in the TransactionController using any
  * transaction metadata entries that have a rawTransaction value.
- * @param {any} state - Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with populated TransactionController submitHistory
  */
 export default function migrate(state) {
   const backgroundState = state.engine.backgroundState;

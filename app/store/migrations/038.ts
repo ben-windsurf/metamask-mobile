@@ -2,6 +2,12 @@ import { captureException } from '@sentry/react-native';
 import { isObject } from '@metamask/utils';
 import { ensureValidState } from './util';
 
+/**
+ * Migration 38: Restructures CurrencyRateController state format
+ * Removes pending currency properties and reorganizes currency rates into a nested structure
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated CurrencyRateController structure
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 38)) {
     return state;
