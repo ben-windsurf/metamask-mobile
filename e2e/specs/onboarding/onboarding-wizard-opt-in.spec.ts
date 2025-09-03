@@ -7,7 +7,7 @@ import LoginView from '../../pages/wallet/LoginView';
 import { CreateNewWallet } from '../../viewHelper';
 import TabBarComponent from '../../pages/wallet/TabBarComponent';
 import CommonView from '../../pages/CommonView';
-import Assertions from '../../framework/Assertions';
+import { Assertions , Utilities } from '../../framework';
 import { mockEvents } from '../../api-mocking/mock-config/mock-events';
 import {
   getEventsPayloads,
@@ -19,7 +19,6 @@ import SoftAssert from '../../utils/SoftAssert';
 import { MockttpServer } from 'mockttp';
 import { getMockServerPort } from '../../fixtures/utils';
 import { startMockServer } from '../../api-mocking/mock-server';
-import Utilities from '../../utils/Utilities';
 
 const PASSWORD = '12345678';
 
