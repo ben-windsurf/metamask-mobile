@@ -16,7 +16,7 @@ import {
   requestPermissionsHandler,
   revokePermissionsHandler,
 } from '@metamask/eip1193-permission-middleware';
-import RPCMethods from './index.js';
+import RPCMethods from './index';
 import { RPC } from '../../constants/network';
 import { ChainId, NetworkType } from '@metamask/controller-utils';
 import {
