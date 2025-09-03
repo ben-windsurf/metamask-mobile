@@ -23,6 +23,12 @@ import { RootState } from '../../../reducers';
 import AddressFrom from './AddressFrom';
 import { isPerDappSelectedNetworkEnabled } from '../../../util/networks';
 
+/**
+ * AccountFromToInfoCard component displays sender and recipient information for transactions
+ * Handles ENS resolution, account name lookup, and confusable character warnings
+ * @param {AccountFromToInfoCardProps} props - Component props containing transaction state and account data
+ * @returns {JSX.Element} Rendered account from/to information card with address details
+ */
 const AccountFromToInfoCard = (props: AccountFromToInfoCardProps) => {
   const { internalAccounts, chainId, ticker, transactionState, origin } = props;
   const {
@@ -201,6 +207,11 @@ const AccountFromToInfoCard = (props: AccountFromToInfoCardProps) => {
   );
 };
 
+/**
+ * Maps Redux state to component props
+ * @param {RootState} state - Redux root state
+ * @returns {Object} Props object with internal accounts, chain ID, and ticker
+ */
 const mapStateToProps = (state: RootState) => ({
   internalAccounts: selectInternalAccounts(state),
   chainId: selectEvmChainId(state),

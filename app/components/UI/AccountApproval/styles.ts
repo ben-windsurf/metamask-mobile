@@ -6,6 +6,12 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates styles for the AccountApproval component
+ * @param {ThemeColors} colors - Theme color palette
+ * @param {ThemeTypography} typography - Theme typography settings
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const createStyles = (colors: ThemeColors, typography: ThemeTypography) =>
   StyleSheet.create({
     root: {

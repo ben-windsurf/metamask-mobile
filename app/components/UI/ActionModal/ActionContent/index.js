@@ -5,6 +5,11 @@ import StyledButton from '../../StyledButton';
 import { strings } from '../../../../../locales/i18n';
 import { useTheme } from '../../../../util/theme';
 
+/**
+ * Creates styles for the ActionContent component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     viewWrapper: {
@@ -42,9 +47,29 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that renders the content of an action modal
- * The objective of this component is to reuse it in other places and not
- * only on ActionModal component
+ * ActionContent component renders the content of an action modal with customizable buttons
+ * Provides a reusable modal content structure with cancel and confirm actions
+ * Supports both horizontal and vertical button layouts with extensive styling options
+ * @param {Object} props - Component props
+ * @param {string} props.cancelTestID - TestID for the cancel button
+ * @param {string} props.confirmTestID - TestID for the confirm button
+ * @param {string} props.cancelText - Text to show in the cancel button
+ * @param {React.ReactNode} props.children - Content to display above the action buttons
+ * @param {string} props.confirmText - Text to show in the confirm button
+ * @param {boolean} props.confirmDisabled - Whether confirm button is disabled
+ * @param {string} props.cancelButtonMode - Type of button to show as the cancel button
+ * @param {boolean} props.cancelButtonDisabled - Whether cancel button is disabled
+ * @param {string} props.confirmButtonMode - Type of button to show as the confirm button
+ * @param {boolean} props.displayCancelButton - Whether cancel button should be displayed
+ * @param {boolean} props.displayConfirmButton - Whether confirm button should be displayed
+ * @param {Function} props.onCancelPress - Called when the cancel button is clicked
+ * @param {Function} props.onConfirmPress - Called when the confirm button is clicked
+ * @param {Object} props.viewWrapperStyle - View wrapper style
+ * @param {Object} props.viewContainerStyle - View container style
+ * @param {Object} props.actionContainerStyle - Action container style
+ * @param {Object} props.childrenContainerStyle - Children container style
+ * @param {boolean} props.verticalButtons - Whether buttons are rendered vertically
+ * @returns {JSX.Element} The rendered ActionContent component
  */
 export default function ActionContent({
   cancelTestID,

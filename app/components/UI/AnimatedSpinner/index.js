@@ -5,6 +5,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
+/**
+ * Available spinner size options
+ * @type {Object}
+ */
 export const SpinnerSize = {
   MD: 'MD',
   SM: 'SM',
@@ -45,6 +49,12 @@ const measures = {
   },
 };
 
+/**
+ * Creates styles for the animated spinner component
+ * @param {Object} colors - Theme colors object
+ * @param {Object} measures - Size measurements for the spinner
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, measures) =>
   StyleSheet.create({
     view: {
@@ -65,6 +75,12 @@ const createStyles = (colors, measures) =>
     },
   });
 
+/**
+ * AnimatedSpinner component renders a rotating loading spinner
+ * Provides smooth animation with configurable size and platform-specific styling
+ * @class AnimatedSpinner
+ * @extends {PureComponent}
+ */
 export default class AnimatedSpinner extends PureComponent {
   spinValue = new Animated.Value(0);
 
@@ -81,6 +97,10 @@ export default class AnimatedSpinner extends PureComponent {
     this.mounted = false;
   }
 
+  /**
+   * Toggles the spinning animation state
+   * Starts animation if not spinning, stops if currently spinning
+   */
   spin = () => {
     this.spinValue.setValue(0);
 
@@ -92,6 +112,10 @@ export default class AnimatedSpinner extends PureComponent {
     }
   };
 
+  /**
+   * Runs the continuous rotation animation
+   * Creates a 1-second linear rotation that loops while spinning is true
+   */
   animation = () => {
     this.spinValue.setValue(0);
 

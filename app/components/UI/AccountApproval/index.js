@@ -412,6 +412,11 @@ class AccountApproval extends PureComponent {
   };
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object containing account and network information
+ */
 const mapStateToProps = (state) => ({
   accountsLength: selectAccountsLength(state),
   tokensLength: selectTokensLength(state),

@@ -15,12 +15,20 @@ import Button, {
   ButtonSize,
 } from '../../../component-library/components/Buttons/Button';
 
+/**
+ * Enum for confirm button states that determine button styling and behavior
+ */
 export const ConfirmButtonState = {
   Error: 'error',
   Warning: 'warning',
   Normal: 'normal',
 };
 
+/**
+ * Creates stylesheet for ActionView component based on theme colors
+ * @param {Object} colors - Theme color object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const getStyles = (colors) =>
   StyleSheet.create({
     actionContainer: {
@@ -40,7 +48,10 @@ const getStyles = (colors) =>
   });
 
 /**
- * PureComponent that renders scrollable content above configurable buttons
+ * ActionView component renders scrollable content above configurable action buttons
+ * Provides a consistent layout for forms and confirmation dialogs with cancel/confirm actions
+ * @param {Object} props - Component props
+ * @returns {JSX.Element} Rendered ActionView component with scrollable content and action buttons
  */
 export default function ActionView({
   cancelTestID,

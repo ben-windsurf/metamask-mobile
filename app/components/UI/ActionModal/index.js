@@ -14,7 +14,32 @@ const styles = StyleSheet.create({
 });
 
 /**
- * View that renders an action modal
+ * ActionModal component renders a customizable modal with action buttons
+ * Provides cancel and confirm buttons with configurable text, styling, and behavior
+ * @param {Object} props - Component props
+ * @param {string} props.cancelTestID - TestID for the cancel button
+ * @param {string} props.confirmTestID - TestID for the confirm button
+ * @param {string} props.cancelText - Text to show in the cancel button
+ * @param {React.ReactNode} props.children - Content to display above the action buttons
+ * @param {string} props.confirmText - Text to show in the confirm button
+ * @param {boolean} props.confirmDisabled - Whether confirm button is disabled
+ * @param {string} props.cancelButtonMode - Type of button to show as the cancel button
+ * @param {string} props.confirmButtonMode - Type of button to show as the confirm button
+ * @param {boolean} props.displayCancelButton - Whether cancel button should be displayed
+ * @param {boolean} props.displayConfirmButton - Whether confirm button should be displayed
+ * @param {Function} props.onCancelPress - Called when the cancel button is clicked
+ * @param {Function} props.onConfirmPress - Called when the confirm button is clicked
+ * @param {Function} props.onRequestClose - Called when hardware back button on Android is clicked
+ * @param {boolean} props.modalVisible - Whether modal is shown
+ * @param {Object} props.modalStyle - Modal style
+ * @param {Object} props.viewWrapperStyle - View wrapper style
+ * @param {Object} props.viewContainerStyle - View container style
+ * @param {Object} props.actionContainerStyle - Action container style
+ * @param {Object} props.childrenContainerStyle - Children container style
+ * @param {boolean} props.verticalButtons - Whether buttons are rendered vertically
+ * @param {boolean} props.propagateSwipe - Allows swipe events to propagate to children components
+ * @param {boolean} props.cancelButtonDisabled - Whether cancel button is disabled
+ * @returns {JSX.Element} The rendered action modal component
  */
 export default function ActionModal({
   cancelTestID,

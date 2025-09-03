@@ -27,6 +27,9 @@ const descriptionArray = [
   strings('accounts.malicious_transactions'),
 ];
 
+/**
+ * Opens the learn more URL about deceptive sites and tracks the analytics event
+ */
 const goToLearnMore = () => {
   Linking.openURL(CONNECTING_TO_A_DECEPTIVE_SITE);
   MetaMetrics.getInstance().trackEvent(
@@ -42,6 +45,11 @@ const goToLearnMore = () => {
   );
 };
 
+/**
+ * Warning banner component that displays security alerts for deceptive sites
+ * Shows expandable details about potential threats and includes advisory information
+ * @returns {JSX.Element} The rendered warning banner with accordion details
+ */
 const ShowWarningBanner = () => {
   const { colors, typography } = useTheme();
   const styles = createStyles(colors, typography);
