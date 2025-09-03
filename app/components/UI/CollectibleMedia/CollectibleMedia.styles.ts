@@ -42,10 +42,6 @@ const styleSheet = (params: {
     },
     cover: {
       height: scaling.scale(Device.getDeviceWidth() - MEDIA_WIDTH_MARGIN, {
-        factor: 1,
-        scaleVertical: false,
-        scaleUp: false,
-        baseSize: undefined,
         baseModel: 2,
       }),
     },
