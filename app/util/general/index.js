@@ -2,7 +2,7 @@ import URL from 'url-parse';
 
 /**
  * Converts a string to lowercase safely
- * @param {string} str - The string to convert to lowercase
+ * @param {string|null|undefined} str - The string to convert to lowercase
  * @returns {string|undefined} The lowercase string or undefined if input is falsy
  */
 export const tlc = (str) => str?.toLowerCase?.();
@@ -62,8 +62,8 @@ export const capitalize = (str) =>
 
 /**
  * Compares two strings for equality after converting both to lowercase
- * @param {string} a - First string to compare
- * @param {string} b - Second string to compare
+ * @param {string|null|undefined} a - First string to compare
+ * @param {string|null|undefined} b - Second string to compare
  * @returns {boolean} True if strings are equal when lowercased, false otherwise
  */
 export const toLowerCaseEquals = (a, b) => {
