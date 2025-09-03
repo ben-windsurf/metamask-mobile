@@ -622,4 +622,72 @@ export default class Gestures {
   ): Promise<void> {
     return this.replaceText(elem, text, { timeout });
   }
+
+  /**
+   * Helper function to add delay before performing an action.
+   * Useful when elements are visible but not fully interactive yet.
+   * @deprecated Use the delay option in other gesture methods instead
+   */
+  static async delayBeforeAction(delayMs: number): Promise<void> {
+    if (delayMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+
+  /**
+   * Tap an element with text partial text matching before tapping it
+   * @deprecated Use Matchers.getElementByText() with regex pattern instead
+   */
+  static async tapTextBeginingWith(textPattern: string): Promise<void> {
+    await detox.element(by.text(new RegExp(`^${textPattern}.*$`))).tap();
+  }
+
+  /**
+   * Type text into a web element within a webview using JavaScript injection.
+   * @deprecated Use modern web element interaction methods instead
+   */
+  static async typeInWebElement(
+    webElement: WebElement,
+    text: string,
+  ): Promise<void> {
+    try {
+      await (
+        await webElement
+      ).runScript(
+        (el: HTMLInputElement, value: string) => {
+          el.focus();
+          el.value = value;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (el as any)._valueTracker?.setValue('');
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+        },
+        [text],
+      );
+    } catch {
+      await (await webElement).typeText(text);
+    }
+  }
+
+  /**
+   * Swipe on an element at a specific index.
+   * @deprecated Use swipe() with atIndex() chaining instead
+   */
+  static async swipeAtIndex(
+    detoxElement: DetoxElement,
+    direction: Detox.Direction,
+    speed?: Detox.Speed,
+    percentage?: number,
+    xStart?: number,
+    yStart?: number,
+    index = 0,
+  ): Promise<void> {
+    const resolvedElement = await detoxElement;
+    if ('atIndex' in resolvedElement) {
+      await (resolvedElement as Detox.IndexableNativeElement)
+        .atIndex(index)
+        .swipe(direction, speed, percentage, xStart, yStart);
+    } else {
+      await resolvedElement.swipe(direction, speed, percentage, xStart, yStart);
+    }
+  }
 }
