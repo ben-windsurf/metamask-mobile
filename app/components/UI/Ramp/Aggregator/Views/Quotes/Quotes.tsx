@@ -70,10 +70,20 @@ export interface QuotesParams {
   fiatCurrency: FiatCurrency;
 }
 
+/**
+ * Creates navigation details for the Quotes screen with typed parameters
+ * @returns Navigation details object for the quotes route
+ */
 export const createQuotesNavDetails = createNavigationDetails<QuotesParams>(
   Routes.RAMP.QUOTES,
 );
 
+/**
+ * Quotes component displays available buy/sell quotes from different providers
+ * Handles quote fetching, polling, provider selection, and navigation to checkout
+ * Supports both on-ramp (buy) and off-ramp (sell) operations with real-time quote updates
+ * @returns JSX.Element The rendered quotes screen with provider options and actions
+ */
 function Quotes() {
   const navigation = useNavigation();
   const trackEvent = useAnalytics();

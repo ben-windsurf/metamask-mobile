@@ -7,9 +7,20 @@ import { Region } from '../types';
 import useSDKMethod from './useSDKMethod';
 import { Country, State } from '@consensys/on-ramp-sdk';
 
+/**
+ * Type guard to check if a region is a Country (has states property)
+ * @param region - The region to check
+ * @returns True if the region is a Country, false otherwise
+ */
 const isCountry = (region: Country | State | null): region is Country =>
   (region as Country).states !== undefined;
 
+/**
+ * Recursively finds the detected region from a list of regions
+ * If a detected country has states, it searches within those states
+ * @param regions - Array of regions to search through
+ * @returns The detected region or null if none found
+ */
 const findDetectedRegion = (regions: Region[]): Region | null => {
   const detectedRegion = regions.find((region) => region.detected);
   if (!detectedRegion) return null;
@@ -19,6 +30,11 @@ const findDetectedRegion = (regions: Region[]): Region | null => {
   return detectedRegion;
 };
 
+/**
+ * Custom hook for managing region selection and validation in the Ramp feature
+ * Handles fetching countries, detecting user region, and managing region support for buy/sell operations
+ * @returns Object containing region data, loading states, and region management functions
+ */
 export default function useRegions() {
   const navigation = useNavigation();
   const route = useRoute();

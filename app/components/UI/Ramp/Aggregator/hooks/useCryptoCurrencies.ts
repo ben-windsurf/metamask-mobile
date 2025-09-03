@@ -3,6 +3,12 @@ import { useRampSDK } from '../sdk';
 import useSDKMethod from './useSDKMethod';
 import { NATIVE_ADDRESS } from '../../../../../constants/on-ramp';
 
+/**
+ * Custom hook for managing cryptocurrency data in the Ramp aggregator
+ * Fetches available cryptocurrencies based on region, fiat currency, and chain
+ * Automatically selects appropriate assets and handles intent-based selection
+ * @returns {Object} Object containing cryptocurrency data, loading states, and query functions
+ */
 export default function useCryptoCurrencies() {
   const {
     selectedRegion,

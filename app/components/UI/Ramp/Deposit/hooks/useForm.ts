@@ -12,6 +12,14 @@ interface UseFormReturn<T> {
   validateFormData: () => boolean;
 }
 
+/**
+ * Custom hook for managing form state, validation, and user interactions
+ * Provides form data management with real-time validation and error handling
+ * @param options - Configuration options for the form hook
+ * @param options.initialFormData - Initial data for the form fields
+ * @param options.validateForm - Function to validate form data and return errors
+ * @returns Object containing form state and handlers for form interactions
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useForm = <T extends Record<string, any>>({
   initialFormData,

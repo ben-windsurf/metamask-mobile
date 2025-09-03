@@ -4,6 +4,13 @@ import { Theme } from '../../../../../../../util/theme/models';
 interface StateSelectorModalStyleSheetVars {
   screenHeight: number;
 }
+/**
+ * Creates stylesheet for StateSelectorModal component
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling
+ * @param {StateSelectorModalStyleSheetVars} params.vars - Variables for dynamic styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: StateSelectorModalStyleSheetVars;

@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for the UnsupportedRegionModal component
+ * Defines styles for modal content, icons, country display, and footer layout
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = () =>
   StyleSheet.create({
     content: {

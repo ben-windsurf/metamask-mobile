@@ -3,6 +3,12 @@
 import { QuoteError, QuoteResponse } from '@consensys/on-ramp-sdk';
 import { DeepPartial } from '../../../../../../util/test/renderWithProvider';
 
+/**
+ * Mock quotes data for testing the Ramp Aggregator Quotes component
+ * Contains sample quote responses from different providers (Banxa, MoonPay, Transak)
+ * with various quote states including successful and error responses
+ * @type {Array<DeepPartial<QuoteResponse> | DeepPartial<QuoteError>>}
+ */
 export const mockQuotesData = [
   {
     provider: {

@@ -77,9 +77,18 @@ export interface InteractiveTimespanChartProps<T extends DataPoint> {
  * This "give" is based on the distance from the center of a segment/data point.
  */
 
+/**
+ * Default test ID for the InteractiveTimespanChart component
+ */
 export const INTERACTIVE_TIMESPAN_CHART_DEFAULT_TEST_ID =
   'InteractiveTimespanChart';
 
+/**
+ * Interactive timespan chart component that displays data points with touch interaction
+ * Supports different timespan views, touch gestures for data point selection, and customizable styling
+ * @param props - Component props
+ * @returns JSX.Element - Rendered interactive chart with timespan controls and tooltip
+ */
 const InteractiveTimespanChart = <T extends DataPoint>({
   dataPoints,
   graphOptions,

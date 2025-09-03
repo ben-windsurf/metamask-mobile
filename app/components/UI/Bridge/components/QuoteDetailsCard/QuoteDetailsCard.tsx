@@ -61,6 +61,12 @@ interface NetworkBadgeProps {
   chainId: string;
 }
 
+/**
+ * NetworkBadge component displays a network badge with icon and name
+ * @param {NetworkBadgeProps} props - Component props
+ * @param {string} props.chainId - The chain ID to display badge for
+ * @returns {JSX.Element} Network badge with icon and display name
+ */
 const NetworkBadge = ({ chainId }: NetworkBadgeProps) => {
   const networkConfigurations = useSelector(selectNetworkConfigurations);
   const networkConfig = networkConfigurations[chainId];
@@ -83,6 +89,12 @@ const NetworkBadge = ({ chainId }: NetworkBadgeProps) => {
   );
 };
 
+/**
+ * QuoteDetailsCard component displays detailed information about a bridge quote
+ * Shows network fees, estimated time, exchange rate, price impact, and slippage
+ * Supports expandable/collapsible view for EVM-Solana bridges
+ * @returns {JSX.Element|null} Quote details card or null if required data is missing
+ */
 const QuoteDetailsCard = () => {
   const theme = useTheme();
   const navigation = useNavigation();

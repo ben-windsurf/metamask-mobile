@@ -19,6 +19,16 @@ import images from '../../../../../../images/image-icons';
 import { TokenValueStackProps } from './TokenValueStack.types';
 import { renderFromWei } from '../../../../../../util/number';
 
+/**
+ * TokenValueStack component displays token amount and fiat value with network badge
+ * Shows the token amount in wei format with symbol and corresponding fiat value
+ * @param {TokenValueStackProps} props - Component props
+ * @param {string} props.amountWei - Token amount in wei format
+ * @param {string} props.amountFiat - Fiat value representation of the token amount
+ * @param {string} props.tokenSymbol - Symbol of the token (e.g., ETH)
+ * @param {Object} props.style - Additional styles to apply to the container
+ * @returns {JSX.Element} Rendered token value stack with network badge and balance display
+ */
 const TokenValueStack = ({
   amountWei,
   amountFiat,

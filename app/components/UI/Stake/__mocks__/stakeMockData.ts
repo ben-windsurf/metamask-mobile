@@ -1,3 +1,7 @@
+/**
+ * Mock data for stake-related components and tests
+ * Provides sample data for pooled stakes, vault responses, and token assets
+ */
 import {
   ChainId,
   type PooledStakes,
@@ -10,6 +14,7 @@ import { Stake } from '../sdk/stakeSdkProvider';
 import { createMockToken, getCreateMockTokenOptions } from '../testUtils';
 import { TOKENS_WITH_DEFAULT_OPTIONS } from '../testUtils/testUtils.types';
 
+/** Mock response for pooled stakes API with sample account data and exit requests */
 export const MOCK_GET_POOLED_STAKES_API_RESPONSE: PooledStakes = {
   accounts: [
     {
@@ -61,6 +66,7 @@ export const MOCK_GET_POOLED_STAKES_API_RESPONSE: PooledStakes = {
   exchangeRate: '1.010906701603882254',
 };
 
+/** Mock response for pooled stakes API with high asset amounts for testing edge cases */
 export const MOCK_GET_POOLED_STAKES_API_RESPONSE_HIGH_ASSETS_AMOUNT: PooledStakes =
   {
     accounts: [
@@ -74,6 +80,7 @@ export const MOCK_GET_POOLED_STAKES_API_RESPONSE_HIGH_ASSETS_AMOUNT: PooledStake
     exchangeRate: '1.010906701603882254',
   };
 
+/** Mock vault data response with APY, capacity, and asset information */
 export const MOCK_GET_VAULT_RESPONSE: VaultData = {
   apy: '2.853065141088762750393474836309926',
   capacity:
@@ -99,14 +106,17 @@ const MOCK_POOLED_STAKING_CONTRACT_SERVICE = {
   getShares: jest.fn(),
 };
 
+/** Mock stake SDK instance with pooled staking contract service */
 export const MOCK_POOL_STAKING_SDK: Stake = {
   stakingContract: MOCK_POOLED_STAKING_CONTRACT_SERVICE,
 };
 
+/** Mock ETH token asset for Ethereum mainnet */
 export const MOCK_ETH_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(CHAIN_IDS.MAINNET, TOKENS_WITH_DEFAULT_OPTIONS.ETH),
 );
 
+/** Mock staked ETH token asset for Ethereum mainnet */
 export const MOCK_STAKED_ETH_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(
     CHAIN_IDS.MAINNET,
@@ -114,6 +124,7 @@ export const MOCK_STAKED_ETH_MAINNET_ASSET = createMockToken(
   ),
 );
 
+/** Mock USDC token asset for Ethereum mainnet */
 export const MOCK_USDC_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(
     CHAIN_IDS.MAINNET,
@@ -121,12 +132,14 @@ export const MOCK_USDC_MAINNET_ASSET = createMockToken(
   ),
 );
 
+/** Mock Aave v3 USDC token asset for Ethereum mainnet */
 export const MOCK_AETHUSDC_MAINNET_ASSET = createMockToken({
   chainId: '0x1',
   symbol: 'AETHUSDC',
   name: 'Aave v3 USDC',
 });
 
+/** Mock USDT token asset for Ethereum mainnet */
 export const MOCK_USDT_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(
     CHAIN_IDS.MAINNET,
@@ -134,10 +147,12 @@ export const MOCK_USDT_MAINNET_ASSET = createMockToken(
   ),
 );
 
+/** Mock USDT token asset for Base network */
 export const MOCK_USDT_BASE_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(CHAIN_IDS.BASE, TOKENS_WITH_DEFAULT_OPTIONS.USDT),
 );
 
+/** Mock Aave v3 USDT token asset for Ethereum mainnet */
 export const MOCK_AUSDT_MAINNET_ASSET = createMockToken({
   chainId: '0x1',
   symbol: 'AUSDT',
@@ -145,10 +160,12 @@ export const MOCK_AUSDT_MAINNET_ASSET = createMockToken({
   address: '0x23878914EFE38d27C4D67Ab83ed1b93A74D4086a',
 });
 
+/** Mock DAI token asset for Ethereum mainnet */
 export const MOCK_DAI_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(CHAIN_IDS.MAINNET, TOKENS_WITH_DEFAULT_OPTIONS.DAI),
 );
 
+/** Mock Aave v3 DAI token asset for Ethereum mainnet */
 export const MOCK_ADAI_MAINNET_ASSET = createMockToken({
   chainId: '0x1',
   symbol: 'ADAI',
@@ -173,16 +190,19 @@ const MOCK_ETH_BASE_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(CHAIN_IDS.BASE, TOKENS_WITH_DEFAULT_OPTIONS.ETH),
 );
 
+/** Mock USDC token asset for Base network */
 export const MOCK_USDC_BASE_MAINNET_ASSET = createMockToken(
   getCreateMockTokenOptions(CHAIN_IDS.BASE, TOKENS_WITH_DEFAULT_OPTIONS.USDC),
 );
 
+/** Mock Aave Base USDC token asset for Base network */
 export const MOCK_ABASUSDC_BASE_MAINNET_ASSET = createMockToken({
   chainId: '0x2105',
   symbol: 'aBasUSDC',
   name: 'aBasUSDC',
 });
 
+/** Mock array of multi-chain token assets for account testing */
 export const MOCK_ACCOUNT_MULTI_CHAIN_TOKENS = [
   MOCK_ETH_MAINNET_ASSET,
   MOCK_STAKED_ETH_MAINNET_ASSET,

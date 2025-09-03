@@ -2,6 +2,12 @@ import { useEffect, useMemo } from 'react';
 import { useRampSDK } from '../sdk';
 import useSDKMethod from './useSDKMethod';
 
+/**
+ * Custom hook for managing fiat currencies in the Ramp aggregator
+ * Handles fetching available fiat currencies, default currency selection,
+ * and automatic fallback to default when selected currency becomes unavailable
+ * @returns {Object} Object containing fiat currency data, loading states, and error information
+ */
 export default function useFiatCurrencies() {
   const {
     selectedRegion,

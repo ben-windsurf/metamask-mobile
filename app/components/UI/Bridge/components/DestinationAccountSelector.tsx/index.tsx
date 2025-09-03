@@ -28,6 +28,11 @@ import { strings } from '../../../../../../locales/i18n';
 import CaipAccountSelectorList from '../../../CaipAccountSelectorList';
 import { CaipAccountId, parseCaipAccountId } from '@metamask/utils';
 
+/**
+ * Creates styles for the DestinationAccountSelector component
+ * @param {Theme} theme - The theme object containing colors and styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = ({ colors }: Theme) =>
   StyleSheet.create({
     container: {
@@ -50,6 +55,12 @@ const createStyles = ({ colors }: Theme) =>
     },
   });
 
+/**
+ * DestinationAccountSelector component allows users to select a destination account for bridge transactions
+ * Filters accounts based on the bridge direction (EVM to Solana or Solana to EVM) and provides
+ * account selection interface with the ability to clear the selected destination
+ * @returns {JSX.Element} The rendered destination account selector component
+ */
 const DestinationAccountSelector = () => {
   const dispatch = useDispatch();
   const { accounts, ensByAccountAddress } = useAccounts();

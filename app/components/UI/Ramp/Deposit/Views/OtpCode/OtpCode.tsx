@@ -39,6 +39,11 @@ export interface OtpCodeParams {
   email: string;
 }
 
+/**
+ * Creates navigation details for the OTP code screen
+ * @param {OtpCodeParams} params - Navigation parameters including email
+ * @returns {NavigationDetails} Navigation details for the OTP code route
+ */
 export const createOtpCodeNavDetails = createNavigationDetails<OtpCodeParams>(
   Routes.DEPOSIT.OTP_CODE,
 );
@@ -47,6 +52,15 @@ const CELL_COUNT = 6;
 const COOLDOWN_TIME = 30;
 const MAX_RESET_ATTEMPTS = 3;
 
+/**
+ * ResendButton component renders a text message with an inline button
+ * Used for resend OTP and contact support actions
+ * @param {Object} props - Component props
+ * @param {VoidFunction} props.onPress - Function to call when button is pressed
+ * @param {string} props.text - Text to display before the button
+ * @param {string} props.button - Button text to display
+ * @returns {JSX.Element} Rendered resend button component
+ */
 const ResendButton: FC<{
   onPress: VoidFunction;
   text: string;
@@ -63,6 +77,12 @@ const ResendButton: FC<{
   );
 };
 
+/**
+ * OtpCode component handles OTP verification for deposit flow
+ * Displays a 6-digit code input field with resend functionality and validation
+ * Manages cooldown periods, error states, and navigation to next step
+ * @returns {JSX.Element} Rendered OTP code verification screen
+ */
 const OtpCode = () => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

@@ -35,6 +35,14 @@ import { getAssetTestId } from '../../../../../wdio/screen-objects/testIDs/Scree
 import SkeletonText from '../../Ramp/Aggregator/components/SkeletonText';
 import parseAmount from '../../Ramp/Aggregator/utils/parseAmount';
 
+/**
+ * Creates styles for the TokenSelectorItem component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and styling
+ * @param {Object} params.vars - Variables for dynamic styling
+ * @param {boolean} params.vars.isSelected - Whether the token item is selected
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = ({
   theme,
   vars,
@@ -95,6 +103,19 @@ interface TokenSelectorItemProps {
   children?: React.ReactNode;
 }
 
+/**
+ * TokenSelectorItem component displays a selectable token with its icon, name, symbol, and balance
+ * Used in bridge token selection interfaces to show available tokens with network badges
+ * @param {TokenSelectorItemProps} props - Component props
+ * @param {BridgeToken} props.token - The token object containing address, symbol, name, balance, and image
+ * @param {Function} props.onPress - Callback function called when token is pressed
+ * @param {string} props.networkName - Name of the network for the badge
+ * @param {ImageSourcePropType} props.networkImageSource - Image source for the network badge
+ * @param {boolean} props.isSelected - Whether this token is currently selected
+ * @param {boolean} props.shouldShowBalance - Whether to display token balance information
+ * @param {React.ReactNode} props.children - Optional child components to render
+ * @returns {JSX.Element} Rendered token selector item with icon, details, and balance
+ */
 export const TokenSelectorItem: React.FC<TokenSelectorItemProps> = ({
   token,
   onPress,

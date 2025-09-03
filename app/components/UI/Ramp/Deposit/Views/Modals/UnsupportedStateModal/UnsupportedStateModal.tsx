@@ -35,12 +35,21 @@ export interface UnsupportedStateModalParams {
   onStateSelect: (stateCode: string) => void;
 }
 
+/**
+ * Creates navigation details for the UnsupportedStateModal
+ * @returns Navigation details object for routing to the unsupported state modal
+ */
 export const createUnsupportedStateModalNavigationDetails =
   createNavigationDetails<UnsupportedStateModalParams>(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.UNSUPPORTED_STATE,
   );
 
+/**
+ * Modal component that displays when a user's state/region is not supported for deposits
+ * Provides options to select a different state or try alternative deposit methods
+ * @returns JSX element rendering the unsupported state modal with action buttons
+ */
 function UnsupportedStateModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const navigation = useNavigation();

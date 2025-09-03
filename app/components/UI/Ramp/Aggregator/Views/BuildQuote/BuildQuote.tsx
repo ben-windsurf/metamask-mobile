@@ -96,9 +96,19 @@ interface BuildQuoteParams {
   showBack?: boolean;
 }
 
+/**
+ * Creates navigation details for the BuildQuote screen
+ * @returns {Function} Navigation details creator function for BuildQuote route
+ */
 export const createBuildQuoteNavDetails =
   createNavigationDetails<BuildQuoteParams>(Routes.RAMP.BUILD_QUOTE);
 
+/**
+ * BuildQuote component for on-ramp and off-ramp quote building
+ * Allows users to select assets, payment methods, regions, and amounts for crypto transactions
+ * Handles both buying (on-ramp) and selling (off-ramp) flows with validation and error handling
+ * @returns {JSX.Element} The BuildQuote screen component
+ */
 const BuildQuote = () => {
   const navigation = useNavigation();
   const params = useParams<BuildQuoteParams>();

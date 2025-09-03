@@ -31,6 +31,10 @@ import {
 } from '../../../../../../../component-library/components/Toast';
 import Logger from '../../../../../../../util/Logger';
 
+/**
+ * Creates navigation details for the configuration modal
+ * @returns {Object} Navigation details object for the configuration modal
+ */
 export const createConfigurationModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
@@ -43,6 +47,14 @@ interface MenuItemProps {
   onPress: () => void;
 }
 
+/**
+ * MenuItem component renders a selectable list item with icon and title
+ * @param {Object} props - Component props
+ * @param {IconName} props.iconName - The icon to display
+ * @param {string} props.title - The title text to display
+ * @param {Function} props.onPress - Callback function when item is pressed
+ * @returns {JSX.Element} The rendered menu item component
+ */
 function MenuItem({ iconName, title, onPress }: MenuItemProps) {
   const { theme } = useStyles(styleSheet, {});
 
@@ -67,6 +79,11 @@ function MenuItem({ iconName, title, onPress }: MenuItemProps) {
   );
 }
 
+/**
+ * ConfigurationModal component displays deposit configuration options in a bottom sheet
+ * Provides access to order history, support contact, and logout functionality
+ * @returns {JSX.Element} The rendered configuration modal component
+ */
 function ConfigurationModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const { styles } = useStyles(styleSheet, {});

@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for RewardsCard component
+ * Defines styles for the rewards card container and estimated annual reward value display
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const stylesSheet = () =>
   StyleSheet.create({
     card: {

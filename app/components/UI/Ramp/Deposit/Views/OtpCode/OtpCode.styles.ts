@@ -2,6 +2,13 @@ import { Theme } from '../../../../../../util/theme/models';
 import { StyleSheet } from 'react-native';
 import { getOtpCellSize } from '../../../utils/getOtpCellSize';
 
+/**
+ * Creates stylesheet for OTP code input component
+ * Generates themed styles for OTP input cells, text, and layout elements
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing color and styling definitions
+ * @returns {Object} StyleSheet object with themed styles for OTP code component
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
 

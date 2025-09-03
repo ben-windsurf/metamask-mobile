@@ -4,6 +4,12 @@ import Engine from '../../../../core/Engine';
 import { pooledStakingSelectors } from '../../../../selectors/earnController';
 import { DEFAULT_VAULT_APY_AVERAGES } from '../constants';
 
+/**
+ * Custom hook for managing vault APY averages for pooled staking
+ * Provides functionality to fetch and access vault APY data for a specific chain
+ * @param {number} chainId - The chain ID to fetch vault APY averages for
+ * @returns {Object} Object containing vault APY data, refresh function, loading state, and error state
+ */
 const useVaultApyAverages = (chainId: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

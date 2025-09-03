@@ -1,3 +1,7 @@
+/**
+ * Mock data for vault daily APY (Annual Percentage Yield) values
+ * Contains historical daily APY data for testing and development purposes
+ */
 export const MOCK_VAULT_DAILY_APYS = [
   {
     id: 30811,
@@ -1954,14 +1958,30 @@ export const MOCK_VAULT_DAILY_APYS = [
   },
 ].reverse();
 
+/**
+ * Mock vault APY data for the last 7 days
+ */
 export const MOCK_VAULT_APYS_ONE_WEEK = MOCK_VAULT_DAILY_APYS.slice(-7);
 
+/**
+ * Mock vault APY data for the last 30 days
+ */
 export const MOCK_VAULT_APYS_ONE_MONTH = MOCK_VAULT_DAILY_APYS.slice(-30);
 
+/**
+ * Mock vault APY data for the last 90 days (approximately 6 months)
+ */
 export const MOCK_VAULT_APYS_SIX_MONTHS = MOCK_VAULT_DAILY_APYS.slice(-90);
 
+/**
+ * Mock vault APY data for the last 365 days (one year)
+ */
 export const MOCK_VAULT_APYS_ONE_YEAR = MOCK_VAULT_DAILY_APYS.slice(-365);
 
+/**
+ * Mock vault APY averages for different time periods
+ * Contains calculated average APY values for various timeframes
+ */
 export const MOCK_VAULT_APY_AVERAGES = {
   oneDay: '3.047713358665092375',
   oneWeek: '3.25756026351317301786',

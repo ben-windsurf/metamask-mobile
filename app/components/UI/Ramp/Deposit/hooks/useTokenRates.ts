@@ -10,6 +10,14 @@ interface UseFetchTokenRatesMultiResult {
 
 const PRICE_API_URL = 'https://price.api.cx.metamask.io/v3/spot-prices';
 
+/**
+ * Custom hook to fetch exchange rates for multiple tokens against a fiat currency
+ * Makes API calls to retrieve current spot prices and handles loading/error states
+ * @param {Object} params - Hook parameters
+ * @param {DepositCryptoCurrency[]} params.tokens - Array of crypto tokens to fetch rates for
+ * @param {DepositFiatCurrency} params.fiatCurrency - Target fiat currency for rate conversion
+ * @returns {UseFetchTokenRatesMultiResult} Object containing rates, loading state, and error state
+ */
 export const useFetchTokenRatesMulti = ({
   tokens,
   fiatCurrency,

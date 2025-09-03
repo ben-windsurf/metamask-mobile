@@ -19,6 +19,12 @@ import { addHexPrefix } from 'ethereumjs-util';
 const TOKEN_API_V3_BASE_URL = 'https://tokens.api.cx.metamask.io/v3';
 const STATIC_METAMASK_BASE_URL = 'https://static.cx.metamask.io';
 
+/**
+ * Converts an address and chain ID to a CAIP-formatted asset ID
+ * @param {Hex | CaipAssetType | string} address - The asset address or existing CAIP asset type
+ * @param {CaipChainId} chainId - The chain ID in CAIP format
+ * @returns {CaipAssetType | undefined} The CAIP-formatted asset ID or undefined if conversion fails
+ */
 export const toAssetId = (
   address: Hex | CaipAssetType | string,
   chainId: CaipChainId,

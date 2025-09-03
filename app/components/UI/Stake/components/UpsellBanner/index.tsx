@@ -8,6 +8,13 @@ import {
 import UpsellBannerBody from './UpsellBannerBody';
 import UpsellBannerHeader from './UpsellBannerHeader';
 
+/**
+ * UpsellBanner component renders different banner variants for staking upsell
+ * Displays either a header or body variant based on the provided variant prop
+ * @param {UpsellBannerProps} props - Component props
+ * @param {string} props.variant - Banner variant type (header or body)
+ * @returns {JSX.Element} The rendered upsell banner component
+ */
 const UpsellBanner = ({
   variant = UPSELL_BANNER_VARIANTS.HEADER,
   ...props

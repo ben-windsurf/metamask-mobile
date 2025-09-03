@@ -38,7 +38,12 @@ const percentageOutputE = {
     CommonPercentageInputUnitsAsE[CommonPercentageInputUnits.PERCENTAGE],
 };
 
-// Determine if a value is equal to or above an evaluated `exponent`, or equal to or below its evaluated inverse
+/**
+ * Determines if a value is equal to or above an evaluated `exponent`, or equal to or below its evaluated inverse
+ * @param {BigNumber} value - The BigNumber value to check
+ * @param {number} exponent - The exponent to compare against
+ * @returns {boolean} True if the value meets the magnitude criteria, false otherwise
+ */
 export const isEqualOrGreaterOrderOfMagnitude = (
   value: BigNumber,
   exponent: number,
@@ -50,7 +55,14 @@ export const isEqualOrGreaterOrderOfMagnitude = (
   );
 };
 
-// Fix a value to a `fixed` value of decimal places either in number or scientific notation depending on the `exponentLimit`
+/**
+ * Fixes a value to a specified number of decimal places, using either standard or scientific notation based on the exponent limit
+ * @param {BigNumber | string | number} value - The value to format
+ * @param {number} fixed - Number of decimal places to display (default: 2)
+ * @param {number} exponentLimit - Threshold for switching to scientific notation (default: 21)
+ * @param {BigNumber.RoundingMode} roundingMode - Rounding mode to use (default: ROUND_DOWN)
+ * @returns {string} The formatted value as a string
+ */
 export const fixDisplayAmount = (
   value: BigNumber | string | number,
   fixed = 2,
@@ -65,6 +77,16 @@ export const fixDisplayAmount = (
   return valueAsBn.toFixed(fixed, roundingMode);
 };
 
+/**
+ * Formats a percentage value from one unit format to another with optional decimal precision
+ * @param {string | number} value - The percentage value to format
+ * @param {Object} options - Formatting options
+ * @param {CommonPercentageInputUnits | number} options.inputFormat - Input format (basis points, decimals, percentage, or custom exponent)
+ * @param {PercentageOutputFormat} options.outputFormat - Output format (basis points, decimal, or percent sign)
+ * @param {number} options.fixed - Number of decimal places to display (optional)
+ * @returns {string} The formatted percentage string with appropriate unit suffix
+ * @throws {Error} If fixed is a negative number
+ */
 export const formatPercent = (
   value: string | number,
   {

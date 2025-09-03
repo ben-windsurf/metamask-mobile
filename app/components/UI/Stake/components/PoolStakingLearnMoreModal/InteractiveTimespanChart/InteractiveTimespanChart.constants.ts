@@ -1,14 +1,36 @@
+/**
+ * Constants for the Interactive Timespan Chart component
+ * Defines thresholds, ratios, insets, and default configurations for chart rendering
+ */
 import { colors } from '@metamask/design-tokens';
 import { GraphOptions } from './InteractiveTimespanChart.types';
 import { ChartButton } from './ChartTimespanButtonGroup/ChartTimespanButtonGroup.types';
 import { strings } from '../../../../../../../locales/i18n';
 
-// Small dataset ~10 points or less
+/**
+ * Threshold for determining small datasets (10 points or less)
+ */
 export const SMALL_DATASET_THRESHOLD = 10;
+
+/**
+ * Snap ratio for small datasets
+ */
 export const SMALL_DATASET_SNAP_RATIO = 0.5;
+
+/**
+ * Graph inset value for small datasets
+ */
 export const SMALL_DATASET_GRAPH_INSET = 20;
+
+/**
+ * Graph inset value for standard datasets
+ */
 export const STANDARD_DATASET_GRAPH_INSET = 10;
 
+/**
+ * Chart timespan button configurations
+ * Defines the available time periods for chart data display
+ */
 export const CHART_BUTTONS: ChartButton[] = [
   { label: strings('stake.interactive_chart.timespan_buttons.7D'), value: 7 },
   { label: strings('stake.interactive_chart.timespan_buttons.1M'), value: 30 },
@@ -18,6 +40,10 @@ export const CHART_BUTTONS: ChartButton[] = [
 
 const DEFAULT_INSET = 0;
 
+/**
+ * Default graph configuration options
+ * Provides standard settings for chart rendering including insets, buttons, and colors
+ */
 export const DEFAULT_GRAPH_OPTIONS: GraphOptions = {
   insetTop: DEFAULT_INSET,
   insetRight: DEFAULT_INSET,

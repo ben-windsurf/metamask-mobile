@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../../../../util/theme/models';
 
+/**
+ * Creates stylesheet for EnterAddress component with theme-aware styling
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing color and styling definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
 

@@ -19,6 +19,11 @@ import Logger from '../../../../../util/Logger';
 import useHandleSuccessfulOrder from './useHandleSuccessfulOrder';
 import Device from '../../../../../util/device';
 
+/**
+ * Custom hook for handling in-app browser functionality for on-ramp transactions
+ * Manages the opening of provider widgets, order processing, and success handling
+ * @returns {Function} renderInAppBrowser function for opening provider widgets
+ */
 export default function useInAppBrowser() {
   const {
     selectedAddress,
@@ -35,6 +40,13 @@ export default function useInAppBrowser() {
   const lockTime = useSelector((state: any) => state.settings.lockTime);
   const handleSuccessfulOrder = useHandleSuccessfulOrder();
 
+  /**
+   * Renders and manages the in-app browser for on-ramp provider widgets
+   * @param {BuyAction} buyAction - The buy action instance from the SDK
+   * @param {Provider} provider - The on-ramp provider configuration
+   * @param {number} amount - Optional transaction amount
+   * @param {string} fiatSymbol - Optional fiat currency symbol
+   */
   const renderInAppBrowser = useCallback(
     async (
       buyAction: BuyAction,

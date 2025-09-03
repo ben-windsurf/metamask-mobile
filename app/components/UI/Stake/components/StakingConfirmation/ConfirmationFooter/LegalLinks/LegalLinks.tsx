@@ -10,11 +10,20 @@ import AppConstants from '../../../../../../../core/AppConstants';
 import { useStyles } from '../../../../../../hooks/useStyles';
 import styleSheet from './LegalLinks.styles';
 
+/**
+ * FooterLegalLinks component renders legal links for staking terms and risk disclosure
+ * Provides navigation to Terms of Service and Risk Disclosure documents in a webview
+ * @returns {JSX.Element} View containing touchable legal links
+ */
 const FooterLegalLinks = () => {
   const { styles } = useStyles(styleSheet, {});
 
   const navigation = useNavigation();
 
+  /**
+   * Handles navigation to a webview with the specified URL
+   * @param {string} url - The URL to navigate to in the webview
+   */
   const handleNavigateToWebView = (url: string) =>
     navigation.navigate('Webview', {
       screen: 'SimpleWebview',

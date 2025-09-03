@@ -39,6 +39,19 @@ interface GetDisplayCurrencyValueParams {
   nonEvmMultichainAssetRates: ReturnType<typeof selectMultichainAssetsRates>;
 }
 
+/**
+ * Calculates and formats the display currency value for a bridge token
+ * Handles both EVM and non-EVM (Solana) chains with appropriate exchange rate calculations
+ * @param {GetDisplayCurrencyValueParams} params - Parameters for currency value calculation
+ * @param {BridgeToken | undefined} params.token - The bridge token to calculate value for
+ * @param {string | undefined} params.amount - The token amount to convert
+ * @param {Record<Hex, Record<Hex, { price: number | undefined }>> | undefined} params.evmMultiChainMarketData - EVM market data
+ * @param {Record<Hex, { nativeCurrency: string }>} params.networkConfigurationsByChainId - Network configurations
+ * @param {Record<string, { conversionRate: number | null }> | undefined} params.evmMultiChainCurrencyRates - EVM currency rates
+ * @param {string} params.currentCurrency - The current display currency
+ * @param {ReturnType<typeof selectMultichainAssetsRates>} params.nonEvmMultichainAssetRates - Non-EVM asset rates
+ * @returns {string} Formatted currency value with symbol
+ */
 export const getDisplayCurrencyValue = ({
   token,
   amount,
@@ -169,9 +182,15 @@ export const fetchTokenExchangeRates = async (
   }
 };
 
-// This fetches the exchange rate for a token in a given currency. This is only called when the exchange
-// rate is not available in the TokenRatesController, which happens when the selected token has not been
-// imported into the wallet
+/**
+ * Fetches the exchange rate for a single token in a given currency
+ * Used when the exchange rate is not available in TokenRatesController
+ * @param {Object} request - Request parameters
+ * @param {Hex | CaipChainId} request.chainId - The chain ID of the token
+ * @param {string} request.tokenAddress - The address of the token
+ * @param {string} request.currency - The currency to get the exchange rate in
+ * @returns {Promise<number | undefined>} The exchange rate or undefined if not found
+ */
 export const getTokenExchangeRate = async (request: {
   chainId: Hex | CaipChainId;
   tokenAddress: string;

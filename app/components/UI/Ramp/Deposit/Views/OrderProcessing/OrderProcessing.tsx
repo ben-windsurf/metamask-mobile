@@ -34,11 +34,21 @@ export interface OrderProcessingParams {
   orderId: string;
 }
 
+/**
+ * Creates navigation details for the order processing screen
+ * @returns Navigation details object for order processing route
+ */
 export const createOrderProcessingNavDetails =
   createNavigationDetails<OrderProcessingParams>(
     Routes.DEPOSIT.ORDER_PROCESSING,
   );
 
+/**
+ * OrderProcessing component displays the status and details of a deposit order
+ * Handles order completion, failure, and cancellation states with appropriate actions
+ * Tracks analytics events for completed and failed transactions
+ * @returns JSX element rendering the order processing screen
+ */
 const OrderProcessing = () => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

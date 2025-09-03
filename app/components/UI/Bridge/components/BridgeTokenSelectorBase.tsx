@@ -25,6 +25,12 @@ import ReusableModal, { ReusableModalRef } from '../../ReusableModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList } from '@shopify/flash-list';
 
+/**
+ * Creates styles for the BridgeTokenSelectorBase component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (params: { theme: Theme }) => {
   const { theme } = params;
   return StyleSheet.create({
@@ -88,6 +94,11 @@ const createStyles = (params: { theme: Theme }) => {
   });
 };
 
+/**
+ * SkeletonItem component renders a loading skeleton for individual token items
+ * Displays placeholder content while token data is being loaded
+ * @returns {JSX.Element} A skeleton placeholder for a token item
+ */
 export const SkeletonItem = () => {
   const { styles } = useStyles(createStyles, {});
 
@@ -108,6 +119,11 @@ export const SkeletonItem = () => {
   );
 };
 
+/**
+ * LoadingSkeleton component renders multiple skeleton items for the loading state
+ * Shows a list of skeleton placeholders while the token list is being fetched
+ * @returns {JSX.Element} A container with multiple skeleton items
+ */
 export const LoadingSkeleton = () => {
   const { styles } = useStyles(createStyles, {});
 
@@ -137,6 +153,13 @@ interface BridgeTokenSelectorBaseProps {
   title?: string;
 }
 
+/**
+ * BridgeTokenSelectorBase component provides a modal interface for selecting bridge tokens
+ * Features token search, network filtering, and displays both user tokens and searchable assets
+ * Handles loading states and provides a responsive token selection experience
+ * @param {BridgeTokenSelectorBaseProps} props - Component props
+ * @returns {JSX.Element} A modal with token selection interface
+ */
 export const BridgeTokenSelectorBase: React.FC<
   BridgeTokenSelectorBaseProps
 > = ({

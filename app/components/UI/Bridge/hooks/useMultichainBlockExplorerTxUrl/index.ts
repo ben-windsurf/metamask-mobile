@@ -21,6 +21,11 @@ import { selectNonEvmNetworkConfigurationsByChainId } from '../../../../../selec
 
 const useEvmBlockExplorer = useBlockExplorer;
 
+/**
+ * Creates a provider configuration for a given network configuration
+ * @param {NetworkConfiguration} networkConfig - The network configuration object
+ * @returns {Object} The provider configuration for the network
+ */
 const getProviderConfigForNetwork = (networkConfig: NetworkConfiguration) => {
   const rpcEndpoint =
     networkConfig?.rpcEndpoints?.[networkConfig?.defaultRpcEndpointIndex];
@@ -29,6 +34,14 @@ const getProviderConfigForNetwork = (networkConfig: NetworkConfiguration) => {
   return providerConfig;
 };
 
+/**
+ * Hook that provides block explorer transaction URL and related information for multichain transactions
+ * Supports both EVM and Solana networks, returning appropriate explorer URLs and metadata
+ * @param {Object} params - Hook parameters
+ * @param {number} params.chainId - The chain ID from the Bridge API
+ * @param {string} params.txHash - The transaction hash to look up
+ * @returns {Object|undefined} Object containing explorerTxUrl, explorerName, networkImageSource, and chainName, or undefined if required params are missing
+ */
 export const useMultichainBlockExplorerTxUrl = ({
   chainId,
   txHash,

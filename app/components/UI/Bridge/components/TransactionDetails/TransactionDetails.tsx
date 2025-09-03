@@ -124,6 +124,16 @@ const MultichainTxStatusToColorMap: Record<Transaction['status'], TextColor> = {
   failed: TextColor.Error,
 };
 
+/**
+ * Determines the appropriate text color for transaction status display
+ * @param {Object} params - Status color parameters
+ * @param {boolean} params.isBridge - Whether this is a bridge transaction
+ * @param {boolean} params.isSwap - Whether this is a swap transaction
+ * @param {Transaction} params.multiChainTx - Multi-chain transaction data
+ * @param {StatusResponse} params.bridgeStatus - Bridge status response
+ * @param {TransactionMeta} params.evmTxMeta - EVM transaction metadata
+ * @returns {TextColor} The appropriate text color for the transaction status
+ */
 const getStatusColor = ({
   isBridge,
   isSwap,
@@ -150,6 +160,13 @@ const getStatusColor = ({
   return TextColor.Error;
 };
 
+/**
+ * BridgeTransactionDetails component displays detailed information about bridge and swap transactions
+ * Shows transaction assets, status, dates, gas fees, and provides access to block explorers
+ * Handles both bridge transactions (cross-chain) and swap transactions (same-chain)
+ * @param {BridgeTransactionDetailsProps} props - Component props containing transaction data
+ * @returns {JSX.Element} The rendered bridge transaction details screen
+ */
 export const BridgeTransactionDetails = (
   props: BridgeTransactionDetailsProps,
 ) => {

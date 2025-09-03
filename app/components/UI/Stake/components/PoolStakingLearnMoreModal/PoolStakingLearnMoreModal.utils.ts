@@ -1,6 +1,12 @@
 import { VaultApyAverages } from '@metamask/stake-sdk';
 import { strings } from '../../../../../../locales/i18n';
 
+/**
+ * Parses vault APY averages response data into a structured format with time periods
+ * Converts the vault timespan APRs into a map organized by number of days with labels
+ * @param {VaultApyAverages} vaultTimespanAprs - The vault APY averages data from the API
+ * @returns {Record<number, {apyAverage: string, numDays: number, label: string}>} Map of days to APY data with localized labels
+ */
 export const parseVaultApyAveragesResponse = (
   vaultTimespanAprs: VaultApyAverages,
 ) => {

@@ -21,8 +21,19 @@ import {
 import { getDecimalChainId } from '../../../../util/networks';
 import { getProviderByChainId } from '../../../../util/notifications';
 
+/**
+ * Global instance of the EarnApiService for staking and lending operations
+ */
 export const earnApiService = new EarnApiService();
+
+/**
+ * Staking API service instance for pooled staking operations
+ */
 export const stakingApiService = earnApiService.pooledStaking;
+
+/**
+ * Lending API service instance for lending protocol operations
+ */
 export const lendingApiService = earnApiService.lending;
 
 export interface Stake {
@@ -33,11 +44,22 @@ export interface Stake {
   networkClientId?: string;
 }
 
+/**
+ * React context for providing staking and lending contract instances throughout the component tree
+ */
 export const StakeContext = createContext<Stake | undefined>(undefined);
 
 export interface StakeProviderProps {
   stakingType?: StakingType;
 }
+/**
+ * Provider component that initializes and provides staking SDK services to child components
+ * Manages the EarnSdk instance and provides staking/lending contracts through context
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to receive the stake context
+ * @param {StakingType} props.stakingType - Optional staking type configuration
+ * @returns {JSX.Element} Provider component wrapping children with stake context
+ */
 export const StakeSDKProvider: React.FC<
   PropsWithChildren<StakeProviderProps>
 > = ({ children }) => {

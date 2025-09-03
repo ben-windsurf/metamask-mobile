@@ -34,6 +34,14 @@ interface BridgeStepsProps {
   srcChainTxMeta?: TransactionMeta;
 }
 
+/**
+ * BridgeStepList component displays a list of bridge transaction steps with progress indicators
+ * Shows the status and timing of each step in the bridge process with visual progress bars
+ * @param {Object} props - Component props
+ * @param {BridgeHistoryItem} props.bridgeHistoryItem - Bridge history item containing step information
+ * @param {TransactionMeta} props.srcChainTxMeta - Source chain transaction metadata
+ * @returns {JSX.Element} Rendered bridge step list with progress indicators
+ */
 export default function BridgeStepList({
   bridgeHistoryItem,
   srcChainTxMeta,

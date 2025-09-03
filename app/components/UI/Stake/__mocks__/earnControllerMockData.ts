@@ -1,9 +1,16 @@
+/**
+ * Mock data for testing earn controller functionality
+ * Provides sample data for staking, lending markets, and positions
+ */
 import {
   LendingMarketWithPosition,
   LendingPositionWithMarketReference,
 } from '@metamask/earn-controller';
 import { LendingProtocol } from '../../Earn/types/lending.types';
 
+/**
+ * Mock pooled stakes data for testing staking functionality
+ */
 export const MOCK_POOLED_STAKES_DATA = {
   account: '0x1234',
   lifetimeRewards: '100',
@@ -11,6 +18,9 @@ export const MOCK_POOLED_STAKES_DATA = {
   exitRequests: [],
 };
 
+/**
+ * Mock vault data for testing vault-related functionality
+ */
 export const MOCK_VAULT_DATA = {
   apy: '3.3',
   capacity: '1000000',
@@ -19,6 +29,9 @@ export const MOCK_VAULT_DATA = {
   vaultAddress: '0xabcd',
 };
 
+/**
+ * Mock USDT lending market data with position information
+ */
 export const MOCK_LENDING_MARKET_USDT: LendingMarketWithPosition = {
   id: '1',
   chainId: 1,
@@ -47,6 +60,9 @@ export const MOCK_LENDING_MARKET_USDT: LendingMarketWithPosition = {
   rewards: [],
 };
 
+/**
+ * Mock USDC lending market data with position information
+ */
 export const MOCK_LENDING_MARKET_USDC: LendingMarketWithPosition = {
   id: '2',
   chainId: 1,
@@ -75,6 +91,9 @@ export const MOCK_LENDING_MARKET_USDC: LendingMarketWithPosition = {
   rewards: [],
 };
 
+/**
+ * Mock WETH lending market data with position information
+ */
 export const MOCK_LENDING_MARKET_WETH: LendingMarketWithPosition = {
   id: '3',
   chainId: 1,
@@ -103,12 +122,18 @@ export const MOCK_LENDING_MARKET_WETH: LendingMarketWithPosition = {
   rewards: [],
 };
 
+/**
+ * Array of all mock lending markets for testing
+ */
 export const MOCK_LENDING_MARKETS: LendingMarketWithPosition[] = [
   MOCK_LENDING_MARKET_USDT,
   MOCK_LENDING_MARKET_USDC,
   MOCK_LENDING_MARKET_WETH,
 ];
 
+/**
+ * Mock USDT lending position data
+ */
 export const MOCK_LENDING_POSITION_USDT: LendingPositionWithMarketReference = {
   marketId: MOCK_LENDING_MARKET_USDT.id,
   marketAddress: MOCK_LENDING_MARKET_USDT.address,
@@ -118,6 +143,9 @@ export const MOCK_LENDING_POSITION_USDT: LendingPositionWithMarketReference = {
   assets: '300',
 };
 
+/**
+ * Mock USDC lending position data
+ */
 export const MOCK_LENDING_POSITION_USDC: LendingPositionWithMarketReference = {
   marketId: MOCK_LENDING_MARKET_USDC.id,
   marketAddress: MOCK_LENDING_MARKET_USDC.address,
@@ -127,6 +155,9 @@ export const MOCK_LENDING_POSITION_USDC: LendingPositionWithMarketReference = {
   assets: '100',
 };
 
+/**
+ * Mock WETH lending position data
+ */
 export const MOCK_LENDING_POSITION_WETH: LendingPositionWithMarketReference = {
   marketId: MOCK_LENDING_MARKET_WETH.id,
   marketAddress: MOCK_LENDING_MARKET_WETH.address,
@@ -136,10 +167,16 @@ export const MOCK_LENDING_POSITION_WETH: LendingPositionWithMarketReference = {
   assets: '200',
 };
 
+/**
+ * Array of all mock lending positions for testing
+ */
 export const MOCK_LENDING_POSITIONS: LendingPositionWithMarketReference[] = [
   MOCK_LENDING_POSITION_USDT,
   MOCK_LENDING_POSITION_USDC,
   MOCK_LENDING_POSITION_WETH,
 ];
 
+/**
+ * Mock exchange rate for testing currency conversions
+ */
 export const MOCK_EXCHANGE_RATE = '1.5';

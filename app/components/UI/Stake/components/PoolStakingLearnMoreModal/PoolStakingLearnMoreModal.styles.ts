@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for the Pool Staking Learn More Modal component
+ * @returns {Object} StyleSheet object containing styles for modal layout and text formatting
+ */
 const styleSheet = () =>
   StyleSheet.create({
     bodyTextContainer: {

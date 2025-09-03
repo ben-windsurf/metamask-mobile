@@ -22,6 +22,10 @@ export interface BridgeDestNetworkSelectorRouteParams {
   shouldGoToTokens?: boolean;
 }
 
+/**
+ * Creates styles for the BridgeDestNetworkSelector component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     listContent: {
@@ -29,6 +33,12 @@ const createStyles = () =>
     },
   });
 
+/**
+ * BridgeDestNetworkSelector component allows users to select destination networks for bridge operations
+ * Displays available destination chains filtered based on bridge view mode and current network
+ * Handles navigation to token selector after network selection if specified in route params
+ * @returns {JSX.Element} The rendered destination network selector component
+ */
 export const BridgeDestNetworkSelector: React.FC = () => {
   const { styles } = useStyles(createStyles, {});
   const navigation = useNavigation();

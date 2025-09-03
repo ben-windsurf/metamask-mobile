@@ -4,6 +4,11 @@ import { Box } from '../../../Box/Box';
 import { useTheme } from '../../../../../util/theme';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates styles for the segment component based on status type
+ * @param {StatusTypes | null} type - The status type that determines segment appearance
+ * @returns {Object} StyleSheet object with outerSegment and innerSegment styles
+ */
 const getSegmentStyle = (type: StatusTypes | null) =>
   StyleSheet.create({
     outerSegment: {
@@ -21,6 +26,13 @@ const getSegmentStyle = (type: StatusTypes | null) =>
     },
   });
 
+/**
+ * Segment component displays a progress indicator for bridge transaction status
+ * Renders a visual progress bar that fills based on the transaction status
+ * @param {Object} props - Component props
+ * @param {StatusTypes | null} props.type - The status type that determines segment fill level
+ * @returns {JSX.Element} A progress segment with dynamic width based on status
+ */
 export default function Segment({ type }: { type: StatusTypes | null }) {
   const theme = useTheme();
   const styles = getSegmentStyle(type);

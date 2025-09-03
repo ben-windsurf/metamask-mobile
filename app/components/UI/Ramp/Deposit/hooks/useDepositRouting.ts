@@ -37,6 +37,14 @@ export interface UseDepositRoutingParams {
   paymentMethodId: string;
 }
 
+/**
+ * Custom hook for handling deposit routing and navigation flow
+ * Manages KYC verification, order creation, and payment processing for deposit transactions
+ * @param {UseDepositRoutingParams} params - Configuration parameters
+ * @param {string} params.cryptoCurrencyChainId - Chain ID for the cryptocurrency
+ * @param {string} params.paymentMethodId - ID of the selected payment method
+ * @returns {Object} Object containing routing functions for deposit flow navigation
+ */
 export const useDepositRouting = ({
   cryptoCurrencyChainId,
   paymentMethodId,

@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for FooterButtonGroup component
+ * Defines styles for button layout and spacing in the confirmation footer
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const stylesSheet = () =>
   StyleSheet.create({
     footerContainer: {

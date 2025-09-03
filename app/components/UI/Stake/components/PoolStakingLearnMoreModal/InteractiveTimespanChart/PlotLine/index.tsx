@@ -9,6 +9,16 @@ interface LineProps {
   testID?: string;
 }
 
+/**
+ * PlotLine component renders an SVG path element for chart visualization
+ * Displays a line with dynamic styling based on data availability and theme
+ * @param {Partial<LineProps>} props - Component props
+ * @param {string} props.line - SVG path data string for the line
+ * @param {boolean} props.doesChartHaveData - Whether the chart contains data (affects styling)
+ * @param {string} props.color - Optional custom color for the line
+ * @param {string} props.testID - Test identifier for the component
+ * @returns {JSX.Element} SVG Path element representing the plot line
+ */
 const PlotLine = ({
   line,
   doesChartHaveData,

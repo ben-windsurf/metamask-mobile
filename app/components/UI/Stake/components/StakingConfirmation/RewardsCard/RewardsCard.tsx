@@ -15,6 +15,15 @@ import { RewardsCardProps } from './RewardsCard.types';
 import { createTooltipOpenedEvent } from '../../../utils/metaMetrics/tooltipMetaMetricsUtils';
 import { useMetrics } from '../../../../../hooks/useMetrics';
 
+/**
+ * RewardsCard component displays staking reward information including reward rate,
+ * estimated annual rewards, and reward frequency with interactive tooltips
+ * @param {RewardsCardProps} props - Component props
+ * @param {string} props.rewardRate - The reward rate percentage to display
+ * @param {string} props.rewardsEth - The estimated rewards in ETH
+ * @param {string} props.rewardsFiat - The estimated rewards in fiat currency
+ * @returns {JSX.Element} A card component showing staking rewards information
+ */
 const RewardsCard = ({
   rewardRate,
   rewardsEth,

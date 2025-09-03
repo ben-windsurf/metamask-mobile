@@ -98,6 +98,13 @@ export type DepositSdkMethodResult<T extends keyof NativeRampsSdk> = [
  * const defaultARFiatCurrency = await getDefaultFiatCurrency('/regions/ar');
  * // The return and error of these calls will be reflected in the returned object of the hook
  */
+/**
+ * React hook for calling NativeRampsSdk methods with state management
+ * Provides automatic loading states, error handling, and result caching for SDK method calls
+ * @param config - Method name or configuration object with method name and options
+ * @param params - Parameters to pass to the SDK method
+ * @returns Tuple containing state object (data, error, isFetching) and query function
+ */
 export function useDepositSdkMethod<T extends keyof NativeRampsSdk>(
   config: T | config<T>,
   ...params: PartialParameters<NativeRampsSdk[T]>

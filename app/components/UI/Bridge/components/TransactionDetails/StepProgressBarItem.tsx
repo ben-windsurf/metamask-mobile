@@ -14,6 +14,14 @@ import { StatusTypes } from '@metamask/bridge-controller';
 
 const ICON_SIZE = IconSize.Xs;
 
+/**
+ * Creates styles for the step progress bar item component
+ * @param params - Style parameters
+ * @param params.theme - The theme object containing color definitions
+ * @param params.vars - Variables containing color configuration
+ * @param params.vars.color - The icon color to use for styling
+ * @returns StyleSheet object with component styles
+ */
 const styleSheet = (params: { theme: Theme; vars: { color: IconColor } }) => {
   let lineColor = params.theme.colors.primary.default;
   if (params.vars.color === IconColor.Muted) {
@@ -40,6 +48,12 @@ const styleSheet = (params: { theme: Theme; vars: { color: IconColor } }) => {
   });
 };
 
+/**
+ * Renders a vertical line connecting step progress items
+ * @param props - Component props
+ * @param props.color - The color of the vertical line
+ * @returns JSX element representing the vertical line
+ */
 const VerticalLine = ({ color }: { color: IconColor }) => {
   const { styles } = useStyles(styleSheet, { color });
 

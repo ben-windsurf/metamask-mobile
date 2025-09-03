@@ -32,6 +32,12 @@ import type { BridgeHistoryItem } from '@metamask/bridge-status-controller';
  * @param step - The step to be rendered
  * @param networkConfigurationsByChainId - The network configurations by chain id
  */
+/**
+ * Gets the localized text for a bridge action based on its status and step details
+ * @param stepStatus - The current status of the bridge step
+ * @param step - The bridge step containing source and destination asset information
+ * @returns {string|null} Localized bridge action text or null if destination symbol is unavailable
+ */
 const getBridgeActionText = (stepStatus: StatusTypes | null, step: Step) => {
   let destChainId: CaipChainId | Hex | undefined;
   if (step.destChainId) {
@@ -65,6 +71,11 @@ const getBridgeActionText = (stepStatus: StatusTypes | null, step: Step) => {
       });
 };
 
+/**
+ * Extracts the bridge action status from a bridge history item
+ * @param bridgeHistoryItem - The bridge history item containing status information
+ * @returns {StatusTypes|null} The bridge action status or null if not available
+ */
 const getBridgeActionStatus = (bridgeHistoryItem: BridgeHistoryItem) =>
   bridgeHistoryItem.status ? bridgeHistoryItem.status.status : null;
 
@@ -105,6 +116,12 @@ const getSwapActionStatus = (
   return null;
 };
 
+/**
+ * Gets the localized text for a swap action based on its status and step details
+ * @param status - The current status of the swap action
+ * @param step - The swap step containing source and destination asset information
+ * @returns {string|null} Localized swap action text or null if asset symbols are unavailable
+ */
 const getSwapActionText = (status: StatusTypes | null, step: Step) => {
   const srcSymbol = step.srcAsset?.symbol;
   const destSymbol = step.destAsset?.symbol;
@@ -127,6 +144,14 @@ const getSwapActionText = (status: StatusTypes | null, step: Step) => {
       });
 };
 
+/**
+ * Determines the status of a bridge or swap step based on transaction state and history
+ * @param params - Parameters for status determination
+ * @param params.bridgeHistoryItem - The bridge history item containing status information
+ * @param params.step - The step to determine status for
+ * @param params.srcChainTxMeta - The source chain transaction metadata
+ * @returns {StatusTypes} The determined step status
+ */
 export const getStepStatus = ({
   bridgeHistoryItem,
   step,
@@ -165,6 +190,15 @@ interface BridgeStepProps {
 // 1. Bridge: usually for cases like Optimism ETH to Arbitrum ETH
 // 2. Swap > Bridge
 // 3. Swap > Bridge > Swap: e.g. Optimism ETH to Avalanche USDC
+/**
+ * BridgeStepDescription component displays the description and status of a bridge or swap step
+ * Renders localized text describing the action being performed with appropriate styling based on status
+ * @param props - Component props
+ * @param props.step - The bridge or swap step to describe
+ * @param props.time - Optional timestamp to display with the step description
+ * @param props.stepStatus - The current status of the step for styling purposes
+ * @returns {JSX.Element} The rendered step description component
+ */
 export default function BridgeStepDescription({
   step,
   time,

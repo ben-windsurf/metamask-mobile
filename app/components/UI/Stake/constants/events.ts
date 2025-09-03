@@ -1,7 +1,13 @@
+/**
+ * Event provider constants for staking analytics tracking
+ */
 export const EVENT_PROVIDERS = {
   CONSENSYS: 'consensys',
 };
 
+/**
+ * Event location constants for tracking where staking events occur in the app
+ */
 export const EVENT_LOCATIONS = {
   HOME_SCREEN: 'HomeScreen',
   GAS_IMPACT_MODAL: 'GasImpactModal',

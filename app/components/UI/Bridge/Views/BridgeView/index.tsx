@@ -79,6 +79,12 @@ export interface BridgeRouteParams {
   sourcePage: string;
 }
 
+/**
+ * BridgeView component provides the main interface for cross-chain token bridging
+ * Handles token selection, amount input, quote fetching, and transaction submission
+ * Supports both EVM-to-EVM and EVM-to-Solana bridging with dynamic UI based on bridge type
+ * @returns {JSX.Element} The bridge view interface with token inputs, quotes, and controls
+ */
 const BridgeView = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isErrorBannerVisible, setIsErrorBannerVisible] = useState(true);

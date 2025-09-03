@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../../../util/theme/models';
 
+/**
+ * Creates styles for the QuoteDetailsCard component
+ * @param {Theme} theme - Theme object containing colors and other styling properties
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = ({ colors }: Theme) =>
   StyleSheet.create({
     container: {

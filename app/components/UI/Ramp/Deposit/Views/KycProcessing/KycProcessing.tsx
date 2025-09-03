@@ -40,9 +40,19 @@ export interface KycProcessingParams {
   kycUrl?: string;
 }
 
+/**
+ * Creates navigation details for the KYC processing screen
+ * @returns Navigation details object for KYC processing route
+ */
 export const createKycProcessingNavDetails =
   createNavigationDetails<KycProcessingParams>(Routes.DEPOSIT.KYC_PROCESSING);
 
+/**
+ * KycProcessing component handles the KYC (Know Your Customer) verification process
+ * Displays different states: processing, approved, rejected, or error
+ * Polls for user details and KYC forms, and routes users based on verification status
+ * @returns JSX element rendering the KYC processing screen with appropriate status
+ */
 const KycProcessing = () => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

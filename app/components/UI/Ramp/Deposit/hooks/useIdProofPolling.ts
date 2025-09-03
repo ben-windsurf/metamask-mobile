@@ -17,6 +17,14 @@ export interface IdProofPollingResult {
  * @param autoStart - Whether to automatically start polling
  * @param maxPollingAttempts - The maximum number of polling attempts before stopping. Set to 0 to poll indefinitely.
  */
+/**
+ * Hook to poll for user details from the SDK
+ * @param kycWorkflowRunId - The ID of the KYC workflow run to poll for
+ * @param pollingInterval - The interval in milliseconds to poll for user details (default: 10000)
+ * @param autoStart - Whether to automatically start polling (default: true)
+ * @param maxPollingAttempts - The maximum number of polling attempts before stopping. Set to 0 to poll indefinitely (default: 30)
+ * @returns Object containing idProofStatus, loading state, error, and polling control functions
+ */
 const useIdProofPolling = (
   kycWorkflowRunId: string,
   pollingInterval: number = 10000,

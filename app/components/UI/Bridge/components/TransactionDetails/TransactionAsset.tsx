@@ -57,6 +57,16 @@ interface TransactionAssetProps {
   txType: TransactionType;
 }
 
+/**
+ * TransactionAsset component displays token information with network badge for bridge transactions
+ * Shows token icon, amount, symbol, and network information with appropriate styling
+ * @param {Object} props - Component props
+ * @param {BridgeToken} props.token - Token object containing symbol, address, and image
+ * @param {string} props.tokenAmount - Amount of tokens being transacted
+ * @param {Hex | CaipChainId} props.chainId - Chain ID for network identification
+ * @param {TransactionType} props.txType - Type of transaction (bridge, etc.)
+ * @returns {JSX.Element} Rendered transaction asset component with token and network info
+ */
 const TransactionAsset = ({
   token,
   tokenAmount,

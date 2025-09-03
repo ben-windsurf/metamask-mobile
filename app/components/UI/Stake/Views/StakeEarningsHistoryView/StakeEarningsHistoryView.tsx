@@ -9,6 +9,11 @@ import styleSheet from './StakeEarningsHistoryView.styles';
 import { StakeEarningsHistoryViewRouteParams } from './StakeEarningsHistoryView.types';
 import EarningsHistory from '../../../Earn/components/Earnings/EarningsHistory/EarningsHistory';
 
+/**
+ * StakeEarningsHistoryView displays the earnings history for a staked asset
+ * Shows historical earnings data in a scrollable view with custom navigation
+ * @returns {JSX.Element} The rendered earnings history view component
+ */
 const StakeEarningsHistoryView = () => {
   const navigation = useNavigation();
   const route = useRoute<StakeEarningsHistoryViewRouteParams>();

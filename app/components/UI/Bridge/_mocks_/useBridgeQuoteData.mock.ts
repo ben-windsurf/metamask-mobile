@@ -1,5 +1,9 @@
 import { mockQuoteWithMetadata } from './bridgeQuoteWithMetadata';
 
+/**
+ * Mock data for the useBridgeQuoteData hook
+ * Provides test data for bridge quote functionality including active quotes, loading states, and formatted quote information
+ */
 export const mockUseBridgeQuoteData = {
   activeQuote: mockQuoteWithMetadata,
   bestQuote: mockQuoteWithMetadata,

@@ -10,6 +10,11 @@ import { strings } from '../../../../../../../locales/i18n';
 import { useMetrics } from '../../../../../hooks/useMetrics';
 import { createTooltipOpenedEvent } from '../../../utils/metaMetrics/tooltipMetaMetricsUtils';
 
+/**
+ * UnstakingTimeCard component displays information about the estimated time required for unstaking
+ * Shows a tooltip with additional details about the unstaking process and tracks user interactions
+ * @returns {JSX.Element} A card component with unstaking time information and tooltip
+ */
 const UnstakingTimeCard = () => {
   const { styles } = useStyles(styleSheet, {});
 

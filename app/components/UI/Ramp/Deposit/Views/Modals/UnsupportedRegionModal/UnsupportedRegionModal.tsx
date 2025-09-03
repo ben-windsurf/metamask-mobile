@@ -26,12 +26,21 @@ import { createRegionSelectorModalNavigationDetails } from '../RegionSelectorMod
 import { useDepositSDK } from '../../../sdk';
 import { createBuyNavigationDetails } from '../../../../Aggregator/routes/utils';
 
+/**
+ * Creates navigation details for the unsupported region modal
+ * @returns {Array} Navigation details array for the unsupported region modal
+ */
 export const createUnsupportedRegionModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.UNSUPPORTED_REGION,
   );
 
+/**
+ * Modal component displayed when user's region is not supported for deposits
+ * Provides options to select a different region or navigate to buy crypto
+ * @returns {JSX.Element} The unsupported region modal component
+ */
 function UnsupportedRegionModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const navigation = useNavigation();

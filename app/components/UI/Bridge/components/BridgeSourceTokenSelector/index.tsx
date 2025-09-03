@@ -36,6 +36,12 @@ import { BridgeToken, BridgeViewMode } from '../../types';
 import { useSwitchNetworks } from '../../../../Views/NetworkSelector/useSwitchNetworks';
 import { useNetworkInfo } from '../../../../../selectors/selectedNetworkController';
 
+/**
+ * BridgeSourceTokenSelector component allows users to select source tokens for bridge operations
+ * Displays available tokens from selected source networks with balances and network switching capability
+ * Handles token selection and automatic network switching when a token from a different chain is selected
+ * @returns {JSX.Element} The rendered bridge source token selector component
+ */
 export const BridgeSourceTokenSelector: React.FC = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();

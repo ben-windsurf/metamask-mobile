@@ -18,6 +18,11 @@ import { constants } from 'ethers';
 import { SolScope } from '@metamask/keyring-api';
 ///: END:ONLY_INCLUDE_IF
 
+/**
+ * Gets the native source token for a given chain ID
+ * @param {Hex | CaipChainId} chainId - The chain ID to get the native token for
+ * @returns {BridgeToken} The formatted native source token object
+ */
 export const getNativeSourceToken = (chainId: Hex | CaipChainId) => {
   const nativeAsset = getNativeAssetForChainId(chainId);
 
@@ -38,6 +43,11 @@ export const getNativeSourceToken = (chainId: Hex | CaipChainId) => {
   return nativeSourceTokenFormatted;
 };
 
+/**
+ * Hook to initialize the source token for bridge operations
+ * Sets the initial source token and switches networks if necessary
+ * @param {BridgeToken} initialSourceToken - Optional initial source token to set
+ */
 export const useInitialSourceToken = (initialSourceToken?: BridgeToken) => {
   const dispatch = useDispatch();
   const evmNetworkConfigurations = useSelector(

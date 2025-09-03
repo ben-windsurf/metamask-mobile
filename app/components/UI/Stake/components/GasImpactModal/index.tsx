@@ -31,6 +31,13 @@ import { MetaMetricsEvents, useMetrics } from '../../../../hooks/useMetrics';
 import { EVENT_LOCATIONS, EVENT_PROVIDERS } from '../../constants/events';
 import usePoolStakedDeposit from '../../hooks/usePoolStakedDeposit';
 
+/**
+ * GasImpactModal component displays a warning when gas costs are high relative to the staking deposit
+ * Shows gas cost impact information and allows users to proceed or cancel the staking transaction
+ * @param {GasImpactModalProps} props - Component props
+ * @param {Object} props.route - Navigation route containing staking parameters
+ * @returns {JSX.Element} Bottom sheet modal with gas impact warning and action buttons
+ */
 const GasImpactModal = ({ route }: GasImpactModalProps) => {
   const { styles } = useStyles(styleSheet, {});
   const confirmationRedesignFlags = useSelector(

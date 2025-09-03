@@ -39,6 +39,13 @@ interface StakeButtonProps {
   asset: TokenI;
 }
 
+/**
+ * Internal component that renders the stake/earn button content
+ * Handles navigation to staking screens or external staking URL based on eligibility
+ * @param {StakeButtonProps} props - Component props
+ * @param {TokenI} props.asset - The token asset to stake/earn with
+ * @returns {JSX.Element} The stake button content or empty fragment if not eligible
+ */
 const StakeButtonContent = ({ asset }: StakeButtonProps) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -189,6 +196,14 @@ const StakeButtonContent = ({ asset }: StakeButtonProps) => {
   );
 };
 
+/**
+ * StakeButton component that provides staking/earning functionality for tokens
+ * Wraps StakeButtonContent with StakeSDKProvider for SDK access
+ * Supports both pooled staking and stablecoin lending experiences
+ * @param {StakeButtonProps} props - Component props
+ * @param {TokenI} props.asset - The token asset to stake/earn with
+ * @returns {JSX.Element} The stake button wrapped with SDK provider
+ */
 // TODO: Rename to EarnButton and make component more generic to support lending.
 export const StakeButton = (props: StakeButtonProps) => (
   <StakeSDKProvider>

@@ -6,6 +6,11 @@ import {
 } from '../../../../../core/redux/slices/bridge';
 import { selectShouldUseSmartTransaction } from '../../../../../selectors/smartTransactionsController';
 
+/**
+ * Custom hook that provides unified context data for swap and bridge operations
+ * Combines smart transaction settings with source and destination token information
+ * @returns {Object} Context object containing smart transaction status, token symbols, and warning arrays
+ */
 export const useUnifiedSwapBridgeContext = () => {
   const smartTransactionsEnabled = useSelector(selectShouldUseSmartTransaction);
   const fromToken = useSelector(selectSourceToken);

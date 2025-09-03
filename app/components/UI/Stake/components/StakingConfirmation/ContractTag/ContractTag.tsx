@@ -11,6 +11,15 @@ import Avatar, {
   AvatarAccountType,
 } from '../../../../../../component-library/components/Avatars/Avatar';
 
+/**
+ * ContractTag component displays a contract name with an associated avatar icon
+ * Renders as a pill-shaped tag with contract avatar and name for staking confirmation
+ * @param {ContractTagProps} props - Component props
+ * @param {string} props.contractName - The name of the contract to display
+ * @param {string} props.contractAddress - The contract address for avatar generation
+ * @param {boolean} props.useBlockieIcon - Whether to use blockie or jazzicon style (default: false)
+ * @returns {JSX.Element} A tag component with contract avatar and name
+ */
 const ContractTag = ({
   contractName,
   contractAddress,

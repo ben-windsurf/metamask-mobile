@@ -28,6 +28,12 @@ import { useStyles } from '../../../../../component-library/hooks';
 import { useMultichainBlockExplorerTxUrl } from '../../hooks/useMultichainBlockExplorerTxUrl';
 import { Transaction } from '@metamask/keyring-api';
 
+/**
+ * Creates stylesheet for the BlockExplorersModal component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing color and styling values
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: { theme: Theme }) =>
   StyleSheet.create({
     container: {
@@ -48,6 +54,12 @@ interface BlockExplorersModalProps {
   };
 }
 
+/**
+ * Modal component that displays block explorer options for bridge transactions
+ * Shows buttons to view transaction details on block explorers for both source and destination chains
+ * @param {BlockExplorersModalProps} props - Component props containing transaction data
+ * @returns {JSX.Element} Modal with block explorer navigation buttons
+ */
 const BlockExplorersModal = (props: BlockExplorersModalProps) => {
   const navigation = useNavigation();
   const { styles } = useStyles(styleSheet, {});

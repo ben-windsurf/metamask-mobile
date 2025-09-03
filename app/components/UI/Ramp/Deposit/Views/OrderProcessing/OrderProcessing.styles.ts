@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for OrderProcessing component
+ * Defines styles for content layout, error states, and button containers
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = () =>
   StyleSheet.create({
     content: {

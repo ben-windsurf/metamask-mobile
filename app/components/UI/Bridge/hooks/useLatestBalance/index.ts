@@ -21,6 +21,13 @@ import { RootState } from '../../../../../reducers';
 import { endTrace, trace, TraceName } from '../../../../../util/trace';
 ///: END:ONLY_INCLUDE_IF
 
+/**
+ * Fetches the atomic token balance for a given ERC-20 token
+ * @param address - The token contract address
+ * @param userAddress - The user's wallet address
+ * @param web3Provider - The Web3 provider instance
+ * @returns Promise resolving to the atomic token balance as BigNumber
+ */
 export async function fetchAtomicTokenBalance(
   address: string,
   userAddress: string,
@@ -33,6 +40,14 @@ export async function fetchAtomicTokenBalance(
   return await tokenBalancePromise;
 }
 
+/**
+ * Fetches the atomic balance for EVM tokens (native ETH or ERC-20 tokens)
+ * @param web3Provider - The Web3 provider instance
+ * @param selectedAddress - The user's selected wallet address
+ * @param tokenAddress - The token contract address (AddressZero for native ETH)
+ * @param chainId - The chain ID as hex string
+ * @returns Promise resolving to the atomic balance as BigNumber or undefined
+ */
 export const fetchEvmAtomicBalance = async (
   web3Provider: Web3Provider,
   selectedAddress: string,

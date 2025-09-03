@@ -36,6 +36,10 @@ interface UseBridgeQuoteDataParams {
 
 /**
  * Hook for getting bridge quote data without request logic
+ * Manages bridge quote state, validation, and formatting for display
+ * @param {UseBridgeQuoteDataParams} params - Hook parameters
+ * @param {EthersBigNumber} params.latestSourceAtomicBalance - Latest atomic balance for source token
+ * @returns {Object} Bridge quote data including active quote, loading state, and formatted data
  */
 export const useBridgeQuoteData = ({
   latestSourceAtomicBalance,

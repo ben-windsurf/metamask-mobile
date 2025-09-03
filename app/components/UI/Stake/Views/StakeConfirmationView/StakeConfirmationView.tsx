@@ -19,6 +19,13 @@ import { getDecimalChainId } from '../../../../../util/networks';
 
 const MOCK_STAKING_CONTRACT_NAME = 'MM Pooled Staking';
 
+/**
+ * StakeConfirmationView displays the confirmation screen for staking operations
+ * Shows staking amount, account details, rewards information, and confirmation controls
+ * @param {StakeConfirmationViewProps} props - Component props
+ * @param {Object} props.route - Navigation route containing staking parameters
+ * @returns {JSX.Element} The rendered stake confirmation view
+ */
 const StakeConfirmationView = ({ route }: StakeConfirmationViewProps) => {
   const navigation = useNavigation();
 

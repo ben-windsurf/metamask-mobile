@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates styles for the QuoteExpiredModal component
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     container: {

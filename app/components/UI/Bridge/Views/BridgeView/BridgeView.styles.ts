@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../../../util/theme/models';
 
+/**
+ * Creates styles for the BridgeView component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing color and styling definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 export const createStyles = (params: { theme: Theme }) => {
   const { theme } = params;
   return StyleSheet.create({

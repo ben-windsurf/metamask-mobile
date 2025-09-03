@@ -54,9 +54,18 @@ export interface BankDetailsParams {
   shouldUpdate?: boolean;
 }
 
+/**
+ * Creates navigation details for the BankDetails screen
+ * @returns Navigation details object for routing to bank details view
+ */
 export const createBankDetailsNavDetails =
   createNavigationDetails<BankDetailsParams>(Routes.DEPOSIT.BANK_DETAILS);
 
+/**
+ * BankDetails component displays bank transfer information for deposit orders
+ * Shows payment details, bank information, and handles order confirmation/cancellation
+ * @returns JSX element rendering the bank details screen with transfer information
+ */
 const BankDetails = () => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

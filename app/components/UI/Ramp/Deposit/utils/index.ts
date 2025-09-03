@@ -33,6 +33,11 @@ import {
 const emailRegex =
   /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
+/**
+ * Validates an email address using regex pattern matching
+ * @param email - The email address string to validate
+ * @returns True if the email is valid, false otherwise
+ */
 export const validateEmail = function (email: string) {
   if (!email || email.split('@').length !== 2) return false;
   return emailRegex.test(email);
@@ -169,6 +174,11 @@ const baseNotificationDetails = {
  * Get notification details for deposit orders
  * @param {FiatOrder} fiatOrder
  */
+/**
+ * Gets notification details for deposit orders based on their state
+ * @param fiatOrder - The fiat order to get notification details for
+ * @returns Notification details object with title, description, and status, or null for created orders
+ */
 export const getNotificationDetails = (fiatOrder: FiatOrder) => {
   switch (fiatOrder.state) {
     case FIAT_ORDER_STATES.FAILED: {
@@ -283,6 +293,12 @@ export const hasDepositOrderField = (
   return field in depositOrder && depositOrder[field] !== undefined;
 };
 
+/**
+ * Generates theme parameters for Transak widget integration
+ * @param themeAppearance - The app theme appearance (light or dark)
+ * @param colors - The color palette from the app theme
+ * @returns Theme parameters object for Transak widget customization
+ */
 export const generateThemeParameters = (
   themeAppearance: AppThemeKey,
   colors: Colors,
@@ -321,6 +337,11 @@ export const generateThemeParameters = (
  * Transforms a timestamp to a Transak format
  * @param timestamp - The timestamp to transform
  * @returns The Transak format
+ */
+/**
+ * Transforms a timestamp to Transak's expected date format (DD-MM-YYYY)
+ * @param timestamp - The timestamp string to transform
+ * @returns Formatted date string in DD-MM-YYYY format
  */
 export const timestampToTransakFormat = (timestamp: string) => {
   const transakDate = new Date(Number(timestamp));

@@ -10,6 +10,10 @@ import AvatarNetwork from '../../../../component-library/components/Avatars/Avat
 import { getNetworkImageSource } from '../../../../util/networks';
 import { CaipChainId, Hex } from '@metamask/utils';
 
+/**
+ * Creates styles for the NetworkRow component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     wrapper: {
@@ -29,6 +33,15 @@ interface NetworkRowProps {
   children?: React.ReactNode;
 }
 
+/**
+ * NetworkRow component displays a network with its avatar and name
+ * Used in bridge and network selection interfaces to show network information
+ * @param {Object} props - Component props
+ * @param {Hex | CaipChainId} props.chainId - The chain ID for the network
+ * @param {string} props.chainName - The display name of the network
+ * @param {React.ReactNode} props.children - Optional child components to render on the right side
+ * @returns {JSX.Element} The rendered network row component
+ */
 export const NetworkRow: React.FC<NetworkRowProps> = ({
   chainId,
   chainName,

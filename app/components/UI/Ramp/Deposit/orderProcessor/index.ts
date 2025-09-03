@@ -10,6 +10,11 @@ import transakNetworkToChainId from '../utils/transakNetworkToChainId';
 import { DepositSDKNoAuth } from '../sdk';
 import Logger from '../../../../../util/Logger';
 
+/**
+ * Converts deposit order status to fiat order state
+ * @param aggregatorOrderState - The deposit order status from the aggregator
+ * @returns The corresponding fiat order state
+ */
 const depositOrderStateToFiatOrderState = (
   aggregatorOrderState: DepositOrder['status'],
 ) => {
@@ -34,6 +39,11 @@ const depositOrderStateToFiatOrderState = (
   }
 };
 
+/**
+ * Converts a deposit order to a fiat order format
+ * @param depositOrder - The deposit order to convert
+ * @returns Fiat order object with mapped properties from the deposit order
+ */
 export const depositOrderToFiatOrder = (depositOrder: DepositOrder) => ({
   id: depositOrder.id,
   provider: FIAT_ORDER_PROVIDERS.DEPOSIT,
@@ -56,6 +66,12 @@ export const depositOrderToFiatOrder = (depositOrder: DepositOrder) => ({
   data: depositOrder,
 });
 
+/**
+ * Processes a deposit order by fetching updated information from the SDK
+ * @param order - The fiat order to process
+ * @param options - Optional processor options including SDK instance
+ * @returns Promise resolving to the updated fiat order or original order if error occurs
+ */
 export async function processDepositOrder(
   order: FiatOrder,
   options?: ProcessorOptions,

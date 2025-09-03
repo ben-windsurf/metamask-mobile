@@ -29,12 +29,22 @@ export interface WebviewModalParams {
   handleNavigationStateChange?: (navState: { url: string }) => void;
 }
 
+/**
+ * Creates navigation details for the WebviewModal component
+ * @returns Navigation details object for routing to the webview modal
+ */
 export const createWebviewModalNavigationDetails =
   createNavigationDetails<WebviewModalParams>(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.WEBVIEW,
   );
 
+/**
+ * WebviewModal component displays a webview in a bottom sheet modal
+ * Handles webview navigation, error states, and provides close functionality
+ * Used for displaying external web content within the app interface
+ * @returns JSX.Element The rendered webview modal component
+ */
 function WebviewModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const previousUrlRef = useRef<string | null>(null);

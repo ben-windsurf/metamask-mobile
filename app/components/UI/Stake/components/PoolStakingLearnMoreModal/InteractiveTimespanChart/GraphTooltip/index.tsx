@@ -15,6 +15,16 @@ export interface GraphTooltipProps {
   isLoading?: boolean;
 }
 
+/**
+ * GraphTooltip component displays tooltip information for interactive charts
+ * Shows title and subtitle text with optional loading state and custom color
+ * @param {GraphTooltipProps} props - Component props
+ * @param {string} props.title - Main title text to display
+ * @param {string} props.subtitle - Subtitle text to display below title
+ * @param {string} props.color - Optional color for the title text
+ * @param {boolean} props.isLoading - Whether to show loading skeleton (default: false)
+ * @returns {JSX.Element} Rendered tooltip component with title and subtitle or loading skeleton
+ */
 const GraphTooltip = ({
   title,
   subtitle,

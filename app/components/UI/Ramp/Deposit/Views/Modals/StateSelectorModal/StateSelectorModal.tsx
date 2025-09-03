@@ -36,12 +36,21 @@ export interface StateSelectorModalParams {
   onStateSelect: (stateCode: string) => void;
 }
 
+/**
+ * Creates navigation details for the state selector modal
+ * @returns Navigation details object for the state selector modal
+ */
 export const createStateSelectorModalNavigationDetails =
   createNavigationDetails<StateSelectorModalParams>(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.STATE_SELECTOR,
   );
 
+/**
+ * StateSelectorModal component displays a searchable list of US states for selection
+ * Provides search functionality and handles special cases like unsupported states
+ * @returns JSX.Element The rendered state selector modal
+ */
 function StateSelectorModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const listRef = useRef<FlatList<{ code: string; name: string }>>(null);

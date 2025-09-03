@@ -12,6 +12,12 @@ interface UseIsInsufficientBalanceParams {
   latestAtomicBalance: BigNumber | undefined;
 }
 
+/**
+ * Normalizes an amount string by converting scientific notation to decimal notation
+ * @param {string} value - The amount value to normalize
+ * @param {number} decimals - The number of decimal places for the token
+ * @returns {string} The normalized amount string
+ */
 const normalizeAmount = (value: string, decimals: number): string => {
   // Check if the value is in scientific notation
   if (value.toLowerCase().includes('e')) {
@@ -27,6 +33,15 @@ const normalizeAmount = (value: string, decimals: number): string => {
   return value;
 };
 
+/**
+ * Hook to determine if the user has insufficient balance for a bridge transaction
+ * Handles special cases for SOL tokens (rent exemption) and gas inclusion checks
+ * @param {UseIsInsufficientBalanceParams} params - Parameters for balance checking
+ * @param {string | undefined} params.amount - The amount to check
+ * @param {BridgeToken | undefined} params.token - The token being bridged
+ * @param {BigNumber | undefined} params.latestAtomicBalance - The latest token balance
+ * @returns {boolean} True if balance is insufficient, false otherwise
+ */
 const useIsInsufficientBalance = ({
   amount,
   token,

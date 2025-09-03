@@ -1,5 +1,9 @@
 import mockQuotes from './mock-quotes-sol-sol.json';
 
+/**
+ * Mock bridge quote data with metadata for testing purposes
+ * Contains quote information with adjusted returns, costs, gas fees, and token amounts
+ */
 export const mockQuoteWithMetadata = {
   ...mockQuotes[0],
   adjustedReturn: { usd: null, valueInCurrency: null },

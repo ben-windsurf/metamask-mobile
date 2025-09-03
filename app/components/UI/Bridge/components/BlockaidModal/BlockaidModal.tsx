@@ -16,6 +16,10 @@ import {
 } from '../../../../../component-library/components/Buttons/Button';
 import { useStyles } from '../../../../../component-library/hooks';
 
+/**
+ * Creates styles for the BlockaidModal component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     container: {
@@ -35,6 +39,11 @@ interface BlockaidModalRouteParams {
   errorType: 'validation' | 'simulation';
 }
 
+/**
+ * BlockaidModal component displays security warnings and validation errors from Blockaid
+ * Shows error messages in a bottom sheet modal with options to go back
+ * @returns {JSX.Element} The rendered BlockaidModal component
+ */
 const BlockaidModal = () => {
   const navigation = useNavigation();
   const sheetRef = useRef<BottomSheetRef>(null);

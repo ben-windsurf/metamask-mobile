@@ -7,6 +7,11 @@ import { toHex } from '@metamask/controller-utils';
 const TWENTY_FOUR_HOURS_IN_SECONDS = 86400;
 const CLAIM_EXITED_ASSETS = 'claimExitedAssets';
 
+/**
+ * Checks if 24 hours have passed since the given timestamp
+ * @param {string} timestamp - The timestamp to check against (in milliseconds)
+ * @returns {boolean} True if 24 hours have passed, false otherwise
+ */
 export const have24HoursPassed = (timestamp: string) => {
   const current = Math.floor(Number(new Date().getTime() / 1000));
   const timestampInSeconds = Math.floor(Number(timestamp) / 1000);
@@ -16,6 +21,12 @@ export const have24HoursPassed = (timestamp: string) => {
   return difference > TWENTY_FOUR_HOURS_IN_SECONDS;
 };
 
+/**
+ * Determines if an exit request is claimable based on queue index and time elapsed
+ * @param {string} exitQueueIndex - The exit queue index to validate
+ * @param {string} timestamp - The timestamp when the exit request was made
+ * @returns {boolean} True if the request is claimable, false otherwise
+ */
 export const isRequestClaimable = (
   exitQueueIndex: string,
   timestamp: string,
@@ -24,6 +35,11 @@ export const isRequestClaimable = (
   return isValidExitQueueIndex && have24HoursPassed(timestamp);
 };
 
+/**
+ * Transforms claimable exit requests into multicall arguments for batch claiming
+ * @param {PooledStakeExitRequest[]} exitRequests - Array of exit requests to process
+ * @returns {MultiCallData} Array of multicall data for claimable exit requests
+ */
 export const transformAggregatedClaimableExitRequestToMulticallArgs = (
   exitRequests: PooledStakeExitRequest[],
 ): MultiCallData => {
@@ -49,6 +65,15 @@ export const transformAggregatedClaimableExitRequestToMulticallArgs = (
   return result;
 };
 
+/**
+ * Generates transaction parameters for claiming staked assets
+ * @param {string} activeAccountAddress - The address of the active account
+ * @param {string} contractAddress - The contract address to interact with
+ * @param {string} encodedClaimTransactionData - The encoded transaction data
+ * @param {ChainId} chainId - The chain ID for the transaction
+ * @param {string} gasLimit - The gas limit for the transaction
+ * @returns {TransactionParams} Transaction parameters object
+ */
 export const generateClaimTxParams = (
   activeAccountAddress: string,
   contractAddress: string,
