@@ -10,6 +10,10 @@ import ledgerConnectErrorDarkImage from '../../../../images/ledger-connect-error
 import ledgerConnectErrorLightImage from '../../../../images/ledger-connect-error-light.png';
 import { ERROR_STEP, RETRY_BUTTON } from './Steps.constants';
 
+/**
+ * Creates styles for the ErrorStep component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     buttonContainer: {
@@ -46,6 +50,12 @@ export interface ErrorStepProps {
   isRetryHide?: boolean;
 }
 
+/**
+ * ErrorStep component displays error information for Ledger connection failures
+ * Shows error message, retry button, and optional settings access button
+ * @param {ErrorStepProps} props - Component props
+ * @returns {JSX.Element} The rendered error step component
+ */
 const ErrorStep = ({
   onReject,
   onRetry,

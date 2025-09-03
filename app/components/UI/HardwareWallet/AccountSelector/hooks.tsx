@@ -13,6 +13,12 @@ export interface AccountBalances {
   [p: string]: AccountBalance;
 }
 
+/**
+ * Custom hook to track and manage account balances for hardware wallet accounts
+ * Automatically syncs balances for untracked accounts using AccountTrackerController
+ * @param {IAccount[]} accounts - Array of account objects with addresses to track
+ * @returns {AccountBalances} Object mapping account addresses to their balance information
+ */
 export const useAccountsBalance = (accounts: IAccount[]) => {
   const [trackedAccounts, setTrackedAccounts] = useState<AccountBalances>({});
   const AccountTrackerController = useMemo(

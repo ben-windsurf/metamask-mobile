@@ -23,6 +23,14 @@ interface ProviderProps<T> {
 
 const CardSDKContext = createContext<ICardSDK | undefined>(undefined);
 
+/**
+ * Provider component for CardSDK context
+ * Initializes and manages the CardSDK instance based on feature flags and chain ID
+ * @param {ProviderProps<ICardSDK>} props - Provider props
+ * @param {ICardSDK} props.value - Optional CardSDK value to override default
+ * @param {React.ReactNode} props.children - Child components
+ * @returns {JSX.Element} CardSDK context provider
+ */
 export const CardSDKProvider = ({
   value,
   ...props
@@ -55,6 +63,11 @@ export const CardSDKProvider = ({
   return <CardSDKContext.Provider value={value || contextValue} {...props} />;
 };
 
+/**
+ * Hook to access CardSDK from context
+ * @returns {ICardSDK} The CardSDK context value
+ * @throws {Error} If used outside of CardSDKProvider
+ */
 export const useCardSDK = () => {
   const contextValue = useContext(CardSDKContext);
   if (!contextValue) {

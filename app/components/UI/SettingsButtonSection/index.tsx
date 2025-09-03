@@ -27,6 +27,12 @@ interface ISettingsButtonSectionProps {
   testID?: string;
 }
 
+/**
+ * SettingsButtonSection component renders a settings section with a title, description, and action button
+ * Optionally displays a confirmation modal when the button is pressed
+ * @param {ISettingsButtonSectionProps} props - Component props
+ * @returns {JSX.Element} The rendered settings button section with optional modal
+ */
 const SettingsButtonSection = ({
   sectionTitle,
   sectionButtonText,

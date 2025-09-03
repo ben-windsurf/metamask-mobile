@@ -14,6 +14,16 @@ interface RefreshTokensProps {
   selectedAccountId?: InternalAccount['id'];
 }
 
+/**
+ * Refreshes token balances for the selected account across different network types
+ * Handles both EVM and non-EVM networks, updating balances through appropriate controllers
+ * @param {RefreshTokensProps} params - Configuration object for token refresh
+ * @param {boolean} params.isEvmSelected - Whether an EVM network is currently selected
+ * @param {Record<string, { chainId: Hex; nativeCurrency: string }>} params.evmNetworkConfigurationsByChainId - EVM network configurations indexed by chain ID
+ * @param {string[]} params.nativeCurrencies - Array of native currency symbols
+ * @param {string} params.selectedAccountId - ID of the currently selected account
+ * @returns {Promise<void>} Promise that resolves when token refresh is complete
+ */
 export const refreshTokens = async ({
   isEvmSelected,
   evmNetworkConfigurationsByChainId,

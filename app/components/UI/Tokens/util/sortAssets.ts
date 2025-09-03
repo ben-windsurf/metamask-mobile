@@ -30,6 +30,12 @@ function getNestedValue<T>(obj: T, keyPath: string): SortingType {
   return get(obj, keyPath) as SortingType;
 }
 
+/**
+ * Sorts an array of assets based on specified criteria
+ * @param array - Array of assets to sort
+ * @param criteria - Sorting criteria containing key, order, and sortCallback
+ * @returns Sorted array of assets with undefined values moved to the end
+ */
 export function sortAssets<T>(
   array: T[],
   criteria: Record<string, string>,

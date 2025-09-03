@@ -18,6 +18,11 @@ import {
 } from '../../../core/Ledger/ledgerErrors';
 import { HardwareDeviceTypes } from '../../../constants/keyringTypes';
 
+/**
+ * Creates styles for the Ledger confirmation modal
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     wrapper: {
@@ -39,6 +44,16 @@ export interface LedgerConfirmationModalProps {
   deviceId: string;
 }
 
+/**
+ * Modal component for handling Ledger hardware wallet confirmation flow
+ * Manages the complete user experience for Ledger transactions including
+ * device connection, app opening, error handling, and transaction confirmation
+ * @param {LedgerConfirmationModalProps} props - Component props
+ * @param {Function} props.onConfirmation - Callback executed when transaction is confirmed
+ * @param {Function} props.onRejection - Callback executed when transaction is rejected
+ * @param {string} props.deviceId - The Ledger device identifier
+ * @returns {JSX.Element} The rendered Ledger confirmation modal
+ */
 const LedgerConfirmationModal = ({
   onConfirmation,
   onRejection,

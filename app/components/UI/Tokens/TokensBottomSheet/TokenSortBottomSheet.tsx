@@ -23,6 +23,11 @@ enum SortOption {
   Alphabetical = 1,
 }
 
+/**
+ * TokenSortBottomSheet component provides a bottom sheet interface for sorting tokens
+ * Allows users to sort tokens by fiat amount (declining balance) or alphabetically
+ * @returns {JSX.Element} Bottom sheet with token sorting options
+ */
 const TokenSortBottomSheet = () => {
   const sheetRef = useRef<BottomSheetRef>(null);
   const { colors } = useTheme();
@@ -31,6 +36,10 @@ const TokenSortBottomSheet = () => {
   const tokenSortConfig = useSelector(selectTokenSortConfig);
   const currentCurrency = useSelector(selectCurrentCurrency);
 
+  /**
+   * Handles sort option selection and updates token sort configuration
+   * @param {SortOption} option - The selected sort option (FiatAmount or Alphabetical)
+   */
   const onSortControlsBottomSheetPress = (option: SortOption) => {
     const { PreferencesController } = Engine.context;
     switch (option) {

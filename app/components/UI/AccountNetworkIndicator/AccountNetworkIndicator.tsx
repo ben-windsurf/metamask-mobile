@@ -10,6 +10,15 @@ import { getActiveNetworksByScopes } from '../../../selectors/multichainNetworkC
 import styleSheet from './AccountNetworkIndicator.styles';
 import { getNetworkImageSource } from '../../../util/networks';
 
+/**
+ * AccountNetworkIndicator displays network avatars for networks with transaction activity
+ * Shows a grouped avatar display of active networks associated with the account
+ * @param {Object} props - Component props
+ * @param {Object} props.partialAccount - Account information with address and network scopes
+ * @param {string} props.partialAccount.address - The account address
+ * @param {CaipChainId[]} props.partialAccount.scopes - Array of CAIP chain IDs for the account
+ * @returns {JSX.Element} Avatar group component displaying network indicators
+ */
 const AccountNetworkIndicator = ({
   partialAccount,
 }: {

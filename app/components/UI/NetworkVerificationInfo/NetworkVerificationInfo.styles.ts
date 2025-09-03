@@ -6,6 +6,12 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates stylesheet for NetworkVerificationInfo component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing colors and typography
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors, typography } = theme;

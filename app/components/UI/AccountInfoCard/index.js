@@ -34,6 +34,11 @@ import Identicon from '../Identicon';
 import { selectInternalAccounts } from '../../../selectors/accountsController';
 import { selectSignatureRequests } from '../../../selectors/signatureController';
 
+/**
+ * Creates styles for the AccountInfoCard component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     accountInformation: {
@@ -101,6 +106,11 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * AccountInfoCard component displays account information including address, balance, and account label
+ * Used in transaction confirmation screens and signature requests to show the active account details
+ * Supports both regular account display and transaction-specific header display
+ */
 class AccountInfoCard extends PureComponent {
   static propTypes = {
     /**
@@ -247,6 +257,11 @@ class AccountInfoCard extends PureComponent {
   }
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object with selected state values
+ */
 const mapStateToProps = (state) => ({
   accounts: selectAccounts(state),
   internalAccounts: selectInternalAccounts(state),

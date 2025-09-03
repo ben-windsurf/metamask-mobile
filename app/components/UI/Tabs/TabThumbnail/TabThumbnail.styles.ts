@@ -12,6 +12,11 @@ const height = Dimensions.get('window').height / (Device.isIphone5S() ? 4 : 5);
 let paddingTop = Dimensions.get('window').height - 190;
 paddingTop -= 100;
 
+/**
+ * Creates styles for the TabThumbnail component
+ * @param {ThemeColors} colors - Theme colors object for styling
+ * @returns {Object} StyleSheet object containing all tab thumbnail styles
+ */
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     tabFavicon: {

@@ -4,6 +4,19 @@ import PropTypes from 'prop-types';
 
 const TIME = 3900; // 3900/6 = 650 for each
 
+/**
+ * FadeAnimationView provides a fade animation effect for content changes
+ * Animates opacity with a sequence of fade in/out transitions when the watched value changes
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Content to render and animate
+ * @param {Object|Array} props.style - Style object or array for the container
+ * @param {number} props.animationTime - Total duration of the animation sequence in milliseconds
+ * @param {string|number} props.valueToWatch - Value to monitor for changes that trigger animation
+ * @param {Function} props.onAnimationStart - Callback fired when animation starts
+ * @param {Function} props.onAnimationEnd - Callback fired when animation completes
+ * @param {boolean} props.animateOnChange - Whether to animate when the watched value changes
+ * @returns {JSX.Element} Animated view with fade transition effects
+ */
 const FadeAnimationView = ({
   children,
   style,

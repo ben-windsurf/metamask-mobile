@@ -14,6 +14,12 @@ interface IAccountDetailsProps {
   toBlockExplorer: (address: string) => void;
 }
 
+/**
+ * AccountDetails component displays hardware wallet account information
+ * Shows account index, address, balance, and provides link to block explorer
+ * @param {IAccountDetailsProps} props - Component props
+ * @returns {JSX.Element} Rendered account details with balance and explorer link
+ */
 const AccountDetails = (props: IAccountDetailsProps) => {
   const { colors } = useTheme();
   const styles = createStyle(colors);

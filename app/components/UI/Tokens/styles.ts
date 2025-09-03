@@ -7,6 +7,11 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates styles for the Tokens component based on the current theme colors
+ * @param {Colors} colors - Theme colors object containing background, text, and other color definitions
+ * @returns {Object} StyleSheet object with all component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     wrapper: {

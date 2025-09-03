@@ -29,6 +29,12 @@ const TOOLTIP_HEIGHT = 36;
 const TOOLTIP_WIDTH = 40;
 const COMPONENT_HEIGHT = DIAMETER + TOOLTIP_HEIGHT + 10;
 
+/**
+ * Creates stylesheet for the SlippageSlider component
+ * @param {Object} colors - Theme colors object
+ * @param {Object} shadows - Theme shadows object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, shadows) =>
   StyleSheet.create({
     root: {
@@ -97,9 +103,27 @@ const createStyles = (colors, shadows) =>
     },
   });
 
+/**
+ * Sets the value of an animated value
+ * @param {Animated.Value} animatedValue - The animated value to update
+ * @param {number} value - The new value to set
+ */
 const setAnimatedValue = (animatedValue, value) =>
   animatedValue.setValue(value);
 
+/**
+ * SlippageSlider component provides an interactive slider for setting slippage tolerance
+ * Features animated slider with tooltip, tick marks, and customizable range and increments
+ * @param {Object} props - Component props
+ * @param {number[]} props.range - Array with min and max values for the slider
+ * @param {number} props.increment - Step size between selectable values
+ * @param {Function} props.onChange - Callback function when value changes
+ * @param {number} props.value - Current slider value
+ * @param {Function} props.formatTooltipText - Function to format tooltip display text
+ * @param {boolean} props.disabled - Whether the slider is disabled
+ * @param {boolean} props.changeOnRelease - Whether to call onChange only on gesture release
+ * @returns {JSX.Element} Rendered SlippageSlider component
+ */
 const SlippageSlider = ({
   range,
   increment,

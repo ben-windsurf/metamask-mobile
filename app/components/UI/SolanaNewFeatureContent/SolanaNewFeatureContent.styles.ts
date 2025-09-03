@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 import Device from '../../../util/device';
 import { colors as importedColors } from '../../../styles/common';
 
+/**
+ * Creates styles for the Solana new feature content component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     scroll: {

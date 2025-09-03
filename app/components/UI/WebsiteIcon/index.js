@@ -10,6 +10,11 @@ import { isNumber } from 'lodash';
 import { isFaviconSVG } from '../../../util/favicon';
 import { SvgUri } from 'react-native-svg';
 
+/**
+ * Creates styles for the WebsiteIcon component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     fallback: {
@@ -30,9 +35,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that renders a website logo depending of the context
- */
-/**
+ * WebsiteIcon component renders a website logo or fallback text based on the provided URL or icon
+ * Displays website favicons with fallback to first letter of title when icon is unavailable
+ * Supports both regular images and SVG icons with error handling
  * @deprecated This `<WebsiteIcon>` component has been deprecated, any new usage of it should use Avatar with the favicon variant instead:
  * https://github.com/MetaMask/metamask-mobile/blob/34f9da127435053a32e5f4e9c69ce8aa1e37c394/app/component-library/components/Avatars/Avatar/README.md#L1
  */
@@ -81,6 +86,7 @@ class WebsiteIcon extends PureComponent {
 
   /**
    * Sets component state to renderIconUrlError to render placeholder image
+   * Called when the icon fails to load, triggering fallback to text display
    */
   onRenderIconUrlError = async () => {
     await this.setState({ renderIconUrlError: true });

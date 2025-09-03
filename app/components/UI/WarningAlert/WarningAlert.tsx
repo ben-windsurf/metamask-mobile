@@ -14,6 +14,16 @@ import { useStyles } from '../../../component-library/hooks';
 import { WarningAlertProps } from './WarningAlert.types';
 import styleSheet from './WarningAlert.styles';
 
+/**
+ * WarningAlert component displays a dismissible warning message with optional learn more link
+ * Renders an alert with warning styling and information icon
+ * @param {WarningAlertProps} props - Component props
+ * @param {string} props.text - The warning text to display
+ * @param {Function} props.dismissAlert - Callback function to dismiss the alert
+ * @param {Function} props.onPressLearnMore - Optional callback for learn more link
+ * @param {boolean} props.precedentAlert - Whether this alert has precedence over others
+ * @returns {JSX.Element} The rendered warning alert component
+ */
 const WarningAlert = ({
   text,
   dismissAlert,

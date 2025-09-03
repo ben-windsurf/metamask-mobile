@@ -24,6 +24,15 @@ interface BiometryButtonProps {
   biometryType: BiometryType | null;
 }
 
+/**
+ * BiometryButton component renders an authentication button with appropriate biometric icons
+ * Displays different icons based on the device platform and available biometry type
+ * @param {BiometryButtonProps} props - Component props
+ * @param {Function} props.onPress - Callback function when button is pressed
+ * @param {boolean} props.hidden - Whether the button should be hidden
+ * @param {BiometryType | null} props.biometryType - The type of biometry available on the device
+ * @returns {JSX.Element | null} The rendered biometry button or null if hidden
+ */
 const BiometryButton = ({
   onPress,
   hidden,

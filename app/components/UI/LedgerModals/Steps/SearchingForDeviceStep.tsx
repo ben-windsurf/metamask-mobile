@@ -20,6 +20,11 @@ import ledgerConnectLightImage from '../../../../images/ledger-connect-light.png
 import { SEARCHING_FOR_DEVICE_STEP } from './Steps.constants';
 import { Colors } from '../../../../util/theme/models';
 
+/**
+ * Creates styles for the SearchingForDeviceStep component
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     modalTitle: {
@@ -61,6 +66,11 @@ const createStyles = (colors: Colors) =>
     },
   });
 
+/**
+ * SearchingForDeviceStep component displays the searching state during Ledger device connection
+ * Shows connection instructions, device requirements, and a loading indicator while searching for devices
+ * @returns {JSX.Element} The rendered searching for device step component
+ */
 const SearchingForDeviceStep = () => {
   const { colors } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);

@@ -12,6 +12,10 @@ import Routes from '../../../constants/navigation/Routes';
 import { useAppThemeFromContext, mockTheme } from '../../../util/theme';
 import { speedUpTransaction } from '../../../util/transaction-controller';
 
+/**
+ * Creates navigation details for the Ledger transaction modal
+ * @returns {Object} Navigation details object for routing to the Ledger transaction modal
+ */
 export const createLedgerTransactionModalNavDetails =
   createNavigationDetails<LedgerTransactionModalParams>(
     Routes.LEDGER_TRANSACTION_MODAL,
@@ -37,6 +41,12 @@ export interface LedgerTransactionModalParams {
   replacementParams?: ReplacementTxParams;
 }
 
+/**
+ * Modal component for handling Ledger hardware wallet transaction confirmations
+ * Displays a confirmation interface and manages transaction execution on Ledger devices
+ * Supports transaction confirmation, speed up, and cancellation operations
+ * @returns {JSX.Element} The rendered Ledger transaction modal
+ */
 const LedgerTransactionModal = () => {
   const modalRef = useRef<ReusableModalRef | null>(null);
   const { colors } = useAppThemeFromContext() || mockTheme;

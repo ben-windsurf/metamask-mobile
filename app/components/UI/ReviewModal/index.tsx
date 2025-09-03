@@ -38,6 +38,11 @@ const helpOptions: HelpOption[] = [
 /* eslint-disable-next-line */
 const foxImage = require('../../../images/branding/fox.png');
 
+/**
+ * ReviewModal component displays a modal for collecting user feedback about the app
+ * Shows sentiment options (good/bad) and provides help resources for users with issues
+ * @returns {JSX.Element} The rendered review modal component
+ */
 const ReviewModal = () => {
   const navigation = useNavigation();
   const modalRef = useRef<ReusableModalRef>(null);

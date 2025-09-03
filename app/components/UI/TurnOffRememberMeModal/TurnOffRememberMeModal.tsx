@@ -24,11 +24,20 @@ import { setAllowLoginWithRememberMe } from '../../../actions/security';
 import { useDispatch } from 'react-redux';
 import { Authentication } from '../../../core';
 
+/**
+ * Creates navigation details for the Turn Off Remember Me modal
+ * @returns {Object} Navigation details object for the modal
+ */
 export const createTurnOffRememberMeModalNavDetails = createNavigationDetails(
   Routes.MODAL.ROOT_MODAL_FLOW,
   Routes.MODAL.TURN_OFF_REMEMBER_ME,
 );
 
+/**
+ * Modal component for turning off the "Remember Me" feature
+ * Requires password confirmation before disabling the feature and locking the app
+ * @returns {JSX.Element} The rendered turn off remember me modal
+ */
 const TurnOffRememberMeModal = () => {
   const { colors, themeAppearance } = useTheme();
   const styles = createStyles(colors);

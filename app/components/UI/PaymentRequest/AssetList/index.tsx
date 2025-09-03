@@ -11,6 +11,11 @@ import { selectTokenList } from '../../../../selectors/tokenListController';
 import { ImportTokenViewSelectorsIDs } from '../../../../../e2e/selectors/wallet/ImportTokenView.selectors';
 import { toChecksumAddress } from '../../../../util/address';
 
+/**
+ * Creates stylesheet for AssetList component
+ * @param {any} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createStyles = (colors: any) =>
@@ -80,6 +85,15 @@ interface Props {
   emptyMessage: string;
 }
 
+/**
+ * AssetList component displays a list of searchable assets for payment requests
+ * Renders asset icons, symbols, and names with selection functionality
+ * @param {Props} props - Component props
+ * @param {any} props.searchResults - Array of asset objects from search
+ * @param {any} props.handleSelectAsset - Callback function when asset is selected
+ * @param {string} props.emptyMessage - Message to display when no results found
+ * @returns {JSX.Element} Rendered asset list or empty message
+ */
 const AssetList = ({
   searchResults,
   handleSelectAsset,
@@ -90,9 +104,9 @@ const AssetList = ({
   const styles = createStyles(colors);
 
   /**
-   * Render logo according to asset. Could be ETH, Identicon or contractMap logo
-   *
-   * @param {object} asset - Asset to generate the logo to render
+   * Renders the appropriate logo for an asset (ETH logo, token icon, or identicon)
+   * @param {any} asset - Asset object containing address and isETH flag
+   * @returns {JSX.Element} Rendered logo component
    */
   const renderLogo = useCallback(
     // TODO: Replace "any" with type

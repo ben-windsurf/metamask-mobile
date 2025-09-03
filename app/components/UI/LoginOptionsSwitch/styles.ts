@@ -2,6 +2,11 @@
 import { fontStyles } from '../../../styles/common';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates styles for the LoginOptionsSwitch component
+ * @param {any} colors - Theme colors object containing background and text colors
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

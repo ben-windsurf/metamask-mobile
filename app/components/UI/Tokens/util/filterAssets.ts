@@ -43,6 +43,12 @@ const filterCallbacks: FilterCallbacksT = {
     value >= opts.min && value <= opts.max,
 };
 
+/**
+ * Retrieves a nested value from an object using a dot-notation key path
+ * @param obj - The object to extract the value from
+ * @param keyPath - Dot-notation string path to the desired property
+ * @returns The value at the specified path, or undefined if not found
+ */
 function getNestedValue<T>(obj: T, keyPath: string): FilterType {
   return get(obj, keyPath);
 }

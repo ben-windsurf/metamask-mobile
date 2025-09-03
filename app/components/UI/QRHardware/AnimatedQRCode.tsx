@@ -15,6 +15,11 @@ interface IAnimatedQRCodeProps {
 const MAX_FRAGMENT_LENGTH = 200;
 const QR_CODE_SIZE = 250;
 
+/**
+ * Creates styles for the AnimatedQRCode component
+ * @param {Theme} theme - The theme object containing color and styling information
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     wrapper: {
@@ -26,6 +31,15 @@ const createStyles = (theme: Theme) =>
     },
   });
 
+/**
+ * AnimatedQRCode component displays an animated QR code for hardware wallet interactions
+ * Cycles through QR code fragments to support large data transmission via QR codes
+ * @param {Object} props - Component props
+ * @param {string} props.cbor - CBOR encoded data to display as QR code
+ * @param {string} props.type - Type identifier for the UR encoding
+ * @param {boolean} props.shouldPause - Whether to pause the QR code animation
+ * @returns {JSX.Element} Animated QR code component
+ */
 const AnimatedQRCode = ({ cbor, type, shouldPause }: IAnimatedQRCodeProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);

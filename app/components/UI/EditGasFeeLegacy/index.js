@@ -34,6 +34,11 @@ import {
 } from '../../../util/gasUtils';
 import { useMetrics } from '../../../components/hooks/useMetrics';
 
+/**
+ * Creates styles for the EditGasFeeLegacy component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     root: {
@@ -112,9 +117,14 @@ const createStyles = (colors) =>
   });
 
 /**
- * The EditGasFeeLegacy component will be deprecated in favor of EditGasFeeLegacyUpdate as part of the gas polling refactor code that moves gas fee modifications to `app/core/GasPolling`. When the refactoring is completed, the EditGasFeeLegacyUpdate will be renamed EditGasFeeLegacy and this component will be removed. The EditGasFeeLegacyUpdate is currently being used in the Update Transaction(Speed Up/Cancel) flow.
+ * EditGasFeeLegacy component provides a legacy interface for editing gas fees
+ * Allows users to select from preset gas options or manually configure gas limit and price
+ * Supports both basic and advanced gas configuration modes with validation and warnings
+ *
+ * Note: This component will be deprecated in favor of EditGasFeeLegacyUpdate as part of the gas polling refactor
+ * @param {Object} props - Component props
+ * @returns {JSX.Element} The rendered gas fee editing interface
  */
-
 const EditGasFeeLegacy = ({
   selected,
   gasFee,

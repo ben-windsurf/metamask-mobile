@@ -16,6 +16,11 @@ import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
 const ROW_HEIGHT = 35;
+/**
+ * Creates styles for the SelectComponent based on theme colors
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     dropdown: {
@@ -91,6 +96,11 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * SelectComponent provides a dropdown selector with modal picker interface
+ * Displays a touchable dropdown that opens a modal with scrollable options
+ * Supports custom styling, default values, and value change callbacks
+ */
 export default class SelectComponent extends PureComponent {
   static propTypes = {
     /**

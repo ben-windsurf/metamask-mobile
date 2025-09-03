@@ -32,6 +32,13 @@ interface ISelectQRAccountsProps {
   title?: string;
 }
 
+/**
+ * AccountSelector component for selecting hardware wallet accounts
+ * Displays a list of accounts with checkboxes for selection, pagination controls,
+ * and action buttons for unlocking selected accounts or forgetting the device
+ * @param {ISelectQRAccountsProps} props - Component props
+ * @returns {JSX.Element} The rendered account selector component
+ */
 const AccountSelector = (props: ISelectQRAccountsProps) => {
   const {
     accounts,

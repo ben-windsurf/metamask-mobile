@@ -31,6 +31,12 @@ const ROWS_VISIBLE = Math.floor(
 );
 const TABS_VISIBLE = ROWS_VISIBLE;
 
+/**
+ * Creates stylesheet for the Tabs component
+ * @param {Object} colors - Theme colors object
+ * @param {Object} shadows - Theme shadows object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, shadows) =>
   StyleSheet.create({
     noTabs: {

@@ -22,6 +22,11 @@ import Button, {
 } from '../../../component-library/components/Buttons/Button';
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * Creates styles for the SkipAccountSecurityModal component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     imageWarning: {
@@ -69,6 +74,13 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * SkipAccountSecurityModal component displays a warning modal when users attempt to skip account security setup
+ * Requires user confirmation via checkbox before allowing them to proceed with skipping backup
+ * @param {Object} props - Component props
+ * @param {Object} props.route - Navigation route object containing callback functions
+ * @returns {JSX.Element} The rendered skip account security modal
+ */
 const SkipAccountSecurityModal = ({ route }) => {
   const sheetRef = useRef(null);
   const { colors } = useTheme();

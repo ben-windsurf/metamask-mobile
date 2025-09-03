@@ -37,6 +37,13 @@ interface TokenListControlBarProps {
   goToAddToken: () => void;
 }
 
+/**
+ * TokenListControlBar component provides controls for filtering, sorting, and adding tokens
+ * Displays network filter, sort button, and add token button with appropriate disabled states
+ * @param {TokenListControlBarProps} props - Component props
+ * @param {Function} props.goToAddToken - Callback function to navigate to add token screen
+ * @returns {JSX.Element} The rendered token list control bar component
+ */
 export const TokenListControlBar = ({
   goToAddToken,
 }: TokenListControlBarProps) => {

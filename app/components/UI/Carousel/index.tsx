@@ -34,6 +34,14 @@ import { IconName } from '../../../component-library/components/Icons/Icon';
 
 const MAX_CAROUSEL_SLIDES = 15;
 
+/**
+ * Carousel component displays promotional banners and slides in the wallet view
+ * Supports both predefined slides and dynamic content from Contentful CMS
+ * Handles slide navigation, dismissal, and analytics tracking
+ * @param {CarouselProps} props - Component props
+ * @param {Object} props.style - Optional style overrides for the carousel
+ * @returns {JSX.Element | null} The rendered carousel component or null if no slides
+ */
 const CarouselComponent: FC<CarouselProps> = ({ style }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [pressedSlideId, setPressedSlideId] = useState<string | null>(null);
@@ -140,6 +148,11 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
 
   const isSingleSlide = visibleSlides.length === 1;
 
+  /**
+   * Creates a function to open a URL with error handling
+   * @param {string} href - The URL to open
+   * @returns {Function} Function that opens the URL when called
+   */
   const openUrl =
     (href: string): (() => Promise<void>) =>
     () =>
@@ -147,6 +160,11 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
         console.error('Failed to open URL:', error);
       });
 
+  /**
+   * Handles slide click events with analytics tracking and navigation
+   * @param {string} slideId - The ID of the clicked slide
+   * @param {NavigationAction} navigation - Navigation configuration for the slide
+   */
   const handleSlideClick = useCallback(
     (slideId: string, navigation: NavigationAction) => {
       const extraProperties: Record<string, string> = {};
@@ -198,6 +216,10 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
     ],
   );
 
+  /**
+   * Handles slide dismissal by dispatching dismiss action
+   * @param {string} slideId - The ID of the slide to dismiss
+   */
   const handleClose = useCallback(
     (slideId: string) => {
       dispatch(dismissBanner(slideId));
@@ -205,6 +227,12 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
     [dispatch],
   );
 
+  /**
+   * Renders individual banner slides with press handling and close button
+   * @param {Object} params - Render parameters
+   * @param {CarouselSlide} params.item - The slide data to render
+   * @returns {JSX.Element} The rendered slide component
+   */
   const renderBannerSlides = useCallback(
     ({ item: slide }: { item: CarouselSlide }) => (
       <Pressable
@@ -273,6 +301,10 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
     });
   }, [visibleSlides, trackEvent, createEventBuilder]);
 
+  /**
+   * Renders progress dots for carousel navigation
+   * @returns {JSX.Element} The progress dots component
+   */
   const renderProgressDots = useMemo(
     () => (
       <View
@@ -327,6 +359,9 @@ const CarouselComponent: FC<CarouselProps> = ({ style }) => {
   );
 };
 
-// Split memo component so we still see a Component name when profiling
+/**
+ * Memoized Carousel component for performance optimization
+ * Split memo component so we still see a Component name when profiling
+ */
 export const Carousel = React.memo(CarouselComponent);
 export default Carousel;

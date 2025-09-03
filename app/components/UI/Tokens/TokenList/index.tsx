@@ -34,6 +34,18 @@ interface TokenListProps {
   setShowScamWarningModal: () => void;
 }
 
+/**
+ * TokenListComponent renders a performant list of tokens using FlashList
+ * Displays token information with refresh capability and handles empty states
+ * @param {Object} props - Component props
+ * @param {FlashListAssetKey[]} props.tokenKeys - Array of token keys to display
+ * @param {boolean} props.refreshing - Whether the list is currently refreshing
+ * @param {Function} props.onRefresh - Callback function for pull-to-refresh
+ * @param {Function} props.showRemoveMenu - Callback to show token removal menu
+ * @param {boolean} props.showPercentageChange - Whether to show percentage change (default: true)
+ * @param {Function} props.setShowScamWarningModal - Callback to show scam warning modal
+ * @returns {JSX.Element} The rendered token list component
+ */
 const TokenListComponent = ({
   tokenKeys,
   refreshing,
@@ -137,5 +149,9 @@ const TokenListComponent = ({
   );
 };
 
+/**
+ * Memoized TokenList component for optimal performance
+ * Prevents unnecessary re-renders when props haven't changed
+ */
 export const TokenList = React.memo(TokenListComponent);
 TokenList.displayName = 'TokenList';

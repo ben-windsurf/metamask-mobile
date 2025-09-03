@@ -12,6 +12,11 @@ import {
   ERROR_PAGE_TITLE,
 } from '../../../../wdio/screen-objects/testIDs/BrowserScreen/ExternalWebsites.testIds';
 
+/**
+ * Creates styles for the WebviewError component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -63,7 +68,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that renders custom error page for the browser
+ * WebviewError component renders a custom error page for the browser
+ * Displays an error message with MetaMask fox logo and a return home button
+ * @returns {JSX.Element|null} The error page component or null if no error
  */
 export default class WebviewError extends PureComponent {
   static propTypes = {

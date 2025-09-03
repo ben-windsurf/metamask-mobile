@@ -5,6 +5,11 @@ import { baseStyles } from '../../../styles/common';
 import { useTheme } from '../../../util/theme';
 import { Theme } from '@metamask/design-tokens';
 
+/**
+ * Creates styles for the BlockingActionModal component
+ * @param {Theme['colors']} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Theme['colors']) =>
   StyleSheet.create({
     modal: {
@@ -46,7 +51,10 @@ interface BlockingActionModalProps {
 }
 
 /**
- * View that renders an action modal
+ * BlockingActionModal component renders a modal that blocks user interaction
+ * Displays content with an optional loading spinner and handles modal animations
+ * @param {BlockingActionModalProps} props - Component props
+ * @returns {JSX.Element} Modal component with blocking overlay and content
  */
 export default function BlockingActionModal({
   children,

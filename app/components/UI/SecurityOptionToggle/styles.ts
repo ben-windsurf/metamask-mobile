@@ -1,6 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for SecurityOptionToggle component
+ * @returns {Object} StyleSheet object containing component styles
+ */
 export const createStyles = () =>
   StyleSheet.create({
     container: {

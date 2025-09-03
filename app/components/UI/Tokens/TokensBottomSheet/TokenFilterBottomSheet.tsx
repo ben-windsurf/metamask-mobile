@@ -28,6 +28,11 @@ enum FilterOption {
   CurrentNetwork,
 }
 
+/**
+ * TokenFilterBottomSheet component provides a bottom sheet interface for filtering tokens by network
+ * Allows users to switch between viewing all networks or current network only
+ * @returns {JSX.Element} Bottom sheet with network filter options
+ */
 const TokenFilterBottomSheet = () => {
   const sheetRef = useRef<BottomSheetRef>(null);
   const allNetworks = useSelector(selectAllPopularNetworkConfigurations);

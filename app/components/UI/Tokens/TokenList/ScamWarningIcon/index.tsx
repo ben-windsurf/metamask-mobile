@@ -20,6 +20,14 @@ interface ScamWarningIconProps {
   setShowScamWarningModal: (arg: boolean) => void;
 }
 
+/**
+ * ScamWarningIcon component displays a warning icon for potentially fraudulent tokens
+ * Shows a danger icon when a token claims to be ETH but is not the original native token
+ * @param {Object} props - Component props
+ * @param {TokenI} props.asset - The token asset to check for scam indicators
+ * @param {Function} props.setShowScamWarningModal - Function to show the scam warning modal
+ * @returns {JSX.Element|null} Warning icon button or null if no warning needed
+ */
 export const ScamWarningIcon = ({
   asset,
   setShowScamWarningModal,

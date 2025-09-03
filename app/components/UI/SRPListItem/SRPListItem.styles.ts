@@ -4,8 +4,10 @@ import { Theme } from '../../../util/theme/models';
 
 /**
  * Style sheet function for SRP List component.
- *
- * @returns StyleSheet object.
+ * Creates styles for displaying Secret Recovery Phrase list items with proper theming
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling properties
+ * @returns {Object} StyleSheet object with component styles
  */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;

@@ -36,6 +36,22 @@ import { calculateTotalGas, renderGwei } from './utils-gas';
 
 const { getSwapsContractAddress } = swapsUtils;
 
+/**
+ * Processes token transfer transactions and formats them for display
+ * @param {Object} args - Transaction processing arguments
+ * @param {Object} args.tx - Transaction object with parameters
+ * @param {string} args.txChainId - Chain ID for the transaction
+ * @param {number} args.conversionRate - Current conversion rate to fiat
+ * @param {string} args.currentCurrency - Current fiat currency
+ * @param {Object} args.tokens - Available tokens mapping
+ * @param {Object} args.contractExchangeRates - Token exchange rates
+ * @param {Object} args.totalGas - Total gas for the transaction
+ * @param {string} args.actionKey - Action key for the transaction
+ * @param {string} args.primaryCurrency - Primary currency preference
+ * @param {string} args.selectedAddress - Currently selected account address
+ * @param {string} args.ticker - Network ticker symbol
+ * @returns {Array} Array containing transaction element and details objects
+ */
 function getTokenTransfer(args) {
   const {
     tx: {
@@ -138,6 +154,20 @@ function getTokenTransfer(args) {
   return [transactionElement, transactionDetails];
 }
 
+/**
+ * Processes collectible (NFT) transfer transactions and formats them for display
+ * @param {Object} args - Transaction processing arguments
+ * @param {Object} args.tx - Transaction object with parameters
+ * @param {string} args.txChainId - Chain ID for the transaction
+ * @param {Array} args.collectibleContracts - Available collectible contracts
+ * @param {Object} args.totalGas - Total gas for the transaction
+ * @param {number} args.conversionRate - Current conversion rate to fiat
+ * @param {string} args.currentCurrency - Current fiat currency
+ * @param {string} args.primaryCurrency - Primary currency preference
+ * @param {string} args.selectedAddress - Currently selected account address
+ * @param {string} args.ticker - Network ticker symbol
+ * @returns {Array} Array containing transaction element and details objects
+ */
 function getCollectibleTransfer(args) {
   const {
     tx: {
@@ -212,6 +242,21 @@ function getCollectibleTransfer(args) {
   return [transactionElement, transactionDetails];
 }
 
+/**
+ * Decodes and processes incoming token transfer transactions
+ * @param {Object} args - Transaction processing arguments
+ * @param {Object} args.tx - Transaction object with transfer information
+ * @param {string} args.txChainId - Chain ID for the transaction
+ * @param {number} args.conversionRate - Current conversion rate to fiat
+ * @param {string} args.currentCurrency - Current fiat currency
+ * @param {Object} args.contractExchangeRates - Token exchange rates
+ * @param {Object} args.totalGas - Total gas for the transaction
+ * @param {string} args.actionKey - Action key for the transaction
+ * @param {string} args.primaryCurrency - Primary currency preference
+ * @param {string} args.selectedAddress - Currently selected account address
+ * @param {string} args.ticker - Network ticker symbol
+ * @returns {Array} Array containing transaction element and details objects
+ */
 function decodeIncomingTransfer(args) {
   const {
     tx: {
@@ -322,6 +367,13 @@ function decodeIncomingTransfer(args) {
   return [transactionElement, transactionDetails];
 }
 
+/**
+ * Decodes transfer transactions and determines if they involve tokens or collectibles
+ * @param {Object} args - Transaction processing arguments
+ * @param {Object} args.tx - Transaction object with parameters
+ * @param {string} args.txChainId - Chain ID for the transaction
+ * @returns {Promise<Array>} Promise resolving to array containing transaction element and details
+ */
 async function decodeTransferTx(args) {
   const {
     tx: {
@@ -917,6 +969,11 @@ export default async function decodeTransaction(args) {
   return [transactionElement, transactionDetails];
 }
 
+/**
+ * Hash map of transaction types that are categorized as token-related transactions
+ * Used to quickly identify if a transaction involves token operations
+ * @type {Object<string, boolean>}
+ */
 export const TOKEN_CATEGORY_HASH = {
   [TransactionType.tokenMethodApprove]: true,
   [TransactionType.tokenMethodSetApprovalForAll]: true,

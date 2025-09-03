@@ -24,6 +24,12 @@ import { SolanaNewFeatureSheetSelectorsIDs } from '../../../../e2e/selectors/wal
 import { MetaMetricsEvents } from '../../../core/Analytics';
 import generateDeviceAnalyticsMetaData from '../../../util/metrics';
 
+/**
+ * SolanaNewFeatureContent component displays information about Solana support
+ * Allows users to import their existing wallet to access Solana accounts or dismiss the feature
+ * Tracks user interactions for analytics and manages feature modal display state
+ * @returns {JSX.Element} The rendered Solana new feature content component
+ */
 const SolanaNewFeatureContent = () => {
   const { trackEvent, createEventBuilder } = useMetrics();
   const { navigate } = useNavigation();

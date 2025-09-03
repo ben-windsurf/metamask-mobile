@@ -33,6 +33,11 @@ import Icon, {
   IconSize,
 } from '../../../component-library/components/Icons/Icon';
 
+/**
+ * Creates styles for the AnimatedQRScanner component
+ * @param {Theme} theme - The theme object containing color and style definitions
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     modal: {
@@ -106,6 +111,13 @@ interface AnimatedQRScannerProps {
   pauseQRCode?: (x: boolean) => void;
 }
 
+/**
+ * AnimatedQRScannerModal component for scanning QR codes from hardware wallets
+ * Supports both sync and sign operations with animated UR code scanning
+ * Handles camera permissions, QR code validation, and progress tracking
+ * @param {AnimatedQRScannerProps} props - Component props
+ * @returns {JSX.Element} Modal component with QR scanner interface
+ */
 const AnimatedQRScannerModal = (props: AnimatedQRScannerProps) => {
   const {
     visible,

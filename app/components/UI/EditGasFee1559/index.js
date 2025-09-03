@@ -35,6 +35,11 @@ import {
 } from '../../../util/gasUtils';
 import { useMetrics } from '../../../components/hooks/useMetrics';
 
+/**
+ * Creates styles for the EditGasFee1559 component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     root: {
@@ -145,9 +150,48 @@ const createStyles = (colors) =>
   });
 
 /**
- * The EditGasFee1559 component will be deprecated in favor of EditGasFee1559Update as part of the gas polling refactor code that moves gas fee modifications to `app/core/GasPolling`. When the refactoring is completed, the EditGasFee1559Update will be renamed EditGasFee1559 and this component will be removed. The EditGasFee1559Update is currently being used in the Update Transaction(Speed Up/Cancel) flow.
+ * EditGasFee1559 component provides an interface for editing EIP-1559 gas fees
+ * Allows users to select gas fee options (low, medium, high) and customize advanced settings
+ * Includes validation, warnings, and real-time fee calculations with time estimates
+ *
+ * Note: This component will be deprecated in favor of EditGasFee1559Update as part of the gas polling refactor
+ * @param {Object} props - Component props
+ * @param {string} props.selected - Currently selected gas option
+ * @param {Object} props.gasFee - Current gas fee configuration
+ * @param {Object} props.gasOptions - Available gas fee options
+ * @param {Function} props.onChange - Callback when gas fee changes
+ * @param {Function} props.onCancel - Callback when user cancels
+ * @param {Function} props.onSave - Callback when user saves changes
+ * @param {string} props.gasFeeNative - Gas fee in native currency
+ * @param {string} props.gasFeeConversion - Gas fee in converted currency
+ * @param {string} props.gasFeeMaxNative - Maximum gas fee in native currency
+ * @param {string} props.gasFeeMaxConversion - Maximum gas fee in converted currency
+ * @param {string} props.maxPriorityFeeNative - Max priority fee in native currency
+ * @param {string} props.maxPriorityFeeConversion - Max priority fee in converted currency
+ * @param {string} props.maxFeePerGasNative - Max fee per gas in native currency
+ * @param {string} props.maxFeePerGasConversion - Max fee per gas in converted currency
+ * @param {string} props.primaryCurrency - Primary currency for display
+ * @param {string} props.chainId - Current chain ID
+ * @param {string} props.timeEstimate - Estimated confirmation time
+ * @param {string} props.timeEstimateColor - Color for time estimate display
+ * @param {string} props.timeEstimateId - ID for time estimate
+ * @param {string} props.error - Error message to display
+ * @param {string} props.warning - Warning message to display
+ * @param {boolean} props.dappSuggestedGas - Whether gas is suggested by dapp
+ * @param {Array} props.ignoreOptions - Gas options to ignore
+ * @param {Object} props.updateOption - Update transaction options
+ * @param {Object} props.extendOptions - Extended options for gas selection
+ * @param {Object} props.recommended - Recommended gas option
+ * @param {string} props.warningMinimumEstimateOption - Warning minimum estimate option
+ * @param {string} props.suggestedEstimateOption - Suggested estimate option
+ * @param {boolean} props.animateOnChange - Whether to animate on value changes
+ * @param {boolean} props.isAnimating - Whether component is currently animating
+ * @param {Function} props.onUpdatingValuesStart - Callback when value updates start
+ * @param {Function} props.onUpdatingValuesEnd - Callback when value updates end
+ * @param {Object} props.analyticsParams - Analytics parameters
+ * @param {string} props.view - Current view context
+ * @returns {JSX.Element} The EditGasFee1559 component
  */
-
 const EditGasFee1559 = ({
   selected,
   gasFee,

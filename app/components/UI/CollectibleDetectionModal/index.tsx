@@ -31,12 +31,21 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * CollectibleDetectionModal component displays a banner prompting users to enable NFT auto-detection
+ * When activated, it enables NFT media display, auto-detection, and triggers NFT detection across supported chains
+ * @returns {JSX.Element} A banner component with action button to enable NFT detection
+ */
 const CollectibleDetectionModal = () => {
   const { colors } = useTheme();
   const { toastRef } = useContext(ToastContext);
   const { addTraitsToUser } = useMetrics();
   const chainIdsToDetectNftsFor = useNftDetectionChainIds();
 
+  /**
+   * Enables NFT detection and shows confirmation toast
+   * Sets display NFT media and auto-detection preferences, then triggers NFT detection across supported chains
+   */
   const showToastAndEnableNFtDetection = useCallback(async () => {
     // show toast
     toastRef?.current?.showToast({
