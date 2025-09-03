@@ -186,7 +186,13 @@ interface OnboardingCarouselProps {
   saveOnboardingEvent: (...eventArgs: [ITrackingEvent]) => void;
 }
 /**
- * View that is displayed to first time (new) users
+ * OnboardingCarousel component displays an interactive welcome screen for first-time users
+ * Features a three-panel carousel showcasing MetaMask's key features with smooth transitions
+ * Handles navigation to the main onboarding flow and terms of use acceptance
+ * @param {OnboardingCarouselProps} props - Component props
+ * @param {NavigationProp<ParamListBase>} props.navigation - React Navigation object for screen transitions
+ * @param {Function} props.saveOnboardingEvent - Function to save onboarding analytics events
+ * @returns {JSX.Element} The rendered onboarding carousel component
  */
 export const OnboardingCarousel: React.FC<OnboardingCarouselProps> = ({
   navigation,

@@ -13,6 +13,12 @@ const blockableStatuses = [
   TransactionStatus.approved,
 ];
 
+/**
+ * Custom hook that provides alerts for signed or submitted transactions
+ * Monitors transaction states and returns blocking alerts when there are pending transactions
+ * that could interfere with the current confirmation flow
+ * @returns {Array} Array of alert objects with blocking status, key, message, and severity
+ */
 export const useSignedOrSubmittedAlert = () => {
   const transactions = useSelector(selectTransactions);
   const transactionMetadata = useTransactionMetadataRequest();

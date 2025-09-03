@@ -38,6 +38,11 @@ interface RootNavigationParamList extends ParamListBase {
 
 type ShareAddressRouteProp = RouteProp<RootNavigationParamList, 'ShareAddress'>;
 
+/**
+ * ShareAddress component displays a bottom sheet with QR code and address sharing functionality
+ * Allows users to share their account address via QR code and view it on block explorer
+ * @returns {JSX.Element} Bottom sheet component with QR code display and explorer link
+ */
 export const ShareAddress = () => {
   const sheetRef = useRef<BottomSheetRef>(null);
   const { styles } = useStyles(styleSheet, {});

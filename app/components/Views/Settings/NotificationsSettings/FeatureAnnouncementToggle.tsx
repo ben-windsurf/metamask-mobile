@@ -6,6 +6,11 @@ import { strings } from '../../../../../locales/i18n';
 import { IconName } from '../../../../component-library/components/Icons/Icon';
 import { NotificationSettingsViewSelectorsIDs } from '../../../../../e2e/selectors/Notifications/NotificationSettingsView.selectors';
 
+/**
+ * FeatureAnnouncementToggle component provides a toggle switch for enabling/disabling feature announcements
+ * Manages the state of product announcement notifications and tracks user interactions with analytics
+ * @returns {JSX.Element} A CustomNotificationsRow component with toggle functionality for feature announcements
+ */
 export function FeatureAnnouncementToggle() {
   const { data: isEnabled, switchFeatureAnnouncements } =
     useFeatureAnnouncementToggle();

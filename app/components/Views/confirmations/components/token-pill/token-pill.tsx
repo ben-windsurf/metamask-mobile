@@ -20,6 +20,14 @@ interface TokenPillProps {
   chainId: Hex;
 }
 
+/**
+ * TokenPill component displays a token with its icon, symbol, and network badge
+ * Used in confirmation flows to show token information with network context
+ * @param {TokenPillProps} props - The component props
+ * @param {Hex} props.address - The token contract address
+ * @param {Hex} props.chainId - The blockchain network chain ID
+ * @returns {JSX.Element | null} The rendered token pill component or null if token not found
+ */
 export const TokenPill: React.FC<TokenPillProps> = ({ address, chainId }) => {
   const { styles } = useStyles(styleSheet, {});
   const tokens = useTokensWithBalance({ chainIds: [chainId] });

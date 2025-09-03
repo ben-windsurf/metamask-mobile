@@ -34,6 +34,12 @@ const ABI_PERMIT_2_APPROVE = {
 };
 const permit2Interface = new Interface([ABI_PERMIT_2_APPROVE]);
 
+/**
+ * Parses transaction data to identify standard token operations (ERC20, ERC721, ERC1155, USDC, Permit2)
+ * Attempts to decode transaction data using various token contract ABIs to determine the transaction type
+ * @param {string} [data] - The transaction data to parse
+ * @returns {Object|undefined} Parsed transaction object or undefined if parsing fails
+ */
 export function parseStandardTokenTransactionData(data?: string) {
   if (!data) {
     return undefined;
@@ -72,6 +78,15 @@ export function parseStandardTokenTransactionData(data?: string) {
   return undefined;
 }
 
+/**
+ * Adds a MetaMask-originated transaction to the transaction controller and validates it with PPOM
+ * Creates a transaction with MetaMask as the origin and performs security validation
+ * @param {TransactionParams} txParams - The transaction parameters
+ * @param {Object} options - Transaction options
+ * @param {string} options.networkClientId - The network client ID for the transaction
+ * @param {TransactionType} [options.type] - Optional transaction type
+ * @returns {Promise<TransactionMeta>} Promise resolving to the created transaction metadata
+ */
 export async function addMMOriginatedTransaction(
   txParams: TransactionParams,
   options: {
@@ -98,6 +113,12 @@ export async function addMMOriginatedTransaction(
   return transactionMeta;
 }
 
+/**
+ * Extracts the 4-byte function selector from transaction data
+ * Used to identify the function being called in a smart contract transaction
+ * @param {string} data - The transaction data hex string
+ * @returns {string} The 4-byte function selector in lowercase
+ */
 export function get4ByteCode(data: string) {
   return data.slice(0, 10).toLowerCase();
 }

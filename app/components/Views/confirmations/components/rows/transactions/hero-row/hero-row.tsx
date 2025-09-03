@@ -13,6 +13,13 @@ const LoadingHeroRow = () => {
   return <View style={styles.loadingWrapper} />;
 };
 
+/**
+ * HeroRow component displays the main transaction hero section in confirmation views
+ * Shows either an NFT hero or token hero based on the transaction type, with loading state support
+ * @param {Object} props - Component props
+ * @param {string} [props.amountWei] - Optional amount in wei for token transactions
+ * @returns {JSX.Element} The rendered hero row component
+ */
 export const HeroRow = ({ amountWei }: { amountWei?: string }) => {
   const { isNft, isPending } = useIsNft();
   const { styles } = useStyles(styleSheet, {});

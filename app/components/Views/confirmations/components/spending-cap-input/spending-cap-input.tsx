@@ -5,6 +5,17 @@ import { ApproveMethod } from '../../types/approve';
 import { validateSpendingCap } from '../../utils/validations/approve';
 import { TextFieldWithLabel } from '../UI/text-field-with-label';
 
+/**
+ * SpendingCapInput component provides an input field for setting token spending limits
+ * Validates spending cap values and provides real-time error feedback for approval transactions
+ * @param {Object} props - Component props
+ * @param {ApproveMethod} props.approveMethod - The approval method being used
+ * @param {string} props.initialValue - Initial spending cap value
+ * @param {number} props.decimals - Token decimal places for validation
+ * @param {function} props.onChange - Callback when spending cap value changes
+ * @param {function} props.onErrorChange - Callback when validation error state changes
+ * @returns {JSX.Element} The rendered spending cap input component
+ */
 export const SpendingCapInput = ({
   approveMethod,
   initialValue,

@@ -38,6 +38,11 @@ interface SnapSettingsProps {
   snap: Snap;
 }
 
+/**
+ * Creates navigation details for the Snap Settings screen
+ * Used to configure navigation parameters and route information for snap configuration
+ * @returns {Object} Navigation details object for the snap settings route
+ */
 export const createSnapSettingsNavDetails =
   createNavigationDetails<SnapSettingsProps>(Routes.SNAPS.SNAP_SETTINGS);
 

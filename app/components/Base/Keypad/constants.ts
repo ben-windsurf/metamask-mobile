@@ -22,6 +22,11 @@ interface CurrencyConfig {
   symbol: string | null;
 }
 
+/**
+ * Currency configuration mapping for keypad input handling across different locales
+ * Defines decimal separators, input validation rules, and currency symbols for each supported currency
+ * Used by the keypad component to handle locale-specific number formatting and currency display
+ */
 export const CURRENCIES: Record<string, CurrencyConfig> = {
   native: {
     decimalSeparator: '.',

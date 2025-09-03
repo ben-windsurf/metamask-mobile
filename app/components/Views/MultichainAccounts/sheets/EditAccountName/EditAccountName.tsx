@@ -40,6 +40,11 @@ type EditAccountNameRouteProp = RouteProp<
   'MultichainEditAccountName'
 >;
 
+/**
+ * EditAccountName component provides a bottom sheet interface for editing account names
+ * Allows users to rename their MetaMask accounts with validation and error handling
+ * @returns {JSX.Element} The rendered edit account name bottom sheet component
+ */
 export const EditAccountName = () => {
   const { styles } = useStyles(styleSheet, {});
   const { colors, themeAppearance } = useTheme();

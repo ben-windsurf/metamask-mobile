@@ -3,15 +3,11 @@ import URLParse from 'url-parse';
 import { SessionENSNames } from './types';
 
 /**
- * Validates url for browser
- *
- * Regular domains (e.g., google.com)
- * Localhost URLs (e.g., http://localhost:3000)
- * URLs with ports (e.g., http://localhost:1234)
- * HTTPS/HTTP protocols
- *
- * @param url - The url to validate
- * @returns
+ * Validates URL for browser navigation in MetaMask Mobile
+ * Supports regular domains, localhost URLs, URLs with ports, and HTTPS/HTTP protocols
+ * Used to determine if a URL is safe and valid for browser navigation
+ * @param {URLParse<string>} url - The parsed URL object to validate
+ * @returns {boolean} True if the URL is valid for browser navigation, false otherwise
  */
 export const isValidUrl = (url: URLParse<string>): boolean => {
   const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/;
@@ -26,7 +22,11 @@ export const isValidUrl = (url: URLParse<string>): boolean => {
 };
 
 /**
- * Checks if it is a ENS website
+ * Checks if a URL represents an ENS (Ethereum Name Service) website
+ * Validates against supported TLDs and checks against an ignore list for exclusions
+ * @param {string} urlToCheck - The URL to check for ENS domain
+ * @param {string[]} ensIgnoreList - Array of hostnames to ignore even if they match ENS patterns
+ * @returns {boolean} True if the URL is an ENS website, false otherwise
  */
 export const isENSUrl = (urlToCheck: string, ensIgnoreList: string[]) => {
   const { hostname } = new URLParse(urlToCheck);
@@ -46,8 +46,12 @@ export const isENSUrl = (urlToCheck: string, ensIgnoreList: string[]) => {
 };
 
 /**
- * Gets the url to be displayed to the user
- * For example, if it's ens then show [site].eth instead of ipfs url
+ * Gets the user-friendly URL to display in the browser address bar
+ * Converts IPFS/IPNS/Swarm gateway URLs back to their original ENS names for better UX
+ * For example, converts IPFS gateway URL back to [site].eth format
+ * @param {string} urlToMask - The gateway URL to convert back to ENS format
+ * @param {SessionENSNames} sessionENSNames - Mapping of ENS names to their resolved gateway information
+ * @returns {string} The masked URL showing ENS name instead of gateway URL, or original URL if no masking needed
  */
 export const getMaskedUrl = (
   urlToMask: string,

@@ -11,7 +11,18 @@ import Icon, {
   IconSize,
 } from '../../../../../component-library/components/Icons/Icon';
 
+/**
+ * Test ID constant for notification switch components
+ * Used for identifying notification toggle switches in tests
+ */
 export const NOTIFICATION_SWITCH = 'notifications-switch';
+
+/**
+ * Generates test ID for custom notifications row switch container
+ * Creates a standardized test ID format for notification row containers
+ * @param {string} testID - Base test ID for the switch (defaults to NOTIFICATION_SWITCH)
+ * @returns {string} Formatted test ID string for the container element
+ */
 export const CUSTOM_NOTIFICATIONS_ROW_SWITCH_CONTAINER_TEST_ID = (
   testID = NOTIFICATION_SWITCH,
 ) => `${testID}--container`;
@@ -25,6 +36,13 @@ interface CustomNotificationsRowProps {
   testID?: string;
 }
 
+/**
+ * CustomNotificationsRow component renders a notification setting row with toggle switch
+ * Displays notification type with icon, title, optional description, and enable/disable toggle
+ * Used in notification settings to allow users to control individual notification types
+ * @param {CustomNotificationsRowProps} props - Component props
+ * @returns {JSX.Element} Rendered notification row with toggle switch
+ */
 const CustomNotificationsRow = ({
   title,
   description,

@@ -29,10 +29,24 @@ export const PrimaryType = {
 // Create a type from the const object
 export type PrimaryType = (typeof PrimaryType)[keyof typeof PrimaryType];
 
+/**
+ * Array of all PrimaryTypeOrder enum values for EIP-712 order signatures
+ * Used for validation and processing of order-related signature types
+ */
 export const PRIMARY_TYPES_ORDER: PrimaryTypeOrder[] =
   Object.values(PrimaryTypeOrder);
+
+/**
+ * Array of all PrimaryTypePermit enum values for EIP-712 permit signatures
+ * Used for validation and processing of permit-related signature types
+ */
 export const PRIMARY_TYPES_PERMIT: PrimaryTypePermit[] =
   Object.values(PrimaryTypePermit);
+
+/**
+ * Array of all PrimaryType values combining order and permit signature types
+ * Used for comprehensive validation of all supported EIP-712 signature types
+ */
 export const PRIMARY_TYPES: PrimaryType[] = Object.values(PrimaryType);
 
 export enum ResultType {

@@ -13,9 +13,12 @@ import { selectTransactionState } from '../../../../reducers/transaction';
 import { updateEditableParams } from '../../../../util/transaction-controller';
 import { useConfirmationContext } from '../context/confirmation-context';
 
-// This hook is used to refresh the max value of the transaction
-// when the user is in max amount mode only for the transaction type simpleSend
-// It subtracts the native fee from the balance and updates the value of the transaction
+/**
+ * Custom hook that refreshes the maximum transaction value when in max amount mode
+ * Automatically recalculates and updates the transaction value by subtracting gas fees from the account balance
+ * Only applies to simpleSend transaction types to ensure accurate maximum sendable amounts
+ * @returns {void} This hook manages state internally and doesn't return any values
+ */
 export function useMaxValueRefresher() {
   const { maxValueMode } = useSelector(selectTransactionState);
   const [valueJustUpdated, setValueJustUpdated] = useState(false);

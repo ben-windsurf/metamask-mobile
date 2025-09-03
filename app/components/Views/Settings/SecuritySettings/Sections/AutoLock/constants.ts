@@ -43,6 +43,14 @@ const AUTO_LOCK_OPTIONS = [
   },
 ];
 
+/**
+ * Array of auto-lock timeout options for MetaMask Mobile security settings
+ * Provides predefined time intervals for automatic wallet locking functionality
+ */
 export default AUTO_LOCK_OPTIONS;
 
+/**
+ * Section identifier constant for the auto-lock settings section
+ * Used for navigation and component identification in security settings
+ */
 export const AUTO_LOCK_SECTION = 'auto-lock-section';

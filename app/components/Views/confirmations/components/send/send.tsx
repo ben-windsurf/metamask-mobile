@@ -17,6 +17,12 @@ import Asset from './asset';
 import To from './to';
 import styleSheet from './send.styles';
 
+/**
+ * Send component provides the main interface for sending transactions in MetaMask Mobile
+ * Displays asset selection, from/to addresses, amount input, and confirmation buttons
+ * Integrates with Redux state for account management and transaction handling
+ * @returns {JSX.Element} The rendered send transaction interface
+ */
 export const Send = () => {
   const from = useSelector(selectSelectedInternalAccount);
   const { styles } = useStyles(styleSheet, {});

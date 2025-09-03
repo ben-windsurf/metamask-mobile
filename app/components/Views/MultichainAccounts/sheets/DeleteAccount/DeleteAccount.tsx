@@ -47,6 +47,12 @@ type DeleteAccountRouteProp = RouteProp<
   'DeleteAccount'
 >;
 
+/**
+ * DeleteAccount component provides a bottom sheet interface for removing accounts from MetaMask Mobile
+ * Displays account information, warning messages, and confirmation buttons for account deletion
+ * Only allows deletion of non-HD keyring accounts for security reasons
+ * @returns {JSX.Element} The rendered delete account bottom sheet component
+ */
 export const DeleteAccount = () => {
   const { styles } = useStyles(styleSheet, {});
   const route = useRoute<DeleteAccountRouteProp>();

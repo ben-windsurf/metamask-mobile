@@ -16,6 +16,13 @@ import { EMPTY_VALUE_STRING, GasOptionIcon } from '../../constants/gas';
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Custom hook that provides gas price estimate options for transaction confirmations
+ * Manages gas fee calculations and user selection for network-suggested gas prices
+ * @param {Object} params - Hook parameters
+ * @param {() => void} params.handleCloseModals - Callback to close gas fee modals after selection
+ * @returns {GasOption[]} Array of gas price estimate options with pricing and selection handlers
+ */
 export const useGasPriceEstimateOption = ({
   handleCloseModals,
 }: {

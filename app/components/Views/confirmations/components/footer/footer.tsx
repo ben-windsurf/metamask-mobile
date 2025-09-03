@@ -29,6 +29,12 @@ import { useConfirmActions } from '../../hooks/useConfirmActions';
 import { isStakingConfirmation } from '../../utils/confirm';
 import styleSheet from './footer.styles';
 
+/**
+ * Footer component for confirmation screens that provides action buttons and alert handling
+ * Manages confirm/cancel actions, security alerts, QR hardware signing, and staking-specific UI
+ * Displays appropriate button states based on alerts, blocking conditions, and transaction types
+ * @returns {JSX.Element} The rendered footer component with action buttons and optional staking terms
+ */
 export const Footer = () => {
   const {
     alerts,

@@ -1,5 +1,10 @@
 import { merge } from 'lodash';
 
+/**
+ * Mock fee market estimates for gas fee calculations in confirmations
+ * Provides low, medium, and high gas fee estimates with timing predictions
+ * Used for testing gas fee controller functionality in confirmation flows
+ */
 export const feeMarketEstimates = {
   low: {
     suggestedMaxPriorityFeePerGas: '0',
@@ -38,6 +43,11 @@ const baseGasFeeControllerMock = {
   },
 };
 
+/**
+ * Mock gas fee controller state for testing confirmation components
+ * Merges base controller state with fee estimates for Ethereum mainnet
+ * Used to simulate gas fee controller behavior in confirmation view tests
+ */
 export const gasFeeControllerMock = merge({}, baseGasFeeControllerMock, {
   engine: {
     backgroundState: {

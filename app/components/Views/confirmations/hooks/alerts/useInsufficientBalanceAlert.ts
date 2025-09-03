@@ -21,6 +21,12 @@ import { useConfirmActions } from '../useConfirmActions';
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Custom hook that generates insufficient balance alerts for transaction confirmations
+ * Checks if the user has enough native currency to cover transaction value and gas fees
+ * Returns alert configuration with buy action when balance is insufficient
+ * @returns {Array} Array of alert objects with blocking insufficient balance warnings
+ */
 export const useInsufficientBalanceAlert = () => {
   const navigation = useNavigation();
   const transactionMetadata = useTransactionMetadataRequest();

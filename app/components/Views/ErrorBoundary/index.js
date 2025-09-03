@@ -133,6 +133,18 @@ const createStyles = (colors) =>
     fullWidthButton: { flex: 1 },
   });
 
+/**
+ * Fallback component that displays error information and recovery options
+ * Provides user-friendly error handling with options to report bugs, contact support, or try again
+ * Supports both general errors and onboarding-specific error handling
+ * @param {Object} props - Component props
+ * @param {string} props.errorMessage - The error message to display
+ * @param {Function} props.showExportSeedphrase - Function to show seed phrase export
+ * @param {Function} props.copyErrorToClipboard - Function to copy error to clipboard
+ * @param {string} props.sentryId - Sentry ID for error tracking
+ * @param {Object} props.onboardingErrorConfig - Configuration for onboarding error handling
+ * @returns {JSX.Element} The rendered fallback error component
+ */
 export const Fallback = (props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);

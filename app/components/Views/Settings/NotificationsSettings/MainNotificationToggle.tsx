@@ -13,10 +13,22 @@ import { useMainNotificationToggle } from './MainNotificationToggle.hooks';
 import styleSheet from './NotificationsSettings.styles';
 import { NotificationSettingsViewSelectorsIDs } from '../../../../../e2e/selectors/Notifications/NotificationSettingsView.selectors';
 
+/**
+ * Test ID constant for the main notification toggle component
+ */
 export const MAIN_NOTIFICATION_TOGGLE_TEST_ID = 'main-notification-toggle';
+
+/**
+ * Test ID constant for the learn more button in the main notification toggle
+ */
 export const MAIN_NOTIFICATION_TOGGLE_LEARN_MORE_TEST_ID =
   'main-notification-toggle--learn-more-button';
 
+/**
+ * MainNotificationToggle component renders the primary toggle for enabling/disabling notifications
+ * Displays a switch control with descriptive text and a learn more link for notification settings
+ * @returns {JSX.Element} The rendered main notification toggle component
+ */
 export const MainNotificationToggle = () => {
   const theme = useTheme();
   const { styles } = useStyles(styleSheet, { theme });

@@ -28,6 +28,13 @@ export enum StateChangeType {
   NFTBiddingReceive = 'NFTBiddingReceive',
 }
 
+/**
+ * Determines the type of state change for NFT transactions based on the change context
+ * Used to categorize NFT listing and bidding operations in signature confirmations
+ * @param {DecodingDataStateChanges | null} stateChangeList - List of all state changes in the transaction
+ * @param {DecodingDataStateChange} stateChange - The specific state change to analyze
+ * @returns {StateChangeType | undefined} The categorized state change type or undefined if not applicable
+ */
 export const getStateChangeType = (
   stateChangeList: DecodingDataStateChanges | null,
   stateChange: DecodingDataStateChange,
@@ -54,6 +61,12 @@ export const getStateChangeType = (
   return undefined;
 };
 
+/**
+ * Gets the appropriate tooltip text for a given NFT transaction state change type
+ * Provides contextual help text for NFT listing and bidding operations
+ * @param {StateChangeType | undefined} nftTransactionType - The type of NFT transaction state change
+ * @returns {string | undefined} Localized tooltip text or undefined if no tooltip is needed
+ */
 export const getStateChangeToolip = (
   nftTransactionType: StateChangeType | undefined,
 ): string | undefined => {

@@ -119,7 +119,23 @@ import { toHex } from '@metamask/controller-utils';
 import { parseCaipAccountId } from '@metamask/utils';
 
 /**
- * Tab component for the in-app browser
+ * BrowserTab component provides the core in-app browser functionality for MetaMask Mobile
+ *
+ * This component manages a complete browser experience including:
+ * - WebView rendering and navigation controls
+ * - Phishing detection and security warnings
+ * - ENS name resolution and IPFS content handling
+ * - dApp permissions and account connection management
+ * - Browser history, bookmarks, and tab management
+ * - Integration with MetaMask wallet functionality
+ * - Real-time security scanning and threat detection
+ *
+ * The component handles complex browser interactions like URL validation,
+ * protocol handling, JavaScript injection for Web3 functionality, and
+ * seamless integration between web content and native MetaMask features.
+ *
+ * @param {BrowserTabProps} props - Component props including tab configuration and callbacks
+ * @returns {JSX.Element} The rendered browser tab with WebView and controls
  */
 export const BrowserTab: React.FC<BrowserTabProps> = React.memo(
   ({

@@ -41,6 +41,15 @@ interface BaseWalletDetailsProps {
   children?: React.ReactNode;
 }
 
+/**
+ * BaseWalletDetails component displays detailed information about a wallet including accounts, balance, and management options
+ * Provides functionality for viewing wallet balance, managing accounts, revealing seed phrase, and adding new accounts
+ * Used in the multichain accounts flow to show comprehensive wallet information and account management capabilities
+ * @param {BaseWalletDetailsProps} props - The component props
+ * @param {AccountWalletObject} props.wallet - The wallet object containing metadata and account information
+ * @param {React.ReactNode} [props.children] - Optional child components to render within the wallet details view
+ * @returns {JSX.Element} The rendered wallet details component with account list and management options
+ */
 export const BaseWalletDetails = ({
   wallet,
   children,

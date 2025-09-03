@@ -16,6 +16,12 @@ import { Pill } from '../../UI/pill';
 import { EditSpendingCapButton } from '../../edit-spending-cap-button/edit-spending-cap-button';
 import styleSheet from '../shared-styles';
 
+/**
+ * IncreaseDecreaseAllowance component displays spending cap and spender information for ERC20 token approval transactions
+ * Shows editable spending cap with current amount and spender address for increase/decrease allowance operations
+ * Only renders for ERC20 tokens and provides interface for modifying spending caps during approval flow
+ * @returns {JSX.Element | null} The rendered allowance component or null for non-ERC20 tokens
+ */
 export const IncreaseDecreaseAllowance = () => {
   const { styles } = useStyles(styleSheet, {});
   const {

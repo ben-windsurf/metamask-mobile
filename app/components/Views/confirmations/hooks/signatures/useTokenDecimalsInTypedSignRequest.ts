@@ -4,6 +4,14 @@ import { getTokenContractInDataTree } from '../../components/info/typed-sign-v3v
 import { isRecognizedPermit, isRecognizedOrder } from '../../utils/signature';
 import { useGetTokenStandardAndDetails } from '../useGetTokenStandardAndDetails';
 
+/**
+ * Custom hook that extracts token decimals from typed signature requests
+ * Handles both permit and order signatures by checking verifying contracts and data tree tokens
+ * @param {SignatureRequest | undefined} signatureRequest - The signature request to analyze
+ * @param {DataTreeInput} data - The data tree input containing signature data
+ * @param {string} verifyingContract - The contract address used for verification
+ * @returns {number | undefined} The number of token decimals, or undefined if not found
+ */
 export const useTokenDecimalsInTypedSignRequest = (
   signatureRequest: SignatureRequest | undefined,
   data: DataTreeInput,

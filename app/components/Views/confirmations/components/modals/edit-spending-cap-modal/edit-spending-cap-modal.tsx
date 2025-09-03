@@ -30,6 +30,13 @@ export interface ModalProps {
   onClose: () => void;
 }
 
+/**
+ * EditSpendingCapModal component allows users to modify the spending cap for token approvals
+ * Provides an interface to edit the amount a dapp can spend on behalf of the user
+ * Includes validation, balance display, and save/cancel functionality
+ * @param {EditSpendingCapProps & ModalProps} props - Combined props for spending cap editing and modal behavior
+ * @returns {JSX.Element} The rendered edit spending cap modal component
+ */
 export const EditSpendingCapModal = ({
   approveMethod,
   balance,

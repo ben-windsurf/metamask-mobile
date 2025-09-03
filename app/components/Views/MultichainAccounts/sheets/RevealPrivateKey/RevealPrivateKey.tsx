@@ -25,6 +25,12 @@ type RevealPrivateKeyProp = RouteProp<
   'RevealPrivateKey'
 >;
 
+/**
+ * RevealPrivateKey component displays a sheet for revealing an account's private key
+ * Provides a secure interface for users to view their private key with proper authentication
+ * Used in multichain account management for credential access
+ * @returns {JSX.Element} The rendered reveal private key sheet component
+ */
 export const RevealPrivateKey = () => {
   const { styles } = useStyles(styleSheet, {});
   const navigation = useNavigation();

@@ -50,6 +50,13 @@ const useTokenDecimals = (
     [tokenAddress, networkClientId],
   );
 
+/**
+ * Custom hook that calculates token amount information for transaction confirmations
+ * Handles both native tokens and ERC-20 tokens, providing formatted amounts and fiat values
+ * @param {TokenAmountProps} props - Configuration object for token amount calculation
+ * @param {string} props.amountWei - Optional value in wei to display, defaults to transaction metadata amount
+ * @returns {TokenAmount} Object containing formatted amounts, fiat values, and token type information
+ */
 export const useTokenAmount = ({
   amountWei,
 }: TokenAmountProps = {}): TokenAmount => {

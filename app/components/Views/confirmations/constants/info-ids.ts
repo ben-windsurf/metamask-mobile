@@ -1,3 +1,8 @@
+/**
+ * Component IDs for different confirmation info components in MetaMask Mobile
+ * Used for identifying and testing specific confirmation dialog types
+ * @constant {Object} ConfirmationInfoComponentIDs - Mapping of confirmation types to their component IDs
+ */
 export const ConfirmationInfoComponentIDs = {
   APPROVE: 'approve-info',
   CONTRACT_INTERACTION: 'contract-interaction-info',

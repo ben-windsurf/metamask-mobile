@@ -32,6 +32,13 @@ export type ApprovalBalanceChange = BalanceChange & {
   nestedTransactionIndex: number;
 };
 
+/**
+ * Custom hook that processes batch approval transactions to extract balance changes
+ * Combines simulation data with balance change information for EIP-7702 batch approvals
+ * @returns {Object} Object containing pending state and array of approval balance changes
+ * @returns {boolean} returns.pending - Whether balance change data is still loading
+ * @returns {ApprovalBalanceChange[]} returns.value - Array of processed approval balance changes
+ */
 export function useBatchApproveBalanceChanges(): {
   pending: boolean;
   value: ApprovalBalanceChange[];

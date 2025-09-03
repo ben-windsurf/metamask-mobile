@@ -8,6 +8,12 @@ import { useTransactionPayToken } from '../../../hooks/pay/useTransactionPayToke
 import { useTransactionBridgeQuotes } from '../../../hooks/pay/useTransactionBridgeQuotes';
 import { Box } from '../../../../../UI/Box/Box';
 
+/**
+ * PayWithRow component displays the payment token selection interface in transaction confirmations
+ * Allows users to view and change the token they want to use for payment via bridge functionality
+ * Integrates with transaction pay token hooks and navigation to the pay-with modal
+ * @returns {JSX.Element} The rendered pay-with row component with token selection interface
+ */
 export function PayWithRow() {
   const navigation = useNavigation();
   const { payToken } = useTransactionPayToken();

@@ -24,6 +24,14 @@ interface SmartAccountDetailsProps {
   account: InternalAccount;
 }
 
+/**
+ * SmartAccountDetails component displays smart account information and EIP-7702 network configurations
+ * Shows a list of networks where the account has smart account capabilities enabled
+ * Includes a learn more link that navigates to smart accounts documentation
+ * @param {SmartAccountDetailsProps} props - Component props
+ * @param {InternalAccount} props.account - The account to display smart account details for
+ * @returns {JSX.Element|null} The smart account details component or null for non-EVM accounts
+ */
 export const SmartAccountDetails = ({ account }: SmartAccountDetailsProps) => {
   const { styles } = useStyles(styleSheet, {});
   const {

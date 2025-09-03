@@ -64,6 +64,10 @@ const styleSheet = (params: { theme: Theme }) =>
     },
   });
 
+/**
+ * Static styles for BackupAndSyncSettings component header elements
+ * Provides consistent styling for header navigation elements
+ */
 export const styles = StyleSheet.create({
   headerLeft: {
     marginHorizontal: 16,

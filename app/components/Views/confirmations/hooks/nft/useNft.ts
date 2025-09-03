@@ -30,6 +30,11 @@ const useNftContract = (chainId: string, tokenAddress: string) => {
   );
 };
 
+/**
+ * Custom hook that retrieves NFT information from transaction metadata
+ * Extracts NFT details including contract name, token ID, and NFT data for confirmation views
+ * @returns {UseNftResponse} Object containing chainId, name, nft, and tokenId information
+ */
 export const useNft = (): UseNftResponse => {
   const { txParams, chainId = '' } = useTransactionMetadataRequest() ?? {};
   const tokenAddress = safeToChecksumAddress(txParams?.to) ?? '';

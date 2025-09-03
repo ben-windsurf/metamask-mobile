@@ -34,6 +34,20 @@ interface AccountItemProps {
   onPress: (account: InternalAccount) => void;
 }
 
+/**
+ * AccountItem component displays individual account information in wallet details view
+ * Shows account avatar, name, balance, and provides navigation to account details
+ * Handles loading states and applies appropriate styling based on position in list
+ * @param {AccountItemProps} props - Component props
+ * @param {InternalAccount} props.account - The account object containing metadata and address
+ * @param {number} props.index - Position index of this account in the list
+ * @param {number} props.totalItemsCount - Total number of accounts in the list
+ * @param {string} props.accountBalance - Formatted balance string for display
+ * @param {boolean} props.isAccountBalanceLoading - Loading state for balance data
+ * @param {AvatarAccountType} props.accountAvatarType - Type of avatar to display for the account
+ * @param {function} props.onPress - Callback function when account item is pressed
+ * @returns {JSX.Element} The rendered account item component
+ */
 export const AccountItem: React.FC<AccountItemProps> = ({
   account,
   index,

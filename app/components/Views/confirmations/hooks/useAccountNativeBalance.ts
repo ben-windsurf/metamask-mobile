@@ -9,6 +9,13 @@ interface AccountData {
 
 type AccountsByChainId = Record<Hex, Record<string, AccountData>>;
 
+/**
+ * Custom hook that retrieves the native balance for a specific account on a given chain
+ * Normalizes account addresses to lowercase for consistent lookups and returns balance in hex format
+ * @param {Hex} chainId - The chain ID to look up the account balance for
+ * @param {string} address - The account address to get the balance for
+ * @returns {Object} Object containing balanceWeiInHex property with the account's native balance
+ */
 export const useAccountNativeBalance = (chainId: Hex, address: string) => {
   const accountsByChainId = useSelector(selectAccountsByChainId);
 

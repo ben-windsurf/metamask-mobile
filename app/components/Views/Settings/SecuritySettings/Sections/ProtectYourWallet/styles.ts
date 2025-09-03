@@ -2,6 +2,12 @@
 import { fontStyles } from '../../../../../../styles/common';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for ProtectYourWallet security settings section
+ * Provides styling for warning text, settings layout, and accessory elements
+ * @param {any} colors - Theme colors object containing text and primary color definitions
+ * @returns {Object} StyleSheet object with styles for the ProtectYourWallet component
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

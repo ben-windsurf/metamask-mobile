@@ -18,6 +18,12 @@ import { View } from 'react-native';
 import styleSheet from './info-section-origin-and-details.styles';
 import { isValidAddress } from 'ethereumjs-util';
 
+/**
+ * InfoSectionOriginAndDetails component displays origin and contract details for typed signature requests
+ * Shows the requesting origin, spender address for permits, and verifying contract information
+ * Used in confirmation flows for eth_signTypedData_v3 and eth_signTypedData_v4 requests
+ * @returns {JSX.Element|null} The rendered info section or null if no signature request
+ */
 export const InfoSectionOriginAndDetails = () => {
   const { styles } = useStyles(styleSheet, {});
 

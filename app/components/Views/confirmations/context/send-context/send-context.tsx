@@ -20,6 +20,10 @@ export interface SendContextType {
   value?: string;
 }
 
+/**
+ * React context for managing send transaction state across confirmation views
+ * Provides asset, recipient, sender, and value information for transaction flows
+ */
 export const SendContext = createContext<SendContextType>({
   asset: undefined,
   from: '0x',
@@ -30,6 +34,13 @@ export const SendContext = createContext<SendContextType>({
   value: undefined,
 });
 
+/**
+ * Provider component for send transaction context
+ * Manages state for asset selection, recipient address, and transaction value
+ * @param {Object} props - Component props
+ * @param {ReactElement[] | ReactElement} props.children - Child components to wrap with context
+ * @returns {JSX.Element} Context provider wrapping children with send transaction state
+ */
 export const SendContextProvider: React.FC<{
   children: ReactElement[] | ReactElement;
 }> = ({ children }) => {
@@ -55,6 +66,12 @@ export const SendContextProvider: React.FC<{
   );
 };
 
+/**
+ * Custom hook to access send transaction context
+ * Must be used within a SendContextProvider component
+ * @returns {SendContextType} Send context containing asset, addresses, and update functions
+ * @throws {Error} When used outside of SendContextProvider
+ */
 export const useSendContext = () => {
   const context = useContext(SendContext);
   if (!context) {

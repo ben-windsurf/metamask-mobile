@@ -18,6 +18,13 @@ import { type GasOption } from '../../types/gas';
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Custom hook that provides advanced gas fee option configuration for transaction confirmations
+ * Manages the advanced gas fee selection state and calculates gas estimates for custom fee settings
+ * @param {Object} params - Hook parameters
+ * @param {function} params.setActiveModal - Function to set the active gas modal type
+ * @returns {GasOption[]} Array containing the advanced gas fee option with current selection state and values
+ */
 export const useAdvancedGasFeeOption = ({
   setActiveModal,
 }: {

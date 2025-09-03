@@ -6,6 +6,11 @@ import { RootState } from '../../../../UI/BasicFunctionality/BasicFunctionalityM
 import useApprovalRequest from '../useApprovalRequest';
 import { ApprovalType } from '@metamask/controller-utils';
 
+/**
+ * Custom hook that retrieves transaction batch metadata for the current approval request
+ * Used in confirmation flows to access batch transaction information and metadata
+ * @returns {TransactionBatchMeta | undefined} Transaction batch metadata or undefined if not available
+ */
 export function useTransactionBatchesMetadata() {
   const { approvalRequest } = useApprovalRequest();
 

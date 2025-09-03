@@ -27,6 +27,12 @@ export interface GasFeeEstimatesType {
   };
 }
 
+/**
+ * Calculates the estimated total gas cost for a native token transfer
+ * Uses the medium gas fee estimate and standard transfer gas limit
+ * @param {GasFeeEstimatesType} gasFeeEstimates - Gas fee estimates containing medium fee suggestion
+ * @returns {BN} The estimated total gas cost in wei
+ */
 export const getEstimatedTotalGas = (gasFeeEstimates: GasFeeEstimatesType) => {
   if (!gasFeeEstimates) {
     return new BN(0);
@@ -47,6 +53,18 @@ export interface GetMaxValueArgs {
   gasFeeEstimates: GasFeeEstimatesType;
 }
 
+/**
+ * Calculates the maximum sendable amount for a given asset
+ * For native tokens, subtracts estimated gas costs from balance
+ * For ERC-20 tokens, returns the full contract balance
+ * @param {GetMaxValueArgs} params - Parameters for max value calculation
+ * @param {Record<Hex, AccountInformation>} params.accounts - Account information by address
+ * @param {AssetType} params.asset - The asset to calculate max value for
+ * @param {Record<Hex, Hex>} params.contractBalances - Token contract balances by address
+ * @param {Hex} params.from - The sender's address
+ * @param {GasFeeEstimatesType} params.gasFeeEstimates - Gas fee estimates for transaction cost calculation
+ * @returns {string} The maximum sendable amount as a string
+ */
 export const getMaxValueFn = ({
   accounts,
   asset,

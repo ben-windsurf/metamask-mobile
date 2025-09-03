@@ -8,6 +8,12 @@ import { selectIsBackupAndSyncEnabled } from '../../../../selectors/identity';
 import { useNotificationsToggle } from '../../../../util/notifications/hooks/useSwitchNotifications';
 import { MetaMetricsEvents, useMetrics } from '../../../hooks/useMetrics';
 
+/**
+ * Custom hook for managing the main notification toggle functionality
+ * Handles toggling notifications on/off with proper navigation and analytics tracking
+ * Navigates to basic functionality screen if not enabled, otherwise toggles notifications
+ * @returns {Object} Object containing onToggle callback and current toggle value
+ */
 export function useMainNotificationToggle() {
   const { data: currentVal, switchNotifications: onChange } =
     useNotificationsToggle();

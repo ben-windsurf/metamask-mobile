@@ -13,6 +13,12 @@ import { AlertKeys } from '../../constants/alerts';
 import { Severity } from '../../types/alerts';
 import { useTransactionMetadataRequest } from '../transactions/useTransactionMetadataRequest';
 
+/**
+ * Custom hook that provides pending transaction alerts for the confirmation flow
+ * Monitors submitted transactions on the current chain and displays warning alerts
+ * when there are pending transactions that might affect the current transaction
+ * @returns {Array} Array of alert objects with pending transaction warnings
+ */
 export const usePendingTransactionAlert = () => {
   const transactions = useSelector(selectTransactions);
   const transactionMeta = useTransactionMetadataRequest();

@@ -28,6 +28,11 @@ const baseApprovalControllerMock = {
   },
 };
 
+/**
+ * Mock approval controller state for transaction confirmations testing
+ * Provides a complete ApprovalController state with pending transaction approval
+ * Used in confirmation view tests to simulate approval flow scenarios
+ */
 export const transactionApprovalControllerMock = merge(
   {},
   baseApprovalControllerMock,

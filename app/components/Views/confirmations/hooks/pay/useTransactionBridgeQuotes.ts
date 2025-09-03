@@ -11,6 +11,14 @@ import { Hex, createProjectLogger } from '@metamask/utils';
 
 const log = createProjectLogger('transaction-pay');
 
+/**
+ * Custom hook that fetches bridge quotes for transaction payment scenarios
+ * Manages the process of getting cross-chain bridge quotes when users need to pay for transactions
+ * with tokens from different chains, dispatching results to Redux store for confirmation flow
+ * @returns {Object} Object containing loading state and bridge quotes array
+ * @returns {boolean} returns.loading - Whether bridge quotes are currently being fetched
+ * @returns {Array} returns.quotes - Array of bridge quote objects for cross-chain token transfers
+ */
 export function useTransactionBridgeQuotes() {
   const dispatch = useDispatch();
   const transactionMeta = useTransactionMetadataOrThrow();

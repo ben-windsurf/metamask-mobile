@@ -8,6 +8,12 @@ import { updateApprovalAmount } from '../../utils/approvals';
 import { useTransactionMetadataRequest } from '../transactions/useTransactionMetadataRequest';
 import { ApprovalBalanceChange } from './useBatchApproveBalanceChanges';
 
+/**
+ * Custom hook that provides actions for updating approval amounts in batch transactions
+ * Handles EIP-7702 batch approval balance changes by updating individual transaction data
+ * within atomic batch operations for MetaMask Mobile confirmations
+ * @returns {Object} Object containing onApprovalAmountUpdate callback function
+ */
 export const useBatchApproveBalanceActions = () => {
   const transactionMeta = useTransactionMetadataRequest();
   const { id, nestedTransactions } = transactionMeta ?? {};

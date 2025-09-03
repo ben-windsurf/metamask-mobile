@@ -2,6 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 
 import Engine from '../../../../core/Engine';
 
+/**
+ * Custom hook that fetches and manages ERC20 token balance for a specific user and contract
+ * Used in confirmation flows to display current token balances before transactions
+ * @param {string} contractAddress - The ERC20 token contract address
+ * @param {string} userAddress - The user's wallet address to check balance for
+ * @param {string} networkClientId - The network client ID to use for the balance query
+ * @returns {Object} Object containing tokenBalance (string|null), loading (boolean), and error (boolean) states
+ */
 export const useERC20TokenBalance = (
   contractAddress: string,
   userAddress: string,

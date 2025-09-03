@@ -48,6 +48,11 @@ const mockedPermissions: PermissionListItemViewModel[] = [
   },
 ];
 
+/**
+ * Mock SDK session items for testing permission management functionality
+ * Contains sample data for SDK-connected applications with originator information
+ * @type {Array<Object>} Array of mock SDK session objects with id and originatorInfo
+ */
 export const mockSdkSessionItems = [
   {
     id: '1',
@@ -84,4 +89,9 @@ export const mockSdkSessionItems = [
   },
 ];
 
+/**
+ * Default export of mocked permission data for testing and development
+ * Contains sample permission items across different connection sources (WalletConnect, SDK, MetaMask Browser)
+ * @type {PermissionListItemViewModel[]} Array of mock permission list items
+ */
 export default mockedPermissions;

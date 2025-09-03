@@ -12,10 +12,12 @@ import {
 import { useRef } from 'react';
 
 /**
- * Returns token details for a given token contract
- *
- * @param tokenAddress
- * @returns
+ * Custom hook that retrieves token standard and details for a given token contract address
+ * Fetches ERC-20 token information including decimals, symbol, and standard type
+ * Used in confirmation flows to display accurate token information to users
+ * @param {Hex | string | undefined} tokenAddress - The token contract address to fetch details for
+ * @param {NetworkClientId} networkClientId - Optional network client ID for multi-chain support
+ * @returns {Object} Object containing token details (decimals, standard, symbol) and loading state
  */
 export const useGetTokenStandardAndDetails = (
   tokenAddress?: Hex | string | undefined,

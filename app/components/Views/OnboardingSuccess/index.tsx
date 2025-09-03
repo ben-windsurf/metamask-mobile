@@ -34,6 +34,10 @@ import SearchingFox from '../../../animations/Searching_Fox.json';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 import { ONBOARDING_SUCCESS_FLOW } from '../../../constants/onboarding';
 
+/**
+ * Navigation action to reset the navigation stack to the home screen
+ * Used after successful onboarding completion to navigate to the main app
+ */
 export const ResetNavigationToHome = CommonActions.reset({
   index: 0,
   routes: [{ name: 'HomeNav' }],
@@ -44,6 +48,15 @@ interface OnboardingSuccessProps {
   successFlow: ONBOARDING_SUCCESS_FLOW;
 }
 
+/**
+ * OnboardingSuccessComponent displays the success screen after completing onboarding
+ * Shows different content based on the success flow type (backup, import, etc.)
+ * Provides navigation to default settings and completion of onboarding process
+ * @param {OnboardingSuccessProps} props - Component props
+ * @param {function} props.onDone - Callback function to execute when onboarding is complete
+ * @param {ONBOARDING_SUCCESS_FLOW} props.successFlow - Type of success flow to display
+ * @returns {JSX.Element} The rendered onboarding success component
+ */
 export const OnboardingSuccessComponent: React.FC<OnboardingSuccessProps> = ({
   onDone,
   successFlow,
@@ -233,6 +246,11 @@ export const OnboardingSuccessComponent: React.FC<OnboardingSuccessProps> = ({
   );
 };
 
+/**
+ * OnboardingSuccess container component that handles navigation and route parameters
+ * Extracts success flow type from route params and manages navigation dispatch
+ * @returns {JSX.Element} The rendered onboarding success container
+ */
 export const OnboardingSuccess = () => {
   const navigation = useNavigation();
   const route = useRoute();

@@ -2,6 +2,12 @@
 import type { ThemeColors } from '@metamask/design-tokens';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for the RestoreWallet view component
+ * Provides styling for wallet restoration screens with proper theming support
+ * @param {ThemeColors} colors - Theme colors object from design tokens
+ * @returns {Object} StyleSheet object containing styles for restore wallet UI elements
+ */
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     screen: {

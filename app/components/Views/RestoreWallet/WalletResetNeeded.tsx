@@ -21,10 +21,21 @@ import { MetaMetricsEvents } from '../../../core/Analytics';
 import generateDeviceAnalyticsMetaData from '../../../util/metrics';
 import { useMetrics } from '../../../components/hooks/useMetrics';
 
+/**
+ * Creates navigation details for the wallet reset needed screen
+ * Used when vault corruption is detected and wallet reset is required
+ * @returns {Object} Navigation details object for the wallet reset needed route
+ */
 export const createWalletResetNeededNavDetails = createNavigationDetails(
   Routes.VAULT_RECOVERY.WALLET_RESET_NEEDED,
 );
 
+/**
+ * WalletResetNeeded component displays when vault corruption is detected
+ * Provides options to try wallet restoration again or create a new wallet
+ * Tracks user interactions and navigation events for analytics
+ * @returns {JSX.Element} The wallet reset needed screen component
+ */
 const WalletResetNeeded = () => {
   const { colors } = useAppThemeFromContext();
   const { trackEvent, createEventBuilder } = useMetrics();

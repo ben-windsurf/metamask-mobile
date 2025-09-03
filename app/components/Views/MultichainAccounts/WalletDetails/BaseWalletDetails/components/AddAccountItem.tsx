@@ -23,6 +23,14 @@ interface AddAccountItemProps {
   onPress: () => void;
 }
 
+/**
+ * AddAccountItem component renders a button for creating new accounts in wallet details
+ * Displays an add icon with localized text and handles account creation flow
+ * @param {AddAccountItemProps} props - Component props
+ * @param {number} props.totalItemsCount - Total number of items to determine styling
+ * @param {() => void} props.onPress - Callback function when add account button is pressed
+ * @returns {JSX.Element} Rendered add account item component
+ */
 export const AddAccountItem: React.FC<AddAccountItemProps> = ({
   totalItemsCount,
   onPress,

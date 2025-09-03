@@ -21,6 +21,10 @@ import {
 } from '../../../../selectors/networkController';
 import { enableAllNetworksFilter } from '../../../UI/Tokens/util/enableAllNetworksFilter';
 
+/**
+ * Constant identifier for the network filter bottom sheet component
+ * Used for testing and component identification in the MetaMask Mobile app
+ */
 export const NETWORK_FILTER_BOTTOM_SHEET = 'NETWORK_FILTER_BOTTOM_SHEET';
 
 /**

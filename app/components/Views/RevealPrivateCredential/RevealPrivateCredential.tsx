@@ -77,6 +77,10 @@ import Text, {
 } from '../../../component-library/components/Texts/Text';
 import TabBar from '../../../component-library/components-temp/TabBar/TabBar';
 
+/**
+ * Constant identifier for private key credential type
+ * Used to distinguish between private key and seed phrase reveal operations
+ */
 export const PRIVATE_KEY = 'private_key';
 
 interface RootStackParamList extends ParamListBase {

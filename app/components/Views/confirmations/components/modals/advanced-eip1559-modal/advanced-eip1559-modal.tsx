@@ -23,6 +23,15 @@ import { MaxBaseFeeInput } from '../../../components/gas/max-base-fee-input';
 import { PriorityFeeInput } from '../../../components/gas/priority-fee-input';
 import styleSheet from './advanced-eip1559-modal.styles';
 
+/**
+ * AdvancedEIP1559Modal component provides an interface for users to manually configure EIP-1559 gas parameters
+ * Allows editing of gas limit, max base fee, and priority fee for advanced transaction customization
+ * Used in the transaction confirmation flow when users need granular control over gas settings
+ * @param {Object} props - Component props
+ * @param {function} props.setActiveModal - Function to set the active modal type
+ * @param {function} props.handleCloseModals - Function to close all modals
+ * @returns {JSX.Element} The rendered advanced EIP-1559 gas configuration modal
+ */
 export const AdvancedEIP1559Modal = ({
   setActiveModal,
   handleCloseModals,

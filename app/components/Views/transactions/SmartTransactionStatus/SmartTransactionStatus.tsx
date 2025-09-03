@@ -44,9 +44,24 @@ interface Props {
   onConfirm: () => void;
 }
 
+/**
+ * Fallback estimated deadline for smart transactions in seconds
+ * Used when the actual estimated deadline is not available
+ */
 export const FALLBACK_STX_ESTIMATED_DEADLINE_SEC = 45;
+
+/**
+ * Fallback maximum deadline for smart transactions in seconds
+ * Used as the upper limit when the actual maximum deadline is not available
+ */
 export const FALLBACK_STX_MAX_DEADLINE_SEC = 150;
 
+/**
+ * Formats remaining time in seconds to a human-readable MM:SS format
+ * Used to display countdown timers for smart transaction status
+ * @param {number} remainingTimeInSec - The remaining time in seconds
+ * @returns {string} Formatted time string in MM:SS format
+ */
 export const showRemainingTimeInMinAndSec = (
   remainingTimeInSec: number,
 ): string => {

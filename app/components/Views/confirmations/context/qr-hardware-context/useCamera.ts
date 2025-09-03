@@ -5,6 +5,12 @@ import { PermissionsAndroid, AppStateStatus, AppState } from 'react-native';
 import { strings } from '../../../../../../locales/i18n';
 import Device from '../../../../../util/device';
 
+/**
+ * Custom hook for managing camera permissions and state in QR hardware signing flows
+ * Handles Android camera permission checks and monitors app state changes to refresh permissions
+ * @param {boolean} isSigningQRObject - Whether the QR signing process is active
+ * @returns {Object} Object containing cameraError string and hasCameraPermission boolean
+ */
 export const useCamera = (isSigningQRObject: boolean) => {
   // todo: integrate with alert system
   const [cameraError, setCameraError] = useState<string | undefined>();

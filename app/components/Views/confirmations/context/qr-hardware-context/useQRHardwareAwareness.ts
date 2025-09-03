@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import Engine from '../../../../../core/Engine';
 import { IQRState } from '../../../../UI/QRHardware/types';
 
+/**
+ * Custom hook that manages QR hardware wallet awareness and state
+ * Provides real-time updates on QR signing progress and keyring state changes
+ * Automatically creates QR keyring if it doesn't exist and manages subscriptions
+ * @returns {Object} QR hardware state object containing signing progress indicators and current QR state
+ */
 export const useQRHardwareAwareness = () => {
   const [QRState, SetQRState] = useState<IQRState>({
     sync: {

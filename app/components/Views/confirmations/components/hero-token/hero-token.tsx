@@ -39,6 +39,14 @@ const AssetAmount = ({
   );
 };
 
+/**
+ * HeroToken component displays token information in a prominent hero layout for confirmations
+ * Shows token amount, symbol, and fiat value with animated pulse during transaction updates
+ * Includes tooltip for precise amounts when values are rounded for display
+ * @param {Object} props - Component props
+ * @param {string} [props.amountWei] - Token amount in wei format for display calculations
+ * @returns {JSX.Element} Hero token display component with amount, symbol, and fiat value
+ */
 export const HeroToken = ({ amountWei }: { amountWei?: string }) => {
   const { isTransactionValueUpdating } = useConfirmationContext();
   const { isFullScreenConfirmation } = useFullScreenConfirmation();

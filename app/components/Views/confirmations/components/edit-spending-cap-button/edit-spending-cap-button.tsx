@@ -12,6 +12,15 @@ import {
 } from '../modals/edit-spending-cap-modal';
 import styleSheet from './edit-spending-cap.styles';
 
+/**
+ * EditSpendingCapButton component provides a button interface for editing spending cap limits
+ * Renders a touchable button with an edit icon that opens a modal for modifying spending cap values
+ * Used in confirmation flows to allow users to adjust token spending allowances
+ * @param {Object} props - Component props
+ * @param {EditSpendingCapProps} props.spendingCapProps - Properties for the spending cap modal
+ * @param {React.ReactNode} [props.children] - Optional child components to render alongside the edit icon
+ * @returns {JSX.Element} The rendered edit spending cap button component
+ */
 export const EditSpendingCapButton = ({
   spendingCapProps,
   children,

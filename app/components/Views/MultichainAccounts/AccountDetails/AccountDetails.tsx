@@ -21,6 +21,16 @@ interface AccountDetailsProps {
   };
 }
 
+/**
+ * AccountDetails component renders account-specific details based on the account type
+ * Displays different detail views for HD, private key, hardware, and Snap accounts
+ * Automatically navigates to account selector if the account is not found
+ * @param {AccountDetailsProps} props - Component props containing route parameters
+ * @param {Object} props.route - Navigation route object
+ * @param {Object} props.route.params - Route parameters
+ * @param {InternalAccount} props.route.params.account - The account to display details for
+ * @returns {JSX.Element | null} The rendered account details component or null if account not found
+ */
 export const AccountDetails = (props: AccountDetailsProps) => {
   const navigation = useNavigation();
   const {

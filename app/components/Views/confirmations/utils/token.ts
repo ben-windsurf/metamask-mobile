@@ -27,8 +27,18 @@ export type TokenDetails =
   | TokenDetailsERC721
   | TokenDetailsERC1155;
 
+/**
+ * Default number of decimal places for ERC20 tokens
+ * Used as fallback when token decimals cannot be determined
+ */
 export const ERC20_DEFAULT_DECIMALS = 18;
 
+/**
+ * Parses token decimal string to number, trying both decimal and hexadecimal formats
+ * Used to convert token decimal values from contract responses to usable numbers
+ * @param {string} decStr - The decimal string to parse (optional)
+ * @returns {number | undefined} Parsed decimal number or undefined if parsing fails
+ */
 export const parseTokenDetailDecimals = (
   decStr?: string,
 ): number | undefined => {
@@ -45,6 +55,16 @@ export const parseTokenDetailDecimals = (
   return undefined;
 };
 
+/**
+ * Memoized function to get token standard and details for ERC20, ERC721, or ERC1155 tokens
+ * Caches results to avoid repeated contract calls for the same token information
+ * @param {Object} params - Token lookup parameters
+ * @param {Hex | string} params.tokenAddress - The token contract address
+ * @param {string} params.userAddress - The user's wallet address (optional)
+ * @param {string} params.tokenId - The token ID for NFTs (optional)
+ * @param {NetworkClientId} params.networkClientId - Network client identifier (optional)
+ * @returns {Promise<TokenDetails | Record<string, never>>} Token details or empty object if lookup fails
+ */
 export const memoizedGetTokenStandardAndDetails = memoize(
   async ({
     tokenAddress,

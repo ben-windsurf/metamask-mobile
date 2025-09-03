@@ -57,6 +57,12 @@ const infuraCurrencyOptions = sortedCurrencies.map(
   }),
 );
 
+/**
+ * Updates user analytics traits with the selected currency and tracks currency change event
+ * Used in general settings when user changes their preferred display currency
+ * @param {string} currency - The currency code (e.g., 'USD', 'EUR') to set as current currency
+ * @param {Object} metrics - MetaMetrics instance for tracking analytics events and user traits
+ */
 export const updateUserTraitsWithCurrentCurrency = (currency, metrics) => {
   // track event and add selected currency to user profile for analytics
   const traits = { [UserProfileProperty.CURRENT_CURRENCY]: currency };
@@ -71,6 +77,12 @@ export const updateUserTraitsWithCurrentCurrency = (currency, metrics) => {
   );
 };
 
+/**
+ * Updates user analytics traits with the primary currency type preference and tracks toggle event
+ * Used in general settings when user switches between ETH and Fiat as primary currency display
+ * @param {string} primaryCurrency - The primary currency type ('ETH' or 'Fiat') to set as preference
+ * @param {Object} metrics - MetaMetrics instance for tracking analytics events and user traits
+ */
 export const updateUserTraitsWithCurrencyType = (primaryCurrency, metrics) => {
   // track event and add primary currency preference (fiat/crypto) to user profile for analytics
   const traits = { [UserProfileProperty.PRIMARY_CURRENCY]: primaryCurrency };

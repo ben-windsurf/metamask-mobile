@@ -22,6 +22,12 @@ export interface ParsedApprovalTransactionData {
   tokenAddress?: Hex;
 }
 
+/**
+ * Parses approval transaction data to extract approval-specific information
+ * Handles various approval types including ERC-20 approve, setApprovalForAll, and Permit2
+ * @param {Hex} data - The transaction data to parse
+ * @returns {ParsedApprovalTransactionData | undefined} Parsed approval data or undefined if not an approval transaction
+ */
 export function parseApprovalTransactionData(
   data: Hex,
 ): ParsedApprovalTransactionData | undefined {
@@ -57,6 +63,15 @@ export function parseApprovalTransactionData(
   };
 }
 
+/**
+ * Updates the approval amount in existing transaction data
+ * Modifies the approval amount while preserving other transaction parameters
+ * @param {Hex} originalData - The original transaction data
+ * @param {string | number | BigNumber} newAmount - The new approval amount
+ * @param {number} decimals - The token decimals for amount conversion
+ * @returns {Hex} Updated transaction data with new approval amount
+ * @throws {Error} When the original data is not valid approval transaction data
+ */
 export function updateApprovalAmount(
   originalData: Hex,
   newAmount: string | number | BigNumber,
@@ -93,6 +108,15 @@ export function updateApprovalAmount(
   return iface.encodeFunctionData(name, [decoded[0], value]) as Hex;
 }
 
+/**
+ * Calculates and formats approval token amounts for display
+ * Converts raw token amounts to human-readable format and handles unlimited approvals
+ * @param {string} amount - The raw token amount in wei
+ * @param {number} decimals - The token decimals (default: 18)
+ * @returns {Object} Object containing formatted amount and raw amount strings
+ * @returns {string} returns.amount - Human-readable amount or "Unlimited" for large values
+ * @returns {string} returns.rawAmount - Raw amount in decimal format
+ */
 export function calculateApprovalTokenAmount(
   amount: string,
   decimals = 18,
@@ -106,6 +130,13 @@ export function calculateApprovalTokenAmount(
   };
 }
 
+/**
+ * Calculates token balance by converting from wei to decimal format
+ * Handles token balance conversion using the specified decimal places
+ * @param {string} tokenBalance - The token balance in wei (optional)
+ * @param {number} decimals - The number of decimal places for the token (optional)
+ * @returns {string} The token balance in decimal format
+ */
 export function calculateTokenBalance(
   tokenBalance?: string,
   decimals?: number,

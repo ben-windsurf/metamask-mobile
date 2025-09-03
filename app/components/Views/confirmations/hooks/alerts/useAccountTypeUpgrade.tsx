@@ -10,6 +10,11 @@ import { Alert, Severity } from '../../types/alerts';
 import { RowAlertKey } from '../../components/UI/info-row/alert-row/constants';
 import { use7702TransactionType } from '../7702/use7702TransactionType';
 
+/**
+ * Custom hook that provides account type upgrade alerts for EIP-7702 transactions
+ * Returns an alert when a batched upgrade transaction is detected, informing users about smart account upgrades
+ * @returns {Alert[]} Array of alert objects for account type upgrade notifications
+ */
 export function useAccountTypeUpgrade(): Alert[] {
   const { isBatchedUpgrade } = use7702TransactionType();
 

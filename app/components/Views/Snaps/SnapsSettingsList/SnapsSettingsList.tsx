@@ -14,10 +14,21 @@ import stylesheet from './SnapsSettingsList.styles';
 import { Snap } from '@metamask/snaps-utils';
 import { selectSnaps } from '../../../../selectors/snaps/snapController';
 
+/**
+ * Creates navigation details for the Snaps Settings List screen
+ * Used for type-safe navigation to the Snaps settings management view
+ * @returns {NavigationDetails} Navigation details object for the Snaps settings list route
+ */
 export const createSnapsSettingsListNavDetails = createNavigationDetails(
   Routes.SNAPS.SNAPS_SETTINGS_LIST,
 );
 
+/**
+ * SnapsSettingsList component displays a scrollable list of installed Snaps
+ * Allows users to view and manage their installed Snaps from the settings screen
+ * Each Snap is rendered as a SnapElement with navigation to individual Snap settings
+ * @returns {JSX.Element} The rendered Snaps settings list component
+ */
 const SnapsSettingsList = () => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(stylesheet, {});

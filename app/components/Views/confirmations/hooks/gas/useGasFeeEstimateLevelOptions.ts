@@ -24,6 +24,14 @@ const GasEstimateFeeLevelEmojis = {
   [GasFeeEstimateLevel.High]: GasOptionIcon.HIGH,
 };
 
+/**
+ * Custom hook that provides gas fee estimate level options for transaction confirmations
+ * Generates selectable gas options (low, medium, high) with pricing and time estimates
+ * Used in gas fee selection modals to allow users to choose their preferred gas level
+ * @param {Object} params - Hook parameters
+ * @param {() => void} params.handleCloseModals - Callback to close gas selection modals
+ * @returns {GasOption[]} Array of gas option objects with pricing, time estimates, and selection handlers
+ */
 export const useGasFeeEstimateLevelOptions = ({
   handleCloseModals,
 }: {

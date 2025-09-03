@@ -426,6 +426,11 @@ const DetectedTokens = () => {
   );
 };
 
+/**
+ * Creates navigation details for the detected tokens modal flow
+ * Used to configure navigation routing for the detected tokens bottom sheet
+ * @returns {Object} Navigation details object for detected tokens modal
+ */
 export const createDetectedTokensNavDetails = createNavigationDetails(
   Routes.MODAL.ROOT_MODAL_FLOW,
   Routes.MODAL.DETECTED_TOKENS,

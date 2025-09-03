@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * ConfirmedText component displays text with confirmed status styling
+ * Renders green bold text to indicate successful or confirmed states
+ * @param {Object} props - Component props
+ * @param {string} [props.testID] - Test identifier for automated testing
+ * @returns {JSX.Element} Styled text component with confirmed appearance
+ */
 export const ConfirmedText = ({ testID, ...props }) => (
   <Text testID={testID} bold green style={styles.status} {...props} />
 );
@@ -21,6 +28,13 @@ ConfirmedText.propTypes = {
   testID: PropTypes.string,
 };
 
+/**
+ * PendingText component displays text with pending status styling
+ * Renders warning-colored bold text to indicate pending or in-progress states
+ * @param {Object} props - Component props
+ * @param {string} [props.testID] - Test identifier for automated testing
+ * @returns {JSX.Element} Styled text component with pending appearance
+ */
 export const PendingText = ({ testID, ...props }) => {
   const { colors } = useTheme();
   return (
@@ -36,6 +50,13 @@ PendingText.propTypes = {
   testID: PropTypes.string,
 };
 
+/**
+ * FailedText component displays text with failed status styling
+ * Renders error-colored bold text to indicate failed or cancelled states
+ * @param {Object} props - Component props
+ * @param {string} [props.testID] - Test identifier for automated testing
+ * @returns {JSX.Element} Styled text component with failed appearance
+ */
 export const FailedText = ({ testID, ...props }) => {
   const { colors } = useTheme();
   return (

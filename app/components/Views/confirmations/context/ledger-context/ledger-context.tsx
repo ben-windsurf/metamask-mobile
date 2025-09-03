@@ -25,6 +25,10 @@ export interface LedgerContextType {
   closeLedgerSignModal: () => void;
 }
 
+/**
+ * React context for managing Ledger hardware wallet state and operations
+ * Provides device information, signing status, and modal controls for Ledger transactions
+ */
 export const LedgerContext = createContext<LedgerContextType>({
   deviceId: undefined,
   isLedgerAccount: false,
@@ -33,6 +37,14 @@ export const LedgerContext = createContext<LedgerContextType>({
   closeLedgerSignModal: () => undefined,
 });
 
+/**
+ * Context provider component for Ledger hardware wallet functionality
+ * Manages Ledger device state, signing progress, and modal visibility for confirmation flows
+ * Automatically detects Ledger accounts and handles device ID retrieval
+ * @param {Object} props - Component props
+ * @param {ReactElement[] | ReactElement} props.children - Child components to wrap with Ledger context
+ * @returns {JSX.Element} Provider component with Ledger context and sign modal
+ */
 export const LedgerContextProvider: React.FC<{
   children: ReactElement[] | ReactElement;
 }> = ({ children }) => {
@@ -96,6 +108,12 @@ export const LedgerContextProvider: React.FC<{
   );
 };
 
+/**
+ * Custom hook to access Ledger context state and operations
+ * Provides access to device ID, account status, signing progress, and modal controls
+ * @returns {LedgerContextType} Ledger context containing device info and control functions
+ * @throws {Error} When used outside of LedgerContextProvider
+ */
 export const useLedgerContext = () => {
   const context = useContext(LedgerContext);
   if (!context) {

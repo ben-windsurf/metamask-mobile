@@ -10,6 +10,15 @@ import { GasModalHeader } from '../../../components/gas/gas-modal-header';
 import { GasModalType } from '../../../constants/gas';
 import styleSheet from './estimates-modal.styles';
 
+/**
+ * EstimatesModal component displays gas fee estimation options in a bottom modal
+ * Allows users to select different gas fee options (slow, standard, fast) for transactions
+ * Provides an interface for editing network fees with various gas price estimates
+ * @param {Object} props - Component props
+ * @param {function} props.setActiveModal - Function to set the active modal type
+ * @param {function} props.handleCloseModals - Function to close all modals
+ * @returns {JSX.Element} The rendered estimates modal component
+ */
 export const EstimatesModal = ({
   setActiveModal,
   handleCloseModals,

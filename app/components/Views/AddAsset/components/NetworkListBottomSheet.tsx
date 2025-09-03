@@ -22,6 +22,10 @@ import { getNetworkImageSource } from '../../../../util/networks';
 import BottomSheetHeader from '../../../../component-library/components/BottomSheets/BottomSheetHeader';
 import { MultichainNetworkConfiguration } from '@metamask/multichain-network-controller';
 
+/**
+ * Test ID constant for the network list bottom sheet component
+ * Used for automated testing and component identification
+ */
 export const NETWORK_LIST_BOTTOM_SHEET = 'NETWORK_LIST_BOTTOM_SHEET';
 
 /**

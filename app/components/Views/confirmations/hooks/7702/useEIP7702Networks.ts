@@ -13,6 +13,13 @@ export type EIP7702NetworkConfiguration = MultichainNetworkConfiguration & {
   upgradeContractAddress?: Hex;
 };
 
+/**
+ * Custom hook that retrieves and filters networks supporting EIP-7702 atomic batch transactions
+ * Separates test and non-test networks, checks atomic batch support for a given address,
+ * and returns networks that support EIP-7702 functionality for transaction confirmations
+ * @param {string} address - The wallet address to check atomic batch support for
+ * @returns {Object} Object containing network7702List, networkSupporting7702Present flag, and pending state
+ */
 export const useEIP7702Networks = (address: string) => {
   const networks = useSelector(selectNetworkConfigurations);
 

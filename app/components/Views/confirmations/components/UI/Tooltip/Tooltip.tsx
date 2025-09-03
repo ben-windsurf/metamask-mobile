@@ -28,6 +28,18 @@ interface TooltipModalProps {
   tooltipTestId?: string;
 }
 
+/**
+ * TooltipModal component displays tooltip content in a bottom modal overlay
+ * Provides a modal interface for showing detailed information with close functionality
+ * Used in confirmation flows to display contextual help and explanations
+ * @param {TooltipModalProps} props - The tooltip modal props
+ * @param {boolean} props.open - Whether the modal is visible
+ * @param {function} props.setOpen - Function to control modal visibility
+ * @param {string | ReactNode} props.content - Content to display in the modal
+ * @param {string} [props.title] - Optional title for the modal header
+ * @param {string} [props.tooltipTestId] - Test ID for the modal component
+ * @returns {JSX.Element} The rendered tooltip modal component
+ */
 export const TooltipModal = ({
   open,
   setOpen,

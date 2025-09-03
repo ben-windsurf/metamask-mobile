@@ -25,6 +25,11 @@ export interface QRHardwareContextType {
   setScannerVisible: (visibility: boolean) => void;
 }
 
+/**
+ * React context for managing QR hardware wallet operations and state
+ * Provides access to QR signing state, camera permissions, and scanner visibility
+ * Used throughout the confirmation flow for hardware wallet interactions
+ */
 export const QRHardwareContext = createContext<QRHardwareContextType>({
   QRState: undefined,
   cameraError: undefined,
@@ -37,6 +42,14 @@ export const QRHardwareContext = createContext<QRHardwareContextType>({
   setScannerVisible: () => undefined,
 });
 
+/**
+ * Context provider component for QR hardware wallet functionality
+ * Manages QR signing state, camera permissions, and navigation handling for hardware wallets
+ * Automatically cancels QR requests when navigating away from confirmation screens
+ * @param {Object} props - Component props
+ * @param {ReactElement[] | ReactElement} props.children - Child components to wrap with context
+ * @returns {JSX.Element} Provider component wrapping children with QR hardware context
+ */
 export const QRHardwareContextProvider: React.FC<{
   children: ReactElement[] | ReactElement;
 }> = ({ children }) => {
@@ -100,6 +113,13 @@ export const QRHardwareContextProvider: React.FC<{
   );
 };
 
+/**
+ * Custom hook to access QR hardware wallet context
+ * Provides access to QR signing state, camera error handling, and scanner controls
+ * Must be used within a QRHardwareContextProvider
+ * @returns {QRHardwareContextType} QR hardware context containing state and control functions
+ * @throws {Error} When used outside of QRHardwareContextProvider
+ */
 export const useQRHardwareContext = () => {
   const context = useContext(QRHardwareContext);
   if (!context) {

@@ -12,6 +12,12 @@ const METRICS_ASSET_TYPES = {
   unknown: 'unknown',
 };
 
+/**
+ * Custom hook that determines the asset type for transfer transactions
+ * Analyzes transaction metadata to classify transfers as native, ERC-20, ERC-721, ERC-1155, or unknown
+ * Used for transaction analytics and metrics tracking in confirmation flows
+ * @returns {Object} Object containing the determined asset type for the current transaction
+ */
 export const useTransferAssetType = () => {
   const transactionMetadata = useTransactionMetadataRequest();
   const { value: details } = useAsyncResult(

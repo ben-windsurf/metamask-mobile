@@ -17,6 +17,12 @@ import { useSignatureMetrics } from './signatures/useSignatureMetrics';
 import { useTransactionMetadataRequest } from './transactions/useTransactionMetadataRequest';
 import { useFullScreenConfirmation } from './ui/useFullScreenConfirmation';
 
+/**
+ * Custom hook that provides confirmation actions for transaction and signature requests
+ * Handles both confirmation and rejection flows with support for hardware wallets (Ledger, QR)
+ * Manages navigation, metrics tracking, and cleanup for different types of approval requests
+ * @returns {Object} Object containing onConfirm and onReject callback functions
+ */
 export const useConfirmActions = () => {
   const {
     onConfirm: onRequestConfirm,

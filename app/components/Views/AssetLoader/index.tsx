@@ -19,6 +19,13 @@ export interface AssetLoaderProps {
   };
 }
 
+/**
+ * AssetLoader component that fetches and displays token information before navigating to asset view
+ * Shows a loading spinner while fetching token data and handles navigation to the asset view screen
+ * Displays an error message if the token is not found on the specified chain
+ * @param {AssetLoaderProps} props - Component props containing route parameters
+ * @returns {JSX.Element} Loading spinner or error message based on token fetch status
+ */
 export const AssetLoader: React.FC<AssetLoaderProps> = ({
   route: {
     params: { address, chainId },

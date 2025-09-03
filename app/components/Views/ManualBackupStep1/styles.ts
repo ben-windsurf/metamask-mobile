@@ -2,6 +2,12 @@
 import { Platform, StyleSheet } from 'react-native';
 import { fontStyles } from '../../../styles/common';
 
+/**
+ * Creates stylesheet for ManualBackupStep1 component with theme-aware styling
+ * Provides comprehensive styling for seed phrase display, concealer overlay, and form elements
+ * @param {any} colors - Theme colors object containing background, border, and text colors
+ * @returns {Object} StyleSheet object with all component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

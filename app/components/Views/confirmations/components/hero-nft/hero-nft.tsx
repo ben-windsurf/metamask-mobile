@@ -73,6 +73,11 @@ const NftImageAndNetworkBadge = ({
   );
 };
 
+/**
+ * HeroNft component displays NFT information in a hero layout for confirmation screens
+ * Shows the NFT image with network badge, title, and token ID in a prominent display
+ * @returns {JSX.Element} The rendered hero NFT component with image and metadata
+ */
 export const HeroNft = () => {
   const { isFullScreenConfirmation } = useFullScreenConfirmation();
   const { chainId, name, nft } = useNft();

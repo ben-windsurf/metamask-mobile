@@ -57,6 +57,11 @@ export function useTransactionRequiredTokens() {
   return result;
 }
 
+/**
+ * Hook to extract token transfer information from transaction data
+ * Decodes ERC-20 transfer function calls to determine required token amounts
+ * @returns {TransactionToken | undefined} Token transfer details or undefined if not a token transfer
+ */
 function useTokenTransferToken(): TransactionToken | undefined {
   const transactionMetadata = useTransactionMetadataOrThrow();
   const { txParams } = transactionMetadata;
@@ -87,6 +92,11 @@ function useTokenTransferToken(): TransactionToken | undefined {
   }, [transferAmount, to]);
 }
 
+/**
+ * Hook to extract native token value from transaction parameters
+ * Returns the native token amount being sent in the transaction
+ * @returns {TransactionToken | undefined} Native token value details or undefined if no value
+ */
 function useValueToken(): TransactionToken | undefined {
   const transactionMetadata = useTransactionMetadataOrThrow();
   const { txParams } = transactionMetadata;
@@ -104,6 +114,11 @@ function useValueToken(): TransactionToken | undefined {
   }, [value]);
 }
 
+/**
+ * Hook to calculate gas token requirements for the transaction
+ * Returns the native token amount needed to cover gas costs
+ * @returns {TransactionToken | undefined} Gas token requirements or undefined if no gas cost
+ */
 function useGasToken(): TransactionToken | undefined {
   const maxGasCost = useTransactionMaxGasCost() ?? '0x0';
 
@@ -116,6 +131,14 @@ function useGasToken(): TransactionToken | undefined {
   }, [maxGasCost]);
 }
 
+/**
+ * Calculates the partial token amounts needed based on current balances
+ * Determines how much additional tokens are required for the transaction
+ * @param {TransactionToken[]} tokens - Required tokens for the transaction
+ * @param {BridgeToken[]} balanceTokens - Current token balances
+ * @param {Hex} chainId - Chain ID for token matching
+ * @returns {TransactionToken[]} Array of tokens with amounts needed to fulfill transaction
+ */
 function getPartialTokens(
   tokens: TransactionToken[],
   balanceTokens: BridgeToken[],
@@ -160,6 +183,12 @@ function getPartialTokens(
   }, [] as TransactionToken[]);
 }
 
+/**
+ * Consolidates duplicate tokens by combining their amounts
+ * Merges tokens with the same address into single entries with summed amounts
+ * @param {TransactionToken[]} targets - Array of transaction tokens to consolidate
+ * @returns {TransactionToken[]} Array of unique tokens with combined amounts
+ */
 function getUniqueTokens(targets: TransactionToken[]): TransactionToken[] {
   return targets.reduce((acc, target) => {
     const existingToken = acc.find(

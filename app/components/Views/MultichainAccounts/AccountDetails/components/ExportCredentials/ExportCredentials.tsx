@@ -35,6 +35,14 @@ interface ExportCredentialsProps {
   account: InternalAccount;
 }
 
+/**
+ * ExportCredentials component provides options to export account credentials
+ * Allows users to export either the secret recovery phrase or private key based on account type
+ * Handles different keyring types and shows appropriate export options with backup reminders
+ * @param {ExportCredentialsProps} props - Component props
+ * @param {InternalAccount} props.account - The account to export credentials for
+ * @returns {JSX.Element} The rendered export credentials component
+ */
 export const ExportCredentials = ({ account }: ExportCredentialsProps) => {
   const { navigate } = useNavigation();
   const canExportPrivateKey =

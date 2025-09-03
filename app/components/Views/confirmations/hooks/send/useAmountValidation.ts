@@ -24,6 +24,17 @@ export interface ValidateAmountArgs {
   from: Hex;
 }
 
+/**
+ * Validates the amount for a transaction by checking balance sufficiency and format
+ * Handles both native tokens and ERC-20 tokens with appropriate balance checks
+ * @param {ValidateAmountArgs} params - The validation parameters
+ * @param {Record<Hex, AccountInformation>} params.accounts - Account information mapping
+ * @param {string} params.amount - The amount to validate
+ * @param {AssetType} params.asset - The asset being sent
+ * @param {Record<Hex, Hex>} params.contractBalances - Token contract balances
+ * @param {Hex} params.from - The sender's address
+ * @returns {string|undefined} Error message if validation fails, undefined if valid
+ */
 export const validateAmountFn = ({
   accounts,
   amount,
@@ -64,6 +75,11 @@ export const validateAmountFn = ({
   return undefined;
 };
 
+/**
+ * Custom hook that validates transaction amounts in the send flow
+ * Provides real-time validation for both native and token transfers
+ * @returns {Object} Object containing amountError string or undefined
+ */
 const useAmountValidation = () => {
   const accounts = useSelector(selectAccounts);
   const contractBalances = useSelector(selectContractBalances);

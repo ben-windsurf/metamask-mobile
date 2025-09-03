@@ -45,6 +45,15 @@ export function useOptimisticNavigationEffect(props: {
   return optimisticLoading;
 }
 
+/**
+ * Custom hook that handles the opt-in click action for notifications
+ * Manages navigation flow, basic functionality checks, and notification activation
+ * @param {Object} props - Hook configuration object
+ * @param {NavigationProp<ParamListBase>} props.navigation - React Navigation object for screen navigation
+ * @param {IUseMetricsHook} props.metrics - Metrics hook for tracking user events
+ * @param {() => Promise<void>} props.enableNotifications - Function to enable notifications and push notifications
+ * @returns {() => Promise<void>} Callback function to handle opt-in click events
+ */
 export function useHandleOptInClick(props: {
   navigation: NavigationProp<ParamListBase>;
   metrics: IUseMetricsHook;
@@ -95,6 +104,15 @@ export function useHandleOptInClick(props: {
   return handleOptInClick;
 }
 
+/**
+ * Custom hook that handles the opt-in cancel action for notifications
+ * Manages navigation back to wallet view and tracks dismissal metrics
+ * @param {Object} props - Hook configuration object
+ * @param {NavigationProp<ParamListBase>} props.navigation - React Navigation object for screen navigation
+ * @param {IUseMetricsHook} props.metrics - Metrics hook for tracking user events
+ * @param {boolean} props.isCreatingNotifications - Flag indicating if notifications are currently being created
+ * @returns {() => void} Callback function to handle opt-in cancel events
+ */
 export function useHandleOptInCancel(props: {
   navigation: NavigationProp<ParamListBase>;
   metrics: IUseMetricsHook;

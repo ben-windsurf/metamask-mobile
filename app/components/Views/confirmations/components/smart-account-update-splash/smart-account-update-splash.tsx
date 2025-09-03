@@ -18,6 +18,12 @@ import { useTransactionMetadataRequest } from '../../hooks/transactions/useTrans
 import { SmartAccountUpdateContent } from '../smart-account-update-content';
 import styleSheet from './smart-account-update-splash.styles';
 
+/**
+ * SmartAccountUpdateSplash component displays a splash screen for smart account upgrades
+ * Shows upgrade information and allows users to accept or reject the smart account functionality
+ * Handles EIP-7702 account upgrade flow with user consent and preference management
+ * @returns {JSX.Element|null} The smart account update splash screen or null if conditions not met
+ */
 export const SmartAccountUpdateSplash = () => {
   const { PreferencesController } = Engine.context;
   const [acknowledged, setAcknowledged] = useState(false);

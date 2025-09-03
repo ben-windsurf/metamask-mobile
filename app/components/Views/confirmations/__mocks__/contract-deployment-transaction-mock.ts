@@ -6,6 +6,11 @@ import { emptySignatureControllerMock } from './controllers/signature-controller
 import { otherControllersMock } from './controllers/other-controllers-mock';
 import { gasFeeControllerMock } from './controllers/gas-fee-controller-mock';
 
+/**
+ * Mock state object for contract deployment transaction confirmations
+ * Combines multiple controller mocks to create a complete state for testing contract deployment flows
+ * Used in confirmation view tests to simulate the application state during contract deployment
+ */
 export const contractDeploymentTransactionStateMock = merge(
   {},
   emptySignatureControllerMock,

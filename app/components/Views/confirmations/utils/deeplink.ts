@@ -31,6 +31,12 @@ const getNetworkClientIdForChainId = (chainId: Hex) => {
   }
 };
 
+/**
+ * Checks if a deeplink function is compatible with the redesigned confirmation flow
+ * Evaluates feature flags to determine if the new confirmation UI should be used
+ * @param {string} [functionName] - The name of the deeplink function to check (e.g., 'transfer', 'approve')
+ * @returns {boolean} True if the function is compatible with redesigned confirmations, false otherwise
+ */
 export function isDeeplinkRedesignedConfirmationCompatible(
   functionName?: string,
 ) {
@@ -57,6 +63,18 @@ export function isDeeplinkRedesignedConfirmationCompatible(
 // It will be removed once `DeeplinkManager.parse` is called once per request
 let isAddingDeeplinkTransaction = false;
 
+/**
+ * Adds a transaction to the transaction controller based on deeplink parameters
+ * Handles both native ETH transfers and ERC20 token transfers from deeplink requests
+ * Prevents duplicate transactions through a temporary locking mechanism
+ * @param {DeeplinkRequest} request - The deeplink request object
+ * @param {string} [request.chain_id] - The blockchain network chain ID
+ * @param {string} [request.function_name] - The function name (e.g., 'transfer')
+ * @param {Object} [request.parameters] - Transaction parameters including addresses and amounts
+ * @param {string} request.target_address - The target contract or recipient address
+ * @param {string} request.origin - The origin of the deeplink request
+ * @returns {Promise<void>} Promise that resolves when the transaction is added
+ */
 export async function addTransactionForDeeplink({
   chain_id,
   function_name,
