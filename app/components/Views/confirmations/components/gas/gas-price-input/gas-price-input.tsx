@@ -24,7 +24,7 @@ export const GasPriceInput = ({
   const transactionMeta = useTransactionMetadataRequest();
   const { styles } = useStyles(styleSheet, {});
   const initialGasPrice = hexWEIToDecGWEI(
-    transactionMeta?.txParams?.gasPrice,
+    transactionMeta?.txParams?.gasPrice || '0x0',
   ).toString();
   const [value, setValue] = useState(initialGasPrice);
   const [error, setError] = useState<string | boolean>(false);

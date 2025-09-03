@@ -20,7 +20,7 @@ export const GasInput = ({
   const transactionMeta = useTransactionMetadataRequest();
   const { styles } = useStyles(styleSheet, {});
   const initialGasLimit = hexToDecimal(
-    transactionMeta?.txParams?.gas,
+    transactionMeta?.txParams?.gas || '0x0',
   ).toString();
   const [value, setValue] = useState(initialGasLimit);
   const [error, setError] = useState<string | boolean>(false);

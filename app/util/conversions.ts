@@ -10,39 +10,53 @@ import { addHexPrefix } from './number';
 
 interface EthConversionParams {
   value: string;
-  fromCurrency?: string;
-  conversionRate?: number;
-  numberOfDecimals?: number;
+  fromCurrency?: string | null;
+  conversionRate?: number | null;
+  numberOfDecimals?: number | null;
 }
 
 interface ValueFromWeiParams {
   value: string;
-  fromCurrency?: string;
-  toCurrency?: string;
-  conversionRate?: number;
-  numberOfDecimals?: number;
-  toDenomination?: string;
+  fromCurrency?: string | null;
+  toCurrency?: string | null;
+  conversionRate?: number | null;
+  numberOfDecimals?: number | null;
+  toDenomination?: string | null;
 }
 
 interface WeiHexFromDecimalParams {
   value: string | number;
-  fromCurrency?: string;
-  conversionRate?: number;
-  fromDenomination?: string;
-  invertConversionRate?: boolean;
+  fromCurrency?: string | null;
+  conversionRate?: number | null;
+  fromDenomination?: string | null;
+  invertConversionRate?: boolean | null;
 }
 
 export function hexToDecimal(hexValue: string): string {
   return conversionUtil(hexValue, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'hex',
     toNumericBase: 'dec',
+    fromDenomination: null,
+    toDenomination: null,
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function decimalToHex(decimal: string | number): string {
   return conversionUtil(decimal, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'dec',
     toNumericBase: 'hex',
+    fromDenomination: null,
+    toDenomination: null,
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
@@ -85,16 +99,18 @@ export function getValueFromWeiHex({
   numberOfDecimals,
   toDenomination,
 }: ValueFromWeiParams): string {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return conversionUtil(value, {
     fromNumericBase: 'hex',
     toNumericBase: 'dec',
-    fromCurrency,
-    toCurrency,
-    numberOfDecimals,
+    fromCurrency: fromCurrency || null,
+    toCurrency: toCurrency || null,
+    numberOfDecimals: numberOfDecimals || null,
     fromDenomination: WEI,
-    toDenomination,
-    conversionRate,
-  }) as string;
+    toDenomination: toDenomination || null,
+    conversionRate: conversionRate || null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any) as string;
 }
 
 export function getWeiHexFromDecimalValue({
@@ -104,16 +120,17 @@ export function getWeiHexFromDecimalValue({
   fromDenomination,
   invertConversionRate,
 }: WeiHexFromDecimalParams): string {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return conversionUtil(value, {
     fromNumericBase: 'dec',
     toNumericBase: 'hex',
-    toCurrency: ETH,
-    fromCurrency,
-    conversionRate,
-    invertConversionRate,
-    fromDenomination,
+    fromCurrency: fromCurrency || null,
+    conversionRate: conversionRate || null,
+    fromDenomination: fromDenomination || null,
+    invertConversionRate: invertConversionRate || null,
     toDenomination: WEI,
-  }) as string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any) as string;
 }
 
 export function addHexWEIsToDec(aHexWEI: string, bHexWEI: string): string {
@@ -136,61 +153,89 @@ export function subtractHexWEIsToDec(aHexWEI: string, bHexWEI: string): string {
 
 export function decEthToConvertedCurrency(
   ethTotal: string,
-  convertedCurrency: string,
+  _convertedCurrency: string,
   conversionRate: number,
 ): string {
   return conversionUtil(ethTotal, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'dec',
     toNumericBase: 'dec',
-    fromCurrency: 'ETH',
-    toCurrency: convertedCurrency,
+    fromDenomination: null,
+    toDenomination: null,
     numberOfDecimals: 2,
-    conversionRate,
+    conversionRate: conversionRate || null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function decGWEIToHexWEI(decGWEI: string): string {
   return conversionUtil(decGWEI, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'dec',
     toNumericBase: 'hex',
     fromDenomination: 'GWEI',
     toDenomination: 'WEI',
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function hexGWEIToHexWEI(decGWEI: string): string {
   return conversionUtil(decGWEI, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'hex',
     toNumericBase: 'hex',
     fromDenomination: 'GWEI',
     toDenomination: 'WEI',
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function hexWEIToDecGWEI(decGWEI: string): string {
   return conversionUtil(decGWEI, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'hex',
     toNumericBase: 'dec',
     fromDenomination: 'WEI',
     toDenomination: 'GWEI',
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function decETHToDecWEI(decEth: string): string {
   return conversionUtil(decEth, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'dec',
     toNumericBase: 'dec',
     fromDenomination: 'ETH',
     toDenomination: 'WEI',
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 
 export function hexWEIToDecETH(hexWEI: string): string {
   return conversionUtil(hexWEI, {
+    fromCurrency: null,
+    toCurrency: null,
     fromNumericBase: 'hex',
     toNumericBase: 'dec',
     fromDenomination: 'WEI',
     toDenomination: 'ETH',
+    numberOfDecimals: null,
+    conversionRate: null,
+    invertConversionRate: null,
   }) as string;
 }
 

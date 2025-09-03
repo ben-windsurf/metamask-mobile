@@ -20,7 +20,7 @@ describe('HeroToken', () => {
         backgroundState: {
           TransactionController: {
             transactions: [
-              { txParams: { value: `0x${decGWEIToHexWEI(55555555)}` } },
+              { txParams: { value: `0x${decGWEIToHexWEI('55555555')}` } },
             ],
           },
         },
@@ -66,7 +66,7 @@ describe('HeroToken', () => {
           backgroundState: {
             TransactionController: {
               transactions: [
-                { txParams: { value: `0x${decGWEIToHexWEI(12345678.9)}` } },
+                { txParams: { value: `0x${decGWEIToHexWEI('12345678.9')}` } },
               ],
             },
           },
