@@ -1,5 +1,9 @@
 import { RatesControllerStateChangeEvent as RatesControllerStateChangeEventType } from '@metamask/assets-controllers';
 
-// Events
+/**
+ * Event type constant for RatesController state changes
+ * Used to listen for updates to exchange rates and currency conversion data
+ * @type {string}
+ */
 export const RatesControllerStateChangeEvent: RatesControllerStateChangeEventType['type'] =
   'RatesController:stateChange';

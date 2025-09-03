@@ -37,6 +37,11 @@ import { Json } from '@metamask/utils';
 import { SchedulableBackgroundEvent } from '@metamask/snaps-controllers';
 import { endTrace, trace } from '../../util/trace';
 
+/**
+ * Extracts the snap ID from a request object
+ * @param {Record<string, unknown>} request - The request object containing snap information
+ * @returns {SnapId | null} The snap ID if found and valid, null otherwise
+ */
 export function getSnapIdFromRequest(
   request: Record<string, unknown>,
 ): SnapId | null {

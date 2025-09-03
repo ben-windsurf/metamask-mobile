@@ -1,6 +1,11 @@
 import { METHODS_TO_REDIRECT } from './SDKConnectConstants';
 import DevLogger from './utils/DevLogger';
 
+/**
+ * Manages a queue of RPC (Remote Procedure Call) requests for SDK connections
+ * Tracks pending RPC calls and determines when it's safe to redirect users back to their apps
+ * Used by MetaMask Mobile to coordinate SDK communication and user flow management
+ */
 export class RPCQueueManager {
   private rpcQueue: { [id: string]: string } = {};
 

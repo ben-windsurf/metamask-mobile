@@ -19,6 +19,16 @@ import Logger from '../util/Logger';
 import { TransactionStatus } from '@metamask/transaction-controller';
 import { endTrace, trace, TraceName } from '../util/trace';
 
+/**
+ * Constructs localized title and message strings for different notification types
+ * @param {Object} notification - The notification object containing type and transaction data
+ * @param {string} notification.type - The type of notification (pending, success, error, etc.)
+ * @param {Object} [notification.transaction] - Transaction data for the notification
+ * @param {Object} [notification.data] - Additional notification data
+ * @returns {Object} Object containing title and message strings
+ * @returns {string} returns.title - Localized title for the notification
+ * @returns {string} returns.message - Localized message for the notification
+ */
 export const constructTitleAndMessage = (notification) => {
   let title, message;
   switch (notification.type) {

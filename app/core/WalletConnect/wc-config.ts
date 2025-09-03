@@ -1,3 +1,10 @@
+/**
+ * Configuration object defining which WalletConnect RPC methods should trigger
+ * a redirect to the MetaMask Mobile app for user interaction and approval.
+ * These methods require user confirmation and cannot be handled silently in the background.
+ *
+ * @type {Object.<string, boolean>} Map of RPC method names to redirect flags
+ */
 export const METHODS_TO_REDIRECT: { [method: string]: boolean } = {
   eth_requestAccounts: true,
   eth_sendTransaction: true,

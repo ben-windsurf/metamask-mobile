@@ -25,6 +25,15 @@ const logControllerCreation = (
   }
 };
 
+/**
+ * Initializes the NotificationServicesPushController for managing push notification services
+ * in MetaMask Mobile. This controller handles push notification registration, delivery,
+ * and management for various notification types including transaction updates and security alerts.
+ * @param {Object} request - Controller initialization request object
+ * @param {Object} request.controllerMessenger - Messenger for inter-controller communication
+ * @param {Object} request.persistedState - Previously persisted controller state
+ * @returns {Object} Object containing the initialized NotificationServicesPushController instance
+ */
 export const notificationServicesPushControllerInit: ControllerInitFunction<
   NotificationServicesPushController,
   NotificationServicesPushControllerMessenger

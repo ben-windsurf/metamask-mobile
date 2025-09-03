@@ -31,6 +31,12 @@ export interface WCMultiVersionParams {
   handshakeTopic?: string;
 }
 
+/**
+ * Extracts the hostname or protocol from a URI string
+ * Handles both standard URLs (http/https) and protocol-based URIs (wc:, ethereum:)
+ * @param {string} uri - The URI string to parse
+ * @returns {string} The hostname for standard URLs or protocol for custom URIs
+ */
 export const getHostname = (uri: string): string => {
   try {
     // Handle empty or invalid URIs
@@ -60,6 +66,12 @@ export const getHostname = (uri: string): string => {
   }
 };
 
+/**
+ * Parses a WalletConnect URI string into its component parameters
+ * Supports both WalletConnect v1 and v2 URI formats
+ * @param {string} uri - The WalletConnect URI to parse (e.g., "wc:topic@version?params")
+ * @returns {WCMultiVersionParams} Parsed parameters including protocol, topic, version, and connection details
+ */
 export const parseWalletConnectUri = (uri: string): WCMultiVersionParams => {
   // Handle wc:{} and wc://{} format
   const str = uri.startsWith('wc://') ? uri.replace('wc://', 'wc:') : uri;

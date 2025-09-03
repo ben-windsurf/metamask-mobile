@@ -6,6 +6,14 @@ import { ApprovalTypes } from '../../../RPCMethods/RPCMethodMiddleware';
 import { type ApprovalControllerMessenger } from '../../messengers/approval-controller-messenger';
 import type { ControllerInitFunction } from '../../types';
 
+/**
+ * Initializes the ApprovalController for managing user approval requests in MetaMask Mobile
+ * Configures the controller with rate limiting exclusions for transactions and smart transactions
+ * @param {Object} request - Controller initialization request containing messenger and configuration
+ * @param {ApprovalControllerMessenger} request.controllerMessenger - Messenger for controller communication
+ * @returns {Object} Object containing the initialized ApprovalController instance
+ * @throws {Error} Throws error if controller initialization fails
+ */
 export const ApprovalControllerInit: ControllerInitFunction<
   ApprovalController,
   ApprovalControllerMessenger

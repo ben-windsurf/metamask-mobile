@@ -8,6 +8,11 @@ import ReduxService from './redux';
 import generateDeviceAnalyticsMetaData from '../util/metrics';
 import generateUserSettingsAnalyticsMetaData from '../util/metrics/UserSettingsAnalyticsMetaData/generateUserProfileAnalyticsMetaData';
 
+/**
+ * Manages application state changes and handles analytics tracking when the app becomes active.
+ * Listens for app state transitions and processes attribution data, user traits, and metrics
+ * when the application moves from background to foreground state.
+ */
 export class AppStateEventListener {
   private appStateSubscription:
     | ReturnType<typeof AppState.addEventListener>
@@ -95,4 +100,8 @@ export class AppStateEventListener {
   }
 }
 
+/**
+ * Singleton instance of AppStateEventListener for managing app state changes throughout the application.
+ * Used to track when the app becomes active and process analytics events accordingly.
+ */
 export const AppStateEventProcessor = new AppStateEventListener();

@@ -48,6 +48,11 @@ export enum WalletClientType {
   ///: END:ONLY_INCLUDE_IF
 }
 
+/**
+ * Configuration mapping for different wallet snap types in MetaMask Mobile
+ * Maps wallet client types to their corresponding snap IDs, names, discovery scopes, and storage identifiers
+ * Used for initializing and managing multichain wallet snap clients
+ */
 export const WALLET_SNAP_MAP = {
   ///: BEGIN:ONLY_INCLUDE_IF(bitcoin)
   [WalletClientType.Bitcoin]: {
@@ -308,6 +313,11 @@ export abstract class MultichainWalletSnapClient {
   }
 }
 
+/**
+ * Bitcoin-specific implementation of the multichain wallet snap client
+ * Handles Bitcoin wallet operations including account creation, transaction signing, and address management
+ * Extends the base MultichainWalletSnapClient with Bitcoin-specific functionality
+ */
 export class BitcoinWalletSnapClient extends MultichainWalletSnapClient {
   constructor(snapKeyringOptions: SnapKeyringOptions) {
     super(BITCOIN_WALLET_SNAP_ID, BITCOIN_WALLET_NAME, snapKeyringOptions);
@@ -329,6 +339,11 @@ export class BitcoinWalletSnapClient extends MultichainWalletSnapClient {
   }
 }
 
+/**
+ * Solana-specific implementation of the multichain wallet snap client
+ * Handles Solana wallet operations including account creation, transaction signing, and address management
+ * Extends the base MultichainWalletSnapClient with Solana-specific functionality
+ */
 export class SolanaWalletSnapClient extends MultichainWalletSnapClient {
   constructor(snapKeyringOptions: SnapKeyringOptions) {
     super(SOLANA_WALLET_SNAP_ID, SOLANA_WALLET_NAME, snapKeyringOptions);
@@ -343,6 +358,11 @@ export class SolanaWalletSnapClient extends MultichainWalletSnapClient {
   }
 }
 
+/**
+ * Factory class for creating multichain wallet snap clients
+ * Provides a centralized way to instantiate different types of wallet snap clients
+ * with consistent default options and proper configuration
+ */
 export class MultichainWalletSnapFactory {
   private static defaultOptions: SnapKeyringOptions = {
     displayConfirmation: false,

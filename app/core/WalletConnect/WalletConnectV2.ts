@@ -40,9 +40,17 @@ import {
 import WalletConnect2Session from './WalletConnect2Session';
 import { CaipChainId } from '@metamask/utils';
 const { PROJECT_ID } = AppConstants.WALLET_CONNECT;
+/**
+ * Determines if WalletConnect v2 is enabled based on the presence of a valid PROJECT_ID
+ * @returns {boolean} True if WalletConnect v2 is enabled with a valid project ID
+ */
 export const isWC2Enabled =
   typeof PROJECT_ID === 'string' && PROJECT_ID?.length > 0;
 
+/**
+ * Standard error messages used throughout WalletConnect v2 operations
+ * Provides consistent error messaging for various WalletConnect failure scenarios
+ */
 export const ERROR_MESSAGES = {
   INVALID_CHAIN: 'Invalid chainId',
   MANUAL_DISCONNECT: 'Manual disconnect',
@@ -51,6 +59,12 @@ export const ERROR_MESSAGES = {
   INVALID_ID: 'Invalid Id',
 };
 
+/**
+ * WalletConnect v2 Manager class that handles all WalletConnect v2 protocol operations
+ * Manages session proposals, requests, connections, and disconnections for MetaMask Mobile
+ * Implements singleton pattern to ensure single instance across the application
+ * Handles deep linking, permission management, and session state synchronization
+ */
 export class WC2Manager {
   private static instance: WC2Manager;
   private static _initialized = false;

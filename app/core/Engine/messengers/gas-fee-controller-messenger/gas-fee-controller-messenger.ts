@@ -31,6 +31,13 @@ export type GasFeeControllerMessenger = RestrictedMessenger<
   MessengerEvents['type']
 >;
 
+/**
+ * Creates a restricted messenger for the GasFeeController with specific permissions
+ * This messenger allows the GasFeeController to interact with the NetworkController
+ * to get network state, EIP-1559 compatibility, and network client information
+ * @param {Messenger<MessengerActions, MessengerEvents>} messenger - The main messenger instance
+ * @returns {GasFeeControllerMessenger} A restricted messenger configured for gas fee operations
+ */
 export function getGasFeeControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): GasFeeControllerMessenger {

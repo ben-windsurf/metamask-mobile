@@ -15,7 +15,16 @@ export interface AndroidAppleLoginHandlerParams extends BaseHandlerOptions {
 }
 
 /**
- * AndroidAppleLoginHandler is the login handler for the Apple login on android.
+ * AndroidAppleLoginHandler handles Apple OAuth authentication flow on Android devices
+ *
+ * This class manages the complete Apple Sign-In process for Android users in MetaMask Mobile,
+ * including generating auth requests, handling OAuth callbacks, and processing authentication tokens.
+ * It uses expo-auth-session with custom Chrome tabs to provide a secure authentication experience.
+ *
+ * The authentication flow follows: App -> AuthServer -> Apple -> AuthServer -> App
+ *
+ * @extends BaseLoginHandler
+ * @implements LoginHandler
  */
 export class AndroidAppleLoginHandler
   extends BaseLoginHandler
@@ -130,6 +139,16 @@ export class AndroidAppleLoginHandler
     );
   }
 
+  /**
+   * Prepares authentication token request data for the Apple OAuth flow
+   *
+   * Transforms the authentication flow parameters into the format required by the
+   * OAuth server to exchange the authorization code for access tokens.
+   *
+   * @param params - The authentication flow parameters containing the authorization code
+   * @returns The formatted authentication request parameters for token exchange
+   * @throws {OAuthError} When params don't contain required 'code' property
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('code' in params)) {
       throw new OAuthError(

@@ -32,6 +32,15 @@ interface CurrencyRateEntry {
   usdConversionRate: number | null;
 }
 
+/**
+ * Initializes the CurrencyRateController for managing cryptocurrency exchange rates
+ * Handles currency rate data normalization and controller configuration for MetaMask Mobile
+ * @param {Object} request - Controller initialization request object
+ * @param {CurrencyRateMessenger} request.controllerMessenger - Messenger for controller communication
+ * @param {Object} request.persistedState - Previously saved controller state
+ * @param {Function} request.getState - Function to get current application state
+ * @returns {Object} Object containing the initialized CurrencyRateController instance
+ */
 export const currencyRateControllerInit: ControllerInitFunction<
   CurrencyRateController,
   CurrencyRateMessenger

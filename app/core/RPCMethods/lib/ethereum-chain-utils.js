@@ -19,6 +19,13 @@ import Engine from '../../Engine';
 
 const EVM_NATIVE_TOKEN_DECIMALS = 18;
 
+/**
+ * Validates and normalizes a chain ID for Ethereum network operations
+ * Ensures the chain ID is properly formatted as a hex string and within safe numerical limits
+ * @param {string} chainId - The chain ID to validate (should be 0x-prefixed hex string)
+ * @returns {string} The validated and normalized chain ID in lowercase
+ * @throws {Error} Throws RPC error if chain ID format is invalid or unsafe
+ */
 export function validateChainId(chainId) {
   const _chainId = typeof chainId === 'string' && chainId.toLowerCase();
 
@@ -37,6 +44,13 @@ export function validateChainId(chainId) {
   return _chainId;
 }
 
+/**
+ * Validates parameters for adding a new Ethereum chain to MetaMask
+ * Ensures all required fields are present and properly formatted for wallet_addEthereumChain RPC calls
+ * @param {Array} params - Array containing the chain configuration object as first element
+ * @returns {Object} Validated chain configuration with normalized values
+ * @throws {Error} Throws RPC error if parameters are invalid or missing required fields
+ */
 export function validateAddEthereumChainParams(params) {
   if (!params || !params?.[0] || typeof params[0] !== 'object') {
     throw rpcErrors.invalidParams({
@@ -167,6 +181,13 @@ function validateNativeCurrency(nativeCurrency) {
   return ticker;
 }
 
+/**
+ * Validates that an RPC endpoint returns the expected chain ID
+ * Makes an eth_chainId call to verify the endpoint serves the correct network
+ * @param {string} rpcUrl - The RPC endpoint URL to validate
+ * @param {string} chainId - The expected chain ID that should be returned
+ * @throws {Error} Throws RPC error if endpoint is unreachable or returns wrong chain ID
+ */
 export async function validateRpcEndpoint(rpcUrl, chainId) {
   let endpointChainId;
   try {

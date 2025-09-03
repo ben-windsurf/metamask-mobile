@@ -7,6 +7,10 @@ import { PermittedHandlerExport } from '@metamask/permission-controller';
 import { Json, JsonRpcParams, hasProperty } from '@metamask/utils';
 import EthQuery from '@metamask/eth-query';
 
+/**
+ * Set of RPC methods that are not supported by the MetaMask Mobile UI
+ * These methods may be implemented in the middleware stack but are not exposed to the mobile interface
+ */
 export const UNSUPPORTED_RPC_METHODS = new Set([
   // This is implemented later in our middleware stack – specifically, in
   // eth-json-rpc-middleware – but our UI does not support it.
@@ -117,6 +121,14 @@ export function makeMethodMiddlewareMaker<U>(
   return makeMethodMiddleware;
 }
 
+/**
+ * Polyfills gasPrice for RPC methods that use EIP-1559 fee structure
+ * Ensures backward compatibility by setting gasPrice to maxFeePerGas when gasPrice is not present
+ * @param method - The RPC method name to execute
+ * @param origin - The origin domain making the request
+ * @param params - Parameters to pass to the RPC method
+ * @returns The RPC response data with gasPrice polyfilled if needed
+ */
 export const polyfillGasPrice = async (
   method: string,
   origin: string,

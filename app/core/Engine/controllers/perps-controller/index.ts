@@ -6,10 +6,14 @@ import {
 } from '../../../../components/UI/Perps/controllers';
 
 /**
- * Initialize the PerpsController.
+ * Initialize the PerpsController for managing perpetual trading functionality.
+ * Creates and configures a new PerpsController instance with the provided messenger
+ * and persisted state, enabling perpetual contract trading features in MetaMask Mobile.
  *
- * @param request - The request object.
- * @returns The PerpsController..
+ * @param request - The controller initialization request containing messenger and state
+ * @param request.controllerMessenger - The messenger for inter-controller communication
+ * @param request.persistedState - Previously saved controller state data
+ * @returns Object containing the initialized PerpsController instance
  */
 export const perpsControllerInit: ControllerInitFunction<
   PerpsController,

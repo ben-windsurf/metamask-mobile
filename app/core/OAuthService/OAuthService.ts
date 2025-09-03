@@ -40,6 +40,11 @@ interface OAuthServiceLocalState {
   oauthLoginSuccess: boolean;
   oauthLoginError: string | null;
 }
+/**
+ * OAuth service for handling social login authentication in MetaMask Mobile
+ * Manages the complete OAuth flow including provider login, token exchange, and seedless authentication
+ * Supports multiple OAuth providers (Google, Apple, etc.) with platform-specific configurations
+ */
 export class OAuthService {
   public localState: OAuthServiceLocalState;
 

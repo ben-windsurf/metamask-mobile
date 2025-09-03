@@ -29,7 +29,12 @@ interface WebViewState {
   };
 }
 
-// This is a class component because storing the references we are don't work in functional components.
+/**
+ * SnapsExecutionWebView manages WebView instances for executing Snaps in isolated environments.
+ * This class component maintains references to multiple WebViews and provides an interface
+ * for creating, managing, and removing WebView instances for Snap execution.
+ * Uses class component pattern because storing WebView references doesn't work reliably in functional components.
+ */
 export class SnapsExecutionWebView extends Component {
   webViews: Record<string, WebViewState> = {};
 

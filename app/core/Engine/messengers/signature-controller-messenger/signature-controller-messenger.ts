@@ -22,6 +22,12 @@ type MessengerActions =
 
 type MessengerEvents = never;
 
+/**
+ * Creates a restricted messenger for the SignatureController with specific allowed actions and events
+ * This messenger enables the SignatureController to communicate with other controllers in the MetaMask engine
+ * @param {Messenger<MessengerActions, MessengerEvents>} messenger - The base messenger instance to restrict
+ * @returns {SignatureControllerMessenger} A restricted messenger configured for signature operations
+ */
 export function getSignatureControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): SignatureControllerMessenger {

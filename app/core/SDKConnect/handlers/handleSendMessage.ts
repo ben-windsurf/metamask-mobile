@@ -9,6 +9,15 @@ import DevLogger from '../utils/DevLogger';
 import { wait } from '../utils/wait.util';
 import handleBatchRpcResponse from './handleBatchRpcResponse';
 
+/**
+ * Handles sending messages through SDK connections and manages navigation flow
+ * Processes RPC responses, manages batch RPC calls, tracks analytics, and handles
+ * navigation redirects based on connection origin and method type
+ * @param {Object} params - The message handling parameters
+ * @param {any} params.msg - The message object containing RPC response data
+ * @param {Connection} params.connection - The SDK connection instance
+ * @returns {Promise<void>} Promise that resolves when message handling is complete
+ */
 export const handleSendMessage = async ({
   msg,
   connection,

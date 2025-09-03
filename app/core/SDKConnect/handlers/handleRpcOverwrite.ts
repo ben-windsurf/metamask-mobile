@@ -1,6 +1,16 @@
 import { RPC_METHODS } from '../SDKConnectConstants';
 import DevLogger from '../utils/DevLogger';
 
+/**
+ * Overwrites RPC method parameters with the current account address and chain ID
+ * Handles specific RPC methods like personal_sign, eth_sendTransaction, and eth_signTypedData variants
+ * to ensure they use the currently selected account and chain in MetaMask Mobile
+ * @param {Object} params - The parameters object
+ * @param {Object} params.rpc - The RPC request object containing method and params
+ * @param {string} params.accountAddress - The currently selected account address
+ * @param {string} params.selectedChainId - The currently selected chain ID
+ * @returns {Object} The modified RPC object with updated parameters
+ */
 export const overwriteRPCWith = ({
   rpc,
   accountAddress,

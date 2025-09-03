@@ -20,6 +20,12 @@ enum BUILD_TYPE {
   flask_dev = 'flask_dev',
 }
 
+/**
+ * OAuth configuration settings for different build environments in MetaMask Mobile
+ * Contains authentication server URLs, Web3Auth network settings, and connection IDs
+ * for Google and Apple OAuth providers across different platforms and build types
+ * @type {Record<BUILD_TYPE, OAUTH_CONFIG_TYPE>}
+ */
 export const OAUTH_CONFIG: Record<BUILD_TYPE, OAUTH_CONFIG_TYPE> = {
   development: {
     GOOGLE_GROUPED_AUTH_CONNECTION_ID: 'mm-seedless-onboarding',

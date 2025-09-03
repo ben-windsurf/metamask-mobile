@@ -13,6 +13,10 @@ export enum OAuthErrorType {
   AppleLoginError = 10012,
 }
 
+/**
+ * Human-readable error messages mapped to OAuth error types
+ * Used for displaying user-friendly error messages in the MetaMask Mobile OAuth flow
+ */
 export const OAuthErrorMessages: Record<OAuthErrorType, string> = {
   [OAuthErrorType.UnknownError]: 'Unknown error',
   [OAuthErrorType.UserCancelled]: 'User cancelled',
@@ -28,9 +32,18 @@ export const OAuthErrorMessages: Record<OAuthErrorType, string> = {
   [OAuthErrorType.AppleLoginError]: 'Apple login error',
 } as const;
 
+/**
+ * Custom error class for OAuth-related errors in MetaMask Mobile
+ * Extends the standard Error class with OAuth-specific error codes and enhanced messaging
+ */
 export class OAuthError extends Error {
   public readonly code: OAuthErrorType;
 
+  /**
+   * Creates a new OAuthError instance
+   * @param errMessage - The error message or Error object
+   * @param code - The specific OAuth error type code
+   */
   constructor(errMessage: string | Error, code: OAuthErrorType) {
     if (errMessage instanceof Error) {
       super(errMessage.message);

@@ -126,6 +126,11 @@ export class ECIES {
     return decryptedString;
   }
 
+  /**
+   * Returns the private and public key information for debugging purposes
+   *
+   * @returns Object containing private and public keys in hex format
+   */
   getKeyInfo(): { private: string; public: string } {
     return {
       private: this.ecies.toHex(),
@@ -133,6 +138,9 @@ export class ECIES {
     };
   }
 
+  /**
+   * Logs the key information for debugging purposes
+   */
   toString() {
     DevLogger.log(`[ECIES: toString()]`, this.getKeyInfo());
   }

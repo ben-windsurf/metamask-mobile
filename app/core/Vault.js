@@ -56,6 +56,12 @@ export const restoreLedgerKeyring = async (serializedLedgerKeyring) => {
   }
 };
 
+/**
+ * Restores an imported seed phrase by creating a new HD keyring and adding the specified number of accounts
+ * @param {string} seedPhrase - The mnemonic seed phrase to restore
+ * @param {number} numberOfAccounts - Number of accounts to create from the seed phrase
+ * @returns {Promise<string>} The keyring ID of the newly created keyring
+ */
 export const restoreImportedSrp = async (seedPhrase, numberOfAccounts) => {
   const { KeyringController } = Engine.context;
   try {
@@ -82,6 +88,12 @@ export const restoreImportedSrp = async (seedPhrase, numberOfAccounts) => {
   }
 };
 
+/**
+ * Restores Snap accounts for multichain support (Bitcoin and Solana)
+ * @param {string} accountType - The type of account to restore (BTC or SOL account types)
+ * @param {string} entropySource - The entropy source used for account generation
+ * @returns {Promise<void>}
+ */
 export const restoreSnapAccounts = async (accountType, entropySource) => {
   let walletClientType;
   let scope;

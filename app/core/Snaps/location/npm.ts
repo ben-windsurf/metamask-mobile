@@ -84,7 +84,19 @@ const cleanupFileSystem = async (path: string) => {
   });
 };
 
+/**
+ * NpmLocation class for handling NPM package fetching and processing in MetaMask Mobile
+ * Extends BaseNpmLocation to provide React Native-specific implementation for downloading,
+ * extracting, and processing NPM packages for Snaps functionality
+ */
 export class NpmLocation extends BaseNpmLocation {
+  /**
+   * Fetches and processes an NPM tarball from the given URL
+   * Downloads the package, extracts it using native code, processes all files,
+   * and returns a map of virtual files for Snaps execution
+   * @param {URL} tarballUrl - The URL of the NPM tarball to fetch
+   * @returns {Promise<Map<string, VirtualFile<unknown>>>} A map of file paths to VirtualFile objects
+   */
   async fetchNpmTarball(
     tarballUrl: URL,
   ): Promise<Map<string, VirtualFile<unknown>>> {

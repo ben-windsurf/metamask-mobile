@@ -41,6 +41,20 @@ const lcLogguedRPCs = [
   'metamask_batch',
 ].map((method) => method.toLowerCase());
 
+/**
+ * Handles incoming messages from SDK connections, processing RPC requests and managing connection state
+ * This is the main message handler for MetaMask SDK communication, responsible for:
+ * - Validating and processing RPC method calls
+ * - Managing connection permissions and authorization
+ * - Coordinating with the background bridge for transaction processing
+ * - Handling analytics tracking for SDK interactions
+ *
+ * @param {Object} params - The message handling parameters
+ * @param {CommunicationLayerMessage} params.message - The incoming message from the SDK
+ * @param {typeof Engine} params.engine - The MetaMask engine instance
+ * @param {Connection} params.connection - The SDK connection instance
+ * @returns {Promise<void>} Promise that resolves when message processing is complete
+ */
 export const handleConnectionMessage = async ({
   message,
   engine,

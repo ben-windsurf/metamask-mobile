@@ -1,3 +1,9 @@
+/**
+ * Extracts all URL query parameters from a given URL string and returns them as an object
+ * Used by SDKConnect to parse connection parameters and configuration from deep links
+ * @param {string} url - The URL string to parse for query parameters
+ * @returns {Record<string, string>} Object containing all query parameters as key-value pairs
+ */
 export const getAllUrlParams = (url: string) => {
   const queryString = url.split('?')?.[1];
   // TODO: Replace "any" with type

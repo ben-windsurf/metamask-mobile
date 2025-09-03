@@ -69,12 +69,22 @@ class PPOMInner {
   }
 }
 
+/**
+ * PPOM (Privacy-Preserving Oracle Machine) factory object for creating PPOM instances
+ * Used for security analysis and transaction validation in MetaMask Mobile
+ * @namespace
+ */
 export const PPOM = {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new: (arg1: any, arg2: any) => new PPOMInner(arg1, arg2),
 };
 
+/**
+ * Initializes the PPOM (Privacy-Preserving Oracle Machine) system
+ * Waits for the WebView to be ready and then initializes the PPOM engine
+ * @returns {Promise<void>} Promise that resolves when PPOM is initialized
+ */
 export const ppomInit = async () => {
   if (!invoke) {
     await new Promise((resolve) => {
@@ -85,6 +95,11 @@ export const ppomInit = async () => {
   await invoke.bindAsync('ppomInit')();
 };
 
+/**
+ * PPOMView component that provides a WebView-based interface for PPOM operations
+ * Handles security analysis and transaction validation through a sandboxed WebView
+ * Used by MetaMask Mobile to perform privacy-preserving security checks
+ */
 export class PPOMView extends Component {
   webViewRef: RefObject<WebView> = React.createRef();
   invoke = createInvoke(() => this.webViewRef?.current);

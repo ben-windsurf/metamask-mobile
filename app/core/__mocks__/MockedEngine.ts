@@ -4,6 +4,11 @@ import { NetworkClientId } from '@metamask/network-controller';
 import Engine from '../../core/Engine';
 import { MOCK_KEYRING_CONTROLLER_STATE } from '../../util/test/keyringControllerTestUtils';
 
+/**
+ * Mocked Engine instance for testing purposes
+ * Provides a comprehensive mock of the MetaMask Engine with all necessary controllers
+ * and methods stubbed with Jest mocks for unit testing scenarios
+ */
 export const mockedEngine = {
   init: () => Engine.init({}),
   controllerMessenger: {

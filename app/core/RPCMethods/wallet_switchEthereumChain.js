@@ -111,6 +111,11 @@ export const wallet_switchEthereumChain = async ({
   });
 };
 
+/**
+ * Handler configuration for the wallet_switchEthereumChain RPC method
+ * Defines the method names, implementation function, and required hooks for switching Ethereum chains
+ * Used by the JsonRpcEngine middleware to handle chain switching requests from dApps
+ */
 export const switchEthereumChainHandler = {
   methodNames: [MESSAGE_TYPE.SWITCH_ETHEREUM_CHAIN],
   implementation: wallet_switchEthereumChain,

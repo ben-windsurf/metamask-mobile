@@ -8,7 +8,11 @@ import {
 import imageIcons from '../../images/image-icons';
 import { MultichainBlockExplorerFormatUrls } from './networks';
 
-// Image imports for React Native rendering
+/**
+ * Token image mappings for multichain networks
+ * Maps blockchain scopes to their corresponding token icons for React Native rendering
+ * @type {Record<string, any>}
+ */
 export const MULTICHAIN_TOKEN_IMAGES = {
   [BtcScope.Mainnet]: imageIcons.BTC,
   [BtcScope.Testnet]: imageIcons['BTC-TESTNET'],
@@ -20,6 +24,11 @@ export const MULTICHAIN_TOKEN_IMAGES = {
   [SolScope.Testnet]: imageIcons.SOLANA,
 } as const;
 
+/**
+ * Block explorer URL format mappings for multichain networks
+ * Provides URL templates for addresses and transactions across different blockchain networks
+ * @type {Record<CaipChainId, MultichainBlockExplorerFormatUrls>}
+ */
 export const MULTICHAIN_NETWORK_BLOCK_EXPLORER_FORMAT_URLS_MAP: Record<
   CaipChainId,
   MultichainBlockExplorerFormatUrls
@@ -61,6 +70,11 @@ export const MULTICHAIN_NETWORK_BLOCK_EXPLORER_FORMAT_URLS_MAP: Record<
   },
 } as const;
 
+/**
+ * Account type to mainnet scope mapping
+ * Maps different account types to their corresponding mainnet blockchain scopes
+ * @type {Record<string, string>}
+ */
 export const MULTICHAIN_ACCOUNT_TYPE_TO_MAINNET = {
   [BtcAccountType.P2pkh]: BtcScope.Mainnet,
   [BtcAccountType.P2sh]: BtcScope.Mainnet,
@@ -69,6 +83,11 @@ export const MULTICHAIN_ACCOUNT_TYPE_TO_MAINNET = {
   [SolAccountType.DataAccount]: SolScope.Mainnet,
 } as const;
 
+/**
+ * Supported currencies for price API requests
+ * List of currency codes that can be used for fetching token prices
+ * @type {string[]}
+ */
 export const PRICE_API_CURRENCIES = [
   'aud',
   'hkd',

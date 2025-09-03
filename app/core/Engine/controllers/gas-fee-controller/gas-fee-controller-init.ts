@@ -16,6 +16,13 @@ const LEGACY_GAS_API_ENDPOINT =
 const EIP1559_API_ENDPOINT =
   'https://gas.api.cx.metamask.io/networks/<chain_id>/suggestedGasFees';
 
+/**
+ * Initializes the GasFeeController for managing gas fee estimation and EIP-1559 support
+ * Configures gas price APIs, network compatibility checks, and provider integration
+ * @param {ControllerInitRequest<GasFeeControllerMessenger>} request - Controller initialization request containing messenger and dependencies
+ * @returns {Object} Object containing the initialized GasFeeController instance
+ * @throws {Error} When GasFeeController initialization fails
+ */
 export const GasFeeControllerInit: ControllerInitFunction<
   GasFeeController,
   GasFeeControllerMessenger

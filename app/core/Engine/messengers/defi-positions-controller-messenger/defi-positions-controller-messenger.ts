@@ -46,6 +46,14 @@ export type DeFiPositionsControllerInitMessenger = ReturnType<
   typeof getDeFiPositionsControllerInitMessenger
 >;
 
+/**
+ * Get a restricted messenger for DeFiPositionsController initialization.
+ * This messenger is used during the initialization phase to access remote feature flags
+ * and determine if DeFi positions functionality should be enabled.
+ *
+ * @param messenger - The base messenger to restrict for initialization purposes
+ * @returns The restricted messenger with access to RemoteFeatureFlagController actions
+ */
 export function getDeFiPositionsControllerInitMessenger(
   messenger: Messenger<InitActions, never>,
 ) {

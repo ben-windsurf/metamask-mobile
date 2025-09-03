@@ -66,6 +66,10 @@ const Engine = ImportedEngine as any;
 let appVersion = '';
 
 ///: BEGIN:ONLY_INCLUDE_IF(keyring-snaps)
+/**
+ * Confirmation types for Snap account management operations
+ * Used to identify different types of account-related confirmations in the Snap keyring system
+ */
 export const SNAP_MANAGE_ACCOUNTS_CONFIRMATION_TYPES = {
   confirmAccountCreation: 'snap_manageAccounts:confirmAccountCreation',
   confirmAccountRemoval: 'snap_manageAccounts:confirmAccountRemoval',
@@ -124,7 +128,19 @@ export interface RPCMethodsMiddleParameters {
   analytics: { [key: string]: string | boolean };
 }
 
-// Also used by WalletConnect.js.
+/**
+ * Validates that the provided address and chain ID are active and permitted for the given origin
+ * Ensures that dApps can only interact with accounts and networks they have permission to access
+ * Also used by WalletConnect.js for connection validation
+ *
+ * @param params - Validation parameters
+ * @param params.address - The Ethereum address to validate (optional)
+ * @param params.chainId - The chain ID to validate (optional)
+ * @param params.channelId - Channel identifier for remote connections (optional)
+ * @param params.hostname - The hostname/origin requesting access
+ * @param params.isWalletConnect - Whether this is a WalletConnect request
+ * @throws {Error} Throws RPC error if address is not permitted or chain ID doesn't match active network
+ */
 export const checkActiveAccountAndChainId = async ({
   address,
   chainId,
@@ -312,8 +328,11 @@ const generateRawSignature = async ({
 
 /**
  * Gets the dependency hooks used by methods from {@link getRpcMethodMiddleware}
- * @param origin - The origin of the connection.
- * @returns The hooks object.
+ * Provides access to permission management, network configuration, and approval controller methods
+ * These hooks enable RPC methods to interact with MetaMask's core controllers safely
+ *
+ * @param origin - The origin of the connection requesting access
+ * @returns The hooks object containing controller access methods
  */
 export const getRpcMethodMiddlewareHooks = (origin: string) => ({
   getCaveat: ({

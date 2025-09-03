@@ -2,6 +2,11 @@ import { AppMetadataControllerState } from '@metamask/app-metadata-controller';
 import Logger from '../../../../util/Logger';
 import { defaultAppMetadataControllerState } from './constants';
 
+/**
+ * Logs the creation of AppMetadataController with state information
+ * Used for debugging and monitoring controller initialization in MetaMask Mobile
+ * @param {Partial<AppMetadataControllerState>} [initialState] - Optional initial state for the controller
+ */
 export function logAppMetadataControllerCreation(
   initialState?: Partial<AppMetadataControllerState>,
 ) {

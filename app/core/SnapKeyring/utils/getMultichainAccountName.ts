@@ -5,6 +5,13 @@ import { strings } from '../../../../locales/i18n';
 import Engine from '../../Engine';
 import { WalletClientType } from '../MultichainWalletSnapClient';
 
+/**
+ * Generates an appropriate account name for multichain accounts based on the scope and client type
+ * Handles Bitcoin and Solana accounts with network-specific naming conventions
+ * @param {CaipChainId} [scope] - The CAIP chain ID scope for the account (e.g., Bitcoin testnet, Solana devnet)
+ * @param {WalletClientType} [clientType] - The type of wallet client (Bitcoin or Solana)
+ * @returns {string} The generated account name with appropriate network prefix and account number
+ */
 export function getMultichainAccountName(
   scope?: CaipChainId,
   clientType?: WalletClientType,

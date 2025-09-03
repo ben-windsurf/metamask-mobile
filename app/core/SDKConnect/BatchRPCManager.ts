@@ -14,6 +14,11 @@ export interface BatchRPCState {
   index: number; // current rpc index
 }
 
+/**
+ * Manages batched RPC method calls for SDK connections
+ * Handles chaining of dependent RPC methods and tracks their responses
+ * Used to coordinate multiple RPC calls that depend on each other's results
+ */
 export class BatchRPCManager {
   // keep track of channelId which could be useful for debugging purpose
   private channelId: string;

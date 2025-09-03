@@ -20,6 +20,14 @@ const logControllerCreation = (
   }
 };
 
+/**
+ * Initializes the NotificationServicesController for managing push notifications and notification services
+ * Creates and configures the controller with proper state management and messenger integration
+ * @param {Object} request - Controller initialization request object
+ * @param {Object} request.controllerMessenger - Messenger for inter-controller communication
+ * @param {Object} request.persistedState - Previously persisted controller states
+ * @returns {Object} Object containing the initialized NotificationServicesController instance
+ */
 export const notificationServicesControllerInit: ControllerInitFunction<
   NotificationServicesController,
   NotificationServicesControllerMessenger

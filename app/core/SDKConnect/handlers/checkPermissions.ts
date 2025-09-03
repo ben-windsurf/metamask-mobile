@@ -20,6 +20,17 @@ import {
 } from '../utils/wait.util';
 import { Platform } from 'react-native';
 
+/**
+ * Checks and manages permissions for SDK connections in MetaMask Mobile
+ * Handles permission validation, keychain unlocking, and approval flow for dApp connections
+ * @param {Object} params - Permission check parameters
+ * @param {Connection} params.connection - The SDK connection instance
+ * @param {typeof Engine} params.engine - The MetaMask engine instance
+ * @param {CommunicationLayerMessage} [params.message] - Optional communication layer message
+ * @param {number} [params.lastAuthorized] - Timestamp of last authorization
+ * @returns {Promise<boolean>} True if permissions are granted, false otherwise
+ * @throws {Error} When permission check fails or encounters errors
+ */
 // TODO: should be more generic and be used in wallet connect and android service as well
 export const checkPermissions = async ({
   connection,

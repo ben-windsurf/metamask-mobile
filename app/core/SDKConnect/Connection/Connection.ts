@@ -52,6 +52,11 @@ export interface ConnectionProps {
 import packageJSON from '../../../../package.json';
 const { version: walletVersion } = packageJSON;
 
+/**
+ * Connection class manages SDK communication between MetaMask Mobile and dApps
+ * Handles WebSocket connections, message routing, authentication, and lifecycle management
+ * for SDK-based dApp interactions through the MetaMask SDK Communication Layer
+ */
 export class Connection extends EventEmitter2 {
   channelId;
   remote: RemoteCommunication;
