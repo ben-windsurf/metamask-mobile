@@ -868,7 +868,7 @@ export const toHexadecimal = (decimal) => {
 /**
  * Calculates the total ETH fee for multi-layer transactions including L1 fees
  * @param {Object} params - Fee calculation parameters
- * @param {string|number} params.multiLayerL1FeeTotal - Total L1 fee for multi-layer transaction (hex string or number)
+ * @param {string|number|undefined} params.multiLayerL1FeeTotal - Total L1 fee for multi-layer transaction (hex string, number, or undefined)
  * @param {number} params.ethFee - Base ETH fee (default: 0)
  * @returns {string} The total calculated ETH fee as a string
  */

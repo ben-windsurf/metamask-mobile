@@ -54,7 +54,7 @@ export function findRouteNameFromNavigatorState(routes) {
 }
 /**
  * Capitalizes the first letter of a string
- * @param {string} str - The string to capitalize
+ * @param {string|null|undefined} str - The string to capitalize
  * @returns {string|boolean} The capitalized string or false if input is falsy
  */
 export const capitalize = (str) =>
