@@ -202,6 +202,11 @@ export function decGWEIToHexWEI(decGWEI) {
   });
 }
 
+/**
+ * Converts hex GWEI to hex WEI
+ * @param {string} decGWEI - The hex GWEI value to convert
+ * @returns {string} The equivalent value in hex WEI
+ */
 export function hexGWEIToHexWEI(decGWEI) {
   return conversionUtil(decGWEI, {
     fromNumericBase: 'hex',
@@ -211,6 +216,11 @@ export function hexGWEIToHexWEI(decGWEI) {
   });
 }
 
+/**
+ * Converts hex WEI to decimal GWEI
+ * @param {string} decGWEI - The hex WEI value to convert
+ * @returns {string} The equivalent value in decimal GWEI
+ */
 export function hexWEIToDecGWEI(decGWEI) {
   return conversionUtil(decGWEI, {
     fromNumericBase: 'hex',
@@ -220,6 +230,11 @@ export function hexWEIToDecGWEI(decGWEI) {
   });
 }
 
+/**
+ * Converts decimal ETH to decimal WEI
+ * @param {string|number} decEth - The decimal ETH value to convert
+ * @returns {string} The equivalent value in decimal WEI
+ */
 export function decETHToDecWEI(decEth) {
   return conversionUtil(decEth, {
     fromNumericBase: 'dec',
@@ -229,6 +244,11 @@ export function decETHToDecWEI(decEth) {
   });
 }
 
+/**
+ * Converts hex WEI to decimal ETH
+ * @param {string} hexWEI - The hex WEI value to convert
+ * @returns {string} The equivalent value in decimal ETH
+ */
 export function hexWEIToDecETH(hexWEI) {
   return conversionUtil(hexWEI, {
     fromNumericBase: 'hex',
@@ -238,6 +258,12 @@ export function hexWEIToDecETH(hexWEI) {
   });
 }
 
+/**
+ * Adds two hex values and returns the result as hex
+ * @param {string} aHexWEI - First hex value to add
+ * @param {string} bHexWEI - Second hex value to add
+ * @returns {string} The sum as a hex string
+ */
 export function addHexes(aHexWEI, bHexWEI) {
   return addCurrencies(aHexWEI, bHexWEI, {
     aBase: 16,

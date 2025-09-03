@@ -217,6 +217,7 @@ export const INFURA_TESTNET_CHAIN_IDS = {
 /**
  * Array of all Infura testnet chain IDs
  * Used for identifying and filtering testnet networks
+ * @type {string[]} Array of hexadecimal chain ID strings for testnet networks
  */
 export const infuraChainIdsTestNets: string[] = [
   INFURA_TESTNET_CHAIN_IDS.GOERLI,
@@ -308,6 +309,11 @@ export const UnpopularNetworkList = [
   },
 ];
 
+/**
+ * Extended chain ID mapping that includes both standard and custom network chain IDs
+ * Combines MetaMask's standard CHAIN_IDS with additional custom network identifiers
+ * @type {Record<string, Hex>} Mapping of network names to hexadecimal chain IDs
+ */
 export const NETWORK_CHAIN_ID: {
   readonly FLARE_MAINNET: '0xe';
   readonly SONGBIRD_TESTNET: '0x13';
@@ -362,6 +368,11 @@ export const NETWORK_CHAIN_ID: {
 };
 
 /* eslint-disable @typescript-eslint/no-require-imports, import/no-commonjs */
+/**
+ * Mapping of network chain IDs to their corresponding image assets
+ * Provides visual representations for custom networks in the MetaMask interface
+ * @type {Record<Hex, string>} Mapping of hexadecimal chain IDs to image require paths
+ */
 export const CustomNetworkImgMapping: Record<Hex, string> = {
   [NETWORK_CHAIN_ID.FLARE_MAINNET]: require('../../images/flare-mainnet.png'),
   [NETWORK_CHAIN_ID.SONGBIRD_TESTNET]: require('../../images/songbird.png'),

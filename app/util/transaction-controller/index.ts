@@ -75,6 +75,13 @@ export async function estimateGas(
   return await TransactionController.estimateGas(transaction, networkClientId);
 }
 
+/**
+ * Estimates gas fees for a transaction on a specific chain
+ * @param {Object} params - The gas fee estimation parameters
+ * @param {TransactionParams} params.transactionParams - The transaction parameters
+ * @param {Hex} params.chainId - The chain ID to estimate fees for
+ * @returns {Promise<Object>} The estimated gas fee data
+ */
 export async function estimateGasFee({
   transactionParams,
   chainId,
@@ -91,6 +98,11 @@ export async function estimateGasFee({
 }
 
 // Proxy methods
+/**
+ * Handles method data for a transaction by parsing contract method signatures
+ * @param {...any} args - Arguments passed to the transaction controller's handleMethodData method
+ * @returns {Promise<Object>} The parsed method data including method name and parameters
+ */
 export function handleMethodData(
   ...args: Parameters<BaseTransactionController['handleMethodData']>
 ) {
@@ -98,6 +110,11 @@ export function handleMethodData(
   return TransactionController.handleMethodData(...args);
 }
 
+/**
+ * Acquires a nonce lock to prevent nonce conflicts during transaction creation
+ * @param {...any} args - Arguments passed to the transaction controller's getNonceLock method
+ * @returns {Promise<Object>} Object containing nextNonce and releaseLock function
+ */
 export function getNonceLock(
   ...args: Parameters<BaseTransactionController['getNonceLock']>
 ) {
@@ -105,6 +122,11 @@ export function getNonceLock(
   return TransactionController.getNonceLock(...args);
 }
 
+/**
+ * Creates a new transaction with higher gas fees to speed up an existing pending transaction
+ * @param {...any} args - Arguments passed to the transaction controller's speedUpTransaction method
+ * @returns {Promise<Object>} The new speed-up transaction metadata
+ */
 export function speedUpTransaction(
   ...args: Parameters<BaseTransactionController['speedUpTransaction']>
 ) {
@@ -112,6 +134,10 @@ export function speedUpTransaction(
   return TransactionController.speedUpTransaction(...args);
 }
 
+/**
+ * Starts polling for incoming transactions if basic functionality is enabled
+ * @returns {void|Promise<void>} Starts the polling process or returns undefined if disabled
+ */
 export function startIncomingTransactionPolling() {
   const isBasicFunctionalityToggleEnabled = selectBasicFunctionalityEnabled(
     store.getState(),

@@ -727,13 +727,24 @@ export function addAccountTimeFlagFilter(
   );
 }
 
-//Leaving here a comment to re-visit this function since it's probably be possible to deprecate
+/**
+ * Normalizes transaction state by merging nested transaction properties
+ * @deprecated This function may be deprecated in the future
+ * @param {Object} state - The Redux state containing transaction data
+ * @returns {Object|undefined} The normalized transaction state or undefined if no transaction exists
+ */
 export function getNormalizedTxState(state) {
   return state.transaction
     ? { ...state.transaction, ...state.transaction.transaction }
     : undefined;
 }
 
+/**
+ * Retrieves the URL of the currently active browser tab
+ * @param {Object} params - Parameters object
+ * @param {Object} params.browser - Browser state containing tabs and activeTab information
+ * @returns {string|undefined} The URL of the active tab or undefined if no active tab exists
+ */
 export const getActiveTabUrl = ({ browser = {} }) =>
   browser.tabs &&
   browser.activeTab &&

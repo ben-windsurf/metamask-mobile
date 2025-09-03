@@ -19,6 +19,12 @@ type BlockExplorerFooterProps = ModalFooterBlockExplorer & {
   notification: INotification;
 };
 
+/**
+ * BlockExplorerFooter component renders a button that opens the transaction in a block explorer
+ * Displays a "View on Block Explorer" button that opens the transaction URL in the device's browser
+ * @param {BlockExplorerFooterProps} props - Component props containing chain ID, transaction hash, and notification data
+ * @returns {JSX.Element | null} The block explorer button component or null if no block explorer URL is available
+ */
 export default function BlockExplorerFooter(props: BlockExplorerFooterProps) {
   const { styles } = useStyles();
   const { notification } = props;

@@ -39,6 +39,12 @@ interface Asset {
   assetId?: string;
 }
 
+/**
+ * Custom hook that retrieves balance information for a given asset
+ * Supports both native tokens and ERC-20 tokens, with multichain balance support for Snap accounts
+ * @param {Asset} asset - The asset to get balance for, containing address, decimals, chainId, and optional assetId
+ * @returns {Object} Balance information object containing balance, balanceFiat, and balanceBN
+ */
 export default function useBalance(asset?: Asset) {
   const accountsByChainId = useSelector(selectAccountsByChainId);
   ///: BEGIN:ONLY_INCLUDE_IF(keyring-snaps)

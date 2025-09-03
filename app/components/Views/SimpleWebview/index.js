@@ -8,6 +8,11 @@ import Logger from '../../../util/Logger';
 import { baseStyles } from '../../../styles/common';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
+/**
+ * SimpleWebview component renders a basic WebView for displaying external web content
+ * Provides navigation bar integration, sharing functionality, and theme support
+ * Used for displaying simple web pages within the MetaMask Mobile app
+ */
 export default class SimpleWebview extends PureComponent {
   static propTypes = {
     /**

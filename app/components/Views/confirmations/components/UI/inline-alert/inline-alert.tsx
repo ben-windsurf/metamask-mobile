@@ -48,6 +48,14 @@ const getTextColor = (severity: Severity) => {
   }
 };
 
+/**
+ * InlineAlert component displays a clickable alert notification within confirmation flows
+ * Shows alert information with appropriate severity styling and opens detailed alert modal when clicked
+ * @param {InlineAlertProps} props - Component props
+ * @param {Alert} props.alertObj - Alert object containing severity, key, and field information
+ * @param {ViewStyle} [props.style] - Additional styles to apply to the inline alert
+ * @returns {JSX.Element} A touchable inline alert component with icon, text, and arrow
+ */
 export default function InlineAlert({ alertObj, style }: InlineAlertProps) {
   const { showAlertModal, setAlertKey } = useAlerts();
   const { trackInlineAlertClicked } = useConfirmationAlertMetrics();

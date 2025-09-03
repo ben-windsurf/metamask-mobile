@@ -47,7 +47,13 @@ export function BNToHex(inputBn) {
   return add0x(inputBn.toString(16));
 }
 
-// Setter Maps
+/**
+ * Utility object for converting different number formats to BigNumber instances
+ * @type {Object}
+ * @property {Function} hex - Converts hex string to BigNumber
+ * @property {Function} dec - Converts decimal string/number to BigNumber
+ * @property {Function} BN - Converts BN instance to BigNumber
+ */
 export const toBigNumber = {
   hex: (n) => new BigNumber(stripHexPrefix(n), 16),
   dec: (n) => new BigNumber(String(n), 10),

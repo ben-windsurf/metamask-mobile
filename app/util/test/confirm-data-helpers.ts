@@ -1376,6 +1376,12 @@ export const MOCK_KEYRING_CONTROLLER_STATE = {
   ],
 };
 
+/**
+ * Builds transaction data for ERC-20/ERC-721 approve function call
+ * @param {string} address - The spender address to approve
+ * @param {number} amountOrTokenId - The amount (ERC-20) or token ID (ERC-721) to approve
+ * @returns {Hex} The encoded transaction data for the approve function call
+ */
 export function buildApproveTransactionData(
   address: string,
   amountOrTokenId: number,
@@ -1385,6 +1391,14 @@ export function buildApproveTransactionData(
   ]).encodeFunctionData('approve', [address, amountOrTokenId]) as Hex;
 }
 
+/**
+ * Builds transaction data for Permit2 approve function call
+ * @param {string} token - The token contract address
+ * @param {string} spender - The spender address to approve
+ * @param {number} amount - The amount to approve
+ * @param {number} expiration - The approval expiration timestamp
+ * @returns {Hex} The encoded transaction data for the Permit2 approve function call
+ */
 export function buildPermit2ApproveTransactionData(
   token: string,
   spender: string,
@@ -1396,6 +1410,12 @@ export function buildPermit2ApproveTransactionData(
   ]).encodeFunctionData('approve', [token, spender, amount, expiration]) as Hex;
 }
 
+/**
+ * Builds transaction data for ERC-20 increaseAllowance function call
+ * @param {string} address - The spender address to increase allowance for
+ * @param {number} amount - The amount to increase the allowance by
+ * @returns {Hex} The encoded transaction data for the increaseAllowance function call
+ */
 export function buildIncreaseAllowanceTransactionData(
   address: string,
   amount: number,
@@ -1405,6 +1425,12 @@ export function buildIncreaseAllowanceTransactionData(
   ]).encodeFunctionData('increaseAllowance', [address, amount]) as Hex;
 }
 
+/**
+ * Builds transaction data for ERC-721/ERC-1155 setApprovalForAll function call
+ * @param {string} address - The operator address to set approval for
+ * @param {boolean} approved - Whether to approve (true) or revoke approval (false)
+ * @returns {Hex} The encoded transaction data for the setApprovalForAll function call
+ */
 export function buildSetApproveForAllTransactionData(
   address: string,
   approved: boolean,

@@ -21,6 +21,12 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * TransactionSummary component displays a formatted summary of transaction details
+ * including amount, fees, and total amounts. Handles different transaction types
+ * like sent/received tokens and collectibles with appropriate formatting and labels.
+ * Provides loading states during gas estimation and edit functionality for transaction fees.
+ */
 export default class TransactionSummary extends PureComponent {
   static propTypes = {
     amount: PropTypes.string,

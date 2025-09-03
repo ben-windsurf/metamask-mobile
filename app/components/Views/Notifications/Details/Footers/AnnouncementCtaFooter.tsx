@@ -8,6 +8,12 @@ import useStyles from '../useStyles';
 
 type AnnouncementCtaFooterProps = ModalFooterAnnouncementCta;
 
+/**
+ * AnnouncementCtaFooter component renders a call-to-action button for announcement notifications
+ * Opens external links when the CTA button is pressed, typically used for feature announcements
+ * @param {AnnouncementCtaFooterProps} props - The announcement CTA footer properties containing mobile link data
+ * @returns {JSX.Element | null} A secondary button component or null if no mobile link is provided
+ */
 export default function AnnouncementCtaFooter(
   props: AnnouncementCtaFooterProps,
 ) {

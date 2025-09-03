@@ -6,6 +6,14 @@ interface KeypadRuleConfig {
   decimals?: number | null;
 }
 
+/**
+ * Creates a keypad input rule handler for numeric input with decimal support
+ * Handles digit input, decimal separator placement, backspace, and enforces decimal precision limits
+ * @param {KeypadRuleConfig} config - Configuration object for keypad behavior
+ * @param {string|null} config.decimalSeparator - Character to use as decimal separator (e.g., '.' or ',')
+ * @param {number|null} config.decimals - Maximum number of decimal places allowed
+ * @returns {function} Handler function that processes keypad input and returns formatted amount string
+ */
 export default function createKeypadRule({
   decimalSeparator = null,
   decimals = null,

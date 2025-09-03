@@ -9,6 +9,11 @@ interface SkeletonPlaceholderItem {
   marginTop: number;
 }
 
+/**
+ * NetworkFeeFieldSkeleton component renders a skeleton placeholder for network fee fields
+ * Used as a loading state while network fee information is being fetched
+ * @returns {JSX.Element} A skeleton placeholder with two items in a row layout
+ */
 export default function NetworkFeeFieldSkeleton() {
   const skeletonProps: SkeletonPlaceholderItem = {
     width: 32,

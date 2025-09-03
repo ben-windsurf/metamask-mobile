@@ -13,12 +13,17 @@ import { TraceName, hasMetricsConsent } from '../trace';
 import { getTraceTags } from './tags';
 /**
  * This symbol matches all object properties when used in a mask
+ * Used in object masking to apply rules to all properties of dynamic objects
+ * @type {Symbol}
  */
 export const AllProperties = Symbol('*');
 
-// This describes the subset of background controller state attached to errors
-// sent to Sentry These properties have some potential to be useful for
-// debugging, and they do not contain any identifiable information.
+/**
+ * Defines the subset of background controller state attached to Sentry error reports
+ * These properties are useful for debugging and do not contain identifiable information
+ * Uses a mask structure where true includes the property, false excludes it, and objects define sub-masks
+ * @type {Object}
+ */
 export const sentryStateMask = {
   accounts: true,
   alert: true,
@@ -263,9 +268,11 @@ const ERROR_URL_ALLOWLIST = [
 
 /**
  * Capture Sentry user feedback and associate ID of captured exception
- *
- * @param options.sentryId - ID of captured exception
- * @param options.comments - User's feedback/comments
+ * Allows users to provide feedback on errors that were reported to Sentry
+ * @param {Object} options - Feedback options
+ * @param {string} options.sentryId - ID of captured exception
+ * @param {string} options.comments - User's feedback/comments
+ * @returns {void}
  */
 export const captureSentryFeedback = ({ sentryId, comments }) => {
   const userFeedback = {
@@ -454,9 +461,10 @@ export function rewriteReport(report) {
 }
 
 /**
- * This function excludes events from being logged in the performance portion of the app.
- * @param {*} event - to be logged
- * @returns {(event|null)}
+ * Filters and modifies Sentry performance events before they are sent
+ * Excludes certain events from being logged and adds additional context to others
+ * @param {Object} event - The Sentry event to be processed
+ * @returns {Object|null} The modified event or null if the event should be excluded
  */
 export function excludeEvents(event) {
   // This is needed because store starts to initialise before performance observers completes to measure app start time

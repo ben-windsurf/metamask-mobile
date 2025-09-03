@@ -37,7 +37,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * Copmonent that provides ability to add a bookmark
+ * Component that provides the ability to add a bookmark to the browser favorites
+ * Renders a form with title and URL input fields for creating new bookmarks
+ * Handles validation and navigation back to the browser after bookmark creation
  */
 export default class AddBookmark extends PureComponent {
   state = {

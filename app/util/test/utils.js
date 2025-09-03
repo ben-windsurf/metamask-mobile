@@ -25,6 +25,7 @@ export const E2E_METAMETRICS_TRACK_URL = 'https://metametrics.test/track';
 /**
  * Returns true if the build type or environment is QA or if the environment is e2e
  * TODO: For the most part, this is meant for e2e testing. Check if this condition is truly needed for QA or if we can consolidate it to check for E2E environment.
+ * @returns {boolean} True if running in QA or E2E environment
  */
 export const isQa =
   process.env.METAMASK_BUILD_TYPE === 'qa' ||

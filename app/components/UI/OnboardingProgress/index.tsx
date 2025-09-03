@@ -17,6 +17,11 @@ interface OnboardingProgressProps {
   steps: string[];
 }
 
+/**
+ * OnboardingProgress component displays a visual step indicator for onboarding flows
+ * Shows progress through multiple steps with customizable styling based on the current theme
+ * Renders a horizontal step indicator with labels, highlighting the current step and completed steps
+ */
 export default class OnboardingProgress extends PureComponent<OnboardingProgressProps> {
   static defaultProps = {
     currentStep: 0,
