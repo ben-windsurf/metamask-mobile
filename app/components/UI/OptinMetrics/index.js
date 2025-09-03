@@ -59,6 +59,12 @@ import {
 } from '../../../util/trace';
 import { setupSentry } from '../../../util/sentry/utils';
 
+/**
+ * Creates styles for the OptinMetrics component
+ * @param {Object} params - Style parameters
+ * @param {Object} params.colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = ({ colors }) =>
   StyleSheet.create({
     root: {
@@ -123,7 +129,10 @@ const createStyles = ({ colors }) =>
   });
 
 /**
- * View that is displayed in the flow to agree to metrics
+ * OptinMetrics component displays the metrics consent screen during onboarding
+ * Allows users to opt-in or opt-out of analytics data collection and marketing consent
+ * Handles onboarding flow navigation and stores user preferences
+ * @returns {JSX.Element} The rendered OptinMetrics component with consent options
  */
 class OptinMetrics extends PureComponent {
   static propTypes = {
@@ -295,6 +304,14 @@ class OptinMetrics extends PureComponent {
     );
   };
 
+  /**
+   * Renders each action item with a check icon for current privacy policy
+   * @param {Object} actionItem - Object containing description and prefix
+   * @param {string} actionItem.description - Description text for the action
+   * @param {string} actionItem.prefix - Prefix text for the action
+   * @param {number} i - Index key for React rendering
+   * @returns {JSX.Element} Rendered action item with check icon and text
+   */
   renderAction = ({ description, prefix }, i) => {
     const styles = this.getStyles();
 
@@ -673,12 +690,22 @@ OptinMetrics.navigationOptions = {
   headerShown: false,
 };
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object with onboarding events and marketing consent state
+ */
 const mapStateToProps = (state) => ({
   events: state.onboarding.events,
   isDataCollectionForMarketingEnabled:
     state.security.dataCollectionForMarketing,
 });
 
+/**
+ * Maps Redux dispatch functions to component props
+ * @param {Function} dispatch - Redux dispatch function
+ * @returns {Object} Props object with action creators
+ */
 const mapDispatchToProps = (dispatch) => ({
   setOnboardingWizardStep: (step) => dispatch(setOnboardingWizardStep(step)),
   clearOnboardingEvents: () => dispatch(clearOnboardingEvents()),

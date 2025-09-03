@@ -12,6 +12,11 @@ interface ConnectHeaderProps {
   title: string;
 }
 
+/**
+ * Creates styles for the ConnectHeader component
+ * @param {Theme['colors']} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Theme['colors']) =>
   StyleSheet.create({
     header: {
@@ -33,6 +38,14 @@ const createStyles = (colors: Theme['colors']) =>
     },
   });
 
+/**
+ * ConnectHeader component displays a header with a back button and title
+ * Used in connection flows to provide navigation and context
+ * @param {ConnectHeaderProps} props - Component props
+ * @param {string} props.title - The title text to display in the header
+ * @param {Function} props.action - Callback function executed when back button is pressed
+ * @returns {JSX.Element} Header component with back button and title
+ */
 const ConnectHeader: React.FC<ConnectHeaderProps> = ({ title, action }) => {
   const context = React.useContext(ThemeContext);
   const colors = context?.colors || mockTheme.colors;

@@ -9,6 +9,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ElevatedView from 'react-native-elevated-view';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
+/**
+ * Creates styles for the GlobalAlert component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     modal: {
@@ -64,10 +69,17 @@ class GlobalAlert extends PureComponent {
     dismissAlert: PropTypes.func,
   };
 
+  /**
+   * Handles closing the alert modal
+   */
   onClose = () => {
     this.props.dismissAlert();
   };
 
+  /**
+   * Handles component updates and auto-dismissal logic
+   * @param {Object} prevProps - Previous component props
+   */
   componentDidUpdate(prevProps) {
     if (
       this.props.autodismiss &&
@@ -81,6 +93,11 @@ class GlobalAlert extends PureComponent {
     }
   }
 
+  /**
+   * Gets the appropriate component based on content type
+   * @param {string} content - The content type identifier
+   * @returns {JSX.Element} The component to render
+   */
   getComponent(content) {
     switch (content) {
       case 'clipboard-alert':
@@ -90,11 +107,19 @@ class GlobalAlert extends PureComponent {
     }
   }
 
+  /**
+   * Gets the component styles based on current theme
+   * @returns {Object} StyleSheet object with themed styles
+   */
   getStyles = () => {
     const colors = this.context.colors || mockTheme.colors;
     return createStyles(colors);
   };
 
+  /**
+   * Renders the clipboard alert component with success icon and message
+   * @returns {JSX.Element} The clipboard alert component
+   */
   renderClipboardAlert = () => {
     const colors = this.context.colors || mockTheme.colors;
     const styles = this.getStyles(colors);
@@ -140,6 +165,11 @@ class GlobalAlert extends PureComponent {
   };
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object with alert state properties
+ */
 const mapStateToProps = (state) => ({
   isVisible: state.alert.isVisible,
   autodismiss: state.alert.autodismiss,
@@ -147,6 +177,11 @@ const mapStateToProps = (state) => ({
   data: state.alert.data,
 });
 
+/**
+ * Maps Redux dispatch functions to component props
+ * @param {Function} dispatch - Redux dispatch function
+ * @returns {Object} Props object with action creators
+ */
 const mapDispatchToProps = (dispatch) => ({
   dismissAlert: () => dispatch(dismissAlert()),
 });

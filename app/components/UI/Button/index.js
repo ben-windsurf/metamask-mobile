@@ -5,6 +5,11 @@ import GenericButton from '../GenericButton'; // eslint-disable-line import/no-u
 import { useTheme } from '../../../util/theme';
 import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
+/**
+ * Creates styles for the Button component based on theme colors
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with button styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     button: {
@@ -26,6 +31,13 @@ const createStyles = (colors) =>
  * {@link https://github.com/MetaMask/metamask-mobile/tree/main/app/component-library/components/Buttons/Button/README.md}
  * If you would like to help with the replacement of the old `Button` component, please submit a pull request against this GitHub issue:
  * {@link https://github.com/MetaMask/metamask-mobile/issues/8108}
+ *
+ * Legacy Button component that renders a styled pressable button
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Button content (text, icons, or other components)
+ * @param {Object} props.style - Additional styles to apply to the button
+ * @param {Function} props.onPress - Function called when button is pressed
+ * @returns {JSX.Element} Rendered button component
  */
 const Button = (props) => {
   const { colors } = useTheme();

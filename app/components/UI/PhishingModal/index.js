@@ -21,6 +21,11 @@ import {
   ButtonWidthTypes,
 } from '../../../component-library/components/Buttons/Button/Button.types';
 
+/**
+ * Creates styles for the PhishingModal component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     warningIcon: {
@@ -97,6 +102,11 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * PhishingModal component displays a warning when a user attempts to visit a potentially harmful site
+ * Provides options to go back to safety, report the issue, share on Twitter, or proceed anyway
+ * @returns {JSX.Element} The rendered phishing warning modal
+ */
 export default class PhishingModal extends PureComponent {
   static propTypes = {
     /**
@@ -118,8 +128,12 @@ export default class PhishingModal extends PureComponent {
     /**
      * Called to the user decides to share on Twitter
      */
+    shareToTwitter: PropTypes.func,
   };
 
+  /**
+   * Opens Twitter with a pre-filled tweet about MetaMask's phishing protection
+   */
   shareToTwitter = () => {
     const tweetText =
       'MetaMask just protected me from a phishing attack! Remember to always stay vigilant when clicking on links. Learn more at https://metamask.io';
