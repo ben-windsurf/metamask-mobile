@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import scaling from '../../../util/scaling';
+import scaling from '../../../util/scaling.ts';
 import Device from '../../../util/device';
 import { Theme } from '../../../util/theme/models';
 

@@ -44,7 +44,7 @@ import Avatar, {
   AvatarVariant,
 } from '../../../../../../component-library/components/Avatars/Avatar';
 import Identicon from '../../../../../UI/Identicon';
-import TransactionTypes from '../../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../../core/TransactionTypes.ts';
 import { showAlert } from '../../../../../../actions/alert';
 import { MetaMetricsEvents } from '../../../../../../core/Analytics';
 import TransactionHeader from '../../../../../UI/TransactionHeader';

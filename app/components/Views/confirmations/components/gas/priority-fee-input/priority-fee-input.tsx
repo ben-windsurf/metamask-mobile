@@ -39,7 +39,7 @@ export const PriorityFeeInput = ({
   const transactionMeta = useTransactionMetadataRequest();
   const { styles } = useStyles(styleSheet, {});
   const initialPriorityFee = hexWEIToDecGWEI(
-    transactionMeta?.txParams?.maxPriorityFeePerGas,
+    transactionMeta?.txParams?.maxPriorityFeePerGas || '0x0',
   ).toString();
   const [value, setValue] = useState(initialPriorityFee);
   const [error, setError] = useState<string | boolean>(false);

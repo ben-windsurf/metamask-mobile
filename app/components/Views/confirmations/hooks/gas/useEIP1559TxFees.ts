@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { TransactionMeta } from '@metamask/transaction-controller';
 
-import { hexToDecimal } from '../../../../../util/conversions';
+import { hexToDecimal } from '../../../../../util/conversions.ts';
 
 export const useEIP1559TxFees = (
   transactionMeta: TransactionMeta,

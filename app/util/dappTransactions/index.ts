@@ -2,7 +2,7 @@ import { remove0x } from '@metamask/utils';
 import { isBN, hexToBN } from '../number';
 import { areAddressesEqual, toFormattedAddress } from '../address';
 import Engine from '../../core/Engine';
-import TransactionTypes from '../../core/TransactionTypes';
+import TransactionTypes from '../../core/TransactionTypes.ts';
 import { strings } from '../../../locales/i18n';
 import BN4 from 'bnjs4';
 import { estimateGas as controllerEstimateGas } from '../transaction-controller';

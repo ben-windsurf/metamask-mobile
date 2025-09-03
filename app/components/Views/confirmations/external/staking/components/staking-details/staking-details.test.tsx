@@ -2,7 +2,7 @@ import { fireEvent } from '@testing-library/react-native';
 import { merge } from 'lodash';
 import React from 'react';
 import { RootState } from '../../../../../../../reducers';
-import { decGWEIToHexWEI } from '../../../../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../../../../util/conversions.ts';
 import { stakingDepositConfirmationState } from '../../../../../../../util/test/confirm-data-helpers';
 import { TOOLTIP_TYPES } from '../../../../../../../core/Analytics/events/confirmations';
 import renderWithProvider, {
@@ -38,7 +38,9 @@ describe('StakingDetails', () => {
             TransactionController: {
               transactions: [
                 {
-                  txParams: { value: `0x${decGWEIToHexWEI(10 ** 8)}` },
+                  txParams: {
+                    value: `0x${decGWEIToHexWEI((10 ** 8).toString())}`,
+                  },
                 },
               ],
             },
@@ -74,7 +76,9 @@ describe('StakingDetails', () => {
             TransactionController: {
               transactions: [
                 {
-                  txParams: { value: `0x${decGWEIToHexWEI(10 ** 8)}` },
+                  txParams: {
+                    value: `0x${decGWEIToHexWEI((10 ** 8).toString())}`,
+                  },
                 },
               ],
             },

@@ -11,7 +11,7 @@ import { RootState } from '../../../../../reducers';
 import { selectConversionRateByChainId } from '../../../../../selectors/currencyRateController';
 import { selectNetworkConfigurationByChainId } from '../../../../../selectors/networkController';
 import { selectShowFiatInTestnets } from '../../../../../selectors/settings';
-import { hexToDecimal } from '../../../../../util/conversions';
+import { hexToDecimal } from '../../../../../util/conversions.ts';
 import { isTestNet } from '../../../../../util/networks';
 import useFiatFormatter from '../../../../UI/SimulationDetails/FiatDisplay/useFiatFormatter';
 import { calculateGasEstimate, getFeesFromHex } from '../../utils/gas';

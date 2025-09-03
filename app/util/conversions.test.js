@@ -1,4 +1,4 @@
-import { multiplyHexes } from './conversions';
+import { multiplyHexes } from './conversions.ts';
 
 describe('multiplyHexes', () => {
   it('should correctly multiply two hex numbers', () => {
