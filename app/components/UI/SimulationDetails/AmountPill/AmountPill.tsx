@@ -5,7 +5,7 @@ import { View, ViewProps } from 'react-native';
 
 import I18n, { strings } from '../../../../../locales/i18n';
 import { TextVariant } from '../../../../component-library/components/Texts/Text';
-import { hexToDecimal } from '../../../../util/conversions';
+import { hexToDecimal } from '../../../../util/conversions.ts';
 import TextWithTooltip from '../../../Views/confirmations/components/UI/text-with-tooltip';
 import { useStyles } from '../../../hooks/useStyles';
 import { AssetIdentifier, AssetType } from '../types';

@@ -14,7 +14,7 @@ import { fontStyles } from '../../../styles/common';
 import { strings } from '../../../../locales/i18n';
 import AndroidBackHandler from '../AndroidBackHandler';
 import Device from '../../../util/device';
-import scaling from '../../../util/scaling';
+import scaling from '../../../util/scaling.ts';
 import Engine from '../../../core/Engine';
 import { ONBOARDING_WIZARD } from '../../../constants/storage';
 import { connect } from 'react-redux';

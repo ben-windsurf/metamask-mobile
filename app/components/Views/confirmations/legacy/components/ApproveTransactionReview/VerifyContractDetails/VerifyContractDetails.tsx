@@ -15,7 +15,7 @@ import createStyles from './VerifyContractDetails.styles';
 import { VerifyContractDetailsProps } from './VerifyContractDetails.types';
 import { findBlockExplorerForRpc } from '../../../../../../../util/networks';
 import { RPC } from '../../../../../../../constants/network';
-import TransactionTypes from '../../../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../../../core/TransactionTypes.ts';
 import { safeToChecksumAddress } from '../../../../../../../util/address';
 import { selectTokens } from '../../../../../../../selectors/tokensController';
 import { selectIsEvmNetworkSelected } from '../../../../../../../selectors/multichainNetworkController';

@@ -21,7 +21,7 @@ import Device from '../../../util/device';
 import { useTheme } from '../../../util/theme';
 import { GAS_ESTIMATE_TYPES } from '@metamask/gas-fee-controller';
 import AppConstants from '../../../core/AppConstants';
-import { decGWEIToHexWEI } from '../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../util/conversions.ts';
 import { BNToHex, hexToBN } from '../../../util/number';
 import {
   calculateEIP1559GasFeeHexes,

@@ -21,7 +21,7 @@ import {
   SmartTransactionStatuses,
 } from '@metamask/smart-transactions-controller/dist/types';
 import { v1 as random } from 'uuid';
-import { decimalToHex } from '../conversions';
+import { decimalToHex } from '../conversions.ts';
 import { ApprovalTypes } from '../../core/RPCMethods/RPCMethodMiddleware';
 import { RAMPS_SEND } from '../../components/UI/Ramp/Aggregator/constants';
 import { Messenger } from '@metamask/base-controller';

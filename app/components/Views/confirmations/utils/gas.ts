@@ -9,7 +9,7 @@ import {
   decimalToHex,
   getValueFromWeiHex,
   multiplyHexes,
-} from '../../../../util/conversions';
+} from '../../../../util/conversions.ts';
 
 const HEX_ZERO = '0x0';
 
@@ -72,7 +72,7 @@ export function getFeesFromHex({
   const decimalCurrentCurrencyFee = Number(
     getValueFromWeiHex({
       value: hexFee,
-      conversionRate: nativeConversionRateInBN,
+      conversionRate: Number(nativeConversionRateInBN),
       fromCurrency: 'GWEI',
       toCurrency: 'ETH',
       numberOfDecimals: 2,
@@ -85,7 +85,7 @@ export function getFeesFromHex({
   const preciseCurrentCurrencyFee = Number(
     getValueFromWeiHex({
       value: hexFee,
-      conversionRate: nativeConversionRateInBN,
+      conversionRate: Number(nativeConversionRateInBN),
       fromCurrency: 'GWEI',
       toCurrency: 'ETH',
       numberOfDecimals: 3,
@@ -139,7 +139,7 @@ export function calculateGasEstimate({
   };
 }) {
   let minimumFeePerGas = addHexes(
-    decGWEIToHexWEI(estimatedBaseFee) ?? HEX_ZERO,
+    decGWEIToHexWEI(estimatedBaseFee || '0') ?? HEX_ZERO,
     decimalToHex(priorityFeePerGas),
   );
 

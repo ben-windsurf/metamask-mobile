@@ -4,7 +4,7 @@ import Amount from '.';
 import { act, fireEvent, waitFor } from '@testing-library/react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import renderWithProvider from '../../../../../../util/test/renderWithProvider';
-import TransactionTypes from '../../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../../core/TransactionTypes.ts';
 import { addTransaction } from '../../../../../../util/transaction-controller';
 import { selectConfirmationRedesignFlags } from '../../../../../../selectors/featureFlagController/confirmations';
 import { AmountViewSelectorsIDs } from '../../../../../../../e2e/selectors/SendFlow/AmountView.selectors';

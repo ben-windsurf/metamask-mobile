@@ -20,7 +20,7 @@ import {
 } from '@metamask/notification-services-controller/notification-services/ui';
 import Engine from '../../../core/Engine';
 import { IconName } from '../../../component-library/components/Icons/Icon';
-import { hexWEIToDecETH, hexWEIToDecGWEI } from '../../conversions';
+import { hexWEIToDecETH, hexWEIToDecGWEI } from '../../conversions.ts';
 import { calcTokenAmount } from '../../transactions';
 import images from '../../../images/image-icons';
 import I18n, { strings } from '../../../../locales/i18n';

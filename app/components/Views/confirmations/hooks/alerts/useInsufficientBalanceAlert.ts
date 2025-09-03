@@ -7,7 +7,7 @@ import {
   addHexes,
   decimalToHex,
   multiplyHexes,
-} from '../../../../../util/conversions';
+} from '../../../../../util/conversions.ts';
 import { strings } from '../../../../../../locales/i18n';
 import { selectNetworkConfigurations } from '../../../../../selectors/networkController';
 import { createBuyNavigationDetails } from '../../../../UI/Ramp/Aggregator/routes/utils';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import TransactionTypes from '../../../core/TransactionTypes';
+import TransactionTypes from '../../../core/TransactionTypes.ts';
 import { strings } from '../../../../locales/i18n';
 import {
   selectEvmChainId,

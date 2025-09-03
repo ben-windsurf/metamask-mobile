@@ -1,5 +1,5 @@
 import BN from 'bnjs4';
-import TransactionTypes from '../core/TransactionTypes';
+import TransactionTypes from '../core/TransactionTypes.ts';
 import { ORIGIN_METAMASK } from '@metamask/controller-utils';
 
 // Transaction Status
