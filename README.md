@@ -26,6 +26,25 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
 
+## TypeScript Migration
+
+MetaMask Mobile is actively migrating from JavaScript to TypeScript to improve code quality, type safety, and developer experience. This ongoing effort focuses on converting core engine files and high-priority components.
+
+### Recent Migrations
+
+- **RPC Methods Core** (`app/core/RPCMethods/index.js` → `index.ts`) - Central coordinator for RPC method handling with proper type definitions for blockchain interactions
+- Added `RPCMethodsType` interface with strict type checking
+- Maintains full compatibility while adding type safety for wallet operations
+
+### Migration Guidelines
+
+- All new code should be written in TypeScript
+- Existing JavaScript files are being systematically converted to TypeScript
+- The project uses strict TypeScript configuration with no explicit `any` types allowed
+- Type definitions use `typeof` inference where possible to maintain accuracy
+
+The migration progress is tracked by fitness functions that ensure only TypeScript files exist in the `app` directory.
+
 ## Getting started
 
 ### Using Expo (recommended)
