@@ -5,8 +5,19 @@ import TransactionTypes from '../../core/TransactionTypes';
 import { estimateGas } from '../transaction-controller';
 import { hexToBN } from '@metamask/controller-utils';
 
+/**
+ * Ethereum currency unit constant
+ */
 export const ETH = 'ETH';
+
+/**
+ * Gwei currency unit constant (10^9 wei)
+ */
 export const GWEI = 'GWEI';
+
+/**
+ * Wei currency unit constant (smallest Ethereum unit)
+ */
 export const WEI = 'WEI';
 
 /**
@@ -107,6 +118,13 @@ export function parseWaitTime(min) {
   return parsed.trim();
 }
 
+/**
+ * Estimates gas limit for a transaction
+ * @param {Object} transaction - Transaction object to estimate gas for
+ * @param {boolean} resetGas - Whether to reset existing gas values before estimation
+ * @param {string} networkClientId - Network client ID for the estimation
+ * @returns {Promise<Object>} Object containing the estimated gas limit as a BN instance
+ */
 export async function getGasLimit(
   transaction,
   resetGas = false,
@@ -129,6 +147,17 @@ export async function getGasLimit(
   return { gas };
 }
 
+/**
+ * Converts a hex wei value to a different currency or denomination
+ * @param {Object} params - Conversion parameters
+ * @param {string} params.value - Hex value to convert
+ * @param {string} params.fromCurrency - Source currency (default: ETH)
+ * @param {string} params.toCurrency - Target currency
+ * @param {number} params.conversionRate - Exchange rate for currency conversion
+ * @param {number} params.numberOfDecimals - Number of decimal places in result
+ * @param {string} params.toDenomination - Target denomination
+ * @returns {string} Converted value as a string
+ */
 export function getValueFromWeiHex({
   value,
   fromCurrency = ETH,

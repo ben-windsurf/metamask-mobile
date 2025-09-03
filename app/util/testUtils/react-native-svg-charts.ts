@@ -41,6 +41,14 @@ const findByProp = function (
   return _findByProp(root, prop);
 };
 
+/**
+ * Fires layout events on all components with onLayout props in the component tree
+ * Used for testing react-native-svg-charts components that depend on layout measurements
+ * @param root - The root node to search for components with `onLayout` props
+ * @param options - The event options inside of `event.nativeElement.layout`
+ * @param options.width - The width value for the layout event (default: 300)
+ * @param options.height - The height value for the layout event (default: 100)
+ */
 export const fireLayoutEvent = function (
   /**
    * The root node to search for components with `onLayout` props.

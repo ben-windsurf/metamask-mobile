@@ -1,5 +1,10 @@
 import URL from 'url-parse';
 
+/**
+ * Converts a string to lowercase safely
+ * @param {string} str - The string to convert to lowercase
+ * @returns {string|undefined} The lowercase string or undefined if input is falsy
+ */
 export const tlc = (str) => str?.toLowerCase?.();
 
 /**
@@ -20,6 +25,12 @@ export function timeoutFetch(url, options, timeout = 500) {
   ]);
 }
 
+/**
+ * Finds the current route name from React Navigation state
+ * Handles nested navigation states and provides compatibility with older navigation versions
+ * @param {Array} routes - Array of route objects from navigation state
+ * @returns {string} The name of the current active route
+ */
 export function findRouteNameFromNavigatorState(routes) {
   let route = routes?.[routes.length - 1];
   if (route.state) {
@@ -41,14 +52,32 @@ export function findRouteNameFromNavigatorState(routes) {
 
   return name;
 }
+/**
+ * Capitalizes the first letter of a string
+ * @param {string} str - The string to capitalize
+ * @returns {string|boolean} The capitalized string or false if input is falsy
+ */
 export const capitalize = (str) =>
   (str && str.charAt(0).toUpperCase() + str.slice(1)) || false;
 
+/**
+ * Compares two strings for equality after converting both to lowercase
+ * @param {string} a - First string to compare
+ * @param {string} b - Second string to compare
+ * @returns {boolean} True if strings are equal when lowercased, false otherwise
+ */
 export const toLowerCaseEquals = (a, b) => {
   if (!a && !b) return false;
   return tlc(a) === tlc(b);
 };
 
+/**
+ * Performs a shallow equality comparison between two objects
+ * Compares only the first level of properties using strict equality
+ * @param {Object} object1 - First object to compare
+ * @param {Object} object2 - Second object to compare
+ * @returns {boolean} True if objects have the same keys and values at the first level
+ */
 export const shallowEqual = (object1, object2) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);

@@ -12,8 +12,13 @@ import { initialNavigationState } from '../../reducers/navigation';
 import { initialOnboardingState } from '../../reducers/onboarding';
 import { initialState as initialPerformanceState } from '../../core/redux/slices/performance';
 import { isTest } from './utils';
-// A cast is needed here because we use enums in some controllers, and TypeScript doesn't consider
-// the string value of an enum as satisfying an enum type.
+/**
+ * Initial background state for testing purposes
+ * Provides a properly typed EngineState from the JSON initial state
+ * A cast is needed here because we use enums in some controllers, and TypeScript doesn't consider
+ * the string value of an enum as satisfying an enum type.
+ * @type {EngineState} The initial engine background state for tests
+ */
 export const backgroundState: EngineState =
   initialBackgroundState as unknown as EngineState;
 
@@ -61,4 +66,10 @@ if (isTest) {
   initialRootState.performance = initialPerformanceState;
 }
 
+/**
+ * Initial root state for testing purposes
+ * Provides a complete RootState object with all required slices initialized
+ * Used as the starting state for Redux store in test environments
+ * @returns {RootState} The initial root state for tests
+ */
 export default initialRootState;

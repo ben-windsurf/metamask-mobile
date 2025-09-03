@@ -1,6 +1,11 @@
 import { strings } from '../../../locales/i18n';
 import { MINUTE, HOUR, DAY } from '../../constants/time';
 
+/**
+ * Converts a timestamp to a localized date and time string
+ * @param {number | Date} timestamp - The timestamp to convert
+ * @returns {string} Formatted date and time string in locale format
+ */
 export function toLocaleDateTime(timestamp) {
   const dateObj = new Date(timestamp);
   const date = dateObj.toLocaleDateString();
@@ -9,9 +14,9 @@ export function toLocaleDateTime(timestamp) {
 }
 
 /**
- * Formats a given timestamp (number | Date)
- * @param {number | Date} timestamp
- * @returns string
+ * Formats a timestamp to a localized date and time string with AM/PM format
+ * @param {number | Date} timestamp - The timestamp to format
+ * @returns {string} Formatted date and time string with month name and AM/PM time
  */
 export function toDateFormat(timestamp) {
   const date = new Date(timestamp);
@@ -28,18 +33,28 @@ export function toDateFormat(timestamp) {
   )} ${hours}:${minutes} ${ampm}`;
 }
 
+/**
+ * Converts a timestamp to a localized date string
+ * @param {number | Date} timestamp - The timestamp to convert
+ * @returns {string} Formatted date string in locale format
+ */
 export function toLocaleDate(timestamp) {
   return new Date(timestamp).toLocaleDateString();
 }
 
+/**
+ * Converts a timestamp to a localized time string
+ * @param {number | Date} timestamp - The timestamp to convert
+ * @returns {string} Formatted time string in locale format
+ */
 export function toLocaleTime(timestamp) {
   return new Date(timestamp).toLocaleTimeString();
 }
 
 /**
- * This function will return the difference between today and a provided date in milliseconds
- * @param {Date} sessionTime - Date object
- * @returns the difference between two dates in milliseconds
+ * Calculates the difference between today and a provided date in milliseconds
+ * @param {Date} date - Date object to compare with today
+ * @returns {number} The difference between the two dates in milliseconds
  */
 export function msBetweenDates(date) {
   const today = new Date();
@@ -47,9 +62,9 @@ export function msBetweenDates(date) {
 }
 
 /**
- * This function will return how many hours in on a determinated amount of milliseconds
- * @param {number} milliseconds - Milliseconds number
- * @returns how many hours in on a determinated amount of milliseconds
+ * Converts milliseconds to hours
+ * @param {number} milliseconds - The number of milliseconds to convert
+ * @returns {number} The equivalent number of hours
  */
 export function msToHours(milliseconds) {
   return milliseconds / (60 * 60 * 1000);

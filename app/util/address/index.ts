@@ -146,6 +146,13 @@ export function renderShortAddress(address: string, chars = 5) {
   )}`;
 }
 
+/**
+ * Returns a slightly longer formatted address than renderShortAddress
+ * @param {string} address - String corresponding to an address
+ * @param {number} chars - Number of characters to show at the end (default: 4)
+ * @param {number} initialChars - Number of characters to show at the beginning (default: 20)
+ * @returns {string} Formatted address with more initial characters shown
+ */
 export function renderSlightlyLongAddress(
   address: string,
   chars = 4,
@@ -185,6 +192,11 @@ export function renderAccountName(
   return renderShortAddress(address);
 }
 
+/**
+ * Determines if an account is an HD account or a first-party Snap account
+ * @param {InternalAccount} account - The internal account to check
+ * @returns {boolean} True if the account is HD or first-party Snap, false otherwise
+ */
 export function isHDOrFirstPartySnapAccount(account: InternalAccount) {
   if (
     account.metadata.keyring.type !== KeyringTypes.snap &&
@@ -482,6 +494,12 @@ export function resemblesAddress(address: string) {
   return address && address.length === 2 + 20 * 2;
 }
 
+/**
+ * Converts an address to its checksummed format
+ * @param {string} address - The address to convert to checksum format
+ * @returns {string} The checksummed address
+ * @throws {Error} If the address is invalid
+ */
 export function toChecksumAddress(address: string) {
   try {
     return getChecksumAddress(address as Hex);
@@ -500,6 +518,11 @@ export function toChecksumAddress(address: string) {
   }
 }
 
+/**
+ * Safely converts an address to its checksummed format, handling undefined input
+ * @param {string} address - The address to convert to checksum format (optional)
+ * @returns {string|undefined} The checksummed address or undefined if input is falsy
+ */
 export function safeToChecksumAddress(address?: string) {
   if (!address) return undefined;
   return toChecksumAddress(address);
@@ -738,6 +761,11 @@ export function isValidAddressInputViaQRCode(input: string) {
  * @param {string} str
  * @returns {string}
  */
+/**
+ * Removes the '0x' prefix from a hex string if present
+ * @param {string} str - The string to strip the hex prefix from
+ * @returns {string} The string without the '0x' prefix
+ */
 export const stripHexPrefix = (str: string) => {
   if (typeof str !== 'string') {
     return str;
@@ -765,6 +793,13 @@ export async function getAddress(
   return null;
 }
 
+/**
+ * Retrieves token details including name, symbol, and decimals
+ * @param {string} tokenAddress - The contract address of the token
+ * @param {string} userAddress - The user's address (optional)
+ * @param {string} tokenId - The token ID for NFTs (optional)
+ * @returns {Promise<Object>} Token details object with name, symbol, decimals, and image
+ */
 export const getTokenDetails = async (
   tokenAddress: string,
   userAddress?: string,
@@ -794,6 +829,12 @@ export const getTokenDetails = async (
   };
 };
 
+/**
+ * Retrieves the decimal places for a token
+ * @param {string} address - The contract address of the token
+ * @param {NetworkClientId} networkClientId - The network client ID (optional)
+ * @returns {Promise<number|undefined>} The number of decimal places for the token
+ */
 export const getTokenDecimal = async (
   address: string,
   networkClientId?: NetworkClientId,

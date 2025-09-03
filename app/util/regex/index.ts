@@ -1,14 +1,30 @@
 import { RegexTypes } from './index.types';
 import { AccountListBottomSheetSelectorsIDs } from '../../../e2e/selectors/wallet/AccountListBottomSheet.selectors';
 
+/**
+ * Creates a regular expression to validate decimal numbers with specific separator and decimal places
+ * @param {string} separator - The decimal separator character (e.g., '.' or ',')
+ * @param {string} decimalPlaces - The exact number of decimal places required
+ * @returns {RegExp} Regular expression that matches numbers with the specified decimal format
+ */
 export function hasDecimals(separator: string, decimalPlaces: string) {
   return new RegExp(`^\\d+\\${separator}\\d{${decimalPlaces}}$`, 'g');
 }
 
+/**
+ * Checks if a URL string contains a protocol prefix (e.g., http://, https://, ftp://)
+ * @param {string} url - The URL string to test
+ * @returns {boolean} True if the URL has a protocol prefix, false otherwise
+ */
 export function hasProtocol(url: string) {
   return /^[a-z]*:\/\//.test(url);
 }
 
+/**
+ * Collection of regular expressions used throughout the MetaMask Mobile application
+ * Provides patterns for validation, parsing, and formatting of various data types
+ * including addresses, URLs, numbers, and network identifiers
+ */
 export const regex: RegexTypes = {
   eth: (num: number) => new RegExp(`${num} ETH`),
   usd: (num: number) => new RegExp(`${num}`),

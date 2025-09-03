@@ -67,6 +67,9 @@ export interface SubmitSmartTransactionRequest {
 const LOG_PREFIX = 'STX publishHook';
 // It has to be 21000 for cancel transactions, otherwise the API would reject it.
 const CANCEL_GAS = 21000;
+/**
+ * Error message for smart transactions that fail to receive a transaction hash
+ */
 export const STX_NO_HASH_ERROR =
   'Smart Transaction does not have a transaction hash, there was a problem';
 
@@ -593,6 +596,11 @@ class SmartTransactionHook {
   };
 }
 
+/**
+ * Submits a single smart transaction using the smart transaction hook
+ * @param {SubmitSmartTransactionRequest} request - The smart transaction request configuration
+ * @returns {Promise<{transactionHash: string | undefined}>} Promise resolving to transaction hash result
+ */
 export const submitSmartTransactionHook = (
   request: SubmitSmartTransactionRequest,
 ) => {
@@ -600,6 +608,11 @@ export const submitSmartTransactionHook = (
   return smartTransactionHook.submit();
 };
 
+/**
+ * Submits a batch of smart transactions using the smart transaction hook
+ * @param {SubmitSmartTransactionRequest} request - The smart transaction request configuration with batch transactions
+ * @returns {Promise<{results: Array<{transactionHash: string}>}>} Promise resolving to batch transaction results
+ */
 export const submitBatchSmartTransactionHook = (
   request: SubmitSmartTransactionRequest,
 ) => {

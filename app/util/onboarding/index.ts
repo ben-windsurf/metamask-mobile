@@ -8,6 +8,12 @@ import {
 import { whatsNewList } from '../../components/UI/WhatsNewModal';
 import StorageWrapper from '../../store/storage-wrapper';
 
+/**
+ * Checks if a version has been seen and is greater than or equal to the minimum app version
+ * @param {string | null} versionSeen - The version that was previously seen
+ * @param {string} minAppVersion - The minimum app version to compare against
+ * @returns {boolean} True if version was seen and meets minimum requirement
+ */
 const isVersionSeenAndGreaterThanMinAppVersion = (
   versionSeen: string | null,
   minAppVersion: string,

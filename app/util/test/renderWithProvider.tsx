@@ -34,6 +34,13 @@ export interface ProviderValues {
   theme?: Theme;
 }
 
+/**
+ * Renders a React component with Redux provider and theme context for testing
+ * @param {React.ReactElement} component - The React component to render
+ * @param {ProviderValues} providerValues - Optional provider values for Redux state and theme
+ * @param {boolean} includeNavigationContainer - Whether to include NavigationContainer wrapper
+ * @returns {Object} Rendered component with testing utilities and store
+ */
 export default function renderWithProvider(
   component: React.ReactElement,
   providerValues?: ProviderValues,
@@ -64,6 +71,16 @@ export default function renderWithProvider(
   return { ...render(component, { wrapper: AllProviders }), store };
 }
 
+/**
+ * Renders a React component within a navigation stack for testing
+ * @param {React.ComponentType} Component - The React component to render
+ * @param {Object} options - Screen configuration options
+ * @param {string} options.name - The name of the screen
+ * @param {StackNavigationOptions} options.options - Optional navigation options
+ * @param {ProviderValues} providerValues - Optional provider values for Redux state and theme
+ * @param {Record<string, any>} initialParams - Initial parameters to pass to the screen
+ * @returns {Object} Rendered component with testing utilities and store
+ */
 export function renderScreen(
   Component: React.ComponentType,
   options: {
@@ -89,6 +106,12 @@ export function renderScreen(
   );
 }
 
+/**
+ * Renders a React hook with Redux provider for testing
+ * @param {Function} hook - The hook function to test
+ * @param {ProviderValues} providerValues - Optional provider values for Redux state and theme
+ * @returns {Object} Hook result with testing utilities and store
+ */
 export function renderHookWithProvider<Result, Props>(
   hook: (props: Props) => Result,
   providerValues?: ProviderValues,

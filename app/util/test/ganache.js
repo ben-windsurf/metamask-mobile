@@ -1,6 +1,9 @@
 import { getGanachePort } from '../../../e2e/fixtures/utils';
 import ganache from 'ganache';
 
+/**
+ * Default port number for Ganache test server
+ */
 export const DEFAULT_GANACHE_PORT = 8545;
 
 const defaultOptions = {
@@ -12,7 +15,17 @@ const defaultOptions = {
   quiet: false,
 };
 
+/**
+ * Ganache test server wrapper for managing local blockchain instances
+ * Provides methods to start/stop the server and interact with test accounts
+ */
 export default class Ganache {
+  /**
+   * Starts the Ganache server with the provided options
+   * @param {Object} opts - Configuration options for the Ganache server
+   * @param {string} opts.mnemonic - Required mnemonic for account generation
+   * @throws {Error} If mnemonic is missing or server fails to start
+   */
   async start(opts) {
     if (!opts.mnemonic) {
       throw new Error('Missing required mnemonic');
@@ -28,10 +41,18 @@ export default class Ganache {
     }
   }
 
+  /**
+   * Gets the Ganache provider instance
+   * @returns {Object|undefined} The Ganache provider or undefined if server not started
+   */
   getProvider() {
     return this._server?.provider;
   }
 
+  /**
+   * Retrieves all available accounts from the Ganache server
+   * @returns {Promise<string[]>} Array of account addresses
+   */
   async getAccounts() {
     return await this.getProvider().request({
       method: 'eth_accounts',
@@ -39,6 +60,10 @@ export default class Ganache {
     });
   }
 
+  /**
+   * Gets the balance of the first account in ETH
+   * @returns {Promise<string|number>} Formatted balance in ETH
+   */
   async getBalance() {
     const accounts = await this.getAccounts();
     const balanceHex = await this.getProvider().request({
@@ -53,6 +78,10 @@ export default class Ganache {
     return balanceFormatted;
   }
 
+  /**
+   * Stops the Ganache server and cleans up resources
+   * @throws {Error} If server is not running
+   */
   async quit() {
     if (!this._server) {
       throw new Error('Server not running yet');

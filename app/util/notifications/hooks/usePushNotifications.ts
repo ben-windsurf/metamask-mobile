@@ -20,6 +20,16 @@ export interface UsePushNotificationsToggleProps {
   // E.g. Onboarding = nudge, settings page = don't nudge
   nudgeEnablePush: boolean;
 }
+/**
+ * Custom hook for managing push notification toggle functionality
+ * Provides methods to enable, disable, and toggle push notifications with permission handling
+ * @param {UsePushNotificationsToggleProps} props - Configuration options for the hook
+ * @param {boolean} props.nudgeEnablePush - Whether to nudge user to enable push notifications (default: true)
+ * @returns {Object} Object containing notification state and toggle functions
+ * @returns {boolean} returns.data - Current push notification enabled state
+ * @returns {Function} returns.togglePushNotification - Function to toggle push notifications
+ * @returns {boolean} returns.loading - Loading state for push notification operations
+ */
 export function usePushNotificationsToggle(
   props: UsePushNotificationsToggleProps = { nudgeEnablePush: true },
 ) {

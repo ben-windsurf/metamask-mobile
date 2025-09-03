@@ -13,6 +13,10 @@ import {
 import { backgroundState } from '../../initial-root-state';
 import { mockNetworkState } from '../../network';
 
+/**
+ * Lowercase version of the mock address for testing purposes
+ * @returns {string} The mock address converted to lowercase
+ */
 export const MOCK_ADDRESS_1_LOWERCASE = MOCK_ADDRESS_1.toLowerCase();
 const MOCK_ADDRESS_TOKEN_CONTRACT =
   '0xae2eee9Bd39cbcf2ceC908D053A3e0bC970b8889'.toLowerCase();
@@ -43,6 +47,10 @@ const MOCK_TX_NFT_TRANSFER = {
   origin: 'https://metamask.github.io',
 } as Partial<TransactionMeta>;
 
+/**
+ * Mock state object for NFT-related testing
+ * Contains mock data for collectibles, accounts, network, and NFT controller state
+ */
 export const MOCK_STATE_NFT = {
   collectibles: {
     favorites: {},

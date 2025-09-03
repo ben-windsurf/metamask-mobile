@@ -1,3 +1,7 @@
+/**
+ * Transaction controller utility functions for managing Ethereum transactions
+ * Provides proxy methods and utilities for interacting with the TransactionController
+ */
 import {
   GasFeeEstimateType,
   TransactionParams,
@@ -11,6 +15,12 @@ import { NetworkClientId } from '@metamask/network-controller';
 import { selectBasicFunctionalityEnabled } from '../../selectors/settings';
 import { store } from '../../store';
 
+/**
+ * Adds a new transaction to the transaction controller
+ * @param {TransactionParams} transaction - The transaction parameters
+ * @param {Object} opts - Additional options for the transaction
+ * @returns {Promise<Object>} The added transaction metadata
+ */
 export async function addTransaction(
   transaction: TransactionParams,
   opts: Parameters<BaseTransactionController['addTransaction']>[1],
@@ -20,6 +30,14 @@ export async function addTransaction(
   return await TransactionController.addTransaction(transaction, opts);
 }
 
+/**
+ * Updates atomic batch data for a transaction
+ * @param {Object} batchData - The batch data to update
+ * @param {string} batchData.transactionId - The transaction ID
+ * @param {Hex} batchData.transactionData - The transaction data
+ * @param {number} batchData.transactionIndex - The transaction index in the batch
+ * @returns {Promise<void>} Promise that resolves when batch data is updated
+ */
 export async function updateAtomicBatchData(batchData: {
   transactionId: string;
   transactionData: Hex;
@@ -30,6 +48,11 @@ export async function updateAtomicBatchData(batchData: {
   return await TransactionController.updateAtomicBatchData(batchData);
 }
 
+/**
+ * Adds a batch of transactions to the transaction controller
+ * @param {...any} args - Arguments passed to the transaction controller's addTransactionBatch method
+ * @returns {Promise<Object[]>} Array of added transaction metadata
+ */
 export async function addTransactionBatch(
   ...args: Parameters<BaseTransactionController['addTransactionBatch']>
 ) {
@@ -38,7 +61,12 @@ export async function addTransactionBatch(
   return await TransactionController.addTransactionBatch(...args);
 }
 
-// Keeping this export as function to put more logic in the future
+/**
+ * Estimates gas for a transaction
+ * @param {TransactionParams} transaction - The transaction parameters
+ * @param {NetworkClientId} networkClientId - The network client ID
+ * @returns {Promise<string>} The estimated gas amount as a hex string
+ */
 export async function estimateGas(
   transaction: TransactionParams,
   networkClientId: NetworkClientId,

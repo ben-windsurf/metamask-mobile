@@ -9,6 +9,11 @@ import { toASCII } from 'punycode/';
 const hostnameRegex =
   /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:\/\/)?(?:www\.)?([^/?:]+)(?::\d+)?/;
 
+/**
+ * Checks if the provided URL is a MetaMask Portfolio URL
+ * @param {string} url - The URL to check
+ * @returns {boolean} True if the URL matches the Portfolio URL origin, false otherwise
+ */
 export function isPortfolioUrl(url: string) {
   try {
     const currentUrl = new URL(url);
@@ -18,6 +23,12 @@ export function isPortfolioUrl(url: string) {
   }
 }
 
+/**
+ * Checks if the provided URL is a MetaMask Bridge URL
+ * Compares both origin and pathname (ignoring trailing slashes)
+ * @param {string} url - The URL to check
+ * @returns {boolean} True if the URL matches the Bridge URL origin and pathname, false otherwise
+ */
 export function isBridgeUrl(url: string) {
   try {
     const currentUrl = new URL(url);
@@ -34,8 +45,11 @@ export function isBridgeUrl(url: string) {
 }
 
 /**
+ * Validates if a URL contains only ASCII characters in its hostname
  * This method does not use the URL library because it does not support punycode encoding in react native.
  * It compares the original hostname to a punycode version of the hostname.
+ * @param {string} urlString - The URL string to validate
+ * @returns {boolean} True if the hostname contains only ASCII characters, false otherwise
  */
 export const isValidASCIIURL = (urlString?: string) => {
   if (!urlString || urlString.length === 0) {
@@ -59,9 +73,12 @@ function removePathTrailingSlash(path: string) {
 }
 
 /**
+ * Converts a URL to its Punycode representation for internationalized domain names
  * Note: We use the punycode library here because the URL library in react native doesn't support punycode encoding.
  * We do have the 'react-native-url-polyfill' package which supports the URL library, but it doesn't support punycode encoding.
  * The URL library is supported in node.js which allows tests to pass, but behavior differs in react-native runtime.
+ * @param {string} urlString - The URL string to convert to Punycode
+ * @returns {string} The Punycode representation of the URL, or the original URL if conversion fails
  */
 export const toPunycodeURL = (urlString: string) => {
   try {

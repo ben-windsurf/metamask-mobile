@@ -6,6 +6,12 @@ import { getNotificationsList } from '../../../selectors/notifications';
 import { selectTransactions } from '../../../selectors/transactionController';
 import { selectPendingApprovals } from '../../../selectors/approvalController';
 
+/**
+ * Generates trace tags for Sentry error reporting based on wallet state
+ * Collects various wallet metrics like account count, token count, NFT count, etc.
+ * @param {RootState} state - The Redux root state object
+ * @returns {Record<string, number | string | boolean>} Object containing trace tags for Sentry
+ */
 export function getTraceTags(state: RootState) {
   const tags: Record<string, number | string | boolean> = {};
 

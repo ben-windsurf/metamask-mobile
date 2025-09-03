@@ -13,6 +13,13 @@ import { RootState } from '../../reducers';
 import Device from '../../util/device';
 import { MetaMetrics } from '../../core/Analytics';
 
+/**
+ * Generates sanitized state logs for debugging and support purposes
+ * Removes sensitive data like NFT/Token controllers and keyring vault information
+ * @param {any} state - The application state to generate logs from
+ * @param {boolean} loggedIn - Whether to include keyring state information (default: true)
+ * @returns {string} JSON string of the sanitized state logs
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, import/prefer-default-export
 export const generateStateLogs = (state: any, loggedIn = true): string => {
@@ -51,6 +58,13 @@ export const generateStateLogs = (state: any, loggedIn = true): string => {
   return JSON.stringify(newState);
 };
 
+/**
+ * Downloads state logs as a shareable file with app version and build information
+ * Creates a JSON file containing sanitized state data for debugging purposes
+ * @param {RootState} fullState - The complete application state
+ * @param {boolean} loggedIn - Whether to include keyring state information (default: true)
+ * @returns {Promise<void>} Promise that resolves when the download/share is complete
+ */
 export const downloadStateLogs = async (
   fullState: RootState,
   loggedIn = true,

@@ -186,6 +186,11 @@ function hasNetworkFeeFields(
 
 type HexChainId = `0x${string}`;
 
+/**
+ * Gets a Web3Provider instance for a given chain ID
+ * @param {HexChainId} chainId - The hexadecimal chain ID to get the provider for
+ * @returns {Web3Provider | undefined} Web3Provider instance if found, undefined otherwise
+ */
 export function getProviderByChainId(chainId: HexChainId) {
   const networkClientId =
     Engine.context.NetworkController.findNetworkClientIdByChainId(chainId);
@@ -197,6 +202,12 @@ export function getProviderByChainId(chainId: HexChainId) {
   return provider && new Web3Provider(provider);
 }
 
+/**
+ * Retrieves network fee information for a given on-chain notification
+ * @param {OnChainRawNotification} notification - The notification to get network fees for
+ * @returns {Promise<Object>} Object containing transaction fee details including ETH and USD amounts, gas info, and fees
+ * @throws {Error} If notification type is invalid or provider not found
+ */
 export const getNetworkFees = async (notification: OnChainRawNotification) => {
   if (!hasNetworkFeeFields(notification)) {
     throw new Error('Invalid notification type');
@@ -261,6 +272,11 @@ export const getNetworkFees = async (notification: OnChainRawNotification) => {
   }
 };
 
+/**
+ * Gets the appropriate icon badge for a notification based on its trigger type
+ * @param {string} trigger_type - The trigger type of the notification
+ * @returns {IconName} The corresponding icon name for the notification badge
+ */
 export const getNotificationBadge = (trigger_type: string) => {
   switch (trigger_type) {
     case TRIGGER_TYPES.ERC20_SENT:
@@ -332,6 +348,11 @@ export function shortenString(
   }`;
 }
 
+/**
+ * Sorts notifications by creation date in descending order (newest first)
+ * @param {INotification[]} notifications - Array of notifications to sort
+ * @returns {INotification[]} Sorted array of notifications, empty array if input is falsy
+ */
 export const sortNotifications = (
   notifications: INotification[],
 ): INotification[] => {
@@ -457,9 +478,19 @@ export const getUsdAmount = (amount: string, decimals: string, usd: string) => {
   return formatAmount(numericAmount);
 };
 
+/**
+ * Checks if there is an initial notification available
+ * @returns {Promise<boolean>} Promise that resolves to true if initial notification exists, false otherwise
+ */
 export const hasInitialNotification = async () =>
   Boolean(await notifee.getInitialNotification());
 
+/**
+ * Wraps a promise with a timeout that rejects if the promise doesn't resolve within the specified time
+ * @param {Promise<T>} promise - The promise to wrap with timeout
+ * @param {number} ms - Timeout duration in milliseconds
+ * @returns {Promise<T>} Promise that resolves with the original promise result or rejects on timeout
+ */
 export function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   const timeout = new Promise<never>((_, reject) =>
     setTimeout(() => reject(new Error(strings('notifications.timeout'))), ms),

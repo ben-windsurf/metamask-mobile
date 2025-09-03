@@ -281,6 +281,12 @@ function getProtocolFromURL(url) {
   return new URL(url).protocol;
 }
 
+/**
+ * Rewrites breadcrumb data to remove sensitive URL information
+ * Replaces full URLs with just the protocol for privacy protection
+ * @param {Object} breadcrumb - The Sentry breadcrumb object to rewrite
+ * @returns {Object} The modified breadcrumb with sanitized URLs
+ */
 export function rewriteBreadcrumb(breadcrumb) {
   if (breadcrumb.data?.url) {
     breadcrumb.data.url = getProtocolFromURL(breadcrumb.data.url);
@@ -412,6 +418,12 @@ export function maskObject(objectToMask, mask = {}) {
   }, {});
 }
 
+/**
+ * Rewrites Sentry error reports to remove sensitive information and add app state
+ * Applies various sanitization steps including URL removal, address masking, and device info removal
+ * @param {Object} report - The Sentry error report to rewrite
+ * @returns {Object} The sanitized error report with masked app state
+ */
 export function rewriteReport(report) {
   try {
     // filter out SES from error stack trace
@@ -545,6 +557,12 @@ export function deriveSentryEnvironment(
 }
 
 // Setup sentry remote error reporting
+/**
+ * Sets up Sentry error reporting with privacy-focused configuration
+ * Initializes Sentry with appropriate environment settings, integrations, and sanitization
+ * @param {boolean} forceEnabled - Whether to force enable Sentry regardless of user consent
+ * @returns {Promise<void>} Promise that resolves when Sentry is initialized
+ */
 export async function setupSentry(forceEnabled = false) {
   const dsn = process.env.MM_SENTRY_DSN;
 
@@ -613,5 +631,10 @@ export async function captureExceptionForced(error, extra = {}) {
   }
 }
 
+/**
+ * Placeholder function for deleting Sentry data
+ * Currently a no-op but reserved for future implementation of data deletion
+ * @returns {void}
+ */
 // eslint-disable-next-line no-empty-function
 export function deleteSentryData() {}

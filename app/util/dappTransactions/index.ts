@@ -57,12 +57,11 @@ interface EstimatedGas {
 }
 
 /**
- * Estimates gas limit
- *
- * @param {object} opts - Object containing optional attributes object to calculate gas with (amount, data and to)
- * @returns {object} - Object containing gas estimation
+ * Estimates gas limit for a transaction
+ * @param {opts} opts - Object containing optional attributes to calculate gas with (amount, data and to)
+ * @param {Transaction} transaction - The transaction object containing sender, network, and asset information
+ * @returns {Promise<EstimatedGas>} Promise resolving to object containing gas estimation
  */
-
 export const estimateGas = async (
   opts: opts,
   transaction: Transaction,
@@ -95,9 +94,10 @@ export const estimateGas = async (
 
 /**
  * Validates Ether transaction amount
- *
- * @param {bool} allowEmpty - Whether the validation allows empty amount or not
- * @returns {string} - String containing error message whether the Ether transaction amount is valid or not
+ * @param {BN4} value - The transaction value to validate
+ * @param {string} from - The sender address
+ * @param {boolean} allowEmpty - Whether the validation allows empty amount or not (default: true)
+ * @returns {string | undefined} String containing error message if invalid, undefined if valid
  */
 export const validateEtherAmount = (
   value: BN4,
@@ -152,9 +152,14 @@ const getTokenBalance = async (
 
 /**
  * Validates asset (ERC20) transaction amount
- *
- * @param {bool} allowEmpty - Whether the validation allows empty amount or not
- * @returns {string} - String containing error message whether the Ether transaction amount is valid or not
+ * @param {BN4} value - The token amount to validate
+ * @param {BN4} gas - The gas limit for the transaction
+ * @param {string} from - The sender address
+ * @param {SelectedAsset} selectedAsset - The selected token asset information
+ * @param {string} selectedAddress - The currently selected wallet address
+ * @param {ContractBalances} contractBalances - Object containing contract balance information
+ * @param {boolean} allowEmpty - Whether the validation allows empty amount or not (default: true)
+ * @returns {Promise<string | undefined>} Promise resolving to error message if invalid, undefined if valid
  */
 export const validateTokenAmount = async (
   value: BN4,
@@ -194,6 +199,13 @@ export const validateTokenAmount = async (
   }
 };
 
+/**
+ * Validates that the selected address owns the specified collectible (ERC721 token)
+ * @param {string} address - The contract address of the collectible
+ * @param {string} tokenId - The token ID of the collectible
+ * @param {string} selectedAddress - The address to check ownership for
+ * @returns {Promise<string | undefined>} Error message if validation fails, undefined if valid
+ */
 export const validateCollectibleOwnership = async (
   address: string,
   tokenId: string,
@@ -224,6 +236,17 @@ interface Validations {
 
 type AssetType = keyof Validations;
 
+/**
+ * Validates transaction amount based on asset type (ETH, ERC20, or ERC721)
+ * @param {AssetType} assetType - The type of asset being validated ('ETH', 'ERC20', or 'ERC721')
+ * @param {string} address - The contract address (for tokens/collectibles)
+ * @param {string} tokenId - The token ID (for collectibles)
+ * @param {string} selectedAddress - The selected wallet address
+ * @param {Transaction} transaction - The transaction object containing amount and other details
+ * @param {ContractBalances} contractBalances - Object containing contract balance information
+ * @param {boolean} allowEmpty - Whether to allow empty amounts (default: true)
+ * @returns {Promise<string | undefined | boolean>} Validation result - error message, undefined if valid, or false if no validator exists
+ */
 export const validateAmount = async (
   assetType: AssetType,
   address: string,
@@ -261,6 +284,13 @@ interface GasAnalyticsParams {
   gas_estimate_type: string;
 }
 
+/**
+ * Generates analytics parameters for gas-related events
+ * @param {Transaction} transaction - The transaction object containing origin and asset information
+ * @param {string} activeTabUrl - The URL of the active tab/dapp
+ * @param {string} gasEstimateType - The type of gas estimation used
+ * @returns {GasAnalyticsParams | Record<string, never>} Analytics parameters object or empty object if error occurs
+ */
 export const getGasAnalyticsParams = (
   transaction: Transaction,
   activeTabUrl: string,
@@ -290,10 +320,10 @@ type setTransactionObjectType = (
 
 /**
  * Updates gas and gasPrice in transaction state
- *
- * @param {object} gasLimit - BN object containing gasLimit value
- * @param {object} gasPrice - BN object containing gasPrice value
- * @param {function} setTransactionObject - Sets any attribute in transaction object
+ * @param {BN4} gasLimit - BN object containing gasLimit value
+ * @param {BN4} gasPrice - BN object containing gasPrice value
+ * @param {setTransactionObjectType} setTransactionObject - Function that sets any attribute in transaction object
+ * @returns {void}
  */
 export const handleGasFeeSelection = (
   gasLimit: BN4,
@@ -310,6 +340,12 @@ export const handleGasFeeSelection = (
 /**
  * Updates gas limit of the current transaction object
  *
+ */
+/**
+ * Estimates and updates the gas limit for a transaction
+ * @param {Transaction} transaction - The transaction object to estimate gas for
+ * @param {setTransactionObjectType} setTransactionObject - Function to update the transaction object with new gas limit
+ * @returns {Promise<void>} Promise that resolves when gas limit is updated
  */
 export const handleGetGasLimit = async (
   transaction: Transaction,

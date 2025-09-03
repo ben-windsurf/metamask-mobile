@@ -6,6 +6,7 @@ import { useAutoSignIn, useAutoSignOut } from '../useAuthentication';
 /**
  * Takes care of various identity effects.
  * - Automatically signs users in or out based on the app state.
+ * @returns {void} This hook doesn't return anything, it only manages side effects
  */
 export const useIdentityEffects = () => {
   const { dispatchAccountSyncing, shouldDispatchAccountSyncing } =

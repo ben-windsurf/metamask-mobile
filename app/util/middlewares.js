@@ -40,8 +40,9 @@ export function createOriginMiddleware(opts) {
 
 /**
  * Checks if the error code or message contains a user rejected error
- * @param {String} errorMessage
- * @returns {boolean}
+ * @param {String} errorMessage - The error message to check
+ * @param {number} errorCode - The error code to check
+ * @returns {boolean} True if the error is a user rejection, false otherwise
  */
 export function containsUserRejectedError(errorMessage, errorCode) {
   try {

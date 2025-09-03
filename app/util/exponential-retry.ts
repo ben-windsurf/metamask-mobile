@@ -1,5 +1,10 @@
 /**
  * Calculates delay for exponential backoff with optional jitter and max delay cap
+ * @param {number} retryCount - The current retry attempt number (0-based)
+ * @param {number} baseDelay - Base delay in milliseconds (default: 1000)
+ * @param {number} maxDelay - Maximum delay cap in milliseconds (default: 30000)
+ * @param {boolean} jitter - Whether to add random jitter to prevent thundering herd (default: false)
+ * @returns {number} The calculated delay in milliseconds
  */
 export function calculateExponentialRetryDelay(
   retryCount: number,
@@ -24,6 +29,13 @@ export function calculateExponentialRetryDelay(
 
 /**
  * Retries an async function with exponential backoff
+ * @param {Function} asyncFn - The async function to retry
+ * @param {number} maxRetries - Maximum number of retry attempts
+ * @param {number} baseDelay - Base delay in milliseconds (default: 1000)
+ * @param {number} maxDelay - Maximum delay cap in milliseconds (default: 30000)
+ * @param {boolean} jitter - Whether to add random jitter to prevent thundering herd (default: false)
+ * @returns {Promise<T>} Promise that resolves with the function result or rejects with the last error
+ * @throws {Error} Throws the last error encountered if all retry attempts fail
  */
 export async function retryWithExponentialDelay<T>(
   asyncFn: () => Promise<T>,

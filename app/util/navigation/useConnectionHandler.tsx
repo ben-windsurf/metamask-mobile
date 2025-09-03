@@ -4,6 +4,12 @@ import {
   MetaMetricsEvents,
 } from '../../components/hooks/useMetrics';
 
+/**
+ * Custom hook for handling network connection state changes
+ * Tracks connection events and navigates to offline mode when connection is lost
+ * @param {any} navigation - React Navigation object for screen navigation
+ * @returns {Object} Object containing connectionChangeHandler function
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useConnectionHandler = (navigation: any) => {

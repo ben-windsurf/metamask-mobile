@@ -9,6 +9,10 @@ import { BtcScope, SolScope } from '@metamask/keyring-api';
 const InfuraKey = process.env.MM_INFURA_PROJECT_ID;
 const infuraProjectId = InfuraKey === 'null' ? '' : InfuraKey;
 
+/**
+ * Mapping of Infura network names to QuickNode endpoint URL functions
+ * Provides failover RPC endpoints for supported networks
+ */
 export const QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME = {
   'ethereum-mainnet': () => process.env.QUICKNODE_MAINNET_URL,
   'linea-mainnet': () => process.env.QUICKNODE_LINEA_MAINNET_URL,
@@ -20,6 +24,11 @@ export const QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME = {
   'bsc-mainnet': () => process.env.QUICKNODE_BSC_URL,
 };
 
+/**
+ * Gets failover RPC URLs for a given Infura network
+ * @param {keyof typeof QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME} infuraNetwork - The Infura network name
+ * @returns {string[]} Array of failover URLs, or empty array if none available
+ */
 export function getFailoverUrlsForInfuraNetwork(
   infuraNetwork: keyof typeof QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME,
 ) {
@@ -30,6 +39,10 @@ export function getFailoverUrlsForInfuraNetwork(
   return [];
 }
 
+/**
+ * List of popular network configurations that users can easily add to MetaMask
+ * Contains network details including chain IDs, RPC URLs, block explorers, and visual assets
+ */
 export const PopularList = [
   {
     chainId: toHex('43114'),
@@ -154,6 +167,11 @@ export const PopularList = [
   },
 ];
 
+/**
+ * Gets the image source for non-EVM networks based on chain ID
+ * @param {CaipChainId} chainId - The CAIP chain ID
+ * @returns {any} The image source for the network, or undefined if not found
+ */
 export const getNonEvmNetworkImageSourceByChainId = (chainId: CaipChainId) => {
   switch (chainId) {
     case SolScope.Mainnet:
@@ -171,6 +189,10 @@ export const getNonEvmNetworkImageSourceByChainId = (chainId: CaipChainId) => {
   }
 };
 
+/**
+ * Chain IDs for Infura-supported test networks
+ * Maps testnet names to their hexadecimal chain IDs
+ */
 export const INFURA_TESTNET_CHAIN_IDS = {
   GOERLI: '0x5',
   LINEA_GOERLI: '0xe704',
@@ -192,6 +214,10 @@ export const INFURA_TESTNET_CHAIN_IDS = {
   UNICHAIN_SEPOLIA: '0x515',
 } as const;
 
+/**
+ * Array of all Infura testnet chain IDs
+ * Used for identifying and filtering testnet networks
+ */
 export const infuraChainIdsTestNets: string[] = [
   INFURA_TESTNET_CHAIN_IDS.GOERLI,
   INFURA_TESTNET_CHAIN_IDS.LINEA_GOERLI,
@@ -213,6 +239,10 @@ export const infuraChainIdsTestNets: string[] = [
   INFURA_TESTNET_CHAIN_IDS.UNICHAIN_SEPOLIA,
 ];
 
+/**
+ * Array of allowed Infura host domains for network validation
+ * Contains mainnet Infura endpoints for supported blockchain networks
+ */
 export const allowedInfuraHosts = [
   // Ethereum
   'mainnet.infura.io',
@@ -247,9 +277,9 @@ export const allowedInfuraHosts = [
 ];
 
 /**
- * List of popularList will change in the future, removing networks from the list will lead to users not
- * seeing the logo of the network anymore.
- * We can keep this new list updated with any network removed from the popular list so we keep returning the logo of the network.
+ * List of network configurations that were previously popular but have been removed
+ * Maintains network logos and configurations for networks no longer in the popular list
+ * Prevents users from losing network logos when networks are deprecated from the main list
  */
 export const UnpopularNetworkList = [
   {

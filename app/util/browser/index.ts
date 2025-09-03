@@ -174,5 +174,9 @@ export const appendURLParams = (
   return url;
 };
 
+/**
+ * Checks if token discovery browser feature is enabled
+ * @returns {boolean} True if token discovery browser is enabled, false otherwise
+ */
 export const isTokenDiscoveryBrowserEnabled = () =>
   AppConstants.TOKEN_DISCOVERY_BROWSER_ENABLED;

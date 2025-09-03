@@ -1,3 +1,8 @@
+/**
+ * Currency conversion utilities for Ethereum values
+ * Provides functions for converting between different numeric bases and denominations
+ * including hex/decimal conversions and ETH/WEI/GWEI transformations
+ */
 import { hexToBN } from '@metamask/controller-utils';
 import { ETH, GWEI, WEI } from './custom-gas';
 import {
@@ -8,6 +13,11 @@ import {
 import { formatCurrency } from './confirm-tx.js';
 import { addHexPrefix } from './number';
 
+/**
+ * Converts a hexadecimal value to decimal
+ * @param {string} hexValue - The hexadecimal value to convert
+ * @returns {string} The decimal representation of the hex value
+ */
 export function hexToDecimal(hexValue) {
   return conversionUtil(hexValue, {
     fromNumericBase: 'hex',
@@ -15,6 +25,11 @@ export function hexToDecimal(hexValue) {
   });
 }
 
+/**
+ * Converts a decimal value to hexadecimal
+ * @param {string|number} decimal - The decimal value to convert
+ * @returns {string} The hexadecimal representation of the decimal value
+ */
 export function decimalToHex(decimal) {
   return conversionUtil(decimal, {
     fromNumericBase: 'dec',
@@ -22,6 +37,16 @@ export function decimalToHex(decimal) {
   });
 }
 
+/**
+ * Converts a Wei hex value to the most appropriate ETH denomination (ETH, GWEI, or WEI)
+ * Returns the first non-zero denomination or WEI if all are zero
+ * @param {Object} params - Conversion parameters
+ * @param {string} params.value - The Wei hex value to convert
+ * @param {string} params.fromCurrency - The source currency (default: ETH)
+ * @param {number} params.conversionRate - The conversion rate for currency conversion
+ * @param {number} params.numberOfDecimals - Number of decimal places (default: 6)
+ * @returns {string} Formatted string with value and denomination
+ */
 export function getEthConversionFromWeiHex({
   value,
   fromCurrency = ETH,
@@ -51,6 +76,17 @@ export function getEthConversionFromWeiHex({
   return nonZeroDenomination;
 }
 
+/**
+ * Converts a Wei hex value to a specified currency and denomination
+ * @param {Object} params - Conversion parameters
+ * @param {string} params.value - The Wei hex value to convert
+ * @param {string} params.fromCurrency - The source currency (default: ETH)
+ * @param {string} params.toCurrency - The target currency
+ * @param {number} params.conversionRate - The conversion rate between currencies
+ * @param {number} params.numberOfDecimals - Number of decimal places to include
+ * @param {string} params.toDenomination - The target denomination (ETH, GWEI, WEI)
+ * @returns {string} The converted value as a decimal string
+ */
 export function getValueFromWeiHex({
   value,
   fromCurrency = ETH,
@@ -71,6 +107,16 @@ export function getValueFromWeiHex({
   });
 }
 
+/**
+ * Converts a decimal value to Wei hex format
+ * @param {Object} params - Conversion parameters
+ * @param {string|number} params.value - The decimal value to convert
+ * @param {string} params.fromCurrency - The source currency
+ * @param {number} params.conversionRate - The conversion rate
+ * @param {string} params.fromDenomination - The source denomination
+ * @param {boolean} params.invertConversionRate - Whether to invert the conversion rate
+ * @returns {string} The Wei value in hexadecimal format
+ */
 export function getWeiHexFromDecimalValue({
   value,
   fromCurrency,
@@ -90,6 +136,12 @@ export function getWeiHexFromDecimalValue({
   });
 }
 
+/**
+ * Adds two hex WEI values and returns the result as a decimal
+ * @param {string} aHexWEI - First hex WEI value to add
+ * @param {string} bHexWEI - Second hex WEI value to add
+ * @returns {string} The sum as a decimal string
+ */
 export function addHexWEIsToDec(aHexWEI, bHexWEI) {
   return addCurrencies(aHexWEI, bHexWEI, {
     aBase: 16,
@@ -99,6 +151,12 @@ export function addHexWEIsToDec(aHexWEI, bHexWEI) {
   });
 }
 
+/**
+ * Subtracts two hex WEI values and returns the result as a decimal
+ * @param {string} aHexWEI - First hex WEI value (minuend)
+ * @param {string} bHexWEI - Second hex WEI value to subtract (subtrahend)
+ * @returns {string} The difference as a decimal string
+ */
 export function subtractHexWEIsToDec(aHexWEI, bHexWEI) {
   return subtractCurrencies(aHexWEI, bHexWEI, {
     aBase: 16,
@@ -108,6 +166,13 @@ export function subtractHexWEIsToDec(aHexWEI, bHexWEI) {
   });
 }
 
+/**
+ * Converts a decimal ETH amount to a specified fiat currency
+ * @param {string|number} ethTotal - The ETH amount to convert
+ * @param {string} convertedCurrency - The target fiat currency code
+ * @param {number} conversionRate - The ETH to fiat conversion rate
+ * @returns {string} The converted amount in the target currency
+ */
 export function decEthToConvertedCurrency(
   ethTotal,
   convertedCurrency,
@@ -123,6 +188,11 @@ export function decEthToConvertedCurrency(
   });
 }
 
+/**
+ * Converts decimal GWEI to hex WEI
+ * @param {string|number} decGWEI - The decimal GWEI value to convert
+ * @returns {string} The equivalent value in hex WEI
+ */
 export function decGWEIToHexWEI(decGWEI) {
   return conversionUtil(decGWEI, {
     fromNumericBase: 'dec',

@@ -1,6 +1,13 @@
 import { QuoteMetadata, QuoteResponse } from '@metamask/bridge-controller';
 import { QuoteMetadataSerialized } from '@metamask/bridge-status-controller';
 
+/**
+ * Serializes quote metadata by converting BigNumber values to strings
+ * Transforms numeric values in quote response to serializable string format for storage or transmission
+ * @param {QuoteResponse & QuoteMetadata} quoteResponse - The quote response with metadata to serialize
+ * @returns {QuoteResponse & QuoteMetadataSerialized} The serialized quote response with string values
+ * @throws {Error} If serialization fails
+ */
 export const serializeQuoteMetadata = (
   quoteResponse: QuoteResponse & QuoteMetadata,
 ): QuoteResponse & QuoteMetadataSerialized => {

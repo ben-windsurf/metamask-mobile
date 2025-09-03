@@ -44,11 +44,21 @@ const isSent = (
   n.type === TRIGGER_TYPES.ERC721_SENT ||
   n.type === TRIGGER_TYPES.ERC1155_SENT;
 
+/**
+ * Gets the appropriate "from" address label for a notification based on whether it's sent or received
+ * @param {SentReceivedNotification} n - The notification object
+ * @returns {string} Localized string for the "from" address label
+ */
 export const label_address_from = (n: SentReceivedNotification): string =>
   isSent(n)
     ? strings('notifications.modal.label_address_from_you')
     : strings('notifications.modal.label_address_from');
 
+/**
+ * Gets the appropriate "to" address label for a notification based on whether it's sent or received
+ * @param {SentReceivedNotification} n - The notification object
+ * @returns {string} Localized string for the "to" address label
+ */
 export const label_address_to = (n: SentReceivedNotification): string =>
   isSent(n)
     ? strings('notifications.modal.label_address_to')

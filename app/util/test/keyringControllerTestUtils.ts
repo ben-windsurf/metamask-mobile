@@ -1,18 +1,31 @@
+/**
+ * Test utilities for keyring controller testing
+ * Provides mock addresses, entropy sources, and keyring controller state for unit tests
+ */
 import { KeyringObject, KeyringTypes } from '@metamask/keyring-controller';
 
+/** Mock address for simple keyring testing */
 export const mockSimpleKeyringAddress =
   '0xd018538C87232FF95acbCe4870629b75640a78E7';
+/** Mock address for QR keyring testing */
 export const mockQrKeyringAddress =
   '0xB374Ca013934e498e5baD3409147F34E6c462389';
+/** Mock address for HD keyring testing */
 export const mockHDKeyringAddress =
   '0x71C7656EC7ab88b098defB751B7401B5f6d8976F';
+/** Mock address for first snap account testing */
 export const mockSnapAddress1 = '0x6f92dC30B1e8E71D4A33B5dF06a812B9aAbCD2e9';
+/** Mock address for second snap account testing */
 export const mockSnapAddress2 = '0x8A4bD37F19C94A72E8Fe0fA97dD1422a65E53b718';
+/** Mock Solana address for multichain testing */
 export const mockSolanaAddress = '7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV';
+/** Mock address for second HD keyring testing */
 export const mockSecondHDKeyringAddress =
   '0xf5E7127d55ed72EBe33d2b0540cc82baF3E31561';
 
+/** Mock entropy source identifier for keyring testing */
 export const MOCK_ENTROPY_SOURCE = '01JNG7170V9X27V5NFDTY04PJ4';
+/** Mock second entropy source identifier for multi-keyring testing */
 export const MOCK_ENTROPY_SOURCE_2 = '01JSJNVTJEPSHZSNWAD3JT0PJN';
 
 const MOCK_DEFAULT_KEYRINGS: KeyringObject[] = [
@@ -58,6 +71,7 @@ const MOCK_DEFAULT_KEYRINGS: KeyringObject[] = [
   },
 ];
 
+/** Mock keyring controller state for testing keyring operations and account management */
 export const MOCK_KEYRING_CONTROLLER_STATE = {
   isUnlocked: jest.fn(),
   getAccountKeyringType: jest.fn(),

@@ -9,6 +9,21 @@ import {
 import { Hex } from '@metamask/utils';
 import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * Creates a mock network state for testing purposes
+ * Generates network configurations with default values for missing properties
+ * @param {...Object} networks - Network configuration objects
+ * @param {string} networks.id - Optional network client ID (generates UUID if not provided)
+ * @param {Hex} networks.chainId - The chain ID for the network
+ * @param {string} networks.rpcUrl - Optional RPC URL (generates localhost URL if not provided)
+ * @param {string} networks.nickname - Optional network nickname (defaults to 'mainnet')
+ * @param {string} networks.ticker - Optional native currency ticker (defaults to 'ETH')
+ * @param {RpcEndpointType} networks.type - Optional RPC endpoint type (defaults to Custom)
+ * @param {string} networks.blockExplorerUrl - Optional block explorer URL
+ * @param {NetworkMetadata} networks.metadata - Optional network metadata
+ * @returns {NetworkState} Complete network state object for testing
+ * @throws {TypeError} When multiple networks have the same chainId
+ */
 export const mockNetworkState = (
   ...networks: {
     id?: string;

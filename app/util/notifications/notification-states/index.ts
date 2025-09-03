@@ -28,6 +28,11 @@ const expandComponentsType = <C extends NotificationState<any>>(
   components: C,
 ) => components as NotificationState;
 
+/**
+ * Maps notification trigger types to their corresponding component states
+ * Each trigger type is associated with a specific notification component that handles
+ * the display and interaction logic for that type of notification
+ */
 export const NotificationComponentState = {
   [TRIGGER_TYPES.ERC20_SENT]: expandComponentsType(ERC20SentReceivedState),
   [TRIGGER_TYPES.ERC20_RECEIVED]: expandComponentsType(ERC20SentReceivedState),
@@ -59,11 +64,21 @@ export const NotificationComponentState = {
   ),
 };
 
+/**
+ * Type guard to check if a trigger type has associated notification components
+ * @param {TRIGGER_TYPES} t - The trigger type to check
+ * @returns {boolean} True if the trigger type has notification components, false otherwise
+ */
 export const hasNotificationComponents = (
   t: TRIGGER_TYPES,
 ): t is keyof typeof NotificationComponentState =>
   t in NotificationComponentState;
 
+/**
+ * Checks if a trigger type has an associated notification modal
+ * @param {TRIGGER_TYPES} t - The trigger type to check
+ * @returns {boolean} True if the trigger type has a notification modal, false otherwise
+ */
 export const hasNotificationModal = (t: TRIGGER_TYPES) => {
   if (!hasNotificationComponents(t)) {
     return false;

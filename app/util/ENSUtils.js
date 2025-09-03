@@ -67,6 +67,13 @@ export function getCachedENSName(address, chainId) {
   return cacheEntry?.name;
 }
 
+/**
+ * Performs a reverse ENS lookup to get the ENS name for an address
+ * Uses caching to avoid repeated lookups within the cache threshold
+ * @param {string} address - The Ethereum address to lookup
+ * @param {string} chainId - The chain ID to perform the lookup on
+ * @returns {Promise<string|undefined>} The ENS name if found, undefined otherwise
+ */
 export async function doENSReverseLookup(address, chainId) {
   const { provider } =
     Engine.context.NetworkController.getProviderAndBlockTracker();
@@ -100,6 +107,12 @@ export async function doENSReverseLookup(address, chainId) {
   }
 }
 
+/**
+ * Performs an ENS lookup to resolve an ENS name to an Ethereum address
+ * @param {string} ensName - The ENS name to resolve
+ * @param {string} chainId - The chain ID to perform the lookup on
+ * @returns {Promise<string|undefined>} The resolved Ethereum address if found, undefined otherwise
+ */
 export async function doENSLookup(ensName, chainId) {
   const { provider } =
     Engine.context.NetworkController.getProviderAndBlockTracker();
@@ -118,6 +131,11 @@ export async function doENSLookup(ensName, chainId) {
   }
 }
 
+/**
+ * Checks if a given name matches the default account name pattern
+ * @param {string} name - The account name to check
+ * @returns {boolean} True if the name matches the default account pattern, false otherwise
+ */
 export function isDefaultAccountName(name) {
   return regex.defaultAccount.test(name);
 }

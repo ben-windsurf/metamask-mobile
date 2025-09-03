@@ -11,6 +11,11 @@ export interface MetaMaskAndroidChannel extends AndroidChannel {
   subtitle: string;
 }
 
+/**
+ * Array of Android notification channels for MetaMask notifications
+ * Defines channel configurations for different types of notifications with appropriate settings
+ * @returns {MetaMaskAndroidChannel[]} Array of configured notification channels
+ */
 export const notificationChannels = [
   {
     id: ChannelId.DEFAULT_NOTIFICATION_CHANNEL_ID,

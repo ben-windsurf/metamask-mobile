@@ -1,17 +1,23 @@
+/**
+ * Utility functions for responsive scaling based on device dimensions
+ * Provides consistent scaling across different iPhone models and screen sizes
+ */
 import { Dimensions, PixelRatio } from 'react-native';
 
-//baseModel 0
 const IPHONE_6_WIDTH = 375;
 const IPHONE_6_HEIGHT = 667;
 
-//baseModel 1
 const IPHONE_11_PRO_WIDTH = 375;
 const IPHONE_11_PRO_HEIGHT = 812;
 
-//baseModel 2
 const IPHONE_11_PRO_MAX_WIDTH = 414;
 const IPHONE_11_PRO_MAX_HEIGHT = 896;
 
+/**
+ * Gets the base dimensions for a specific iPhone model
+ * @param {number} baseModel - The base model identifier (0: iPhone 6, 1: iPhone 11 Pro, 2: iPhone 11 Pro Max)
+ * @returns {Object} Object containing width and height dimensions for the specified model
+ */
 const getBaseModel = (baseModel) => {
   if (baseModel === 1) {
     return { width: IPHONE_11_PRO_WIDTH, height: IPHONE_11_PRO_HEIGHT };
@@ -22,6 +28,12 @@ const getBaseModel = (baseModel) => {
   return { width: IPHONE_6_WIDTH, height: IPHONE_6_HEIGHT };
 };
 
+/**
+ * Internal helper function to get current and base screen sizes for scaling calculations
+ * @param {boolean} scaleVertical - Whether to use vertical dimensions for scaling
+ * @param {number} baseModel - The base model identifier for reference dimensions
+ * @returns {Object} Object containing currSize and baseScreenSize for scaling calculations
+ */
 const _getSizes = (scaleVertical, baseModel) => {
   const { width, height } = Dimensions.get('window');
   const CURR_WIDTH = width < height ? width : height;
@@ -38,6 +50,17 @@ const _getSizes = (scaleVertical, baseModel) => {
   return { currSize, baseScreenSize };
 };
 
+/**
+ * Scales a size value based on device dimensions and scaling options
+ * @param {number} size - The base size to scale
+ * @param {Object} options - Scaling configuration options
+ * @param {number} options.factor - Scaling factor applied to the difference (default: 1)
+ * @param {boolean} options.scaleVertical - Whether to scale based on vertical dimensions (default: false)
+ * @param {boolean} options.scaleUp - Whether to allow scaling up beyond original size (default: false)
+ * @param {number} options.baseSize - Custom base size for scaling calculations (default: current screen size)
+ * @param {number} options.baseModel - Base device model for scaling reference
+ * @returns {number} The scaled size value, rounded to nearest pixel
+ */
 const scale = (
   size,
   {
@@ -58,6 +81,12 @@ const scale = (
   return size;
 };
 
+/**
+ * Convenience function for vertical scaling
+ * @param {number} size - The base size to scale
+ * @param {Object} options - Scaling configuration options (same as scale function)
+ * @returns {number} The vertically scaled size value
+ */
 const scaleVertical = (size, options) =>
   scale(size, { scaleVertical: true, ...options });
 
