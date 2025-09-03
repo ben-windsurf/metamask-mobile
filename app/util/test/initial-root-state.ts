@@ -2,6 +2,9 @@ import type { RootState } from '../../reducers';
 import type { EngineState } from '../../core/Engine';
 import { initialState as initialFiatOrdersState } from '../../reducers/fiatOrders';
 import { initialState as initialSecurityState } from '../../reducers/security';
+import { initialState as initialPrivacyState } from '../../reducers/privacy';
+import { initialState as initialSettingsState } from '../../reducers/settings';
+import { initialState as initialBrowserState } from '../../reducers/browser';
 import { initialState as initialInpageProvider } from '../../core/redux/slices/inpageProvider';
 import { initialState as confirmationMetrics } from '../../core/redux/slices/confirmationMetrics';
 import { initialState as originThrottling } from '../../core/redux/slices/originThrottling';
@@ -21,11 +24,11 @@ const initialRootState: RootState = {
   legalNotices: undefined,
   collectibles: undefined,
   engine: { backgroundState },
-  privacy: undefined,
+  privacy: initialPrivacyState,
   bookmarks: undefined,
-  browser: undefined,
+  browser: initialBrowserState,
   modals: undefined,
-  settings: undefined,
+  settings: initialSettingsState,
   alert: undefined,
   transaction: undefined,
   user: userInitialState,
