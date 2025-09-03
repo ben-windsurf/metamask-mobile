@@ -37,6 +37,15 @@ interface BaseAccountDetailsProps {
   children?: React.ReactNode;
 }
 
+/**
+ * BaseAccountDetails component displays detailed information about a multichain account
+ * Provides a comprehensive view with account avatar, name editing, address sharing, and wallet navigation
+ * Used as the foundation for account detail screens across different account types in MetaMask Mobile
+ * @param {BaseAccountDetailsProps} props - The component props
+ * @param {InternalAccount} props.account - The account object containing metadata and address information
+ * @param {React.ReactNode} [props.children] - Optional child components to render below the account details
+ * @returns {JSX.Element} The rendered account details component with navigation and interaction capabilities
+ */
 export const BaseAccountDetails = ({
   account,
   children,

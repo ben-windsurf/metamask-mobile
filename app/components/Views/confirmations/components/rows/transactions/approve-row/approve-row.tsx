@@ -8,6 +8,12 @@ import { SetApprovalForAll } from '../../../approve-static-simulations/set-appro
 import { IncreaseDecreaseAllowance } from '../../../approve-static-simulations/increase-decrease-allowance';
 import { StaticSimulationLayout } from '../../../UI/static-simulation-layout';
 
+/**
+ * ApproveRow component renders the appropriate approval transaction simulation
+ * Displays different UI components based on the type of approval method being used
+ * Supports standard approvals, Permit2 approvals, setApprovalForAll, and allowance modifications
+ * @returns {JSX.Element} The rendered approval row component with appropriate simulation layout
+ */
 export const ApproveRow = () => {
   const { approveMethod, isLoading } = useApproveTransactionData();
 

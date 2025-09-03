@@ -27,6 +27,15 @@ const InfoLabel = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+/**
+ * PriorityFeeInput component allows users to input and validate priority fees for EIP-1559 transactions
+ * Provides real-time validation against max fee per gas and displays current/historical fee ranges
+ * @param {Object} props - Component props
+ * @param {Hex} props.maxFeePerGas - Maximum fee per gas in hex format for validation
+ * @param {function} props.onChange - Callback function called when priority fee value changes
+ * @param {function} props.onErrorChange - Callback function called when validation error state changes
+ * @returns {JSX.Element} Priority fee input component with validation and fee range information
+ */
 export const PriorityFeeInput = ({
   maxFeePerGas,
   onChange,

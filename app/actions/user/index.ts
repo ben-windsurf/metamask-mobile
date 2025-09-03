@@ -28,24 +28,41 @@ import {
 
 export * from './types';
 
+/**
+ * Action to interrupt biometric authentication process
+ * @returns {InterruptBiometricsAction} Redux action to interrupt biometrics
+ */
 export function interruptBiometrics(): InterruptBiometricsAction {
   return {
     type: UserActionType.INTERRUPT_BIOMETRICS,
   };
 }
 
+/**
+ * Action to lock the application
+ * @returns {LockAppAction} Redux action to lock the app
+ */
 export function lockApp(): LockAppAction {
   return {
     type: UserActionType.LOCKED_APP,
   };
 }
 
+/**
+ * Action to trigger deeplink checking process
+ * @returns {CheckForDeeplinkAction} Redux action to check for deeplinks
+ */
 export function checkForDeeplink(): CheckForDeeplinkAction {
   return {
     type: UserActionType.CHECK_FOR_DEEPLINK,
   };
 }
 
+/**
+ * Action to signal successful authentication
+ * @param {string} [bioStateMachineId] - Optional biometric state machine identifier
+ * @returns {AuthSuccessAction} Redux action indicating authentication success
+ */
 export function authSuccess(bioStateMachineId?: string): AuthSuccessAction {
   return {
     type: UserActionType.AUTH_SUCCESS,
@@ -53,6 +70,11 @@ export function authSuccess(bioStateMachineId?: string): AuthSuccessAction {
   };
 }
 
+/**
+ * Action to signal authentication error
+ * @param {string} [bioStateMachineId] - Optional biometric state machine identifier
+ * @returns {AuthErrorAction} Redux action indicating authentication error
+ */
 export function authError(bioStateMachineId?: string): AuthErrorAction {
   return {
     type: UserActionType.AUTH_ERROR,
@@ -60,18 +82,30 @@ export function authError(bioStateMachineId?: string): AuthErrorAction {
   };
 }
 
+/**
+ * Action to signal that user password has been set
+ * @returns {PasswordSetAction} Redux action indicating password is set
+ */
 export function passwordSet(): PasswordSetAction {
   return {
     type: UserActionType.PASSWORD_SET,
   };
 }
 
+/**
+ * Action to signal that user password has been unset
+ * @returns {PasswordUnsetAction} Redux action indicating password is unset
+ */
 export function passwordUnset(): PasswordUnsetAction {
   return {
     type: UserActionType.PASSWORD_UNSET,
   };
 }
 
+/**
+ * Action to signal that seedphrase has been backed up
+ * @returns {SeedphraseBackedUpAction} Redux action indicating seedphrase backup completion
+ */
 export function seedphraseBackedUp(): SeedphraseBackedUpAction {
   return {
     type: UserActionType.SEEDPHRASE_BACKED_UP,

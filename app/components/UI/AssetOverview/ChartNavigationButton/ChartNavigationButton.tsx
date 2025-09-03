@@ -13,6 +13,15 @@ interface ChartNavigationButtonProps {
   selected: boolean;
 }
 
+/**
+ * ChartNavigationButton renders a navigation button for chart time period selection
+ * Displays different styles based on selection state and handles press events
+ * @param {ChartNavigationButtonProps} props - Component props
+ * @param {() => void} props.onPress - Callback function when button is pressed
+ * @param {string} props.label - Text label to display on the button
+ * @param {boolean} props.selected - Whether this button is currently selected
+ * @returns {JSX.Element} A touchable button with styled text
+ */
 const ChartNavigationButton = ({
   onPress,
   label,

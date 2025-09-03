@@ -37,6 +37,13 @@ export interface StakingEarningsProps {
   asset: TokenI;
 }
 
+/**
+ * Internal component that renders the staking earnings content
+ * Displays annual rate, lifetime rewards, and estimated annual earnings for a staked asset
+ * @param {StakingEarningsProps} props - Component props
+ * @param {TokenI} props.asset - The staked asset to display earnings for
+ * @returns {JSX.Element} The staking earnings content with loading states and tooltips
+ */
 const StakingEarningsContent = ({ asset }: StakingEarningsProps) => {
   const { styles } = useStyles(styleSheet, {});
 
@@ -204,6 +211,13 @@ const StakingEarningsContent = ({ asset }: StakingEarningsProps) => {
   );
 };
 
+/**
+ * StakingEarnings component displays earnings information for a staked asset
+ * Shows annual rate, lifetime rewards, and estimated earnings with SDK provider context
+ * @param {StakingEarningsProps} props - Component props
+ * @param {TokenI} props.asset - The staked asset to display earnings for
+ * @returns {JSX.Element} The staking earnings component wrapped with StakeSDKProvider
+ */
 export const StakingEarnings = ({ asset }: StakingEarningsProps) => (
   <StakeSDKProvider>
     <StakingEarningsContent asset={asset} />

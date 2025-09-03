@@ -92,6 +92,12 @@ const translations: TranslationKeys = {
     ),
 };
 
+/**
+ * Creates a localized push notification message for MetaMask Mobile
+ * Transforms notification data into a user-friendly push message using localized translations
+ * @param {INotification} notification - The notification object containing transaction/event data
+ * @returns {object} Formatted push notification message with localized title and description
+ */
 export function createNotificationMessage(notification: INotification) {
   return createOnChainPushNotificationMessage(notification, translations);
 }

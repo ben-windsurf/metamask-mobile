@@ -56,7 +56,20 @@ const Default = () => {
 };
 
 /**
- * View that renders a warning for existing user in a modal
+ * Modal component that displays a warning message for existing users during onboarding
+ * Shows a customizable warning dialog with cancel and confirm actions
+ * @param {Object} props - Component props
+ * @param {boolean} props.warningModalVisible - Whether the modal is visible
+ * @param {Function} props.onCancelPress - Callback when cancel button is pressed
+ * @param {boolean} props.cancelButtonDisabled - Whether cancel button is disabled
+ * @param {Function} props.onRequestClose - Callback when modal is requested to close
+ * @param {Function} props.onConfirmPress - Callback when confirm button is pressed
+ * @param {React.ReactNode} props.children - Custom content to display in modal
+ * @param {string} props.cancelText - Custom text for cancel button
+ * @param {string} props.confirmText - Custom text for confirm button
+ * @param {string} props.confirmTestID - Test ID for confirm button
+ * @param {string} props.cancelTestID - Test ID for cancel button
+ * @returns {JSX.Element} The rendered warning modal component
  */
 export default function WarningExistingUserModal({
   warningModalVisible,

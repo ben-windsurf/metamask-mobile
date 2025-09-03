@@ -11,33 +11,72 @@ jest.mock(
   }),
 );
 
+/**
+ * Ethereum mainnet chain ID for testing
+ */
 export const ethChainId = '0x1' as Hex;
+
+/**
+ * Optimism chain ID for testing
+ */
 export const optimismChainId = '0xa' as Hex;
 
+/**
+ * Mock EVM account ID for testing
+ */
 export const evmAccountId = 'evmAccountId';
+
+/**
+ * Mock EVM account address for testing
+ */
 export const evmAccountAddress =
   '0x1234567890123456789012345678901234567890' as Hex;
 
+/**
+ * Mock Solana account ID for testing
+ */
 export const solanaAccountId = 'solanaAccountId';
+
+/**
+ * Mock Solana account address for testing
+ */
 export const solanaAccountAddress =
   'pXwSggYaFeUryz86UoCs9ugZ4VWoZ7R1U5CVhxYjL61';
 
-// Ethereum tokens
+/**
+ * Mock Ethereum token address for testing
+ */
 export const ethToken1Address =
   '0x0000000000000000000000000000000000000001' as Hex;
+
+/**
+ * Mock Ethereum token address for testing
+ */
 export const ethToken2Address =
   '0x0000000000000000000000000000000000000002' as Hex;
 
-// Optimism tokens
+/**
+ * Mock Optimism token address for testing
+ */
 export const optimismToken1Address =
   '0x0000000000000000000000000000000000000003' as Hex;
 
-// Solana tokens
+/**
+ * Mock Solana native token address for testing
+ */
 export const solanaNativeTokenAddress =
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp/slip44:501' as CaipAssetId;
+
+/**
+ * Mock Solana token address for testing
+ */
 export const solanaToken2Address =
   'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp/token:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' as CaipAssetId;
 
+/**
+ * Mock initial state for bridge component testing
+ * Contains comprehensive mock data for all controllers and state slices
+ */
 export const initialState = {
   engine: {
     backgroundState: {

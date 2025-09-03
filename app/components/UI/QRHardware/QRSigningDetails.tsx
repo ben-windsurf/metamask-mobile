@@ -49,6 +49,11 @@ interface IQRSigningDetails {
   fromAddress: string;
 }
 
+/**
+ * Creates styles for the QRSigningDetails component
+ * @param {any} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createStyles = (colors: any) =>
@@ -116,6 +121,13 @@ const createStyles = (colors: any) =>
     },
   });
 
+/**
+ * QRSigningDetails component handles QR code signing flow for hardware wallets
+ * Displays animated QR codes for transaction signing and manages QR scanner for signature capture
+ * Handles camera permissions, error states, and communication with hardware wallet keyring
+ * @param {IQRSigningDetails} props - Component props
+ * @returns {JSX.Element} The QR signing details interface with animated QR code and scanner
+ */
 const QRSigningDetails = ({
   QRState,
   successCallback,

@@ -1,12 +1,23 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { isEqual } from 'lodash';
 
+/**
+ * Constant representing the loading state when refetching notification accounts
+ */
 export const REFECHING_ACCOUNTS_STATES = 'loading';
 
+/**
+ * Interface defining the state structure for notifications accounts
+ * Maps Ethereum addresses to their notification enabled status
+ */
 export interface NotificationsAccountsState {
   [address: string]: boolean;
 }
 
+/**
+ * Initial state for the notifications accounts provider slice
+ * Starts with an empty object containing no account notification states
+ */
 export const initialState: NotificationsAccountsState = {};
 
 const name = 'notificationsAccountsProvider';
@@ -41,4 +52,8 @@ const { actions, reducer } = slice;
 
 export default reducer;
 
+/**
+ * Redux action creator for updating notification account states
+ * Exported from the notifications accounts slice
+ */
 export const { updateAccountState } = actions;

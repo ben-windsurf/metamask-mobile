@@ -20,6 +20,11 @@ export const STATELESS_NON_CONTROLLER_NAMES = [
   'MultichainAccountService',
 ] as const;
 
+/**
+ * Array of event names for background state changes from various MetaMask controllers
+ * Used to listen for state updates from all controllers in the Engine's background context
+ * @type {readonly string[]}
+ */
 export const BACKGROUND_STATE_CHANGE_EVENT_NAMES = [
   'AccountsController:stateChange',
   'AccountTreeController:stateChange',
@@ -77,6 +82,11 @@ export const BACKGROUND_STATE_CHANGE_EVENT_NAMES = [
   'SeedlessOnboardingController:stateChange',
 ] as const;
 
+/**
+ * Array of chain IDs that support swaps functionality in MetaMask Mobile
+ * Used to determine which networks allow token swapping operations
+ * @type {readonly string[]}
+ */
 export const swapsSupportedChainIds = [
   swapsUtils.ETH_CHAIN_ID,
   swapsUtils.BSC_CHAIN_ID,

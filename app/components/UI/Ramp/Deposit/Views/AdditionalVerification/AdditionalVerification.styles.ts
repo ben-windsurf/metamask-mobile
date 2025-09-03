@@ -3,6 +3,12 @@ import { Theme } from '../../../../../../util/theme/models';
 
 const screenWidth = Dimensions.get('window').width;
 
+/**
+ * Creates styles for the AdditionalVerification component
+ * @param _params - Style parameters containing theme
+ * @param _params.theme - Theme object for styling
+ * @returns StyleSheet object with component styles
+ */
 const styleSheet = (_params: { theme: Theme }) =>
   StyleSheet.create({
     image: {

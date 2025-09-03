@@ -8,9 +8,19 @@ import { useCallback } from 'react';
 
 import { addMMOriginatedTransaction } from '../../utils/transaction';
 
+/**
+ * Address constant used to revoke EIP-7702 account delegations
+ * Points to the zero address to effectively remove any existing delegation
+ */
 export const EIP_7702_REVOKE_ADDRESS =
   '0x0000000000000000000000000000000000000000';
 
+/**
+ * Custom hook for managing EIP-7702 account operations (upgrade/downgrade)
+ * Provides functionality to upgrade accounts to smart contract accounts and downgrade them back
+ * @param {NetworkConfiguration} networkConfiguration - Network configuration containing RPC endpoints
+ * @returns {Object} Object containing downgradeAccount and upgradeAccount functions
+ */
 export function useEIP7702Accounts(networkConfiguration: NetworkConfiguration) {
   const defaultRpcEndpoint =
     networkConfiguration.rpcEndpoints[

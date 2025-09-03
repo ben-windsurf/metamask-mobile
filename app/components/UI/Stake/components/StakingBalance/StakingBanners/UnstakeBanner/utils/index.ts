@@ -1,13 +1,14 @@
 import { strings } from '../../../../../../../../../locales/i18n';
 
 /**
- * Allows for flexible rendering of unstaking banner countdown.
- *
- * Examples:
- * - Unstaking 0.0172 ETH in progress. Come back later to claim it. (days: 0, hours: 0) (default)
- * - Unstaking 0.0172 ETH in progress. Come back in 1 day to claim it. (days: 1, hours: 0).
- * - Unstaking 0.0172 ETH in progress. Come back in 1 hour to claim it. (days: 0, hours: 1).
- * - Unstaking 0.0172 ETH in progress. Come back in 2 days and 3 hours. (days: 2, hours: 3).
+ * Renders the unstaking time remaining message with flexible countdown display
+ * Formats the message based on remaining time components and ETH amount
+ * @param {Object} timeRemaining - Time remaining object
+ * @param {number} timeRemaining.days - Number of days remaining
+ * @param {number} timeRemaining.hours - Number of hours remaining
+ * @param {number} timeRemaining.minutes - Number of minutes remaining
+ * @param {string} amountEth - Amount of ETH being unstaked
+ * @returns {string} Formatted unstaking time remaining message
  */
 export const renderUnstakingTimeRemaining = (
   { days, hours, minutes }: { days: number; hours: number; minutes: number },

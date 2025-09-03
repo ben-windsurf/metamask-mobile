@@ -16,6 +16,11 @@ const getWindowInformation = `
   ))
 `;
 
+/**
+ * JavaScript code that listens for URL changes in Single Page Applications (SPAs)
+ * Intercepts history.pushState and history.replaceState to detect navigation changes
+ * Posts messages to React Native WebView with updated URL and title information
+ */
 export const SPA_urlChangeListener = `(function () {
   var __mmHistory = window.history;
   var __mmPushState = __mmHistory.pushState;
@@ -67,15 +72,30 @@ export const SPA_urlChangeListener = `(function () {
   })();
 `;
 
+/**
+ * JavaScript code that extracts window information including title and favicon
+ * Executes the getWindowInformation function to gather page metadata
+ */
 export const JS_WINDOW_INFORMATION = `
   (function () {
     ${getWindowInformation}
   })();
 `;
 
+/**
+ * JavaScript code that deselects all selected text on the page
+ * Handles both modern browsers (getSelection) and legacy IE (document.selection)
+ */
 export const JS_DESELECT_TEXT = `if (window.getSelection) {window.getSelection().removeAllRanges();}
 else if (document.selection) {document.selection.empty();}`;
 
+/**
+ * Generates JavaScript code that safely posts a message to the provider
+ * Includes origin validation to prevent cross-origin message injection
+ * @param {object} message - The message object to send to the provider
+ * @param {string} origin - The expected origin for security validation
+ * @returns {string} JavaScript code string for posting the message
+ */
 export const JS_POST_MESSAGE_TO_PROVIDER = (
   message: object,
   origin: string,
@@ -92,6 +112,13 @@ export const JS_POST_MESSAGE_TO_PROVIDER = (
   }
 })();`;
 
+/**
+ * Generates JavaScript code for posting messages to iframe providers
+ * Currently disabled and returns empty function for security reasons
+ * @param {object} _message - The message object (unused)
+ * @param {string} _origin - The origin string (unused)
+ * @returns {string} JavaScript code string (empty function)
+ */
 export const JS_IFRAME_POST_MESSAGE_TO_PROVIDER = (
   _message: object,
   _origin: string,

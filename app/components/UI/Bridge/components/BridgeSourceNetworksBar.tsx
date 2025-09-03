@@ -22,6 +22,12 @@ import { useNavigation } from '@react-navigation/native';
 import AvatarNetwork from '../../../../component-library/components/Avatars/Avatar/variants/AvatarNetwork/AvatarNetwork';
 import { AvatarSize } from '../../../../component-library/components/Avatars/Avatar';
 
+/**
+ * Creates styles for the BridgeSourceNetworksBar component
+ * @param params - Style parameters containing theme
+ * @param params.theme - Theme object for styling
+ * @returns StyleSheet object with component styles
+ */
 const createStyles = (params: { theme: Theme }) => {
   const { theme } = params;
   return StyleSheet.create({
@@ -42,6 +48,9 @@ const createStyles = (params: { theme: Theme }) => {
   });
 };
 
+/**
+ * Maximum number of network icons to display before showing overflow indicator
+ */
 export const MAX_NETWORK_ICONS = 3;
 
 interface SourceNetworksButtonProps {
@@ -52,6 +61,18 @@ interface SourceNetworksButtonProps {
   onPress?: () => void;
 }
 
+/**
+ * BridgeSourceNetworksBar component displays selected source networks for bridge operations
+ * Shows network avatars with overflow indicator and network count text
+ * Provides navigation to network selector when pressed
+ * @param props - Component props
+ * @param props.networksToShow - Array of networks to display as avatars
+ * @param props.networkConfigurations - Network configuration data
+ * @param props.selectedSourceChainIds - Array of selected source chain IDs
+ * @param props.enabledSourceChains - Array of enabled source chains
+ * @param props.onPress - Optional custom press handler
+ * @returns JSX element representing the source networks bar
+ */
 export const BridgeSourceNetworksBar: React.FC<SourceNetworksButtonProps> = ({
   networksToShow,
   networkConfigurations,

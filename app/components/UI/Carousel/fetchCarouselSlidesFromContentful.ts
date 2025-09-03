@@ -27,6 +27,12 @@ interface ContentfulSysField {
   sys: { id: string };
 }
 
+/**
+ * Fetches carousel slides from Contentful CMS
+ * Retrieves promotional banners marked for mobile display and separates them into priority and regular slides
+ * Falls back to direct fetch if Contentful SDK fails
+ * @returns {Promise<Object>} Promise resolving to object with prioritySlides and regularSlides arrays
+ */
 export async function fetchCarouselSlidesFromContentful(): Promise<{
   prioritySlides: CarouselSlide[];
   regularSlides: CarouselSlide[];
@@ -89,6 +95,13 @@ export async function fetchCarouselSlidesFromContentful(): Promise<{
   }
 }
 
+/**
+ * Maps Contentful entries to carousel slide objects
+ * Processes raw Contentful data and separates slides into priority and regular categories
+ * @param {any[]} items - Array of Contentful entry items
+ * @param {any[]} assets - Array of Contentful asset items for image resolution
+ * @returns {Object} Object containing prioritySlides and regularSlides arrays
+ */
 function mapContentfulEntriesToSlides(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   items: any[],
@@ -148,6 +161,14 @@ function mapContentfulEntriesToSlides(
   return { prioritySlides, regularSlides };
 }
 
+/**
+ * Determines if a carousel slide is currently active based on its date range
+ * @param {Object} slide - The slide object to check
+ * @param {string} slide.startDate - Optional start date for the slide
+ * @param {string} slide.endDate - Optional end date for the slide
+ * @param {Date} now - Current date to compare against (defaults to new Date())
+ * @returns {boolean} True if the slide is currently active, false otherwise
+ */
 export function isActive(
   slide: { startDate?: string; endDate?: string },
   now = new Date(),

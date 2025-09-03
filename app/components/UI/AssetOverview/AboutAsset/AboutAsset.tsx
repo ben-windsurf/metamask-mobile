@@ -25,6 +25,14 @@ interface SkeletonPlaceholderItem {
   marginBottom: number;
 }
 
+/**
+ * AboutAsset component displays information about a specific asset/token
+ * Shows token descriptions with loading states and localization support
+ * @param {AboutAssetProps} props - Component props
+ * @param {Asset} props.asset - The asset object containing token information
+ * @param {Hex} props.chainId - The chain ID where the asset exists
+ * @returns {JSX.Element | null} The rendered about asset component or null if no description
+ */
 const AboutAsset = ({ asset, chainId }: AboutAssetProps) => {
   const { styles } = useStyles(styleSheet, {});
   const locale: keyof TokenDescriptions = i18n.locale;

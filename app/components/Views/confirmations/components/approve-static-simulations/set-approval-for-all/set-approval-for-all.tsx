@@ -62,6 +62,11 @@ const SpenderInfoRow: React.FC<SpenderInfoRowProps> = ({
   </InfoRow>
 );
 
+/**
+ * SetApprovalForAll component displays approval information for ERC721 and ERC1155 token transactions
+ * Shows NFT information and spender/permission details based on whether it's a revoke or approve operation
+ * @returns {JSX.Element|null} The rendered approval information or null if not applicable
+ */
 export const SetApprovalForAll = () => {
   const { tokenStandard, isRevoke, spender } = useApproveTransactionData();
   const transactionMetadata =

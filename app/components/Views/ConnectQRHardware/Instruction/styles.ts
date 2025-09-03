@@ -3,6 +3,13 @@ import { fontStyles } from '../../../../styles/common';
 import { Theme } from '../../../../util/theme/models';
 import { EdgeInsets } from 'react-native-safe-area-context';
 
+/**
+ * Creates stylesheet for QR Hardware connection instruction components
+ * Provides themed styling for instruction screens, buttons, text, and layout elements
+ * @param {Theme} theme - The current theme object containing color and styling properties
+ * @param {EdgeInsets} insets - Safe area insets for proper screen positioning
+ * @returns {Object} StyleSheet object containing styled components for QR hardware instruction UI
+ */
 export const createStyles = (theme: Theme, insets: EdgeInsets) =>
   StyleSheet.create({
     wrapper: {

@@ -46,8 +46,19 @@ function canonicalize(url: URL): string {
   return fullUrl;
 }
 
+/**
+ * Signature verification result indicating no signature was found in the URL
+ */
 export const MISSING = 'MISSING' as const;
+
+/**
+ * Signature verification result indicating the signature is valid and verified
+ */
 export const VALID = 'VALID' as const;
+
+/**
+ * Signature verification result indicating the signature is invalid or verification failed
+ */
 export const INVALID = 'INVALID' as const;
 
 type VerificationResult = typeof MISSING | typeof VALID | typeof INVALID;
@@ -85,6 +96,12 @@ async function lazyGetTools() {
   return tools;
 }
 
+/**
+ * Verifies the cryptographic signature of a MetaMask deeplink URL to ensure authenticity
+ * Uses ECDSA with P-256 curve and SHA-256 hashing to verify the signature against the canonical URL
+ * @param {URL} url - The deeplink URL containing the signature parameter to verify
+ * @returns {Promise<VerificationResult>} Promise resolving to MISSING if no signature, VALID if verified, or INVALID if verification fails
+ */
 export const verifyDeeplinkSignature = async (
   url: URL,
 ): Promise<VerificationResult> => {
@@ -120,4 +137,9 @@ export const verifyDeeplinkSignature = async (
   }
 };
 
+/**
+ * Checks if a URL contains a signature parameter for deeplink verification
+ * @param {URL} url - The URL to check for signature presence
+ * @returns {boolean} True if the URL has a 'sig' parameter, false otherwise
+ */
 export const hasSignature = (url: URL): boolean => url.searchParams.has('sig');

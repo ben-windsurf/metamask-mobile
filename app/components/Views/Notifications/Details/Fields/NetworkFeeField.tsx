@@ -27,6 +27,10 @@ import { useMetrics } from '../../../../../components/hooks/useMetrics';
 import { MetaMetricsEvents } from '../../../../../core/Analytics';
 import NetworkFeeFieldSkeleton from './Skeletons/NetworkFeeField';
 
+/**
+ * Test ID constant for the network fee field component
+ * Used for testing and automation purposes in notification details
+ */
 export const NETWORK_FEE_FIELD_TESTID = 'network-fee-field';
 
 type NetworkFeeFieldProps = ModalFieldNetworkFee & {
@@ -37,6 +41,15 @@ type NetworkFeeFieldProps = ModalFieldNetworkFee & {
 
 type NetworkFee = Awaited<ReturnType<ModalFieldNetworkFee['getNetworkFees']>>;
 
+/**
+ * Custom hook that fetches and manages network fee data for notifications
+ * Handles loading states and error handling for network fee information
+ * @param {NetworkFeeFieldProps} props - Props containing getNetworkFees function
+ * @param {Function} props.getNetworkFees - Function to fetch network fee data
+ * @returns {Object} Object containing network fee data and loading state
+ * @returns {NetworkFee | undefined} returns.data - The fetched network fee data
+ * @returns {boolean} returns.isLoading - Loading state indicator
+ */
 export function useNetworkFee({ getNetworkFees }: NetworkFeeFieldProps) {
   const [data, setData] = useState<NetworkFee | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);

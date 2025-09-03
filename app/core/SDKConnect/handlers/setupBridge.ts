@@ -11,6 +11,14 @@ import DevLogger from '../utils/DevLogger';
 import handleSendMessage from './handleSendMessage';
 import { ImageSourcePropType } from 'react-native';
 
+/**
+ * Sets up a BackgroundBridge for SDK connections to enable communication between
+ * MetaMask Mobile and external dApps through the MetaMask SDK
+ * @param {Object} params - Setup parameters
+ * @param {OriginatorInfo} params.originatorInfo - Information about the originating dApp including URL, title, and platform
+ * @param {Connection} params.connection - The SDK connection instance to bridge with
+ * @returns {BackgroundBridge} Configured BackgroundBridge instance for handling RPC communication
+ */
 export const setupBridge = ({
   originatorInfo,
   connection,

@@ -2,6 +2,11 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../../util/theme/models';
 
+/**
+ * Creates stylesheet for Ledger modal components
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with modal and content wrapper styles
+ */
 export const createStyles = (colors: Colors) =>
   StyleSheet.create({
     modal: {

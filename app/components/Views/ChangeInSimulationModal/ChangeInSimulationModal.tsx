@@ -18,7 +18,16 @@ import {
 import SheetHeader from '../../../component-library/components/Sheet/SheetHeader';
 import Text from '../../../component-library/components/Texts/Text';
 
+/**
+ * Test ID for the proceed button in the change in simulation modal
+ * Used for automated testing and UI element identification
+ */
 export const PROCEED_BUTTON_TEST_ID = 'proceed-button';
+
+/**
+ * Test ID for the reject button in the change in simulation modal
+ * Used for automated testing and UI element identification
+ */
 export const REJECT_BUTTON_TEST_ID = 'reject-button';
 
 const createStyles = () =>
@@ -38,6 +47,17 @@ const createStyles = () =>
     },
   });
 
+/**
+ * ChangeInSimulationModal displays a warning modal when transaction simulation results change
+ * Allows users to proceed with or reject the transaction after simulation changes are detected
+ * Used in the transaction confirmation flow to ensure users are aware of simulation updates
+ * @param {Object} props - Component props
+ * @param {Object} props.route - Navigation route object containing callback functions
+ * @param {Object} props.route.params - Route parameters
+ * @param {Function} props.route.params.onProceed - Callback function when user chooses to proceed
+ * @param {Function} props.route.params.onReject - Callback function when user chooses to reject
+ * @returns {JSX.Element} The rendered change in simulation modal component
+ */
 const ChangeInSimulationModal = ({
   route,
 }: {

@@ -39,6 +39,17 @@ export enum FiatType {
   NotAvailable = 'not_available',
 }
 
+/**
+ * Custom hook for tracking simulation metrics and analytics
+ * Collects and dispatches metrics about transaction simulation results including balance changes,
+ * asset information, and simulation performance data
+ * @param {UseSimulationMetricsProps} props - Configuration object for simulation metrics
+ * @param {BalanceChange[]} props.balanceChanges - Array of balance changes from simulation
+ * @param {boolean} props.loading - Whether simulation is currently loading
+ * @param {SimulationData} props.simulationData - Simulation result data
+ * @param {string} props.transactionId - Unique identifier for the transaction
+ * @param {boolean} props.enableMetrics - Whether metrics collection is enabled
+ */
 export function useSimulationMetrics({
   balanceChanges,
   loading,

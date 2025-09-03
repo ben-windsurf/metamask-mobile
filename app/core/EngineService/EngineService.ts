@@ -20,6 +20,11 @@ import { MetaMetrics } from '../Analytics';
 import { VaultBackupResult } from './types';
 import { INIT_BG_STATE_KEY, UPDATE_BG_STATE_KEY, LOG_TAG } from './constants';
 
+/**
+ * Service class responsible for initializing and managing the MetaMask Engine
+ * Handles engine startup, controller state synchronization with Redux, and vault recovery operations
+ * Acts as the bridge between the core MetaMask controllers and the React Native application
+ */
 export class EngineService {
   private engineInitialized = false;
 

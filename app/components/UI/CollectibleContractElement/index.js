@@ -28,8 +28,17 @@ import {
 import { getDecimalChainId } from '../../../util/networks';
 
 const DEVICE_WIDTH = Device.getDeviceWidth();
+/**
+ * Calculated width for individual collectible items in the grid layout
+ */
 const COLLECTIBLE_WIDTH = (DEVICE_WIDTH - 30 - 16) / 3;
 
+/**
+ * Creates stylesheet for the CollectibleContractElement component
+ * @param {Object} colors - Theme colors object
+ * @param {Object} brandColors - Brand-specific colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, brandColors) =>
   StyleSheet.create({
     itemWrapper: {
@@ -78,6 +87,12 @@ const createStyles = (colors, brandColors) =>
     },
   });
 
+/**
+ * Splits an array into sub-arrays of specified count for grid layout
+ * @param {Array} array - The array to split
+ * @param {number} count - Number of items per sub-array
+ * @returns {Array} Array of sub-arrays with specified count of items
+ */
 const splitIntoSubArrays = (array, count) => {
   const newArray = [];
   while (array.length > 0) {
@@ -87,7 +102,18 @@ const splitIntoSubArrays = (array, count) => {
 };
 
 /**
- * Customizable view to render assets in lists
+ * CollectibleContractElement renders a collapsible section for NFT collections
+ * Displays collection header with toggle functionality and grid of collectibles
+ * Supports actions like removing NFTs and refreshing metadata
+ * @param {Object} props - Component props
+ * @param {Object} props.asset - The collection/contract asset object
+ * @param {Array} props.contractCollectibles - Array of collectibles in this contract
+ * @param {boolean} props.collectiblesVisible - Whether collectibles are initially visible
+ * @param {Function} props.onPress - Callback when a collectible is pressed
+ * @param {string} props.chainId - Current chain ID
+ * @param {string} props.selectedAddress - Currently selected wallet address
+ * @param {Function} props.removeFavoriteCollectible - Function to remove favorite collectible
+ * @returns {JSX.Element} The rendered collectible contract element
  */
 function CollectibleContractElement({
   asset,
@@ -308,11 +334,21 @@ CollectibleContractElement.propTypes = {
   removeFavoriteCollectible: PropTypes.func,
 };
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state
+ * @returns {Object} Props object with chainId and selectedAddress
+ */
 const mapStateToProps = (state) => ({
   chainId: selectChainId(state),
   selectedAddress: selectSelectedInternalAccountFormattedAddress(state),
 });
 
+/**
+ * Maps Redux dispatch functions to component props
+ * @param {Function} dispatch - Redux dispatch function
+ * @returns {Object} Props object with action creators
+ */
 const mapDispatchToProps = (dispatch) => ({
   removeFavoriteCollectible: (selectedAddress, chainId, collectible) =>
     dispatch(removeFavoriteCollectible(selectedAddress, chainId, collectible)),

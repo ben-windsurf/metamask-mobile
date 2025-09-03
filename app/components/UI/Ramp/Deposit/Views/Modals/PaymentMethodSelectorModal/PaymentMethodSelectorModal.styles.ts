@@ -4,6 +4,13 @@ import { Theme } from '../../../../../../../util/theme/models';
 interface PaymentSelectorModalStyleSheetVars {
   screenHeight: number;
 }
+/**
+ * Creates stylesheet for PaymentMethodSelectorModal component
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - Theme object containing color and styling definitions
+ * @param {PaymentSelectorModalStyleSheetVars} params.vars - Variables for dynamic styling including screen dimensions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: PaymentSelectorModalStyleSheetVars;

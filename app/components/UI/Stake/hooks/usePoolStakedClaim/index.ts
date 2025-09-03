@@ -15,6 +15,14 @@ import {
 import { NetworkClientId } from '@metamask/network-controller';
 import { Stake } from '../../sdk/stakeSdkProvider';
 
+/**
+ * Attempts to create a multi-call claim transaction for multiple exit requests
+ * @param {PooledStake} pooledStakesData - The pooled stakes data containing exit requests
+ * @param {PooledStakingContract} poolStakingContract - The staking contract instance
+ * @param {string} activeAccountAddress - The active account address
+ * @param {NetworkClientId} networkClientId - The network client ID
+ * @returns {Promise} Promise that resolves to the transaction result
+ */
 const attemptMultiCallClaimTransaction = async (
   pooledStakesData: PooledStake,
   poolStakingContract: PooledStakingContract,
@@ -53,6 +61,14 @@ const attemptMultiCallClaimTransaction = async (
   });
 };
 
+/**
+ * Attempts to create a single claim transaction for one exit request
+ * @param {PooledStake} pooledStakesData - The pooled stakes data containing exit requests
+ * @param {PooledStakingContract} poolStakingContract - The staking contract instance
+ * @param {string} activeAccountAddress - The active account address
+ * @param {NetworkClientId} networkClientId - The network client ID
+ * @returns {Promise} Promise that resolves to the transaction result
+ */
 const attemptSingleClaimTransaction = async (
   pooledStakesData: PooledStake,
   poolStakingContract: PooledStakingContract,
@@ -98,6 +114,12 @@ const attemptSingleClaimTransaction = async (
   });
 };
 
+/**
+ * Creates a curried function for attempting pool staked claim transactions
+ * @param {PooledStakingContract} poolStakingContract - The staking contract instance
+ * @param {NetworkClientId} networkClientId - The network client ID
+ * @returns {Function} Function that takes activeAccountAddress and pooledStakesData to execute claim
+ */
 const attemptPoolStakedClaimTransaction =
   (
     poolStakingContract: PooledStakingContract,
@@ -131,6 +153,11 @@ const attemptPoolStakedClaimTransaction =
     }
   };
 
+/**
+ * Custom hook for handling pooled staking claim transactions
+ * Provides functionality to claim exited staking assets from pooled staking contracts
+ * @returns {Object} Object containing attemptPoolStakedClaimTransaction function
+ */
 const usePoolStakedClaim = () => {
   const { networkClientId, stakingContract } =
     useStakeContext() as Required<Stake>;

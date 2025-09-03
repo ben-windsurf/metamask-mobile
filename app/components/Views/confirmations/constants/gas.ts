@@ -13,4 +13,8 @@ export enum GasOptionIcon {
   SITE_SUGGESTED = '🌐',
 }
 
+/**
+ * Default string value displayed when gas values are empty or unavailable
+ * Used throughout gas estimation and confirmation UI components
+ */
 export const EMPTY_VALUE_STRING = '--';

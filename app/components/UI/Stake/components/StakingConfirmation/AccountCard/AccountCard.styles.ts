@@ -1,6 +1,12 @@
 import type { Theme } from '../../../../../../util/theme/models';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for AccountCard component with theme-based styling
+ * @param {Object} params - Parameters object
+ * @param {Theme} params.theme - Theme object containing colors and styling properties
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const stylesSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

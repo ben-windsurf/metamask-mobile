@@ -9,6 +9,11 @@ import { isSolanaChainId } from '@metamask/bridge-controller';
 import { useTokensWithBalance } from './useTokensWithBalance';
 import { SolScope } from '@metamask/keyring-api';
 
+/**
+ * Custom hook that sorts source networks by their total fiat value in descending order
+ * Calculates total fiat value for both EVM and Solana chains including native and token balances
+ * @returns {Object} Object containing sortedSourceNetworks array with chains ordered by total fiat value
+ */
 export const useSortedSourceNetworks = () => {
   const enabledSourceChains = useSelector(selectEnabledSourceChains);
 

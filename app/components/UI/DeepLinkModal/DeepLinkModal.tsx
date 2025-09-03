@@ -43,6 +43,13 @@ import {
   ModalImageProps,
 } from './types';
 
+/**
+ * ModalImage component renders the appropriate image based on the deep link type
+ * @param {Object} props - Component props
+ * @param {DeepLinkModalLinkType} props.linkType - The type of deep link (public, private, or invalid)
+ * @param {Object} props.styles - Style object for the component
+ * @returns {JSX.Element} The rendered image component
+ */
 const ModalImage = memo<ModalImageProps>(({ linkType, styles }) => {
   if (linkType === DeepLinkModalLinkType.INVALID) {
     return (
@@ -58,6 +65,12 @@ const ModalImage = memo<ModalImageProps>(({ linkType, styles }) => {
   );
 });
 
+/**
+ * DeepLinkModal component displays a modal for handling deep link navigation
+ * Shows different content based on link type (public, private, or invalid)
+ * Includes analytics tracking and user preference options for private links
+ * @returns {JSX.Element} The rendered deep link modal component
+ */
 const DeepLinkModal = () => {
   const params = useParams<DeepLinkModalParams>();
   const { linkType, onBack } = params;
@@ -124,9 +137,16 @@ const DeepLinkModal = () => {
     );
   }, [trackEvent, createEventBuilder, linkType, LINK_TYPE_MAP]);
 
+  /**
+   * Dismisses the modal with optional callback
+   * @param {Function} cb - Optional callback to execute after modal dismissal
+   */
   const dismissModal = (cb?: () => void): void =>
     bottomSheetRef?.current?.onCloseBottomSheet(cb);
 
+  /**
+   * Handles modal dismissal with analytics tracking
+   */
   const onDimiss = useCallback(() => {
     dismissModal(() => {
       const event = LINK_TYPE_MAP[linkType].eventDismiss;
@@ -141,6 +161,9 @@ const DeepLinkModal = () => {
     });
   }, [trackEvent, createEventBuilder, linkType, LINK_TYPE_MAP, onBack]);
 
+  /**
+   * Handles continue button press with analytics tracking
+   */
   const onContinuePressed = useCallback(() => {
     if (linkType === DeepLinkModalLinkType.INVALID) {
       return;
@@ -168,6 +191,9 @@ const DeepLinkModal = () => {
     params,
   ]);
 
+  /**
+   * Handles checkbox toggle for "don't remind me again" option
+   */
   const onDontRemindMeAgainPressed = useCallback(() => {
     const event = isChecked
       ? MetaMetricsEvents.DEEP_LINK_MODAL_PRIVATE_DONT_REMIND_ME_AGAIN_CHECKBOX_UNCHECKED

@@ -7,6 +7,11 @@ import { MetricsEventBuilder } from '../../../../core/Analytics/MetricsEventBuil
 
 interface MergedRampEvents extends AggregatorEvents, DepositEvents {}
 
+/**
+ * Tracks a ramp-related analytics event with the specified parameters
+ * @param eventType - The type of event to track from merged ramp events
+ * @param params - Event parameters specific to the event type
+ */
 export function trackEvent<T extends keyof MergedRampEvents>(
   eventType: T,
   params: MergedRampEvents[T],
@@ -19,6 +24,10 @@ export function trackEvent<T extends keyof MergedRampEvents>(
   );
 }
 
+/**
+ * Custom hook for tracking ramp analytics events
+ * @returns A memoized callback function for tracking events
+ */
 function useAnalytics() {
   return useCallback(
     <T extends keyof MergedRampEvents>(

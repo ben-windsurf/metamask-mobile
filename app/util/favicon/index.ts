@@ -154,6 +154,7 @@ export const getFaviconURLFromHtml = async (origin: string) => {
 /**
  * Returns the favicon URL from the image source if it is an SVG image
  * @param imageSource the image source
+ * @returns The SVG favicon URL if the image source is an SVG, undefined otherwise
  */
 export const isFaviconSVG = (imageSource: ImageSourcePropType) => {
   if (

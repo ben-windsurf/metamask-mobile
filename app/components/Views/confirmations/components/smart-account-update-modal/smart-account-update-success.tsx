@@ -19,6 +19,11 @@ import AppConstants from '../../../../../core/AppConstants';
 import { useStyles } from '../../../../hooks/useStyles';
 import styleSheet from './smart-account-update-modal.styles';
 
+/**
+ * SmartAccountUpdateSuccess component displays a success screen after smart account update
+ * Shows confirmation message with close button and learn more link for EIP-7702 functionality
+ * @returns {JSX.Element} The rendered smart account update success component
+ */
 export const SmartAccountUpdateSuccess = () => {
   const { styles } = useStyles(styleSheet, {});
   const navigation = useNavigation();

@@ -29,6 +29,11 @@ import Routes from '../../../../constants/navigation/Routes';
 import { useNavigation } from '@react-navigation/native';
 import Engine from '../../../../core/Engine';
 
+/**
+ * Gets the activity title for a swap bridge transaction
+ * @param bridgeTxHistoryItem - The bridge transaction history item
+ * @returns The localized title string for the bridge transaction or undefined if no destination chain name is found
+ */
 export const getSwapBridgeTxActivityTitle = (
   bridgeTxHistoryItem: BridgeHistoryItem,
 ): string | undefined => {
@@ -45,6 +50,16 @@ export const getSwapBridgeTxActivityTitle = (
     : undefined;
 };
 
+/**
+ * Decodes a bridge transaction for display in transaction history
+ * @param args - The decoding parameters
+ * @param args.tx - The transaction metadata
+ * @param args.currentCurrency - The current fiat currency
+ * @param args.conversionRate - Gas token to current currency conversion rate
+ * @param args.bridgeTxHistoryData - Bridge transaction history data
+ * @param args.contractExchangeRates - Token to gas token exchange rates
+ * @returns Array containing transaction element and transaction details for display
+ */
 export const decodeBridgeTx = (args: {
   tx: TransactionMeta;
   currentCurrency: string;
@@ -101,6 +116,19 @@ export const decodeBridgeTx = (args: {
   return [transactionElement, transactionDetails];
 };
 
+/**
+ * Decodes a swaps transaction for display in transaction history
+ * @param args - The decoding parameters
+ * @param args.tx - The transaction metadata
+ * @param args.currentCurrency - The current fiat currency
+ * @param args.conversionRate - Gas token to current currency conversion rate
+ * @param args.bridgeTxHistoryData - Bridge transaction history data
+ * @param args.txChainId - The transaction chain ID
+ * @param args.ticker - The gas token symbol
+ * @param args.contractExchangeRates - Token to gas token exchange rates
+ * @param args.primaryCurrency - Primary currency setting from user preferences
+ * @returns Array containing transaction element and transaction details for display
+ */
 export const decodeSwapsTx = (args: {
   tx: TransactionMeta;
   currentCurrency: string;
@@ -217,6 +245,13 @@ export const decodeSwapsTx = (args: {
   return [transactionElement, transactionDetails];
 };
 
+/**
+ * Handles click events on unified swaps transaction history items
+ * Navigates to bridge transaction details and resets polling for failed attempts if needed
+ * @param navigation - React Navigation navigation object
+ * @param tx - The transaction metadata
+ * @param bridgeTxHistoryItem - Optional bridge transaction history item
+ */
 export const handleUnifiedSwapsTxHistoryItemClick = (
   navigation: ReturnType<typeof useNavigation>,
   tx: TransactionMeta,

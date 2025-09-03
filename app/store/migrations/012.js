@@ -1,3 +1,9 @@
+/**
+ * Migration 012: Rename CollectiblesController to NftController
+ * Migrates collectibles-related state properties to use NFT naming convention
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with renamed NFT controllers and properties
+ */
 export default function migrate(state) {
   const {
     allCollectibles,

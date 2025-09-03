@@ -35,6 +35,11 @@ import { selectSelectedInternalAccount } from '../../../../../selectors/accounts
 import { RootState } from '../../../../../reducers';
 ///: END:ONLY_INCLUDE_IF
 
+/**
+ * TokenListFooter component displays a buy button when the main token balance is zero
+ * Shows a call-to-action for users to purchase native tokens when needed to continue transactions
+ * @returns {JSX.Element} Footer component with conditional buy button
+ */
 export const TokenListFooter = () => {
   const chainId = useSelector(selectChainId);
   const navigation = useNavigation();

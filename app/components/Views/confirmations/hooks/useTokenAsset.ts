@@ -12,6 +12,14 @@ import { useTransactionMetadataRequest } from './transactions/useTransactionMeta
 
 const selectEvmAsset = makeSelectAssetByAddressAndChainId();
 
+/**
+ * Custom hook that retrieves token asset information for transaction confirmations
+ * Determines the appropriate asset (native or ERC20) based on transaction type and parameters
+ * Used in confirmation flows to display correct token details and metadata
+ * @returns {Object} Object containing asset information and display name
+ * @returns {Object.asset} The token asset object with name, symbol, and other metadata
+ * @returns {Object.displayName} The formatted display name for the token (ticker, symbol, or name)
+ */
 export const useTokenAsset = () => {
   const {
     chainId,

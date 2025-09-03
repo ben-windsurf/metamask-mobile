@@ -10,6 +10,15 @@ export interface KycPollingResult {
   stopPolling: () => void;
 }
 
+/**
+ * Custom hook for polling KYC (Know Your Customer) status during deposit flow
+ * Automatically polls the KYC forms endpoint to check if user is approved to place orders
+ * @param quote - The buy quote object containing deposit information
+ * @param pollingInterval - Interval between polling requests in milliseconds (default: 10000)
+ * @param autoStart - Whether to start polling automatically on mount (default: true)
+ * @param maxPollingAttempts - Maximum number of polling attempts before stopping (default: 30)
+ * @returns Object containing KYC approval status, loading state, error, and control functions
+ */
 const useKycPolling = (
   quote: BuyQuote,
   pollingInterval: number = 10000,

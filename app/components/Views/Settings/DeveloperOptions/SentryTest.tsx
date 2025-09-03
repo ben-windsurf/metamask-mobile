@@ -71,6 +71,11 @@ function GenerateTrace() {
   );
 }
 
+/**
+ * SentryTest component provides developer tools for testing Sentry integration
+ * Renders a section with trace generation functionality for debugging and monitoring
+ * @returns {JSX.Element} The rendered Sentry test component with trace generation controls
+ */
 export default function SentryTest() {
   const theme = useTheme();
   const { styles } = useStyles(styleSheet, { theme });

@@ -12,6 +12,12 @@ const animationSize = Device.getDeviceWidth() / 2;
 const loadingLight = require('./logo-light.json');
 const loadingDark = require('./logo-dark.json');
 
+/**
+ * Creates styles for the SDK loading component
+ * @param {ThemeColors} colors - Theme colors object
+ * @param {EdgeInsets} _safeAreaInsets - Safe area insets (unused)
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: ThemeColors, _safeAreaInsets: EdgeInsets) =>
   StyleSheet.create({
     root: {
@@ -42,6 +48,11 @@ const createStyles = (colors: ThemeColors, _safeAreaInsets: EdgeInsets) =>
     },
   });
 
+/**
+ * SDK Loading component displays an animated MetaMask logo during SDK operations
+ * Shows a centered Lottie animation with theme-aware styling
+ * @returns {JSX.Element} The rendered SDK loading component with animated logo
+ */
 export const SDKLoading = () => {
   const safeAreaInsets = useSafeAreaInsets();
   const { colors } = useTheme();

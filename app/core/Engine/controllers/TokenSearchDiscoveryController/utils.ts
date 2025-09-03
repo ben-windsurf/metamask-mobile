@@ -25,6 +25,15 @@ const getPortfolioApiBaseUrl = () => {
   }
 };
 
+/**
+ * Creates and initializes a TokenSearchDiscoveryController instance for MetaMask Mobile
+ * Configures the controller with appropriate API services based on the current environment
+ * @param {TokenSearchDiscoveryControllerParams} params - Controller initialization parameters
+ * @param {object} params.state - Initial state for the controller
+ * @param {object} params.messenger - Controller messenger for communication
+ * @returns {TokenSearchDiscoveryController} Configured TokenSearchDiscoveryController instance
+ * @throws {Error} Throws error if controller initialization fails
+ */
 export const createTokenSearchDiscoveryController = ({
   state,
   messenger,

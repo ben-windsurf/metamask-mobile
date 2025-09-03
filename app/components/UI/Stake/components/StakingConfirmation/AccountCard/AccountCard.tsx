@@ -20,6 +20,16 @@ import ContractTag from '../ContractTag/ContractTag';
 import { RootState } from '../../../../BasicFunctionality/BasicFunctionalityModal/BasicFunctionalityModal.test';
 import useVaultMetadata from '../../../hooks/useVaultMetadata';
 
+/**
+ * AccountCard component displays account and contract information for staking confirmation
+ * Shows the selected account, contract details, and network information in a card layout
+ * @param {AccountCardProps} props - Component props
+ * @param {string} props.contractName - Name of the staking contract
+ * @param {string} props.primaryLabel - Label for the account section
+ * @param {string} props.secondaryLabel - Label for the contract section
+ * @param {string} props.chainId - Chain ID for vault metadata lookup
+ * @returns {JSX.Element} Rendered account card with account, contract, and network details
+ */
 const AccountCard = ({
   contractName,
   primaryLabel,

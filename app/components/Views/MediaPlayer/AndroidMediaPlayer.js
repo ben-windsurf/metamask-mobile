@@ -154,6 +154,23 @@ const createStyles = (theme) =>
     },
   });
 
+/**
+ * VideoPlayer component for Android that provides a full-featured video player with custom controls
+ * Supports play/pause, seeking, muting, and customizable control visibility with animations
+ * @param {Object} props - Component props
+ * @param {number} props.controlsAnimationTiming - Duration for control show/hide animations
+ * @param {number} props.controlsToggleTiming - Timeout duration before auto-hiding controls
+ * @param {Object|number} props.source - Video source (URI object for remote files or number for bundled files)
+ * @param {boolean} props.displayTopControls - Whether to show top control bar with close button
+ * @param {boolean} props.displayBottomControls - Whether to show bottom control bar with playback controls
+ * @param {Function} props.onClose - Callback function when close button is pressed
+ * @param {Function} props.onError - Callback function when video error occurs
+ * @param {Array} props.textTracks - Array of text track objects for subtitles/captions
+ * @param {Object} props.selectedTextTrack - Currently selected text track object
+ * @param {Function} props.onLoad - Callback function when video loads successfully
+ * @param {Object} props.style - Additional styles for the player container
+ * @returns {JSX.Element} The rendered video player component with controls
+ */
 export default function VideoPlayer({
   controlsAnimationTiming,
   controlsToggleTiming,

@@ -12,6 +12,15 @@ type AlertNameMetrics = {
   [K in AlertKeys]: string;
 };
 
+/**
+ * Custom hook for tracking confirmation alert metrics in MetaMask Mobile
+ * Manages alert-related analytics including alert triggers, resolutions, clicks, and visualizations
+ * Used in confirmation flows to track user interactions with security alerts and warnings
+ * @returns {Object} Object containing alert tracking functions
+ * @returns {Function} returns.trackAlertRendered - Tracks when an alert is rendered/visualized
+ * @returns {Function} returns.trackInlineAlertClicked - Tracks when an alert is clicked with optional field parameter
+ * @returns {Function} returns.trackAlertMetrics - Tracks general alert metrics like trigger and resolution counts
+ */
 export function useConfirmationAlertMetrics() {
   const { setConfirmationMetric } = useConfirmationMetricEvents();
   const { alerts, isAlertConfirmed, alertKey } = useAlerts();

@@ -4,6 +4,11 @@ import { Animated, StyleSheet } from 'react-native';
 import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
+/**
+ * Creates styles for the FadeOutOverlay component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     view: {
@@ -17,7 +22,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that is displayed to first time (new) users
+ * FadeOutOverlay component that creates a full-screen overlay that fades out over time
+ * Used to provide smooth transitions and visual effects during app initialization
+ * Automatically removes itself from the render tree after the fade animation completes
  */
 export default class FadeOutOverlay extends PureComponent {
   static propTypes = {

@@ -13,10 +13,12 @@ export interface UserDetailsPollingResult {
 
 /**
  * Hook to poll for user details from the SDK
+ * Automatically stops polling when KYC status reaches a terminal state
  *
  * @param pollingInterval - The interval in milliseconds to poll for user details
  * @param autoStart - Whether to automatically start polling
  * @param maxPollingAttempts - The maximum number of polling attempts before stopping. Set to 0 to poll indefinitely.
+ * @returns Object containing user details, loading state, error, and polling control functions
  */
 const useUserDetailsPolling = (
   pollingInterval: number = 10000,

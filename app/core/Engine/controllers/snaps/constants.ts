@@ -1,3 +1,19 @@
+/**
+ * Constants for MetaMask Snaps controller events and actions
+ *
+ * This module defines string constants used for communication between the MetaMask Mobile
+ * application and the Snaps controllers. These constants ensure type-safe event handling
+ * and action dispatching for Snap lifecycle management, interface interactions, cronjob
+ * scheduling, and WebSocket communications.
+ *
+ * The constants are organized into categories:
+ * - SnapController Events: Lifecycle events for Snap installation, updates, and state changes
+ * - SnapController Actions: Actions for managing Snap state, permissions, and file access
+ * - SnapInterfaceController Actions: Actions for managing Snap user interfaces
+ * - CronjobController Actions: Actions for scheduled task management
+ * - WebSocketService Actions: Actions for WebSocket communication management
+ */
+
 import {
   SnapStateChange as SnapControllerStateChangeEventType,
   HandleSnapRequest as SnapControllerHandleRequestActionType,
@@ -28,6 +44,11 @@ import {
 } from '@metamask/snaps-controllers';
 
 // SnapController Events
+
+/**
+ * Event constant for SnapController state changes
+ * Fired when the overall state of the SnapController changes
+ */
 export const SnapControllerStateChangeEvent: SnapControllerStateChangeEventType['type'] =
   'SnapController:stateChange';
 

@@ -1,5 +1,9 @@
 const DEFAULT_REGION_ISO_CODE = 'US';
 
+/**
+ * Interface defining the structure of a deposit region
+ * Contains region information including phone formatting and currency details
+ */
 export interface DepositRegion {
   isoCode: string;
   flag: string;
@@ -14,6 +18,10 @@ export interface DepositRegion {
   recommended?: boolean;
 }
 
+/**
+ * Array of all available deposit regions with their configuration
+ * Includes both supported and unsupported regions for comprehensive coverage
+ */
 export const DEPOSIT_REGIONS: DepositRegion[] = [
   {
     isoCode: 'US',
@@ -2527,6 +2535,10 @@ export const DEPOSIT_REGIONS: DepositRegion[] = [
   },
 ];
 
+/**
+ * Array of US states with their codes and names
+ * Used for address validation and state selection in deposit forms
+ */
 export const US_STATES = [
   { code: 'AL', name: 'Alabama' },
   { code: 'AK', name: 'Alaska' },
@@ -2586,6 +2598,10 @@ export const US_STATES = [
   { code: 'VI', name: 'U.S. Virgin Islands' },
 ];
 
+/**
+ * Default region configuration for deposit operations
+ * Falls back to US region as the default selection
+ */
 export const DEFAULT_REGION = DEPOSIT_REGIONS.find(
   (region) => region.isoCode === DEFAULT_REGION_ISO_CODE,
 ) as DepositRegion;

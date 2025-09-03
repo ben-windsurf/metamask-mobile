@@ -30,12 +30,22 @@ import { useTokens } from '../../hooks/useTokens';
 import { BridgeToken, BridgeViewMode } from '../../types';
 import { PopularList } from '../../../../../util/networks/customNetworks';
 
+/**
+ * Creates styles for the BridgeDestTokenSelector component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     infoButton: {
       marginRight: 12,
     },
   });
+/**
+ * BridgeDestTokenSelector component allows users to select destination tokens for bridge transactions
+ * Displays available tokens on the destination network with filtering and selection capabilities
+ * Includes network switching and token information access functionality
+ * @returns {JSX.Element} The rendered destination token selector component
+ */
 export const BridgeDestTokenSelector: React.FC = () => {
   const dispatch = useDispatch();
   const { styles } = useStyles(createStyles, {});

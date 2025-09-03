@@ -2,6 +2,13 @@ import { Hex } from '@metamask/utils';
 import Engine from '../../../../core/Engine';
 import Logger from '../../../../util/Logger';
 
+/**
+ * Performs a comprehensive refresh of EVM token data across multiple networks
+ * Updates token detection, balances, account tracking, currency rates, and token rates
+ * @param {Record<string, { chainId: Hex; nativeCurrency: string }>} evmNetworkConfigurationsByChainId - Network configurations indexed by chain ID
+ * @param {string[]} nativeCurrencies - Array of native currency symbols to update rates for
+ * @returns {Promise<void>} Promise that resolves when all refresh operations complete
+ */
 export const performEvmRefresh = async (
   evmNetworkConfigurationsByChainId: Record<
     string,

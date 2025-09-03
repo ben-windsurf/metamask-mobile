@@ -8,6 +8,16 @@ import styleSheet from './Quotes.styles';
 
 import { strings } from '../../../../../../../locales/i18n';
 
+/**
+ * Timer component displays quote refresh countdown and fetching status
+ * Shows either a loading indicator when fetching quotes or a countdown timer
+ * Highlights the timer when time is running low based on polling interval
+ * @param {Object} props - Component props
+ * @param {boolean} props.isFetchingQuotes - Whether quotes are currently being fetched
+ * @param {number} props.pollingCyclesLeft - Number of polling cycles remaining
+ * @param {number} props.remainingTime - Time remaining in milliseconds
+ * @returns {JSX.Element} Timer component with countdown or loading state
+ */
 const Timer = ({
   isFetchingQuotes,
   pollingCyclesLeft,

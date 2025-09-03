@@ -1,5 +1,12 @@
 import { NetworksChainId } from '@metamask/controller-utils';
 
+/**
+ * Migration 004: Converts network types to chain IDs for tokens and collectibles
+ * Updates TokensController and CollectiblesController to use chain IDs instead of network types
+ * for organizing tokens, collectibles, and collectible contracts by network
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated network organization
+ */
 export default function migrate(state) {
   const { allTokens } = state.engine.backgroundState.TokensController;
   const { allCollectibleContracts, allCollectibles } =

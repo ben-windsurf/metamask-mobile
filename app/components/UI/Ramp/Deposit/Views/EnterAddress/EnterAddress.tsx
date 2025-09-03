@@ -41,6 +41,10 @@ export interface EnterAddressParams {
   quote: BuyQuote;
 }
 
+/**
+ * Creates navigation details for the EnterAddress screen
+ * @returns Navigation details object for the enter address route
+ */
 export const createEnterAddressNavDetails =
   createNavigationDetails<EnterAddressParams>(Routes.DEPOSIT.ENTER_ADDRESS);
 
@@ -53,6 +57,11 @@ interface AddressFormData {
   countryCode: string;
 }
 
+/**
+ * EnterAddress component for collecting user address information during deposit flow
+ * Handles address form validation, submission, and navigation to next step
+ * @returns JSX element rendering the address entry form with validation
+ */
 const EnterAddress = (): JSX.Element => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

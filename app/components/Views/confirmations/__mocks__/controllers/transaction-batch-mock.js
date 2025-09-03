@@ -6,6 +6,12 @@ import {
   mockTxId,
 } from '../../../../../util/test/confirm-data-helpers';
 
+/**
+ * Mock state configuration for stablecoin lending deposit confirmation flows
+ * Provides a complete Redux state with transaction batch approval setup for testing
+ * confirmation views in the MetaMask Mobile lending feature
+ * @type {Object}
+ */
 export const generateStablecoinLendingDepositConfirmationState = {
   ...contractInteractionBaseState,
   engine: {

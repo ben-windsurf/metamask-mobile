@@ -1,6 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for the UpdateNeeded component
+ * @param {any} colors - Theme colors object containing background and other color definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

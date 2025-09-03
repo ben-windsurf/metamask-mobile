@@ -24,6 +24,11 @@ interface Props {
   address?: string;
 }
 
+/**
+ * Creates styles for the AssetIcon component
+ * @param {any} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createStyles = (colors: any) =>
@@ -38,7 +43,13 @@ const createStyles = (colors: any) =>
   });
 
 /**
- * PureComponent that provides an asset icon dependent on OS.
+ * AssetIcon component displays an asset icon with fallback handling
+ * Renders a remote image for token/asset logos with proper styling and placeholder support
+ * @param {Props} props - Component props
+ * @param {string} props.logo - URL of the logo to display
+ * @param {StyleProp<ImageStyle>} props.customStyle - Custom style to apply to image
+ * @param {string} props.address - Token address for caching purposes
+ * @returns {JSX.Element|null} The rendered asset icon or null if no logo provided
  */
 // eslint-disable-next-line react/display-name
 const AssetIcon = memo((props: Props) => {

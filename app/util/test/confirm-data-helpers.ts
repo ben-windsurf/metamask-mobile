@@ -20,6 +20,10 @@ import { merge } from 'lodash';
 
 import { backgroundState } from './initial-root-state';
 
+/**
+ * Mock state for confirmation redesign remote feature flags
+ * Used in tests to enable confirmation redesign features
+ */
 export const confirmationRedesignRemoteFlagsState = {
   remoteFeatureFlags: {
     confirmation_redesign: {
@@ -36,6 +40,10 @@ const mockTypeDefEIP712Domain = [
   { name: 'verifyingContract', type: 'address' },
 ];
 
+/**
+ * Mock personal sign signature request for testing
+ * Contains sample data for personal_sign method testing
+ */
 export const personalSignSignatureRequest = {
   chainId: '0x1',
   type: SignatureRequestType.PersonalSign,
@@ -57,6 +65,10 @@ export const personalSignSignatureRequest = {
   time: 1733143817088,
 } as SignatureRequest;
 
+/**
+ * Mock state for personal signature confirmation testing
+ * Includes approval controller and signature controller state
+ */
 export const personalSignatureConfirmationState = {
   engine: {
     backgroundState: {
@@ -113,6 +125,10 @@ export const personalSignatureConfirmationState = {
   },
 };
 
+/**
+ * Mock SIWE (Sign-In with Ethereum) signature request for testing
+ * Extends personal sign request with SIWE-specific message data
+ */
 export const siweSignSignatureRequest = {
   ...personalSignSignatureRequest,
   messageParams: {
@@ -137,6 +153,10 @@ export const siweSignSignatureRequest = {
   },
 } as unknown as SignatureRequest;
 
+/**
+ * Mock state for SIWE signature confirmation testing
+ * Contains approval and signature controller state for SIWE requests
+ */
 export const siweSignatureConfirmationState = {
   engine: {
     backgroundState: {
@@ -187,6 +207,10 @@ export const siweSignatureConfirmationState = {
   },
 };
 
+/**
+ * Mock typed sign V1 signature request for testing
+ * Contains sample data for eth_signTypedData_v1 method testing
+ */
 export const typedSignV1SignatureRequest = {
   chainId: '0x1' as Hex,
   messageParams: {
@@ -208,6 +232,10 @@ export const typedSignV1SignatureRequest = {
   } as MessageParamsTyped,
 } as SignatureRequest;
 
+/**
+ * Mock state for typed sign V1 confirmation testing
+ * Includes approval and signature controller state for V1 typed data
+ */
 export const typedSignV1ConfirmationState = {
   engine: {
     backgroundState: {
@@ -255,6 +283,10 @@ export const typedSignV1ConfirmationState = {
   },
 };
 
+/**
+ * Mock EIP-712 typed data message for V3 testing
+ * Contains structured data with types, domain, and message
+ */
 export const mockTypedSignV3Message = {
   types: {
     EIP712Domain: [
@@ -287,6 +319,10 @@ export const mockTypedSignV3Message = {
   },
 };
 
+/**
+ * Mock typed sign V3 signature request for testing
+ * Contains sample data for eth_signTypedData_v3 method testing with EIP-712 structured data
+ */
 export const typedSignV3SignatureRequest = {
   chainId: '0x1' as Hex,
   type: SignatureRequestType.TypedSign,
@@ -306,6 +342,10 @@ export const typedSignV3SignatureRequest = {
   } as MessageParamsTyped,
 } as SignatureRequest;
 
+/**
+ * Mock state for typed sign V3 confirmation testing
+ * Includes approval and signature controller state for V3 typed data with EIP-712 support
+ */
 export const typedSignV3ConfirmationState = {
   engine: {
     backgroundState: {
@@ -352,6 +392,10 @@ export const typedSignV3ConfirmationState = {
   },
 };
 
+/**
+ * Mock typed sign V4 signature request for testing
+ * Contains sample data for eth_signTypedData_v4 method testing with full EIP-712 support
+ */
 export const typedSignV4SignatureRequest = {
   id: 'fb2029e1-b0ab-11ef-9227-05a11087c334',
   chainId: '0x1' as Hex,
@@ -376,6 +420,10 @@ export const typedSignV4SignatureRequest = {
   time: 1733143817088,
 } as SignatureRequest;
 
+/**
+ * Mock state for typed sign V4 confirmation testing
+ * Includes approval and signature controller state for V4 typed data signatures
+ */
 export const typedSignV4ConfirmationState = {
   engine: {
     backgroundState: {
@@ -418,6 +466,10 @@ export const typedSignV4ConfirmationState = {
   },
 };
 
+/**
+ * Mock typed sign V4 NFT signature request for testing
+ * Contains sample data for NFT-related eth_signTypedData_v4 method testing
+ */
 export const typedSignV4NFTSignatureRequest = {
   id: 'c5067710-87cf-11ef-916c-71f266571322',
   chainId: '0x1' as Hex,
@@ -442,6 +494,10 @@ export const typedSignV4NFTSignatureRequest = {
   time: 1733143817088,
 } as SignatureRequest;
 
+/**
+ * Mock state for typed sign V4 NFT confirmation testing
+ * Includes approval and signature controller state for NFT-related V4 typed data
+ */
 export const typedSignV4NFTConfirmationState = {
   engine: {
     backgroundState: {
@@ -485,6 +541,10 @@ export const typedSignV4NFTConfirmationState = {
   },
 };
 
+/**
+ * Mock security alert response for testing
+ * Contains sample security analysis data for malicious transaction detection
+ */
 export const securityAlertResponse = {
   block: 21572398,
   result_type: 'Malicious',
@@ -712,6 +772,10 @@ const stakingConfirmationBaseState = {
   },
 };
 
+/**
+ * Mock state for staking deposit confirmation testing
+ * Extends base staking state with deposit-specific transaction data
+ */
 export const stakingDepositConfirmationState = merge(
   {},
   stakingConfirmationBaseState,
@@ -726,6 +790,10 @@ export const stakingDepositConfirmationState = merge(
   },
 );
 
+/**
+ * Mock state for staking withdrawal confirmation testing
+ * Extends base staking state with withdrawal-specific transaction data
+ */
 export const stakingWithdrawalConfirmationState = merge(
   {},
   stakingConfirmationBaseState,
@@ -740,6 +808,10 @@ export const stakingWithdrawalConfirmationState = merge(
   },
 );
 
+/**
+ * Mock state for staking claim confirmation testing
+ * Extends base staking state with claim rewards transaction data
+ */
 export const stakingClaimConfirmationState = merge(
   {},
   stakingConfirmationBaseState,
@@ -829,6 +901,11 @@ const SIGN_TYPE_DATA: Record<SignTypedDataMockType, string> = {
   }),
 };
 
+/**
+ * Generates mock state for sign typed data testing based on specified type
+ * @param mockType - The type of mock data to generate (PERMIT, NFT, etc.)
+ * @returns Mock state object with signature request and controller state
+ */
 export function generateStateSignTypedData(mockType: SignTypedDataMockType) {
   const mockSignatureRequest = {
     id: 'c5067710-87cf-11ef-916c-71f266571322',
@@ -1299,6 +1376,12 @@ export const MOCK_KEYRING_CONTROLLER_STATE = {
   ],
 };
 
+/**
+ * Builds transaction data for ERC-20/ERC-721 approve function call
+ * @param {string} address - The spender address to approve
+ * @param {number} amountOrTokenId - The amount (ERC-20) or token ID (ERC-721) to approve
+ * @returns {Hex} The encoded transaction data for the approve function call
+ */
 export function buildApproveTransactionData(
   address: string,
   amountOrTokenId: number,
@@ -1308,6 +1391,14 @@ export function buildApproveTransactionData(
   ]).encodeFunctionData('approve', [address, amountOrTokenId]) as Hex;
 }
 
+/**
+ * Builds transaction data for Permit2 approve function call
+ * @param {string} token - The token contract address
+ * @param {string} spender - The spender address to approve
+ * @param {number} amount - The amount to approve
+ * @param {number} expiration - The approval expiration timestamp
+ * @returns {Hex} The encoded transaction data for the Permit2 approve function call
+ */
 export function buildPermit2ApproveTransactionData(
   token: string,
   spender: string,
@@ -1319,6 +1410,12 @@ export function buildPermit2ApproveTransactionData(
   ]).encodeFunctionData('approve', [token, spender, amount, expiration]) as Hex;
 }
 
+/**
+ * Builds transaction data for ERC-20 increaseAllowance function call
+ * @param {string} address - The spender address to increase allowance for
+ * @param {number} amount - The amount to increase the allowance by
+ * @returns {Hex} The encoded transaction data for the increaseAllowance function call
+ */
 export function buildIncreaseAllowanceTransactionData(
   address: string,
   amount: number,
@@ -1328,6 +1425,12 @@ export function buildIncreaseAllowanceTransactionData(
   ]).encodeFunctionData('increaseAllowance', [address, amount]) as Hex;
 }
 
+/**
+ * Builds transaction data for ERC-721/ERC-1155 setApprovalForAll function call
+ * @param {string} address - The operator address to set approval for
+ * @param {boolean} approved - Whether to approve (true) or revoke approval (false)
+ * @returns {Hex} The encoded transaction data for the setApprovalForAll function call
+ */
 export function buildSetApproveForAllTransactionData(
   address: string,
   approved: boolean,

@@ -27,6 +27,15 @@ const InfoLabel = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+/**
+ * MaxBaseFeeInput component allows users to input and validate the maximum base fee for EIP-1559 transactions
+ * Provides real-time validation, gas fee estimates, and historical fee range information
+ * @param {Object} props - Component props
+ * @param {Hex} props.maxPriorityFeePerGas - The maximum priority fee per gas in hex format
+ * @param {Function} props.onChange - Callback function called when the max base fee value changes
+ * @param {Function} props.onErrorChange - Callback function called when validation error state changes
+ * @returns {JSX.Element} The rendered max base fee input component
+ */
 export const MaxBaseFeeInput = ({
   maxPriorityFeePerGas,
   onChange,

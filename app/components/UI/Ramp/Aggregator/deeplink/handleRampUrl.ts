@@ -15,6 +15,14 @@ interface RampUrlOptions {
   navigation: NavigationProp<ParamListBase>;
 }
 
+/**
+ * Handles ramp URL navigation by parsing the path and redirecting to appropriate screens
+ * Processes buy/sell ramp URLs and navigates to the correct flow based on the ramp type
+ * @param {RampUrlOptions} options - The ramp URL handling options
+ * @param {string} options.rampPath - The ramp URL path to process
+ * @param {RampType} options.rampType - The type of ramp operation (buy or sell)
+ * @param {NavigationProp<ParamListBase>} options.navigation - React Navigation object for screen navigation
+ */
 export default function handleRampUrl({
   rampPath,
   rampType,

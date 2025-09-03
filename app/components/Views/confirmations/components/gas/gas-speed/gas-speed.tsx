@@ -67,6 +67,12 @@ const getEstimatedTime = (
   return ` ~ ${humanizedWaitTime}`;
 };
 
+/**
+ * GasSpeed component displays the selected gas fee level with an icon and estimated time
+ * Shows gas speed options like Low, Medium, High, Site Suggested, or Advanced with timing estimates
+ * Used in transaction confirmation flows to indicate the selected gas fee level and expected confirmation time
+ * @returns {JSX.Element|null} The gas speed display component or null if no user fee level is set
+ */
 export const GasSpeed = () => {
   const transactionMeta = useTransactionMetadataRequest();
   const { gasFeeEstimates } = useGasFeeEstimates(

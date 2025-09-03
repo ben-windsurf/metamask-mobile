@@ -88,6 +88,18 @@ export interface SDKConnectState {
 
 export type SDKEventListener = (event: string) => void;
 
+/**
+ * SDKConnect manages SDK connections and communication between MetaMask Mobile and external dApps.
+ * This singleton class handles connection lifecycle, session management, and RPC communication
+ * for both Android SDK and deeplink protocol connections.
+ *
+ * Key responsibilities:
+ * - Managing connection establishment and teardown
+ * - Handling session persistence and recovery
+ * - Processing RPC requests from connected dApps
+ * - Managing approved hosts and connection permissions
+ * - Coordinating Android SDK and deeplink protocol services
+ */
 export class SDKConnect {
   private static instance: SDKConnect;
 

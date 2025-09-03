@@ -13,6 +13,11 @@ const styleSheet = ({ theme }: { theme: Theme }) =>
     },
   });
 
+/**
+ * InfoRowDivider component renders a horizontal divider line for separating info rows
+ * Used in confirmation screens to visually separate different sections of information
+ * @returns {JSX.Element} A styled horizontal divider view
+ */
 export const InfoRowDivider: React.FC = () => {
   const { styles } = useStyles(styleSheet, {});
 

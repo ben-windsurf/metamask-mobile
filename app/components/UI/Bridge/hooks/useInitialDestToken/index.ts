@@ -9,6 +9,12 @@ import { selectChainId } from '../../../../../selectors/networkController';
 import { BridgeViewMode, BridgeToken } from '../../types';
 import { getNativeSourceToken } from '../useInitialSourceToken';
 
+/**
+ * Hook to initialize the destination token for bridge operations
+ * Sets a default destination token based on the current chain and source token
+ * Handles race conditions by accepting the initial source token as a parameter
+ * @param {BridgeToken} initialSourceToken - The initial source token to avoid race conditions
+ */
 // Need to pass in the initial source token to avoid a race condition with useInitialSourceToken
 // Can't just use selectSourceToken because of race condition
 export const useInitialDestToken = (initialSourceToken?: BridgeToken) => {

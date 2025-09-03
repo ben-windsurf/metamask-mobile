@@ -45,6 +45,12 @@ const isNonPermitSupportedByDecodingAPI = (
   );
 };
 
+/**
+ * Custom hook that determines if typed signature simulation should be enabled
+ * Checks if the current signature request supports simulation based on transaction simulation settings,
+ * signature type (TypedSign V3/V4), and whether it's a recognized permit or supported non-permit type
+ * @returns {boolean | undefined} True if simulation should be enabled, false if disabled, undefined if no signature request
+ */
 export function useTypedSignSimulationEnabled() {
   const signatureRequest = useSignatureRequest();
   const useTransactionSimulations = useSelector(

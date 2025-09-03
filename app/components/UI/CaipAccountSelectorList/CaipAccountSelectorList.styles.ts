@@ -2,12 +2,9 @@
 import { StyleSheet } from 'react-native';
 
 /**
- * Style sheet function for AvatarIcon component.
- *
- * @param params Style sheet params.
- * @param params.theme App theme from ThemeContext.
- * @param params.vars Inputs that the style sheet depends on.
- * @returns StyleSheet object.
+ * Style sheet function for CaipAccountSelectorList component
+ * Creates styles for account selector list balances and labels
+ * @returns StyleSheet object containing component styles
  */
 const styleSheet = () =>
   StyleSheet.create({

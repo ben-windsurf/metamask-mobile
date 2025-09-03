@@ -17,6 +17,11 @@ import { useConfirmationLocation } from './useConfirmationLocation';
 import { useTransactionMetadataRequest } from '../transactions/useTransactionMetadataRequest';
 import { useSignatureRequest } from '../signatures/useSignatureRequest';
 
+/**
+ * Custom hook that provides metric event tracking functions for confirmation screens
+ * Manages analytics events for user interactions during transaction and signature confirmations
+ * @returns {Object} Object containing event tracking functions and metric setters
+ */
 export function useConfirmationMetricEvents() {
   const { createEventBuilder, trackEvent } = useMetrics();
   const location = useConfirmationLocation();
@@ -120,6 +125,15 @@ export function useConfirmationMetricEvents() {
   return { ...events };
 }
 
+/**
+ * Generates a MetaMetrics event with the specified properties and sensitive data
+ * @param {Object} params - Event generation parameters
+ * @param {Function} params.createEventBuilder - Event builder function from useMetrics hook
+ * @param {IMetaMetricsEvent} params.metametricsEvent - The MetaMetrics event type to track
+ * @param {JsonMap} [params.properties] - Optional event properties to include
+ * @param {JsonMap} [params.sensitiveProperties] - Optional sensitive properties to include
+ * @returns {Object} Built MetaMetrics event ready for tracking
+ */
 function generateEvent({
   createEventBuilder,
   metametricsEvent,

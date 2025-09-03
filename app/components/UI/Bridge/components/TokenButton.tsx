@@ -32,6 +32,11 @@ interface StylesParams {
   theme: Theme;
 }
 
+/**
+ * Creates styles for the TokenButton component
+ * @param {StylesParams} params - Style parameters containing theme
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (params: StylesParams) => {
   const { theme } = params;
   const { shadows } = theme;
@@ -56,6 +61,12 @@ const createStyles = (params: StylesParams) => {
   });
 };
 
+/**
+ * TokenButton component displays a token with its symbol and network badge
+ * Renders a touchable button with token icon, network badge, and symbol text
+ * @param {TokenProps} props - Component props
+ * @returns {JSX.Element} Rendered token button component
+ */
 export const TokenButton: React.FC<TokenProps> = ({
   symbol,
   iconUrl,

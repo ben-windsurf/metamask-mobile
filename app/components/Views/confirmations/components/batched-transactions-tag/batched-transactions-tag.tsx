@@ -16,6 +16,12 @@ import { useTransactionBatchesMetadata } from '../../hooks/transactions/useTrans
 import { useTransactionMetadataRequest } from '../../hooks/transactions/useTransactionMetadataRequest';
 import styleSheet from './batched-transactions-tag.styles';
 
+/**
+ * BatchedTransactionTag component displays a tag indicating when a transaction includes multiple batched operations
+ * Shows the count of nested or batched transactions and only renders when there are multiple transactions
+ * Used in confirmation flows to inform users about complex transaction structures
+ * @returns {JSX.Element|null} The batched transaction tag component or null if not applicable
+ */
 export const BatchedTransactionTag = () => {
   const { styles } = useStyles(styleSheet, {});
   const transactionMetadata = useTransactionMetadataRequest();

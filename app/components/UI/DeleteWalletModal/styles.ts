@@ -2,6 +2,11 @@
 import { fontStyles } from '../../../styles/common';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for DeleteWalletModal component
+ * @param {any} colors - Theme colors object containing color definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

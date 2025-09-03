@@ -69,6 +69,11 @@ import {
 import { CHAIN_IDS } from '@metamask/transaction-controller';
 import TagBase from '../../../../component-library/base-components/TagBase';
 
+/**
+ * Creates stylesheet for TransactionDetails component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     viewOnEtherscan: {
@@ -120,7 +125,10 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that renders a transaction details as part of transactions list
+ * TransactionDetails component renders detailed information about a specific transaction
+ * Displays transaction status, date, from/to addresses, nonce, summary, and block explorer link
+ * Provides speed up and cancel functionality for pending transactions
+ * @returns {JSX.Element} Detailed transaction information modal
  */
 class TransactionDetails extends PureComponent {
   static propTypes = {
@@ -540,6 +548,12 @@ class TransactionDetails extends PureComponent {
   };
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state
+ * @param {Object} ownProps - Component's own props
+ * @returns {Object} Props object with selected state values
+ */
 const mapStateToProps = (state, ownProps) => ({
   chainId: selectChainId(state),
   providerConfig: isPerDappSelectedNetworkEnabled()

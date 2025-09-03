@@ -31,6 +31,11 @@ export interface PerformanceState {
   isInitialized: boolean;
 }
 
+/**
+ * Initial state for the performance Redux slice
+ * Contains default values for performance tracking including session management,
+ * metrics collection, and environment information
+ */
 export const initialState: PerformanceState = {
   sessionId: '',
   startTime: 0,
@@ -127,16 +132,31 @@ const { actions, reducer } = slice;
 const selectPerformanceState = (state: RootState) => state.performance;
 
 // Selectors using createSelector
+/**
+ * Selector to get the entire performance state
+ * @param {RootState} state - The Redux root state
+ * @returns {PerformanceState} The complete performance state object
+ */
 export const selectPerformanceData = createSelector(
   [selectPerformanceState],
   (performanceState) => performanceState,
 );
 
+/**
+ * Selector to get performance metrics array
+ * @param {RootState} state - The Redux root state
+ * @returns {PerformanceMetric[]} Array of performance metrics
+ */
 export const selectPerformanceMetrics = createSelector(
   [selectPerformanceState],
   (performanceState) => performanceState?.metrics,
 );
 
+/**
+ * Selector to get performance session information
+ * @param {RootState} state - The Redux root state
+ * @returns {Object} Object containing sessionId, startTime, and environment data
+ */
 export const selectPerformanceSession = createSelector(
   [selectPerformanceState],
   (performanceState) => ({
@@ -147,6 +167,12 @@ export const selectPerformanceSession = createSelector(
 );
 
 // Actions
+/**
+ * Performance tracking Redux actions
+ * - startPerformanceTrace: Begins tracking a performance event
+ * - endPerformanceTrace: Ends tracking and records the performance metric
+ * - clearPerformanceMetrics: Clears all collected performance metrics
+ */
 export const {
   startPerformanceTrace,
   endPerformanceTrace,

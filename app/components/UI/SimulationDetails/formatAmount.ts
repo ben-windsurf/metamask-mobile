@@ -5,6 +5,10 @@ const MIN_AMOUNT = new BigNumber('0.000001');
 
 // The default precision for displaying currency values.
 // It set to the number of decimal places in the minimum amount.
+/**
+ * The default precision for displaying currency values
+ * Set to the number of decimal places in the minimum amount
+ */
 export const DEFAULT_PRECISION = new BigNumber(MIN_AMOUNT).decimalPlaces();
 
 // The number of significant decimals places to show for amounts less than 1.
@@ -12,6 +16,12 @@ const MAX_SIGNIFICANT_DECIMAL_PLACES = 3;
 
 const ZERO_DISPLAY = '0';
 
+/**
+ * Formats an amount with maximum precision, preserving all decimal places
+ * @param locale - The locale string for number formatting
+ * @param num - The number or BigNumber to format
+ * @returns The formatted amount string with full precision
+ */
 export function formatAmountMaxPrecision(
   locale: string,
   num: number | BigNumber,

@@ -19,6 +19,13 @@ import { selectEvmChainId } from '../../../../../selectors/networkController';
 
 const MOCK_STAKING_CONTRACT_NAME = 'MM Pooled Staking';
 
+/**
+ * UnstakeConfirmationView component displays the confirmation screen for unstaking ETH
+ * Shows the unstaking amount, time estimates, account details, and confirmation actions
+ * @param {UnstakeConfirmationViewProps} props - Component props
+ * @param {Object} props.route - Navigation route containing unstaking parameters
+ * @returns {JSX.Element} The rendered unstake confirmation view
+ */
 const UnstakeConfirmationView = ({ route }: UnstakeConfirmationViewProps) => {
   const { styles, theme } = useStyles(styleSheet, {});
   const chainId = useSelector(selectEvmChainId);

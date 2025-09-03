@@ -5,6 +5,14 @@
 
 import { IMetaMetricsEvent } from './MetaMetrics.types';
 
+/**
+ * Generates a MetaMetrics event object with optional action and description properties
+ * Used to create standardized analytics events for tracking user interactions in MetaMask Mobile
+ * @param {EVENT_NAME} name - The event name/category from the EVENT_NAME enum
+ * @param {ACTIONS} [action] - Optional action parameter to specify the type of action taken
+ * @param {DESCRIPTION} [description] - Optional description to provide additional context for the event
+ * @returns {IMetaMetricsEvent} A formatted MetaMetrics event object with category and optional properties
+ */
 export const generateOpt = (
   name: EVENT_NAME,
   action?: ACTIONS,

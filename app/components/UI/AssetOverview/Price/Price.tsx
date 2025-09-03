@@ -39,6 +39,23 @@ interface PriceProps {
   isEvmAssetSelected: boolean;
 }
 
+/**
+ * Price component displays token price information with interactive chart
+ * Shows current price, price difference, percentage change, and historical price chart
+ * Supports both EVM and multichain assets with loading states and skeleton placeholders
+ * @param {PriceProps} props - Component props
+ * @param {TokenI} props.asset - Token asset information
+ * @param {TokenPrice[]} props.prices - Array of historical price data points
+ * @param {number} props.priceDiff - Price difference from comparison period
+ * @param {number} props.currentPrice - Current token price
+ * @param {string} props.currentCurrency - Current fiat currency for display
+ * @param {number} props.comparePrice - Price to compare against for percentage calculation
+ * @param {boolean} props.isLoading - Loading state for price data
+ * @param {TimePeriod} props.timePeriod - Selected time period for price chart
+ * @param {Record<CaipAssetType, AssetConversion>} props.multichainAssetsRates - Multichain asset conversion rates
+ * @param {boolean} props.isEvmAssetSelected - Whether an EVM asset is currently selected
+ * @returns {JSX.Element} Price component with chart and price information
+ */
 const Price = ({
   asset,
   prices,

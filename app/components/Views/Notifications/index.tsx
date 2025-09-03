@@ -40,6 +40,13 @@ import ButtonIcon, {
 import { MetaMetricsEvents } from '../../../core/Analytics';
 import { NotificationMenuViewSelectorsIDs } from '../../../../e2e/selectors/Notifications/NotificationMenuView.selectors';
 
+/**
+ * Custom hook that provides functionality to mark notifications as read
+ * Handles marking all notifications as read and tracks analytics events
+ * @param {Object} props - Hook properties
+ * @param {INotification[]} props.notifications - Array of notifications to mark as read
+ * @returns {Object} Object containing handleMarkAllAsRead function and loading state
+ */
 export function useMarkAsReadCallback(props: {
   notifications: INotification[];
 }) {
@@ -63,6 +70,13 @@ export function useMarkAsReadCallback(props: {
   };
 }
 
+/**
+ * Custom hook that filters and categorizes notifications into different types
+ * Separates notifications into all, wallet, and announcement categories
+ * @param {Object} props - Hook properties
+ * @param {INotification[]} props.notifications - Array of notifications to filter
+ * @returns {Object} Object containing filtered notification arrays: allNotifications, walletNotifications, announcementNotifications
+ */
 export function useNotificationFilters(props: {
   notifications: INotification[];
 }) {

@@ -7,6 +7,12 @@ import { updateApprovalAmount } from '../utils/approvals';
 import { useTransactionMetadataRequest } from './transactions/useTransactionMetadataRequest';
 import { useApproveTransactionData } from './useApproveTransactionData';
 
+/**
+ * Custom hook that provides actions for managing approve transaction operations
+ * Handles spending cap updates for ERC-20 token approval transactions
+ * @returns {Object} Object containing transaction action functions
+ * @returns {Function} returns.onSpendingCapUpdate - Function to update the spending cap for approval transactions
+ */
 export const useApproveTransactionActions = () => {
   const transactionMeta = useTransactionMetadataRequest();
   const { decimals } = useApproveTransactionData();

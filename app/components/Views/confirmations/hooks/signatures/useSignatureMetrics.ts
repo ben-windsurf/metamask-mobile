@@ -65,6 +65,11 @@ const getAnalyticsParams = (
   };
 };
 
+/**
+ * Custom hook that provides signature metrics tracking functionality for confirmation flows
+ * Captures analytics events for signature requests including security alerts, decoding data, and user interactions
+ * @returns {Object} Object containing captureSignatureMetrics function for tracking signature-related events
+ */
 export const useSignatureMetrics = () => {
   const signatureRequest = useSignatureRequest();
   const isSimulationEnabled = useTypedSignSimulationEnabled();

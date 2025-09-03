@@ -7,6 +7,11 @@ export interface DataGradientProps {
   color?: string;
 }
 
+/**
+ * Calculates gradient opacity values based on the size of the dataset
+ * @param {number} dataSetSize - The number of data points in the dataset
+ * @returns {Object} Object containing opacityTop and opacityBottom values
+ */
 const getGradientOpacityByDataSetSize = (dataSetSize: number) => {
   let opacityTop, opacityBottom;
 
@@ -21,6 +26,14 @@ const getGradientOpacityByDataSetSize = (dataSetSize: number) => {
   return { opacityTop, opacityBottom };
 };
 
+/**
+ * DataGradient component renders an SVG linear gradient for chart data visualization
+ * Creates a dynamic gradient with opacity based on dataset size for better visual representation
+ * @param {DataGradientProps} props - Component props
+ * @param {number[]} props.dataPoints - Array of data points to determine gradient opacity
+ * @param {string} props.color - Optional color for the gradient, defaults to theme success color
+ * @returns {JSX.Element} SVG Defs element containing the linear gradient definition
+ */
 const DataGradient = ({ dataPoints, color }: DataGradientProps) => {
   const { colors } = useTheme();
 

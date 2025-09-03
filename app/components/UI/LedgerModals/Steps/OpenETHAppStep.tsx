@@ -11,6 +11,10 @@ import ledgerConnectDarkImage from '../../../../images/ledger-connect-dark.png';
 
 import { OPEN_ETH_APP_STEP } from './Steps.constants';
 
+/**
+ * Creates styles for the OpenETHAppStep component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     modalTitle: {
@@ -37,6 +41,13 @@ export interface OpenETHAppStepProps {
   onReject: () => void;
 }
 
+/**
+ * OpenETHAppStep component displays instructions for opening the Ethereum app on a Ledger device
+ * Shows a Ledger device image and instructions with a reject button for canceling the process
+ * @param {OpenETHAppStepProps} props - Component props
+ * @param {Function} props.onReject - Callback function called when user rejects/cancels the step
+ * @returns {JSX.Element} The rendered OpenETHAppStep component
+ */
 const OpenETHAppStep = ({ onReject }: OpenETHAppStepProps) => {
   const styles = useMemo(() => createStyles(), []);
   const ledgerImage = useAssetFromTheme(

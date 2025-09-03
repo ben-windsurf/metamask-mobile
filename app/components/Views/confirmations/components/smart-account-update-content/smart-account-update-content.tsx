@@ -45,6 +45,12 @@ const ListItem = ({
   );
 };
 
+/**
+ * SmartAccountUpdateContent component displays information about smart account updates and EIP-7702 functionality
+ * Shows benefits like better transaction experiences, gas payment with tokens, and enhanced account features
+ * Includes interactive elements with links to learn more about smart accounts
+ * @returns {JSX.Element} The rendered smart account update content component
+ */
 export const SmartAccountUpdateContent = () => {
   const { styles } = useStyles(styleSheet, {});
 

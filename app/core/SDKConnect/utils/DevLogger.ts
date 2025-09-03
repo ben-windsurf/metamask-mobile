@@ -1,3 +1,8 @@
+/**
+ * Development logger utility for SDK Connect functionality
+ * Provides conditional logging that only outputs in development environment
+ * Used for debugging SDK connection and communication issues
+ */
 export const DevLogger = {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

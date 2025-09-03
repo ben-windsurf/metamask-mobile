@@ -49,6 +49,13 @@ import {
   CaipChainId,
 } from '@metamask/utils';
 
+/**
+ * CaipAccountSelectorList component renders a list of CAIP-compliant accounts with selection capabilities
+ * Supports single and multi-select modes, account removal, and custom rendering accessories
+ * Handles account balances, ENS names, and network indicators for each account
+ * @param {CaipAccountSelectorListProps} props - Component props
+ * @returns {JSX.Element} Rendered account selector list component
+ */
 const CaipAccountSelectorList = ({
   onSelectAccount,
   onRemoveImportedAccount,

@@ -35,10 +35,20 @@ import Text, {
   TextVariant,
 } from '../../../../../../component-library/components/Texts/Text';
 
+/**
+ * Creates navigation details for the regions screen
+ * @returns {Object} Navigation details object for the regions route
+ */
 export const createRegionsNavDetails = createNavigationDetails(
   Routes.RAMP.REGION,
 );
 
+/**
+ * RegionsView component for selecting user's region in the fiat on-ramp flow
+ * Displays available regions, handles region selection, and manages navigation to the next step
+ * Supports both buy and sell flows with appropriate validation and error handling
+ * @returns {JSX.Element} The rendered regions selection screen
+ */
 const RegionsView = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();

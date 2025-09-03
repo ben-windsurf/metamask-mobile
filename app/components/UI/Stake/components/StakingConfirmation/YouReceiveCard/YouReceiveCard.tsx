@@ -20,6 +20,14 @@ import ethLogo from '../../../../../../images/ethereum.png';
 import { YouReceiveCardProps } from './YouReceiveCard.types';
 import { strings } from '../../../../../../../locales/i18n';
 
+/**
+ * YouReceiveCard component displays the estimated amount of ETH the user will receive from staking
+ * Shows both the ETH amount and its fiat equivalent in a card format with success styling
+ * @param {YouReceiveCardProps} props - Component props
+ * @param {string} props.amountWei - The amount of ETH in wei that will be received
+ * @param {string} props.amountFiat - The fiat equivalent of the ETH amount
+ * @returns {JSX.Element} Card component showing the estimated ETH rewards
+ */
 const YouReceiveCard = ({ amountWei, amountFiat }: YouReceiveCardProps) => {
   const { styles } = useStyles(styleSheet, {});
 

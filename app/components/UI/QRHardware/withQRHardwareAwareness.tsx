@@ -2,6 +2,12 @@ import React, { useState, useEffect, ComponentClass } from 'react';
 import Engine from '../../../core/Engine';
 import { IQRState } from './types';
 
+/**
+ * Higher-order component that provides QR hardware awareness to wrapped components
+ * Manages QR keyring state and provides signing/syncing status to child components
+ * @param Children - The component class to wrap with QR hardware awareness
+ * @returns Enhanced component with QR hardware state and status props
+ */
 const withQRHardwareAwareness = (
   Children: ComponentClass<{
     QRState?: IQRState;

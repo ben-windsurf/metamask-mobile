@@ -15,6 +15,13 @@ interface RemoveAccountProps {
   account: InternalAccount;
 }
 
+/**
+ * RemoveAccount component renders a button that allows users to delete an account
+ * Navigates to the account deletion confirmation modal when pressed
+ * @param {RemoveAccountProps} props - Component props
+ * @param {InternalAccount} props.account - The account to be removed
+ * @returns {JSX.Element} Button component for removing the account
+ */
 export const RemoveAccount = ({ account }: RemoveAccountProps) => {
   const { navigate } = useNavigation();
   const { styles } = useStyles(styleSheet, {});

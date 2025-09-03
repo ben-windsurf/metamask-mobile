@@ -25,6 +25,12 @@ import { useTransactionPayToken } from '../../../hooks/pay/useTransactionPayToke
 import { useParams } from '../../../../../../util/navigation/navUtils';
 import { strings } from '../../../../../../../locales/i18n';
 
+/**
+ * PayWithModal component provides a token selection interface for transaction payments
+ * Allows users to select tokens from enabled source chains with minimum balance filtering
+ * Integrates with bridge functionality to enable cross-chain payment options
+ * @returns {JSX.Element} The rendered pay with modal component
+ */
 export function PayWithModal() {
   const allNetworkConfigurations = useSelector(selectNetworkConfigurations);
   const enabledSourceChains = useSelector(selectEnabledSourceChains);

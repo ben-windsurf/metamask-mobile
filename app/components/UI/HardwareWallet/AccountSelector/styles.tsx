@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 import { fontStyles } from '../../../../styles/common';
 import Device from '../../../../util/device';
 
+/**
+ * Creates stylesheet for hardware wallet account selector component
+ * @param {any} colors - Theme colors object containing text, background, and primary color definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyle = (colors: any) =>

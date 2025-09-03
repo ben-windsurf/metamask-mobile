@@ -1,6 +1,12 @@
 import { strings } from '../../../../../../locales/i18n';
 import { normalizeGasInput } from '../gas';
 
+/**
+ * Validates gas limit input for transaction confirmations
+ * Performs comprehensive validation including existence, numeric format, integer check, positivity, and minimum value
+ * @param {string} value - The gas limit value to validate
+ * @returns {string | boolean} Returns false if valid, or error message string if invalid
+ */
 export const validateGas = (value: string): string | boolean => {
   const field = strings('transactions.gas_modal.gas_limit');
   return (
@@ -12,6 +18,13 @@ export const validateGas = (value: string): string | boolean => {
   );
 };
 
+/**
+ * Validates priority fee input for EIP-1559 transactions
+ * Ensures the priority fee is valid and doesn't exceed the maximum fee per gas
+ * @param {string} value - The priority fee value to validate
+ * @param {string} maxFeePerGasInDec - The maximum fee per gas in decimal format for comparison
+ * @returns {string | boolean} Returns false if valid, or error message string if invalid
+ */
 export const validatePriorityFee = (
   value: string,
   maxFeePerGasInDec: string,
@@ -25,6 +38,13 @@ export const validatePriorityFee = (
   );
 };
 
+/**
+ * Validates maximum base fee input for EIP-1559 transactions
+ * Ensures the max base fee is valid and greater than the priority fee
+ * @param {string} value - The maximum base fee value to validate
+ * @param {string} maxPriorityFeePerGasInDec - The priority fee in decimal format for comparison
+ * @returns {string | boolean} Returns false if valid, or error message string if invalid
+ */
 export const validateMaxBaseFee = (
   value: string,
   maxPriorityFeePerGasInDec: string,
@@ -41,6 +61,12 @@ export const validateMaxBaseFee = (
   );
 };
 
+/**
+ * Validates gas price input for legacy transactions
+ * Performs basic validation including existence, numeric format, and positivity
+ * @param {string} value - The gas price value to validate
+ * @returns {string | boolean} Returns false if valid, or error message string if invalid
+ */
 export const validateGasPrice = (value: string): string | boolean => {
   const field = strings('transactions.gas_modal.gas_price');
   return (

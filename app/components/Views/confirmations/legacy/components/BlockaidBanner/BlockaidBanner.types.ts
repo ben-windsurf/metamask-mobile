@@ -21,6 +21,10 @@ export enum Reason {
   requestInProgress = 'request_in_progress',
 }
 
+/**
+ * Re-exported ResultType constant from signatures constants
+ * Used for type consistency in Blockaid banner security alert responses
+ */
 export const ResultType = BlockaidResultType;
 
 export interface SecurityAlertResponse {

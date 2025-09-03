@@ -54,6 +54,14 @@ const STAKING_TX_METRIC_EVENTS: Record<
   },
 };
 
+/**
+ * FooterButtonGroup component renders action buttons for staking confirmation
+ * Handles stake/unstake transaction submission, cancellation, and transaction event tracking
+ * @param {FooterButtonGroupProps} props - Component props
+ * @param {string} props.valueWei - The amount to stake/unstake in wei
+ * @param {FooterButtonGroupActions} props.action - The action type (STAKE or UNSTAKE)
+ * @returns {JSX.Element} Footer button group with cancel and continue buttons
+ */
 const FooterButtonGroup = ({ valueWei, action }: FooterButtonGroupProps) => {
   const { styles } = useStyles(styleSheet, {});
 

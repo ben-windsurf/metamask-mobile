@@ -93,6 +93,12 @@ function getRegistryForChainId(chainId) {
   }
 }
 
+/**
+ * Checks if a URL object represents a gateway URL for IPFS, Swarm, or IPNS
+ * Used to identify decentralized content gateway URLs in the MetaMask browser
+ * @param {Object} urlObj - URL object to check
+ * @returns {boolean} True if the URL is a gateway URL, false otherwise
+ */
 export function isGatewayUrl(urlObj) {
   // All IPFS gateway urls start with the path /ipfs/
   if (urlObj.pathname.substr(0, 6) === '/ipfs/') return true;

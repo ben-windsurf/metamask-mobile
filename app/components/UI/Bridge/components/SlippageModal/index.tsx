@@ -25,6 +25,11 @@ import {
   setSlippage,
 } from '../../../../../core/redux/slices/bridge';
 
+/**
+ * Generates slippage options based on current slippage setting
+ * @param {string | undefined} slippage - Current slippage value
+ * @returns {SlippageOption[]} Array of slippage options with labels and values
+ */
 const getSlippageOptions = (slippage: string | undefined): SlippageOption[] => {
   const baseOptions = [
     { label: '1%', value: '1' },
@@ -37,6 +42,11 @@ const getSlippageOptions = (slippage: string | undefined): SlippageOption[] => {
     : [{ label: '0.5%', value: '0.5' }, ...baseOptions];
 };
 
+/**
+ * SlippageModal component allows users to configure slippage tolerance for bridge transactions
+ * Displays slippage options in a segmented control and applies the selected value to the bridge state
+ * @returns {JSX.Element} Bottom sheet modal with slippage configuration options
+ */
 export const SlippageModal = () => {
   const dispatch = useDispatch();
 

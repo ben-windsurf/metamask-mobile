@@ -20,6 +20,14 @@ interface SecurityOptionsToggleProps {
 /**
  * View that renders the toggle for security options
  * This component assumes that the parent will manage the state of the toggle. This is because most of the state is global.
+ * @param {SecurityOptionsToggleProps} props - Component props
+ * @param {string} props.title - The title text for the toggle option
+ * @param {string} props.description - Optional description text displayed below the title
+ * @param {boolean} props.value - Current toggle state (true for enabled, false for disabled)
+ * @param {Function} props.onOptionUpdated - Callback function called when toggle value changes
+ * @param {string} props.testId - Optional test ID for automated testing
+ * @param {boolean} props.disabled - Whether the toggle should be disabled
+ * @returns {JSX.Element} A toggle component with title, optional description, and switch control
  */
 const SecurityOptionToggle = ({
   title,

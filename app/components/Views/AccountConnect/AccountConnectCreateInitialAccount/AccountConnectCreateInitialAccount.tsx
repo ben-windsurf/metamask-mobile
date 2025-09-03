@@ -19,6 +19,14 @@ interface AccountConnectCreateInitialAccountProps {
   onCreateAccount: () => void;
 }
 
+/**
+ * AccountConnectCreateInitialAccount component displays a prompt for creating the first account
+ * when no accounts exist during the account connection flow. Shows descriptive text and a
+ * create account button to guide users through initial account setup.
+ * @param {AccountConnectCreateInitialAccountProps} props - Component props
+ * @param {() => void} props.onCreateAccount - Callback function triggered when user creates an account
+ * @returns {JSX.Element} The rendered create initial account component
+ */
 export const AccountConnectCreateInitialAccount = ({
   onCreateAccount,
 }: AccountConnectCreateInitialAccountProps) => {

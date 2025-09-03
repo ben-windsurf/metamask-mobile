@@ -73,6 +73,11 @@ import { RequestPaymentViewSelectors } from '../../../../e2e/selectors/Receive/R
 import { MetaMetricsEvents } from '../../../core/Analytics';
 
 const KEYBOARD_OFFSET = 120;
+/**
+ * Creates stylesheet for PaymentRequest component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -264,7 +269,10 @@ const MODE_SELECT = 'select';
 const MODE_AMOUNT = 'amount';
 
 /**
- * View to generate a payment request link
+ * PaymentRequest component allows users to generate payment request links
+ * Supports both ETH and ERC-20 token payment requests with amount input and asset selection
+ * Provides search functionality for tokens and handles currency conversion between crypto and fiat
+ * @extends PureComponent
  */
 class PaymentRequest extends PureComponent {
   static propTypes = {
@@ -956,6 +964,11 @@ class PaymentRequest extends PureComponent {
 
 PaymentRequest.contextType = ThemeContext;
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object containing state values
+ */
 const mapStateToProps = (state) => ({
   conversionRate: selectConversionRate(state),
   currentCurrency: selectCurrentCurrency(state),

@@ -28,6 +28,13 @@ interface FormatMarketDetailsOptions {
 
 /**
  * Formats market details with consistent formatting options
+ * @param {MarketData} marketData - Raw market data to format
+ * @param {FormatMarketDetailsOptions} options - Formatting configuration options
+ * @param {string} options.locale - Locale for number formatting
+ * @param {string} options.currentCurrency - Currency code for formatting
+ * @param {boolean} options.isEvmAssetSelected - Whether an EVM asset is selected
+ * @param {number} options.conversionRate - Rate for currency conversion
+ * @returns {MarketDetails} Formatted market details with localized values
  */
 export const formatMarketDetails = (
   marketData: MarketData,

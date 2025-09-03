@@ -4,6 +4,13 @@ import { Theme } from '../../../../../../../util/theme/models';
 interface TokenSelectorModalStyleSheetVars {
   screenHeight: number;
 }
+/**
+ * Creates stylesheet for TokenSelectorModal component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object for styling
+ * @param {TokenSelectorModalStyleSheetVars} params.vars - Variables for dynamic styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: TokenSelectorModalStyleSheetVars;

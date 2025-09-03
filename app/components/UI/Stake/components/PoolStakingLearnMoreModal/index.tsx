@@ -51,6 +51,11 @@ type PoolStakingLearnMoreModalRouteProp = RouteProp<
   'params'
 >;
 
+/**
+ * BodyText component renders informational text about staking features
+ * Displays key benefits like no minimum requirement, ETH rewards, and flexible unstaking
+ * @returns {JSX.Element} View containing formatted text about staking benefits
+ */
 const BodyText = () => {
   const { styles } = useStyles(styleSheet, {});
 
@@ -85,6 +90,12 @@ const BodyText = () => {
   );
 };
 
+/**
+ * PoolStakingLearnMoreModal displays educational content about ETH staking
+ * Shows APY charts, staking benefits, and provides navigation to detailed FAQ
+ * Includes interactive timespan chart for historical APY data visualization
+ * @returns {JSX.Element} Bottom sheet modal with staking information and controls
+ */
 const PoolStakingLearnMoreModal = () => {
   const { styles } = useStyles(styleSheet, {});
 

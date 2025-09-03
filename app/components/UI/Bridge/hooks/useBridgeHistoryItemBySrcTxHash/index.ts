@@ -4,8 +4,10 @@ import { BridgeHistoryItem } from '@metamask/bridge-status-controller';
 import { useMemo } from 'react';
 
 /**
- * This hook is used to get the bridge history item by source transaction hash.
- * It is used to get the bridge history item for the non EVM transactions.
+ * Custom hook to get bridge history items indexed by source transaction hash
+ * Creates a lookup map for efficient access to bridge history items using their source transaction hash
+ * Primarily used for non-EVM transactions where source hash lookup is needed
+ * @returns {Object} Object containing bridgeHistoryItemsBySrcTxHash lookup map
  */
 export const useBridgeHistoryItemBySrcTxHash = () => {
   const bridgeHistory = useSelector(selectBridgeHistoryForAccount);

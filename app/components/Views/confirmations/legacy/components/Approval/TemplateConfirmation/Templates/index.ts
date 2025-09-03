@@ -35,6 +35,10 @@ const APPROVAL_TEMPLATES: { [key: string]: ConfirmationTemplate } = {
   [ApprovalTypes.SMART_TRANSACTION_STATUS]: smartTransactionStatus,
 };
 
+/**
+ * Array of approval types that have templated confirmation implementations
+ * Used to determine which approval requests can be rendered using the template system
+ */
 export const TEMPLATED_CONFIRMATION_APPROVAL_TYPES =
   Object.keys(APPROVAL_TEMPLATES);
 
@@ -49,6 +53,16 @@ const ALLOWED_TEMPLATE_KEYS: string[] = [
   'loadingText',
 ];
 
+/**
+ * Retrieves template values for a pending approval request
+ * Validates that the approval type has a template and returns safe template values
+ * @param {ApprovalRequest<any>} pendingApproval - The pending approval request to get template values for
+ * @param {function} stringFn - Function to retrieve localized strings by key
+ * @param {Actions} actions - Action handlers for confirmation interactions
+ * @param {Colors} colors - Theme colors for styling the confirmation template
+ * @returns {ConfirmationTemplateValues} Safe template values for rendering the confirmation
+ * @throws {Error} When approval type is not specified in templates or contains extraneous keys
+ */
 export function getTemplateValues(
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

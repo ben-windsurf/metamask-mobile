@@ -11,6 +11,12 @@ import { formatAmount } from '../../../../../UI/SimulationDetails/formatAmount';
 import useVaultMetadata from '../../../../../UI/Stake/hooks/useVaultMetadata';
 import { useTransactionMetadataRequest } from '../../../hooks/transactions/useTransactionMetadataRequest';
 
+/**
+ * Custom hook that calculates staking details including APR and annual rewards
+ * Processes transaction metadata to compute ETH staking rewards in both native and fiat currencies
+ * Used in staking confirmation flows to display reward projections to users
+ * @returns {Object} Staking details object containing APR, annual rewards in fiat, and annual rewards in ETH
+ */
 export const useStakingDetails = () => {
   const transactionMeta = useTransactionMetadataRequest();
   const txValueWei = transactionMeta?.txParams?.value;

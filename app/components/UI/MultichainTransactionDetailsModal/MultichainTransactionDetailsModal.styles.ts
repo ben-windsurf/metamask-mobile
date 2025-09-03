@@ -6,6 +6,12 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates styles for the MultichainTransactionDetailsModal component
+ * @param {Colors} colors - Theme colors object
+ * @param {ThemeTypography} typography - Theme typography configuration
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors, typography: ThemeTypography) =>
   StyleSheet.create({
     modal: {

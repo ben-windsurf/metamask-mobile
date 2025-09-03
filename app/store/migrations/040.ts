@@ -4,9 +4,10 @@ import { ensureValidState } from './util';
 
 /**
  * Migration to remove metadata from Permissioned accounts
+ * Removes metadata from eth_accounts permission caveats, keeping only the address values
  *
- * @param state Persisted Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with cleaned permission caveats
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 40)) {

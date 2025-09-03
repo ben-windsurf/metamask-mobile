@@ -3,6 +3,11 @@ import { View, Image, StyleSheet } from 'react-native';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 import { CommonSelectorsIDs } from '../../../../e2e/selectors/Common.selectors';
 
+/**
+ * Creates styles for the FoxScreen component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -25,8 +30,9 @@ const createStyles = (colors) =>
 const foxImage = require('../../../images/branding/fox.png'); // eslint-disable-line import/no-commonjs
 
 /**
- * View component that displays the MetaMask fox
- * in the middle of the screen
+ * FoxScreen component displays the MetaMask fox logo centered on screen
+ * Used as a loading screen or placeholder while the app initializes
+ * @returns {JSX.Element} A centered fox image with themed background
  */
 export default class FoxScreen extends PureComponent {
   render = () => {

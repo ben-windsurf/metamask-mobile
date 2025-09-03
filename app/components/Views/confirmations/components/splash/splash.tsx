@@ -5,6 +5,11 @@ import { use7702TransactionType } from '../../hooks/7702/use7702TransactionType'
 import { useTransactionMetadataRequest } from '../../hooks/transactions/useTransactionMetadataRequest';
 import { SmartAccountUpdateSplash } from '../smart-account-update-splash';
 
+/**
+ * Splash component that conditionally renders a smart account update splash screen
+ * Displays upgrade information for 7702 transactions when not originating from MetaMask
+ * @returns {JSX.Element | null} The SmartAccountUpdateSplash component or null if conditions aren't met
+ */
 export function Splash() {
   const { isUpgrade } = use7702TransactionType();
   const transactionMetadata = useTransactionMetadataRequest();

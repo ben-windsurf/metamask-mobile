@@ -51,7 +51,16 @@ interface Alert {
 }
 
 /**
- * NetworkVerificationInfo component
+ * NetworkVerificationInfo component displays network information for user verification
+ * Handles custom network addition, network RPC updates, and security validation
+ * Shows network details, alerts, and provides confirmation/rejection options
+ * @param {Object} props - Component props
+ * @param {CustomNetworkInformation} props.customNetworkInformation - Network information to display
+ * @param {Function} props.onReject - Callback function when user rejects the network
+ * @param {Function} props.onConfirm - Callback function when user confirms the network
+ * @param {boolean} props.isCustomNetwork - Whether this is a custom network (default: false)
+ * @param {boolean} props.isNetworkRpcUpdate - Whether this is an RPC URL update (default: false)
+ * @returns {JSX.Element} The rendered network verification component
  */
 const NetworkVerificationInfo = ({
   customNetworkInformation,

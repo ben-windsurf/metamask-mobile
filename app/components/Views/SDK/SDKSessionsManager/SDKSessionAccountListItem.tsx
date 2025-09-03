@@ -43,6 +43,16 @@ const createStyles = (
     ...getSharedStyles(colors, typography, _safeAreaInsets),
   });
 
+/**
+ * SDKSessionAccountListItem displays a single SDK connection session in the sessions manager
+ * Shows connection status, app icon/name, and provides disconnect functionality
+ * Used in the SDK sessions management view to list active and inactive connections
+ * @param {SDKSessionViewProps} props - Component props
+ * @param {Object} props.connection - Connection object containing id and originator info
+ * @param {boolean} props.connected - Whether the connection is currently active
+ * @param {Function} props.onDisconnect - Callback function to handle disconnection
+ * @returns {JSX.Element} The rendered SDK session list item component
+ */
 export const SDKSessionAccountListItem = ({
   connection,
   connected = false,

@@ -1,6 +1,10 @@
 import type { BridgeState } from '../../../../core/redux/slices/bridge';
 import { BridgeViewMode } from '../types';
 
+/**
+ * Mock bridge reducer state for testing purposes
+ * Contains sample data for bridge operations including source/destination tokens and amounts
+ */
 export const mockBridgeReducerState: BridgeState = {
   sourceAmount: '1000000000000000000',
   destAmount: undefined,

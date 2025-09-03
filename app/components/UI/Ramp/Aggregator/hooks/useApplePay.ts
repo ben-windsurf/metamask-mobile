@@ -12,6 +12,9 @@ import {
 
 //* Payment Request */
 
+/**
+ * Constant indicating that an Apple Pay payment request was aborted by the user
+ */
 export const ABORTED = 'ABORTED';
 enum PAYMENT_REQUEST_COMPLETE {
   SUCCESS = 'success',
@@ -20,6 +23,11 @@ enum PAYMENT_REQUEST_COMPLETE {
 }
 
 //* Setup */
+/**
+ * Creates Apple Pay setup configuration for a given quote
+ * @param {QuoteResponse} quote - The quote response containing payment details
+ * @returns {IApplePaySetup} Apple Pay setup configuration with label functions
+ */
 function createApplePaySetup(quote: QuoteResponse): IApplePaySetup {
   return {
     getPurchaseFiatAmountWithoutFeeLabel(crypto: CryptoCurrency) {
@@ -40,6 +48,12 @@ function createApplePaySetup(quote: QuoteResponse): IApplePaySetup {
   };
 }
 
+/**
+ * Custom hook for handling Apple Pay payments in the fiat on-ramp flow
+ * Provides functionality to show Apple Pay payment request and process the payment
+ * @param {QuoteResponse} quote - The quote response containing Apple Pay payment details
+ * @returns {[Function]} Array containing the showRequest function
+ */
 function useApplePay(quote: QuoteResponse) {
   const showRequest = useCallback(async () => {
     if (!quote.getApplePayRequestInfo || !quote.purchaseWithApplePay) {
@@ -98,4 +112,7 @@ function useApplePay(quote: QuoteResponse) {
   return [showRequest] as const;
 }
 
+/**
+ * Default export of the useApplePay hook
+ */
 export default useApplePay;

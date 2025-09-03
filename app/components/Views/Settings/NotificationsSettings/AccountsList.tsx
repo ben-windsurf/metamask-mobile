@@ -8,6 +8,12 @@ import NotificationOptionToggle from './NotificationOptionToggle';
 import { NotificationSettingsViewSelectorsIDs } from '../../../../../e2e/selectors/Notifications/NotificationSettingsView.selectors';
 import { toFormattedAddress } from '../../../../util/address';
 
+/**
+ * AccountsList component renders a list of user accounts with notification toggle controls
+ * Displays each account with its name, address, and a toggle switch to enable/disable notifications
+ * Handles loading states and provides feedback during notification setting updates
+ * @returns {JSX.Element} The rendered accounts list with notification toggles
+ */
 export const AccountsList = () => {
   const { accounts, accountAddresses, accountAvatarType } = useAccountProps();
   const {

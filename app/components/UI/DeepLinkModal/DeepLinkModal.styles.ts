@@ -2,6 +2,12 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../util/theme/models';
 
+/**
+ * Creates stylesheet for DeepLinkModal component with theme-aware styling
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - The theme object containing colors and styling properties
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

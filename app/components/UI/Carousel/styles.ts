@@ -12,9 +12,23 @@ const BANNER_WIDTH = SCREEN_WIDTH - 32;
 const CAROUSEL_HEIGHT = 59;
 const DOTS_HEIGHT = 18;
 const PEEK_WIDTH = 5;
+/**
+ * Standard width for carousel images
+ */
 export const IMAGE_WIDTH = 60;
+
+/**
+ * Standard height for carousel images
+ */
 export const IMAGE_HEIGHT = 59;
 
+/**
+ * Creates a stylesheet for the Carousel component with theme and variable support
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - The theme object containing colors and styling
+ * @param {CarouselStyleSheetVars} params.vars - Component-specific style variables
+ * @returns {Object} StyleSheet object with all carousel-related styles
+ */
 export const styleSheet = (params: {
   theme: Theme;
   vars: CarouselStyleSheetVars;

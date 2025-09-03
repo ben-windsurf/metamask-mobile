@@ -18,6 +18,12 @@ interface NetworkState {
   selectedNetworkClientId: string;
 }
 
+/**
+ * Migration 46: Migrates users from Linea Goerli testnet to Linea Sepolia testnet
+ * Updates the NetworkController configuration to use Linea Sepolia instead of the deprecated Linea Goerli
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated network configuration
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 46)) {
     return state;

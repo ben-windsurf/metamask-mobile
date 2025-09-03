@@ -5,6 +5,12 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates stylesheet for URL autocomplete component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing colors and typography
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = ({ theme: { colors, typography } }: { theme: Theme }) =>
   StyleSheet.create({
     wrapper: {

@@ -1,6 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates styles for the ReviewModal component
+ * @param {any} colors - Theme colors object containing background, text, primary, and error colors
+ * @returns {Object} StyleSheet object with modal styling definitions
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

@@ -12,6 +12,12 @@ export enum StakeAccountStatus {
   INACTIVE_WITH_REWARDS_ONLY = 'INACTIVE_WITH_REWARDS_ONLY', // zero staked shares, no exit requests, previous lifetime rewards
 }
 
+/**
+ * Custom hook for managing pooled staking data and operations
+ * Provides access to pooled stakes data, exchange rates, and status information
+ * @param {number} chainId - The chain ID to fetch pooled stakes data for
+ * @returns {Object} Object containing pooled stakes data, loading state, error state, and status flags
+ */
 const usePooledStakes = (chainId: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,6 +27,10 @@ const usePooledStakes = (chainId: number) => {
   const pooledStakesData = useSelector(selectPoolStakesForChain(chainId));
   const exchangeRate = useSelector(selectExchangeRateForChain(chainId));
 
+  /**
+   * Fetches fresh pooled stakes data from the EarnController
+   * Resets cache and updates loading/error states during the operation
+   */
   const fetchData = async () => {
     setIsLoading(true);
     setError(null);
@@ -36,6 +46,11 @@ const usePooledStakes = (chainId: number) => {
     }
   };
 
+  /**
+   * Determines the status of a pooled stake based on assets and exit requests
+   * @param {PooledStake} stake - The pooled stake object to analyze
+   * @returns {StakeAccountStatus} The determined status of the stake account
+   */
   const getStatus = (stake: PooledStake) => {
     if (stake.assets === '0' && stake.exitRequests.length > 0) {
       return StakeAccountStatus.INACTIVE_WITH_EXIT_REQUESTS;

@@ -14,6 +14,11 @@ import { useTheme } from '../../../../util/theme';
 import type { Colors } from '../../../../util/theme/models';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
+/**
+ * Creates styles for the EstimatedAnnualRewardsCard component
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     rewardCard: {
@@ -48,6 +53,15 @@ interface EstimatedAnnualRewardsCardProps {
   onIconPress: () => void;
 }
 
+/**
+ * EstimatedAnnualRewardsCard displays the estimated annual rewards for MetaMask staking pool
+ * Shows the reward percentage with a question icon for additional information
+ * @param {EstimatedAnnualRewardsCardProps} props - Component props
+ * @param {string} props.estimatedAnnualRewards - The estimated annual rewards percentage to display
+ * @param {Function} props.onIconPress - Callback function when the info icon is pressed
+ * @param {boolean} props.isLoading - Whether to show loading skeleton (default: false)
+ * @returns {JSX.Element} The rendered estimated annual rewards card component
+ */
 const EstimatedAnnualRewardsCard = ({
   estimatedAnnualRewards,
   onIconPress,

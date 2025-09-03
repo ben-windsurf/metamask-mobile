@@ -10,6 +10,17 @@ import {
 import { addHexPrefix, safeBNToHex } from '../number';
 import { safeToChecksumAddress } from '../address';
 
+/**
+ * Builds transaction parameters from gas data and transaction details
+ * Handles both EIP-1559 (fee market) and legacy gas pricing models
+ * @param {Object} params - Transaction building parameters
+ * @param {any} params.gasDataEIP1559 - EIP-1559 gas fee data including base fee and priority fee
+ * @param {any} params.gasDataLegacy - Legacy gas data with gas price and limit
+ * @param {GasEstimateType} params.gasEstimateType - Type of gas estimation being used
+ * @param {boolean} params.showCustomNonce - Whether to include custom nonce in transaction
+ * @param {any} params.transaction - Base transaction object to build from
+ * @returns {TransactionParams} Complete transaction parameters ready for submission
+ */
 export function buildTransactionParams({
   gasDataEIP1559,
   gasDataLegacy,

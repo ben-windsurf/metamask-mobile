@@ -90,6 +90,12 @@ function isBatchTransaction(approvalRequestType: ApprovalType) {
   return approvalRequestType === ApprovalType.TransactionBatch;
 }
 
+/**
+ * Custom hook that determines if the confirmation redesign should be enabled
+ * Checks various confirmation types (signatures, transactions, batches) against feature flags
+ * to determine whether to use the redesigned confirmation UI or legacy confirmation flow
+ * @returns {Object} Object containing isRedesignedEnabled boolean flag
+ */
 export const useConfirmationRedesignEnabled = () => {
   const { approvalRequest } = useApprovalRequest();
   const transactionMetadata = useTransactionMetadataRequest();

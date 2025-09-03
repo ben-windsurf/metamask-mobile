@@ -19,6 +19,15 @@ interface GoToAddEvmTokenProps {
   currentChainId: string;
 }
 
+/**
+ * Navigates to the Add Asset screen for adding EVM tokens and tracks the action
+ * @param {GoToAddEvmTokenProps} params - Navigation and tracking parameters
+ * @param {StackNavigationProp} params.navigation - Navigation prop for screen transitions
+ * @param {Function} params.trackEvent - Function to track analytics events
+ * @param {Function} params.createEventBuilder - Function to create metrics event builders
+ * @param {Function} params.getDecimalChainId - Function to convert chain ID to decimal format
+ * @param {string} params.currentChainId - Current blockchain chain ID
+ */
 export const goToAddEvmToken = ({
   navigation,
   trackEvent,

@@ -167,6 +167,12 @@ function findUnusedApprovals(approvals: Hex[], tokenOutflows: Hex[]): Hex[] {
   return approvals.filter((approval) => !tokenOutflows.includes(approval));
 }
 
+/**
+ * Custom hook that detects unused token approvals in batched transactions
+ * Analyzes nested transactions to identify approvals that don't result in token outflows
+ * Used in confirmation flows to alert users about potentially unnecessary approvals
+ * @returns {Array} Array of alert objects for unused approvals, empty if no alerts needed
+ */
 export const useBatchedUnusedApprovalsAlert = () => {
   const transactionMetadata = useTransactionMetadataRequest();
 

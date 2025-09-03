@@ -1,13 +1,12 @@
 import { TokenPrice } from 'app/components/hooks/useTokenHistoricalPrices';
 
-// this function is used to sample the data points to be displayed on the chart
-// it will return a maximum of 100 data points
-// if there are less than 100 data points, it will return all of them
-// if there are more than 100 data points, it will return 100 data points
-// the first and last data points will always be included
-// the data points in between will be sampled at an interval of (numDataPoints / 98)
-
-// this is to ensure that the chart does not become unresponsive when there are too many data points
+/**
+ * Samples data points for chart display to optimize performance
+ * Returns a maximum of 100 data points, always including first and last points
+ * Intermediate points are sampled at regular intervals to maintain chart responsiveness
+ * @param {TokenPrice[]} dataPoints - Array of token price data points to sample
+ * @returns {TokenPrice[]} Sampled array of up to 100 data points
+ */
 export function distributeDataPoints(dataPoints: TokenPrice[]): TokenPrice[] {
   const numDataPoints = dataPoints.length;
   const interval = Math.max(1, Math.floor(numDataPoints / 98));
@@ -24,7 +23,10 @@ export function distributeDataPoints(dataPoints: TokenPrice[]): TokenPrice[] {
   return sampledDataPoints;
 }
 
-// this data draws a placeholder chart to show a greyed out chart when there is no data available
+/**
+ * Placeholder data for displaying a greyed out chart when no real data is available
+ * Contains sample price points to show chart structure and layout
+ */
 export const placeholderData = [
   3, 5, 6, 8, 7, 5, 7, 9, 10, 12, 14, 15, 14, 12, 11, 10, 9, 10, 8, 7, 5, 6, 5,
   4, 5, 4, 3, 4, 5, 6, 7, 8, 10, 12, 13, 12, 10, 9, 8, 10, 11, 10, 8, 7, 8, 10,

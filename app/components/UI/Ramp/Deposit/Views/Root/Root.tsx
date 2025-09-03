@@ -11,6 +11,11 @@ import {
 } from '../../../../../../constants/on-ramp';
 import { createBankDetailsNavDetails } from '../BankDetails/BankDetails';
 
+/**
+ * Root component for the deposit flow that manages navigation and initialization
+ * Handles checking for existing tokens, managing deposit orders, and routing to appropriate screens
+ * @returns {JSX.Element} The GetStarted component as the initial screen
+ */
 const Root = () => {
   const navigation = useNavigation();
   const [initialRoute] = useState<string>(Routes.DEPOSIT.BUILD_QUOTE);

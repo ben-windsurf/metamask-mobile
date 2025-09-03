@@ -20,6 +20,11 @@ import styleSheet from './network-and-origin-row.styles';
 import AvatarNetwork from '../../../../../../../component-library/components/Avatars/Avatar/variants/AvatarNetwork/AvatarNetwork';
 import { AvatarSize } from '../../../../../../../component-library/components/Avatars/Avatar/Avatar.types';
 
+/**
+ * NetworkAndOriginRow component displays network information and origin details for transaction confirmations
+ * Shows the network name with avatar and optionally displays the dApp origin if the request is from an external source
+ * @returns {JSX.Element | null} The rendered network and origin row component or null if no transaction metadata
+ */
 export const NetworkAndOriginRow = () => {
   const { styles } = useStyles(styleSheet, {});
   const transactionMetadata = useTransactionMetadataRequest();

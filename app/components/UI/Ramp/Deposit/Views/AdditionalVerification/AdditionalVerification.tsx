@@ -31,11 +31,20 @@ interface AdditionalVerificationParams {
   paymentMethodId: string;
 }
 
+/**
+ * Creates navigation details for the Additional Verification screen
+ * @returns {Object} Navigation details object for routing to additional verification
+ */
 export const createAdditionalVerificationNavDetails =
   createNavigationDetails<AdditionalVerificationParams>(
     Routes.DEPOSIT.ADDITIONAL_VERIFICATION,
   );
 
+/**
+ * AdditionalVerification component displays KYC verification requirements
+ * Shows information about additional verification needed and provides navigation to KYC webview
+ * @returns {JSX.Element} The rendered additional verification screen
+ */
 const AdditionalVerification = () => {
   const navigation = useNavigation();
   const {

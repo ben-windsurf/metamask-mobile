@@ -19,6 +19,11 @@ export type ExtractedNotification<NodeType extends TRIGGER_TYPES> =
     ? CustomExtract<INotification, { type: NodeType }>
     : never;
 
+/**
+ * Creates a type guard function that checks if a notification is of specified types
+ * @param {NodeType[]} types - Array of notification types to check against
+ * @returns {Function} Type guard function that validates notification type
+ */
 export const isOfTypeNodeGuard =
   <NodeType extends INotification['type']>(types: NodeType[]) =>
   (n: INotification): n is ExtractedNotification<NodeType> =>

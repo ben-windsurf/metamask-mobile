@@ -7,12 +7,28 @@ import { Connection } from '../Connection';
 import { isE2E } from '../../../util/test/utils';
 import { store } from '../../../../app/store/index';
 
+/**
+ * Maximum number of iterations for queue polling loops
+ */
 export const MAX_QUEUE_LOOP = Infinity;
+
+/**
+ * Creates a promise that resolves after a specified delay
+ * @param {number} ms - The number of milliseconds to wait
+ * @returns {Promise<void>} A promise that resolves after the specified delay
+ */
 export const wait = (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 
+/**
+ * Waits for a specific client to become ready in the connected clients registry
+ * @param {string} id - The client ID to wait for
+ * @param {Object} connectedClients - Registry of connected DApp clients
+ * @param {number} [waitTime=200] - Time to wait between checks in milliseconds
+ * @returns {Promise<void>} Resolves when the client is ready or timeout is reached
+ */
 export const waitForReadyClient = async (
   id: string,
   connectedClients: {
@@ -65,7 +81,13 @@ export const waitForCondition = async ({
 };
 
 /**
- * Similar to `waitForCondition`, but for asynchronous conditions that return a promise.
+ * Asynchronously waits for an async condition to return true by periodically executing
+ * a provided async function. Similar to `waitForCondition`, but handles promises.
+ * @param {Object} params - Configuration object for the wait condition
+ * @param {Function} params.fn - An async function that returns a promise resolving to boolean
+ * @param {string} [params.context] - Optional context for logging diagnostic messages
+ * @param {number} [params.waitTime=1000] - Time to wait between polls in milliseconds
+ * @returns {Promise<void>} Resolves when the condition function returns true
  */
 export const waitForAsyncCondition = async ({
   fn,

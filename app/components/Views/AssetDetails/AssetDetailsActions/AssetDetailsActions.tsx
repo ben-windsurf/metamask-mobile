@@ -31,6 +31,13 @@ export interface AssetDetailsActionsProps {
   receiveButtonActionID?: string;
 }
 
+/**
+ * AssetDetailsActions component renders action buttons for asset management
+ * Displays buy, swap, bridge, send, and receive buttons based on configuration
+ * Handles user interactions for various asset operations in the MetaMask wallet
+ * @param {AssetDetailsActionsProps} props - Component props containing display flags and action handlers
+ * @returns {JSX.Element} The rendered asset action buttons component
+ */
 export const AssetDetailsActions: React.FC<AssetDetailsActionsProps> = ({
   displayBuyButton,
   displaySwapsButton,

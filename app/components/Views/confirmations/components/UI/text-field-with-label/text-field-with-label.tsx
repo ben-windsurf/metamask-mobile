@@ -16,6 +16,12 @@ export type TextFieldWithLabelProps = {
   label?: string;
 } & TextFieldProps;
 
+/**
+ * TextFieldWithLabel component renders a text input field with an optional label and error message
+ * Used in confirmation flows to provide labeled form inputs with validation feedback
+ * @param {TextFieldWithLabelProps} props - Component props including error state, input type, and optional label
+ * @returns {JSX.Element} Rendered text field with label and error display
+ */
 export const TextFieldWithLabel = (props: TextFieldWithLabelProps) => {
   const { error, inputType, label, ...restProps } = props;
   const { styles, theme } = useStyles(styleSheet, {});

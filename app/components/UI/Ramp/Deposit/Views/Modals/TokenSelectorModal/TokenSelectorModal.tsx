@@ -44,12 +44,21 @@ interface TokenSelectorModalNavigationDetails {
   handleSelectAssetId?: (assetId: string) => void;
 }
 
+/**
+ * Creates navigation details for the token selector modal
+ * @returns {Object} Navigation details object for the token selector modal
+ */
 export const createTokenSelectorModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.TOKEN_SELECTOR,
   );
 
+/**
+ * TokenSelectorModal component displays a bottom sheet modal for selecting deposit tokens
+ * Provides search functionality and displays supported tokens with network badges
+ * @returns {JSX.Element} The rendered token selector modal component
+ */
 function TokenSelectorModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const listRef = useRef<FlatList>(null);

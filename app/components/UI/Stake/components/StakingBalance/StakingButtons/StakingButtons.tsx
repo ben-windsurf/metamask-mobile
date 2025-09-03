@@ -26,6 +26,16 @@ interface StakingButtonsProps extends Pick<ViewProps, 'style'> {
   hasEthToUnstake: boolean;
 }
 
+/**
+ * StakingButtons component renders action buttons for staking operations
+ * Displays stake and unstake buttons based on user's staking positions and available ETH
+ * @param {StakingButtonsProps} props - Component props
+ * @param {ViewProps['style']} props.style - Custom styling for the container
+ * @param {TokenI} props.asset - The token asset for staking operations
+ * @param {boolean} props.hasStakedPositions - Whether user has existing staked positions
+ * @param {boolean} props.hasEthToUnstake - Whether user has ETH available to unstake
+ * @returns {JSX.Element} Container with stake and unstake action buttons
+ */
 const StakingButtons = ({
   style,
   asset,

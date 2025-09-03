@@ -1,3 +1,7 @@
+/**
+ * Storage identifiers for notification-related data in local storage
+ * Contains keys for various notification settings, tokens, and configuration
+ */
 export const STORAGE_IDS = {
   NOTIFICATIONS: 'notifications',
   GLOBAL_PUSH_NOTIFICATION_SETTINGS: 'globalNotificationSettings',
@@ -15,6 +19,10 @@ export const STORAGE_IDS = {
   PN_USER_STORAGE: 'pnUserStorage',
 };
 
+/**
+ * Data types for storage values
+ * Used to determine how to serialize/deserialize stored data
+ */
 export const STORAGE_TYPES = {
   STRING: 'string',
   BOOLEAN: 'boolean',
@@ -22,7 +30,12 @@ export const STORAGE_TYPES = {
   OBJECT: 'object',
 };
 
-// Map all non string storage ids to their respective types
+/**
+ * Maps storage IDs to their corresponding data types
+ * Determines the appropriate storage type for serialization/deserialization
+ * @param {string} id - The storage ID to map
+ * @returns {string} The corresponding storage type (string, boolean, number, or object)
+ */
 export const mapStorageTypeToIds = (id: string) => {
   switch (id) {
     case STORAGE_IDS.NOTIFICATIONS:

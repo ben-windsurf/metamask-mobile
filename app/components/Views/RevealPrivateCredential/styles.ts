@@ -3,6 +3,12 @@ import { Platform, StyleSheet } from 'react-native';
 import { fontStyles } from '../../../styles/common';
 import { Theme } from '../../../util/theme/models';
 
+/**
+ * Creates stylesheet for the RevealPrivateCredential component
+ * Provides theming support for displaying seed phrases and private keys securely
+ * @param {Theme} theme - The theme object containing color and style definitions
+ * @returns {Object} StyleSheet object with themed styles for credential reveal UI
+ */
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     wrapper: {

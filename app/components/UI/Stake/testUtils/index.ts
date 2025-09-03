@@ -22,8 +22,16 @@ import { EarnTokenDetails } from '../../Earn/types/lending.types';
 import { EARN_EXPERIENCES } from '../../Earn/constants/experiences';
 import { VaultData } from '@metamask/stake-sdk';
 
+/**
+ * Chain ID for Hoodi network used in testing
+ */
 export const HOODI_CHAIN_ID = '0x88BB0'; // Chain id 560048
 
+/**
+ * Creates a mock token object for testing purposes
+ * @param {CreateMockTokenOptions} options - Configuration options for the mock token
+ * @returns {Object} Mock token object with specified properties
+ */
 export const createMockToken = (options: CreateMockTokenOptions) => {
   const {
     chainId,
@@ -60,6 +68,12 @@ export const createMockToken = (options: CreateMockTokenOptions) => {
   };
 };
 
+/**
+ * Gets predefined token options for creating mock tokens
+ * @param {number} chainId - The chain ID for the token
+ * @param {TOKENS_WITH_DEFAULT_OPTIONS} token - The token type to get options for
+ * @returns {CreateMockTokenOptions} Token options object with chainId and token-specific properties
+ */
 export const getCreateMockTokenOptions = (
   chainId: (typeof CHAIN_IDS)[keyof typeof CHAIN_IDS],
   token: TOKENS_WITH_DEFAULT_OPTIONS,
@@ -125,6 +139,20 @@ export const getCreateMockTokenOptions = (
   };
 };
 
+/**
+ * Creates a mock root state for the EarnController used in testing
+ * @param {Object} options - Configuration options for the mock state
+ * @param {number} options.chainId - Chain ID for the mock state (default: 1)
+ * @param {boolean} options.isEligible - Whether the user is eligible for earning (default: true)
+ * @param {Object} options.pooledStakes - Mock pooled stakes data
+ * @param {Object} options.vaultMetadata - Mock vault metadata
+ * @param {Object} options.exchangeRate - Mock exchange rate data
+ * @param {Object} options.vaultApyAverages - Mock vault APY averages
+ * @param {Object} options.vaultDailyApys - Mock vault daily APYs
+ * @param {Object} options.markets - Mock lending markets data
+ * @param {Object} options.positions - Mock lending positions data
+ * @returns {Object} Mock root state object for EarnController
+ */
 export const mockEarnControllerRootState = ({
   chainId = 1,
   isEligible = true,
@@ -185,7 +213,9 @@ type CreateMockEarnTokenOptions = CreateMockTokenOptions &
   >;
 
 /**
- * Creates a mock EarnTokenDetails object for testing.
+ * Creates a mock EarnTokenDetails object for testing
+ * @param {CreateMockEarnTokenOptions} options - Configuration options for the mock earn token
+ * @returns {EarnTokenDetails} Mock EarnTokenDetails object with specified properties and default experience
  */
 export const createMockEarnToken = (
   options: CreateMockEarnTokenOptions,

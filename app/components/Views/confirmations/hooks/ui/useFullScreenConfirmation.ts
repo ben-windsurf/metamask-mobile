@@ -31,6 +31,12 @@ const getIsFullScreenConfirmation = (
   return false;
 };
 
+/**
+ * Custom hook that determines whether a confirmation should be displayed in full screen mode
+ * Evaluates approval requests and transaction metadata to decide on full screen presentation
+ * Used in confirmation flows to provide appropriate UI layout for different transaction types
+ * @returns {Object} Object containing isFullScreenConfirmation boolean flag
+ */
 export const useFullScreenConfirmation = () => {
   const { approvalRequest } = useApprovalRequest();
   const transactionMetadata = useTransactionMetadataRequest();

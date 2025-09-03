@@ -8,6 +8,11 @@ import SelectSRP from './SelectSRP';
 import { strings } from '../../../../locales/i18n';
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * SelectSRPBottomSheet component displays a bottom sheet for Secret Recovery Phrase selection
+ * Provides a modal interface for users to select and manage their SRP during wallet setup or recovery
+ * @returns {JSX.Element} The rendered bottom sheet component with SRP selection interface
+ */
 export const SelectSRPBottomSheet = () => {
   const bottomSheetRef = useRef<BottomSheetRef>(null);
   const navigation = useNavigation();

@@ -13,8 +13,10 @@ import { lightTheme, darkTheme, brandColor } from '@metamask/design-tokens';
 import Device from '../device';
 
 /**
+ * Mock theme object for unit testing
  * This is needed to make our unit tests pass since Enzyme doesn't support contextType
  * TODO: Convert classes into functional components and remove contextType
+ * @returns {Object} Mock theme object with light theme properties
  */
 export const mockTheme = {
   colors: lightTheme.colors,
@@ -24,18 +26,22 @@ export const mockTheme = {
   brandColors: brandColor,
 };
 
-// TODO: Replace "any" with type
+/**
+ * React context for theme management
+ * Provides theme data to components throughout the application
+ * TODO: Replace "any" with type
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ThemeContext = React.createContext<any>(undefined);
 
 /**
  * Utility function for getting asset from theme (Class components)
- *
- * @param appTheme Theme from app
- * @param osColorScheme Theme from OS
- * @param light Light asset
- * @param dark Dark asset
- * @returns
+ * Selects appropriate asset based on app theme preference and OS color scheme
+ * @param {AppThemeKey} appTheme - Theme preference from app settings
+ * @param {ColorSchemeName} osColorScheme - Theme from OS (light/dark/null)
+ * @param {any} light - Light theme asset
+ * @param {any} dark - Dark theme asset
+ * @returns {any} Selected asset based on theme configuration
  */
 export const getAssetFromTheme = (
   appTheme: AppThemeKey,
@@ -102,6 +108,11 @@ const useColorSchemeCustom = (
 };
 /* eslint-enable */
 
+/**
+ * Hook that provides the current app theme based on user preferences and OS settings
+ * Handles theme switching, status bar styling, and returns complete theme object
+ * @returns {Theme} Complete theme object with colors, typography, shadows, and brand colors
+ */
 export const useAppTheme = (): Theme => {
   const osThemeName = useColorSchemeCustom();
   const appTheme: AppThemeKey = useSelector(
@@ -182,11 +193,21 @@ export const useAppTheme = (): Theme => {
   return { colors, themeAppearance, typography, shadows, brandColors };
 };
 
+/**
+ * Hook that retrieves theme from React context
+ * Used when theme is provided via ThemeContext provider
+ * @returns {Theme} Theme object from context
+ */
 export const useAppThemeFromContext = (): Theme => {
   const theme = useContext<Theme>(ThemeContext);
   return theme;
 };
 
+/**
+ * Primary hook for accessing theme throughout the application
+ * Falls back to mockTheme if no theme is available from context
+ * @returns {Theme} Current theme object or mock theme as fallback
+ */
 export const useTheme = (): Theme => {
   const theme = useAppThemeFromContext() || mockTheme;
   return theme;
@@ -194,10 +215,10 @@ export const useTheme = (): Theme => {
 
 /**
  * Hook that returns asset based on theme (Functional components)
- *
- * @param light Light asset
- * @param dark Dark asset
- * @returns Asset based on theme
+ * Automatically selects appropriate asset based on current theme settings
+ * @param {any} light - Light theme asset
+ * @param {any} dark - Dark theme asset
+ * @returns {any} Asset based on current theme configuration
  */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

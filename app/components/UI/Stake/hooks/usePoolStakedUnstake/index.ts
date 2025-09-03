@@ -12,6 +12,14 @@ import useBalance from '../useBalance';
 import { Stake } from '../../sdk/stakeSdkProvider';
 import { NetworkClientId } from '@metamask/network-controller';
 
+/**
+ * Generates transaction parameters for unstaking operations
+ * @param {string} activeAccountAddress - The address of the account performing the unstake
+ * @param {string} contractAddress - The address of the staking contract
+ * @param {string} encodedUnstakeTransactionData - The encoded transaction data for unstaking
+ * @param {ChainId} chainId - The chain ID for the transaction
+ * @returns {TransactionParams} Transaction parameters object for the unstake operation
+ */
 const generateUnstakeTxParams = (
   activeAccountAddress: string,
   contractAddress: string,
@@ -25,12 +33,25 @@ const generateUnstakeTxParams = (
   value: '0',
 });
 
+/**
+ * Creates a function to attempt an unstake transaction
+ * @param {PooledStakingContract | null} pooledStakingContract - The pooled staking contract instance
+ * @param {string} stakedBalanceWei - The total staked balance in wei
+ * @param {NetworkClientId} networkClientId - The network client identifier
+ * @returns {Function} Async function that executes the unstake transaction
+ */
 const attemptUnstakeTransaction =
   (
     pooledStakingContract: PooledStakingContract | null,
     stakedBalanceWei: string,
     networkClientId: NetworkClientId,
   ) =>
+  /**
+   * Executes an unstake transaction for the specified amount
+   * @param {string} valueWei - The amount to unstake in wei
+   * @param {string} receiver - The user address attempting to unstake
+   * @returns {Promise<any>} The transaction result or undefined if failed
+   */
   // Note: receiver is the user address attempting to unstake.
   async (valueWei: string, receiver: string) => {
     try {
@@ -82,6 +103,11 @@ const attemptUnstakeTransaction =
     }
   };
 
+/**
+ * Hook for managing pooled staking unstake operations
+ * Provides functionality to attempt unstake transactions with proper error handling
+ * @returns {Object} Object containing attemptUnstakeTransaction function
+ */
 const usePoolStakedUnstake = () => {
   const { networkClientId, stakingContract } =
     useStakeContext() as Required<Stake>;

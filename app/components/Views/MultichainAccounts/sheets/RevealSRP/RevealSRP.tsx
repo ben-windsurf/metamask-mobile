@@ -41,6 +41,12 @@ interface RootNavigationParamList extends ParamListBase {
 
 type RevealSRPProp = RouteProp<RootNavigationParamList, 'RevealSRP'>;
 
+/**
+ * RevealSRP component provides an introduction screen for revealing Secret Recovery Phrase
+ * Displays security information and guides users through the SRP reveal process with educational content
+ * Includes navigation to security quiz and learn more resources about SRP safety
+ * @returns {JSX.Element} The rendered RevealSRP component with security introduction and action buttons
+ */
 export const RevealSRP = () => {
   const route = useRoute<RevealSRPProp>();
   const { account } = route.params;

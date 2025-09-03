@@ -3,6 +3,11 @@ import { BridgeToken } from '../types';
 import { Hex } from '@metamask/utils';
 import { CHAIN_IDS } from '@metamask/transaction-controller';
 
+/**
+ * Default destination tokens for bridge swaps across different networks
+ * Maps chain IDs to their preferred stable token for bridge operations
+ * Includes USDC and USDT tokens across major EVM chains and Solana
+ */
 export const DefaultSwapDestTokens: Record<Hex | CaipChainId, BridgeToken> = {
   [CHAIN_IDS.MAINNET]: {
     symbol: 'USDC',

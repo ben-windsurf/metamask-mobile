@@ -24,7 +24,11 @@ const clearStackNavigatorOptions = {
   animationEnabled: false,
 };
 
-// Regular Stack for Screens
+/**
+ * Stack navigator for staking screens
+ * Provides navigation between stake input, confirmation, and history screens
+ * @returns {JSX.Element} Stack navigator wrapped with StakeSDKProvider
+ */
 const StakeScreenStack = () => (
   <StakeSDKProvider>
     <Stack.Navigator headerMode="screen">
@@ -53,7 +57,11 @@ const StakeScreenStack = () => (
   </StakeSDKProvider>
 );
 
-// Modal Stack for Modals
+/**
+ * Modal stack navigator for staking modals
+ * Handles modal presentations for learn more, max input, gas impact, and token list
+ * @returns {JSX.Element} Modal stack navigator wrapped with StakeSDKProvider
+ */
 const StakeModalStack = () => (
   <StakeSDKProvider>
     <ModalStack.Navigator

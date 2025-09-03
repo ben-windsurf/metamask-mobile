@@ -16,6 +16,12 @@ import { useGasFeeEstimates } from './useGasFeeEstimates';
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Custom hook that calculates gas fees and estimates for transaction confirmations
+ * Handles both legacy and EIP-1559 fee calculations, providing formatted native and fiat values
+ * @param {TransactionMeta} transactionMeta - Transaction metadata containing gas parameters and chain information
+ * @returns {Object} Fee calculation results including estimated fees in native and fiat currencies
+ */
 export const useFeeCalculations = (transactionMeta: TransactionMeta) => {
   const { chainId, gasLimitNoBuffer, layer1GasFee, networkClientId } =
     transactionMeta;

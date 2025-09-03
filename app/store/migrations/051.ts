@@ -4,9 +4,10 @@ import { ensureValidState } from './util';
 
 /**
  * Migration to overwrite MATIC token ticker to POL
+ * Updates network configurations and provider config to change MATIC ticker to POL for Polygon (chain 0x89)
  *
- * @param state Persisted Redux state
- * @returns
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with MATIC ticker updated to POL
  */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 51)) {

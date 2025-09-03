@@ -42,9 +42,26 @@ const getFeatureFlagAppDistribution = () => {
   }
 };
 
+/**
+ * Boolean flag indicating whether remote feature flag override is activated
+ * Determined by the OVERRIDE_REMOTE_FEATURE_FLAGS environment variable
+ * When true, allows local override of remote feature flags for development/testing
+ */
 export const isRemoteFeatureFlagOverrideActivated =
   process.env.OVERRIDE_REMOTE_FEATURE_FLAGS === 'true';
 
+/**
+ * Creates and initializes a RemoteFeatureFlagController instance for MetaMask Mobile
+ * Configures the controller with mobile-specific settings and handles feature flag fetching
+ *
+ * @param {Object} params - Configuration parameters for the controller
+ * @param {Object} params.state - Initial state for the controller
+ * @param {Object} params.messenger - Controller messenger for communication
+ * @param {boolean} params.disabled - Whether the controller should be disabled
+ * @param {Function} params.getMetaMetricsId - Function to retrieve MetaMetrics ID
+ * @param {number} params.fetchInterval - Interval for fetching feature flags (defaults to API constant)
+ * @returns {RemoteFeatureFlagController} Configured RemoteFeatureFlagController instance
+ */
 export const createRemoteFeatureFlagController = ({
   state,
   messenger,

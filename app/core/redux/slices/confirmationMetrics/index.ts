@@ -24,6 +24,10 @@ export interface ConfirmationMetricsState {
   >;
 }
 
+/**
+ * Initial state for confirmation metrics Redux slice
+ * Contains empty objects for storing metrics, pay tokens, and bridge quotes by ID
+ */
 export const initialState: ConfirmationMetricsState = {
   metricsById: {},
   transactionPayTokenById: {},
@@ -83,25 +87,52 @@ const { actions, reducer } = slice;
 
 export default reducer;
 
-// Actions
+/**
+ * Redux actions for managing confirmation metrics
+ * Includes actions for updating metrics, setting pay tokens, and managing bridge quotes
+ */
 export const {
   updateConfirmationMetric,
   setTransactionPayToken,
   setTransactionBridgeQuotes,
 } = actions;
 
-// Selectors
+/**
+ * Selector to get all confirmation metrics from Redux state
+ * @param {RootState} state - The Redux root state
+ * @returns {Record<string, ConfirmationMetrics>} Object containing all metrics by ID
+ */
 export const selectConfirmationMetrics = (state: RootState) =>
   state[name].metricsById;
 
+/**
+ * Selector to get transaction pay token by transaction ID
+ * @param {RootState} state - The Redux root state
+ * @param {string} id - The transaction ID
+ * @returns {TransactionPayToken | undefined} The pay token for the transaction
+ */
 export const selectTransactionPayToken = (state: RootState, id: string) =>
   state[name].transactionPayTokenById[id];
 
+/**
+ * Memoized selector to get confirmation metrics by ID
+ * Uses reselect for performance optimization
+ * @param {RootState} state - The Redux root state
+ * @param {string} id - The confirmation ID
+ * @returns {ConfirmationMetrics | undefined} The metrics for the specified confirmation
+ */
 export const selectConfirmationMetricsById = createSelector(
   [selectConfirmationMetrics, (_: RootState, id: string) => id],
   (metricsById, id) => metricsById[id],
 );
 
+/**
+ * Memoized selector to get bridge quotes by transaction ID
+ * Uses reselect for performance optimization
+ * @param {RootState} state - The Redux root state
+ * @param {string} transactionId - The transaction ID
+ * @returns {TransactionBridgeQuote[] | undefined} The bridge quotes for the transaction
+ */
 export const selectTransactionBridgeQuotesById = createSelector(
   (state: RootState) => state[name].transactionBridgeQuotesById,
   (_: RootState, transactionId: string) => transactionId,

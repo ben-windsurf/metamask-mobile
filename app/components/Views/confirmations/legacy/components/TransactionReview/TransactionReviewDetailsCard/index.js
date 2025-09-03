@@ -88,6 +88,11 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * TransactionReviewDetailsCard displays detailed information about a transaction for review
+ * Shows contract address, spending cap/asset details, site URL, and expandable transaction data
+ * Used in transaction confirmation flows to provide users with comprehensive transaction details
+ */
 export default class TransactionReviewDetailsCard extends Component {
   static propTypes = {
     toggleViewDetails: PropTypes.func,

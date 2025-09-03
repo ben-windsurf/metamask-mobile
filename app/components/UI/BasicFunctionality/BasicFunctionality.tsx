@@ -12,6 +12,14 @@ import styles from './BasicFunctionality.styles';
 import { BasicFunctionalityComponentProps } from './BasicFunctionality.types';
 import AppConstants from '../../../core/AppConstants';
 
+/**
+ * BasicFunctionalityComponent renders a toggle switch for enabling/disabling basic functionality
+ * Displays the current state and allows users to toggle basic functionality settings
+ * Includes a link to the privacy policy for additional information
+ * @param {Object} props - Component props
+ * @param {Function} props.handleSwitchToggle - Callback function to handle toggle state changes
+ * @returns {JSX.Element} A view containing the toggle switch and descriptive text
+ */
 export default function BasicFunctionalityComponent({
   handleSwitchToggle,
 }: Readonly<BasicFunctionalityComponentProps>) {

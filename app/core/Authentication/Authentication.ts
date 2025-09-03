@@ -1118,4 +1118,9 @@ class AuthenticationService {
   };
 }
 
+/**
+ * Singleton instance of the AuthenticationService for managing user authentication
+ * in MetaMask Mobile. Handles password storage, biometric authentication, wallet creation,
+ * and login flows including both traditional seed phrase and seedless OAuth2 authentication.
+ */
 export const Authentication = new AuthenticationService();

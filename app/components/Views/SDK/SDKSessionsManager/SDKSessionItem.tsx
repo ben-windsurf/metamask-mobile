@@ -55,6 +55,15 @@ const createStyles = (
     ...getSharedStyles(colors, typography, _safeAreaInsets),
   });
 
+/**
+ * SDKSessionItem component displays information about an active SDK connection session
+ * Shows connection status, session name/URL, connected accounts count, and management controls
+ * Used in the SDK sessions manager to list and manage active dApp connections
+ * @param {SDKSessionViewProps} props - Component props
+ * @param {Object} props.connection - Connection object containing id, originatorInfo, and connected status
+ * @param {number} [props.trigger] - Optional trigger value to force refresh of permitted accounts
+ * @returns {JSX.Element} The rendered SDK session item component
+ */
 export const SDKSessionItem = ({
   connection,
   trigger,

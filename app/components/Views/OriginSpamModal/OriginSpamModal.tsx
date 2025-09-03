@@ -24,7 +24,16 @@ import Text, {
 import TagUrl from '../../../component-library/components/Tags/TagUrl';
 import { resetOriginSpamState } from '../../../core/redux/slices/originThrottling';
 
+/**
+ * Test ID for the block origin button in the spam modal
+ * Used for automated testing of the block functionality
+ */
 export const BLOCK_BUTTON_TEST_ID = 'block-origin-button';
+
+/**
+ * Test ID for the continue button in the spam modal
+ * Used for automated testing of the continue functionality
+ */
 export const CONTINUE_BUTTON_TEST_ID = 'continue-origin-button';
 
 const createStyles = () =>
@@ -160,6 +169,16 @@ const SiteBlockedContent = ({ onCloseModal }: { onCloseModal: () => void }) => {
   );
 };
 
+/**
+ * OriginSpamModal component displays a modal to handle spam requests from origins
+ * Shows warning when an origin makes too many requests and allows users to block or continue
+ * Manages state between showing the warning and confirmation screens
+ * @param {Object} props - Component props
+ * @param {Object} props.route - Navigation route object containing origin parameter
+ * @param {Object} props.route.params - Route parameters
+ * @param {string} props.route.params.origin - The origin URL that triggered the spam detection
+ * @returns {JSX.Element} The rendered origin spam modal component
+ */
 const OriginSpamModal = ({
   route,
 }: {

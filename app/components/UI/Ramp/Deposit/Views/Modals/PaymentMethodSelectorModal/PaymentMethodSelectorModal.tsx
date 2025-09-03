@@ -34,12 +34,21 @@ interface PaymentMethodSelectorModalNavigationDetails {
   handleSelectPaymentMethodId?: (paymentMethodId: string) => void;
 }
 
+/**
+ * Creates navigation details for the payment method selector modal
+ * @returns {Object} Navigation details object for the payment method selector modal
+ */
 export const createPaymentMethodSelectorModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.PAYMENT_METHOD_SELECTOR,
   );
 
+/**
+ * PaymentMethodSelectorModal component displays a bottom sheet modal for selecting payment methods
+ * Allows users to choose from available deposit payment methods with visual indicators and duration info
+ * @returns {JSX.Element} The rendered payment method selector modal component
+ */
 function PaymentMethodSelectorModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const listRef = useRef<FlatList>(null);
@@ -124,4 +133,7 @@ function PaymentMethodSelectorModal() {
   );
 }
 
+/**
+ * Default export of the PaymentMethodSelectorModal component
+ */
 export default PaymentMethodSelectorModal;

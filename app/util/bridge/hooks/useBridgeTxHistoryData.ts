@@ -7,6 +7,10 @@ import { selectBridgeHistoryForAccount } from '../../../selectors/bridgeStatusCo
 import { Transaction } from '@metamask/keyring-api';
 import { BridgeHistoryItem } from '@metamask/bridge-status-controller';
 
+/**
+ * Array of transaction statuses that represent final non-confirmed states
+ * These statuses indicate that a transaction has reached a terminal state without being confirmed
+ */
 export const FINAL_NON_CONFIRMED_STATUSES = [
   TransactionStatus.failed,
   TransactionStatus.dropped,

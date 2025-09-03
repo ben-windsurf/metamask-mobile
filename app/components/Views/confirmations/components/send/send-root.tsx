@@ -9,6 +9,11 @@ import { Send } from './send';
 
 const Stack = createStackNavigator();
 
+/**
+ * SendRoot component provides the navigation structure for the send flow
+ * Sets up a stack navigator with send and confirmation screens within a SendContextProvider
+ * @returns {JSX.Element} Stack navigator with send flow screens
+ */
 export const SendRoot = () => (
   <SendContextProvider>
     <Stack.Navigator headerMode="screen">

@@ -11,6 +11,12 @@ const SIGNATURE_APPROVAL_TYPES = [
   ApprovalType.EthSignTypedData,
 ];
 
+/**
+ * Custom hook that retrieves signature request data for confirmation flows
+ * Filters approval requests to only return signature-related requests (PersonalSign, EthSignTypedData)
+ * Used in confirmation views to access signature request details for user approval
+ * @returns {SignatureRequest | undefined} The signature request object or undefined if not a signature request
+ */
 export function useSignatureRequest() {
   const { approvalRequest } = useApprovalRequest();
 

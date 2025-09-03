@@ -1,6 +1,8 @@
 /**
  * Needed after https://github.com/MetaMask/controllers/pull/152
- *
+ * Migrates AddressBookController structure to organize addresses by chainId
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with restructured address book
  **/
 export default function migrate(state) {
   const addressBook =

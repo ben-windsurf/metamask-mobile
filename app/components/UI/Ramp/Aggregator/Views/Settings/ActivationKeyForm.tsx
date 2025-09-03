@@ -35,11 +35,20 @@ interface ActivationKeyFormParams {
   label: string;
 }
 
+/**
+ * Creates navigation details for the activation key form screen
+ * @returns Navigation details object for the activation key form
+ */
 export const createActivationKeyFormNavDetails =
   createNavigationDetails<ActivationKeyFormParams>(
     Routes.RAMP.ACTIVATION_KEY_FORM,
   );
 
+/**
+ * ActivationKeyForm component for adding or editing fiat on-ramp activation keys
+ * Provides form interface for users to input activation key and label information
+ * @returns JSX.Element The activation key form component
+ */
 function ActivationKeyForm() {
   const navigation = useNavigation();
   const {

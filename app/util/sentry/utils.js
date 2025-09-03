@@ -13,12 +13,17 @@ import { TraceName, hasMetricsConsent } from '../trace';
 import { getTraceTags } from './tags';
 /**
  * This symbol matches all object properties when used in a mask
+ * Used in object masking to apply rules to all properties of dynamic objects
+ * @type {Symbol}
  */
 export const AllProperties = Symbol('*');
 
-// This describes the subset of background controller state attached to errors
-// sent to Sentry These properties have some potential to be useful for
-// debugging, and they do not contain any identifiable information.
+/**
+ * Defines the subset of background controller state attached to Sentry error reports
+ * These properties are useful for debugging and do not contain identifiable information
+ * Uses a mask structure where true includes the property, false excludes it, and objects define sub-masks
+ * @type {Object}
+ */
 export const sentryStateMask = {
   accounts: true,
   alert: true,
@@ -263,9 +268,11 @@ const ERROR_URL_ALLOWLIST = [
 
 /**
  * Capture Sentry user feedback and associate ID of captured exception
- *
- * @param options.sentryId - ID of captured exception
- * @param options.comments - User's feedback/comments
+ * Allows users to provide feedback on errors that were reported to Sentry
+ * @param {Object} options - Feedback options
+ * @param {string} options.sentryId - ID of captured exception
+ * @param {string} options.comments - User's feedback/comments
+ * @returns {void}
  */
 export const captureSentryFeedback = ({ sentryId, comments }) => {
   const userFeedback = {
@@ -281,6 +288,12 @@ function getProtocolFromURL(url) {
   return new URL(url).protocol;
 }
 
+/**
+ * Rewrites breadcrumb data to remove sensitive URL information
+ * Replaces full URLs with just the protocol for privacy protection
+ * @param {Object} breadcrumb - The Sentry breadcrumb object to rewrite
+ * @returns {Object} The modified breadcrumb with sanitized URLs
+ */
 export function rewriteBreadcrumb(breadcrumb) {
   if (breadcrumb.data?.url) {
     breadcrumb.data.url = getProtocolFromURL(breadcrumb.data.url);
@@ -412,6 +425,12 @@ export function maskObject(objectToMask, mask = {}) {
   }, {});
 }
 
+/**
+ * Rewrites Sentry error reports to remove sensitive information and add app state
+ * Applies various sanitization steps including URL removal, address masking, and device info removal
+ * @param {Object} report - The Sentry error report to rewrite
+ * @returns {Object} The sanitized error report with masked app state
+ */
 export function rewriteReport(report) {
   try {
     // filter out SES from error stack trace
@@ -442,9 +461,10 @@ export function rewriteReport(report) {
 }
 
 /**
- * This function excludes events from being logged in the performance portion of the app.
- * @param {*} event - to be logged
- * @returns {(event|null)}
+ * Filters and modifies Sentry performance events before they are sent
+ * Excludes certain events from being logged and adds additional context to others
+ * @param {Object} event - The Sentry event to be processed
+ * @returns {Object|null} The modified event or null if the event should be excluded
  */
 export function excludeEvents(event) {
   // This is needed because store starts to initialise before performance observers completes to measure app start time
@@ -545,6 +565,12 @@ export function deriveSentryEnvironment(
 }
 
 // Setup sentry remote error reporting
+/**
+ * Sets up Sentry error reporting with privacy-focused configuration
+ * Initializes Sentry with appropriate environment settings, integrations, and sanitization
+ * @param {boolean} forceEnabled - Whether to force enable Sentry regardless of user consent
+ * @returns {Promise<void>} Promise that resolves when Sentry is initialized
+ */
 export async function setupSentry(forceEnabled = false) {
   const dsn = process.env.MM_SENTRY_DSN;
 
@@ -613,5 +639,10 @@ export async function captureExceptionForced(error, extra = {}) {
   }
 }
 
+/**
+ * Placeholder function for deleting Sentry data
+ * Currently a no-op but reserved for future implementation of data deletion
+ * @returns {void}
+ */
 // eslint-disable-next-line no-empty-function
 export function deleteSentryData() {}

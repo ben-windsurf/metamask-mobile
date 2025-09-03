@@ -22,6 +22,11 @@ import { useMetrics } from '../../../components/hooks/useMetrics';
 import Logger from '../../../util/Logger';
 import { TraceName, endTrace, trace } from '../../../util/trace';
 
+/**
+ * Creates stylesheet for the AddCustomCollectible component
+ * @param {any} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createStyles = (colors: any) =>
@@ -68,6 +73,14 @@ interface AddCustomCollectibleProps {
   };
 }
 
+/**
+ * AddCustomCollectible component allows users to manually add NFTs/collectibles to their wallet
+ * Validates contract address, token ID, and ownership before adding the collectible
+ * @param {AddCustomCollectibleProps} props - Component props
+ * @param {any} props.navigation - Navigation object for screen transitions
+ * @param {Object} props.collectibleContract - Optional pre-filled contract information
+ * @returns {JSX.Element} The rendered add custom collectible form
+ */
 const AddCustomCollectible = ({
   navigation,
   collectibleContract,

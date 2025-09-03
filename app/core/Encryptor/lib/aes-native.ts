@@ -34,6 +34,12 @@ enum CipherAlgorithmAesCrypto {
 const Aes = NativeModules.Aes;
 const AesForked = NativeModules.AesForked;
 
+/**
+ * Validates that the provided algorithm is a supported KDF (Key Derivation Function) algorithm
+ * Used to ensure type safety when working with encryption key derivation in MetaMask Mobile
+ * @param algorithm - The algorithm string to validate
+ * @throws {Error} When the algorithm is not supported
+ */
 export function assertIsKdfAlgorithm(
   algorithm: string,
 ): asserts algorithm is typeof KDF_ALGORITHM {
@@ -123,10 +129,17 @@ class AesForkedEncryptionLibrary implements EncryptionLibrary {
 // Those wrappers are stateless, we can build them only once!
 
 /**
- * @deprecated - This class is deprecated and will be removed in future versions.
+ * Legacy AES encryption library instance for MetaMask Mobile vault encryption
+ * Provides AES-CBC encryption with PBKDF2 key derivation using native React Native modules
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Please use `QuickCryptoEncryptionLibrary` instead for new implementations.
  */
 export const AesLib = new AesEncryptionLibrary();
+
 /**
- * @deprecated - This class is deprecated and will be removed in future versions.
+ * Legacy forked AES encryption library instance with hardcoded iteration parameters
+ * Used for backward compatibility with older MetaMask Mobile vault formats
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Please use `QuickCryptoEncryptionLibrary` instead for new implementations.
  */
 export const AesForkedLib = new AesForkedEncryptionLibrary();

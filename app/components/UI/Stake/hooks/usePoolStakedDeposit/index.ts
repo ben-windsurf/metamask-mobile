@@ -17,6 +17,15 @@ import { useStakeContext } from '../useStakeContext';
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
+/**
+ * Generates transaction parameters for a staking deposit transaction
+ * @param {string} valueWei - The deposit amount in wei
+ * @param {string} activeAccountAddress - The address of the account making the deposit
+ * @param {string} contractAddress - The staking contract address
+ * @param {string} encodedDepositTransactionData - The encoded transaction data
+ * @param {ChainId} chainId - The chain ID for the transaction
+ * @returns {TransactionParams} The formatted transaction parameters
+ */
 const generateDepositTxParams = (
   valueWei: string,
   activeAccountAddress: string,
@@ -31,6 +40,14 @@ const generateDepositTxParams = (
   value: toHex(valueWei.toString()),
 });
 
+/**
+ * Creates a function to attempt a staking deposit transaction
+ * @param {PooledStakingContract} pooledStakingContract - The staking contract instance
+ * @param {NetworkClientId} networkClientId - The network client identifier
+ * @param {Function} trackEvent - Function to track analytics events
+ * @param {Function} createEventBuilder - Function to create event builders for analytics
+ * @returns {Function} Async function that executes the deposit transaction
+ */
 const attemptDepositTransaction =
   (
     pooledStakingContract: PooledStakingContract,
@@ -38,6 +55,14 @@ const attemptDepositTransaction =
     trackEvent: ReturnType<typeof useMetrics>['trackEvent'],
     createEventBuilder: ReturnType<typeof useMetrics>['createEventBuilder'],
   ) =>
+  /**
+   * Executes a staking deposit transaction
+   * @param {string} depositValueWei - The deposit amount in wei
+   * @param {string} receiver - The address that can claim exited ETH
+   * @param {string} referrer - Address to track referrals or deposits from different interfaces
+   * @param {boolean} isRedesigned - Whether using the redesigned UI
+   * @returns {Promise} Promise that resolves when transaction is submitted
+   */
   async (
     depositValueWei: string,
     receiver: string, // the address that can claim exited ETH
@@ -94,6 +119,11 @@ const attemptDepositTransaction =
     }
   };
 
+/**
+ * Hook for managing pooled staking deposit transactions
+ * Provides functionality to initiate staking deposits with proper gas estimation and analytics tracking
+ * @returns {Object} Object containing attemptDepositTransaction function
+ */
 const usePoolStakedDeposit = () => {
   const { networkClientId, stakingContract } =
     useStakeContext() as Required<Stake>;

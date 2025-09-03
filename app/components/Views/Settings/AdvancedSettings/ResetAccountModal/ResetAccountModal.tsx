@@ -12,6 +12,16 @@ import { useSelector } from 'react-redux';
 import { selectSelectedInternalAccountFormattedAddress } from '../../../../../selectors/accountsController';
 import { selectChainId } from '../../../../../selectors/networkController';
 
+/**
+ * ResetAccountModal component displays a confirmation modal for resetting account transaction history
+ * Allows users to clear all transaction data and bridge status for the current account
+ * Navigates back to WalletView after successful reset operation
+ * @param {Object} props - Component props
+ * @param {boolean} props.resetModalVisible - Controls modal visibility
+ * @param {() => void} props.cancelResetAccount - Callback function to cancel the reset operation
+ * @param {any} props.styles - Style object for modal components
+ * @returns {JSX.Element} The rendered reset account confirmation modal
+ */
 export const ResetAccountModal = ({
   resetModalVisible,
   cancelResetAccount,

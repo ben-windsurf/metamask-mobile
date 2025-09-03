@@ -11,6 +11,13 @@ import { trace } from '../../../../util/trace';
 import AppConstants from '../../../AppConstants';
 import Logger from '../../../../util/Logger';
 
+/**
+ * Initializes the SignatureController for MetaMask Mobile
+ * Handles signature request decoding and transaction simulations based on user preferences
+ * @param {ControllerInitRequest<SignatureControllerMessenger>} request - Controller initialization request containing messenger and persisted state
+ * @returns {Object} Object containing the initialized SignatureController instance
+ * @throws {Error} Throws error if SignatureController initialization fails
+ */
 export const SignatureControllerInit: ControllerInitFunction<
   SignatureController,
   SignatureControllerMessenger
@@ -36,6 +43,11 @@ export const SignatureControllerInit: ControllerInitFunction<
   }
 };
 
+/**
+ * Extracts required controllers from the initialization request
+ * @param {ControllerInitRequest<SignatureControllerMessenger>} request - Controller initialization request
+ * @returns {Object} Object containing the PreferencesController instance
+ */
 function getControllers(
   request: ControllerInitRequest<SignatureControllerMessenger>,
 ) {

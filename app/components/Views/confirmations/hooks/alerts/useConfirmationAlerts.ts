@@ -35,6 +35,11 @@ function useTransactionAlerts(): Alert[] {
     ],
   );
 }
+/**
+ * Custom hook that aggregates all confirmation-related alerts for transaction and signature confirmations
+ * Combines blockaid security alerts, signature alerts, transaction alerts, and account type upgrade alerts
+ * @returns {Alert[]} Array of all applicable alerts for the current confirmation context
+ */
 export default function useConfirmationAlerts(): Alert[] {
   const blockaidAlerts = useBlockaidAlerts();
   const signatureAlerts = useSignatureAlerts();

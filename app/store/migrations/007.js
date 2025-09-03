@@ -1,3 +1,9 @@
+/**
+ * Migration 007: Restructures token storage format in TokensController
+ * Reorganizes allTokens and ignoredTokens from account-first to chain-first structure
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with restructured token storage
+ */
 export default function migrate(state) {
   const allTokens = state.engine.backgroundState.TokensController.allTokens;
   const newAllTokens = {};

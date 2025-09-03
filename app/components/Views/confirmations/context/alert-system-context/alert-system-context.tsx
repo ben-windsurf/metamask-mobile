@@ -50,6 +50,15 @@ interface AlertsContextProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * AlertsContextProvider manages alert state and provides alert-related functionality to child components
+ * Handles sorting alerts by severity, categorizing them by type, and managing alert modal visibility
+ * Used in confirmation flows to display security alerts and warnings to users
+ * @param {AlertsContextProviderProps} props - The provider props
+ * @param {Alert[]} props.alerts - Array of alerts to manage and display
+ * @param {React.ReactNode} props.children - Child components that will have access to the alerts context
+ * @returns {JSX.Element} The alerts context provider component
+ */
 export const AlertsContextProvider: React.FC<AlertsContextProviderProps> = ({
   children,
   alerts,
@@ -150,6 +159,13 @@ export const AlertsContextProvider: React.FC<AlertsContextProviderProps> = ({
   );
 };
 
+/**
+ * Custom hook to access the alerts context
+ * Provides access to alert state, modal controls, and alert management functions
+ * Must be used within an AlertsContextProvider component
+ * @returns {AlertsContextParams} The alerts context containing alert state and management functions
+ * @throws {Error} When used outside of an AlertsContextProvider
+ */
 export const useAlerts = () => {
   const context = useContext(AlertsContext);
   if (!context) {

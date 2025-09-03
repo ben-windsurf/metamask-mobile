@@ -31,11 +31,21 @@ interface DepositOrderDetailsParams {
   orderId: string;
 }
 
+/**
+ * Creates navigation details for the deposit order details screen
+ * @returns Navigation details object for routing to deposit order details
+ */
 export const createDepositOrderDetailsNavDetails =
   createNavigationDetails<DepositOrderDetailsParams>(
     Routes.DEPOSIT.ORDER_DETAILS,
   );
 
+/**
+ * DepositOrderDetails component displays detailed information about a deposit order
+ * Handles order status updates, refresh functionality, and error states
+ * Provides real-time polling for orders in CREATED state
+ * @returns JSX.Element The rendered deposit order details screen
+ */
 const DepositOrderDetails = () => {
   const params = useParams<DepositOrderDetailsParams>();
   const order = useSelector((state: RootState) =>

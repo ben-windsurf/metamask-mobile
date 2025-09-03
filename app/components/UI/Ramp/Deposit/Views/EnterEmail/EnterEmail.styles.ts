@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../../../../util/theme/models';
 
+/**
+ * Creates stylesheet for EnterEmail component with theme-based styling
+ * @param {Object} params - Parameters object
+ * @param {Theme} params.theme - Theme object containing color and style definitions
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
 

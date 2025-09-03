@@ -13,14 +13,28 @@ interface TransactionSecurityAlertResponseType {
 export type TransactionType = TransactionMeta &
   TransactionSecurityAlertResponseType;
 
+/**
+ * Checks if Blockaid security alerts are enabled in user preferences
+ * @returns {boolean} True if security alerts are enabled, false otherwise
+ */
 export const isBlockaidPreferenceEnabled = (): boolean => {
   const { PreferencesController } = Engine.context;
   return PreferencesController.state.securityAlertsEnabled;
 };
 
+/**
+ * Checks if Blockaid security feature is enabled
+ * Currently delegates to preference check but can be extended for additional feature flags
+ * @returns {Promise<boolean>} Promise resolving to true if Blockaid feature is enabled
+ */
 export const isBlockaidFeatureEnabled = async (): Promise<boolean> =>
   isBlockaidPreferenceEnabled();
 
+/**
+ * Extracts metrics parameters from a Blockaid security alert response
+ * @param {SecurityAlertResponse} securityAlertResponse - The security alert response from Blockaid
+ * @returns {Record<string, unknown>} Object containing metrics parameters for analytics
+ */
 export const getBlockaidMetricsParams = (
   securityAlertResponse?: SecurityAlertResponse,
 ): Record<string, unknown> => {
@@ -53,6 +67,11 @@ export const getBlockaidMetricsParams = (
   return additionalParams;
 };
 
+/**
+ * Extracts Blockaid metrics parameters from a transaction object
+ * @param {TransactionType} transaction - Transaction object containing security alert responses
+ * @returns {Record<string, unknown>} Object containing Blockaid metrics parameters for the transaction
+ */
 export const getBlockaidTransactionMetricsParams = (
   transaction: TransactionType,
 ): Record<string, unknown> => {

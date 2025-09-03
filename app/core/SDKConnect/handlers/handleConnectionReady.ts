@@ -14,6 +14,20 @@ import generateOTP from '../utils/generateOTP.util';
 import { setupBridge } from './setupBridge';
 import { HOUR_IN_MS } from '../SDKConnectConstants';
 
+/**
+ * Handles the connection ready event for SDK connections in MetaMask Mobile
+ * Manages the authorization flow, permission checks, and bridge setup for different connection types
+ * including QR code connections, deeplink connections, and reconnections with OTP validation
+ * @param {Object} params - Connection ready parameters
+ * @param {OriginatorInfo} params.originatorInfo - Information about the originating dApp
+ * @param {typeof Engine} params.engine - MetaMask engine instance
+ * @param {Connection} params.connection - The SDK connection instance
+ * @param {Function} params.approveHost - Function to approve host connections
+ * @param {Function} params.disapprove - Function to disapprove connections
+ * @param {Function} params.onError - Optional error handler callback
+ * @param {Function} params.updateOriginatorInfos - Function to update originator information
+ * @returns {Promise<void>} Promise that resolves when connection is ready
+ */
 export const handleConnectionReady = async ({
   originatorInfo,
   engine,

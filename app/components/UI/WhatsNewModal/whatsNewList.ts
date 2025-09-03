@@ -3,6 +3,12 @@ import { strings } from '../../../../locales/i18n';
 import Routes from '../../../constants/navigation/Routes';
 import { WhatsNew } from './types';
 
+/**
+ * Configuration object for the What's New modal content
+ * Defines the slides, version constraints, and content for displaying new features to users
+ * Uses a templating system with 2D arrays where the root layer determines slide count
+ * and inner arrays define slide content (image, title, description, button types)
+ */
 export const whatsNew: WhatsNew = {
   // All users that have <6.4.0 and are updating to >=6.4.0 should see
   onlyUpdates: false, // false: Users who updated the app and new installs will see this. true: only users who update will see it

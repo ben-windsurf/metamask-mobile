@@ -2,6 +2,11 @@
 import { fontStyles } from '../../../styles/common';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates styles for the TurnOffRememberMeModal component
+ * @param {any} colors - Theme colors object for styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createStyles = (colors: any) =>

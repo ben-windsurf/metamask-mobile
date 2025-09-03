@@ -12,6 +12,11 @@ import { View } from 'react-native';
 import { useStyles } from '../../../../../component-library/hooks';
 import createStyles from './QuoteInfoModal.styles';
 
+/**
+ * QuoteInfoModal component displays detailed information about a bridge quote
+ * Renders as a bottom sheet modal with quote details and navigation controls
+ * @returns {JSX.Element} The rendered quote information modal
+ */
 const QuoteInfoModal = () => {
   const navigation = useNavigation();
   const sheetRef = useRef<BottomSheetRef>(null);

@@ -1,3 +1,8 @@
+/**
+ * SwapsQuotesView component displays available swap quotes and handles swap execution
+ * Manages quote selection, gas estimation, approval transactions, and swap completion
+ * Provides comprehensive swap functionality with price impact warnings and slippage controls
+ */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Eth from '@metamask/ethjs-query';

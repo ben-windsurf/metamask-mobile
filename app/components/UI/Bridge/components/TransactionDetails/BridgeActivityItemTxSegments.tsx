@@ -10,6 +10,12 @@ import { FlexDirection } from '../../../Box/box.types';
 import { Transaction } from '@metamask/keyring-api';
 import { StatusTypes } from '@metamask/bridge-controller';
 
+/**
+ * Gets the transaction index based on source transaction status
+ * @param srcTxStatus - The source transaction status
+ * @returns The transaction index (1 for pending, 2 for complete)
+ * @throws Error if status is not recognized
+ */
 const getTxIndex = (srcTxStatus: StatusTypes) => {
   if (srcTxStatus === StatusTypes.PENDING) {
     return 1;
@@ -22,6 +28,11 @@ const getTxIndex = (srcTxStatus: StatusTypes) => {
   throw new Error('No more possible states for srcTxStatus');
 };
 
+/**
+ * Converts transaction status to source transaction status for bridge operations
+ * @param transactionStatus - The transaction status (EVM or Solana)
+ * @returns StatusTypes.COMPLETE if confirmed, StatusTypes.PENDING otherwise
+ */
 const getSrcTxStatus = (
   transactionStatus: TransactionStatus | Transaction['status'],
 ) =>
@@ -29,6 +40,13 @@ const getSrcTxStatus = (
     ? StatusTypes.COMPLETE
     : StatusTypes.PENDING;
 
+/**
+ * Determines the destination transaction status for bridge operations
+ * @param params - Parameters object
+ * @param params.bridgeTxHistoryItem - The bridge history item containing transaction details
+ * @param params.srcTxStatus - The source transaction status
+ * @returns StatusTypes.COMPLETE if dest tx is complete, StatusTypes.PENDING if pending, null if src tx not complete
+ */
 const getDestTxStatus = ({
   bridgeTxHistoryItem,
   srcTxStatus,

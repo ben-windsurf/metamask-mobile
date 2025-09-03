@@ -23,6 +23,15 @@ interface StakingCtaProps extends Pick<ViewProps, 'style'> {
   chainId: Hex;
 }
 
+/**
+ * StakingCta component displays a call-to-action for staking ETH
+ * Shows estimated reward rate and provides navigation to learn more about staking
+ * @param {StakingCtaProps} props - Component props
+ * @param {string} props.estimatedRewardRate - The estimated annual reward rate for staking
+ * @param {ViewProps['style']} props.style - Optional style overrides
+ * @param {Hex} props.chainId - The chain ID for the staking network
+ * @returns {JSX.Element} The rendered staking CTA component
+ */
 const StakingCta = ({
   estimatedRewardRate,
   style,

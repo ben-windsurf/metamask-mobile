@@ -42,6 +42,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SolScope } from '@metamask/keyring-api';
 import { BridgeViewMode } from '../types';
 ///: END:ONLY_INCLUDE_IF
+/**
+ * Creates styles for the BridgeDestNetworksBar component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (params: { theme: Theme }) => {
   const { theme } = params;
   return StyleSheet.create({
@@ -89,6 +95,12 @@ const ShortChainNames: Record<Hex | CaipChainId, string> = {
   [ETH_CHAIN_ID]: 'Ethereum',
 };
 
+/**
+ * BridgeDestNetworksBar component displays a horizontal scrollable list of destination networks for bridging
+ * Allows users to select destination networks and navigate to a full network selector modal
+ * Filters and sorts networks based on popularity and current bridge view mode
+ * @returns {JSX.Element} Horizontal scrollable bar with network selection buttons
+ */
 export const BridgeDestNetworksBar = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();

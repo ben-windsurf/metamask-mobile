@@ -11,6 +11,8 @@ import { EARN_EXPERIENCES } from '../../Earn/constants/experiences';
 
 /**
  * Maps pooled staking transaction types to their corresponding Earn trace names
+ * Used to determine which trace to start/end for different staking operations
+ * @constant {Record<string, TraceName>}
  */
 const STAKING_TRACE_MAP: Record<string, TraceName> = {
   [TransactionType.stakingDeposit]:
@@ -22,6 +24,8 @@ const STAKING_TRACE_MAP: Record<string, TraceName> = {
 
 /**
  * Hook that adds tracing for pooled staking transactions (submitted and confirmed)
+ * Automatically starts traces when staking transactions are submitted and ends them when confirmed
+ * @returns {void} This hook doesn't return anything, it sets up transaction event listeners
  */
 export const useStakingTransactionTracing = () => {
   const transactionMetadata = useTransactionMetadataRequest();

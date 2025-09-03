@@ -10,8 +10,19 @@ import AppConstants from '../../../../../core/AppConstants';
 import { ProcessorOptions } from '../../index';
 import { isSellFiatOrder } from '../utils';
 
+/**
+ * Polling frequency for order status updates in milliseconds
+ */
 export const POLLING_FREQUENCY = AppConstants.FIAT_ORDERS.POLLING_FREQUENCY;
+
+/**
+ * Polling frequency converted to seconds for easier calculations
+ */
 export const POLLING_FRECUENCY_IN_SECONDS = POLLING_FREQUENCY / 1000;
+
+/**
+ * Maximum number of consecutive errors before stopping order processing
+ */
 export const MAX_ERROR_COUNT = 5;
 
 /**
@@ -42,6 +53,11 @@ const aggregatorOrderStateToFiatOrderState = (
   }
 };
 
+/**
+ * Transforms an aggregator order object into a fiat order format
+ * @param {Order} aggregatorOrder - The aggregator order to transform
+ * @returns {Object} Transformed fiat order object with standardized properties
+ */
 export const aggregatorOrderToFiatOrder = (aggregatorOrder: Order) => ({
   id: aggregatorOrder.id,
   provider: FIAT_ORDER_PROVIDERS.AGGREGATOR,

@@ -28,6 +28,13 @@ import { RootState } from '../../../reducers';
 import { MetaMetricsEvents } from '../../../core/Analytics/MetaMetrics.events';
 import useMetrics from '../../hooks/useMetrics/useMetrics';
 
+/**
+ * SRPListItem component displays a Secret Recovery Phrase (SRP) keyring item
+ * Shows keyring name, account count, and expandable list of associated accounts
+ * Handles SRP selection and account visibility toggling with analytics tracking
+ * @param {SRPListItemProps} props - Component props
+ * @returns {JSX.Element} The rendered SRP list item component
+ */
 const SRPListItem = ({
   name,
   keyring,

@@ -175,6 +175,11 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * Coachmark component for displaying guided onboarding tooltips and tutorials
+ * Provides an animated overlay with directional indicators, progress tracking,
+ * and navigation controls for step-by-step user guidance during onboarding
+ */
 export default class Coachmark extends PureComponent {
   static propTypes = {
     /**

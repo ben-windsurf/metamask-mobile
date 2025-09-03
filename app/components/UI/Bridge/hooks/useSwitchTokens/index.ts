@@ -13,6 +13,11 @@ import { CaipChainId, Hex } from '@metamask/utils';
 import { selectEvmNetworkConfigurationsByChainId } from '../../../../../selectors/networkController';
 import Engine from '../../../../../core/Engine';
 
+/**
+ * Custom hook for switching source and destination tokens in the bridge interface
+ * Handles token swapping, network switching, and bridge controller state management
+ * @returns {Object} Object containing handleSwitchTokens function
+ */
 export const useSwitchTokens = () => {
   const dispatch = useDispatch();
   const sourceToken = useSelector(selectSourceToken);

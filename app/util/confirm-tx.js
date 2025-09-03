@@ -28,6 +28,11 @@ const NON_ISO4217_CRYPTO_CODES = [
   'ZEC',
 ];
 
+/**
+ * Increases the last gas price by 10% for transaction replacement
+ * @param {string} lastGasPrice - The previous gas price in hex format
+ * @returns {string} The increased gas price with hex prefix
+ */
 export function increaseLastGasPrice(lastGasPrice) {
   return addHexPrefix(
     multiplyCurrencies(lastGasPrice || '0x0', 1.1, {
@@ -38,6 +43,12 @@ export function increaseLastGasPrice(lastGasPrice) {
   );
 }
 
+/**
+ * Compares two hex values to determine if the first is greater than the second
+ * @param {string} a - First hex value to compare
+ * @param {string} b - Second hex value to compare
+ * @returns {boolean} True if a is greater than b, false otherwise
+ */
 export function hexGreaterThan(a, b) {
   return conversionGreaterThan(
     { value: a, fromNumericBase: 'hex' },
@@ -45,6 +56,13 @@ export function hexGreaterThan(a, b) {
   );
 }
 
+/**
+ * Calculates the total gas cost by multiplying gas limit and gas price
+ * @param {Object} params - Gas calculation parameters
+ * @param {string} params.gasLimit - The gas limit in hex format
+ * @param {string} params.gasPrice - The gas price in hex format
+ * @returns {string} The total gas cost in hex format with prefix
+ */
 export function getHexGasTotal({ gasLimit, gasPrice }) {
   return addHexPrefix(
     multiplyCurrencies(gasLimit || '0x0', gasPrice || '0x0', {
@@ -55,6 +73,11 @@ export function getHexGasTotal({ gasLimit, gasPrice }) {
   );
 }
 
+/**
+ * Adds multiple ETH amounts together with 6 decimal precision
+ * @param {...string} args - Variable number of ETH amounts to add
+ * @returns {string} The sum of all ETH amounts as a decimal string
+ */
 export function addEth(...args) {
   return args.reduce((acc, ethAmount) =>
     addCurrencies(acc, ethAmount, {
@@ -66,6 +89,11 @@ export function addEth(...args) {
   );
 }
 
+/**
+ * Adds multiple fiat amounts together with 2 decimal precision
+ * @param {...string} args - Variable number of fiat amounts to add
+ * @returns {string} The sum of all fiat amounts as a decimal string
+ */
 export function addFiat(...args) {
   return args.reduce((acc, fiatAmount) =>
     addCurrencies(acc, fiatAmount, {
@@ -77,6 +105,17 @@ export function addFiat(...args) {
   );
 }
 
+/**
+ * Converts a value from Wei hex format to the specified currency and denomination
+ * @param {Object} params - Conversion parameters
+ * @param {string} params.value - The value in Wei hex format to convert
+ * @param {string} params.fromCurrency - Source currency (default: 'ETH')
+ * @param {string} params.toCurrency - Target currency for conversion
+ * @param {number} params.conversionRate - Exchange rate for currency conversion
+ * @param {number} params.numberOfDecimals - Number of decimal places in result
+ * @param {string} params.toDenomination - Target denomination for the result
+ * @returns {string} The converted value as a decimal string
+ */
 export function getValueFromWeiHex({
   value,
   fromCurrency = 'ETH',
@@ -97,6 +136,16 @@ export function getValueFromWeiHex({
   });
 }
 
+/**
+ * Calculates transaction fee by converting from BigNumber Wei to decimal currency
+ * @param {Object} params - Fee calculation parameters
+ * @param {string} params.value - The fee value in BigNumber format
+ * @param {string} params.fromCurrency - Source currency (default: 'ETH')
+ * @param {string} params.toCurrency - Target currency for conversion
+ * @param {number} params.conversionRate - Exchange rate for currency conversion
+ * @param {number} params.numberOfDecimals - Number of decimal places in result
+ * @returns {string} The transaction fee as a decimal string
+ */
 export function getTransactionFee({
   value,
   fromCurrency = 'ETH',
@@ -115,6 +164,12 @@ export function getTransactionFee({
   });
 }
 
+/**
+ * Formats a numeric value as currency using appropriate formatting rules
+ * @param {string|number} value - The numeric value to format
+ * @param {string} currencyCode - The currency code for formatting
+ * @returns {string} The formatted currency string
+ */
 export function formatCurrency(value, currencyCode) {
   const upperCaseCurrencyCode = currencyCode.toUpperCase();
 
@@ -130,6 +185,16 @@ export function formatCurrency(value, currencyCode) {
   return formatedCurrency;
 }
 
+/**
+ * Converts token value to fiat currency using contract and base exchange rates
+ * @param {Object} params - Conversion parameters
+ * @param {string} params.value - The token value to convert
+ * @param {string} params.fromCurrency - Source currency (default: 'ETH')
+ * @param {string} params.toCurrency - Target fiat currency
+ * @param {number} params.conversionRate - Base currency to fiat exchange rate
+ * @param {number} params.contractExchangeRate - Token to base currency exchange rate
+ * @returns {number} The converted fiat value, or 0 if no contract exchange rate
+ */
 export function convertTokenToFiat({
   value,
   fromCurrency = 'ETH',

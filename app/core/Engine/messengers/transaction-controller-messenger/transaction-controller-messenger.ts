@@ -53,6 +53,11 @@ export type TransactionControllerInitMessenger = ReturnType<
   typeof getTransactionControllerInitMessenger
 >;
 
+/**
+ * Creates a restricted messenger for the TransactionController with specific allowed actions and events
+ * @param {Messenger<MessengerActions, MessengerEvents>} messenger - The base messenger instance
+ * @returns {TransactionControllerMessenger} A restricted messenger configured for transaction operations
+ */
 export function getTransactionControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): TransactionControllerMessenger {
@@ -72,6 +77,11 @@ export function getTransactionControllerMessenger(
   });
 }
 
+/**
+ * Creates a restricted messenger for TransactionController initialization with event handling capabilities
+ * @param {Messenger<MessengerActions, MessengerEvents>} messenger - The base messenger instance
+ * @returns {TransactionControllerInitMessenger} A restricted messenger configured for transaction initialization and event handling
+ */
 export function getTransactionControllerInitMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ) {

@@ -61,35 +61,62 @@ import { EIP_7702_REVOKE_ADDRESS } from '../../components/Views/confirmations/ho
 
 const { SAI_ADDRESS } = AppConstants;
 
+/** Token transfer method identifier */
 export const TOKEN_METHOD_TRANSFER = 'transfer';
+/** Token approval method identifier */
 export const TOKEN_METHOD_APPROVE = 'approve';
+/** Token transfer from method identifier */
 export const TOKEN_METHOD_TRANSFER_FROM = 'transferfrom';
+/** Token increase allowance method identifier */
 export const TOKEN_METHOD_INCREASE_ALLOWANCE = 'increaseAllowance';
+/** Contract deployment method identifier */
 export const CONTRACT_METHOD_DEPLOY = 'deploy';
+/** Connext deposit method identifier */
 export const CONNEXT_METHOD_DEPOSIT = 'connextdeposit';
+/** Token set approval for all method identifier */
 export const TOKEN_METHOD_SET_APPROVAL_FOR_ALL = 'setapprovalforall';
 
+/** Action key for sending Ether transactions */
 export const SEND_ETHER_ACTION_KEY = 'sentEther';
+/** Action key for contract deployment transactions */
 export const DEPLOY_CONTRACT_ACTION_KEY = 'deploy';
+/** Action key for token approval transactions */
 export const APPROVE_ACTION_KEY = 'approve';
+/** Action key for token transfer transactions */
 export const SEND_TOKEN_ACTION_KEY = 'transfer';
+/** Action key for transfer from transactions */
 export const TRANSFER_FROM_ACTION_KEY = 'transferfrom';
+/** Action key for unknown function calls */
 export const UNKNOWN_FUNCTION_KEY = 'unknownFunction';
+/** Action key for smart contract interaction transactions */
 export const SMART_CONTRACT_INTERACTION_ACTION_KEY = 'smartContractInteraction';
+/** Action key for swap transactions */
 export const SWAPS_TRANSACTION_ACTION_KEY = 'swapsTransaction';
+/** Action key for bridge transactions */
 export const BRIDGE_TRANSACTION_ACTION_KEY = 'bridgeTransaction';
+/** Action key for increase allowance transactions */
 export const INCREASE_ALLOWANCE_ACTION_KEY = 'increaseAllowance';
+/** Action key for set approval for all transactions */
 export const SET_APPROVE_FOR_ALL_ACTION_KEY = 'setapprovalforall';
+/** Action key for smart account upgrade transactions */
 export const UPGRADE_SMART_ACCOUNT_ACTION_KEY = 'upgradeSmartAccount';
+/** Action key for smart account downgrade transactions */
 export const DOWNGRADE_SMART_ACCOUNT_ACTION_KEY = 'downgradeSmartAccount';
 
+/** Function signature for ERC-20 transfer method */
 export const TRANSFER_FUNCTION_SIGNATURE = '0xa9059cbb';
+/** Function signature for ERC-20 transferFrom method */
 export const TRANSFER_FROM_FUNCTION_SIGNATURE = '0x23b872dd';
+/** Function signature for ERC-20 approve method */
 export const APPROVE_FUNCTION_SIGNATURE = '0x095ea7b3';
+/** Function signature for contract creation */
 export const CONTRACT_CREATION_SIGNATURE = '0x60a060405260046060527f48302e31';
+/** Function signature for ERC-20 increaseAllowance method */
 export const INCREASE_ALLOWANCE_SIGNATURE = '0x39509351';
+/** Function signature for ERC-721/ERC-1155 setApprovalForAll method */
 export const SET_APPROVAL_FOR_ALL_SIGNATURE = '0xa22cb465';
 
+/** Transaction type constants for categorizing different types of transactions */
 export const TRANSACTION_TYPES = {
   APPROVE: 'transaction_approve',
   INCREASE_ALLOWANCE: 'transaction_increase_allowance',
@@ -305,6 +332,11 @@ export function generateApprovalData(opts) {
   );
 }
 
+/**
+ * Decodes approval transaction data to extract spender address and amount
+ * @param {string} data - The transaction data to decode
+ * @returns {Object} Object containing spenderAddress and encodedAmount
+ */
 export function decodeApproveData(data) {
   return {
     spenderAddress: addHexPrefix(data.substr(34, 40)),
@@ -368,6 +400,12 @@ export function decodeTransferData(type, data) {
  * @param {string} data - Transaction data
  * @returns {MethodData} - Method data object containing the name if is valid
  */
+/**
+ * Returns method data object for a transaction data
+ * @param {string} data - Transaction data
+ * @param {string} networkClientId - Network client ID for registry lookup
+ * @returns {Promise<MethodData>} Method data object containing the name if valid
+ */
 export async function getMethodData(data, networkClientId) {
   if (data.length < 10) return {};
   const fourByteSignature = getFourByteSignature(data);
@@ -406,6 +444,13 @@ export async function getMethodData(data, networkClientId) {
  * @param {string} chainId - Current chainId
  * @param {string | undefined} networkClientId - ID of the network client
  * @returns {Promise<boolean>} - Whether the given address is a contract
+ */
+/**
+ * Returns whether the given address is a contract
+ * @param {string} address - Ethereum address
+ * @param {string} chainId - Current chainId
+ * @param {string | undefined} networkClientId - ID of the network client
+ * @returns {Promise<boolean>} Whether the given address is a contract
  */
 export async function isSmartContractAddress(
   address,
@@ -682,13 +727,24 @@ export function addAccountTimeFlagFilter(
   );
 }
 
-//Leaving here a comment to re-visit this function since it's probably be possible to deprecate
+/**
+ * Normalizes transaction state by merging nested transaction properties
+ * @deprecated This function may be deprecated in the future
+ * @param {Object} state - The Redux state containing transaction data
+ * @returns {Object|undefined} The normalized transaction state or undefined if no transaction exists
+ */
 export function getNormalizedTxState(state) {
   return state.transaction
     ? { ...state.transaction, ...state.transaction.transaction }
     : undefined;
 }
 
+/**
+ * Retrieves the URL of the currently active browser tab
+ * @param {Object} params - Parameters object
+ * @param {Object} params.browser - Browser state containing tabs and activeTab information
+ * @returns {string|undefined} The URL of the active tab or undefined if no active tab exists
+ */
 export const getActiveTabUrl = ({ browser = {} }) =>
   browser.tabs &&
   browser.activeTab &&

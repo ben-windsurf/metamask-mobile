@@ -65,6 +65,14 @@ export interface FilterHandlerParams {
   chainId: string;
 }
 
+/**
+ * Handles filter control press events for network filtering in the Add Asset view
+ * Updates the token network filter based on the selected option (all networks or current network)
+ * @param {FilterHandlerParams} params - The filter handler parameters
+ * @param {FilterOption} params.option - The selected filter option (AllNetworks or CurrentNetwork)
+ * @param {Record<string, boolean>} params.allNetworksEnabled - Map of all available networks with enabled status
+ * @param {string} params.chainId - The current chain ID for network filtering
+ */
 export const handleFilterControlsPress = ({
   option,
   allNetworksEnabled,

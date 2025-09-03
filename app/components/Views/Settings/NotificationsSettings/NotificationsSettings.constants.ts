@@ -1,5 +1,9 @@
 import { strings } from '../../../../../locales/i18n';
 
+/**
+ * Mapping of notification setting titles to their corresponding selector IDs
+ * Used for UI testing and component identification in the notifications settings view
+ */
 export const NotificationsViewSelectorsIDs = {
   [strings('app_settings.notifications_opts.assets_sent_title')]: 'AssetsSent',
   [strings('app_settings.notifications_opts.assets_received_title')]:
@@ -10,6 +14,10 @@ export const NotificationsViewSelectorsIDs = {
     'ProductsAnnouncements',
 };
 
+/**
+ * Enumeration of different notification types supported by MetaMask Mobile
+ * Used to categorize and filter notifications in the settings and notification system
+ */
 export enum NotificationsKinds {
   SENT = 'sent',
   RECEIVED = 'received',

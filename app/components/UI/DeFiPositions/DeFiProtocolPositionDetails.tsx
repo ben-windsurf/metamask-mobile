@@ -22,14 +22,28 @@ import DeFiProtocolPositionGroups from './DeFiProtocolPositionGroups';
 import { useStyles } from '../../hooks/useStyles';
 import { WalletViewSelectorsIDs } from '../../../../e2e/selectors/wallet/WalletView.selectors';
 
+/**
+ * Test ID for the DeFi protocol position details balance element
+ */
 export const DEFI_PROTOCOL_POSITION_DETAILS_BALANCE_TEST_ID =
   'defi_protocol_position_details_balance';
 
+/**
+ * Parameters interface for DeFi protocol position details navigation
+ * @interface DeFiProtocolPositionDetailsParams
+ * @property {GroupedDeFiPositions['protocols'][number]} protocolAggregate - The protocol aggregate data containing positions and details
+ * @property {ImageSourcePropType | undefined} networkIconAvatar - The network icon avatar image source
+ */
 interface DeFiProtocolPositionDetailsParams {
   protocolAggregate: GroupedDeFiPositions['protocols'][number];
   networkIconAvatar: ImageSourcePropType | undefined;
 }
 
+/**
+ * DeFiProtocolPositionDetails component displays detailed information about a specific DeFi protocol
+ * Shows protocol name, aggregated market value, avatar with network badge, and position groups
+ * @returns {JSX.Element} The rendered DeFi protocol position details component
+ */
 const DeFiProtocolPositionDetails: React.FC = () => {
   const { styles } = useStyles(styleSheet, undefined);
   const navigation = useNavigation();

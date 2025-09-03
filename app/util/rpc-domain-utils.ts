@@ -9,6 +9,7 @@ let initPromise: Promise<void> | null = null;
 
 /**
  * Get module state - encapsulates access to internal state
+ * @returns {Object} Object containing state variables and setter functions for known domains and initialization promise
  */
 export function getModuleState() {
   return {
@@ -26,6 +27,7 @@ export function getModuleState() {
 /**
  * Get the list of safe chains from cache only
  * This allows us to use chain data without making network requests
+ * @returns {Promise<SafeChain[]>} Promise resolving to array of cached safe chain configurations
  */
 export async function getSafeChainsListFromCacheOnly(): Promise<SafeChain[]> {
   try {
@@ -47,6 +49,8 @@ export async function getSafeChainsListFromCacheOnly(): Promise<SafeChain[]> {
 
 /**
  * Initialize the set of known domains from the chains list
+ * Extracts and caches domain names from RPC URLs in the safe chains list
+ * @returns {Promise<void>} Promise that resolves when initialization is complete
  */
 export async function initializeRpcProviderDomains(): Promise<void> {
   const state = getModuleState();
@@ -82,7 +86,7 @@ export async function initializeRpcProviderDomains(): Promise<void> {
 
 /**
  * Get the current set of known domains
- * @returns The set of known domains or null if not initialized
+ * @returns {Set<string>|null} The set of known domains or null if not initialized
  */
 export function getKnownDomains(): Set<string> | null {
   return getModuleState().knownDomainsSet;
@@ -90,14 +94,18 @@ export function getKnownDomains(): Set<string> | null {
 
 /**
  * Check if a domain is in the known domains list
- *
- * @param domain - The domain to check
+ * @param {string} domain - The domain to check
+ * @returns {boolean} True if the domain is in the known domains set, false otherwise
  */
 export function isKnownDomain(domain: string): boolean {
   const state = getModuleState();
   return state.knownDomainsSet?.has(domain?.toLowerCase()) ?? false;
 }
 
+/**
+ * Enum-like object defining possible RPC domain status values
+ * Used for categorizing RPC domains in analytics and validation
+ */
 export const RpcDomainStatus = {
   Invalid: 'invalid',
   Private: 'private',
@@ -107,6 +115,11 @@ export const RpcDomainStatus = {
 export type RpcDomainStatus =
   (typeof RpcDomainStatus)[keyof typeof RpcDomainStatus];
 
+/**
+ * Parses a domain from a URL string
+ * @param {string} url - The URL to parse the domain from
+ * @returns {string|undefined} The lowercase hostname or undefined if parsing fails
+ */
 function parseDomain(url: string): string | undefined {
   try {
     const normalizedUrl = url.includes('://') ? url : `https://${url}`;
@@ -121,8 +134,8 @@ const ALLOWED_PROVIDER_DOMAINS = new Set(['infura.io', 'alchemyapi.io']);
 
 /**
  * Check if a hostname is an allowed provider domain or legitimate subdomain
- * @param hostname - The hostname to check
- * @returns True if the hostname is allowed, false otherwise
+ * @param {string} hostname - The hostname to check
+ * @returns {boolean} True if the hostname is allowed, false otherwise
  */
 function isAllowedProviderDomain(hostname: string): boolean {
   // Check exact match first
@@ -138,8 +151,8 @@ function isAllowedProviderDomain(hostname: string): boolean {
 
 /**
  * Extracts the domain from an RPC URL for analytics tracking
- * @param rpcUrl - The RPC URL to extract domain from
- * @returns The domain extracted from the URL, or "private" for non-known domains, or "invalid" for invalid URLs
+ * @param {string} rpcUrl - The RPC URL to extract domain from
+ * @returns {RpcDomainStatus|string} The domain extracted from the URL, or "private" for non-known domains, or "invalid" for invalid URLs
  */
 export function extractRpcDomain(rpcUrl: string): RpcDomainStatus | string {
   const domain = parseDomain(rpcUrl);
@@ -168,9 +181,8 @@ export function extractRpcDomain(rpcUrl: string): RpcDomainStatus | string {
 
 /**
  * Gets the RPC URL for a specific chain ID from the NetworkController
- *
- * @param chainId - The chain ID to get the RPC URL for
- * @returns The RPC URL for the chain, or 'unknown' if not found
+ * @param {string} chainId - The chain ID to get the RPC URL for
+ * @returns {string} The RPC URL for the chain, or 'unknown' if not found
  */
 export function getNetworkRpcUrl(chainId: string): string {
   try {

@@ -245,6 +245,12 @@ function getPermittedScopesFromSubject(subject: any): CaipChainId[] {
   );
 }
 
+/**
+ * Retrieves the permitted CAIP account IDs for a specific hostname from the permission state
+ * @param state - The permission controller state containing subjects and their permissions
+ * @param hostname - The hostname/origin to get permitted account IDs for
+ * @returns An array of CAIP account IDs that are permitted for the given hostname
+ */
 export const getPermittedCaipAccountIdsByHostname = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   state: any,
@@ -257,6 +263,12 @@ export const getPermittedCaipAccountIdsByHostname = (
   return getCaipAccountIdsFromSubject(subject);
 };
 
+/**
+ * Retrieves the permitted EVM addresses for a specific hostname from the permission state
+ * @param state - The permission controller state containing subjects and their permissions
+ * @param hostname - The hostname/origin to get permitted EVM addresses for
+ * @returns An array of EVM addresses (as Hex strings) that are permitted for the given hostname, sorted by last selected
+ */
 export const getPermittedEvmAddressesByHostname = (
   state: { subjects: Record<string, unknown> },
   hostname: string,
@@ -268,6 +280,13 @@ export const getPermittedEvmAddressesByHostname = (
   return getEvmAddessesFromSubject(subject);
 };
 
+/**
+ * Retrieves the permitted CAIP chain IDs for a specific hostname from the permission state
+ * Filters out wallet scopes and returns only blockchain network chain IDs
+ * @param state - The permission controller state containing subjects and their permissions
+ * @param hostname - The hostname/origin to get permitted chain IDs for
+ * @returns An array of CAIP chain IDs that are permitted for the given hostname, excluding wallet scopes
+ */
 export const getPermittedCaipChainIdsByHostname = (
   state: { subjects: Record<string, unknown> },
   hostname: string,
@@ -306,7 +325,11 @@ export const getDefaultCaip25CaveatValue = (): Caip25CaveatValue => ({
   isMultichainOrigin: false,
 });
 
-// Returns the CAIP-25 caveat or undefined if it does not exist
+/**
+ * Retrieves the CAIP-25 caveat for a given origin from the permission controller
+ * @param origin - The origin/hostname to get the CAIP-25 caveat for
+ * @returns The CAIP-25 caveat object if it exists, undefined otherwise
+ */
 export const getCaip25Caveat = (origin: string) => {
   let caip25Caveat;
   try {
@@ -326,6 +349,13 @@ export const getCaip25Caveat = (origin: string) => {
   return caip25Caveat;
 };
 
+/**
+ * Adds permitted accounts to an existing CAIP-25 permission for a given origin
+ * Also automatically adds necessary chain permissions for the account namespaces
+ * @param origin - The origin/hostname to add account permissions for
+ * @param accounts - Array of CAIP account IDs to add to the permitted accounts
+ * @throws {Caip25EndowmentMissingError} When no CAIP-25 permission exists for the origin
+ */
 export const addPermittedAccounts = (
   origin: string,
   accounts: CaipAccountId[],
@@ -414,6 +444,13 @@ export const addPermittedAccounts = (
   );
 };
 
+/**
+ * Removes permitted accounts from an existing CAIP-25 permission for a given origin
+ * If no accounts remain after removal, revokes the entire permission
+ * @param origin - The origin/hostname to remove account permissions from
+ * @param addresses - Array of account addresses to remove from permitted accounts
+ * @throws {Caip25EndowmentMissingError} When no CAIP-25 permission exists for the origin
+ */
 export const removePermittedAccounts = (
   origin: string,
   addresses: string[],

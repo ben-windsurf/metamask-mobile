@@ -27,12 +27,21 @@ import { strings } from '../../../../../../../../locales/i18n';
 import Routes from '../../../../../../../constants/navigation/Routes';
 import { DEPOSIT_NETWORKS_BY_CHAIN_ID } from '../../../constants/networks';
 
+/**
+ * Creates navigation details for the incompatible account token modal
+ * @returns {Object} Navigation details object for routing to the modal
+ */
 export const createIncompatibleAccountTokenModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.INCOMPATIBLE_ACCOUNT_TOKEN,
   );
 
+/**
+ * Modal component that displays when a user tries to deposit with an incompatible account token
+ * Shows information about network compatibility and provides a close action
+ * @returns {JSX.Element} The rendered incompatible account token modal
+ */
 function IncompatibleAccountTokenModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const chainId = useSelector(selectChainId);

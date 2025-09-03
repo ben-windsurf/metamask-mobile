@@ -15,6 +15,12 @@ import { Box } from '../../../Box/Box';
 import { Theme } from '@metamask/design-tokens';
 import { useStyles } from '../../../../../component-library/hooks';
 
+/**
+ * Creates styles for the PulsingCircle component
+ * @param params - Style parameters
+ * @param params.theme - The theme object containing color and styling tokens
+ * @returns StyleSheet object with component styles
+ */
 const styleSheet = (params: { theme: Theme }) =>
   StyleSheet.create({
     container: {
@@ -39,10 +45,13 @@ const styleSheet = (params: { theme: Theme }) =>
   });
 
 /**
- * Renders the steps in the Bridge Transaction Details page
+ * PulsingCircle component renders an animated pulsing circle with a centered icon
+ * Used in Bridge Transaction Details to indicate active or processing states
+ * Features a scaling animation that pulses continuously
  *
- * @param options
- * @param options.color - The color of the icon
+ * @param props - Component props
+ * @param props.color - The color of the centered icon
+ * @returns JSX.Element - Animated pulsing circle with icon
  */
 export default function PulsingCircle({ color }: { color: IconColor }) {
   const { styles } = useStyles(styleSheet, {});

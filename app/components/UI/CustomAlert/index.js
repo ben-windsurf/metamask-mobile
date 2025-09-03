@@ -40,9 +40,12 @@ const createStyles = (colors) =>
   });
 
 /**
-/* PureComponent that renders our custom alerts, which contains
-/* a header with an image, body and footer with a button
-*/
+ * CustomAlert component renders a modal dialog with customizable header, body, and footer sections
+ * Used throughout the app to display important alerts and confirmations to users
+ * Features a themed design with backdrop overlay and swipe gesture support
+ * @class CustomAlert
+ * @extends {PureComponent}
+ */
 export default class CustomAlert extends PureComponent {
   static propTypes = {
     /**

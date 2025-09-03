@@ -18,6 +18,11 @@ import { isMainNet } from '../../../util/networks';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 import { selectChainId } from '../../../selectors/networkController';
 
+/**
+ * Creates stylesheet for the CollectibleContractInformation component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -110,7 +115,10 @@ const createStyles = (colors) =>
 const openSeaLogo = require('../../../images/opensea-logo-flat-colored-blue.png'); // eslint-disable-line
 
 /**
- * View that contains a collectible contract information as description, total supply and address
+ * CollectibleContractInformation component displays detailed information about a collectible contract
+ * Shows contract name, description, total supply, address, and OpenSea attribution for mainnet
+ * Provides modal interface with close functionality and navigation to OpenSea
+ * @returns {JSX.Element} Modal view with collectible contract information
  */
 class CollectibleContractInformation extends PureComponent {
   static propTypes = {
@@ -133,10 +141,17 @@ class CollectibleContractInformation extends PureComponent {
     chainId: PropTypes.string.isRequired,
   };
 
+  /**
+   * Closes the modal by calling the onClose prop
+   */
   closeModal = () => {
     this.props.onClose(true);
   };
 
+  /**
+   * Navigates to OpenSea website in a webview
+   * Closes the current modal and opens OpenSea in SimpleWebview
+   */
   goToOpenSea = () => {
     const openSeaUrl = 'https://opensea.io/';
     InteractionManager.runAfterInteractions(() => {
@@ -227,6 +242,11 @@ class CollectibleContractInformation extends PureComponent {
   };
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object containing chainId
+ */
 const mapStateToProps = (state) => ({
   chainId: selectChainId(state),
 });

@@ -19,6 +19,11 @@ import { TokenOverviewSelectorsIDs } from '../../../../e2e/selectors/wallet/Toke
 import { WalletViewSelectorsIDs } from '../../../../e2e/selectors/wallet/WalletView.selectors';
 import { handleSendPageNavigation } from '../../Views/confirmations/utils/send';
 
+/**
+ * Creates styles for the CollectibleContractOverview component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -162,10 +167,20 @@ class CollectibleContractOverview extends PureComponent {
   }
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object with collectibles data
+ */
 const mapStateToProps = (state) => ({
   collectibles: collectiblesSelector(state),
 });
 
+/**
+ * Maps Redux dispatch functions to component props
+ * @param {Function} dispatch - Redux dispatch function
+ * @returns {Object} Props object with action creators
+ */
 const mapDispatchToProps = (dispatch) => ({
   toggleCollectibleContractModal: () =>
     dispatch(toggleCollectibleContractModal()),

@@ -28,10 +28,19 @@ import {
 import { useDepositSDK } from '../../sdk';
 import { createEnterEmailNavDetails } from '../EnterEmail/EnterEmail';
 
+/**
+ * Creates navigation details for the VerifyIdentity screen
+ * @returns {Object} Navigation details object for the verify identity route
+ */
 export const createVerifyIdentityNavDetails = createNavigationDetails(
   Routes.DEPOSIT.VERIFY_IDENTITY,
 );
 
+/**
+ * VerifyIdentity component displays identity verification information for deposit flow
+ * Shows verification requirements, terms and conditions, and provides navigation to email entry
+ * @returns {JSX.Element} The rendered verify identity screen with terms and continue button
+ */
 const VerifyIdentity = () => {
   const navigation = useNavigation();
 

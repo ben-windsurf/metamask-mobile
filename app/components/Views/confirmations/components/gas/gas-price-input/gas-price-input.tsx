@@ -14,6 +14,14 @@ import { validateGasPrice } from '../../../utils/validations/gas';
 import { TextFieldWithLabel } from '../../UI/text-field-with-label';
 import styleSheet from './gas-price-input.styles';
 
+/**
+ * GasPriceInput component allows users to input and validate gas price values for transactions
+ * Provides real-time validation and converts input values to appropriate hex format for transaction processing
+ * @param {Object} props - Component props
+ * @param {function} props.onChange - Callback function called when gas price value changes, receives hex WEI value
+ * @param {function} props.onErrorChange - Callback function called when validation error state changes
+ * @returns {JSX.Element} Gas price input field with validation and GWEI unit display
+ */
 export const GasPriceInput = ({
   onChange,
   onErrorChange,

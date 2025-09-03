@@ -58,6 +58,11 @@ const useNotificationStartupSelectors = () => {
   };
 };
 
+/**
+ * Hook that registers for notifications and fetches existing notifications on app startup
+ * Only runs when the wallet is unlocked, basic functionality is enabled, and notifications are enabled
+ * @returns {void}
+ */
 export function useRegisterAndFetchNotifications() {
   const { isUnlocked, isBasicFunctionalityEnabled, notificationsEnabled } =
     useNotificationStartupSelectors();
@@ -90,6 +95,11 @@ export function useRegisterAndFetchNotifications() {
   ]);
 }
 
+/**
+ * Hook that automatically enables notifications by default for new users
+ * Runs when conditions are met and user hasn't previously disabled notifications
+ * @returns {void}
+ */
 export function useEnableNotificationsByDefaultEffect() {
   const {
     isUnlocked,
@@ -141,6 +151,8 @@ export function useEnableNotificationsByDefaultEffect() {
 
 /**
  * Effect that queries for notifications on startup if notifications are enabled.
+ * Combines registration/fetching and default enablement effects for complete startup flow
+ * @returns {void}
  */
 export function useStartupNotificationsEffect() {
   useRegisterAndFetchNotifications();

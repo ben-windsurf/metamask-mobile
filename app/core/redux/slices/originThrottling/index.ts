@@ -1,7 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../../reducers';
 
+/**
+ * Maximum number of RPC request rejections allowed before blocking an origin
+ */
 export const NUMBER_OF_REJECTIONS_THRESHOLD = 3;
+
+/**
+ * Time window in milliseconds for counting rejections (30 seconds)
+ */
 export const REJECTION_THRESHOLD_IN_MS = 30000;
 const BLOCKING_THRESHOLD_IN_MS = 60000;
 
@@ -16,6 +23,9 @@ export interface OriginThrottlingState {
   };
 }
 
+/**
+ * Initial state for origin throttling Redux slice
+ */
 export const initialState: OriginThrottlingState = {
   origins: {},
 };
@@ -62,12 +72,24 @@ const slice = createSlice({
 const { actions, reducer } = slice;
 
 export default reducer;
+/**
+ * Redux action creators for origin throttling
+ * @property {Function} onRPCRequestRejectedByUser - Records when a user rejects an RPC request from an origin
+ * @property {Function} resetOriginSpamState - Clears the throttling state for a specific origin
+ */
 export const { onRPCRequestRejectedByUser, resetOriginSpamState } = actions;
 
 // Selectors
 const selectOriginState = (state: RootState, origin: string) =>
   state[name].origins[origin];
 
+/**
+ * Selector to determine if an origin should be blocked from making RPC requests
+ * An origin is blocked if it has exceeded the rejection threshold within the blocking time window
+ * @param {RootState} state - The Redux root state
+ * @param {string} origin - The origin URL to check
+ * @returns {boolean} True if the origin should be blocked, false otherwise
+ */
 export const selectIsOriginBlockedForRPCRequests = (
   state: RootState,
   origin: string,

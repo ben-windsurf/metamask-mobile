@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 import { ThemeContext, mockTheme } from '../../../../util/theme';
 import { BrowserViewSelectorsIDs } from '../../../../../e2e/selectors/Browser/BrowserView.selectors';
 
+/**
+ * Creates styles for the TabCountIcon component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     tabIcon: {
@@ -26,8 +31,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * PureComponent that renders an icon showing
- * the current number of open tabs
+ * TabCountIcon component displays the current number of open browser tabs
+ * Renders a bordered icon with the tab count number inside
+ * @returns {JSX.Element} The rendered tab count icon component
  */
 class TabCountIcon extends PureComponent {
   static propTypes = {
@@ -59,6 +65,11 @@ class TabCountIcon extends PureComponent {
   }
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object containing tab count
+ */
 const mapStateToProps = (state) => ({
   tabCount: state.browser.tabs.length,
 });

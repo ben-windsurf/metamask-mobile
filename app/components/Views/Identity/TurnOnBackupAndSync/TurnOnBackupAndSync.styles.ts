@@ -6,6 +6,13 @@ import scaling from '../../../../util/scaling';
 
 const HEIGHT = scaling.scale(240);
 
+/**
+ * Creates stylesheet for the TurnOnBackupAndSync component
+ * Provides responsive styling for the backup and sync onboarding screen with card layout and CTA buttons
+ * @param {Theme} theme - The theme object containing colors and design tokens
+ * @param {Object} theme.colors - Color palette from the design system
+ * @returns {Object} StyleSheet object containing component styles
+ */
 export const createStyles = ({ colors }: Theme) =>
   StyleSheet.create({
     wrapper: {

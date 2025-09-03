@@ -9,6 +9,14 @@ enum DecodingResponseType {
   Loading = 'decoding_in_progress',
 }
 
+/**
+ * Generates event properties for signature decoding metrics tracking
+ * Extracts relevant data from signature decoding results for analytics purposes
+ * @param {DecodingData | undefined} decodingData - The decoded signature data containing state changes and errors
+ * @param {boolean} decodingLoading - Whether the decoding process is currently in progress
+ * @param {boolean} isDecodingAPIEnabled - Whether the decoding API feature is enabled (default: false)
+ * @returns {Object} Event properties object containing decoding metrics data
+ */
 export const getSignatureDecodingEventProps = (
   decodingData: DecodingData | undefined,
   decodingLoading: boolean,

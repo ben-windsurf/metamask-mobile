@@ -20,7 +20,9 @@ import { PerformanceEventNames } from '../redux/slices/performance/constants';
 import { areAddressesEqual } from '../../util/address';
 
 /**
- * Builder type for the Snap keyring.
+ * Builder type for the Snap keyring that creates SnapKeyring instances.
+ * This interface defines a factory function that returns a configured SnapKeyring
+ * along with the keyring type identifier for MetaMask's keyring system.
  */
 export interface SnapKeyringBuilder {
   (): SnapKeyring;
@@ -28,10 +30,14 @@ export interface SnapKeyringBuilder {
 }
 
 /**
- * Helpers for the Snap keyring implementation.
+ * Helper functions required by the Snap keyring implementation for account management.
+ * These helpers provide the necessary persistence and account removal functionality
+ * that the SnapKeyring needs to integrate with MetaMask Mobile's account system.
  */
 export interface SnapKeyringHelpers {
+  /** Function to persist the keyring state to storage */
   persistKeyringHelper: () => Promise<void>;
+  /** Function to remove an account by its address from the keyring */
   removeAccountHelper: (address: string) => Promise<void>;
 }
 

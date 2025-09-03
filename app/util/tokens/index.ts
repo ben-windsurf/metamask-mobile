@@ -2,6 +2,8 @@ import { TokenListMap } from '@metamask/assets-controllers';
 
 /**
  * Convert token list object to token list array
+ * @param {TokenListMap} tokenList - Token list map object to convert
+ * @returns {Array} Array of token data objects
  */
 export const tokenListToArray = (tokenList: TokenListMap) =>
   Object.values(tokenList).map((tokenData) => tokenData);

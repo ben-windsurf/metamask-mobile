@@ -68,6 +68,14 @@ export function isNonEvmAddress(address: string): boolean {
   );
 }
 
+/**
+ * Gets the address of the last selected account for a specific non-EVM network chain.
+ * Used for multichain account management to retrieve the previously selected account
+ * address for networks like Bitcoin or Solana.
+ *
+ * @param chainId - The CAIP chain ID of the non-EVM network
+ * @returns The address of the last selected account for the chain, or undefined if none exists
+ */
 export function lastSelectedAccountAddressByNonEvmNetworkChainId(
   chainId: CaipChainId,
 ): string | undefined {
@@ -76,6 +84,12 @@ export function lastSelectedAccountAddressByNonEvmNetworkChainId(
   return AccountsController.getSelectedMultichainAccount(chainId)?.address;
 }
 
+/**
+ * Gets the address of the last selected account in the EVM network.
+ * Used to retrieve the currently selected Ethereum account address for EVM-compatible networks.
+ *
+ * @returns The address of the last selected EVM account, or undefined if none exists
+ */
 export function lastSelectedAccountAddressInEvmNetwork(): string | undefined {
   const { AccountsController } = Engine.context;
   // TODO: Add teh logic if there is none last selected account what to do

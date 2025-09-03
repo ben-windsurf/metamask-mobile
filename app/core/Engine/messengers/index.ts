@@ -39,7 +39,22 @@ import { getApprovalControllerMessenger } from './approval-controller-messenger'
 import { getPerpsControllerMessenger } from './perps-controller-messenger';
 import { getMultichainAccountServiceMessenger } from './multichain-account-service-messenger/multichain-account-service-messenger';
 /**
- * The messengers for the controllers that have been.
+ * Configuration object containing messenger factory functions for all MetaMask controllers.
+ * Each controller entry provides getMessenger and getInitMessenger functions to create
+ * the appropriate messenger instances for controller communication within the Engine.
+ *
+ * @constant {Object} CONTROLLER_MESSENGERS - Maps controller names to their messenger factories
+ * @property {Object} AccountsController - Messenger factories for account management
+ * @property {Object} TransactionController - Messenger factories for transaction handling
+ * @property {Object} CurrencyRateController - Messenger factories for currency rate updates
+ * @property {Object} MultichainNetworkController - Messenger factories for multichain network management
+ * @property {Object} GasFeeController - Messenger factories for gas fee estimation
+ * @property {Object} SignatureController - Messenger factories for signature requests
+ * @property {Object} DeFiPositionsController - Messenger factories for DeFi position tracking
+ * @property {Object} NotificationServicesController - Messenger factories for notification services
+ * @property {Object} SeedlessOnboardingController - Messenger factories for seedless onboarding
+ * @property {Object} PerpsController - Messenger factories for perpetual contracts
+ * @property {Object} MultichainAccountService - Messenger factories for multichain account services
  */
 export const CONTROLLER_MESSENGERS = {
   AccountsController: {

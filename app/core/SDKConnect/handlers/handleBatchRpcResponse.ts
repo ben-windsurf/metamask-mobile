@@ -3,6 +3,17 @@ import BatchRPCManager, { BatchRPCState } from '../BatchRPCManager';
 import DevLogger from '../utils/DevLogger';
 import { wait } from '../utils/wait.util';
 
+/**
+ * Handles batch RPC response processing for SDK Connect
+ * Manages the sequential execution of batched RPC calls and aggregates responses
+ * @param {Object} params - The batch RPC response parameters
+ * @param {BatchRPCState} params.chainRpcs - Current state of the batch RPC chain
+ * @param {BatchRPCManager} params.batchRPCManager - Manager for batch RPC operations
+ * @param {BackgroundBridge} [params.backgroundBridge] - Bridge to background processes
+ * @param {Function} params.sendMessage - Function to send messages back to the client
+ * @param {any} params.msg - The RPC response message to process
+ * @returns {Promise<boolean>} True if this was the last RPC in the batch or an error occurred
+ */
 export const handleBatchRpcResponse = async ({
   chainRpcs,
   batchRPCManager,

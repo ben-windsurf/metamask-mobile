@@ -57,6 +57,12 @@ import { selectConversionRateByChainId } from '../../../selectors/currencyRateCo
 import { selectContractExchangeRatesByChainId } from '../../../selectors/tokenRatesController';
 import { selectTokensByChainIdAndAddress } from '../../../selectors/tokensController';
 
+/**
+ * Creates stylesheet for TransactionElement component
+ * @param {Object} colors - Theme colors object
+ * @param {Object} typography - Typography styles object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, typography) =>
   StyleSheet.create({
     row: {
@@ -144,7 +150,10 @@ const transactionIconSwapFailed = require('../../../images/transaction-icons/swa
 /* eslint-enable import/no-commonjs */
 
 /**
- * View that renders a transaction item part of transactions list
+ * TransactionElement component renders individual transaction items in a transaction list
+ * Displays transaction details including type, status, amounts, and action buttons
+ * Supports various transaction types including swaps, bridges, approvals, and transfers
+ * @extends PureComponent
  */
 class TransactionElement extends PureComponent {
   static propTypes = {
@@ -294,7 +303,7 @@ class TransactionElement extends PureComponent {
 
   /**
    * Function that evaluates tx to see if the Added Wallet label should be rendered.
-   * @returns Account added to wallet view
+   * @returns {JSX.Element|null} Account added to wallet view or null if not applicable
    */
   renderImportTime = () => {
     const { tx, selectedInternalAccount } = this.props;
@@ -381,8 +390,8 @@ class TransactionElement extends PureComponent {
 
   /**
    * Renders an horizontal bar with basic tx information
-   *
-   * @param {object} transactionElement - Transaction information to render, containing addressTo, actionKey, value, fiatValue, contractDeployment
+   * @param {Object} transactionElement - Transaction information to render, containing addressTo, actionKey, value, fiatValue, contractDeployment
+   * @returns {JSX.Element} Rendered transaction element with details and action buttons
    */
   renderTxElement = (transactionElement) => {
     const {
@@ -698,6 +707,12 @@ class TransactionElement extends PureComponent {
   }
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @param {Object} ownProps - Component's own props
+ * @returns {Object} Props object with selected state values
+ */
 const mapStateToProps = (state, ownProps) => ({
   selectedInternalAccount: selectSelectedInternalAccount(state),
   primaryCurrency: selectPrimaryCurrency(state),
@@ -715,6 +730,16 @@ const mapStateToProps = (state, ownProps) => ({
 TransactionElement.contextType = ThemeContext;
 
 // Create a wrapper functional component
+/**
+ * Wrapper component that provides bridge transaction history data to TransactionElement
+ * @param {Object} props - Component props passed through to TransactionElement
+ * @returns {JSX.Element} TransactionElement component with bridge data
+ */
+/**
+ * Higher-order component that wraps TransactionElement with bridge transaction data
+ * @param {Object} props - Component props passed through to TransactionElement
+ * @returns {JSX.Element} TransactionElement component with bridge data
+ */
 const TransactionElementWithBridge = (props) => {
   const bridgeTxHistoryData = useBridgeTxHistoryData({ evmTxMeta: props.tx });
 

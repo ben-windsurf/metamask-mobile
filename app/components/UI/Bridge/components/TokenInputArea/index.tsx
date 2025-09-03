@@ -41,10 +41,15 @@ import { renderShortAddress } from '../../../../../util/address';
 import { FlexDirection } from '../../../Box/box.types';
 
 const MAX_DECIMALS = 5;
+/**
+ * Maximum allowed length for token input values
+ */
 export const MAX_INPUT_LENGTH = 36;
 
 /**
- * Calculates font size based on input length
+ * Calculates font size based on input length for responsive text display
+ * @param length - The length of the input string
+ * @returns The calculated font size in pixels
  */
 export const calculateFontSize = (length: number): number => {
   if (length <= 10) return 40;
@@ -54,6 +59,11 @@ export const calculateFontSize = (length: number): number => {
   return 20;
 };
 
+/**
+ * Creates styles for the TokenInputArea component with dynamic font sizing
+ * @param vars - Style variables containing fontSize
+ * @returns StyleSheet object with component styles
+ */
 const createStyles = ({ vars }: { vars: { fontSize: number } }) =>
   StyleSheet.create({
     content: {
@@ -83,6 +93,11 @@ export enum TokenInputAreaType {
   Destination = 'destination',
 }
 
+/**
+ * Formats an address for display, handling both regular and CAIP asset addresses
+ * @param address - The address to format
+ * @returns Shortened address string or undefined if no address provided
+ */
 const formatAddress = (address?: string) => {
   if (!address) return undefined;
 
@@ -93,6 +108,12 @@ const formatAddress = (address?: string) => {
   return renderShortAddress(address, 4);
 };
 
+/**
+ * Gets the display amount for a token, applying formatting based on token type
+ * @param amount - The raw amount string
+ * @param tokenType - The type of token input (source or destination)
+ * @returns Formatted amount string for display
+ */
 export const getDisplayAmount = (
   amount?: string,
   tokenType?: TokenInputAreaType,
@@ -128,6 +149,11 @@ interface TokenInputAreaProps {
   latestAtomicBalance?: BigNumber;
 }
 
+/**
+ * TokenInputArea component for bridge token input with balance display and token selection
+ * Handles both source and destination token inputs with different behaviors and formatting
+ * @returns JSX element for token input area with amount input, token button, and balance/address display
+ */
 export const TokenInputArea = forwardRef<
   TokenInputAreaRef,
   TokenInputAreaProps

@@ -27,10 +27,19 @@ import PoweredByTransak from '../../components/PoweredByTransak';
 import Logger from '../../../../../../util/Logger';
 import useAnalytics from '../../../hooks/useAnalytics';
 
+/**
+ * Creates navigation details for the Enter Email screen in the deposit flow
+ * @returns {Object} Navigation details object for the Enter Email route
+ */
 export const createEnterEmailNavDetails = createNavigationDetails(
   Routes.DEPOSIT.ENTER_EMAIL,
 );
 
+/**
+ * EnterEmail component handles email input for the deposit flow
+ * Validates email format, submits to SDK, and navigates to OTP verification
+ * @returns {JSX.Element} The rendered email input screen with validation and submission
+ */
 const EnterEmail = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');

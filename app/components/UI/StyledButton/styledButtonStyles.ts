@@ -2,6 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors as importedColors, fontStyles } from '../../../styles/common';
 import { Theme } from '@metamask/design-tokens';
 
+/**
+ * Creates StyleSheet styles for StyledButton component using theme colors
+ * @param {Theme['colors']} colors - Theme colors object from design tokens
+ * @returns {Object} StyleSheet object with button styles
+ */
 const createStyles = (colors: Theme['colors']) =>
   StyleSheet.create({
     container: {
@@ -147,6 +152,13 @@ const createStyles = (colors: Theme['colors']) =>
     },
   });
 
+/**
+ * Gets the appropriate styles for a button based on its type
+ * @param {string} type - The button type (e.g., 'blue', 'orange', 'confirm', 'cancel')
+ * @param {Theme['colors']} colors - Theme colors object from design tokens
+ * @returns {Object} Object containing fontStyle and containerStyle arrays
+ * @throws {Error} Throws error for unknown button types
+ */
 function getStyles(type: string, colors: Theme['colors']) {
   const styles = createStyles(colors);
 

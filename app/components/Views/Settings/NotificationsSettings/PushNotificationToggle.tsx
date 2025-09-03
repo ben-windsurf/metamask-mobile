@@ -12,8 +12,18 @@ import styleSheet from './NotificationsSettings.styles';
 import { usePushNotificationSettingsToggle } from './PushNotificationToggle.hooks';
 import { NotificationSettingsViewSelectorsIDs } from '../../../../../e2e/selectors/Notifications/NotificationSettingsView.selectors';
 
+/**
+ * Test ID constant for the push notification toggle component
+ * Used for automated testing and component identification
+ */
 export const PUSH_NOTIFICATION_TOGGLE_TEST_ID = 'push-notification-toggle';
 
+/**
+ * PushNotificationToggle component renders a toggle switch for enabling/disabling push notifications
+ * Provides users with control over push notification preferences in MetaMask Mobile settings
+ * Integrates with the notification settings system and handles loading states during toggle operations
+ * @returns {JSX.Element} The rendered push notification toggle component with switch and label
+ */
 export const PushNotificationToggle = () => {
   const theme = useTheme();
   const { styles } = useStyles(styleSheet, { theme });

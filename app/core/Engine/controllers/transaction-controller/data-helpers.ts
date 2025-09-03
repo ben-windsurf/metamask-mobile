@@ -1,5 +1,10 @@
 import { merge } from 'lodash';
 
+/**
+ * Mock state configuration for enabled smart transactions in MetaMask Mobile
+ * Used for testing transaction controller functionality with smart transactions enabled
+ * Includes complete controller state with accounts, network, and preferences configured
+ */
 export const enabledSmartTransactionsState = {
   engine: {
     backgroundState: {
@@ -56,6 +61,11 @@ export const enabledSmartTransactionsState = {
   },
 };
 
+/**
+ * Mock state configuration for disabled smart transactions in MetaMask Mobile
+ * Extends the enabled state but with smart transactions opt-in status set to false
+ * Used for testing transaction controller behavior when smart transactions are disabled
+ */
 export const disabledSmartTransactionsState = merge(
   {},
   enabledSmartTransactionsState,

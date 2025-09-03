@@ -6,7 +6,11 @@ import { useSelector } from 'react-redux';
 import { selectChainId } from '../../../../selectors/networkController';
 
 /**
- * Hook to retrieve allowances for supported tokens.
+ * Hook to retrieve allowances for supported tokens from the Card SDK
+ * Fetches token allowances for a given address and maps them to CardTokenAllowance objects
+ * @param {string} address - The wallet address to fetch allowances for
+ * @param {boolean} autoFetch - Whether to automatically fetch allowances on mount (default: false)
+ * @returns {Object} Object containing allowances array, fetchAllowances function, and loading state
  */
 export const useGetAllowances = (address?: string, autoFetch = false) => {
   const { sdk } = useCardSDK();

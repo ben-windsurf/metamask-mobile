@@ -7,7 +7,14 @@ import { useNetworkInfo } from '../../../selectors/selectedNetworkController';
 import { useMetrics } from '../../../components/hooks/useMetrics';
 
 /**
- * Account access approval component
+ * Network switching approval component that allows users to approve or reject
+ * requests from dapps to switch to a custom network
+ * @param {Object} props - Component props
+ * @param {Object} props.customNetworkInformation - Information about the network to switch to
+ * @param {Object} props.currentPageInformation - Current page title, url, and icon information
+ * @param {Function} props.onCancel - Callback triggered when user rejects the network switch
+ * @param {Function} props.onConfirm - Callback triggered when user approves the network switch
+ * @returns {JSX.Element} The network switch approval component
  */
 const SwitchCustomNetwork = ({
   customNetworkInformation,

@@ -67,6 +67,12 @@ const getConfirmModalDescription = (reason: Reason) => {
   return copy;
 };
 
+/**
+ * Custom hook that generates Blockaid security alerts for transaction confirmations
+ * Processes security alert responses from Blockaid and converts them into displayable alerts
+ * with appropriate severity levels, titles, and content components
+ * @returns {Alert[]} Array of alert objects containing Blockaid security warnings
+ */
 export default function useBlockaidAlerts(): Alert[] {
   const { securityAlertResponse } = useSecurityAlertResponse();
   const { trackBlockaidAlertLinkClickedEvent } = useConfirmationMetricEvents();

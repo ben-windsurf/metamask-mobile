@@ -1,6 +1,12 @@
 import { StyleSheet, TextStyle } from 'react-native';
 import type { Theme } from '../../../../../util/theme/models';
 
+/**
+ * Creates stylesheet for StakingEarnings component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

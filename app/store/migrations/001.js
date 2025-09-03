@@ -5,6 +5,13 @@ import { toLowerCaseEquals } from '../../util/general';
  * MakerDAO DAI => SAI
  *
  **/
+
+/**
+ * Migrates token symbols from DAI to SAI for MakerDAO tokens
+ * Updates TokensController state to rename DAI tokens with SAI_ADDRESS to SAI symbol
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with updated token symbols
+ */
 export default function migrate(state) {
   const tokens = state.engine.backgroundState.TokensController.tokens;
   const migratedTokens = [];

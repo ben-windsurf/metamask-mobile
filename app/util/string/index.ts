@@ -18,6 +18,11 @@ export const escapeSpecialUnicode = (str: string): string => {
   return str.split('\u202D').join('\\u202D').split('\u202E').join('\\u202E');
 };
 
+/**
+ * Removes multiple consecutive newlines from a string, replacing them with single newlines
+ * @param {string | unknown} str - The string to process
+ * @returns {string | unknown} The string with multiple newlines stripped, or original value if not a string
+ */
 export const stripMultipleNewlines = (
   str: string | unknown,
 ): string | unknown => {
@@ -74,17 +79,42 @@ const solidityTypes = () => {
 
 const SOLIDITY_TYPES = solidityTypes();
 
+/**
+ * Removes array type notation from a Solidity type string
+ * @param {string} potentialArrayType - The type string that may contain array notation
+ * @returns {string} The type string with array notation removed
+ */
 export const stripArrayType = (potentialArrayType: string) =>
   potentialArrayType.replace(/\[[[0-9]*\]*/gu, '');
 
+/**
+ * Removes one layer of array nesting from a Solidity type string
+ * @param {string} potentialArrayType - The type string that may contain array notation
+ * @returns {string} The type string with one layer of array nesting removed
+ */
 export const stripOneLayerofNesting = (potentialArrayType: string) =>
   potentialArrayType.replace(/\[(\d*)\]/u, '');
 
+/**
+ * Checks if a type string represents an array type in Solidity
+ * @param {string} potentialArrayType - The type string to check
+ * @returns {boolean} True if the type string contains array notation, false otherwise
+ */
 export const isArrayType = (potentialArrayType: string) =>
   potentialArrayType.match(/\[[[0-9]*\]*/u) !== null;
 
+/**
+ * Checks if a given type string is a valid Solidity type
+ * @param {string} type - The type string to validate
+ * @returns {boolean} True if the type is a valid Solidity type, false otherwise
+ */
 export const isSolidityType = (type: string) => SOLIDITY_TYPES.includes(type);
 
+/**
+ * Formats a multi-line seed phrase into a single line with space-separated words
+ * @param {string} seedPhrase - The seed phrase that may contain newlines
+ * @returns {string} The seed phrase formatted as a single line with spaces
+ */
 export const formatSeedPhraseToSingleLine = (seedPhrase: string) =>
   seedPhrase
     .split('\n')

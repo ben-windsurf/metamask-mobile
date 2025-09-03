@@ -94,6 +94,15 @@ const legacyNetworkId = () => {
     : networkId;
 };
 
+/**
+ * BackgroundBridge serves as the communication bridge between the MetaMask background
+ * and various connection types (webview, WalletConnect, SDK, remote connections).
+ * It manages JSON-RPC provider engines, handles state updates, and coordinates
+ * permissions and account notifications across different connection contexts.
+ *
+ * This class extends EventEmitter to provide real-time updates for network changes,
+ * account changes, and permission updates to connected dapps and external applications.
+ */
 export class BackgroundBridge extends EventEmitter {
   constructor({
     webview,

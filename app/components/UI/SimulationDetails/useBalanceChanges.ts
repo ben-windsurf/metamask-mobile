@@ -208,7 +208,15 @@ function getTokenBalanceChanges(
   });
 }
 
-// Compiles a list of balance changes from simulation data
+/**
+ * Custom hook that compiles a list of balance changes from simulation data
+ * Processes native and token balance changes, fetches exchange rates and decimals
+ * @param {Object} params - Hook parameters
+ * @param {Hex} params.chainId - The chain ID for the network
+ * @param {SimulationData} params.simulationData - Optional simulation data containing balance changes
+ * @param {string} params.networkClientId - Network client identifier for token details
+ * @returns {Object} Object with pending status and array of balance changes
+ */
 export default function useBalanceChanges({
   chainId,
   simulationData,

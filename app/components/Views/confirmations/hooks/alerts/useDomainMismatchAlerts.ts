@@ -12,6 +12,12 @@ import { strings } from '../../../../../../locales/i18n';
 import { regex } from '../../../../../util/regex';
 import { AlertKeys } from '../../constants/alerts';
 
+/**
+ * Custom hook that detects domain mismatches in SIWE (Sign-In with Ethereum) requests
+ * and returns appropriate alerts when the origin domain doesn't match the SIWE domain.
+ * Used in confirmation flows to warn users about potential security risks.
+ * @returns {Alert[]} Array of domain mismatch alerts, empty if no mismatch detected
+ */
 export default function useDomainMismatchAlerts(): Alert[] {
   const { approvalRequest } = useApprovalRequest();
   const signatureRequest = useSignatureRequest();

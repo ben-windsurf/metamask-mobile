@@ -148,4 +148,9 @@ class QuickCryptoEncryptionLibrary implements EncryptionLibrary {
   };
 }
 
+/**
+ * Singleton instance of the QuickCrypto encryption library for MetaMask Mobile.
+ * Provides cryptographic operations using react-native-quick-crypto for secure
+ * wallet data encryption, key derivation, and decryption operations.
+ */
 export const QuickCryptoLib = new QuickCryptoEncryptionLibrary();

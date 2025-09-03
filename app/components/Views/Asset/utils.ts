@@ -11,6 +11,13 @@ import { isPortfolioViewEnabled } from '../../../util/networks';
 import { Hex, CaipChainId } from '@metamask/utils';
 import { RootState } from '../../../reducers';
 
+/**
+ * Determines if swaps functionality is live for a given chain
+ * Checks both EVM and Solana chain support based on portfolio view settings
+ * @param {RootState} state - Redux state containing swap liveness data
+ * @param {Hex | CaipChainId} chainId - The chain ID to check swap availability for
+ * @returns {boolean} True if swaps are live for the specified chain
+ */
 export const getSwapsIsLive = (
   state: RootState,
   chainId: Hex | CaipChainId,
@@ -30,6 +37,21 @@ export const getSwapsIsLive = (
   return swapsIsLive;
 };
 
+/**
+ * Determines if an asset is allowed for swaps functionality
+ * Checks asset eligibility based on type (native/ERC-20), search discovery tokens, and supported swap tokens
+ * Supports both EVM and Solana assets with different validation logic
+ * @param {Object} params - Parameters object
+ * @param {Object} params.asset - Asset information including type and address
+ * @param {boolean} params.asset.isETH - Whether the asset is ETH
+ * @param {boolean} params.asset.isNative - Whether the asset is a native token
+ * @param {string} params.asset.address - The asset's contract address
+ * @param {string} params.asset.chainId - The chain ID where the asset exists
+ * @param {boolean} [params.asset.isFromSearch] - Whether the asset was found via search
+ * @param {string[]} params.searchDiscoverySwapsTokens - List of tokens discoverable via search that support swaps
+ * @param {Record<string, unknown>} params.swapsTokens - Map of supported swap tokens by address
+ * @returns {boolean} True if the asset is allowed for swaps
+ */
 export const getIsSwapsAssetAllowed = ({
   asset,
   searchDiscoverySwapsTokens,

@@ -31,6 +31,11 @@ const BATCHED_MESSAGE_TYPE = {
   ETH_SEND_TRANSACTION: 'eth_sendTransaction',
 };
 
+/**
+ * Converts a TransactionType enum value to its corresponding string representation for metrics
+ * @param {TransactionType | undefined} transactionType - The transaction type to convert
+ * @returns {string} The string representation of the transaction type for analytics tracking
+ */
 export function getTransactionTypeValue(
   transactionType: TransactionType | undefined,
 ) {
@@ -159,6 +164,13 @@ async function getBatchProperties(transactionMeta: TransactionMeta) {
   return properties;
 }
 
+/**
+ * Generates comprehensive default metrics for transaction events including gas fees, batch properties, and transaction details
+ * @param {IMetaMetricsEvent} metametricsEvent - The base metrics event to enhance
+ * @param {TransactionMeta} transactionMeta - Transaction metadata containing all transaction details
+ * @param {TransactionEventHandlerRequest} transactionEventHandlerRequest - Request context with state access
+ * @returns {Promise<object>} Merged metrics object with properties and sensitive properties for analytics
+ */
 export async function generateDefaultTransactionMetrics(
   metametricsEvent: IMetaMetricsEvent,
   transactionMeta: TransactionMeta,
@@ -200,6 +212,14 @@ export async function generateDefaultTransactionMetrics(
   return mergedDefaultProperties;
 }
 
+/**
+ * Creates a MetaMetrics event builder with properties and sensitive properties for analytics tracking
+ * @param {object} params - Event generation parameters
+ * @param {IMetaMetricsEvent} params.metametricsEvent - The base metrics event type
+ * @param {JsonMap} [params.properties] - Non-sensitive properties to include in the event
+ * @param {JsonMap} [params.sensitiveProperties] - Sensitive properties that require special handling
+ * @returns {object} Built metrics event ready for tracking
+ */
 export function generateEvent({
   metametricsEvent,
   properties,
@@ -215,6 +235,11 @@ export function generateEvent({
     .build();
 }
 
+/**
+ * Generates RPC-related properties for metrics tracking based on the network chain ID
+ * @param {string} chainId - The blockchain network chain ID
+ * @returns {object} Object containing RPC domain properties and empty sensitive properties for metrics
+ */
 export function generateRPCProperties(chainId: string) {
   const rpcUrl = getNetworkRpcUrl(chainId);
   const rpcDomain = extractRpcDomain(rpcUrl);

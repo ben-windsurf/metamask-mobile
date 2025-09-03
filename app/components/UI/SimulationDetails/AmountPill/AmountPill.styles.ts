@@ -2,6 +2,15 @@ import { StyleSheet } from 'react-native';
 import { Theme } from '../../../../util/theme/models';
 import sharedStyles from '../shared.styles';
 
+/**
+ * Creates stylesheet for AmountPill component with dynamic theming
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling
+ * @param {Object} params.vars - Variables for conditional styling
+ * @param {boolean} params.vars.isApproval - Whether this is an approval transaction
+ * @param {boolean} params.vars.isNegative - Whether the amount is negative
+ * @returns {Object} StyleSheet object with base and label styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: { isApproval: boolean; isNegative: boolean };

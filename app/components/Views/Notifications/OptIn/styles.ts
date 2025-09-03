@@ -6,6 +6,13 @@ import scaling from '../../../../util/scaling';
 
 const HEIGHT = scaling.scale(240);
 
+/**
+ * Creates stylesheet for the notifications opt-in view component
+ * Provides styling for the opt-in card, buttons, and layout elements
+ * @param {Theme} theme - The theme object containing color tokens
+ * @param {Object} theme.colors - Color palette from the design system
+ * @returns {Object} StyleSheet object containing component styles
+ */
 export const createStyles = ({ colors }: Theme) =>
   StyleSheet.create({
     wrapper: {

@@ -112,9 +112,10 @@ async function onBackgroundEvent(navigation: NavigationProp<NavigationParams>) {
 }
 
 /**
- * Effect that registers Notifee Push listeners
- * - When push notifications are recieved
- * - When push notifications are clicked
+ * Effect that registers Notifee Push listeners for handling push notifications
+ * Sets up listeners for when push notifications are received and clicked
+ * Only activates when notifications feature flag and controllers are enabled
+ * @returns {void} No return value - sets up effect hooks for notification handling
  */
 export function useRegisterPushNotificationsEffect() {
   const navigation: NavigationProp<NavigationParams> = useNavigation();

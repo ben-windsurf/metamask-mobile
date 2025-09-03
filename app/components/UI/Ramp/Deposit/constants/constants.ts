@@ -7,6 +7,9 @@ import {
   SOLANA_MAINNET,
 } from './networks';
 
+/**
+ * Interface defining the structure of a fiat currency for deposit operations
+ */
 export interface DepositFiatCurrency {
   id: string;
   name: string;
@@ -14,6 +17,9 @@ export interface DepositFiatCurrency {
   emoji: string;
 }
 
+/**
+ * US Dollar currency configuration for deposit operations
+ */
 export const USD_CURRENCY: DepositFiatCurrency = {
   id: 'USD',
   name: 'US Dollar',
@@ -21,6 +27,9 @@ export const USD_CURRENCY: DepositFiatCurrency = {
   emoji: '🇺🇸',
 };
 
+/**
+ * Euro currency configuration for deposit operations
+ */
 export const EUR_CURRENCY: DepositFiatCurrency = {
   id: 'EUR',
   name: 'Euro',
@@ -28,6 +37,9 @@ export const EUR_CURRENCY: DepositFiatCurrency = {
   emoji: '🇪🇺',
 };
 
+/**
+ * Mapping of network names to their CAIP chain IDs for Transak integration
+ */
 export const TRANSAK_NETWORKS: Record<string, CaipChainId> = {
   ethereum: ETHEREUM_MAINNET.chainId,
   linea: LINEA_MAINNET.chainId,
@@ -36,15 +48,37 @@ export const TRANSAK_NETWORKS: Record<string, CaipChainId> = {
   bsc: BSC_MAINNET.chainId,
 };
 
+/**
+ * Transak support page URL
+ */
 export const TRANSAK_SUPPORT_URL = 'https://support.transak.com';
+
+/**
+ * Main Transak website URL
+ */
 export const TRANSAK_URL = 'https://www.transak.com';
+
+/**
+ * ConsenSys privacy policy URL
+ */
 export const CONSENSYS_PRIVACY_POLICY_URL =
   'https://consensys.net/privacy-policy';
+
+/**
+ * Transak terms of service URL for US users
+ */
 export const TRANSAK_TERMS_URL_US =
   'https://www.transak.com/terms-of-service-us';
+
+/**
+ * Transak terms of service URL for international users
+ */
 export const TRANSAK_TERMS_URL_WORLD =
   'https://www.transak.com/terms-of-service';
 
+/**
+ * Enumeration of possible KYC (Know Your Customer) verification statuses
+ */
 export enum KycStatus {
   NOT_SUBMITTED = 'NOT_SUBMITTED',
   SUBMITTED = 'SUBMITTED',

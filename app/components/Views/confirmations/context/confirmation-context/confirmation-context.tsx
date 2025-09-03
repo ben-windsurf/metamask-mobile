@@ -17,6 +17,13 @@ interface ConfirmationContextProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * ConfirmationContextProvider provides context for managing transaction confirmation state
+ * Manages the transaction value updating state across confirmation components
+ * @param {ConfirmationContextProviderProps} props - The provider props
+ * @param {React.ReactNode} props.children - Child components that will have access to the confirmation context
+ * @returns {JSX.Element} The context provider component
+ */
 export const ConfirmationContextProvider: React.FC<
   ConfirmationContextProviderProps
 > = ({ children }) => {
@@ -38,6 +45,12 @@ export const ConfirmationContextProvider: React.FC<
   );
 };
 
+/**
+ * Custom hook to access the confirmation context
+ * Provides access to transaction value updating state and setter function
+ * @returns {ConfirmationContextParams} The confirmation context containing isTransactionValueUpdating state and setter
+ * @throws {Error} When used outside of ConfirmationContextProvider
+ */
 export const useConfirmationContext = () => {
   const context = useContext(ConfirmationContext);
   if (!context) {

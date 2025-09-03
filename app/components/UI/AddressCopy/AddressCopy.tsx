@@ -35,6 +35,15 @@ interface AddressCopyProps {
   };
 }
 
+/**
+ * AddressCopy component provides a copy button for account addresses
+ * Handles copying the account address to clipboard and shows confirmation alert
+ * @param {AddressCopyProps} props - Component props
+ * @param {InternalAccount} props.account - The account object containing address information
+ * @param {IconColor} props.iconColor - Optional color for the copy icon
+ * @param {Object} props.hitSlop - Optional hit slop configuration for touch area
+ * @returns {JSX.Element} Copy button component for account address
+ */
 const AddressCopy = ({ account, iconColor, hitSlop }: AddressCopyProps) => {
   const { styles } = useStyles(styleSheet, {});
 

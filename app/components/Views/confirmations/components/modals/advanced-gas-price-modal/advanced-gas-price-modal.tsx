@@ -19,6 +19,14 @@ import { useTransactionMetadataRequest } from '../../../hooks/transactions/useTr
 import BottomModal from '../../UI/bottom-modal';
 import styleSheet from './advanced-gas-price-modal.styles';
 
+/**
+ * AdvancedGasPriceModal component provides an interface for users to manually set custom gas price and gas limit
+ * Allows advanced users to override automatic gas fee estimates with their own values
+ * @param {Object} props - Component props
+ * @param {function} props.setActiveModal - Function to navigate to different gas modal types
+ * @param {function} props.handleCloseModals - Function to close all gas-related modals
+ * @returns {JSX.Element} Modal component for advanced gas price configuration
+ */
 export const AdvancedGasPriceModal = ({
   setActiveModal,
   handleCloseModals,

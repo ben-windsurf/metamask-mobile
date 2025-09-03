@@ -21,7 +21,9 @@ export interface IosGoogleLoginHandlerParams extends BaseHandlerOptions {
 }
 
 /**
- * IosGoogleLoginHandler is the login handler for the Google login
+ * IosGoogleLoginHandler handles Google OAuth authentication flow for iOS devices in MetaMask Mobile.
+ * Extends BaseLoginHandler to provide Google-specific OAuth implementation using expo-auth-session.
+ * Manages the complete OAuth flow including authorization request, token exchange, and error handling.
  */
 export class IosGoogleLoginHandler extends BaseLoginHandler {
   public readonly OAUTH_SERVER_URL =
@@ -109,6 +111,15 @@ export class IosGoogleLoginHandler extends BaseLoginHandler {
     );
   }
 
+  /**
+   * Transforms OAuth flow parameters into the format required for auth token request.
+   * Validates that the required 'code' parameter is present and constructs the request data
+   * needed to exchange the authorization code for an access token.
+   *
+   * @param params - The OAuth flow parameters containing authorization code and related data
+   * @returns AuthRequestParams object formatted for token exchange request
+   * @throws OAuthError when required 'code' parameter is missing from params
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('code' in params)) {
       throw new OAuthError(

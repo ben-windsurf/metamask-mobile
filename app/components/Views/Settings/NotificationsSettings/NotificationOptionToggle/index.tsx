@@ -21,9 +21,19 @@ import { useAccountNotificationsToggle } from '../../../../../util/notifications
 
 const NOTIFICATION_OPTIONS_TOGGLE_SWITCH_TEST_ID =
   'notification_options_toggle_switch';
+/**
+ * Generates test ID for notification options toggle container element
+ * @param {string} testID - Base test ID for the toggle component
+ * @returns {string} Formatted test ID for the container element
+ */
 export const NOTIFICATION_OPTIONS_TOGGLE_CONTAINER_TEST_ID = (
   testID = NOTIFICATION_OPTIONS_TOGGLE_SWITCH_TEST_ID,
 ) => `${testID}:notification_options_toggle--container`;
+/**
+ * Generates test ID for notification options toggle loading indicator element
+ * @param {string} testID - Base test ID for the toggle component
+ * @returns {string} Formatted test ID for the loading indicator element
+ */
 export const NOTIFICATION_OPTIONS_TOGGLE_LOADING_TEST_ID = (
   testID = NOTIFICATION_OPTIONS_TOGGLE_SWITCH_TEST_ID,
 ) => `${testID}:notification_options_toggle--loading`;
@@ -40,6 +50,13 @@ interface NotificationOptionsToggleProps {
   testID: string;
 }
 
+/**
+ * Custom hook for updating account notification settings
+ * Manages the toggle state and loading status for account notification preferences
+ * @param {string} address - The account address to update settings for
+ * @param {() => Promise<void>} refetchAccountSettings - Function to refetch account settings after update
+ * @returns {Object} Object containing toggleAccount function, loading state, and error state
+ */
 export function useUpdateAccountSetting(
   address: string,
   refetchAccountSettings: () => Promise<void>,

@@ -3,6 +3,14 @@ import { Hex } from '@metamask/utils';
 import { isEqual } from 'lodash';
 import { getIntlNumberFormatter } from '../intl';
 
+/**
+ * Formats a number with a threshold, showing "<threshold" if the amount is below the threshold
+ * @param {number | null} amount - The amount to format
+ * @param {number} threshold - The minimum threshold value
+ * @param {string} locale - The locale for number formatting
+ * @param {Intl.NumberFormatOptions} options - Number formatting options
+ * @returns {string} The formatted number string or empty string if amount is null
+ */
 export const formatWithThreshold = (
   amount: number | null,
   threshold: number,

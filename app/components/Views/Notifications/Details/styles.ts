@@ -14,6 +14,14 @@ const COLLECTIBLE_WIDTH = (DEVICE_WIDTH - 30 - 16) / 3;
 
 export type NotificationDetailStyles = ReturnType<typeof createStyles>;
 
+/**
+ * Creates stylesheet for notification details view components
+ * Provides comprehensive styling for notification content, images, badges, and interactive elements
+ * @param {Theme} theme - The theme object containing colors and typography
+ * @param {Object} theme.colors - Color palette from design tokens
+ * @param {Object} theme.typography - Typography styles from design tokens
+ * @returns {Object} StyleSheet object containing all notification detail component styles
+ */
 export const createStyles = ({ colors, typography }: Theme) =>
   StyleSheet.create({
     contentContainerWrapper: {

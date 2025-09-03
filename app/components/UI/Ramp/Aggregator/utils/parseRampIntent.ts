@@ -1,5 +1,11 @@
 import { RampIntent } from '../types';
 
+/**
+ * Parses path parameters into a RampIntent object for on-ramp functionality
+ * Validates required fields and sets default chainId if address is provided without chainId
+ * @param pathParams - Object containing path parameters with potential ramp intent data
+ * @returns Parsed RampIntent object or undefined if no valid intent can be created
+ */
 export default function parseRampIntent(
   pathParams: Record<string, string | undefined>,
 ): RampIntent | undefined {

@@ -30,19 +30,34 @@ interface RestoreWalletParams {
   previousScreen: string;
 }
 
+/**
+ * Creates navigation details for the RestoreWallet screen
+ * Used for navigating to the wallet restoration flow when vault corruption is detected
+ * @returns {NavigationDetails} Navigation details object for RestoreWallet screen
+ */
 export const createRestoreWalletNavDetails =
   createNavigationDetails<RestoreWalletParams>(
     Routes.VAULT_RECOVERY.RESTORE_WALLET,
   );
 
-// Needed for passing the proper params from outside this stack navigator
-// This occurs from the Login screen
+/**
+ * Creates nested navigation details for the RestoreWallet screen
+ * Needed for passing proper params from outside this stack navigator, particularly from the Login screen
+ * Handles nested navigation structure for vault recovery flow
+ * @returns {NavigationDetails} Nested navigation details object for RestoreWallet screen
+ */
 export const createRestoreWalletNavDetailsNested =
   createNavigationDetails<RestoreWalletParams>(
     Routes.VAULT_RECOVERY.RESTORE_WALLET,
     Routes.VAULT_RECOVERY.RESTORE_WALLET,
   );
 
+/**
+ * RestoreWallet component displays the wallet restoration screen when vault corruption is detected
+ * Provides UI for users to restore their wallet from backup after vault corruption
+ * Handles the restoration process and navigation to appropriate success/failure screens
+ * @returns {JSX.Element} The rendered RestoreWallet component
+ */
 const RestoreWallet = () => {
   const { trackEvent, createEventBuilder } = useMetrics();
   const { colors } = useAppThemeFromContext();
@@ -117,4 +132,8 @@ const RestoreWallet = () => {
   );
 };
 
+/**
+ * Memoized export of RestoreWallet component
+ * Optimizes performance by preventing unnecessary re-renders when props haven't changed
+ */
 export default React.memo(RestoreWallet);

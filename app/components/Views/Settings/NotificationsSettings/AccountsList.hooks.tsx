@@ -10,6 +10,12 @@ import {
   toFormattedAddress,
 } from '../../../../util/address';
 
+/**
+ * Custom hook that provides props and utilities for managing notification account list
+ * Handles loading states, account updates, and notification settings for multiple accounts
+ * @param {string[]} addresses - Array of account addresses to manage notifications for
+ * @returns {Object} Object containing loading states and utility functions for account notifications
+ */
 export function useNotificationAccountListProps(addresses: string[]) {
   const { update, initialLoading, accountsBeingUpdated, data } =
     useFetchAccountNotifications(addresses);
@@ -40,6 +46,11 @@ export function useNotificationAccountListProps(addresses: string[]) {
   };
 }
 
+/**
+ * Custom hook that provides account-related props for notification settings
+ * Retrieves valid notification accounts, avatar types, and account data
+ * @returns {Object} Object containing accounts array, avatar type, and account addresses
+ */
 export function useAccountProps() {
   const accountAddresses = useSelector(getValidNotificationAccounts);
   const { accounts: allAccounts } = useAccounts();

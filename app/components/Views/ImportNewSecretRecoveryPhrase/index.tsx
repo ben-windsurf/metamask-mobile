@@ -64,6 +64,12 @@ import { Authentication } from '../../../core';
 
 const defaultNumberOfWords = 12;
 
+/**
+ * Parses and normalizes a secret recovery phrase string
+ * Trims whitespace, converts to lowercase, and extracts valid words
+ * @param {string} seedPhrase - The raw secret recovery phrase string to parse
+ * @returns {string} The normalized secret recovery phrase with words separated by single spaces
+ */
 export const parseSecretRecoveryPhrase = (seedPhrase: string) =>
   (seedPhrase || '').trim().toLowerCase().match(/\w+/gu)?.join(' ') || '';
 

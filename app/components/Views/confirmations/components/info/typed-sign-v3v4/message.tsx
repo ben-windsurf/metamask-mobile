@@ -16,10 +16,11 @@ import { DataTreeInput } from '../../data-tree/data-tree';
 import styleSheet from './message.styles';
 
 /**
+ * Extracts token contract address from data tree structure for typed signature requests
  * If a token contract is found within the dataTree, fetch the token decimal of this contract
  * to be utilized for displaying token amounts of the dataTree.
- *
- * @param dataTreeData
+ * @param {DataTreeInput} dataTreeData - The data tree input containing potential token contract information
+ * @returns {Hex | undefined} The token contract address as hex string, or undefined if not found or invalid
  */
 export const getTokenContractInDataTree = (
   dataTreeData: DataTreeInput,
@@ -36,6 +37,12 @@ export const getTokenContractInDataTree = (
   return tokenContract;
 };
 
+/**
+ * Message component for displaying typed signature (v3/v4) request details
+ * Renders the message content for EIP-712 typed data signatures with expandable/collapsible view
+ * Shows primary type, data tree structure, and handles token decimal formatting when applicable
+ * @returns {JSX.Element | null} The rendered message component or null if no signature request
+ */
 const Message = () => {
   const signatureRequest = useSignatureRequest();
   const isSimulationSupported = useTypedSignSimulationEnabled();

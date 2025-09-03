@@ -24,12 +24,22 @@ import { BACKUPANDSYNC_FEATURES } from '@metamask/profile-sync-controller/user-s
 import { MetaMetricsEvents, useMetrics } from '../../../hooks/useMetrics';
 import { selectIsMetamaskNotificationsEnabled } from '../../../../selectors/notifications';
 
+/**
+ * Test identifiers for the TurnOnBackupAndSync component
+ * Used for automated testing and component identification
+ */
 export const turnOnBackupAndSyncTestIds = {
   view: 'turn-on-backup-and-sync-view',
   cancelButton: 'turn-on-backup-and-sync-cancel-button',
   enableButton: 'turn-on-backup-and-sync-enable-button',
 };
 
+/**
+ * TurnOnBackupAndSync component displays a modal to enable backup and sync functionality
+ * Allows users to turn on profile syncing with privacy information and navigation to settings
+ * Handles analytics tracking for user interactions and backup sync state changes
+ * @returns {JSX.Element} The rendered turn on backup and sync modal component
+ */
 const TurnOnBackupAndSync = () => {
   const theme = useTheme();
   const styles = createStyles(theme);

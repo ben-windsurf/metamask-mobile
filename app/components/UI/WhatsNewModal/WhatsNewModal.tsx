@@ -53,6 +53,11 @@ const slideImageWidth = slideItemWidth - modalPadding * 2;
 const imageAspectRatio = 128 / 264;
 const slideImageHeight = slideImageWidth * imageAspectRatio;
 
+/**
+ * Creates styles for the WhatsNewModal component
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     slideContent: {
@@ -125,6 +130,12 @@ const createStyles = (colors: Colors) =>
     horizontalScrollView: { flexGrow: 0 },
   });
 
+/**
+ * WhatsNewModal component displays a modal with slides showcasing new features
+ * Currently disabled due to UX concerns and overlapping functionality with notification system
+ * Renders a paginated modal with images, titles, descriptions, and action buttons
+ * @returns {JSX.Element} The rendered WhatsNewModal component
+ */
 const WhatsNewModal = () => {
   const modalRef = useRef<ReusableModalRef>(null);
   const scrollViewRef = useRef<ScrollView>(null);

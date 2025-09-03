@@ -52,6 +52,14 @@ export const isPermitDaiUnlimited = (
   );
 };
 
+/**
+ * Checks if a signature request represents a DAI permit revocation
+ * Used to identify when users are revoking DAI token permissions
+ * @param {string} tokenAddress - The token contract address to check
+ * @param {number | string | boolean} [allowed] - The allowed amount or permission flag
+ * @param {number | string | BigNumber} [value] - The value being set in the permit
+ * @returns {boolean} True if this is a DAI permit revocation, false otherwise
+ */
 export const isPermitDaiRevoke = (
   tokenAddress: string,
   allowed?: number | string | boolean,
@@ -194,6 +202,12 @@ export const parseAndNormalizeSignTypedData = (messageParamsData: string) => {
   return result;
 };
 
+/**
+ * Parses and sanitizes typed signature data by removing invalid type definitions
+ * Used to clean up signature request data before displaying to users
+ * @param {string} messageParamsData - The raw message parameters data to parse
+ * @returns {Object} Object containing sanitized message, primary type, and domain
+ */
 export const parseAndSanitizeSignTypedData = (messageParamsData: string) => {
   if (!messageParamsData) {
     return {};
@@ -205,6 +219,12 @@ export const parseAndSanitizeSignTypedData = (messageParamsData: string) => {
   return { sanitizedMessage, primaryType, domain };
 };
 
+/**
+ * Parses, normalizes, and sanitizes typed signature data with large number handling
+ * Combines normalization for large numbers with sanitization of invalid types
+ * @param {string} messageParamsData - The raw message parameters data to process
+ * @returns {Object} Object containing sanitized message, primary type, and domain
+ */
 export const parseNormalizeAndSanitizeSignTypedData = (
   messageParamsData: string,
 ) => {
@@ -219,6 +239,12 @@ export const parseNormalizeAndSanitizeSignTypedData = (
   return { sanitizedMessage, primaryType, domain };
 };
 
+/**
+ * Extracts and normalizes typed signature data from a signature request
+ * Used to process signature requests and handle large number precision issues
+ * @param {SignatureRequest} [signatureRequest] - The signature request to process
+ * @returns {Object} Parsed and normalized signature data or empty object if invalid
+ */
 export const parseAndNormalizeSignTypedDataFromSignatureRequest = (
   signatureRequest?: SignatureRequest,
 ) => {
@@ -275,10 +301,22 @@ type MessageParamsSIWE = MessageParamsPersonal & {
   };
 };
 
+/**
+ * Checks if a signature request is a Sign-In with Ethereum (SIWE) request
+ * Used to identify SIWE authentication requests in the confirmation flow
+ * @param {SignatureRequest} [signatureRequest] - The signature request to check
+ * @returns {boolean} True if this is a SIWE signature request, false otherwise
+ */
 export const isSIWESignatureRequest = (signatureRequest?: SignatureRequest) =>
   Boolean(
     (signatureRequest?.messageParams as MessageParamsSIWE)?.siwe?.isSIWEMessage,
   );
 
+/**
+ * Extracts SIWE (Sign-In with Ethereum) details from a signature request
+ * Used to get parsed SIWE message data for display in confirmation screens
+ * @param {SignatureRequest} [signatureRequest] - The signature request containing SIWE data
+ * @returns {Object} SIWE details object or empty object if not a SIWE request
+ */
 export const getSIWEDetails = (signatureRequest?: SignatureRequest) =>
   (signatureRequest?.messageParams as MessageParamsSIWE)?.siwe ?? {};

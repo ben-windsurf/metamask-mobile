@@ -26,6 +26,13 @@ interface UseTopTokensProps {
   chainId?: Hex | CaipChainId;
 }
 
+/**
+ * Custom hook for fetching and managing top tokens for bridge operations
+ * Combines token data from Swaps API and Bridge API, prioritizing top assets
+ * @param {UseTopTokensProps} props - Hook configuration
+ * @param {Hex | CaipChainId} props.chainId - The chain ID to fetch tokens for
+ * @returns {Object} Object containing topTokens array, remainingTokens array, and pending state
+ */
 export const useTopTokens = ({
   chainId,
 }: UseTopTokensProps): {

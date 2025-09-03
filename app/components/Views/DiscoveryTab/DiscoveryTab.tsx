@@ -25,7 +25,14 @@ import { selectSearchEngine } from '../../../reducers/browser/selectors';
 import BrowserBottomBar from '../../UI/BrowserBottomBar';
 
 /**
- * Tab component for the in-app browser
+ * DiscoveryTab component provides a browser-like interface for token discovery and web navigation
+ * Features URL bar with autocomplete, token search functionality, and navigation controls
+ * Serves as the main discovery interface within MetaMask Mobile's browser experience
+ * @param {DiscoveryTabProps} props - Component props
+ * @param {string} props.id - Unique identifier for this tab instance
+ * @param {Function} props.showTabs - Callback to show the tabs overview
+ * @param {Function} props.updateTabInfo - Callback to update tab information with new URL or state
+ * @returns {JSX.Element} The rendered discovery tab component
  */
 export const DiscoveryTab: React.FC<DiscoveryTabProps> = ({
   id: tabId,

@@ -52,6 +52,12 @@ const AvatarTokenOrNetworkAssetLogo = ({
   );
 };
 
+/**
+ * AvatarTokenWithNetworkBadge component displays a token avatar with a network badge overlay
+ * Shows the token image or network asset logo with a network badge in the bottom-right corner
+ * Used in confirmation flows to clearly identify both the token and the network it belongs to
+ * @returns {JSX.Element} The rendered avatar token with network badge component
+ */
 export const AvatarTokenWithNetworkBadge = () => {
   const { styles } = useStyles(styleSheet, {});
   const { chainId } =

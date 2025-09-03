@@ -49,6 +49,11 @@ export const stopGasPolling = () => {
   return GasFeeController.stopPolling();
 };
 
+/**
+ * Custom hook that provides access to gas-related data from the Redux store
+ * Combines multiple selectors to provide all necessary data for gas calculations and UI display
+ * @returns {Object} Object containing gas fee estimates, transaction state, exchange rates, and other gas-related data
+ */
 export const useDataStore = () => {
   const [
     gasFeeEstimates,
@@ -184,8 +189,16 @@ export const getLegacyTransactionData = ({
 };
 
 /**
- *
- * @returns {Object} the transaction data for the current transaction.
+ * Custom hook that processes and returns transaction data with gas calculations
+ * Handles both EIP-1559 and legacy transaction types based on network support
+ * @param {UseGasTransactionProps} props - Configuration object for gas transaction processing
+ * @param {boolean} props.onlyGas - Whether to calculate only gas costs without transaction value
+ * @param {string} props.gasSelected - Selected gas fee option (low, medium, high)
+ * @param {boolean} props.legacy - Whether to use legacy gas calculation method
+ * @param {Object} props.gasObject - EIP-1559 gas object with fee estimates
+ * @param {Object} props.gasObjectLegacy - Legacy gas object with gas price estimates
+ * @param {string} props.multiLayerL1FeeTotal - Additional L1 fees for multi-layer networks
+ * @returns {Object} Parsed transaction data with gas calculations and fee estimates
  */
 export const useGasTransaction = ({
   onlyGas,

@@ -19,11 +19,17 @@ import { debounce } from 'lodash';
 import { useUnifiedSwapBridgeContext } from '../useUnifiedSwapBridgeContext';
 import { selectShouldUseSmartTransaction } from '../../../../../selectors/smartTransactionsController';
 
+/**
+ * Debounce wait time in milliseconds for bridge quote requests
+ * Prevents excessive API calls when user is actively typing amounts
+ */
 export const DEBOUNCE_WAIT = 700;
 
 /**
- * Hook for handling bridge quote request updates
- * @returns {Function} A debounced function to update quote parameters
+ * Hook for handling bridge quote request updates with debouncing
+ * Manages bridge quote parameters and provides a debounced function to update them
+ * Prevents excessive API calls when user is actively typing amounts
+ * @returns {Function} A debounced function to update quote parameters in the bridge controller
  */
 export const useBridgeQuoteRequest = () => {
   const sourceAmount = useSelector(selectSourceAmount);
@@ -41,6 +47,8 @@ export const useBridgeQuoteRequest = () => {
   );
   /**
    * Updates quote parameters in the bridge controller
+   * Validates required parameters and normalizes source amount before updating
+   * @returns {Promise<void>} Promise that resolves when quote parameters are updated
    */
   const updateQuoteParams = useCallback(async () => {
     if (

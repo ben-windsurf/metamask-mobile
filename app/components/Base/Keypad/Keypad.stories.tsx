@@ -25,6 +25,10 @@ const DefaultKeypadStory = () => {
   );
 };
 
+/**
+ * Default Storybook story configuration for the Keypad component
+ * Demonstrates basic keypad functionality with value display and change handling
+ */
 export const Default = {
   render: DefaultKeypadStory,
 };

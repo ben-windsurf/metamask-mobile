@@ -8,6 +8,11 @@ import {
 import { useTheme } from '../../../util/theme';
 import { Theme } from '@metamask/design-tokens';
 
+/**
+ * Creates styles for the OnboardingScreenWithBg component
+ * @param {Theme['colors']} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Theme['colors']) =>
   StyleSheet.create({
     flex: {
@@ -60,6 +65,12 @@ interface OnboardingScreenWithBgProps {
   backgroundColor?: string;
 }
 
+/**
+ * OnboardingScreenWithBg component renders a screen with a background image for onboarding flows
+ * Displays different background images based on the screen prop and renders children content over the background
+ * @param {OnboardingScreenWithBgProps} props - Component props
+ * @returns {JSX.Element} The rendered onboarding screen with background
+ */
 const OnboardingScreenWithBg: React.FC<OnboardingScreenWithBgProps> = ({
   screen,
   children,

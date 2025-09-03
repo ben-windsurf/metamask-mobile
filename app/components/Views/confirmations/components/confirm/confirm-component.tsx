@@ -64,6 +64,13 @@ interface ConfirmProps {
   route?: UnstakeConfirmationViewProps['route'];
 }
 
+/**
+ * Confirm component handles the main confirmation flow for transactions and operations
+ * Renders different UI layouts based on confirmation type (full screen vs modal) and redesign settings
+ * Manages navigation options and provides context providers for confirmation-related functionality
+ * @param {ConfirmProps} props - Component props containing optional route information
+ * @returns {JSX.Element} The rendered confirmation component with appropriate layout
+ */
 export const Confirm = ({ route }: ConfirmProps) => {
   const { approvalRequest } = useApprovalRequest();
   const { isFullScreenConfirmation } = useFullScreenConfirmation();

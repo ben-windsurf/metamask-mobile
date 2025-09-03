@@ -47,7 +47,13 @@ export function BNToHex(inputBn) {
   return add0x(inputBn.toString(16));
 }
 
-// Setter Maps
+/**
+ * Utility object for converting different number formats to BigNumber instances
+ * @type {Object}
+ * @property {Function} hex - Converts hex string to BigNumber
+ * @property {Function} dec - Converts decimal string/number to BigNumber
+ * @property {Function} BN - Converts BN instance to BigNumber
+ */
 export const toBigNumber = {
   hex: (n) => new BigNumber(stripHexPrefix(n), 16),
   dec: (n) => new BigNumber(String(n), 10),
@@ -412,6 +418,11 @@ export function isNumberValue(value) {
   return isDecimal(value);
 }
 
+/**
+ * Formats a decimal value by replacing commas with dots for consistent decimal notation
+ * @param {number|string} value - The value to format
+ * @returns {string} The formatted value with dots as decimal separators
+ */
 export const dotAndCommaDecimalFormatter = (value) => {
   const valueStr = String(value);
 
@@ -429,6 +440,12 @@ export const dotAndCommaDecimalFormatter = (value) => {
  * @see https://262.ecma-international.org/5.1/#sec-9.8.1
  */
 
+/**
+ * Determines whether the given number is going to be displayed in scientific notation after being converted to a string
+ * @param {number} value - The value to check
+ * @returns {boolean} True if the value is a number in scientific notation, false otherwise
+ * @see https://262.ecma-international.org/5.1/#sec-9.8.1
+ */
 export const isNumberScientificNotationWhenString = (value) => {
   if (typeof value !== 'number') {
     return false;
@@ -854,6 +871,13 @@ export const toHexadecimal = (decimal) => {
   return toBigNumber.dec(decimal).toString(16);
 };
 
+/**
+ * Calculates the total ETH fee for multi-layer transactions including L1 fees
+ * @param {Object} params - Fee calculation parameters
+ * @param {string|number|undefined} params.multiLayerL1FeeTotal - Total L1 fee for multi-layer transaction (hex string, number, or undefined)
+ * @param {number} params.ethFee - Base ETH fee (default: 0)
+ * @returns {string} The total calculated ETH fee as a string
+ */
 export const calculateEthFeeForMultiLayer = ({
   multiLayerL1FeeTotal,
   ethFee = 0,
@@ -876,6 +900,11 @@ export const calculateEthFeeForMultiLayer = ({
  *
  * @param {number|string|object} value - Value to check
  * @returns {boolean} - true if value is zero
+ */
+/**
+ * Checks if a value represents zero in various formats
+ * @param {number|string|object} value - Value to check
+ * @returns {boolean} True if value is zero, false otherwise
  */
 export const isZeroValue = (value) => {
   if (value === null || value === undefined) {

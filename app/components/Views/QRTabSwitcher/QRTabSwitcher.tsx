@@ -52,6 +52,11 @@ export interface QRTabSwitcherParams {
   networkName?: string;
 }
 
+/**
+ * Creates navigation details for the QR Tab Switcher screen
+ * Used to configure navigation parameters and type safety for the QR scanner/receiver interface
+ * @returns {NavigationDetails} Navigation configuration object for QR Tab Switcher
+ */
 export const createQRScannerNavDetails =
   createNavigationDetails<QRTabSwitcherParams>(Routes.QR_TAB_SWITCHER);
 

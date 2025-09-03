@@ -10,6 +10,14 @@ import { useCallback } from 'react';
 import { RootState } from '../../../../../reducers';
 import { Hex } from '@metamask/utils';
 
+/**
+ * Custom hook for managing transaction payment token selection and state
+ * Provides functionality to get and set the payment token for a specific transaction
+ * Used in confirmation flows to handle token selection for transaction payments
+ * @returns {Object} Object containing current payToken and setPayToken function
+ * @returns {TransactionPayToken} returns.payToken - Current payment token with address and chainId
+ * @returns {Function} returns.setPayToken - Function to update the payment token for the transaction
+ */
 export function useTransactionPayToken() {
   const dispatch = useDispatch();
 

@@ -14,6 +14,14 @@ export interface EarningHistoryResponse {
   userRewards: EarningHistory[];
 }
 
+/**
+ * Custom hook for fetching and managing staking earnings history
+ * Retrieves daily rewards data for the selected account on a specific chain
+ * @param {Object} params - Hook parameters
+ * @param {ChainId} params.chainId - The chain ID to fetch earnings for
+ * @param {number} params.limitDays - Number of days to limit the history (default: 365)
+ * @returns {Object} Object containing earningsHistory array, loading state, and error state
+ */
 const useStakingEarningsHistory = ({
   chainId,
   limitDays = 365,

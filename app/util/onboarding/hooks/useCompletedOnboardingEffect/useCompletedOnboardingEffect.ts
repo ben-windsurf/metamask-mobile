@@ -4,12 +4,13 @@ import { setCompletedOnboarding } from '../../../../actions/onboarding';
 import { RootState } from '../../../../reducers';
 import { selectCompletedOnboarding } from '../../../../selectors/onboarding';
 
+/**
+ * Custom hook to ensure onboarding completion state is consistent with KeyringController state
+ * Backfills the completedOnboarding state based on the presence of a vault in KeyringController
+ * This logic is applied here instead of a migration because onboarding was previously blacklisted in persistConfig
+ * Handles edge cases where users can reset completedOnboarding to false without setting it to true again
+ */
 export const useCompletedOnboardingEffect = () => {
-  // This hook is used to backfill the completedOnboarding state based on the KeyringController state.
-  // The logic is applied here instead of a migration because `onboarding` was previously blacklisted in `persistConfig`.
-  // Another reason is that there are flows where users can reset `completedOnboarding` to `false` without ever setting it to `true` again,
-  // such as when they delete their wallet, go through onboarding again, and kill the app before entirely completing the onboarding flow.
-  // This ensures that the completedOnboarding state is always consistent with the KeyringController state.
   const dispatch = useDispatch();
 
   const vault = useSelector(

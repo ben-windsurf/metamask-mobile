@@ -3,6 +3,12 @@ import { TransactionMeta } from '@metamask/transaction-controller';
 
 import { hexToDecimal } from '../../../../../util/conversions';
 
+/**
+ * Custom hook that extracts and converts EIP-1559 transaction fee parameters from hex to decimal
+ * Used in confirmation views to display gas fees in a human-readable format
+ * @param {TransactionMeta} transactionMeta - Transaction metadata containing EIP-1559 fee parameters
+ * @returns {Object} Object containing maxFeePerGas and maxPriorityFeePerGas as decimal strings
+ */
 export const useEIP1559TxFees = (
   transactionMeta: TransactionMeta,
 ): {

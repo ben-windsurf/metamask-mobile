@@ -1,6 +1,12 @@
 import { Theme } from '../../../../../../util/theme/models';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for BuildQuote component with theme-aware styling
+ * @param {Object} params - Parameters object
+ * @param {Theme} params.theme - Theme object containing colors and styling properties
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

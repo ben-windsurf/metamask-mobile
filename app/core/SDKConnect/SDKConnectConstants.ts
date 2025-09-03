@@ -1,10 +1,32 @@
+/**
+ * Time conversion constant: milliseconds in one minute
+ */
 export const MIN_IN_MS = 1000 * 60;
+
+/**
+ * Time conversion constant: milliseconds in one hour
+ */
 export const HOUR_IN_MS = MIN_IN_MS * 60;
+
+/**
+ * Time conversion constant: milliseconds in one day
+ */
 export const DAY_IN_MS = HOUR_IN_MS * 24;
+
+/**
+ * Default session timeout duration for SDK connections (30 days in milliseconds)
+ */
 export const DEFAULT_SESSION_TIMEOUT_MS = 30 * DAY_IN_MS;
 
+/**
+ * Timeout duration for pausing SDK connections (25 seconds in milliseconds)
+ */
 export const TIMEOUT_PAUSE_CONNECTIONS = 25000;
 
+/**
+ * RPC method names supported by the SDK Connect functionality
+ * Maps method identifiers to their corresponding RPC method strings
+ */
 export const RPC_METHODS = {
   METAMASK_GETPROVIDERSTATE: 'metamask_getProviderState',
   METAMASK_CONNECTSIGN: 'metamask_connectSign',
@@ -28,6 +50,9 @@ export const RPC_METHODS = {
   ETH_ACCOUNTS: 'eth_accounts',
   ETH_CHAINID: 'eth_chainId',
 };
+/**
+ * Event name for SDK connection loading state
+ */
 export const CONNECTION_LOADING_EVENT = 'loading';
 
 export const METHODS_TO_REDIRECT: { [method: string]: boolean } = {

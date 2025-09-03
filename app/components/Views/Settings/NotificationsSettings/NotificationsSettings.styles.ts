@@ -64,6 +64,11 @@ const styleSheet = (params: { theme: Theme }) =>
     },
   });
 
+/**
+ * Static styles for NotificationsSettings component header elements
+ * Provides consistent styling for header navigation components
+ * @returns {Object} StyleSheet object containing header-specific styles
+ */
 export const styles = StyleSheet.create({
   headerLeft: {
     marginHorizontal: 16,

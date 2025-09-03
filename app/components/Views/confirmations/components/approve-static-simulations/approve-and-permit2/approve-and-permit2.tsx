@@ -16,6 +16,12 @@ import { ApproveMethod } from '../../../types/approve';
 import { EditSpendingCapButton } from '../../edit-spending-cap-button';
 import styleSheet from '../shared-styles';
 
+/**
+ * ApproveAndPermit2 component displays approval transaction details for ERC20 and ERC721 tokens
+ * Handles both approve and revoke operations, showing spending caps, spender information, and token details
+ * Supports editing spending caps for ERC20 tokens and displays appropriate UI based on token standard
+ * @returns {JSX.Element|null} The rendered approval component or null if token standard is not supported
+ */
 export const ApproveAndPermit2 = () => {
   const { styles } = useStyles(styleSheet, {});
   const {
@@ -124,6 +130,16 @@ interface PillAndAddressProps {
   transactionMetadata: TransactionMeta;
 }
 
+/**
+ * PillAndAddress component displays token amount/ID in a pill format alongside the contract address
+ * Shows either token amount for ERC20 tokens or token ID for NFTs, with the target contract address
+ * @param {PillAndAddressProps} props - The component props
+ * @param {string} [props.amount] - Token amount for ERC20 tokens
+ * @param {boolean} props.isERC20 - Whether the token is an ERC20 token
+ * @param {string} [props.tokenId] - Token ID for NFT tokens
+ * @param {TransactionMeta} props.transactionMetadata - Transaction metadata containing contract address and chain info
+ * @returns {JSX.Element} The rendered pill and address component
+ */
 function PillAndAddress({
   amount,
   isERC20,

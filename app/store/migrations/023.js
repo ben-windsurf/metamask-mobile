@@ -22,6 +22,8 @@ import ambiguousNetworks from './migration-data/amibiguous-networks.json';
  * TODO: Use `unknown` as the state type, and silence or work around the
  * redux-persist bug somehow.
  *
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with address book entries keyed by chain ID
  **/
 export default function migrate(state) {
   const keyringControllerState = state.engine.backgroundState.KeyringController;

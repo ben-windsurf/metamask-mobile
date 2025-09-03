@@ -3,6 +3,12 @@ import { useState } from 'react';
 import { pooledStakingSelectors } from '../../../../selectors/earnController';
 import Engine from '../../../../core/Engine';
 
+/**
+ * Custom hook for managing vault metadata and APY data for staking
+ * Provides vault information, loading states, and refresh functionality
+ * @param {number} chainId - The chain ID to fetch vault metadata for
+ * @returns {Object} Object containing vault metadata, APY data, loading state, and refresh function
+ */
 const useVaultMetadata = (chainId: number) => {
   const { selectVaultMetadataForChain, selectVaultApyForChain } =
     pooledStakingSelectors;

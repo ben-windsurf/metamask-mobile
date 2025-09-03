@@ -39,12 +39,24 @@ import { isRelaySupported } from './transaction-relay.ts';
 const VERSION = '2.0.0';
 const SUPPORTED_KEYRING_TYPES = [KeyringTypes.hd, KeyringTypes.simple];
 
+/**
+ * Retrieves all account addresses from the AccountsController
+ * Used by EIP-5792 wallet_getAccounts RPC method to return available accounts
+ * @returns {Promise<string[]>} Promise resolving to array of account addresses
+ */
 export const getAccounts = async () => {
   const { AccountsController } = Engine.context;
   const addresses = AccountsController.listAccounts().map((acc) => acc.address);
   return Promise.resolve(addresses);
 };
 
+/**
+ * Processes EIP-5792 wallet_sendCalls RPC method requests
+ * Handles both single and batch transaction processing with security validation
+ * @param {SendCalls} params - The sendCalls parameters containing transaction calls
+ * @param {JsonRpcRequest} req - The JSON-RPC request object with network and origin info
+ * @returns {Promise<SendCallsResult>} Promise resolving to result with batch ID
+ */
 export async function processSendCalls(
   params: SendCalls,
   req: JsonRpcRequest,
@@ -94,8 +106,19 @@ type Actions =
   | TransactionControllerGetStateAction
   | PreferencesControllerGetStateAction;
 
+/**
+ * Messenger type for EIP-5792 RPC methods communication
+ * Enables interaction with various MetaMask controllers for account, network, and transaction operations
+ */
 export type EIP5792Messenger = Messenger<Actions, never>;
 
+/**
+ * Retrieves the status of a transaction batch by ID for EIP-5792 wallet_getCallsStatus
+ * Returns transaction status, receipts, and execution details
+ * @param {Hex} id - The batch ID to query status for
+ * @returns {Promise<GetCallsStatusResult>} Promise resolving to batch status and receipts
+ * @throws {JsonRpcError} When no matching bundle is found
+ */
 export async function getCallsStatus(id: Hex): Promise<GetCallsStatusResult> {
   const transactions = Engine.controllerMessenger
     .call('TransactionController:getState')
@@ -139,6 +162,10 @@ export async function getCallsStatus(id: Hex): Promise<GetCallsStatusResult> {
   };
 }
 
+/**
+ * Enum defining atomic batch transaction capability status levels
+ * Used to indicate EIP-7702 smart account support status for different chains
+ */
 export enum AtomicCapabilityStatus {
   Supported = 'supported',
   Ready = 'ready',
@@ -194,6 +221,13 @@ async function getAlternateGasFeesCapability(
   }, {});
 }
 
+/**
+ * Retrieves wallet capabilities for EIP-5792 wallet_getCapabilities RPC method
+ * Returns atomic batch transaction and alternate gas fee support by chain
+ * @param {Hex} address - The account address to check capabilities for
+ * @param {Hex[]} [chainIds] - Optional array of chain IDs to check, defaults to all configured networks
+ * @returns {Promise<GetCapabilitiesResult>} Promise resolving to capabilities by chain ID
+ */
 export async function getCapabilities(address: Hex, chainIds?: Hex[]) {
   const {
     controllerMessenger,

@@ -1,6 +1,12 @@
 import type { Theme } from '@metamask/design-tokens';
 import { StyleSheet, TextStyle } from 'react-native';
 
+/**
+ * Creates a stylesheet for TokenDetails component with theme-based styling
+ * @param {Object} params - Parameters object
+ * @param {Theme} params.theme - The theme object containing colors and design tokens
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

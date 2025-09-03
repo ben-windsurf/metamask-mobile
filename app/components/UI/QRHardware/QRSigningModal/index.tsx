@@ -17,6 +17,11 @@ interface IQRSigningModalProps {
   onFailure?: (error: string) => void;
 }
 
+/**
+ * Creates styles for the QR signing modal
+ * @param {any} colors - Theme colors object
+ * @returns {Object} StyleSheet object with modal styles
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createStyles = (colors: any) =>
@@ -35,6 +40,12 @@ const createStyles = (colors: any) =>
     },
   });
 
+/**
+ * QRSigningModal component displays a modal for QR code-based transaction signing
+ * Handles hardware wallet QR signing flow with success, cancel, and failure callbacks
+ * @param {IQRSigningModalProps} props - Component props
+ * @returns {JSX.Element} Modal component with QR signing interface
+ */
 const QRSigningModal = ({
   isVisible,
   QRState,

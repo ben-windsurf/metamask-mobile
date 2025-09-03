@@ -49,7 +49,16 @@ const log = createProjectLogger('ppom-util');
 
 const METHOD_SEND_TRANSACTION = 'eth_sendTransaction';
 const TRANSACTION_METHODS = [METHOD_SEND_TRANSACTION, 'eth_sendRawTransaction'];
+/**
+ * Method constant for eth_signTypedData_v3 RPC calls
+ * Used for typed data signing validation in PPOM security checks
+ */
 export const METHOD_SIGN_TYPED_DATA_V3 = 'eth_signTypedData_v3';
+
+/**
+ * Method constant for eth_signTypedData_v4 RPC calls
+ * Used for typed data signing validation in PPOM security checks
+ */
 export const METHOD_SIGN_TYPED_DATA_V4 = 'eth_signTypedData_v4';
 
 const CONFIRMATION_METHODS = Object.freeze([

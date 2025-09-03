@@ -15,6 +15,12 @@ import {
   weiToFiatNumber,
 } from '../../../../util/number';
 
+/**
+ * Custom hook for managing balance calculations and formatting for staking
+ * Provides ETH and fiat balance information for both regular and staked balances
+ * @param {Hex} chainId - Optional chain ID to get balance for, defaults to selected chain
+ * @returns {Object} Object containing formatted balances, conversion rates, and currency info
+ */
 const useBalance = (chainId?: Hex) => {
   const accountsByChainId = useSelector(selectAccountsByChainId);
   const selectedChainId = useSelector(selectEvmChainId);

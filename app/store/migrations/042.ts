@@ -9,6 +9,13 @@ import { InternalAccount } from '@metamask/keyring-internal-api';
 import { isDefaultAccountName } from '../../util/ENSUtils';
 import { ETH_EOA_METHODS } from '../../constants/eth-methods';
 
+/**
+ * Migration 42: Merges duplicate internal accounts with the same address
+ * Consolidates accounts that have the same Ethereum address but different IDs,
+ * preserving custom names over default names and ensuring unique account entries
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with merged internal accounts
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 42)) {
     return state;

@@ -4,6 +4,10 @@ import { showAlert } from '../../../../../actions/alert';
 import { protectWalletModalVisible } from '../../../../../actions/user';
 import ClipboardManager from '../../../../../core/ClipboardManager';
 
+/**
+ * Alert message configuration object for clipboard copy operations
+ * Provides localized messages for different types of clipboard copy actions in notifications
+ */
 export const CopyClipboardAlertMessage = {
   default: (): string => strings('notifications.copied_to_clipboard'),
   address: (): string => strings('notifications.address_copied_to_clipboard'),
@@ -11,6 +15,11 @@ export const CopyClipboardAlertMessage = {
     strings('notifications.transaction_id_copied_to_clipboard'),
 };
 
+/**
+ * Custom hook for copying content to clipboard with user feedback
+ * Provides clipboard functionality with alert notifications and wallet protection modal trigger
+ * @returns {Function} copyToClipboard function that copies text and shows confirmation alert
+ */
 function useCopyClipboard() {
   const dispatch = useDispatch();
 

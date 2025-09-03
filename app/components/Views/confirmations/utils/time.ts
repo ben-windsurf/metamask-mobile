@@ -21,6 +21,13 @@ const withoutUnitHumanizer = humanizeDuration.humanizer({
   },
 });
 
+/**
+ * Converts a time range in milliseconds to a human-readable estimated time range
+ * Used in transaction confirmations to display estimated completion times
+ * @param {number} min - Minimum time in milliseconds
+ * @param {number} max - Maximum time in milliseconds
+ * @returns {string | undefined} Human-readable time range (e.g., "1- 2 min") or undefined if invalid inputs
+ */
 export const toHumanEstimatedTimeRange = (min: number, max: number) => {
   if (!min || !max) {
     return undefined;
@@ -50,6 +57,12 @@ export const toHumanEstimatedTimeRange = (min: number, max: number) => {
   );
 };
 
+/**
+ * Converts milliseconds to a human-readable seconds format
+ * Used in transaction confirmations to display time durations in seconds
+ * @param {number} milliseconds - Time duration in milliseconds
+ * @returns {string} Human-readable time in seconds format (e.g., "30 sec")
+ */
 export const toHumanSeconds = (milliseconds: number): string => {
   const options = {
     units: ['s'],

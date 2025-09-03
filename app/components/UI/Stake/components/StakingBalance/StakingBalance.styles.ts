@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for StakingBalance component
+ * Defines styles for container, balances, buttons, and staking-related UI elements
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const styleSheet = () =>
   StyleSheet.create({
     container: {

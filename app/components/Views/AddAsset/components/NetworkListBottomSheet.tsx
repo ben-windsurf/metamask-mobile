@@ -22,8 +22,25 @@ import { getNetworkImageSource } from '../../../../util/networks';
 import BottomSheetHeader from '../../../../component-library/components/BottomSheets/BottomSheetHeader';
 import { MultichainNetworkConfiguration } from '@metamask/multichain-network-controller';
 
+/**
+ * Test ID constant for the network list bottom sheet component
+ * Used for automated testing and component identification
+ */
 export const NETWORK_LIST_BOTTOM_SHEET = 'NETWORK_LIST_BOTTOM_SHEET';
 
+/**
+ * NetworkListBottomSheet component displays a bottom sheet with a list of available networks
+ * for selection. It allows users to choose from configured networks and optionally filter
+ * to show only EVM-compatible networks.
+ *
+ * @param props - Component props
+ * @param props.selectedNetwork - Currently selected network chain ID
+ * @param props.setSelectedNetwork - Function to set the selected network
+ * @param props.setOpenNetworkSelector - Function to control the visibility of the network selector
+ * @param props.sheetRef - Reference to the bottom sheet component
+ * @param props.displayEvmNetworksOnly - Whether to display only EVM networks (default: true)
+ * @returns JSX element rendering a bottom sheet with network selection options
+ */
 export default function NetworkListBottomSheet({
   selectedNetwork,
   setSelectedNetwork,

@@ -23,6 +23,13 @@ interface AccountInfoProps {
   account: InternalAccount;
 }
 
+/**
+ * AccountInfo component displays account details including avatar, name, and formatted address
+ * Used in multichain account details view to show comprehensive account information
+ * @param {AccountInfoProps} props - The component props
+ * @param {InternalAccount} props.account - The internal account object containing metadata and address
+ * @returns {JSX.Element} The rendered account information component
+ */
 export const AccountInfo = ({ account }: AccountInfoProps) => {
   const { styles, theme } = useStyles(styleSheet, {});
   const { colors } = theme;

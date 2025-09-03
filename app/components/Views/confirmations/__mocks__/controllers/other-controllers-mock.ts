@@ -1,9 +1,24 @@
 import { merge } from 'lodash';
 
+/**
+ * Mock Ethereum account address used for testing confirmations
+ */
 export const accountMock = '0xdc47789de4ceff0e8fe9d15d728af7f17550c164';
+
+/**
+ * Mock ERC-20 token address used for testing token interactions
+ */
 export const tokenAddress1Mock = '0x1234567890abcdef1234567890abcdef12345678';
+
+/**
+ * Mock ERC-20 token address used for testing multiple token scenarios
+ */
 export const tokenAddress2Mock = '0xabcdefabcdefabcdefabcdefabcdefabcdefabcdef';
 
+/**
+ * Mock KeyringController state for testing wallet keyring functionality
+ * Contains vault, unlock status, and keyring configuration data
+ */
 export const keyringControllerMock = {
   engine: {
     backgroundState: {
@@ -18,6 +33,10 @@ export const keyringControllerMock = {
   },
 };
 
+/**
+ * Mock AccountsController state for testing account management functionality
+ * Contains internal accounts data, metadata, and selected account information
+ */
 export const accountsControllerMock = {
   engine: {
     backgroundState: {
@@ -41,6 +60,10 @@ export const accountsControllerMock = {
   },
 };
 
+/**
+ * Mock AccountTrackerController state for testing account balance tracking
+ * Contains accounts organized by chain ID for multichain support
+ */
 export const accountTrackerControllerMock = {
   engine: {
     backgroundState: {
@@ -51,6 +74,10 @@ export const accountTrackerControllerMock = {
   },
 };
 
+/**
+ * Mock MultichainNetworkController state for testing multichain network functionality
+ * Contains network configurations, selected chain, and transaction activity data
+ */
 export const multichainNetworkControllerMock = {
   engine: {
     backgroundState: {
@@ -64,6 +91,10 @@ export const multichainNetworkControllerMock = {
   },
 };
 
+/**
+ * Mock TokenBalancesController state for testing token balance functionality
+ * Contains token balance data organized by account and chain
+ */
 export const tokenBalancesControllerMock = {
   engine: {
     backgroundState: {
@@ -74,6 +105,10 @@ export const tokenBalancesControllerMock = {
   },
 };
 
+/**
+ * Mock NetworkController state for testing network management functionality
+ * Contains network metadata, configurations, and selected network client information
+ */
 export const networkControllerMock = {
   engine: {
     backgroundState: {
@@ -101,6 +136,10 @@ export const networkControllerMock = {
   },
 };
 
+/**
+ * Mock CurrencyRateController state for testing currency conversion functionality
+ * Contains current currency settings and exchange rates for ETH and other assets
+ */
 export const currencyRateControllerMock = {
   engine: {
     backgroundState: {
@@ -118,6 +157,10 @@ export const currencyRateControllerMock = {
   },
 };
 
+/**
+ * Mock NftController state for testing NFT functionality
+ * Contains NFT contracts data organized by account and chain
+ */
 export const nftControllerMock = {
   engine: {
     backgroundState: {
@@ -128,6 +171,10 @@ export const nftControllerMock = {
   },
 };
 
+/**
+ * Mock swaps state for testing token swap functionality
+ * Contains feature flags and smart transaction configuration
+ */
 export const swapsState = {
   swaps: {
     featureFlags: {

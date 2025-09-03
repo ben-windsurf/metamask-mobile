@@ -60,8 +60,20 @@ import DiscoveryTab from '../DiscoveryTab/DiscoveryTab';
 const MAX_BROWSER_TABS = 5;
 
 /**
- * Component that wraps all the browser
- * individual tabs and the tabs view
+ * Browser component that manages multiple browser tabs and provides tab switching functionality
+ * Handles tab creation, closing, archiving, and navigation within the MetaMask Mobile browser
+ * Integrates with account permissions and displays active account notifications
+ * @param {Object} props - Component props
+ * @param {Object} props.route - React Navigation route object containing URL and navigation parameters
+ * @param {Object} props.navigation - React Navigation object for screen transitions
+ * @param {Function} props.createNewTab - Redux action to create a new browser tab
+ * @param {Function} props.closeAllTabs - Redux action to close all browser tabs
+ * @param {Function} props.closeTab - Redux action to close a specific tab
+ * @param {Function} props.setActiveTab - Redux action to set the active tab
+ * @param {Function} props.updateTab - Redux action to update tab information
+ * @param {Array} props.tabs - Array of browser tab objects
+ * @param {number} props.activeTab - ID of the currently active tab
+ * @returns {JSX.Element} The rendered browser component with tab management
  */
 export const Browser = (props) => {
   const {

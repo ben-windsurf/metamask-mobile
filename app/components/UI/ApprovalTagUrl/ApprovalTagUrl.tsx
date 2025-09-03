@@ -10,6 +10,9 @@ import stylesheet from './ApprovalTagUrl.styles';
 import { INTERNAL_ORIGINS } from '../../../constants/transaction';
 
 const { ORIGIN_DEEPLINK, ORIGIN_QR_CODE } = AppConstants.DEEPLINKS;
+/**
+ * Test ID constant for the approval tag URL origin pill component
+ */
 export const APPROVAL_TAG_URL_ORIGIN_PILL = 'APPROVAL_TAG_URL_ORIGIN_PILL';
 
 interface ApprovalTagUrlProps {
@@ -22,6 +25,17 @@ interface ApprovalTagUrlProps {
   url: string;
 }
 
+/**
+ * ApprovalTagUrl component displays a URL tag for approval requests
+ * Shows the origin domain with favicon for dapp approval flows
+ * Handles various URL sources including ENS names, deep links, and SDK metadata
+ * @param {ApprovalTagUrlProps} props - Component props
+ * @param {string} props.origin - The origin URL of the requesting dapp
+ * @param {string} props.url - The full URL of the request
+ * @param {Object} props.sdkDappMetadata - SDK metadata containing URL and icon
+ * @param {string} props.currentEnsName - ENS name if available
+ * @returns {JSX.Element|null} The rendered URL tag component or null if no origin to show
+ */
 const ApprovalTagUrl = ({
   origin,
   url,

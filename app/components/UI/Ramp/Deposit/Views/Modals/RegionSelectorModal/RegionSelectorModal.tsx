@@ -30,12 +30,21 @@ import useAnalytics from '../../../../hooks/useAnalytics';
 
 const MAX_REGION_RESULTS = 20;
 
+/**
+ * Creates navigation details for the region selector modal
+ * @returns {Object} Navigation details object for the region selector modal
+ */
 export const createRegionSelectorModalNavigationDetails =
   createNavigationDetails(
     Routes.DEPOSIT.MODALS.ID,
     Routes.DEPOSIT.MODALS.REGION_SELECTOR,
   );
 
+/**
+ * RegionSelectorModal component displays a searchable list of regions for deposit services
+ * Allows users to select their region with search functionality and displays supported/unsupported regions
+ * @returns {JSX.Element} The rendered region selector modal with search and region list
+ */
 function RegionSelectorModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
   const listRef = useRef<FlatList<DepositRegion>>(null);

@@ -44,6 +44,10 @@ export interface BasicInfoParams {
   quote: BuyQuote;
 }
 
+/**
+ * Creates navigation details for the BasicInfo screen
+ * @returns Navigation details object for BasicInfo route
+ */
 export const createBasicInfoNavDetails =
   createNavigationDetails<BasicInfoParams>(Routes.DEPOSIT.BASIC_INFO);
 
@@ -55,6 +59,12 @@ export interface BasicInfoFormData {
   ssn?: string;
 }
 
+/**
+ * BasicInfo component for collecting user's basic information during deposit flow
+ * Renders a form with fields for first name, last name, phone number, date of birth,
+ * and SSN (for US users). Includes validation and navigation to the next step.
+ * @returns JSX element containing the basic info form
+ */
 const BasicInfo = (): JSX.Element => {
   const navigation = useNavigation();
   const { styles, theme } = useStyles(styleSheet, {});

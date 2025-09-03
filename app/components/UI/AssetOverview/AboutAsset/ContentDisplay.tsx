@@ -16,6 +16,16 @@ interface ContentDisplayProps {
   textStyle?: TextStyle;
 }
 
+/**
+ * ContentDisplay component renders expandable text content with show more/less functionality
+ * Displays content with a configurable number of lines and optional disclaimer text
+ * @param {ContentDisplayProps} props - Component props
+ * @param {string} props.content - The main text content to display
+ * @param {number} props.numberOfLines - Number of lines to show when collapsed (default: 3)
+ * @param {string} props.disclaimer - Optional disclaimer text shown when expanded
+ * @param {TextStyle} props.textStyle - Optional custom text styling
+ * @returns {JSX.Element} Expandable content display with toggle button
+ */
 const ContentDisplay = ({
   content,
   numberOfLines = 3,

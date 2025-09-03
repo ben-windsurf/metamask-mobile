@@ -46,6 +46,11 @@ import Text, {
 import { withMetricsAwareness } from '../../../components/hooks/useMetrics';
 import { isPortfolioUrl } from '../../../util/url';
 
+/**
+ * Creates styles for the AccountOverview component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     scrollView: {
@@ -449,6 +454,11 @@ class AccountOverview extends PureComponent {
   }
 }
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object with selected state values
+ */
 const mapStateToProps = (state) => ({
   selectedAddress: selectSelectedInternalAccountFormattedAddress(state),
   internalAccounts: selectInternalAccounts(state),
@@ -457,6 +467,11 @@ const mapStateToProps = (state) => ({
   browserTabs: state.browser.tabs,
 });
 
+/**
+ * Maps Redux dispatch functions to component props
+ * @param {Function} dispatch - Redux dispatch function
+ * @returns {Object} Props object with bound action creators
+ */
 const mapDispatchToProps = (dispatch) => ({
   showAlert: (config) => dispatch(showAlert(config)),
   protectWalletModalVisible: () => dispatch(protectWalletModalVisible()),

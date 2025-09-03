@@ -17,6 +17,17 @@ interface AssetActionButtonProps {
   testID?: string;
 }
 
+/**
+ * AssetActionButton renders a customizable action button for asset operations
+ * Displays an icon and label for actions like send, receive, swap, buy, etc.
+ * @param {AssetActionButtonProps} props - Component props
+ * @param {Function} props.onPress - Callback function when button is pressed
+ * @param {string} props.icon - Icon type to display (send, receive, add, information, swap, buy)
+ * @param {string} props.label - Text label to display below the icon
+ * @param {boolean} props.disabled - Whether the button is disabled
+ * @param {string} props.testID - Test identifier for automation
+ * @returns {JSX.Element} The rendered asset action button component
+ */
 const AssetActionButton = ({
   onPress,
   icon,

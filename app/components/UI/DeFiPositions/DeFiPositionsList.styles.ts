@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 /**
- *
- * @param params Style sheet params.
- * @returns StyleSheet object.
+ * Creates stylesheet for DeFi positions list component
+ * @returns StyleSheet object containing styles for empty view and wrapper
  */
 const styleSheet = () =>
   StyleSheet.create({

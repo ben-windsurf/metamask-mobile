@@ -71,6 +71,14 @@ const validateAmountIsNotPuttingExtraDecimals = (
   return false;
 };
 
+/**
+ * Validates a spending cap value for token approval transactions
+ * Performs comprehensive validation including emptiness, format, positivity, and decimal precision checks
+ * @param {string} newSpendingCap - The spending cap value to validate
+ * @param {number} decimals - The number of decimal places allowed for the token
+ * @param {ApproveMethod} approveMethod - The approval method being used (approve, increase, or decrease allowance)
+ * @returns {string|false} Error message string if validation fails, false if validation passes
+ */
 export const validateSpendingCap = (
   newSpendingCap: string,
   decimals: number,

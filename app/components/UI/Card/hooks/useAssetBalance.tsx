@@ -29,7 +29,16 @@ import I18n, { strings } from '../../../../../locales/i18n';
 import { isTestNet } from '../../../../util/networks';
 import { TokenI } from '../../Tokens/types';
 
-// This hook retrieves the asset balance and related information for a given token and account.
+/**
+ * Custom hook that retrieves asset balance and related information for a given token and account
+ * Handles both EVM and non-EVM assets, calculates fiat values, and formats balances for display
+ * @param {FlashListAssetKey | null | undefined} token - The token object containing address and chain information
+ * @returns {Object} Object containing asset data, formatted balances, and fiat values
+ * @returns {TokenI | undefined} returns.asset - The complete asset object with balance information
+ * @returns {string | undefined} returns.balanceFiat - The fiat value of the asset balance
+ * @returns {string} returns.mainBalance - The primary balance display value
+ * @returns {string} returns.secondaryBalance - The secondary balance display value
+ */
 const useAssetBalance = (
   token: FlashListAssetKey | null | undefined,
 ): {

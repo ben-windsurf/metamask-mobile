@@ -6,6 +6,13 @@ import { isObject } from '@metamask/utils';
  * regarding the phishing list property listState, that is no longer used
  *
  **/
+/**
+ * Migration 26: Removes unused phishing list data and resets fetch timestamps
+ * Cleans up the PhishingController state by removing the deprecated listState property
+ * and resetting hotlist/stalelist fetch timestamps to force re-fetching on app update
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with cleaned PhishingController data
+ */
 export default function migrate(state) {
   const keyringControllerState = state.engine.backgroundState.KeyringController;
   if (!isObject(keyringControllerState)) {

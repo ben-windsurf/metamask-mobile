@@ -13,6 +13,17 @@ import {
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Converts hexadecimal fee values to formatted currency strings for display in transaction confirmations
+ * Handles both native currency (ETH) and fiat currency formatting with proper precision
+ * @param {Object} params - Fee conversion parameters
+ * @param {string} params.hexFee - The fee amount in hexadecimal wei format
+ * @param {number | null | undefined} params.nativeConversionRate - Exchange rate for fiat conversion
+ * @param {string | undefined} params.nativeCurrency - Native currency symbol (e.g., 'ETH')
+ * @param {function} params.fiatFormatter - Function to format fiat currency amounts
+ * @param {boolean} params.shouldHideFiat - Whether to hide fiat currency display
+ * @returns {Object} Object containing formatted fee strings and hex values
+ */
 export function getFeesFromHex({
   hexFee,
   nativeConversionRate,
@@ -114,6 +125,20 @@ export function getFeesFromHex({
   };
 }
 
+/**
+ * Calculates gas fee estimates for transaction confirmations using EIP-1559 or legacy gas pricing
+ * Handles Layer 2 networks with additional Layer 1 fees and applies minimum fee logic
+ * @param {Object} params - Gas estimation parameters
+ * @param {string} params.feePerGas - Maximum fee per gas in hex format
+ * @param {string} params.priorityFeePerGas - Priority fee per gas in decimal format
+ * @param {string} params.gasPrice - Gas price for legacy transactions in hex format
+ * @param {string} params.gas - Gas limit in hex format
+ * @param {boolean} params.shouldUseEIP1559FeeLogic - Whether to use EIP-1559 fee calculation
+ * @param {string | undefined} params.estimatedBaseFee - Estimated base fee in decimal format
+ * @param {string} [params.layer1GasFee] - Additional Layer 1 fee for Layer 2 networks
+ * @param {function} params.getFeesFromHexFn - Function to convert hex fees to formatted strings
+ * @returns {Object} Formatted fee information including native and fiat currency amounts
+ */
 export function calculateGasEstimate({
   feePerGas,
   gasPrice,
@@ -166,6 +191,12 @@ export function calculateGasEstimate({
   return getFeesFromHexFn(estimation);
 }
 
+/**
+ * Normalizes gas input values by replacing commas with periods for decimal formatting
+ * Ensures consistent decimal notation across different locale inputs
+ * @param {string} value - The gas input value to normalize
+ * @returns {string} Normalized value with periods as decimal separators
+ */
 export function normalizeGasInput(value: string) {
   return value.replace(',', '.');
 }

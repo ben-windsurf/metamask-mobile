@@ -6,6 +6,11 @@ import { selectTransactionMetadataById } from '../../../../../selectors/transact
 import { RootState } from '../../../../UI/BasicFunctionality/BasicFunctionalityModal/BasicFunctionalityModal.test';
 import useApprovalRequest from '../useApprovalRequest';
 
+/**
+ * Custom hook that retrieves transaction metadata for the current approval request
+ * Used in confirmation flows to access transaction details and metadata
+ * @returns {TransactionMeta | undefined} Transaction metadata object or undefined if not found
+ */
 export function useTransactionMetadataRequest() {
   const { approvalRequest } = useApprovalRequest();
 
@@ -23,6 +28,12 @@ export function useTransactionMetadataRequest() {
   return transactionMetadata as TransactionMeta;
 }
 
+/**
+ * Custom hook that retrieves transaction metadata for the current approval request
+ * Throws an error if transaction metadata is not found, ensuring non-null return
+ * @returns {TransactionMeta} Transaction metadata object
+ * @throws {Error} When transaction approval request is not found
+ */
 export function useTransactionMetadataOrThrow() {
   const transactionMetadata = useTransactionMetadataRequest();
 

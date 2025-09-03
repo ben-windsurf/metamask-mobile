@@ -37,11 +37,21 @@ export interface LedgerMessageSignModalParams {
   deviceId: any;
 }
 
+/**
+ * Creates navigation details for the Ledger message signing modal
+ * @returns {Object} Navigation details object for routing to the Ledger message sign modal
+ */
 export const createLedgerMessageSignModalNavDetails =
   createNavigationDetails<LedgerMessageSignModalParams>(
     Routes.LEDGER_MESSAGE_SIGN_MODAL,
   );
 
+/**
+ * Modal component for handling Ledger device message signing
+ * Displays a confirmation modal for users to approve or reject message signing on their Ledger device
+ * Manages the signing flow state and handles completion/error scenarios
+ * @returns {JSX.Element} The rendered Ledger message signing modal
+ */
 const LedgerMessageSignModal = () => {
   const dispatch = useDispatch();
   const modalRef = useRef<ReusableModalRef | null>(null);

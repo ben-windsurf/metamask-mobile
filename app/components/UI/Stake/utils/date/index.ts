@@ -1,3 +1,10 @@
+/**
+ * Gets the UTC week range (Monday to Sunday) for a given date
+ * @param {Date | string} date - The date to get the week range for
+ * @returns {Object} Object containing start and end dates of the week in YYYY-MM-DD format
+ * @returns {string} returns.start - The start date of the week (Monday)
+ * @returns {string} returns.end - The end date of the week (Sunday)
+ */
 export const getUTCWeekRange = (date: Date | string) => {
   const startDate = new Date(date);
   const dayOfWeek = startDate.getUTCDay();

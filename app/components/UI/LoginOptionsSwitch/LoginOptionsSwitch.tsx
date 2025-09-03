@@ -21,6 +21,12 @@ interface Props {
  * The highest priority login option is biometrics and will always get rendered over other options IF it is enabled.
  * If the user has enabled login with remember me in settings and has turned off biometrics then remember me will be the option
  * If both of these features are disabled then no options will be rendered
+ * @param {Props} props - Component props
+ * @param {BIOMETRY_TYPE | AUTHENTICATION_TYPE | string | null} props.shouldRenderBiometricOption - The biometric option type to render, or null if not available
+ * @param {boolean} props.biometryChoiceState - Current state of biometry choice
+ * @param {Function} props.onUpdateBiometryChoice - Callback when biometry choice is updated
+ * @param {Function} props.onUpdateRememberMe - Callback when remember me option is updated
+ * @returns {JSX.Element | null} The login options toggle component or null if no options available
  */
 const LoginOptionsSwitch = ({
   shouldRenderBiometricOption,

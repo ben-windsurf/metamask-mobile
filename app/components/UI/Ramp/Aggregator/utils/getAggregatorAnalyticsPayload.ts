@@ -4,6 +4,12 @@ import { FiatOrder } from '../../../../../reducers/fiatOrders';
 import { AnalyticsEvents } from '../types';
 import { FIAT_ORDER_STATES } from '../../../../../constants/on-ramp';
 
+/**
+ * Generates analytics payload for aggregator fiat order events
+ * Creates appropriate event name and payload based on order state and type (buy/sell)
+ * @param {FiatOrder} fiatOrder - The fiat order to generate analytics payload for
+ * @returns {[string|null, object|null]} Tuple containing event name and analytics payload
+ */
 const getAggregatorAnalyticsPayload = (
   fiatOrder: FiatOrder,
 ): [

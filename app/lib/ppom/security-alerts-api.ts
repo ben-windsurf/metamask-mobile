@@ -3,15 +3,31 @@ import AppConstants from '../../core/AppConstants';
 
 const ENDPOINT_VALIDATE = 'validate';
 
+/**
+ * Request interface for Security Alerts API calls
+ * Used to validate transactions and detect potential security threats
+ */
 export interface SecurityAlertsAPIRequest {
   method: string;
   params: unknown[];
 }
 
+/**
+ * Checks if the Security Alerts API is enabled via environment configuration
+ * @returns {boolean} True if the security alerts API is enabled, false otherwise
+ */
 export function isSecurityAlertsAPIEnabled() {
   return process.env.MM_SECURITY_ALERTS_API_ENABLED === 'true';
 }
 
+/**
+ * Validates a transaction or request using the Security Alerts API
+ * Sends transaction data to the security service for threat analysis
+ * @param {string} chainId - The blockchain network chain ID
+ * @param {SecurityAlertsAPIRequest} body - The request payload containing method and parameters
+ * @returns {Promise<SecurityAlertResponse>} Promise resolving to security alert response
+ * @throws {Error} When the API request fails or returns an error status
+ */
 export async function validateWithSecurityAlertsAPI(
   chainId: string,
   body: SecurityAlertsAPIRequest,

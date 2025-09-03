@@ -50,6 +50,13 @@ interface KeyringSnapRemovalWarningProps {
   onSubmit: () => void;
 }
 
+/**
+ * KeyringSnapRemovalWarning component displays a warning modal when removing a keyring snap
+ * Shows affected accounts and requires confirmation by typing the snap name before removal
+ * Handles the two-step removal process: account list display and confirmation input
+ * @param {KeyringSnapRemovalWarningProps} props - Component props
+ * @returns {JSX.Element} A bottom sheet modal with warning content and removal confirmation
+ */
 export default function KeyringSnapRemovalWarning({
   snap,
   keyringAccounts,

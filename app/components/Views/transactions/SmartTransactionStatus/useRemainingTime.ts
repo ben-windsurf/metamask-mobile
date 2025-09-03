@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSwapsChainFeatureFlags } from '../../../../reducers/swaps';
 
+/**
+ * Fallback estimated deadline for smart transactions in seconds
+ * Used when chain feature flags don't provide an estimated deadline
+ */
 export const FALLBACK_STX_ESTIMATED_DEADLINE_SEC = 45;
+
+/**
+ * Fallback maximum deadline for smart transactions in seconds
+ * Used when chain feature flags don't provide a maximum deadline
+ */
 export const FALLBACK_STX_MAX_DEADLINE_SEC = 150;
 
 interface Props {
@@ -10,6 +19,14 @@ interface Props {
   isStxPending: boolean;
 }
 
+/**
+ * Custom hook that calculates remaining time for smart transactions
+ * Manages countdown timers and deadline transitions for pending smart transactions
+ * @param {Props} props - Hook parameters
+ * @param {number | undefined} props.creationTime - Transaction creation timestamp
+ * @param {boolean} props.isStxPending - Whether the smart transaction is pending
+ * @returns {Object} Object containing timeLeftForPendingStxInSec, stxDeadlineSec, and isStxPastEstimatedDeadline
+ */
 const useRemainingTime = ({ creationTime, isStxPending }: Props) => {
   const swapFeatureFlags = useSelector(selectSwapsChainFeatureFlags);
 
@@ -78,4 +95,8 @@ const useRemainingTime = ({ creationTime, isStxPending }: Props) => {
   };
 };
 
+/**
+ * Default export of the useRemainingTime hook
+ * Custom hook for managing smart transaction countdown timers and deadline states
+ */
 export default useRemainingTime;

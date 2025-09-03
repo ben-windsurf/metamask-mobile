@@ -15,6 +15,13 @@ interface UseTokenSearchResult {
   searchResults: BridgeToken[];
 }
 
+/**
+ * Custom hook for searching and filtering bridge tokens
+ * Provides fuzzy search functionality with debounced input and sorted results by balance
+ * @param {UseTokenSearchProps} props - Hook parameters
+ * @param {BridgeToken[]} props.tokens - Array of bridge tokens to search through
+ * @returns {UseTokenSearchResult} Object containing search state and filtered results
+ */
 export function useTokenSearch({
   tokens,
 }: UseTokenSearchProps): UseTokenSearchResult {

@@ -5,6 +5,12 @@ import { UseWalletBalancesHook } from './useWalletBalances.types';
 import { formatWithThreshold } from '../../../../../util/assets';
 import I18n from '../../../../../../locales/i18n';
 
+/**
+ * Custom hook that calculates and formats wallet balances across multiple accounts
+ * Aggregates balances from all provided accounts and provides formatted total balance
+ * @param {InternalAccount[]} accounts - Array of internal accounts to calculate balances for
+ * @returns {UseWalletBalancesHook} Object containing formatted wallet total balance and multichain balances data
+ */
 export const useWalletBalances = (
   accounts: InternalAccount[],
 ): UseWalletBalancesHook => {

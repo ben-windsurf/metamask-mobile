@@ -21,7 +21,20 @@ import {
 } from '../../../../selectors/networkController';
 import { enableAllNetworksFilter } from '../../../UI/Tokens/util/enableAllNetworksFilter';
 
+/**
+ * Constant identifier for the network filter bottom sheet component
+ * Used for testing and component identification in the MetaMask Mobile app
+ */
 export const NETWORK_FILTER_BOTTOM_SHEET = 'NETWORK_FILTER_BOTTOM_SHEET';
+
+/**
+ * NetworkFilterBottomSheet component provides a bottom sheet interface for filtering tokens by network
+ * Allows users to choose between viewing all popular networks or just the current network
+ * @param onFilterControlsBottomSheetPress - Callback function triggered when a filter option is selected
+ * @param setOpenNetworkFilter - Function to control the visibility of the network filter bottom sheet
+ * @param sheetRef - React ref object for controlling the bottom sheet component
+ * @returns JSX.Element The rendered network filter bottom sheet with selectable network options
+ */
 export default function NetworkFilterBottomSheet({
   onFilterControlsBottomSheetPress,
   setOpenNetworkFilter,

@@ -14,6 +14,14 @@ import { useFeeCalculations } from './useFeeCalculations';
 
 const HEX_ZERO = '0x0';
 
+/**
+ * Custom hook that provides dApp-suggested gas fee options for transaction confirmations
+ * Creates gas fee options based on gas fees suggested by the dApp, allowing users to select
+ * the dApp's recommended gas settings for their transactions
+ * @param {Object} params - Hook parameters
+ * @param {() => void} params.handleCloseModals - Function to close gas fee selection modals
+ * @returns {GasOption[]} Array of gas fee options including dApp-suggested option if available
+ */
 export const useDappSuggestedGasFeeOption = ({
   handleCloseModals,
 }: {

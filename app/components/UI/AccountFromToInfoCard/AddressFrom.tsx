@@ -42,6 +42,17 @@ interface AddressFromProps {
   chainId?: string;
 }
 
+/**
+ * AddressFrom component displays the sender's account information in transaction confirmations
+ * Shows account name, balance, network badge, and account type label for the from address
+ * @param {AddressFromProps} props - Component props
+ * @param {Asset} props.asset - Asset information including address, symbol, and decimals
+ * @param {string} props.chainId - Chain ID for network-specific operations
+ * @param {boolean} props.dontWatchAsset - Whether to skip watching the asset
+ * @param {string} props.from - The sender's address
+ * @param {string} props.origin - Origin of the transaction request
+ * @returns {JSX.Element} Rendered AddressFrom component with account details
+ */
 const AddressFrom = ({
   asset,
   chainId,

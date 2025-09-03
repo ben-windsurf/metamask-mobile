@@ -17,11 +17,20 @@ import { createNavigationDetails } from '../../../../../../../util/navigation/na
 import { strings } from '../../../../../../../../locales/i18n';
 import Routes from '../../../../../../../constants/navigation/Routes';
 
+/**
+ * Creates navigation details for the SSN info modal
+ * @returns {Object} Navigation details object for the SSN info modal
+ */
 export const createSsnInfoModalNavigationDetails = createNavigationDetails(
   Routes.DEPOSIT.MODALS.ID,
   Routes.DEPOSIT.MODALS.SSN_INFO,
 );
 
+/**
+ * SSN Info Modal component that displays information about Social Security Number requirements
+ * Renders a bottom sheet modal with explanatory text about why SSN is required for deposits
+ * @returns {JSX.Element} The rendered SSN info modal component
+ */
 function SsnInfoModal() {
   const sheetRef = useRef<BottomSheetRef>(null);
 

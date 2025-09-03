@@ -41,9 +41,19 @@ interface OrderDetailsParams {
   redirectToSendTransaction?: boolean;
 }
 
+/**
+ * Creates navigation details for the OrderDetails screen
+ * @returns Navigation details object for routing to order details
+ */
 export const createOrderDetailsNavDetails =
   createNavigationDetails<OrderDetailsParams>(Routes.RAMP.ORDER_DETAILS);
 
+/**
+ * OrderDetails component displays detailed information about a fiat order
+ * Handles order status updates, refresh functionality, and navigation to related screens
+ * Supports both buy and sell order types with appropriate tracking and actions
+ * @returns JSX element rendering the order details screen with refresh and action buttons
+ */
 const OrderDetails = () => {
   const trackEvent = useAnalytics();
   const params = useParams<OrderDetailsParams>();

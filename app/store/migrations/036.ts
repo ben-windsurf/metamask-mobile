@@ -13,6 +13,13 @@ export interface Identity {
   importTime?: number;
 }
 
+/**
+ * Migration 36: Creates AccountsController and migrates account data from PreferencesController
+ * This migration introduces the AccountsController and converts existing identity data
+ * from PreferencesController.identities into internal accounts with proper scopes and metadata
+ * @param {unknown} state - The Redux state to migrate
+ * @returns {unknown} The migrated state with AccountsController initialized
+ */
 export default function migrate(state: unknown) {
   if (!isObject(state)) {
     captureException(

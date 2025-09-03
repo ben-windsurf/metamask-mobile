@@ -14,6 +14,11 @@ import {
 } from '../../actions/user';
 import ReduxService from '../redux';
 
+/**
+ * Service that manages automatic app locking based on user settings and app state changes.
+ * Handles background timers, keyring locking, and app state transitions to provide
+ * security by automatically locking the wallet when the app is backgrounded or inactive.
+ */
 export class LockManagerService {
   #appState?: AppStateStatus;
   #appStateListener?: NativeEventSubscription;

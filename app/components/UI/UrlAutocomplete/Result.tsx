@@ -32,6 +32,15 @@ interface ResultProps {
   onSwapPress: (result: TokenSearchResult) => void;
 }
 
+/**
+ * Result component displays individual autocomplete search results
+ * Renders different UI based on result type (favorites, tokens, etc.) with appropriate actions
+ * @param {Object} props - Component props
+ * @param {AutocompleteSearchResult} props.result - The search result to display
+ * @param {Function} props.onPress - Callback when result is pressed
+ * @param {Function} props.onSwapPress - Callback when swap button is pressed for token results
+ * @returns {JSX.Element} The rendered result component
+ */
 export const Result: React.FC<ResultProps> = memo(
   ({ result, onPress, onSwapPress }) => {
     const theme = useTheme();

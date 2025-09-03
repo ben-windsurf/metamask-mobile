@@ -39,6 +39,16 @@ type StakeBannerProps = Pick<BannerProps, 'style'> & {
   asset: TokenI;
 };
 
+/**
+ * ClaimBanner component displays a banner for claiming staked ETH rewards
+ * Shows the claimable amount and provides a button to initiate the claim transaction
+ * Handles both legacy and redesigned confirmation flows
+ * @param {Object} props - Component props
+ * @param {string} props.claimableAmount - The amount of ETH available to claim in wei
+ * @param {TokenI} props.asset - The token asset information
+ * @param {Object} props.style - Optional style overrides for the banner
+ * @returns {JSX.Element} The rendered claim banner component
+ */
 const ClaimBanner = ({ claimableAmount, asset, style }: StakeBannerProps) => {
   const { styles } = useStyles(styleSheet, {});
   const { trackEvent, createEventBuilder } = useMetrics();

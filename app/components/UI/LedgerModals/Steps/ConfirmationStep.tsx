@@ -12,6 +12,10 @@ import { LEDGER_CONFIRMATION_STEP } from './Steps.constants';
 const ledgerConnectLightImage = require('../../../../images/ledger-connect-light.png');
 const ledgerConnectDarkImage = require('../../../../images/ledger-connect-dark.png');
 
+/**
+ * Creates styles for the ConfirmationStep component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     buttonContainer: {
@@ -40,6 +44,13 @@ export interface ConfirmationStepProps {
   onReject: () => void;
 }
 
+/**
+ * ConfirmationStep component displays the Ledger transaction confirmation interface
+ * Shows a Ledger device image, confirmation message, loading indicator, and reject button
+ * @param {ConfirmationStepProps} props - Component props
+ * @param {Function} props.onReject - Callback function when user rejects the transaction
+ * @returns {JSX.Element} The rendered confirmation step component
+ */
 const ConfirmationStep = ({ onReject }: ConfirmationStepProps) => {
   const styles = useMemo(() => createStyles(), []);
   const ledgerImage = useAssetFromTheme(

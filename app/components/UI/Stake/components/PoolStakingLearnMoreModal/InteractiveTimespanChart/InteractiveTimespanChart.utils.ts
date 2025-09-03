@@ -5,11 +5,23 @@ import {
   STANDARD_DATASET_GRAPH_INSET,
 } from './InteractiveTimespanChart.constants';
 
+/**
+ * Calculates the width of each segment in the chart based on total width and number of data points
+ * @param {number} chartWidth - The total width of the chart
+ * @param {number[]} dataPoints - Array of data points to determine segment count
+ * @returns {number} The width of each chart segment, rounded to 6 decimal places
+ */
 export const getChartSegmentWidth = (
   chartWidth: number,
   dataPoints: number[],
 ) => parseFloat((chartWidth / dataPoints.length).toFixed(6));
 
+/**
+ * Calculates the center position of each chart segment for touch interaction
+ * @param {number[] | string[]} dataPoints - Array of data points to map segment centers for
+ * @param {number} segmentWidth - The width of each segment
+ * @returns {number[]} Array of center positions for each segment
+ */
 export const calculateSegmentCenters = (
   dataPoints: number[] | string[],
   segmentWidth: number,
@@ -25,10 +37,21 @@ export const calculateSegmentCenters = (
     return centerOfSegment;
   });
 
-// Example ISO 8601 timestamp: '2024-11-30T00:00:00.000Z'
+/**
+ * Formats an ISO 8601 timestamp for chart display
+ * Example ISO 8601 timestamp: '2024-11-30T00:00:00.000Z'
+ * @param {string} iso8601Timestamp - ISO 8601 formatted timestamp string
+ * @returns {string} Formatted date string for chart display
+ */
 export const formatChartDate = (iso8601Timestamp: string) =>
   new Date(iso8601Timestamp).toUTCString().split(' ').slice(0, 4).join(' ');
 
+/**
+ * Determines graph insets based on the number of data points
+ * Uses smaller insets for datasets with 10 or fewer points for better visualization
+ * @param {number} numDataPoints - The number of data points in the dataset
+ * @returns {Object} Object containing insetTop and insetBottom values
+ */
 export const getGraphInsetsByDataPointLength = (numDataPoints: number) => {
   const graphInsets = {
     insetTop: STANDARD_DATASET_GRAPH_INSET,
@@ -44,6 +67,13 @@ export const getGraphInsetsByDataPointLength = (numDataPoints: number) => {
   return graphInsets;
 };
 
+/**
+ * Calculates the snap threshold for touch interactions on the chart
+ * Enables snapping only for small datasets to improve touch precision
+ * @param {number} chartSegmentWidth - The width of each chart segment
+ * @param {number} numDataPoints - The total number of data points
+ * @returns {number} The snap threshold distance for touch interactions
+ */
 export const calculateSnapThreshold = (
   chartSegmentWidth: number,
   numDataPoints: number,
@@ -52,6 +82,15 @@ export const calculateSnapThreshold = (
   // We only enable snapping for small datasets.
   (numDataPoints <= SMALL_DATASET_THRESHOLD ? SMALL_DATASET_SNAP_RATIO : 0);
 
+/**
+ * Finds the closest data point index based on touch position and snap threshold
+ * Returns -1 when finger is lifted or when touch is outside snap threshold for small datasets
+ * @param {number} x - The x-coordinate of the touch position (-1 when finger lifted)
+ * @param {number[]} segmentCenters - Array of center positions for each segment
+ * @param {number} snapThreshold - The snap threshold distance for touch interactions
+ * @param {number} numDataPoints - The total number of data points
+ * @returns {number} The index of the closest data point, or -1 if no point should be selected
+ */
 export const findClosestPointIndex = (
   x: number,
   segmentCenters: number[],

@@ -11,7 +11,9 @@ import { useDeepMemo } from '../useDeepMemo';
 const log = createProjectLogger('transaction-pay');
 
 /**
- * Calculate the amount of the selected pay token, that is needed for each token required by the transaction.
+ * Custom hook that calculates the amount of the selected pay token needed for each token required by the transaction
+ * Converts fiat values to token amounts using current exchange rates and token decimals
+ * @returns {string[] | undefined} Array of token amounts in raw format (with decimals applied) or undefined if rates unavailable
  */
 export function useTransactionPayTokenAmounts() {
   const { payToken } = useTransactionPayToken();
@@ -54,6 +56,13 @@ export function useTransactionPayTokenAmounts() {
   return amounts;
 }
 
+/**
+ * Calculates the token amount needed based on fiat value and exchange rate
+ * @param {number | undefined} fiatAmount - The fiat amount to convert
+ * @param {number} fiatRate - The exchange rate from token to fiat
+ * @param {number} decimals - The number of decimals for the token
+ * @returns {string | undefined} The token amount in raw format or undefined if fiat amount is not provided
+ */
 function calculateAmount(
   fiatAmount: number | undefined,
   fiatRate: number,

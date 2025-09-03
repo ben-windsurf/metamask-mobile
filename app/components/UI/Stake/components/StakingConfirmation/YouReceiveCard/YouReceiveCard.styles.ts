@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for YouReceiveCard component
+ * Defines styles for the staking confirmation card showing what the user will receive
+ * @returns {Object} StyleSheet object containing component styles
+ */
 const styleSheet = () =>
   StyleSheet.create({
     changesCard: {

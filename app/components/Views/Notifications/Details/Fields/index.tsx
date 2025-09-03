@@ -27,6 +27,13 @@ interface Props {
   notification: INotification;
 }
 
+/**
+ * ModalField component renders different types of notification modal fields based on the field type.
+ * Acts as a factory component that returns the appropriate field component for each modal field type.
+ * Supports various field types including addresses, assets, networks, fees, and transactions.
+ * @param {Props} props - The component props
+ * @returns {JSX.Element | null} The appropriate field component or null if no matching type
+ */
 export default function ModalField({
   modalField,
   isCollapsed,

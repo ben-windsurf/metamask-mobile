@@ -144,6 +144,9 @@ export enum TraceOperation {
 
 const ID_DEFAULT = 'default';
 const OP_DEFAULT = 'custom';
+/**
+ * Interval for cleaning up stale traces (5 minutes in milliseconds)
+ */
 export const TRACES_CLEANUP_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 const tracesByKey: Map<string, PendingTrace> = new Map();
@@ -349,6 +352,11 @@ function createBufferedEndTrace(request: EndTraceRequest): BufferedTrace {
 /**
  * Buffer a trace start call in local memory
  */
+/**
+ * Buffer a trace start call in local memory when consent is not yet available
+ * @param {TraceRequest} request - The trace request to buffer
+ * @param {string} parentTraceName - Optional parent trace name for reconnection
+ */
 export function bufferTraceStartCallLocal(
   request: TraceRequest,
   parentTraceName?: string,
@@ -359,12 +367,20 @@ export function bufferTraceStartCallLocal(
 /**
  * Buffer a trace end call in local memory
  */
+/**
+ * Buffer a trace end call in local memory when consent is not yet available
+ * @param {EndTraceRequest} request - The end trace request to buffer
+ */
 export function bufferTraceEndCallLocal(request: EndTraceRequest) {
   localBufferedTraces.push(createBufferedEndTrace(request));
 }
 
 /**
  * Flushes buffered traces to Sentry when consent is given
+ */
+/**
+ * Flushes buffered traces to Sentry when consent is given
+ * Processes all buffered start and end trace calls in order
  */
 export async function flushBufferedTraces() {
   const localBufferedTracesCopy = [...localBufferedTraces];
@@ -416,6 +432,10 @@ let cachedConsent: boolean | null = null;
 /**
  * Check if user has given consent for metrics
  */
+/**
+ * Check if user has given consent for metrics collection
+ * @returns {Promise<boolean>} True if user has consented to metrics
+ */
 export async function hasMetricsConsent(): Promise<boolean> {
   const metricsOptIn = await StorageWrapper.getItem(METRICS_OPT_IN);
   const hasConsent = metricsOptIn === AGREED;
@@ -435,10 +455,18 @@ function getCachedConsent(): boolean | null {
  * Update cached consent state
  * @param {boolean} consent - new consent state
  */
+/**
+ * Update cached consent state for metrics collection
+ * @param {boolean} consent - New consent state
+ */
 export function updateCachedConsent(consent: boolean) {
   cachedConsent = consent;
 }
 
+/**
+ * Discard all buffered traces without processing them
+ * Used when user denies consent for metrics collection
+ */
 export function discardBufferedTraces() {
   localBufferedTraces.length = 0; // Clear local buffer as well
 }

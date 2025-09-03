@@ -33,6 +33,11 @@ import {
   MOCK_ENTROPY_SOURCE_2,
 } from './keyringControllerTestUtils';
 
+/**
+ * Creates a mock UUID from an address for testing purposes
+ * @param {string} address - The address to generate a UUID from
+ * @returns {AccountId} A deterministic UUID based on the address
+ */
 export function createMockUuidFromAddress(address: string): AccountId {
   const fakeShaFromAddress = Array.from(
     { length: 16 },
@@ -79,6 +84,14 @@ function getAccountTypeScopes(accountType: KeyringAccountType): CaipChainId[] {
   return scopes;
 }
 
+/**
+ * Creates a mock internal account for testing
+ * @param {string} address - The account address
+ * @param {string} nickname - The account nickname/name
+ * @param {KeyringTypes} keyringType - The type of keyring (default: hd)
+ * @param {KeyringAccountType} accountType - The account type (default: EthAccountType.Eoa)
+ * @returns {InternalAccount} A mock internal account object
+ */
 export function createMockInternalAccount(
   address: string,
   nickname: string,
@@ -121,6 +134,14 @@ export function createMockInternalAccount(
   };
 }
 
+/**
+ * Creates a mock snap internal account for testing
+ * @param {string} address - The account address
+ * @param {string} nickname - The account nickname/name
+ * @param {KeyringAccountType} accountType - The account type (default: EthAccountType.Eoa)
+ * @param {string} entropySource - The entropy source identifier (default: empty string)
+ * @returns {InternalAccount} A mock snap internal account object
+ */
 export function createMockSnapInternalAccount(
   address: string,
   nickname: string,
@@ -187,6 +208,9 @@ export function createMockSnapInternalAccount(
   };
 }
 
+/**
+ * Mock Bitcoin P2WPKH account for testing
+ */
 export const MOCK_ACCOUNT_BIP122_P2WPKH: InternalAccount = {
   id: 'ae247df6-3911-47f7-9e36-28e6a7d96078',
   address: 'bc1qwl8399fz829uqvqly9tcatgrgtwp3udnhxfq4k',
@@ -205,6 +229,9 @@ export const MOCK_ACCOUNT_BIP122_P2WPKH: InternalAccount = {
   },
 };
 
+/**
+ * Mock Bitcoin P2WPKH testnet account for testing
+ */
 export const MOCK_ACCOUNT_BIP122_P2WPKH_TESTNET: InternalAccount = {
   id: 'fcdafe8b-4bdf-4e25-9051-e255b2a0af5f',
   address: 'tb1q6rmsq3vlfdhjdhtkxlqtuhhlr6pmj09y6w43g8',
@@ -223,6 +250,9 @@ export const MOCK_ACCOUNT_BIP122_P2WPKH_TESTNET: InternalAccount = {
   },
 };
 
+/**
+ * Mock Solana account for testing
+ */
 export const MOCK_SOLANA_ACCOUNT: InternalAccount = {
   address: '7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV',
   id: '1',
@@ -248,30 +278,52 @@ export const MOCK_SOLANA_ACCOUNT: InternalAccount = {
   scopes: [SolScope.Mainnet, SolScope.Testnet, SolScope.Devnet],
 };
 
+/**
+ * Collection of mock non-EVM accounts for multichain testing
+ */
 export const MOCK_MULTICHAIN_NON_EVM_ACCOUNTS = {
   [MOCK_ACCOUNT_BIP122_P2WPKH.id]: MOCK_ACCOUNT_BIP122_P2WPKH,
   [MOCK_ACCOUNT_BIP122_P2WPKH_TESTNET.id]: MOCK_ACCOUNT_BIP122_P2WPKH_TESTNET,
   [MOCK_SOLANA_ACCOUNT.id]: MOCK_SOLANA_ACCOUNT,
 };
 
-// Mock checksummed addresses
+/**
+ * Mock checksummed Ethereum address for testing
+ */
 export const MOCK_ADDRESS_1 = '0xC4955C0d639D99699Bfd7Ec54d9FaFEe40e4D272';
+
+/**
+ * Second mock checksummed Ethereum address for testing
+ */
 export const MOCK_ADDRESS_2 = '0xC4966c0D659D99699BFD7EB54D8fafEE40e4a756';
 
-// Convert the addresses to lower case to test the edge case between lowercase vs checksummed addresses.
+/**
+ * Expected UUID for MOCK_ADDRESS_1 in lowercase for testing address case handling
+ */
 export const expectedUuid = createMockUuidFromAddress(
   MOCK_ADDRESS_1.toLowerCase(),
 );
+
+/**
+ * Expected UUID for MOCK_ADDRESS_2 in lowercase for testing address case handling
+ */
 export const expectedUuid2 = createMockUuidFromAddress(
   MOCK_ADDRESS_2.toLowerCase(),
 );
 
+/**
+ * Mock internal account 1 for testing with entropy source
+ */
 export const internalAccount1: InternalAccount = {
   ...createMockInternalAccount(MOCK_ADDRESS_1.toLowerCase(), 'Account 1'),
   options: {
     entropySource: MOCK_ENTROPY_SOURCE,
   },
 };
+
+/**
+ * Mock internal account 2 for testing with entropy source
+ */
 export const internalAccount2: InternalAccount = {
   ...createMockInternalAccount(MOCK_ADDRESS_2.toLowerCase(), 'Account 2'),
   options: {
@@ -279,6 +331,9 @@ export const internalAccount2: InternalAccount = {
   },
 };
 
+/**
+ * Mock internal Solana account for testing multichain functionality
+ */
 export const internalSolanaAccount1: InternalAccount = {
   ...createMockInternalAccount(
     mockSolanaAddress,
@@ -291,6 +346,9 @@ export const internalSolanaAccount1: InternalAccount = {
   },
 };
 
+/**
+ * Expected UUID for second HD keyring address for testing multiple keyrings
+ */
 export const expectedSecondHDKeyringUuid = createMockUuidFromAddress(
   mockSecondHDKeyringAddress,
 );

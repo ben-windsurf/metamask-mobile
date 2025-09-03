@@ -6,6 +6,10 @@ import type {
 } from '@metamask/utils';
 import { trace, TraceName } from '../../util/trace';
 
+/**
+ * Message types for JSON-RPC methods that require tracing in MetaMask Mobile
+ * Maps method names to their corresponding string identifiers for performance monitoring
+ */
 export const MESSAGE_TYPE = {
   ETH_SIGN_TYPED_DATA: 'eth_signTypedData',
   ETH_SIGN_TYPED_DATA_V1: 'eth_signTypedData_v1',
@@ -31,6 +35,11 @@ const METHOD_TYPE_TO_TRACE_NAME: Record<string, TraceName> = {
   [MESSAGE_TYPE.PERSONAL_SIGN]: TraceName.Signature,
 };
 
+/**
+ * Creates a tracing middleware for JSON-RPC requests in MetaMask Mobile
+ * Enables performance monitoring and debugging by adding trace context to specific method calls
+ * @returns {Function} Middleware function that adds tracing to supported JSON-RPC methods
+ */
 export default function createTracingMiddleware() {
   return async function tracingMiddleware(
     req: JsonRpcRequest<JsonRpcParams> & { traceContext?: unknown },

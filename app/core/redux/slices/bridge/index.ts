@@ -31,6 +31,11 @@ import { selectHasCreatedSolanaMainnetAccount } from '../../../../selectors/acco
 import { hasMinimumRequiredVersion } from './utils/hasMinimumRequiredVersion';
 import { isUnifiedSwapsEnvVarEnabled } from './utils/isUnifiedSwapsEnvVarEnabled';
 
+/**
+ * Selects the Bridge Controller state from the Redux store
+ * @param {RootState} state - The Redux root state
+ * @returns {Object|undefined} The Bridge Controller state or undefined if not available
+ */
 export const selectBridgeControllerState = (state: RootState) =>
   state.engine.backgroundState?.BridgeController;
 
@@ -47,6 +52,10 @@ export interface BridgeState {
   bridgeViewMode: BridgeViewMode | undefined;
 }
 
+/**
+ * Initial state for the bridge Redux slice
+ * Contains default values for all bridge-related state properties
+ */
 export const initialState: BridgeState = {
   sourceAmount: undefined,
   destAmount: undefined,
@@ -62,11 +71,19 @@ export const initialState: BridgeState = {
 
 const name = 'bridge';
 
+/**
+ * Async thunk to fetch and set the exchange rate for the source token
+ * Used to display fiat values for bridge transactions
+ */
 export const setSourceTokenExchangeRate = createAsyncThunk(
   'bridge/setSourceTokenExchangeRate',
   getTokenExchangeRate,
 );
 
+/**
+ * Async thunk to fetch and set the exchange rate for the destination token
+ * Used to display fiat values for bridge transactions
+ */
 export const setDestTokenExchangeRate = createAsyncThunk(
   'bridge/setDestTokenExchangeRate',
   getTokenExchangeRate,
@@ -156,16 +173,28 @@ export default reducer;
 const selectBridgeState = (state: RootState) => state[name];
 
 // Derived selectors using createSelector
+/**
+ * Selector to get the source amount for bridge transactions
+ * @returns {string|undefined} The source token amount as a string
+ */
 export const selectSourceAmount = createSelector(
   selectBridgeState,
   (bridgeState) => bridgeState.sourceAmount,
 );
 
+/**
+ * Selector to get the destination amount for bridge transactions
+ * @returns {string|undefined} The destination token amount as a string
+ */
 export const selectDestAmount = createSelector(
   selectBridgeState,
   (bridgeState) => bridgeState.destAmount,
 );
 
+/**
+ * Selector to get the current bridge view mode
+ * @returns {BridgeViewMode|undefined} The current view mode of the bridge interface
+ */
 export const selectBridgeViewMode = createSelector(
   selectBridgeState,
   (bridgeState) => bridgeState.bridgeViewMode,

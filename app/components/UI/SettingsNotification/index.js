@@ -5,6 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from '../../../util/theme';
 
+/**
+ * Creates styles for the SettingsNotification component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     menuItemWarning: {
@@ -38,6 +43,10 @@ const createStyles = (colors) =>
     },
   });
 
+/**
+ * Warning icon component for displaying error states
+ * @returns {JSX.Element} FontAwesome exclamation triangle icon
+ */
 const WarningIcon = () => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -51,6 +60,10 @@ const WarningIcon = () => {
     />
   );
 };
+/**
+ * Check icon component for displaying success states
+ * @returns {JSX.Element} MaterialCommunityIcons check circle icon
+ */
 const CheckIcon = () => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -80,6 +93,16 @@ const defaultProps = {
   isHighlighted: false,
 };
 
+/**
+ * SettingsNotification component displays notification messages with appropriate icons
+ * Shows warning or success states with customizable styling and content
+ * @param {Object} props - Component props
+ * @param {Object} props.style - Custom styles to apply
+ * @param {boolean} props.isWarning - Whether to display warning state
+ * @param {boolean} props.isNotification - Whether to use notification layout
+ * @param {React.ReactNode} props.children - Content to display in the notification
+ * @returns {JSX.Element} Styled notification container with icon and content
+ */
 const SettingsNotification = ({
   style,
   isWarning,

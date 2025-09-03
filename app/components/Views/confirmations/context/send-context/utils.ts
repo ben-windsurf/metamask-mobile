@@ -7,6 +7,13 @@ import { toTokenMinimalUnit, toWei } from '../../../../../util/number';
 import { AssetType } from '../../types/token';
 import { isNativeToken } from '../../utils/generic';
 
+/**
+ * Prepares an EVM transaction based on the asset type and transaction parameters
+ * Handles native tokens, NFTs (ERC-721), and ERC-20 tokens with appropriate data encoding
+ * @param {AssetType} asset - The asset being transferred (native token, ERC-20, or NFT)
+ * @param {TransactionParams} transactionParams - Base transaction parameters including from, to, and value
+ * @returns {TransactionParams} Prepared transaction parameters with appropriate data, to, and value fields
+ */
 export const prepareEVMTransaction = (
   asset: AssetType,
   transactionParams: TransactionParams,

@@ -11,6 +11,10 @@ import {
   onRPCRequestRejectedByUser,
 } from '../redux/slices/originThrottling';
 
+/**
+ * Set of RPC methods that can be blocked by the spam filter
+ * These methods are considered potentially spammy and subject to origin throttling
+ */
 export const BLOCKABLE_SPAM_RPC_METHODS = new Set([
   RPC_METHODS.ETH_SENDTRANSACTION,
   RPC_METHODS.ETH_SIGNTYPEDEATA,
@@ -28,10 +32,22 @@ export const BLOCKABLE_SPAM_RPC_METHODS = new Set([
 // Origin added in the createOriginMiddleware
 export type ExtendedJSONRPCRequest = JsonRpcRequest & { origin: string };
 
+/**
+ * Error thrown when a request is blocked by the spam filter
+ * Returns an unauthorized provider error with descriptive message
+ */
 export const SPAM_FILTER_ACTIVATED = providerErrors.unauthorized(
   'Request blocked due to spam filter.',
 );
 
+/**
+ * Validates whether an RPC request should be throttled based on origin spam filtering
+ * Throws SPAM_FILTER_ACTIVATED error if the origin is blocked for the requested method
+ * @param {Object} params - Validation parameters
+ * @param {ExtendedJSONRPCRequest} params.req - The RPC request with origin information
+ * @param {Store} params.store - Redux store to check origin blocking status
+ * @throws {Error} SPAM_FILTER_ACTIVATED if origin is blocked for this RPC method
+ */
 export function validateOriginThrottling({
   req,
   store,
@@ -55,6 +71,16 @@ export function validateOriginThrottling({
   }
 }
 
+/**
+ * Processes RPC request rejections to update origin throttling state
+ * Tracks user rejections and shows spam modal when origin gets blocked
+ * @param {Object} params - Processing parameters
+ * @param {ExtendedJSONRPCRequest} params.req - The rejected RPC request with origin
+ * @param {Object} params.error - Error details from the rejection
+ * @param {string} params.error.message - Error message text
+ * @param {number} [params.error.code] - Optional error code
+ * @param {Store} params.store - Redux store to dispatch throttling actions
+ */
 export function processOriginThrottlingRejection({
   req,
   error,

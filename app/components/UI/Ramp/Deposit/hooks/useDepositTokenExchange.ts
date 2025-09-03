@@ -16,6 +16,16 @@ interface UseTokenExchangeResult {
   error: Error | null;
 }
 
+/**
+ * Custom hook for calculating token exchange amounts in deposit flows
+ * Converts fiat currency amounts to token amounts using current exchange rates
+ * @param {UseTokenExchangeParams} params - Exchange calculation parameters
+ * @param {DepositFiatCurrency} params.fiatCurrency - The fiat currency to convert from
+ * @param {string} params.fiatAmount - The fiat amount to convert
+ * @param {DepositCryptoCurrency} params.token - The target token for conversion
+ * @param {DepositCryptoCurrency[]} params.tokens - Available tokens for rate lookup
+ * @returns {UseTokenExchangeResult} Exchange calculation result with token amount and rate
+ */
 const useDepositTokenExchange = ({
   fiatCurrency,
   fiatAmount,

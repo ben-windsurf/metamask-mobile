@@ -7,6 +7,12 @@ import { version as migrationVersion } from '../../../../store/migrations';
 import type { ControllerInitRequest } from '../../types';
 import { logAppMetadataControllerCreation } from './utils';
 
+/**
+ * Initializes the AppMetadataController for MetaMask Mobile
+ * Manages application version tracking and migration state across app updates
+ * @param {ControllerInitRequest<AppMetadataControllerMessenger>} initRequest - Controller initialization request containing messenger and persisted state
+ * @returns {{controller: AppMetadataController}} Object containing the initialized AppMetadataController instance
+ */
 export function appMetadataControllerInit(
   initRequest: ControllerInitRequest<AppMetadataControllerMessenger>,
 ) {

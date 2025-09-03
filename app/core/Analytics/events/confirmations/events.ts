@@ -24,6 +24,10 @@ enum TRANSACTION_EVENT_NAMES {
 const createEvent = (name: EVENT_NAME | TRANSACTION_EVENT_NAMES) =>
   generateOpt(name as unknown as METRICS_EVENT_NAME);
 
+/**
+ * Analytics events for confirmation screens and user interactions
+ * Contains pre-configured MetaMetrics events for tracking confirmation-related user actions
+ */
 export const CONFIRMATION_EVENTS = {
   ADVANCED_DETAILS_CLICKED: createEvent(EVENT_NAME.ADVANCED_DETAILS_CLICKED),
   BLOCKAID_ALERT_LINK_CLICKED: createEvent(
@@ -33,6 +37,11 @@ export const CONFIRMATION_EVENTS = {
   TOOLTIP_CLICKED: createEvent(EVENT_NAME.TOOLTIP_CLICKED),
 };
 
+/**
+ * Analytics events for transaction lifecycle tracking
+ * Contains pre-configured MetaMetrics events for monitoring transaction states and user decisions
+ * Used throughout the application to track transaction flow from creation to finalization
+ */
 export const TRANSACTION_EVENTS = {
   TRANSACTION_ADDED: createEvent(TRANSACTION_EVENT_NAMES.TRANSACTION_ADDED),
   TRANSACTION_APPROVED: createEvent(

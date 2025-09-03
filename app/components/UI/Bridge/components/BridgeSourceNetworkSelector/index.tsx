@@ -32,6 +32,10 @@ import { useSwitchNetworks } from '../../../../Views/NetworkSelector/useSwitchNe
 import { CaipChainId, Hex } from '@metamask/utils';
 import { selectEvmNetworkConfigurationsByChainId } from '../../../../../selectors/networkController';
 
+/**
+ * Creates styles for the BridgeSourceNetworkSelector component
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = () =>
   StyleSheet.create({
     listContent: {
@@ -55,6 +59,13 @@ export interface BridgeSourceNetworkSelectorProps {
   onApply?: (selectedChainIds: Hex[]) => void;
 }
 
+/**
+ * BridgeSourceNetworkSelector component allows users to select source networks for bridging
+ * Displays available networks with balances and provides multi-selection functionality
+ * @param {BridgeSourceNetworkSelectorProps} props - Component props
+ * @param {Function} props.onApply - Optional callback when networks are applied
+ * @returns {JSX.Element} The rendered source network selector component
+ */
 export const BridgeSourceNetworkSelector: React.FC<
   BridgeSourceNetworkSelectorProps
 > = ({ onApply }) => {

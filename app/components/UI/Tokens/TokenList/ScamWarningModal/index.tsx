@@ -24,6 +24,14 @@ interface ScamWarningModalProps {
   setShowScamWarningModal: (arg: boolean) => void;
 }
 
+/**
+ * ScamWarningModal displays a warning when the current network doesn't match the expected ticker
+ * Provides users with information about potential scam networks and allows navigation to edit network details
+ * @param {Object} props - Component props
+ * @param {boolean} props.showScamWarningModal - Whether the modal is visible
+ * @param {Function} props.setShowScamWarningModal - Function to control modal visibility
+ * @returns {JSX.Element} Modal component with scam warning content and edit network button
+ */
 export const ScamWarningModal = ({
   showScamWarningModal,
   setShowScamWarningModal,

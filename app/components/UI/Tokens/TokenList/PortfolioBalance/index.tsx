@@ -22,6 +22,12 @@ import Loader from '../../../../../component-library/components-temp/Loader/Load
 import NonEvmAggregatedPercentage from '../../../../../component-library/components-temp/Price/AggregatedPercentage/NonEvmAggregatedPercentage';
 import { selectIsEvmNetworkSelected } from '../../../../../selectors/multichainNetworkController';
 
+/**
+ * PortfolioBalance component displays the user's total portfolio balance across all chains
+ * Shows aggregated balance with privacy toggle and percentage change indicators
+ * Supports both EVM and non-EVM networks with appropriate percentage displays
+ * @returns {JSX.Element} The rendered portfolio balance component with privacy controls
+ */
 export const PortfolioBalance = React.memo(() => {
   const { PreferencesController } = Engine.context;
   const { colors } = useTheme();

@@ -21,6 +21,11 @@ const clearStackNavigatorOptions = {
 };
 
 const Stack = createStackNavigator();
+/**
+ * Bridge screen stack navigator component
+ * Provides navigation structure for the main bridge view
+ * @returns {JSX.Element} Stack navigator with bridge view screen
+ */
 export const BridgeScreenStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="BridgeView" component={BridgeView} />
@@ -28,6 +33,12 @@ export const BridgeScreenStack = () => (
 );
 
 const ModalStack = createStackNavigator();
+/**
+ * Bridge modal stack navigator component
+ * Provides modal navigation for bridge-related screens including token selectors,
+ * network selectors, slippage settings, and transaction details
+ * @returns {JSX.Element} Modal stack navigator with all bridge modal screens
+ */
 export const BridgeModalStack = () => (
   <ModalStack.Navigator
     mode={'modal'}

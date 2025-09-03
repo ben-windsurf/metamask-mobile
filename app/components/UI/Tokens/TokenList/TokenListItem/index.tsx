@@ -84,6 +84,18 @@ interface TokenListItemProps {
   showPercentageChange?: boolean;
 }
 
+/**
+ * TokenListItem component displays individual token information in a list
+ * Shows token balance, price changes, network badges, and provides interaction handlers
+ * Supports both EVM and non-EVM assets with staking and earning capabilities
+ * @param {TokenListItemProps} props - Component props
+ * @param {FlashListAssetKey} props.assetKey - Unique key identifying the asset
+ * @param {Function} props.showRemoveMenu - Callback to show token removal menu
+ * @param {Function} props.setShowScamWarningModal - Callback to show scam warning modal
+ * @param {boolean} props.privacyMode - Whether privacy mode is enabled
+ * @param {boolean} props.showPercentageChange - Whether to show price percentage change
+ * @returns {JSX.Element|null} Rendered token list item or null if no asset
+ */
 export const TokenListItem = React.memo(
   ({
     assetKey,

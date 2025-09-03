@@ -26,6 +26,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuoteRefreshRate } from '../../utils/quoteUtils';
 
+/**
+ * QuoteExpiredModal component displays a modal when a bridge quote has expired
+ * Allows users to get a new quote and handles stopping/resetting bridge controller state
+ * @returns {JSX.Element} Modal component with expired quote message and action button
+ */
 const QuoteExpiredModal = () => {
   const navigation = useNavigation();
   const sheetRef = useRef<BottomSheetRef>(null);

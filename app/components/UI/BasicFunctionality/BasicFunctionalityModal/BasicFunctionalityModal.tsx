@@ -41,6 +41,14 @@ interface Props {
   };
 }
 
+/**
+ * Modal component for toggling basic functionality settings in MetaMask
+ * Displays different content based on whether basic functionality is currently enabled or disabled
+ * Handles enabling/disabling basic functionality and related features like notifications
+ * @param {Props} props - Component props
+ * @param {Object} props.route - Navigation route object containing caller information
+ * @returns {JSX.Element} Bottom sheet modal with toggle functionality
+ */
 const BasicFunctionalityModal = ({ route }: Props) => {
   const { trackEvent, createEventBuilder } = useMetrics();
   const { colors } = useTheme();

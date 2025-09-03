@@ -31,11 +31,21 @@ import { useMetrics } from '../../../components/hooks/useMetrics';
 const foxLogo = require('../../../images/branding/fox.png');
 const metamaskName = require('../../../images/branding/metamask-name.png');
 
+/**
+ * Creates navigation details for the UpdateNeeded modal
+ * @returns {Object} Navigation details object for routing to the update needed modal
+ */
 export const createUpdateNeededNavDetails = createNavigationDetails(
   Routes.MODAL.ROOT_MODAL_FLOW,
   Routes.MODAL.UPDATE_NEEDED,
 );
 
+/**
+ * UpdateNeeded component displays a modal prompting users to update the app
+ * Shows when the current app version is no longer supported and requires an update
+ * Provides options to update now or remind later, with analytics tracking
+ * @returns {JSX.Element} The rendered update needed modal component
+ */
 const UpdateNeeded = () => {
   const { colors } = useTheme();
   const { trackEvent, createEventBuilder } = useMetrics();

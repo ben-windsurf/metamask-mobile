@@ -62,6 +62,13 @@ export interface StakingBalanceProps {
   asset: TokenI;
 }
 
+/**
+ * Internal component that renders the staking balance content with SDK provider context
+ * Displays staked ETH balance, staking rewards, unstaking banners, and staking action buttons
+ * @param {StakingBalanceProps} props - Component props
+ * @param {TokenI} props.asset - The asset token information for staking display
+ * @returns {JSX.Element} The staking balance content with banners and controls
+ */
 const StakingBalanceContent = ({ asset }: StakingBalanceProps) => {
   const { styles } = useStyles(styleSheet, {});
 
@@ -272,6 +279,14 @@ const StakingBalanceContent = ({ asset }: StakingBalanceProps) => {
   );
 };
 
+/**
+ * StakingBalance component displays the user's staking balance and related actions
+ * Shows staked ETH amounts, rewards, unstaking progress, and provides staking controls
+ * Wraps the content with StakeSDKProvider for staking functionality
+ * @param {StakingBalanceProps} props - Component props
+ * @param {TokenI} props.asset - The asset token information for staking operations
+ * @returns {JSX.Element} The complete staking balance interface
+ */
 export const StakingBalance = ({ asset }: StakingBalanceProps) => (
   <StakeSDKProvider>
     <StakingBalanceContent asset={asset} />

@@ -13,6 +13,14 @@ interface Options {
   internal?: boolean;
 }
 
+/**
+ * Custom hook for managing activation keys for ramp aggregator functionality
+ * Handles synchronization between device-stored keys and SDK activation keys
+ * @param {Options} options - Configuration options for the hook
+ * @param {boolean} options.provider - Whether to initialize provider-specific functionality
+ * @param {boolean} options.internal - Whether to use internal SDK activation keys
+ * @returns {Object} Hook return object with activation key management functions and state
+ */
 export default function useActivationKeys(options: Options = {}) {
   const { internal = false, provider = false } = options;
   const dispatch = useDispatch();

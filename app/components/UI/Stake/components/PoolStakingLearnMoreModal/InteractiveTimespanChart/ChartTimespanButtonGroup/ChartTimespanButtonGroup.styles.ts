@@ -1,6 +1,14 @@
 import type { Theme } from '@metamask/design-tokens';
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for chart timespan button group component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Design system theme object
+ * @param {Object} params.vars - Variable styles
+ * @param {boolean} params.vars.isSelected - Whether the button is selected
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: { isSelected: boolean };

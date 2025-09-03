@@ -19,6 +19,11 @@ import Text, {
 } from '../../../component-library/components/Texts/Text';
 import { selectNetworkName } from '../../../selectors/networkInfos';
 
+/**
+ * Creates styles for the NavbarTitle component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -32,8 +37,9 @@ const createStyles = (colors) =>
   });
 
 /**
- * UI PureComponent that renders inside the navbar
- * showing the view title and the selected network
+ * NavbarTitle component renders the navigation bar title with network selection
+ * Displays the current view title and selected network, allowing users to switch networks
+ * @returns {JSX.Element} TouchableOpacity containing title and network information
  */
 class NavbarTitle extends PureComponent {
   static propTypes = {
@@ -174,6 +180,11 @@ class NavbarTitle extends PureComponent {
 
 NavbarTitle.contextType = ThemeContext;
 
+/**
+ * Maps Redux state to component props
+ * @param {Object} state - Redux state object
+ * @returns {Object} Props object containing provider config, chain ID, and network name
+ */
 const mapStateToProps = (state) => ({
   providerConfig: selectProviderConfig(state),
   chainId: selectChainId(state),

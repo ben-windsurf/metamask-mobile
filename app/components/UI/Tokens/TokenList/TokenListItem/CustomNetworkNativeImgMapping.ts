@@ -12,6 +12,11 @@ import XrpLevmImg from '../../../../../images/xrp-logo.png';
 import SophonImg from '../../../../../images/sophon.png';
 import SophonTestnetImg from '../../../../../images/sophon-testnet.png';
 
+/**
+ * Mapping of custom network chain IDs to their native token images
+ * Provides image assets for displaying native tokens of custom networks in the token list
+ * @type {Record<Hex, ImageSourcePropType>}
+ */
 export const CustomNetworkNativeImgMapping: Record<Hex, ImageSourcePropType> = {
   [NETWORK_CHAIN_ID.FLARE_MAINNET]: FlareMainnetImg,
   [NETWORK_CHAIN_ID.SONGBIRD_TESTNET]: SongbirdImg,

@@ -1,3 +1,8 @@
+/**
+ * Sample network configurations for the Multi RPC Modal
+ * Contains predefined network settings for Ethereum Mainnet and Goerli testnet
+ * Used to demonstrate and test multi-RPC endpoint functionality in MetaMask Mobile
+ */
 export const SAMPLE_NETWORK_CONFIGURATIONS = {
   '0x1': {
     blockExplorerUrls: [],

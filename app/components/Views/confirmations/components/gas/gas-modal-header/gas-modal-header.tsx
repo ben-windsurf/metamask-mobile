@@ -11,6 +11,14 @@ import Text, {
   TextVariant,
 } from '../../../../../../component-library/components/Texts/Text';
 
+/**
+ * GasModalHeader component renders a header for gas-related modals with a back button and title
+ * Provides consistent navigation and title display for gas fee configuration screens
+ * @param {Object} props - Component props
+ * @param {() => void} props.onBackButtonClick - Callback function triggered when back button is pressed
+ * @param {string} props.title - Title text to display in the header
+ * @returns {JSX.Element} The rendered gas modal header component
+ */
 export const GasModalHeader = ({
   onBackButtonClick,
   title,

@@ -55,7 +55,20 @@ interface HeroProps {
 }
 
 /**
- * Hero component
+ * Hero component displays a prominent header section with an asset, title, and optional subtitle
+ * Used in confirmation flows to present key information with optional tooltip functionality
+ * @param {HeroProps} props - The component props
+ * @param {React.ReactNode} props.componentAsset - The main visual asset to display (icon, image, etc.)
+ * @param {React.ReactNode | string} props.title - The hero title, can be a string or custom React element
+ * @param {boolean} [props.hasPaddingTop=false] - Whether to add top padding to the hero section
+ * @param {string} [props.subtitle] - Optional subtitle text to display below the title
+ * @param {Object} [props.tooltipModalProps={}] - Configuration for optional tooltip modal
+ * @param {boolean} [props.tooltipModalProps.hasTooltip] - Whether tooltip functionality is available
+ * @param {boolean} [props.tooltipModalProps.isEnabled] - Whether tooltip modal is enabled
+ * @param {string} [props.tooltipModalProps.content] - Tooltip modal content text
+ * @param {string} [props.tooltipModalProps.title] - Tooltip modal title
+ * @param {string} [props.tooltipModalProps.testId] - Test ID for tooltip modal
+ * @returns {JSX.Element} The rendered Hero component
  * @example
  *
  * <Hero

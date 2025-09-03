@@ -13,6 +13,17 @@ import Icon, {
   IconSize,
 } from '../../../../../../component-library/components/Icons/Icon';
 
+/**
+ * UpsellBannerBody component renders the main content area of an upsell banner
+ * Displays primary, secondary, and tertiary text with an optional tooltip and end accessory
+ * @param {UpsellBannerBodyProps} props - Component props
+ * @param {string} props.primaryText - Main heading text
+ * @param {string} props.secondaryText - Secondary text displayed in success color
+ * @param {string} props.tertiaryText - Additional descriptive text
+ * @param {Function} props.onTooltipPress - Callback function when tooltip icon is pressed
+ * @param {React.ReactElement} props.endAccessory - Optional React element to display on the right side
+ * @returns {JSX.Element} The rendered upsell banner body component
+ */
 const UpsellBannerBody = ({
   primaryText,
   secondaryText,

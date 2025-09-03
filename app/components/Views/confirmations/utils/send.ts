@@ -8,9 +8,19 @@ import { toTokenMinimalUnit, toWei } from '../../../../util/number';
 import { AssetType } from '../types/token';
 import { isNativeToken } from '../utils/generic';
 
+/**
+ * Checks if the send redesign feature is enabled via environment variable
+ * @returns {boolean} True if send redesign is enabled, false otherwise
+ */
 export const isSendRedesignEnabled = () =>
   process.env.MM_SEND_REDESIGN_ENABLED === 'true';
 
+/**
+ * Handles navigation to the appropriate send page based on feature flags
+ * Routes to either the redesigned send flow or the legacy send flow
+ * @param {Function} navigate - Navigation function for screen transitions
+ * @param {AssetType | Nft} asset - The asset or NFT to be sent
+ */
 export const handleSendPageNavigation = (
   navigate: <RouteName extends string>(
     screenName: RouteName,
@@ -30,6 +40,13 @@ export const handleSendPageNavigation = (
   }
 };
 
+/**
+ * Prepares EVM transaction parameters for different asset types
+ * Handles native tokens, ERC-20 tokens, and NFTs with appropriate transaction data
+ * @param {AssetType} asset - The asset being transferred (native, ERC-20, or NFT)
+ * @param {TransactionParams} transactionParams - Base transaction parameters including from, to, and value
+ * @returns {TransactionParams} Prepared transaction parameters with appropriate data and value fields
+ */
 export const prepareEVMTransaction = (
   asset: AssetType,
   transactionParams: TransactionParams,

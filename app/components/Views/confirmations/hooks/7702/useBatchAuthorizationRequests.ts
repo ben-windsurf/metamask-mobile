@@ -14,6 +14,13 @@ export type EIP7702NetworkConfiguration = MultichainNetworkConfiguration & {
   upgradeContractAddress?: Hex;
 };
 
+/**
+ * Custom hook that checks for pending EIP-7702 authorization requests for a specific account and chain
+ * Filters submitted transactions to find those with authorization lists from the specified account
+ * @param {Hex} from - The account address to check for pending authorization requests
+ * @param {Hex} chainId - The chain ID to filter transactions by
+ * @returns {Object} Object containing hasPendingRequests boolean indicating if there are pending authorization requests
+ */
 export const useBatchAuthorizationRequests = (from: Hex, chainId: Hex) => {
   const transactions = useSelector(selectTransactions);
 

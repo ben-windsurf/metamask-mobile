@@ -16,6 +16,16 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * ErrorMessage component displays error or warning messages in the SendFlow
+ * Renders an Alert component with error/warning styling and optional continue button
+ * @param {Object} props - Component props
+ * @param {string|Object|Array} props.errorMessage - Error message to display
+ * @param {boolean} props.errorContinue - Whether to show continue button
+ * @param {Function} props.onContinue - Callback when continue button is pressed
+ * @param {boolean} props.isOnlyWarning - Whether to show as warning instead of error
+ * @returns {JSX.Element} Alert component with error message and optional continue button
+ */
 export default function ErrorMessage(props) {
   const { errorMessage, errorContinue, onContinue, isOnlyWarning } = props;
   return (

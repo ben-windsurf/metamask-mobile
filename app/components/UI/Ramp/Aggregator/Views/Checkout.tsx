@@ -35,10 +35,19 @@ interface CheckoutParams {
   provider: Provider;
 }
 
+/**
+ * Creates navigation details for the checkout screen
+ * @returns Navigation details object for the checkout route
+ */
 export const createCheckoutNavDetails = createNavigationDetails<CheckoutParams>(
   Routes.RAMP.CHECKOUT,
 );
 
+/**
+ * CheckoutWebView component handles the provider checkout process in a WebView
+ * Manages order completion, error handling, and navigation state changes during the checkout flow
+ * @returns JSX element rendering the checkout WebView or error states
+ */
 const CheckoutWebView = () => {
   const { selectedAddress, selectedChainId, sdkError, callbackBaseUrl, isBuy } =
     useRampSDK();

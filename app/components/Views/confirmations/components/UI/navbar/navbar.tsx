@@ -12,6 +12,16 @@ import {
 import Device from '../../../../../../util/device';
 import { Theme } from '../../../../../../util/theme/models';
 
+/**
+ * Creates a navigation bar configuration for confirmation screens
+ * Provides a customizable header with title, back button, and theme-aware styling
+ * @param {Object} options - Navigation bar configuration options
+ * @param {string} options.title - The title to display in the navigation bar
+ * @param {() => void} options.onReject - Callback function when back button is pressed
+ * @param {boolean} [options.addBackButton=true] - Whether to show the back button
+ * @param {Theme} options.theme - Theme object for styling the navigation bar
+ * @returns {Object} Navigation bar configuration object for React Navigation
+ */
 export function getNavbar({
   title,
   onReject,

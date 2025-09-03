@@ -16,6 +16,11 @@ import { IconName } from '../../../../component-library/components/Icons/Icon';
 import { useSelector } from 'react-redux';
 import { selectStablecoinLendingEnabledFlag } from '../../Earn/selectors/featureFlags';
 
+/**
+ * Creates styles for the QuickAmounts component
+ * @param {Colors} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
     content: {
@@ -46,6 +51,15 @@ interface AmountProps {
   disabled?: boolean;
 }
 
+/**
+ * Individual amount button component for quick selection
+ * Renders a button with the amount label and handles press events
+ * @param {AmountProps} props - Component props
+ * @param {QuickAmount} props.amount - The amount object containing value and label
+ * @param {Function} props.onPress - Callback when amount is pressed
+ * @param {Function} props.onMaxPress - Optional callback for max amount selection
+ * @returns {JSX.Element} Rendered amount button component
+ */
 const Amount = ({ amount, onPress, onMaxPress }: AmountProps) => {
   const { value, label } = amount;
   const { colors } = useTheme();
@@ -87,6 +101,15 @@ interface QuickAmountsProps {
   onMaxPress?: () => void;
 }
 
+/**
+ * QuickAmounts component displays a row of quick amount selection buttons
+ * Used for staking operations to allow users to quickly select preset amounts
+ * @param {QuickAmountsProps} props - Component props
+ * @param {QuickAmount[]} props.amounts - Array of quick amount options
+ * @param {Function} props.onAmountPress - Callback when an amount is selected
+ * @param {Function} props.onMaxPress - Optional callback for max amount selection
+ * @returns {JSX.Element} Rendered quick amounts selection component
+ */
 const QuickAmounts = ({
   amounts,
   onAmountPress,

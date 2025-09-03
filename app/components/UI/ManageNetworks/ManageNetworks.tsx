@@ -21,6 +21,11 @@ import AppConstants from '../../../core/AppConstants';
 import styles from './ManageNetworks.styles';
 import { selectChainId } from '../../../selectors/networkController';
 
+/**
+ * ManageNetworksComponent displays network management interface
+ * Allows users to switch networks and provides links to privacy policies
+ * @returns {JSX.Element} The rendered manage networks component
+ */
 export default function ManageNetworksComponent() {
   const chainId = useSelector(selectChainId);
   const navigation = useNavigation();

@@ -40,6 +40,12 @@ import {
 } from './event-handlers/metrics';
 import { handleShowNotification } from './event-handlers/notification';
 
+/**
+ * Initializes the TransactionController with MetaMask Mobile-specific configuration
+ * Sets up transaction handling, smart transaction support, and event listeners
+ * @param {ControllerInitRequest} request - Controller initialization request containing messenger, state, and dependencies
+ * @returns {Object} Object containing the initialized TransactionController instance
+ */
 export const TransactionControllerInit: ControllerInitFunction<
   TransactionController,
   TransactionControllerMessenger,

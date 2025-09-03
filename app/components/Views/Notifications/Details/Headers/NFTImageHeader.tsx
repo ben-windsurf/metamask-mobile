@@ -12,6 +12,12 @@ import useStyles from '../useStyles';
 
 type NFTImageHeaderProps = ModalHeaderNFTImage;
 
+/**
+ * NFTImageHeader component displays an NFT image with a network badge overlay
+ * Used in notification details to show NFT collection icons with network identification
+ * @param {NFTImageHeaderProps} props - Component props containing NFT image URL and network badge URL
+ * @returns {JSX.Element} A view containing the NFT image with a positioned network badge
+ */
 export default function NFTImageHeader(props: NFTImageHeaderProps) {
   const { styles } = useStyles();
 

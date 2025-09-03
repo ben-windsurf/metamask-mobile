@@ -20,6 +20,10 @@ import { WalletClientType } from '../../../core/SnapKeyring/MultichainWalletSnap
 import { SolScope } from '@metamask/keyring-api';
 ///: END:ONLY_INCLUDE_IF
 
+/**
+ * Predefined carousel slides configuration for various MetaMask features
+ * Contains slide data for Solana integration, smart accounts, funding, and other features
+ */
 export const PREDEFINED_SLIDES: CarouselSlide[] = [
   ///: BEGIN:ONLY_INCLUDE_IF(solana)
   {
@@ -113,6 +117,10 @@ export const PREDEFINED_SLIDES: CarouselSlide[] = [
   },
 ];
 
+/**
+ * Mapping of slide IDs to their corresponding banner images
+ * Used to display appropriate images for each carousel slide
+ */
 export const BANNER_IMAGES: Partial<Record<SlideId, ImageSourcePropType>> = {
   card: cardImage,
   fund: fundImage,
@@ -126,6 +134,15 @@ export const BANNER_IMAGES: Partial<Record<SlideId, ImageSourcePropType>> = {
   ///: END:ONLY_INCLUDE_IF
 };
 
+/**
+ * Gets the space ID for features announcements from environment variables
+ * @returns {string} The features announcements space ID
+ */
 export const SPACE_ID = () => process.env.FEATURES_ANNOUNCEMENTS_SPACE_ID;
+
+/**
+ * Gets the access token for features announcements from environment variables
+ * @returns {string} The features announcements access token
+ */
 export const ACCESS_TOKEN = () =>
   process.env.FEATURES_ANNOUNCEMENTS_ACCESS_TOKEN;

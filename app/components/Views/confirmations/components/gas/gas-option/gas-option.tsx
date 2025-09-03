@@ -8,6 +8,14 @@ import Text, {
 import { type GasOption as GasOptionType } from '../../../types/gas';
 import styleSheet from './gas-option.styles';
 
+/**
+ * GasOption component displays a selectable gas fee option with pricing and timing information
+ * Renders gas option details including name, estimated time, fiat value, and selection state
+ * Used in gas fee selection interfaces to allow users to choose transaction speed and cost
+ * @param {Object} props - Component props
+ * @param {GasOptionType} props.option - Gas option data containing pricing, timing, and selection info
+ * @returns {JSX.Element} The rendered gas option component
+ */
 export const GasOption = ({ option }: { option: GasOptionType }) => {
   const {
     onSelect,

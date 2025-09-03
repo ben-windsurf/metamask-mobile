@@ -10,6 +10,15 @@ import { validateGas } from '../../../utils/validations/gas';
 import { TextFieldWithLabel } from '../../UI/text-field-with-label';
 import styleSheet from './gas-input.styles';
 
+/**
+ * GasInput component provides an input field for users to set gas limit values in transaction confirmations
+ * Validates gas input values and converts between decimal and hexadecimal formats
+ * Updates parent components with both the converted hex value and validation errors
+ * @param {Object} props - Component props
+ * @param {function} props.onChange - Callback function called when gas limit value changes, receives hex value
+ * @param {function} props.onErrorChange - Callback function called when validation error state changes
+ * @returns {JSX.Element} Rendered gas input component with validation
+ */
 export const GasInput = ({
   onChange,
   onErrorChange,

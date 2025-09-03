@@ -1,6 +1,14 @@
 import type { Theme } from '@metamask/design-tokens';
 import { StyleSheet, TextStyle } from 'react-native';
 
+/**
+ * Creates stylesheet for ChartNavigationButton component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Design system theme object
+ * @param {Object} params.vars - Style variables
+ * @param {boolean} params.vars.selected - Whether the button is in selected state
+ * @returns {Object} StyleSheet object with button and label styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: {

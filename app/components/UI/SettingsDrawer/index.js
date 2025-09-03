@@ -18,6 +18,12 @@ import Text, {
   TextColor,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates styles for the SettingsDrawer component
+ * @param {Object} colors - Theme colors object
+ * @param {string} titleColor - Color for the title text
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors, titleColor) =>
   StyleSheet.create({
     root: {
@@ -83,6 +89,19 @@ const defaultProps = {
   onPress: undefined,
 };
 
+/**
+ * SettingsDrawer component renders a touchable list item for settings navigation
+ * Displays a title, optional description, warning message, and arrow indicator
+ * @param {Object} props - Component props
+ * @param {string} props.title - The main title text to display
+ * @param {string} props.description - Optional descriptive text below the title
+ * @param {Function} props.onPress - Handler called when the drawer is pressed
+ * @param {string} props.warning - Optional warning message to display
+ * @param {boolean} props.renderArrowRight - Whether to show the right arrow (default: true)
+ * @param {string} props.testID - Test identifier for testing purposes
+ * @param {string} props.titleColor - Color for the title text (default: TextColor.Default)
+ * @returns {JSX.Element} The rendered settings drawer component
+ */
 const SettingsDrawer = ({
   title,
   description,

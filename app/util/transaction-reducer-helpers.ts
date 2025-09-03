@@ -56,7 +56,7 @@ export function getTxData(txMeta: TxMeta = {}): Partial<TxMeta> {
  * Get meta data of a transaction, without the standard properties, from a set of tx data
  *
  * @param {object} txMeta - An object containing data about a transaction
- * @returns {object} - An object containing the standard properties of a transaction
+ * @returns {object} - An object containing the non-standard properties of a transaction (excluding data, from, gas, gasPrice, to, value, maxFeePerGas, maxPriorityFeePerGas)
  */
 export function getTxMeta(txMeta: TxMeta = {}): Partial<TxMeta> {
   const {

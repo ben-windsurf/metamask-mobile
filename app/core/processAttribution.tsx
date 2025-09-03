@@ -20,6 +20,14 @@ interface AttributionResult {
   utm_content?: string;
 }
 
+/**
+ * Processes attribution data from deeplinks for marketing analytics
+ * Extracts UTM parameters and attribution IDs from deeplink URLs when data collection is enabled
+ * @param {ProcessAttributionParams} params - The attribution processing parameters
+ * @param {string | null} params.currentDeeplink - The current deeplink URL to process
+ * @param {Store<RootState, any>} params.store - Redux store to check marketing data collection settings
+ * @returns {AttributionResult | undefined} Attribution data object with UTM parameters, or undefined if data collection is disabled or no deeplink provided
+ */
 export function processAttribution({
   currentDeeplink,
   store,

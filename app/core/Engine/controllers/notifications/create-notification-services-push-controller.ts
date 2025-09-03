@@ -12,6 +12,14 @@ import {
   isPushNotificationsEnabled,
 } from './push-utils';
 
+/**
+ * Creates and configures a NotificationServicesPushController instance for MetaMask Mobile
+ * Handles push notification registration, subscription management, and permission validation
+ * @param {Object} props - Configuration properties for the push controller
+ * @param {NotificationServicesPushControllerMessenger} props.messenger - Controller messenger for communication
+ * @param {Partial<NotificationServicesPushControllerState>} [props.initialState] - Optional initial state override
+ * @returns {NotificationServicesPushController} Configured push notification controller instance
+ */
 export const createNotificationServicesPushController = (props: {
   messenger: NotificationServicesPushControllerMessenger;
   initialState?: Partial<NotificationServicesPushControllerState>;

@@ -19,6 +19,18 @@ interface RemoveEvmTokenProps {
   createEventBuilder: (event: IMetaMetricsEvent) => MetricsEventBuilder;
 }
 
+/**
+ * Removes an EVM token from the user's token list by hiding it
+ * Handles the token removal process including controller interaction, notifications, and analytics tracking
+ * @param {RemoveEvmTokenProps} params - Token removal parameters
+ * @param {TokenI} params.tokenToRemove - The token object to remove from the list
+ * @param {string} params.currentChainId - The current chain ID
+ * @param {Function} params.trackEvent - Function to track analytics events
+ * @param {Function} params.strings - Localization function for getting translated strings
+ * @param {Function} params.getDecimalChainId - Function to convert chain ID to decimal format
+ * @param {Function} params.createEventBuilder - Function to create analytics event builders
+ * @returns {Promise<void>} Promise that resolves when token removal is complete
+ */
 export const removeEvmToken = async ({
   tokenToRemove,
   currentChainId,

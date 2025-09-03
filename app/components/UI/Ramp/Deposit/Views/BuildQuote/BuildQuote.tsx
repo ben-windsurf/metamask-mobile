@@ -90,9 +90,19 @@ interface BuildQuoteParams {
   shouldRouteImmediately?: boolean;
 }
 
+/**
+ * Creates navigation details for the BuildQuote screen
+ * @returns Navigation details object for BuildQuote route
+ */
 export const createBuildQuoteNavDetails =
   createNavigationDetails<BuildQuoteParams>(Routes.DEPOSIT.BUILD_QUOTE);
 
+/**
+ * BuildQuote component allows users to configure and build a deposit quote
+ * Handles token selection, payment method selection, amount input, and quote generation
+ * Manages authentication flow and routing to appropriate next steps
+ * @returns JSX element rendering the build quote interface
+ */
 const BuildQuote = () => {
   const { shouldRouteImmediately } = useParams<BuildQuoteParams>();
 

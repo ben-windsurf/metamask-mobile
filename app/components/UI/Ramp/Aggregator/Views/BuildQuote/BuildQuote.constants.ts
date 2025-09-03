@@ -15,6 +15,10 @@ const {
   ACH_DARK,
 } = APP_CONSTANTS.URLS.ICONS;
 
+/**
+ * Mock cryptocurrency data for testing and development purposes
+ * Contains sample ETH and UNI token information with network details and limits
+ */
 export const mockCryptoCurrenciesData = [
   {
     id: '2',
@@ -40,6 +44,10 @@ export const mockCryptoCurrenciesData = [
   },
 ] as CryptoCurrency[];
 
+/**
+ * Mock fiat currency data for testing and development purposes
+ * Contains sample USD and EUR currency information with symbols and decimals
+ */
 export const mockFiatCurrenciesData = [
   {
     id: '2',
@@ -57,6 +65,11 @@ export const mockFiatCurrenciesData = [
   },
 ] as FiatCurrency[];
 
+/**
+ * Mock payment methods data for testing and development purposes
+ * Contains sample payment options including credit/debit cards, Apple Pay, and bank transfers
+ * with associated icons, logos, delays, and supported features
+ */
 export const mockPaymentMethods = [
   {
     id: '/payments/credit-debit-card',
@@ -122,6 +135,10 @@ export const mockPaymentMethods = [
   },
 ] as Partial<Payment>[];
 
+/**
+ * Mock regions data for testing and development purposes
+ * Contains sample country information with supported currencies and buy/sell capabilities
+ */
 export const mockRegionsData = [
   {
     currencies: ['/currencies/fiat/clp'],

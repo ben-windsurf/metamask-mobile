@@ -4,6 +4,13 @@ import { Theme } from '../../../../../../../util/theme/models';
 interface RegionSelectorModalStyleSheetVars {
   screenHeight: number;
 }
+/**
+ * Creates stylesheet for RegionSelectorModal component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling
+ * @param {RegionSelectorModalStyleSheetVars} params.vars - Variables for dynamic styling
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: RegionSelectorModalStyleSheetVars;

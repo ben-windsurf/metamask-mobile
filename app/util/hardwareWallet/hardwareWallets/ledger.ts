@@ -21,6 +21,12 @@ export interface LedgerMessageSignModalParams extends LedgerSignModelNavParams {
   deviceId: any;
 }
 
+/**
+ * Creates navigation details for Ledger message signing modal
+ * Retrieves the device ID and combines it with the provided parameters
+ * @param {LedgerSignModelNavParams} params - Parameters for the Ledger signing modal
+ * @returns {Promise<Object>} Navigation details object for the Ledger message sign modal
+ */
 export const signModalNavDetail = async (params: LedgerSignModelNavParams) => {
   const deviceId = await getDeviceId();
   return createNavigationDetails<LedgerMessageSignModalParams>(

@@ -177,6 +177,10 @@ export const NetworkList = {
 
 const NetworkListKeys = Object.keys(NetworkList);
 
+/**
+ * Mapping of chain IDs to network names supported by Blockaid security service
+ * Used for security validation and threat detection across supported networks
+ */
 export const BLOCKAID_SUPPORTED_NETWORK_NAMES = {
   [NETWORKS_CHAIN_ID.MAINNET]: 'Ethereum Mainnet',
   [NETWORKS_CHAIN_ID.BSC]: 'Binance Smart Chain',
@@ -196,15 +200,32 @@ export const BLOCKAID_SUPPORTED_NETWORK_NAMES = {
 
 export default NetworkList;
 
+/**
+ * Gets all supported network types excluding RPC networks
+ * @returns {string[]} Array of network type strings
+ */
 export const getAllNetworks = () =>
   NetworkListKeys.filter((name) => name !== RPC);
 
+/**
+ * Gets all mainnet network types (excluding testnets)
+ * @returns {string[]} Array of mainnet network type strings
+ */
 export const getMainnetNetworks = () =>
   getAllNetworks().filter((name) => !NetworkList[name].isTestNet);
 
+/**
+ * Gets all testnet network types
+ * @returns {string[]} Array of testnet network type strings
+ */
 export const getTestNetworks = () =>
   getAllNetworks().filter((name) => NetworkList[name].isTestNet);
 
+/**
+ * Checks if the given network type is a mainnet network
+ * @param {string} networkType - The network type to check
+ * @returns {boolean} True if the network is a mainnet, false otherwise
+ */
 export const isMainnetNetwork = (networkType) =>
   getMainnetNetworks().includes(networkType);
 
@@ -224,10 +245,25 @@ export const isDefaultMainnet = (networkType) => networkType === MAINNET;
  */
 export const isMainNet = (chainId) => chainId === '0x1';
 
+/**
+ * Checks if the given network type is Linea Mainnet
+ * @param {string} networkType - The network type to check
+ * @returns {boolean} True if the network is Linea Mainnet, false otherwise
+ */
 export const isLineaMainnet = (networkType) => networkType === LINEA_MAINNET;
+/**
+ * Checks if the given chain ID is Linea Mainnet
+ * @param {string} chainId - The chain ID to check
+ * @returns {boolean} True if the chain ID is Linea Mainnet, false otherwise
+ */
 export const isLineaMainnetChainId = (chainId) =>
   chainId === CHAIN_IDS.LINEA_MAINNET;
 
+/**
+ * Checks if the given chain ID is Solana Mainnet
+ * @param {string} chainId - The chain ID to check
+ * @returns {boolean} True if the chain ID is Solana Mainnet, false otherwise
+ */
 export const isSolanaMainnet = (chainId) => chainId === SolScope.Mainnet;
 
 /**
@@ -249,12 +285,27 @@ export const getDecimalChainId = (chainId) => {
   return parseInt(chainId, 16).toString(10);
 };
 
+/**
+ * Checks if the given chain ID corresponds to Ethereum Mainnet
+ * @param {string|number} chainId - The chain ID to check
+ * @returns {boolean} True if the chain ID is Ethereum Mainnet, false otherwise
+ */
 export const isMainnetByChainId = (chainId) =>
   getDecimalChainId(String(chainId)) === String(1);
 
+/**
+ * Checks if the given chain ID corresponds to Linea Mainnet
+ * @param {string|number} chainId - The chain ID to check
+ * @returns {boolean} True if the chain ID is Linea Mainnet, false otherwise
+ */
 export const isLineaMainnetByChainId = (chainId) =>
   getDecimalChainId(String(chainId)) === String(59144);
 
+/**
+ * Checks if the given chain ID corresponds to a multi-layer fee network
+ * @param {string} chainId - The chain ID to check
+ * @returns {boolean} True if the network uses multi-layer fees, false otherwise
+ */
 export const isMultiLayerFeeNetwork = (chainId) =>
   chainId === NETWORKS_CHAIN_ID.OPTIMISM;
 

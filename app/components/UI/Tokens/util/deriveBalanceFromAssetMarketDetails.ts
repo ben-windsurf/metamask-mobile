@@ -9,6 +9,16 @@ import { TOKEN_BALANCE_LOADING, TOKEN_RATE_UNDEFINED } from '../constants';
 import { TokenI } from '../types';
 import { Hex } from '@metamask/utils';
 
+/**
+ * Derives balance information from asset market details including fiat conversion
+ * Calculates formatted balance, fiat value, and handles loading states for tokens
+ * @param {TokenI} asset - The token asset object containing balance and metadata
+ * @param {any} tokenExchangeRates - Exchange rates for token contracts
+ * @param {any} tokenBalances - Token balance data by contract address
+ * @param {any} conversionRate - Current conversion rate to fiat currency
+ * @param {any} currentCurrency - Current fiat currency for formatting
+ * @returns {Object} Object containing balanceFiat, balanceValueFormatted, balance, and balanceFiatCalculation
+ */
 export const deriveBalanceFromAssetMarketDetails = (
   asset: TokenI,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

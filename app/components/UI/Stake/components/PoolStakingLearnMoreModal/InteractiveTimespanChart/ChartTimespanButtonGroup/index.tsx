@@ -14,6 +14,14 @@ interface ChartTimespanButtonProps {
   label: string;
   isSelected: boolean;
 }
+/**
+ * Individual button component for chart timespan selection
+ * @param {ChartTimespanButtonProps} props - Component props
+ * @param {Function} props.onPress - Callback function when button is pressed
+ * @param {string} props.label - Text label to display on the button
+ * @param {boolean} props.isSelected - Whether this button is currently selected
+ * @returns {JSX.Element} Rendered timespan button component
+ */
 const ChartTimespanButton = ({
   onPress,
   label,
@@ -36,6 +44,16 @@ export interface ChartTimespanButtonGroupProps {
   isLoading?: boolean;
 }
 
+/**
+ * Button group component for selecting chart timespan periods
+ * Renders a horizontal group of buttons for different time periods (e.g., 1D, 7D, 30D)
+ * Shows skeleton loading state when data is being fetched
+ * @param {ChartTimespanButtonGroupProps} props - Component props
+ * @param {ChartButton[]} props.buttons - Array of button configurations with labels and values
+ * @param {Function} props.onPress - Callback function when a button is pressed, receives the selected timespan value
+ * @param {boolean} props.isLoading - Whether to show loading skeleton instead of buttons
+ * @returns {JSX.Element} Rendered button group component or loading skeleton
+ */
 const ChartTimespanButtonGroup = ({
   buttons,
   onPress,

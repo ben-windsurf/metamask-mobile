@@ -25,10 +25,21 @@ import { SRP_GUIDE_URL } from '../../../constants/urls';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useMetrics } from '../../../components/hooks/useMetrics';
 
+/**
+ * Creates navigation details for the wallet restored screen
+ * Used for navigation configuration in the vault recovery flow
+ * @returns {Object} Navigation details object for the wallet restored route
+ */
 export const createWalletRestoredNavDetails = createNavigationDetails(
   Routes.VAULT_RECOVERY.WALLET_RESTORED,
 );
 
+/**
+ * WalletRestored component displays a success screen after wallet restoration
+ * Shows celebration message and provides navigation to continue the onboarding flow
+ * Handles authentication and tracks analytics events for the restoration process
+ * @returns {JSX.Element} The rendered wallet restored success screen
+ */
 const WalletRestored = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { colors } = useAppThemeFromContext();
