@@ -5,8 +5,17 @@ import {
   TextVariant,
 } from '../../../../component-library/components/Texts/Text';
 
+/**
+ * Standard height for price charts, calculated as 44% of screen height
+ */
 export const CHART_HEIGHT = Dimensions.get('screen').height * 0.44;
 
+/**
+ * Creates stylesheet for PriceChart component with theme-aware styling
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and typography
+ * @returns {Object} StyleSheet object with chart styling definitions
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { typography } = theme;

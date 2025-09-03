@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 /**
- *
- * @returns StyleSheet object.
+ * Creates stylesheet for DeFi positions list item component
+ * Defines styles for list item layout, content wrapper, and balance display
+ * @returns StyleSheet object containing styles for DeFi positions list item
  */
 const styleSheet = () =>
   StyleSheet.create({

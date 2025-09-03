@@ -11,6 +11,10 @@ export enum AssetType {
 /**
  * Describes an amount of fiat.
  */
+/**
+ * Constant representing unavailable fiat amount
+ * Used when fiat conversion is not possible or data is unavailable
+ */
 export const FIAT_UNAVAILABLE = null;
 export type FiatAmountAvailable = number | string;
 export type FiatAmount = FiatAmountAvailable | typeof FIAT_UNAVAILABLE;

@@ -1,6 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../../util/theme/models';
 
+/**
+ * Creates stylesheet for SimulationDetails component with theme and variant support
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - Theme object containing colors and styling tokens
+ * @param {Object} params.vars - Variant configuration object
+ * @param {boolean} params.vars.isTransactionsRedesign - Whether to use redesigned transaction styling
+ * @param {boolean} params.vars.noBalanceChanges - Whether there are no balance changes to display
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: {
   theme: Theme;
   vars: { isTransactionsRedesign: boolean; noBalanceChanges?: boolean };

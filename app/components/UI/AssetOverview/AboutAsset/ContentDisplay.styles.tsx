@@ -1,6 +1,12 @@
 import type { Theme } from '@metamask/design-tokens';
 import { StyleSheet, TextStyle } from 'react-native';
 
+/**
+ * Creates stylesheet for ContentDisplay component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and design tokens
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

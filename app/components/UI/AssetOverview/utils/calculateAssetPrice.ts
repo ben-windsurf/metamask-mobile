@@ -52,6 +52,18 @@ const TIME_PERIOD_TO_MARKET_DATA_KEY: Record<
   all: 'P1000Y',
 };
 
+/**
+ * Calculates asset price information including current price, price difference, and percentage change
+ * Handles both EVM and non-EVM assets with different pricing mechanisms
+ * @param {CalculateAssetPriceParams} params - Parameters for price calculation
+ * @param {boolean} params.isEvmAssetSelected - Whether the selected asset is an EVM asset
+ * @param {number} params.exchangeRate - Exchange rate for EVM assets
+ * @param {number} params.tickerConversionRate - Ticker conversion rate for EVM assets
+ * @param {TokenPrice[]} params.prices - Historical price data array
+ * @param {Object} params.multichainAssetRates - Rate and market data for non-EVM assets
+ * @param {TimePeriod} params.timePeriod - Time period for price comparison
+ * @returns {CalculateAssetPriceResult} Object containing current price, price difference, compare price, and percentage change
+ */
 export const calculateAssetPrice = ({
   isEvmAssetSelected,
   exchangeRate,

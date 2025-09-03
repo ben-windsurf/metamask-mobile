@@ -13,6 +13,10 @@ import { FIAT_UNAVAILABLE, FiatAmount } from '../types';
 import useHideFiatForTestnet from '../../../hooks/useHideFiatForTestnet';
 import { shortenString } from '../../../../util/notifications';
 
+/**
+ * Creates stylesheet for fiat display components
+ * @returns {Object} StyleSheet object with base styling for fiat displays
+ */
 const styleSheet = () =>
   StyleSheet.create({
     base: {
@@ -35,6 +39,11 @@ const FiatNotAvailableDisplay: React.FC = () => {
   );
 };
 
+/**
+ * Calculates the total fiat value from an array of fiat amounts
+ * @param {FiatAmount[]} fiatAmounts - Array of fiat amounts to sum
+ * @returns {BigNumber} The total fiat value as a BigNumber
+ */
 export function calculateTotalFiat(fiatAmounts: FiatAmount[]): BigNumber {
   return fiatAmounts.reduce(
     (total: BigNumber, fiat) =>
@@ -57,6 +66,12 @@ interface IndividualFiatDisplayProps extends ViewProps {
   shorten?: boolean;
 }
 
+/**
+ * Component that displays an individual fiat amount with optional shortening
+ * Handles unavailable fiat values and testnet hiding
+ * @param {IndividualFiatDisplayProps} props - Component props
+ * @returns {JSX.Element|null} Rendered fiat display or null if hidden
+ */
 export const IndividualFiatDisplay: React.FC<IndividualFiatDisplayProps> = ({
   fiatAmount,
   shorten = true,
@@ -95,6 +110,13 @@ export const IndividualFiatDisplay: React.FC<IndividualFiatDisplayProps> = ({
  *
  * @param props - Properties object.
  * @param props.fiatAmounts - The list of fiat amounts to sum.
+ */
+/**
+ * Component that displays the total fiat value of multiple amounts
+ * Shows formatted total with currency or unavailable message
+ * @param {Object} props - Component props
+ * @param {FiatAmount[]} props.fiatAmounts - Array of fiat amounts to sum and display
+ * @returns {JSX.Element|null} Rendered total fiat display or null if hidden
  */
 export const TotalFiatDisplay: React.FC<{
   fiatAmounts: FiatAmount[];

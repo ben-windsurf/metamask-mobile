@@ -3,6 +3,15 @@ import { TokenI } from '../../Tokens/types';
 import { TokenDetails } from '../TokenDetails/TokenDetails';
 import { parseCaipAssetType } from '@metamask/utils';
 
+/**
+ * Extracts token details from asset information for display purposes
+ * Handles both EVM and non-EVM assets, including native tokens and contract tokens
+ * @param {TokenI} asset - The token asset object containing basic token information
+ * @param {boolean} isNonEvmAsset - Whether this is a non-EVM asset (e.g., Solana)
+ * @param {string | undefined} tokenContractAddress - The contract address for EVM tokens
+ * @param {Record<string, string | number | string[]>} tokenMetadata - Additional token metadata
+ * @returns {TokenDetails} Formatted token details including contract address, decimals, and token list
+ */
 export const getTokenDetails = (
   asset: TokenI,
   isNonEvmAsset: boolean,

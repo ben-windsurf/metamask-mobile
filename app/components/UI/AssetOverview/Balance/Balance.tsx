@@ -50,6 +50,12 @@ interface BalanceProps {
   secondaryBalance?: string;
 }
 
+/**
+ * Gets the appropriate network badge image source for a given chain ID
+ * Handles test networks, default networks, popular networks, and custom networks
+ * @param {Hex} chainId - The chain ID to get the badge source for
+ * @returns {string | undefined} The image source URL for the network badge
+ */
 export const NetworkBadgeSource = (chainId: Hex) => {
   if (isTestNet(chainId)) return getTestNetImageByChainId(chainId);
   const defaultNetwork = getDefaultNetworkByChainId(chainId) as
@@ -86,6 +92,15 @@ export const NetworkBadgeSource = (chainId: Hex) => {
   }
 };
 
+/**
+ * Balance component displays asset balance information with network badge and percentage change
+ * Shows the user's balance for a specific asset with navigation to asset details
+ * @param {BalanceProps} props - Component props
+ * @param {TokenI} props.asset - The asset/token to display balance for
+ * @param {string} props.mainBalance - The primary balance display value
+ * @param {string} props.secondaryBalance - Optional secondary balance display value
+ * @returns {JSX.Element} The rendered balance component
+ */
 const Balance = ({ asset, mainBalance, secondaryBalance }: BalanceProps) => {
   const { styles } = useStyles(styleSheet, {});
   const navigation = useNavigation();

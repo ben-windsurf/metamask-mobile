@@ -24,8 +24,9 @@ const comparators: BalanceChangeComparator[] = [byTokenStandard];
 /**
  * Compares BalanceChange objects based on multiple criteria.
  *
- * @param a
- * @param b
+ * @param a - First BalanceChange object to compare
+ * @param b - Second BalanceChange object to compare
+ * @returns Number indicating sort order (-1, 0, or 1)
  */
 export const compareBalanceChanges: BalanceChangeComparator = (a, b) => {
   for (const comparator of comparators) {
@@ -40,7 +41,8 @@ export const compareBalanceChanges: BalanceChangeComparator = (a, b) => {
 /**
  * Sorts an array of balance changes based on multiple criteria
  *
- * @param balanceChanges
+ * @param balanceChanges - Array of BalanceChange objects to sort
+ * @returns New sorted array of BalanceChange objects
  */
 export const sortBalanceChanges = (
   balanceChanges: BalanceChange[],

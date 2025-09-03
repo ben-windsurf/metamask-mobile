@@ -17,6 +17,11 @@ import CollectibleMedia from '../CollectibleMedia';
 import AssetElement from '../AssetElement';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 
+/**
+ * Creates stylesheet for the Collectibles component
+ * @param {Object} colors - Theme colors object
+ * @returns {Object} StyleSheet object with component styles
+ */
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -58,8 +63,10 @@ const createStyles = (colors) =>
   });
 
 /**
- * View that renders a list of Collectibles
- * also known as ERC-721 Tokens
+ * Collectibles component renders a list of NFTs (ERC-721 tokens) with management functionality
+ * Displays collectibles in a scrollable list with options to view details, refresh metadata, and remove items
+ * Handles empty states and provides pull-to-refresh functionality
+ * @returns {JSX.Element} The rendered collectibles list component
  */
 export default class Collectibles extends PureComponent {
   static propTypes = {

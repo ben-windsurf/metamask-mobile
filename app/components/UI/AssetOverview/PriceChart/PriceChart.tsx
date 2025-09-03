@@ -53,6 +53,16 @@ interface PriceChartProps {
   onChartIndexChange: (index: number) => void;
 }
 
+/**
+ * PriceChart component displays an interactive price chart for token price history
+ * Renders an area chart with touch interaction, tooltips, and loading states
+ * @param {PriceChartProps} props - Component props
+ * @param {TokenPrice[]} props.prices - Array of price data points [timestamp, price]
+ * @param {number} props.priceDiff - Price difference for determining chart color
+ * @param {boolean} props.isLoading - Whether the chart is in loading state
+ * @param {Function} props.onChartIndexChange - Callback when chart index changes
+ * @returns {JSX.Element} The rendered price chart component
+ */
 const PriceChart = ({
   prices,
   priceDiff,
@@ -145,6 +155,11 @@ const PriceChart = ({
     }),
   );
 
+  /**
+   * Line component renders the chart line path
+   * @param {Partial<LineProps>} props - Line component props
+   * @returns {JSX.Element} SVG Path element for the chart line
+   */
   const Line = (props: Partial<LineProps>) => {
     const { line, chartHasData } = props as LineProps;
     return (
@@ -159,6 +174,10 @@ const PriceChart = ({
     );
   };
 
+  /**
+   * DataGradient component creates a gradient definition for chart fill
+   * @returns {JSX.Element} SVG Defs element with linear gradient
+   */
   const DataGradient = () => (
     <Defs key="dataGradient">
       <LinearGradient
@@ -174,6 +193,10 @@ const PriceChart = ({
     </Defs>
   );
 
+  /**
+   * NoDataGradient component creates a gradient overlay for empty chart state
+   * @returns {JSX.Element} SVG Group element with gradient overlay
+   */
   const NoDataGradient = () => {
     // gradient with transparent center and grey edges
     const gradient = (

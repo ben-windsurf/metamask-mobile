@@ -5,6 +5,12 @@ import {
   TextVariant,
 } from '../../../component-library/components/Texts/Text';
 
+/**
+ * Creates stylesheet for AssetOverview component with theme-based styling
+ * @param {Object} params - Styling parameters
+ * @param {Theme} params.theme - The theme object containing colors and typography
+ * @returns {Object} StyleSheet object with component-specific styles
+ */
 const styleSheet = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors, typography } = theme;

@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 /**
- *
- * @returns StyleSheet object.
+ * Creates stylesheet for DeFi protocol position group tokens component
+ * Defines styles for underlying token balances display and layout
+ * @returns {Object} StyleSheet object containing component styles
  */
 const styleSheet = () =>
   StyleSheet.create({

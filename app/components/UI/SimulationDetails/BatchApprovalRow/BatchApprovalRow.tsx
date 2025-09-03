@@ -15,6 +15,11 @@ const InlineAlertStyle = {
   marginLeft: 0,
 };
 
+/**
+ * BatchApprovalRow component displays approval balance changes for batch transactions
+ * Renders individual balance change rows for each approval and shows relevant alerts
+ * @returns {JSX.Element|null} The rendered batch approval rows or null if no approvals
+ */
 const BatchApprovalRow = () => {
   const { value: approveBalanceChanges } =
     useBatchApproveBalanceChanges() ?? {};

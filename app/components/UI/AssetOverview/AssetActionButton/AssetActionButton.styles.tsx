@@ -2,6 +2,12 @@ import { StyleSheet } from 'react-native';
 import Device from '../../../../util/device';
 import type { Theme } from '@metamask/design-tokens';
 
+/**
+ * Creates styles for AssetActionButton component
+ * @param {Object} params - Style parameters
+ * @param {Theme} params.theme - The theme object containing colors and design tokens
+ * @returns {Object} StyleSheet object with button styles for different states and platforms
+ */
 const createStyles = (params: { theme: Theme }) => {
   const { theme } = params;
   const { colors } = theme;

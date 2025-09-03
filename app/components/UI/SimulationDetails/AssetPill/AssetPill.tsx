@@ -21,6 +21,11 @@ interface AssetPillProperties extends ViewProps {
   asset: AssetIdentifier;
 }
 
+/**
+ * Gets the network image source for a given chain ID
+ * @param chainId - The chain ID to get the network image for
+ * @returns The network image source or null if not found
+ */
 const getNetworkImage = (chainId: Hex) => {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,6 +37,11 @@ const getNetworkImage = (chainId: Hex) => {
   return network?.imageSource || null;
 };
 
+/**
+ * Component that renders a pill for native assets with network avatar and currency symbol
+ * @param asset - The native asset identifier containing chain ID
+ * @returns JSX element displaying the native asset pill
+ */
 const NativeAssetPill: React.FC<AssetPillProperties> = ({ asset }) => {
   const { styles } = useStyles(styleSheet, {});
   const imageSource = getNetworkImage(asset.chainId);
@@ -56,6 +66,12 @@ const NativeAssetPill: React.FC<AssetPillProperties> = ({ asset }) => {
   );
 };
 
+/**
+ * Component that renders an asset pill, displaying either a native asset or token information
+ * Conditionally renders NativeAssetPill for native assets or Name component for tokens
+ * @param asset - The asset identifier containing type, address, and chain ID
+ * @returns JSX element displaying the appropriate asset pill variant
+ */
 const AssetPill: React.FC<AssetPillProperties> = ({ asset }) => {
   const { styles } = useStyles(styleSheet, {});
 

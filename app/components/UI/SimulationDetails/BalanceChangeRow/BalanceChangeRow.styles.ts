@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+/**
+ * Creates stylesheet for BalanceChangeRow component
+ * Defines styles for container layout, pill containers, and pill arrangements
+ * @returns {Object} StyleSheet object with component styles
+ */
 const styleSheet = () =>
   StyleSheet.create({
     container: {

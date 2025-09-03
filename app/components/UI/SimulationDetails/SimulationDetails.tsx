@@ -155,9 +155,13 @@ const SimulationDetailsLayout: React.FC<{
 
 /**
  * Preview of a transaction's effects using simulation data.
+ * Displays balance changes, errors, and loading states for transaction simulations.
+ * Only renders for dapp interactions and handles various simulation states.
  *
- * @param simulationData - The simulation data.
- * @returns The simulation details.
+ * @param transaction - The transaction metadata containing simulation data
+ * @param enableMetrics - Whether to enable simulation metrics tracking
+ * @param isTransactionsRedesign - Whether to use the redesigned transaction UI
+ * @returns The simulation details component or null if not applicable
  */
 export const SimulationDetails: React.FC<SimulationDetailsProps> = ({
   transaction,
