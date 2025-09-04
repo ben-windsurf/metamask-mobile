@@ -5,6 +5,7 @@ import {
   TransactionAction,
   TransactionActionType,
   SelectedAsset,
+  TransactionObject,
 } from './types';
 
 const initialState: TransactionState = {
@@ -115,12 +116,14 @@ const transactionReducer = (
         const assetType = getAssetType(selectedAsset);
         transactionWithExtras.assetType = assetType;
       }
-      const txMeta = getTxMeta(action.transaction);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const txMeta = getTxMeta(action.transaction as any);
       return {
         ...state,
         transaction: {
           ...state.transaction,
-          ...getTxData(action.transaction),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ...getTxData(action.transaction as any),
         },
         ...txMeta,
         securityAlertResponses: state.securityAlertResponses,
@@ -141,8 +144,10 @@ const transactionReducer = (
         symbol: 'ETH',
         assetType: 'ETH',
         selectedAsset: { isETH: true, symbol: 'ETH' },
-        ...getTxMeta(action.transaction),
-        transaction: getTxData(action.transaction),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ...getTxMeta(action.transaction as any),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        transaction: getTxData(action.transaction as any),
       };
     case TransactionActionType.SET_TRANSACTION_SECURITY_ALERT_RESPONSE: {
       const { transactionId, securityAlertResponse } = action;
