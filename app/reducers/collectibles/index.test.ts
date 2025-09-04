@@ -3,9 +3,12 @@ import reducer, {
   ADD_FAVORITE_COLLECTIBLE,
   REMOVE_FAVORITE_COLLECTIBLE,
 } from './index';
+import { CollectiblesAction, CollectiblesActionType } from './types';
 import mockedEngine from '../../core/__mocks__/MockedEngine';
 
-const emptyAction = { type: null };
+const emptyAction: CollectiblesAction = {
+  type: CollectiblesActionType.HIDE_NFT_FETCHING_LOADER,
+};
 
 const collectibleA1 = { tokenId: '101', address: '0xA' };
 const collectibleA2 = { tokenId: '102', address: '0xA' };

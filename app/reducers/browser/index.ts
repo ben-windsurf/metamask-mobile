@@ -1,20 +1,25 @@
 import { BrowserActionTypes } from '../../actions/browser';
 import AppConstants from '../../core/AppConstants';
 import { appendURLParams } from '../../util/browser';
+import { BrowserState, BrowserAction } from './types';
 
-const initialState = {
+const initialState: BrowserState = {
   history: [],
   whitelist: [],
   tabs: [],
   favicons: [],
   activeTab: null,
-  // Keep track of viewed Dapps, which is used for MetaMetricsEvents.DAPP_VIEWED event
   visitedDappsByHostname: {},
 };
-const browserReducer = (state = initialState, action) => {
+
+/* eslint-disable @typescript-eslint/default-param-last */
+const browserReducer = (
+  state: BrowserState = initialState,
+  action: BrowserAction,
+): BrowserState => {
   switch (action.type) {
     case BrowserActionTypes.ADD_TO_VIEWED_DAPP: {
-      const { hostname } = action;
+      const { hostname } = action as { hostname: string };
       return {
         ...state,
         visitedDappsByHostname: {
@@ -101,4 +106,6 @@ const browserReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default browserReducer;
+export * from './types';

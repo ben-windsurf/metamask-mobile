@@ -6,15 +6,8 @@ import { NetworkClientType } from '@metamask/network-controller';
 import * as tokensControllerSelectors from '../../selectors/tokensController';
 import { NETWORKS_CHAIN_ID } from '../../constants/network';
 import { FeatureFlags } from '@metamask/swaps-controller/dist/types';
-
-// Type definitions for the swaps reducer
-// Note: The reducer is written in JavaScript without proper TypeScript types,
-// so we need to use type assertions in some places
-
-interface SwapsAction {
-  type: string | null;
-  payload?: object | null;
-}
+import { SwapsAction, SwapsActionType } from './types';
+import { RootState } from '../index';
 
 interface SetLivenessPayload {
   chainId: string;
@@ -65,7 +58,10 @@ import reducer, {
   getFeatureFlagChainId,
 } from './index';
 
-const emptyAction: SwapsAction = { type: null };
+const emptyAction: SwapsAction = {
+  type: SwapsActionType.SWAPS_SET_LIVENESS,
+  payload: { chainId: '0x1', featureFlags: null },
+};
 
 const DEFAULT_FEATURE_FLAGS = {
   ethereum: {
@@ -771,10 +767,25 @@ describe('swaps reducer', () => {
           backgroundState: {
             SwapsController: {
               tokens: [],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
           },
         },
-      };
+        swaps: { isLive: false, hasOnboarded: false },
+      } as RootState;
       expect(swapsTokensObjectSelector(state)).toStrictEqual({});
     });
   });
@@ -838,6 +849,20 @@ describe('swaps reducer', () => {
                   iconUrl: 'https://swaps2.url',
                 },
               ],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -851,6 +876,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -887,6 +913,20 @@ describe('swaps reducer', () => {
           backgroundState: {
             SwapsController: {
               tokens: [], // Empty SwapsController tokens
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -900,6 +940,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -930,6 +971,20 @@ describe('swaps reducer', () => {
                   iconUrl: 'https://onlyswaps.url',
                 },
               ],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -943,6 +998,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -983,6 +1039,20 @@ describe('swaps reducer', () => {
                   iconUrl: 'https://swaps.url',
                 },
               ],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -996,6 +1066,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -1036,6 +1107,20 @@ describe('swaps reducer', () => {
                   occurrences: 1,
                 },
               ],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -1049,6 +1134,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -1085,6 +1171,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called
@@ -1144,6 +1231,20 @@ describe('swaps reducer', () => {
                   occurrences: 1,
                 },
               ],
+              approvalTransaction: null,
+              quoteValues: {},
+              quotes: {},
+              aggregatorMetadata: {},
+              error: null,
+              quoteRefreshSeconds: 0,
+              usedGasEstimate: null,
+              usedCustomGas: null,
+              topAggId: null,
+              pollingCyclesLeft: 0,
+              quotesLastFetched: 0,
+              isInPolling: false,
+              topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -1157,6 +1258,7 @@ describe('swaps reducer', () => {
             },
           },
         },
+        swaps: { isLive: false, hasOnboarded: false },
       };
 
       // When the selector is called

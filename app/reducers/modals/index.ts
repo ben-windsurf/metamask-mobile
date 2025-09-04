@@ -1,4 +1,6 @@
-const initialState = {
+import { ModalsState, ModalsAction, ModalsActionType } from './types';
+
+const initialState: ModalsState = {
   networkModalVisible: false,
   shouldNetworkSwitchPopToWallet: true,
   collectibleContractModalVisible: false,
@@ -6,20 +8,24 @@ const initialState = {
   signMessageModalVisible: true,
 };
 
-const modalsReducer = (state = initialState, action) => {
+/* eslint-disable @typescript-eslint/default-param-last */
+const modalsReducer = (
+  state: ModalsState = initialState,
+  action: ModalsAction,
+): ModalsState => {
   switch (action.type) {
-    case 'TOGGLE_NETWORK_MODAL':
+    case ModalsActionType.TOGGLE_NETWORK_MODAL:
       return {
         ...state,
         networkModalVisible: !state.networkModalVisible,
         shouldNetworkSwitchPopToWallet: action.shouldNetworkSwitchPopToWallet,
       };
-    case 'TOGGLE_COLLECTIBLE_CONTRACT_MODAL':
+    case ModalsActionType.TOGGLE_COLLECTIBLE_CONTRACT_MODAL:
       return {
         ...state,
         collectibleContractModalVisible: !state.collectibleContractModalVisible,
       };
-    case 'TOGGLE_DAPP_TRANSACTION_MODAL':
+    case ModalsActionType.TOGGLE_DAPP_TRANSACTION_MODAL:
       if (action.show === false) {
         return {
           ...state,
@@ -31,9 +37,9 @@ const modalsReducer = (state = initialState, action) => {
         dappTransactionModalVisible:
           action.show === null
             ? !state.dappTransactionModalVisible
-            : action.show,
+            : Boolean(action.show),
       };
-    case 'TOGGLE_INFO_NETWORK_MODAL':
+    case ModalsActionType.TOGGLE_INFO_NETWORK_MODAL:
       if (action.show === false) {
         return {
           ...state,
@@ -44,7 +50,7 @@ const modalsReducer = (state = initialState, action) => {
         ...state,
         infoNetworkModalVisible: !state.infoNetworkModalVisible,
       };
-    case 'TOGGLE_SIGN_MODAL':
+    case ModalsActionType.TOGGLE_SIGN_MODAL:
       if (action.show === false) {
         return {
           ...state,
@@ -59,4 +65,6 @@ const modalsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default modalsReducer;
+export * from './types';
