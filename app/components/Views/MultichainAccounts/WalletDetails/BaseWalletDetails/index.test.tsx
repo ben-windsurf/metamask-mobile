@@ -76,6 +76,12 @@ const mockWallet = {
 const mockInitialState: Partial<RootState> = {
   settings: {
     useBlockieIcon: false,
+    searchEngine: 'Google',
+    primaryCurrency: 'ETH',
+    lockTime: -1,
+    hideZeroBalanceTokens: false,
+    basicFunctionalityEnabled: true,
+    deepLinkModalDisabled: false,
   },
 };
 

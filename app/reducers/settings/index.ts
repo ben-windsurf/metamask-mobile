@@ -1,0 +1,106 @@
+/* eslint-disable @typescript-eslint/default-param-last */
+import AppConstants from '../../core/AppConstants';
+import { ActionType, Action } from '../../actions/settings';
+
+interface TokenSortConfig {
+  key: string;
+  order: string;
+  sortCallback: string;
+}
+
+export interface SettingsState {
+  searchEngine: string;
+  primaryCurrency: string;
+  lockTime: number;
+  useBlockieIcon: boolean;
+  hideZeroBalanceTokens: boolean;
+  basicFunctionalityEnabled: boolean;
+  deepLinkModalDisabled: boolean;
+  showHexData?: boolean;
+  showCustomNonce?: boolean;
+  showFiatOnTestnets?: boolean;
+  deviceNotificationEnabled?: boolean;
+  tokenSortConfig?: TokenSortConfig;
+}
+
+export const initialState: Readonly<SettingsState> = {
+  searchEngine: AppConstants.DEFAULT_SEARCH_ENGINE,
+  primaryCurrency: 'ETH',
+  lockTime: -1,
+  useBlockieIcon: true,
+  hideZeroBalanceTokens: false,
+  basicFunctionalityEnabled: true,
+  deepLinkModalDisabled: false,
+};
+
+const settingsReducer = (
+  state: SettingsState = initialState,
+  action: Action,
+): SettingsState => {
+  switch (action.type) {
+    case ActionType.SET_SEARCH_ENGINE:
+      return {
+        ...state,
+        searchEngine: action.searchEngine,
+      };
+    case ActionType.SET_LOCK_TIME:
+      return {
+        ...state,
+        lockTime: action.lockTime,
+      };
+    case ActionType.SET_SHOW_HEX_DATA:
+      return {
+        ...state,
+        showHexData: action.showHexData,
+      };
+    case ActionType.SET_SHOW_CUSTOM_NONCE:
+      return {
+        ...state,
+        showCustomNonce: action.showCustomNonce,
+      };
+    case ActionType.SET_HIDE_ZERO_BALANCE_TOKENS:
+      return {
+        ...state,
+        hideZeroBalanceTokens: action.hideZeroBalanceTokens,
+      };
+    case ActionType.SET_USE_BLOCKIE_ICON:
+      return {
+        ...state,
+        useBlockieIcon: action.useBlockieIcon,
+      };
+    case ActionType.SET_PRIMARY_CURRENCY:
+      return {
+        ...state,
+        primaryCurrency: action.primaryCurrency,
+      };
+    case ActionType.SET_SHOW_FIAT_ON_TESTNETS:
+      return {
+        ...state,
+        showFiatOnTestnets: action.showFiatOnTestnets,
+      };
+    case ActionType.TOGGLE_BASIC_FUNCTIONALITY:
+      return {
+        ...state,
+        basicFunctionalityEnabled: action.basicFunctionalityEnabled,
+      };
+    case ActionType.TOGGLE_DEVICE_NOTIFICATIONS:
+      return {
+        ...state,
+        deviceNotificationEnabled: action.deviceNotificationEnabled,
+      };
+    case ActionType.SET_DEEP_LINK_MODAL_DISABLED:
+      return {
+        ...state,
+        deepLinkModalDisabled: action.deepLinkModalDisabled,
+      };
+    case ActionType.SET_TOKEN_SORT_CONFIG:
+      return {
+        ...state,
+        tokenSortConfig: action.tokenSortConfig,
+      };
+    default:
+      return state;
+  }
+};
+
+export default settingsReducer;
