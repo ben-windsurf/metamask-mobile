@@ -1,6 +1,10 @@
 import enContent from '../../../locales/languages/en.json';
 import { CustomNetworks } from '../../resources/networks.e2e';
 
+/**
+ * Text selectors for the Network Non-Permitted Bottom Sheet component.
+ * Contains localized text strings and network names used in E2E tests.
+ */
 export const NetworkNonPemittedBottomSheetSelectorsText = {
   ADD_THIS_NETWORK_TITLE: enContent.permissions.title_add_network_permission,
   SEPOLIA_NETWORK_NAME: CustomNetworks.Sepolia.providerConfig.nickname,
@@ -11,6 +15,10 @@ export const NetworkNonPemittedBottomSheetSelectorsText = {
   LINEA_MAINNET_NETWORK_NAME: 'Linea Main Network',
 };
 
+/**
+ * Element ID selectors for the Network Non-Permitted Bottom Sheet component.
+ * Contains testID values used to identify UI elements in E2E tests.
+ */
 export const NetworkNonPemittedBottomSheetSelectorsIDs = {
   ADD_THIS_NETWORK_BUTTON: 'add-this-network-button',
   CHOOSE_FROM_PERMITTED_NETWORKS_BUTTON:

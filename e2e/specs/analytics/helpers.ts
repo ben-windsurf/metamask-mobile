@@ -1,6 +1,12 @@
 import { MockedEndpoint, Mockttp, MockttpServer } from 'mockttp';
 import { E2E_METAMETRICS_TRACK_URL } from '../../../app/util/test/utils';
 
+/**
+ * Represents an analytics event payload structure.
+ * @interface EventPayload
+ * @property event - The name of the analytics event
+ * @property properties - Additional properties associated with the event
+ */
 export interface EventPayload {
   event: string;
   properties: Record<string, unknown>;
@@ -109,6 +115,10 @@ export const filterEvents = (
   eventName: string,
 ): EventPayload[] => payloads.filter((payload) => payload.event === eventName);
 
+/**
+ * Collection of onboarding-related analytics event names used throughout the application.
+ * These constants ensure consistent event naming across the codebase for analytics tracking.
+ */
 export const onboardingEvents = {
   ANALYTICS_PREFERENCE_SELECTED: 'Analytics Preference Selected',
   WELCOME_MESSAGE_VIEWED: 'Welcome Message Viewed',

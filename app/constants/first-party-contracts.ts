@@ -48,4 +48,9 @@ const FIRST_PARTY_CONTRACT_NAMES: Record<string, Record<Hex, Hex>> = {
   },
 };
 
+/**
+ * Default export of first-party contract names mapped to their addresses.
+ * Used throughout the application to identify and interact with MetaMask's
+ * official smart contracts across different blockchain networks.
+ */
 export default FIRST_PARTY_CONTRACT_NAMES;

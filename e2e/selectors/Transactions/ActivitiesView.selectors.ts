@@ -1,13 +1,26 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Generates a localized message for sent unit transactions by replacing the unit placeholder.
+ * @param unit - The unit type (e.g., 'ETH', 'USDC') to insert into the message template
+ * @returns The formatted sent unit message with the specified unit
+ */
 function getSentUnitMessage(unit: string) {
   return enContent.transactions.sent_unit.replace('{{unit}}', unit);
 }
 
+/**
+ * Test selector IDs for the Activities View component.
+ * Used for identifying UI elements during end-to-end testing.
+ */
 export const ActivitiesViewSelectorsIDs = {
   CONTAINER: 'transactions-container',
 };
 
+/**
+ * Test selector text constants for the Activities View component.
+ * Contains localized text strings used to identify UI elements during testing.
+ */
 export const ActivitiesViewSelectorsText = {
   SUBMITTED_TEXT: enContent.transaction.submitted,
   CONFIRM_TEXT: enContent.transaction.confirmed,
@@ -26,6 +39,10 @@ export const ActivitiesViewSelectorsText = {
   STAKING_CLAIM: enContent.transactions.tx_review_staking_claim,
 };
 
+/**
+ * Pre-configured sent message token IDs for common token types.
+ * Maps token symbols to their corresponding sent message text for testing.
+ */
 export const sentMessageTokenIDs = {
   eth: ActivitiesViewSelectorsText.SENT_TOKENS_MESSAGE_TEXT(enContent.unit.eth),
 };

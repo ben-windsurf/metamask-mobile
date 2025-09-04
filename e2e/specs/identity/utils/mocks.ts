@@ -4,8 +4,16 @@ import { getDecodedProxiedURL } from './helpers';
 import { USER_STORAGE_FEATURE_NAMES } from '@metamask/profile-sync-controller/sdk';
 import { Mockttp } from 'mockttp';
 
+/** Authentication mocks from the profile sync controller */
 const AuthMocks = AuthenticationController.Mocks;
 
+/**
+ * Configuration for mock API responses
+ * @interface MockResponse
+ * @property url - The URL or regex pattern to match requests against
+ * @property requestMethod - The HTTP method for the request
+ * @property response - The response data to return for matching requests
+ */
 interface MockResponse {
   url: string | RegExp;
   requestMethod: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -57,13 +65,23 @@ export async function mockIdentityServices(server: Mockttp) {
   };
 }
 
+/** Base key used for generating mock SRP identifiers in E2E tests */
 export const MOCK_SRP_E2E_IDENTIFIER_BASE_KEY = 'MOCK_SRP_IDENTIFIER';
 
+/**
+ * Storage for mock SRP identifiers used in E2E testing
+ * Maps public keys to unique identifiers for consistent mocking
+ */
 const MOCK_SRP_E2E_IDENTIFIERS = {
   baseKey: MOCK_SRP_E2E_IDENTIFIER_BASE_KEY,
   list: new Map(),
 };
 
+/**
+ * Generates or retrieves a unique E2E SRP identifier for a given public key
+ * @param publicKey - The public key to generate an identifier for
+ * @returns The unique identifier for the public key
+ */
 const getE2ESrpIdentifierForPublicKey = (publicKey: string) => {
   const { baseKey, list } = MOCK_SRP_E2E_IDENTIFIERS;
 
@@ -80,6 +98,11 @@ const getE2ESrpIdentifierForPublicKey = (publicKey: string) => {
   return nextIdentifier;
 };
 
+/**
+ * Sets up a mock API call on the server with the specified response configuration
+ * @param server - The Mockttp server instance to configure
+ * @param response - The mock response configuration
+ */
 async function mockAPICall(server: Mockttp, response: MockResponse) {
   let requestRuleBuilder;
 
@@ -132,7 +155,9 @@ async function mockAPICall(server: Mockttp, response: MockResponse) {
     });
 }
 
+/** Mock Ethereum balance value (1 ETH in wei) used for testing */
 const MOCK_ETH_BALANCE = '0xde0b6b3a7640000';
+/** Base URL for Infura mainnet API endpoints */
 const INFURA_URL = 'https://mainnet.infura.io/v3/';
 
 /**

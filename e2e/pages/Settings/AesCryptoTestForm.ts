@@ -9,6 +9,10 @@ import {
 import Matchers from '../../framework/Matchers.ts';
 import Gestures from '../../framework/Gestures.ts';
 
+/**
+ * Page object model for the AES Crypto test form in the Settings section.
+ * Provides methods to interact with encryption/decryption functionality for end-to-end testing.
+ */
 class AesCryptoTestForm {
   get scrollViewIdentifier(): Promise<Detox.NativeMatcher> {
     return Matchers.getIdentifier(aesCryptoFormScrollIdentifier);
@@ -168,6 +172,12 @@ class AesCryptoTestForm {
     );
   }
 
+  /**
+   * Generates a salt with the specified byte count.
+   *
+   * @param saltBytesCount - The number of bytes for the salt generation
+   * @returns Promise that resolves to the generated salt string
+   */
   async generateSalt(saltBytesCount: string): Promise<string> {
     await this.scrollUpToGenerateSalt();
     await Gestures.typeText(this.generateSaltBytesCountInput, saltBytesCount, {
@@ -185,6 +195,13 @@ class AesCryptoTestForm {
     return (responseFieldAtts as { label: string }).label;
   }
 
+  /**
+   * Generates an encryption key from a password and salt.
+   *
+   * @param password - The password to use for key generation
+   * @param salt - The salt to use for key generation
+   * @returns Promise that resolves to the generated encryption key
+   */
   async generateEncryptionKey(password: string, salt: string): Promise<string> {
     await this.scrollUpToGenerateEncryptionKey();
     await Gestures.typeText(this.generateEncryptionKeyPasswordInput, password, {
@@ -210,6 +227,13 @@ class AesCryptoTestForm {
     return (responseFieldAtts as { label: string }).label;
   }
 
+  /**
+   * Encrypts data using the provided encryption key.
+   *
+   * @param data - The data to encrypt
+   * @param encryptionKey - The encryption key to use
+   * @returns Promise that resolves when encryption is complete
+   */
   async encrypt(data: string, encryptionKey: string): Promise<void> {
     await this.scrollToEncrypt();
     await Gestures.typeText(this.encryptDataInput, data, {
@@ -225,6 +249,12 @@ class AesCryptoTestForm {
     });
   }
 
+  /**
+   * Decrypts previously encrypted data using the provided encryption key.
+   *
+   * @param encryptionKey - The encryption key to use for decryption
+   * @returns Promise that resolves when decryption is complete
+   */
   async decrypt(encryptionKey: string): Promise<void> {
     await this.scrollToDecrypt();
     await Gestures.typeText(this.decryptPasswordInput, encryptionKey, {
@@ -237,6 +267,13 @@ class AesCryptoTestForm {
     });
   }
 
+  /**
+   * Encrypts data directly with a provided encryption key.
+   *
+   * @param encryptionKey - The encryption key to use
+   * @param data - The data to encrypt
+   * @returns Promise that resolves when encryption is complete
+   */
   async encryptWithKey(encryptionKey: string, data: string): Promise<void> {
     await this.scrollToEncryptWithKey();
     await Gestures.typeText(
@@ -256,6 +293,12 @@ class AesCryptoTestForm {
     });
   }
 
+  /**
+   * Decrypts data directly with a provided encryption key.
+   *
+   * @param encryptionKey - The encryption key to use for decryption
+   * @returns Promise that resolves when decryption is complete
+   */
   async decryptWithKey(encryptionKey: string): Promise<void> {
     await this.scrollToDecryptWithKey();
     await Gestures.typeText(

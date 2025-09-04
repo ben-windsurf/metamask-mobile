@@ -1,5 +1,9 @@
 import CryptoJS from 'crypto-js';
 
+/**
+ * Generates a random number within a specified range using cryptographically secure random bytes.
+ * @returns A random number between 0 and 999
+ */
 function generateRandomNumber() {
   const range = 1000;
   const randomBytes = CryptoJS.lib.WordArray.random(range);
@@ -7,6 +11,11 @@ function generateRandomNumber() {
   return randomNumber;
 }
 
+/**
+ * Serializes an error object into a plain object for transmission or storage.
+ * @param error - The error object to serialize
+ * @returns A serialized representation of the error with all enumerable properties
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function serializeError(error: any) {
@@ -17,6 +26,11 @@ function serializeError(error: any) {
   return serialized;
 }
 
+/**
+ * Deserializes a plain object back into an Error object.
+ * @param data - The serialized error data containing message and other properties
+ * @returns A reconstructed Error object with all original properties
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function deserializeError(data: any) {
@@ -29,6 +43,13 @@ function deserializeError(data: any) {
   return error;
 }
 
+/**
+ * Enhances an invoke object with async function definition and binding capabilities.
+ * Provides utilities for creating asynchronous function calls across different contexts
+ * with proper error handling and serialization.
+ * @param invoke - The invoke object to enhance with async capabilities
+ * @returns The enhanced invoke object with defineAsync and bindAsync methods
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (invoke: any) => {

@@ -10,13 +10,27 @@ import {
 } from '../../methods/common';
 import { getTokenAmount, getTokenUSDAmount } from '../token-amounts';
 
+/**
+ * Type definition for swap completed notification data structure.
+ * Represents a notification triggered when a MetaMask swap transaction is completed.
+ */
 type SwapCompletedNotification =
   ExtractedNotification<TRIGGER_TYPES.METAMASK_SWAP_COMPLETED>;
 
+/**
+ * Type guard function to check if a notification is a swap completed notification.
+ * @param notification - The notification to check
+ * @returns True if the notification is of type METAMASK_SWAP_COMPLETED
+ */
 const isSwapCompletedNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.METAMASK_SWAP_COMPLETED,
 ]);
 
+/**
+ * Notification state configuration for swap completed notifications.
+ * Defines how swap completed notifications are displayed in menu items and modal details.
+ * Includes token swap information, amounts, rates, and transaction details.
+ */
 const state: NotificationState<SwapCompletedNotification> = {
   guardFn: isSwapCompletedNotification,
   createMenuItem: (notification) => ({

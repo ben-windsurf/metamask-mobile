@@ -1,6 +1,12 @@
 import { SNAP_MANAGE_ACCOUNTS_CONFIRMATION_TYPES } from '../../RPCMethods/RPCMethodMiddleware';
 import { SnapKeyringBuilderMessenger } from '../types';
 
+/**
+ * Result of a create account confirmation dialog.
+ * @interface CreateAccountConfirmationResult
+ * @property success - Whether the account creation was successful
+ * @property name - Optional custom name provided by the user for the account
+ */
 interface CreateAccountConfirmationResult {
   success: boolean;
   name?: string;

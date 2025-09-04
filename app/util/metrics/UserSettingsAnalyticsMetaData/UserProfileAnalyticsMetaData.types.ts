@@ -1,5 +1,10 @@
 import { CaipChainId } from '@metamask/utils';
 
+/**
+ * Enum defining user profile properties used for analytics metadata collection.
+ * These properties represent various user settings and preferences that are tracked
+ * for analytics purposes in MetaMask Mobile.
+ */
 export enum UserProfileProperty {
   ENABLE_OPENSEA_API = 'Enable OpenSea API',
   NFT_AUTODETECTION = 'NFT Autodetection',
@@ -17,6 +22,13 @@ export enum UserProfileProperty {
   CHAIN_IDS = 'chain_id_list',
 }
 
+/**
+ * Interface defining the structure of user profile metadata for analytics.
+ * Maps user profile properties to their corresponding data types and values.
+ * Used to collect and structure user settings data for analytics tracking.
+ *
+ * @interface UserProfileMetaData
+ */
 export interface UserProfileMetaData {
   [UserProfileProperty.ENABLE_OPENSEA_API]: string;
   [UserProfileProperty.NFT_AUTODETECTION]: string;

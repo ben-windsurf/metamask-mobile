@@ -8,6 +8,12 @@ import {
 import { formatCurrency } from './confirm-tx.js';
 import { addHexPrefix } from './number';
 
+/**
+ * Converts a hexadecimal value to decimal format.
+ *
+ * @param hexValue - The hexadecimal value to convert
+ * @returns The decimal representation of the hex value
+ */
 export function hexToDecimal(hexValue) {
   return conversionUtil(hexValue, {
     fromNumericBase: 'hex',
@@ -15,6 +21,12 @@ export function hexToDecimal(hexValue) {
   });
 }
 
+/**
+ * Converts a decimal value to hexadecimal format.
+ *
+ * @param decimal - The decimal value to convert
+ * @returns The hexadecimal representation of the decimal value
+ */
 export function decimalToHex(decimal) {
   return conversionUtil(decimal, {
     fromNumericBase: 'dec',
@@ -22,6 +34,16 @@ export function decimalToHex(decimal) {
   });
 }
 
+/**
+ * Converts a Wei hex value to the most appropriate ETH denomination (ETH, GWEI, or WEI).
+ * Returns the first non-zero denomination or WEI if all are zero.
+ *
+ * @param value - The Wei hex value to convert
+ * @param fromCurrency - The source currency (defaults to ETH)
+ * @param conversionRate - The conversion rate for currency conversion
+ * @param numberOfDecimals - Number of decimal places to display (defaults to 6)
+ * @returns A formatted string with value and denomination (e.g., "0.001 ETH")
+ */
 export function getEthConversionFromWeiHex({
   value,
   fromCurrency = ETH,
@@ -51,6 +73,17 @@ export function getEthConversionFromWeiHex({
   return nonZeroDenomination;
 }
 
+/**
+ * Converts a Wei hex value to a decimal value in the specified currency and denomination.
+ *
+ * @param value - The Wei hex value to convert
+ * @param fromCurrency - The source currency (defaults to ETH)
+ * @param toCurrency - The target currency for conversion
+ * @param conversionRate - The conversion rate between currencies
+ * @param numberOfDecimals - Number of decimal places in the result
+ * @param toDenomination - The target denomination (ETH, GWEI, WEI)
+ * @returns The converted decimal value as a string
+ */
 export function getValueFromWeiHex({
   value,
   fromCurrency = ETH,
@@ -71,6 +104,16 @@ export function getValueFromWeiHex({
   });
 }
 
+/**
+ * Converts a decimal value to Wei hex format.
+ *
+ * @param value - The decimal value to convert
+ * @param fromCurrency - The source currency
+ * @param conversionRate - The conversion rate for currency conversion
+ * @param fromDenomination - The source denomination
+ * @param invertConversionRate - Whether to invert the conversion rate
+ * @returns The Wei hex value as a string
+ */
 export function getWeiHexFromDecimalValue({
   value,
   fromCurrency,

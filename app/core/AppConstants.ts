@@ -2,13 +2,22 @@ import { CoreTypes } from '@walletconnect/types';
 import Device from '../util/device';
 import { DEFAULT_SERVER_URL } from '@metamask/sdk-communication-layer';
 
+/** Development environment identifier */
 const DEVELOPMENT = 'development';
+
+/** Portfolio URL from environment variable or default */
 const PORTFOLIO_URL =
   process.env.MM_PORTFOLIO_URL || 'https://portfolio.metamask.io';
+
+/** Security alerts API URL from environment variable or default */
 const SECURITY_ALERTS_API_URL =
   process.env.SECURITY_ALERTS_API_URL ??
   'https://security-alerts.api.cx.metamask.io';
 
+/**
+ * Application constants used throughout the MetaMask Mobile app.
+ * Contains configuration values, URLs, timeouts, and other static data.
+ */
 export default {
   IS_DEV: process.env?.NODE_ENV === DEVELOPMENT,
   METAMASK_BUILD_TYPE: process.env.METAMASK_BUILD_TYPE,

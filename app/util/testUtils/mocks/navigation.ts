@@ -1,3 +1,16 @@
+/**
+ * Creates mock navigation props for testing React Navigation components.
+ * Provides all necessary navigation methods and route parameters with Jest mock functions.
+ *
+ * @param params - Route parameters to be passed to the navigation state and route
+ * @returns Mock navigation props object with navigation and route properties
+ *
+ * @example
+ * ```typescript
+ * const mockProps = createNavigationProps({ userId: '123' });
+ * const component = render(<MyComponent {...mockProps} />);
+ * ```
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createNavigationProps = (params: any): any => ({

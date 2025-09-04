@@ -6,6 +6,12 @@ import { LINEA_SEPOLIA_BLOCK_EXPLORER } from '../../../app/constants/urls';
 import { ensureValidState } from './util';
 import { CHAINLIST_CURRENCY_SYMBOLS_MAP } from '../../constants/network';
 
+/**
+ * Network state interface for migration 46
+ * @interface NetworkState
+ * @property providerConfig - Network provider configuration
+ * @property selectedNetworkClientId - ID of the selected network client
+ */
 interface NetworkState {
   providerConfig: {
     chainId: string;
@@ -18,6 +24,13 @@ interface NetworkState {
   selectedNetworkClientId: string;
 }
 
+/**
+ * Migration 46: Updates Linea Goerli network configuration to Linea Sepolia
+ * This migration handles the transition from deprecated Linea Goerli testnet to Linea Sepolia
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with updated network configuration
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 46)) {
     return state;

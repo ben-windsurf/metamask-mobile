@@ -1,3 +1,7 @@
+/**
+ * Web element IDs for the test DApp used in end-to-end testing.
+ * Contains selectors for various blockchain interaction buttons and elements.
+ */
 export const TestDappSelectorsWebIDs = {
   CHAIN_ID_TEXT: 'chainId',
   TEST_DAPP_FOX_LOGO: 'mm-logo',

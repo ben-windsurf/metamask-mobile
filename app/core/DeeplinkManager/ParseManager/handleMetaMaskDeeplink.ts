@@ -10,6 +10,20 @@ import WC2Manager from '../../WalletConnect/WalletConnectV2';
 import DeeplinkManager from '../DeeplinkManager';
 import parseOriginatorInfo from '../parseOriginatorInfo';
 import extractURLParams from './extractURLParams';
+
+/**
+ * Handles MetaMask deeplink URLs by parsing the URL and routing to appropriate handlers.
+ * Supports various deeplink actions including SDK connections, WalletConnect, and crypto buy/sell flows.
+ *
+ * @param params - The deeplink handling parameters
+ * @param params.instance - The DeeplinkManager instance
+ * @param params.handled - Callback function to mark the deeplink as handled
+ * @param params.wcURL - The WalletConnect URL if applicable
+ * @param params.origin - The origin of the deeplink
+ * @param params.params - Extracted URL parameters
+ * @param params.url - The original deeplink URL
+ * @returns True if the deeplink was handled for connect actions, undefined otherwise
+ */
 export function handleMetaMaskDeeplink({
   instance,
   handled,

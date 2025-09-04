@@ -15,6 +15,17 @@ import { isValidAddress } from 'ethereumjs-util';
 import { JsonRpcRequest, PendingJsonRpcResponse } from '@metamask/utils';
 import { MESSAGE_TYPE } from '../createTracingMiddleware';
 
+/**
+ * Handles the wallet_watchAsset RPC method to add a token to the user's wallet.
+ * Validates the token address, checks if it exists on the current network,
+ * and adds it to the TokensController if valid.
+ *
+ * @param req - The JSON-RPC request containing token details
+ * @param res - The JSON-RPC response object to populate
+ * @param hostname - The hostname of the requesting dApp
+ * @param checkTabActive - Function to verify the tab is active
+ * @throws {Error} When params are undefined, token address is invalid, or token is not supported on network
+ */
 export const wallet_watchAsset = async ({
   req,
   res,
@@ -109,6 +120,11 @@ export const wallet_watchAsset = async ({
   res.result = true;
 };
 
+/**
+ * Handler configuration for the wallet_watchAsset RPC method.
+ * Defines the method names, implementation function, and hook names
+ * for processing watch asset requests.
+ */
 export const watchAssetHandler = {
   methodNames: [MESSAGE_TYPE.WATCH_ASSET],
   implementation: wallet_watchAsset,

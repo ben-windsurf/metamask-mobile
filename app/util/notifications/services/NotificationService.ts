@@ -21,11 +21,21 @@ import { mmStorage } from '../settings';
 import { STORAGE_IDS } from '../settings/storage/constants';
 import { LAUNCH_ACTIVITY, PressActionId } from '../types';
 
+/**
+ * Interface for alert button configuration
+ * @interface AlertButton
+ * @property text - The text to display on the button
+ * @property onPress - Function to execute when button is pressed
+ */
 interface AlertButton {
   text: string;
   onPress: () => void | Promise<void>;
 }
 
+/**
+ * Service class for managing push notifications using Notifee
+ * Handles notification permissions, channels, display, and user interactions
+ */
 class NotificationsService {
   async getBlockedNotifications(): Promise<Map<ChannelId, boolean>> {
     try {
@@ -305,15 +315,27 @@ class NotificationsService {
   };
 }
 
+/**
+ * Singleton instance of the NotificationsService
+ * Provides centralized notification management for the application
+ */
 const NotificationService = new NotificationsService();
 
 export default NotificationService;
 
+/**
+ * Requests push notification permissions from the user
+ * @returns Promise that resolves to true if permissions are granted, false otherwise
+ */
 export async function requestPushPermissions() {
   const result = await NotificationService.getAllPermissions(true);
   return result.permission === 'authorized';
 }
 
+/**
+ * Checks if the app currently has push notification permissions
+ * @returns Promise that resolves to true if permissions are granted, false otherwise
+ */
 export async function hasPushPermission() {
   const result = await NotificationService.getAllPermissions(false);
   return result.permission === 'authorized';

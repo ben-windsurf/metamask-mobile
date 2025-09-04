@@ -1,17 +1,43 @@
+/**
+ * Log levels for controlling logging output verbosity.
+ * Lower numeric values indicate higher priority/severity.
+ */
 export enum LogLevel {
+  /** Critical errors that require immediate attention */
   ERROR = 0,
+  /** Warning messages for potentially problematic situations */
   WARN = 1,
+  /** General informational messages */
   INFO = 2,
+  /** Detailed debugging information */
   DEBUG = 3,
+  /** Most verbose tracing information */
   TRACE = 4,
 }
 
+/**
+ * Configuration options for creating a Logger instance.
+ */
 export interface LoggerOptions {
+  /** Custom prefix to display in log messages */
   prefix?: string;
+  /** Whether to enable colored output (default: true) */
   colors?: boolean;
+  /** Name identifier for the logger instance */
   name?: string;
 }
 
+/**
+ * A configurable logger class for E2E test framework with support for
+ * different log levels, colored output, and custom formatting.
+ *
+ * @example
+ * ```typescript
+ * const logger = new Logger({ name: 'TestSuite', prefix: 'E2E' });
+ * logger.info('Test started');
+ * logger.error('Test failed', error);
+ * ```
+ */
 export class Logger {
   private level: LogLevel;
   private prefix: string;
@@ -43,6 +69,11 @@ export class Logger {
     bgCyan: '\x1b[46m',
   };
 
+  /**
+   * Creates a new Logger instance with the specified options.
+   *
+   * @param options - Configuration options for the logger
+   */
   constructor(options: LoggerOptions = {}) {
     this.name = options.name || '';
     this.prefix = options.prefix || 'E2E Framework';
@@ -72,11 +103,26 @@ export class Logger {
     }
   }
 
+  /**
+   * Applies ANSI color codes to text if colors are enabled.
+   *
+   * @param text - The text to colorize
+   * @param color - The color to apply
+   * @returns The colorized text or original text if colors are disabled
+   */
   private colorize(text: string, color: keyof typeof this.colorCodes): string {
     if (!this.colors) return text;
     return `${this.colorCodes[color]}${text}${this.colorCodes.reset}`;
   }
 
+  /**
+   * Formats a log message with level, prefix, and name information.
+   *
+   * @param level - The log level string
+   * @param message - The message to format
+   * @param color - The color to apply to the level indicator
+   * @returns The formatted message string
+   */
   private formatMessage(
     level: string,
     message: string,
@@ -91,6 +137,15 @@ export class Logger {
     } ${message}`;
   }
 
+  /**
+   * Internal logging method that handles level filtering and message formatting.
+   *
+   * @param level - The numeric log level
+   * @param levelName - The string representation of the log level
+   * @param color - The color to apply to the level indicator
+   * @param message - The message to log
+   * @param args - Additional arguments to pass to console.log
+   */
   private log(
     level: LogLevel,
     levelName: string,
@@ -104,10 +159,22 @@ export class Logger {
     console.log(formattedMessage, ...args);
   }
 
+  /**
+   * Logs an error message.
+   *
+   * @param message - The error message to log
+   * @param args - Additional arguments to include in the log
+   */
   error(message: string, ...args: unknown[]): void {
     this.log(LogLevel.ERROR, 'error', 'red', message, ...args);
   }
 
+  /**
+   * Logs a warning message.
+   *
+   * @param message - The warning message to log
+   * @param args - Additional arguments to include in the log
+   */
   warn(message: string, ...args: unknown[]): void {
     this.log(LogLevel.WARN, 'warn', 'yellow', message, ...args);
   }

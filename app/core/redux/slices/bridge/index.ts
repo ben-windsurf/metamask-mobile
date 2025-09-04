@@ -31,22 +31,45 @@ import { selectHasCreatedSolanaMainnetAccount } from '../../../../selectors/acco
 import { hasMinimumRequiredVersion } from './utils/hasMinimumRequiredVersion';
 import { isUnifiedSwapsEnvVarEnabled } from './utils/isUnifiedSwapsEnvVarEnabled';
 
+/**
+ * Selector to get the bridge controller state from the Redux store.
+ * @param state - The root Redux state
+ * @returns The bridge controller state or undefined if not available
+ */
 export const selectBridgeControllerState = (state: RootState) =>
   state.engine.backgroundState?.BridgeController;
 
+/**
+ * Interface defining the bridge Redux state structure.
+ * Contains all the necessary state for managing cross-chain bridge operations.
+ */
 export interface BridgeState {
+  /** The amount of source tokens to bridge */
   sourceAmount: string | undefined;
+  /** The amount of destination tokens expected */
   destAmount: string | undefined;
+  /** The source token being bridged */
   sourceToken: BridgeToken | undefined;
+  /** The destination token to receive */
   destToken: BridgeToken | undefined;
+  /** The destination address for the bridged tokens */
   destAddress: string | undefined;
+  /** Array of selected source chain IDs */
   selectedSourceChainIds: (Hex | CaipChainId)[] | undefined;
+  /** The selected destination chain ID */
   selectedDestChainId: Hex | CaipChainId | undefined;
+  /** The slippage tolerance percentage */
   slippage: string | undefined;
+  /** Whether a transaction is currently being submitted */
   isSubmittingTx: boolean;
+  /** The current bridge view mode */
   bridgeViewMode: BridgeViewMode | undefined;
 }
 
+/**
+ * Initial state for the bridge Redux slice.
+ * Sets default values for all bridge-related state properties.
+ */
 export const initialState: BridgeState = {
   sourceAmount: undefined,
   destAmount: undefined,
@@ -60,13 +83,26 @@ export const initialState: BridgeState = {
   bridgeViewMode: undefined,
 };
 
+/**
+ * The name of the bridge Redux slice.
+ */
 const name = 'bridge';
 
+/**
+ * Async thunk to fetch and set the exchange rate for the source token.
+ * @param tokenInfo - Token information including chain ID and address
+ * @returns Promise resolving to the exchange rate
+ */
 export const setSourceTokenExchangeRate = createAsyncThunk(
   'bridge/setSourceTokenExchangeRate',
   getTokenExchangeRate,
 );
 
+/**
+ * Async thunk to fetch and set the exchange rate for the destination token.
+ * @param tokenInfo - Token information including chain ID and address
+ * @returns Promise resolving to the exchange rate
+ */
 export const setDestTokenExchangeRate = createAsyncThunk(
   'bridge/setDestTokenExchangeRate',
   getTokenExchangeRate,

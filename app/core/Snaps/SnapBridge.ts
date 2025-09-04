@@ -30,6 +30,13 @@ import { createOriginMiddleware } from '../../util/middlewares';
 import { createSelectedNetworkMiddleware } from '@metamask/selected-network-controller';
 const pump = require('pump');
 
+/**
+ * Props interface for SnapBridge constructor
+ * @interface ISnapBridgeProps
+ * @property snapId - Unique identifier for the snap
+ * @property connectionStream - Duplex stream for communication with the snap
+ * @property getRPCMethodMiddleware - Function to get RPC method middleware for the snap
+ */
 interface ISnapBridgeProps {
   snapId: string;
   connectionStream: Duplex;
@@ -38,6 +45,10 @@ interface ISnapBridgeProps {
   getRPCMethodMiddleware: (args: any) => any;
 }
 
+/**
+ * Bridge class that manages communication between MetaMask and a Snap
+ * Handles provider setup, RPC method routing, and network state management for snaps
+ */
 export default class SnapBridge {
   snapId: string;
   stream: Duplex;
@@ -59,6 +70,13 @@ export default class SnapBridge {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   #blockTrackerProxy: any;
 
+  /**
+   * Creates a new SnapBridge instance
+   * @param props - Configuration object for the snap bridge
+   * @param props.snapId - Unique identifier for the snap
+   * @param props.connectionStream - Duplex stream for communication
+   * @param props.getRPCMethodMiddleware - Function to get RPC method middleware
+   */
   constructor({
     snapId,
     connectionStream,
@@ -114,6 +132,10 @@ export default class SnapBridge {
     this.blockTracker = blockTracker;
   };
 
+  /**
+   * Gets the current provider state including unlock status and network state
+   * @returns Promise resolving to provider state object
+   */
   async getProviderState() {
     return {
       isUnlocked: this.isUnlocked(),
@@ -121,6 +143,10 @@ export default class SnapBridge {
     };
   }
 
+  /**
+   * Sets up the provider connection stream for the snap
+   * Creates a bidirectional stream for JSON-RPC communication
+   */
   setupProviderConnection = () => {
     Logger.log('[SNAP BRIDGE LOG] Engine+setupProviderConnection');
     const outStream = this.#mux.createStream('metamask-provider');
@@ -135,6 +161,10 @@ export default class SnapBridge {
     });
   };
 
+  /**
+   * Sets up the JSON-RPC engine with all necessary middleware for the snap
+   * @returns Configured JsonRpcEngine instance
+   */
   setupProviderEngine = () => {
     const engine = new JsonRpcEngine();
 
@@ -214,6 +244,10 @@ export default class SnapBridge {
     return engine;
   };
 
+  /**
+   * Checks if the MetaMask keyring is currently unlocked
+   * @returns True if keyring is unlocked, false otherwise
+   */
   isUnlocked = (): boolean => {
     // TODO: Replace "any" with type
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -221,6 +255,11 @@ export default class SnapBridge {
     return KeyringController.isUnlocked();
   };
 
+  /**
+   * Gets the network state for a specific origin/snap
+   * @param origin - The origin/snap ID to get network state for
+   * @returns Promise resolving to network state with chainId and networkVersion
+   */
   async getProviderNetworkState(origin: string) {
     const networkClientId = Engine.controllerMessenger.call(
       'SelectedNetworkController:getNetworkClientIdForDomain',

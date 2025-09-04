@@ -8,6 +8,9 @@ import { captureException } from '@sentry/react-native';
  * This migration removes the 'staking' key from the state that was previously
  * in the application but has been removed. This fixes the Redux error:
  * "Unexpected key 'staking' found in previous state received by the reducer."
+ *
+ * @param state - The Redux state object to migrate
+ * @returns The migrated state with the 'staking' key removed
  */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 70;

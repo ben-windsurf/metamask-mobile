@@ -2,37 +2,65 @@ import { OnboardingWizardModalSelectorsIDs } from '../../selectors/Onboarding/On
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Onboarding Wizard Modal in end-to-end tests.
+ * Provides methods to interact with the onboarding tutorial steps and navigation buttons.
+ */
 class OnboardingWizardModal {
+  /**
+   * Gets the first step container element in the onboarding wizard.
+   * @returns The DetoxElement for step one container
+   */
   get stepOneContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_ONE_CONTAINER,
     );
   }
 
+  /**
+   * Gets the second step container element in the onboarding wizard.
+   * @returns The DetoxElement for step two container
+   */
   get stepTwoContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_TWO_CONTAINER,
     );
   }
 
+  /**
+   * Gets the third step container element in the onboarding wizard.
+   * @returns The DetoxElement for step three container
+   */
   get stepThreeContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_THREE_CONTAINER,
     );
   }
 
+  /**
+   * Gets the fourth step container element in the onboarding wizard.
+   * @returns The DetoxElement for step four container
+   */
   get stepFourContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_FOUR_CONTAINER,
     );
   }
 
+  /**
+   * Gets the fifth step container element in the onboarding wizard.
+   * @returns The DetoxElement for step five container
+   */
   get stepFiveContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_FIVE_CONTAINER,
     );
   }
 
+  /**
+   * Gets the sixth step container element in the onboarding wizard.
+   * @returns The DetoxElement for step six container
+   */
   get stepSixContainer(): DetoxElement {
     return Matchers.getElementByID(
       OnboardingWizardModalSelectorsIDs.STEP_SIX_CONTAINER,

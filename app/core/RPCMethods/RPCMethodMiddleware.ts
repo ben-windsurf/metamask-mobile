@@ -66,6 +66,10 @@ const Engine = ImportedEngine as any;
 let appVersion = '';
 
 ///: BEGIN:ONLY_INCLUDE_IF(keyring-snaps)
+/**
+ * Confirmation types for Snap account management operations.
+ * Used to identify different types of account-related confirmations in the approval flow.
+ */
 export const SNAP_MANAGE_ACCOUNTS_CONFIRMATION_TYPES = {
   confirmAccountCreation: 'snap_manageAccounts:confirmAccountCreation',
   confirmAccountRemoval: 'snap_manageAccounts:confirmAccountRemoval',
@@ -74,6 +78,10 @@ export const SNAP_MANAGE_ACCOUNTS_CONFIRMATION_TYPES = {
 };
 ///: END:ONLY_INCLUDE_IF
 
+/**
+ * Enumeration of approval types used throughout the RPC middleware.
+ * These types identify different kinds of user approval requests that require confirmation.
+ */
 export enum ApprovalTypes {
   CONNECT_ACCOUNTS = 'CONNECT_ACCOUNTS',
   SIGN_MESSAGE = 'SIGN_MESSAGE',

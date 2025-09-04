@@ -5,6 +5,10 @@ import {
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Activities View in end-to-end tests.
+ * Provides methods to interact with transaction activities and their elements.
+ */
 class ActivitiesView {
   get title(): DetoxElement {
     return Matchers.getElementByText(ActivitiesViewSelectorsText.TITLE);
@@ -37,14 +41,30 @@ class ActivitiesView {
     return Matchers.getElementByText(ActivitiesViewSelectorsText.STAKING_CLAIM);
   }
 
+  /**
+   * Gets the transaction status element for a specific row.
+   * @param row - The row number of the transaction
+   * @returns DetoxElement for the transaction status
+   */
   transactionStatus(row: number): DetoxElement {
     return Matchers.getElementByID(`transaction-status-${row}`);
   }
 
+  /**
+   * Gets the transaction item element for a specific row.
+   * @param row - The row number of the transaction
+   * @returns DetoxElement for the transaction item
+   */
   transactionItem(row: number): DetoxElement {
     return Matchers.getElementByID(`transaction-item-${row}`);
   }
 
+  /**
+   * Generates a swap activity label by replacing token placeholders.
+   * @param sourceToken - The source token symbol
+   * @param destinationToken - The destination token symbol
+   * @returns The formatted swap activity label
+   */
   generateSwapActivityLabel(
     sourceToken: string,
     destinationToken: string,
@@ -55,12 +75,22 @@ class ActivitiesView {
     return title;
   }
 
+  /**
+   * Generates a bridge activity label by replacing the chain name placeholder.
+   * @param destNetwork - The destination network name
+   * @returns The formatted bridge activity label
+   */
   generateBridgeActivityLabel(destNetwork: string): string {
     let title = ActivitiesViewSelectorsText.BRIDGE;
     title = title.replace('{{chainName}}', destNetwork);
     return title;
   }
 
+  /**
+   * Generates an approved token activity label with regex pattern matching.
+   * @param sourceToken - The source token symbol
+   * @returns The formatted approved token activity label with regex anchors
+   */
   generateApprovedTokenActivityLabel(sourceToken: string): string {
     let title = ActivitiesViewSelectorsText.APPROVE;
     title = title.replace('{{sourceToken}}', sourceToken);

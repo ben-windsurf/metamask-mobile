@@ -37,13 +37,22 @@ import ContractAddressRegistry from '../../../app/util/test/contract-address-reg
 import FixtureBuilder from './FixtureBuilder';
 import { createLogger } from '../logger';
 
+/**
+ * Logger instance for FixtureHelper operations
+ */
 const logger = createLogger({
   name: 'FixtureHelper',
 });
 
+/**
+ * URL for the fixture server endpoint
+ */
 const FIXTURE_SERVER_URL = `http://localhost:${getFixturesServerPort()}/state.json`;
 
-// checks if server has already been started
+/**
+ * Checks if the fixture server has already been started
+ * @returns Promise that resolves to true if server is running, false otherwise
+ */
 const isFixtureServerStarted = async () => {
   try {
     const response = await axios.get(FIXTURE_SERVER_URL);
@@ -289,7 +298,11 @@ export const loadFixture = async (
   }
 };
 
-// Start the fixture server
+/**
+ * Starts the fixture server if it's not already running
+ * @param fixtureServer - The fixture server instance to start
+ * @returns Promise that resolves when the server is started
+ */
 export const startFixtureServer = async (fixtureServer: FixtureServer) => {
   if (await isFixtureServerStarted()) {
     logger.debug('The fixture server has already been started');
@@ -304,7 +317,11 @@ export const startFixtureServer = async (fixtureServer: FixtureServer) => {
   }
 };
 
-// Stop the fixture server
+/**
+ * Stops the fixture server if it's currently running
+ * @param fixtureServer - The fixture server instance to stop
+ * @returns Promise that resolves when the server is stopped
+ */
 export const stopFixtureServer = async (fixtureServer: FixtureServer) => {
   if (!(await isFixtureServerStarted())) {
     logger.debug('The fixture server has already been stopped');

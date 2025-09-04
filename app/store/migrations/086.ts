@@ -7,6 +7,13 @@ import { captureException } from '@sentry/react-native';
  *
  * This migration removes the automatic security checks state from the security state.
  */
+/**
+ * Removes automatic security checks related properties from the security state.
+ * This migration cleans up deprecated security check settings that are no longer used.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with automatic security checks properties removed
+ */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 86;
 

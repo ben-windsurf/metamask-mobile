@@ -12,8 +12,18 @@ import {
   selectIsMetaMaskPushNotificationsEnabled,
 } from '../../../selectors/notifications';
 
+/**
+ * Navigation parameters type for notification-related routes.
+ * Maps route names to their parameters containing notification data.
+ */
 type NavigationParams = Record<string, { notification: INotification }>;
 
+/**
+ * Type guard to check if an unknown value is a valid INotification.
+ *
+ * @param n - The unknown value to check
+ * @returns True if the value is a valid INotification, false otherwise
+ */
 function isINotification(n: unknown): n is INotification {
   const assumedShape = n as INotification;
   return Boolean(assumedShape?.type) && Boolean(assumedShape?.data);
@@ -44,8 +54,10 @@ function clickPushNotification(
 
 /**
  * Android Devices use a `getInitialNotifications` if a push notification cold-starts the application.
- * @param navigation - navigation prop for page navigations
- * @returns - void
+ * Handles notification clicks that occur when the app is opened from a cold start.
+ *
+ * @param navigation - Navigation prop for page navigations
+ * @returns Promise that resolves when notification handling is complete
  */
 async function onAppOpenNotification(
   navigation: NavigationProp<NavigationParams>,
@@ -78,9 +90,11 @@ async function onAppOpenNotification(
 }
 
 /**
- * IOS/Anroid devices will use a notifee `backgroundEvent` if a push notification is delivered and clicked on a minimised app.
- * (IOS also uses this for cold-starts).
- * @param navigation - navigation prop used for page navigations
+ * IOS/Android devices will use a notifee `backgroundEvent` if a push notification is delivered and clicked on a minimised app.
+ * (IOS also uses this for cold-starts). Sets up background event listeners for notification interactions.
+ *
+ * @param navigation - Navigation prop used for page navigations
+ * @returns Promise that resolves when background event listener is set up
  */
 async function onBackgroundEvent(navigation: NavigationProp<NavigationParams>) {
   NotificationsService.onBackgroundEvent((event) =>

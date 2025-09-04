@@ -147,19 +147,47 @@ export enum DataDeleteResponseStatus {
   error = 'error',
 }
 
+/**
+ * Response interface for data deletion regulation requests
+ * @interface IDeleteRegulationResponse
+ * @property status - The response status indicating success or error
+ * @property error - Optional error message if the request failed
+ */
 export interface IDeleteRegulationResponse {
   status: DataDeleteResponseStatus;
   error?: string;
 }
 
+/**
+ * Response interface for checking data deletion regulation status
+ * @interface IDeleteRegulationStatusResponse
+ * @property status - The response status indicating success or error
+ * @property dataDeleteStatus - Current status of the data deletion task
+ */
 export interface IDeleteRegulationStatusResponse {
   status: DataDeleteResponseStatus;
   dataDeleteStatus: DataDeleteStatus;
 }
 
+/**
+ * Type representing a data deletion request date
+ * @description Can be a string date or undefined if no deletion request has been made
+ */
 export type DataDeleteDate = string | undefined;
+
+/**
+ * Type representing a data deletion regulation ID
+ * @description Can be a string ID or undefined if no regulation ID exists
+ */
 export type DataDeleteRegulationId = string | undefined;
 
+/**
+ * Interface representing the current status of a data deletion regulation
+ * @interface IDeleteRegulationStatus
+ * @property deletionRequestDate - Optional date when the deletion request was made
+ * @property hasCollectedDataSinceDeletionRequest - Whether data has been collected since the deletion request
+ * @property dataDeletionRequestStatus - Current status of the data deletion request
+ */
 export interface IDeleteRegulationStatus {
   deletionRequestDate?: DataDeleteDate;
   hasCollectedDataSinceDeletionRequest: boolean;

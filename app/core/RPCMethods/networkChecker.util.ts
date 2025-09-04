@@ -5,12 +5,24 @@ import { PopularList } from '../../util/networks/customNetworks';
 
 import { toHex } from '@metamask/controller-utils';
 
+/**
+ * Checks if a network exists in the popular networks list by RPC URL and chain ID.
+ * @param rpcUrl - The RPC URL to check
+ * @param chainId - The chain ID to match
+ * @returns True if the network is found in the popular list
+ */
 const findPopularNetwork = (rpcUrl: string, chainId: string) =>
   PopularList.some((network) => {
     const { origin } = new URL(network.rpcUrl);
     return origin === rpcUrl && network.chainId === chainId;
   });
 
+/**
+ * Checks if a network name exists in the popular networks list by name and chain ID.
+ * @param name - The network name to check
+ * @param chainId - The chain ID to match
+ * @returns True if the network name is found in the popular list
+ */
 const findPopularNetworkName = (name: string, chainId: string) =>
   PopularList.some(
     (network) =>
@@ -18,11 +30,26 @@ const findPopularNetworkName = (name: string, chainId: string) =>
       network.chainId === chainId,
   );
 
+/**
+ * Checks if a network symbol exists in the popular networks list by symbol and chain ID.
+ * @param symbol - The network symbol/ticker to check
+ * @param chainId - The chain ID to match
+ * @returns True if the network symbol is found in the popular list
+ */
 const findPopularNetworkSymbol = (symbol: string, chainId: string) =>
   PopularList.some(
     (network) => network.ticker === symbol && network.chainId === chainId,
   );
 
+/**
+ * Validates a custom network configuration against the safe chains list and popular networks.
+ * Checks RPC URL, chain name, ticker symbol, and native currency decimals for potential issues.
+ * @param chainIdDecimal - The chain ID in decimal format
+ * @param rpcUrl - The RPC URL to validate
+ * @param nickname - The network name to validate
+ * @param ticker - The native currency symbol to validate
+ * @returns Array of alert objects containing validation errors and warnings
+ */
 const checkSafeNetwork = async (
   chainIdDecimal: string,
   rpcUrl: string,

@@ -2,6 +2,13 @@ import { ethers } from 'ethers';
 import { Encryptor, LEGACY_DERIVATION_OPTIONS } from '../../core/Encryptor';
 import { regex } from '../regex';
 
+/**
+ * Validates if a seed phrase meets the required format requirements.
+ * Checks that the word count is a multiple of 3 and between 12-24 words.
+ *
+ * @param seed - The seed phrase string to validate
+ * @returns True if the seed phrase fails requirements, false if it passes
+ */
 export const failedSeedPhraseRequirements = (seed: string): boolean => {
   const wordCount = seed.split(/\s/u).length;
   return wordCount % 3 !== 0 || wordCount > 24 || wordCount < 12;
@@ -43,8 +50,19 @@ export const parseVaultValue = async (
   return vaultSeed;
 };
 
+/**
+ * Parses and normalizes a seed phrase string by trimming whitespace,
+ * converting to lowercase, and extracting valid seed phrase words.
+ *
+ * @param seedPhrase - The raw seed phrase string to parse
+ * @returns Normalized seed phrase with valid words joined by spaces, or empty string if invalid
+ */
 export const parseSeedPhrase = (seedPhrase: string): string =>
   (seedPhrase || '').trim().toLowerCase().match(regex.seedPhrase)?.join(' ') ||
   '';
 
+/**
+ * Validates if a mnemonic phrase is valid according to BIP39 standards.
+ * Re-exported from ethers.utils for convenience.
+ */
 export const { isValidMnemonic } = ethers.utils;

@@ -4,13 +4,16 @@ import { $ } from 'execa';
 import { Listr } from 'listr2';
 import path from 'path';
 
+/** Whether the script is running in a CI environment */
 const IS_CI = process.env.CI;
+/** Whether the current platform is macOS */
 const IS_OSX = process.platform === 'darwin';
 // iOS builds are enabled by default on macOS only but can be enabled or disabled explicitly
 let BUILD_IOS = IS_OSX;
 let IS_NODE = false;
 let BUILD_ANDROID = true
 let INSTALL_PODS;
+/** Command line arguments passed to the setup script */
 const args = process.argv.slice(2) || [];
 for (const arg of args) {
   switch (arg) {
@@ -43,6 +46,7 @@ if (INSTALL_PODS && !BUILD_IOS) {
   throw new Error('Cannot install pods if iOS setup has been skipped');
 }
 
+/** Configuration options for the Listr task renderer */
 const rendererOptions = {
   collapseErrors: false,
   showSkipMessage: false,
@@ -53,6 +57,7 @@ const rendererOptions = {
 /*
  * TODO: parse example env file and add missing variables to existing .js.env
  */
+/** Task configuration for copying and sourcing environment variables */
 const copyAndSourceEnvVarsTask = {
   title: 'Copy and source environment variables',
   task: (_, task) => {
@@ -109,6 +114,7 @@ const copyAndSourceEnvVarsTask = {
   },
 };
 
+/** Task configuration for building the PPOM (Privacy-Preserving Oracle Machine) module */
 const buildPpomTask = {
   title: 'Build PPOM',
   task: (_, task) => {
@@ -153,6 +159,7 @@ const buildPpomTask = {
   },
 };
 
+/** Task configuration for setting up iOS development environment */
 const setupIosTask = {
   title: 'Set up iOS',
   task: async (_, task) => {
@@ -201,6 +208,7 @@ const setupIosTask = {
   },
 };
 
+/** Task configuration for building the inpage bridge for web3 injection */
 const buildInpageBridgeTask = {
   title: 'Build inpage bridge',
   task: async (_, task) => {
@@ -213,6 +221,7 @@ const buildInpageBridgeTask = {
   },
 };
 
+/** Task configuration for jetifying npm packages to support AndroidX */
 const jetifyTask = {
   title: 'Jetify npm packages for Android',
   task: async (_, task) => {
@@ -226,6 +235,7 @@ const jetifyTask = {
   },
 };
 
+/** Task configuration for applying patches to npm packages */
 const patchPackageTask = {
   title: 'Patch npm packages',
   task: async () => {
@@ -233,6 +243,7 @@ const patchPackageTask = {
   },
 };
 
+/** Task configuration for installing Foundry development toolkit */
 const installFoundryTask = {
   title: 'Install Foundry',
   task: (_, task) =>
@@ -263,6 +274,7 @@ const installFoundryTask = {
     ),
 };
 
+/** Task configuration for displaying Expo build links and setup instructions */
 const expoBuildLinks = {
   title: 'Try EXPO!',
   task: async () => {
@@ -283,6 +295,7 @@ const expoBuildLinks = {
   },
 };
 
+/** Task configuration for initializing and updating git submodules */
 const updateGitSubmodulesTask = {
   title: 'Init git submodules',
   task: async (_, task) => {
@@ -293,6 +306,7 @@ const updateGitSubmodulesTask = {
   },
 };
 
+/** Task configuration for running LavaMoat allow-scripts security check */
 const runLavamoatAllowScriptsTask = {
   title: 'Run lavamoat allow-scripts',
   task: async () => {

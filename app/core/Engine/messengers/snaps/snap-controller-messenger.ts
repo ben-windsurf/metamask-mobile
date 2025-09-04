@@ -41,6 +41,10 @@ import { PreferencesControllerGetStateAction } from '@metamask/preferences-contr
 import { NetworkControllerGetNetworkClientByIdAction } from '@metamask/network-controller';
 import { SelectedNetworkControllerGetNetworkClientIdForDomainAction } from '@metamask/selected-network-controller';
 
+/**
+ * Union type of all actions that the Snap controller messenger can handle.
+ * Includes permission management, approval requests, snap execution, and network operations.
+ */
 type Actions =
   | GetEndowments
   | GetPermissions
@@ -70,12 +74,20 @@ type Actions =
   | NetworkControllerGetNetworkClientByIdAction
   | SelectedNetworkControllerGetNetworkClientIdForDomainAction;
 
+/**
+ * Union type of all events that the Snap controller messenger can handle.
+ * Includes error messages, outbound requests/responses, and keyring lock events.
+ */
 type Events =
   | ErrorMessageEvent
   | OutboundRequest
   | OutboundResponse
   | KeyringControllerLockEvent;
 
+/**
+ * Type representing the restricted messenger for the Snap controller.
+ * This messenger is scoped to specific actions and events that the Snap controller can handle.
+ */
 export type SnapControllerMessenger = ReturnType<
   typeof getSnapControllerMessenger
 >;
@@ -130,10 +142,18 @@ export function getSnapControllerMessenger(
   });
 }
 
+/**
+ * Union type of actions available during Snap controller initialization.
+ * Limited to keyring and preferences controller actions needed for setup.
+ */
 type InitActions =
   | KeyringControllerGetKeyringsByTypeAction
   | PreferencesControllerGetStateAction;
 
+/**
+ * Type representing the restricted messenger for Snap controller initialization.
+ * This messenger has limited scope for initialization-specific operations.
+ */
 export type SnapControllerInitMessenger = ReturnType<
   typeof getSnapControllerInitMessenger
 >;

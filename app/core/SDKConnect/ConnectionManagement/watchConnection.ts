@@ -8,6 +8,13 @@ import SDKConnect from '../SDKConnect';
 import { CONNECTION_LOADING_EVENT } from '../SDKConnectConstants';
 import DevLogger from '../utils/DevLogger';
 
+/**
+ * Sets up event listeners to monitor connection status changes and handle connection lifecycle events.
+ * Manages connection state updates, loading states, and cleanup when connections are terminated or disconnected.
+ *
+ * @param connection - The SDK connection instance to monitor
+ * @param instance - The SDKConnect instance that manages the connection
+ */
 function watchConnection(connection: Connection, instance: SDKConnect) {
   connection.remote.on(
     EventType.CONNECTION_STATUS,

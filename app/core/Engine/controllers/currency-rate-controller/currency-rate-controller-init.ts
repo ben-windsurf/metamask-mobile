@@ -16,7 +16,12 @@ import { selectBasicFunctionalityEnabled } from '../../../../selectors/settings'
  * @returns The CurrencyRateController.
  */
 
-// TODO: Remove once the CurrencyRateMessenger is properly exported from module
+/**
+ * Messenger type for the CurrencyRateController.
+ * Provides restricted messaging capabilities for currency rate operations.
+ *
+ * TODO: Remove once the CurrencyRateMessenger is properly exported from module
+ */
 export type CurrencyRateMessenger = RestrictedMessenger<
   'CurrencyRateController',
   CurrencyRateControllerActions | NetworkControllerGetNetworkClientByIdAction,
@@ -25,13 +30,27 @@ export type CurrencyRateMessenger = RestrictedMessenger<
   never
 >;
 
-// Define the currency rate type based on usage
+/**
+ * Represents a currency rate entry with conversion information.
+ * Used internally for normalizing currency rate data.
+ */
 interface CurrencyRateEntry {
+  /** The conversion rate for the currency */
   conversionRate: number;
+  /** The date when the conversion rate was last updated, or null if unknown */
   conversionDate: number | null;
+  /** The USD conversion rate, or null if not available */
   usdConversionRate: number | null;
 }
 
+/**
+ * Initializes the CurrencyRateController with normalized currency rate data.
+ * Ensures that all currency rates have valid conversion rates and handles
+ * persisted state restoration with proper data normalization.
+ *
+ * @param request - The controller initialization request containing messenger, state, and utilities
+ * @returns Object containing the initialized CurrencyRateController instance
+ */
 export const currencyRateControllerInit: ControllerInitFunction<
   CurrencyRateController,
   CurrencyRateMessenger

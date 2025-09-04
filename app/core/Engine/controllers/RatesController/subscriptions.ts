@@ -7,7 +7,10 @@ import {
 import Logger from '../../../../util/Logger';
 import { RestrictedMessenger } from '@metamask/base-controller';
 
-// FIXME: This messenger type is not exported on `@metamask/assets-controllers`, so declare it here for now:
+/**
+ * Messenger type for CurrencyRateController communication.
+ * FIXME: This messenger type is not exported on `@metamask/assets-controllers`, so declare it here for now.
+ */
 type CurrencyRateControllerMessenger = RestrictedMessenger<
   CurrencyRateController['name'],
   never,

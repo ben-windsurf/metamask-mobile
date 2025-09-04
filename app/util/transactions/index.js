@@ -61,26 +61,46 @@ import { EIP_7702_REVOKE_ADDRESS } from '../../components/Views/confirmations/ho
 
 const { SAI_ADDRESS } = AppConstants;
 
+/** Token method identifier for ERC20 transfer function */
 export const TOKEN_METHOD_TRANSFER = 'transfer';
+/** Token method identifier for ERC20 approve function */
 export const TOKEN_METHOD_APPROVE = 'approve';
+/** Token method identifier for ERC20 transferFrom function */
 export const TOKEN_METHOD_TRANSFER_FROM = 'transferfrom';
+/** Token method identifier for ERC20 increaseAllowance function */
 export const TOKEN_METHOD_INCREASE_ALLOWANCE = 'increaseAllowance';
+/** Contract method identifier for contract deployment */
 export const CONTRACT_METHOD_DEPLOY = 'deploy';
+/** Connext method identifier for deposit function */
 export const CONNEXT_METHOD_DEPOSIT = 'connextdeposit';
+/** Token method identifier for ERC721/ERC1155 setApprovalForAll function */
 export const TOKEN_METHOD_SET_APPROVAL_FOR_ALL = 'setapprovalforall';
 
+/** Action key for Ether sending transactions */
 export const SEND_ETHER_ACTION_KEY = 'sentEther';
+/** Action key for contract deployment transactions */
 export const DEPLOY_CONTRACT_ACTION_KEY = 'deploy';
+/** Action key for token approval transactions */
 export const APPROVE_ACTION_KEY = 'approve';
+/** Action key for token transfer transactions */
 export const SEND_TOKEN_ACTION_KEY = 'transfer';
+/** Action key for transferFrom transactions (typically NFTs) */
 export const TRANSFER_FROM_ACTION_KEY = 'transferfrom';
+/** Action key for unknown function calls */
 export const UNKNOWN_FUNCTION_KEY = 'unknownFunction';
+/** Action key for smart contract interaction transactions */
 export const SMART_CONTRACT_INTERACTION_ACTION_KEY = 'smartContractInteraction';
+/** Action key for MetaMask Swaps transactions */
 export const SWAPS_TRANSACTION_ACTION_KEY = 'swapsTransaction';
+/** Action key for MetaMask Bridge transactions */
 export const BRIDGE_TRANSACTION_ACTION_KEY = 'bridgeTransaction';
+/** Action key for token allowance increase transactions */
 export const INCREASE_ALLOWANCE_ACTION_KEY = 'increaseAllowance';
+/** Action key for setApprovalForAll transactions */
 export const SET_APPROVE_FOR_ALL_ACTION_KEY = 'setapprovalforall';
+/** Action key for smart account upgrade transactions */
 export const UPGRADE_SMART_ACCOUNT_ACTION_KEY = 'upgradeSmartAccount';
+/** Action key for smart account downgrade transactions */
 export const DOWNGRADE_SMART_ACCOUNT_ACTION_KEY = 'downgradeSmartAccount';
 
 export const TRANSFER_FUNCTION_SIGNATURE = '0xa9059cbb';

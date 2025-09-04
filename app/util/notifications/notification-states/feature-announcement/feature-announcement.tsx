@@ -5,13 +5,28 @@ import { NotificationState } from '../types/NotificationState';
 import { getNotificationBadge } from '../../methods/common';
 import METAMASK_FOX from '../../../../images/branding/fox.png';
 
+/**
+ * Type definition for feature announcement notifications.
+ * Represents a notification extracted from the FEATURES_ANNOUNCEMENT trigger type.
+ */
 type FeatureAnnouncementNotification =
   ExtractedNotification<TRIGGER_TYPES.FEATURES_ANNOUNCEMENT>;
 
+/**
+ * Type guard function to check if a notification is a feature announcement.
+ * Uses node guard pattern to validate notification type.
+ *
+ * @returns Function that validates if notification matches FEATURES_ANNOUNCEMENT trigger type
+ */
 const isFeatureAnnouncementNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.FEATURES_ANNOUNCEMENT,
 ]);
 
+/**
+ * Notification state configuration for feature announcement notifications.
+ * Defines how feature announcements are displayed in menu items and modal details.
+ * Includes guard function, menu item creation, and modal detail creation logic.
+ */
 const state: NotificationState<FeatureAnnouncementNotification> = {
   guardFn: isFeatureAnnouncementNotification,
   createMenuItem: (notification) => ({

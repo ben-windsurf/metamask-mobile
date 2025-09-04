@@ -7,6 +7,11 @@ import {
 import { TokenSearchDiscoveryControllerParams } from './types';
 import { PORTFOLIO_API_URL } from './constants';
 
+/**
+ * Gets the appropriate Portfolio API base URL based on the current environment.
+ *
+ * @returns The Portfolio API base URL for the current environment
+ */
 const getPortfolioApiBaseUrl = () => {
   const env = process.env.METAMASK_ENVIRONMENT;
   switch (env) {
@@ -25,6 +30,15 @@ const getPortfolioApiBaseUrl = () => {
   }
 };
 
+/**
+ * Creates and configures a TokenSearchDiscoveryController instance with the appropriate API services.
+ *
+ * @param params - Configuration parameters for the controller
+ * @param params.state - Initial state for the controller
+ * @param params.messenger - Controller messenger for inter-controller communication
+ * @returns A configured TokenSearchDiscoveryController instance
+ * @throws Will throw an error if controller creation fails
+ */
 export const createTokenSearchDiscoveryController = ({
   state,
   messenger,

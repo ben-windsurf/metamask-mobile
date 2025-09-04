@@ -8,6 +8,13 @@ import { ensureValidState } from './util';
  *
  * This migration sets `isBackupAndSyncEnabled` and `isAccountSyncingEnabled` to true for all users.
  */
+/**
+ * Migrates the state to enable backup and sync features for all users.
+ * Sets both `isBackupAndSyncEnabled` and `isAccountSyncingEnabled` to true in the UserStorageController.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with backup and sync features enabled
+ */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 85;
 

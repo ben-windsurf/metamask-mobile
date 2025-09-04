@@ -28,21 +28,28 @@ import {
 } from '@metamask/snaps-controllers';
 
 // SnapController Events
+
+/** Event type constant for SnapController state changes */
 export const SnapControllerStateChangeEvent: SnapControllerStateChangeEventType['type'] =
   'SnapController:stateChange';
 
+/** Event type constant for when a Snap is installed */
 export const SnapControllerSnapInstalledEvent: SnapControllerSnapInstalledEventType['type'] =
   'SnapController:snapInstalled';
 
+/** Event type constant for when a Snap is updated */
 export const SnapControllerSnapUpdatedEvent: SnapControllerSnapUpdatedEventType['type'] =
   'SnapController:snapUpdated';
 
+/** Event type constant for when a Snap is uninstalled */
 export const SnapControllerSnapUninstalledEvent: SnapControllerSnapUninstalledEventType['type'] =
   'SnapController:snapUninstalled';
 
+/** Event type constant for when a Snap is enabled */
 export const SnapControllerSnapEnabledEvent: SnapControllerSnapEnabledEventType['type'] =
   'SnapController:snapEnabled';
 
+/** Event type constant for when a Snap is disabled */
 export const SnapControllerSnapDisabledEvent: SnapControllerSnapDisabledEventType['type'] =
   'SnapController:snapDisabled';
 

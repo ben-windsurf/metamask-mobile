@@ -4,6 +4,11 @@ import { NetworkClientId } from '@metamask/network-controller';
 import Engine from '../../core/Engine';
 import { MOCK_KEYRING_CONTROLLER_STATE } from '../../util/test/keyringControllerTestUtils';
 
+/**
+ * Mocked Engine instance for testing purposes.
+ * Provides mock implementations of all Engine controllers and methods
+ * to enable isolated unit testing without requiring full Engine initialization.
+ */
 export const mockedEngine = {
   init: () => Engine.init({}),
   controllerMessenger: {
@@ -114,4 +119,8 @@ export const mockedEngine = {
   getCaip25PermissionFromLegacyPermissions: jest.fn(),
 };
 
+/**
+ * Default export of the mocked Engine instance.
+ * @see mockedEngine
+ */
 export default mockedEngine;

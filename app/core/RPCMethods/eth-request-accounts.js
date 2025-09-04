@@ -3,6 +3,10 @@ import { MESSAGE_TYPE } from '../createTracingMiddleware';
 import { trackDappViewedEvent } from '../../util/metrics';
 import { isSnapId } from '@metamask/snaps-utils';
 
+/**
+ * RPC method configuration for handling eth_requestAccounts requests.
+ * Provides account access to dApps with proper permission handling.
+ */
 const requestEthereumAccounts = {
   methodNames: [MESSAGE_TYPE.ETH_REQUEST_ACCOUNTS],
   implementation: requestEthereumAccountsHandler,
@@ -15,7 +19,10 @@ const requestEthereumAccounts = {
 };
 export default requestEthereumAccounts;
 
-// Used to rate-limit pending requests to one per origin
+/**
+ * Set used to rate-limit pending requests to one per origin.
+ * Prevents multiple simultaneous account requests from the same origin.
+ */
 const locks = new Set();
 
 /**

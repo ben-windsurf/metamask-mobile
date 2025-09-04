@@ -1,12 +1,23 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { isEqual } from 'lodash';
 
+/**
+ * Constant representing the loading state when refetching account states.
+ */
 export const REFECHING_ACCOUNTS_STATES = 'loading';
 
+/**
+ * Interface representing the state of notifications for different accounts.
+ * Maps account addresses to their notification enabled status.
+ */
 export interface NotificationsAccountsState {
+  /** Account address mapped to notification enabled status */
   [address: string]: boolean;
 }
 
+/**
+ * Initial state for the notifications accounts provider slice.
+ */
 export const initialState: NotificationsAccountsState = {};
 
 const name = 'notificationsAccountsProvider';

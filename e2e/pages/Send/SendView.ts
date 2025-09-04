@@ -3,15 +3,31 @@ import Matchers from '../../framework/Matchers';
 import { SendViewSelectorsIDs } from '../../selectors/SendFlow/SendView.selectors';
 import { AddAddressModalSelectorsIDs } from '../../selectors/SendFlow/AddAddressModal.selectors';
 
+/**
+ * Page object model for the Send View screen in MetaMask Mobile.
+ * Provides methods to interact with send transaction UI elements and perform send-related actions.
+ */
 class SendView {
+  /**
+   * Gets the cancel button element in the send view.
+   * @returns The cancel button DetoxElement
+   */
   get cancelButton(): DetoxElement {
     return Matchers.getElementByID(SendViewSelectorsIDs.SEND_CANCEL_BUTTON);
   }
 
+  /**
+   * Gets the address input field element.
+   * @returns The address input field DetoxElement
+   */
   get addressInputField(): DetoxElement {
     return Matchers.getElementByID(SendViewSelectorsIDs.ADDRESS_INPUT);
   }
 
+  /**
+   * Gets the next button element, with platform-specific handling.
+   * @returns The next button DetoxElement
+   */
   get nextButton(): DetoxElement {
     return device.getPlatform() === 'ios'
       ? Matchers.getElementByID(SendViewSelectorsIDs.ADDRESS_BOOK_NEXT_BUTTON)
@@ -49,6 +65,9 @@ class SendView {
     return Matchers.getElementByID(SendViewSelectorsIDs.NO_ETH_MESSAGE);
   }
 
+  /**
+   * Taps the cancel button to cancel the send transaction.
+   */
   async tapCancelButton() {
     await Gestures.waitAndTap(this.cancelButton, {
       elemDescription: 'Cancel Button in Send View',
@@ -73,6 +92,10 @@ class SendView {
     });
   }
 
+  /**
+   * Taps on an account name in the send view.
+   * @param account - The account name to tap
+   */
   async tapAccountName(account: string): Promise<void> {
     const accountName = Matchers.getElementByText(account);
     await Gestures.waitAndTap(accountName, {
@@ -86,6 +109,10 @@ class SendView {
     });
   }
 
+  /**
+   * Inputs an address into the address input field.
+   * @param address - The address to input
+   */
   async inputAddress(address: string): Promise<void> {
     await Gestures.replaceText(this.addressInputField, address, {
       elemDescription: 'Address Input Field in Send View',

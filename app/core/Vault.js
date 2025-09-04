@@ -56,6 +56,14 @@ export const restoreLedgerKeyring = async (serializedLedgerKeyring) => {
   }
 };
 
+/**
+ * Restores an imported Secret Recovery Phrase (SRP) by creating a new HD keyring
+ * and adding the specified number of accounts to it.
+ *
+ * @param {string} seedPhrase - The Secret Recovery Phrase to restore
+ * @param {number} numberOfAccounts - Number of accounts to create from the SRP
+ * @returns {Promise<string>} The keyring ID of the newly created keyring
+ */
 export const restoreImportedSrp = async (seedPhrase, numberOfAccounts) => {
   const { KeyringController } = Engine.context;
   try {
@@ -82,6 +90,14 @@ export const restoreImportedSrp = async (seedPhrase, numberOfAccounts) => {
   }
 };
 
+/**
+ * Restores Snap accounts by creating multichain wallet clients for the specified account type.
+ * Supports Solana and Bitcoin account types with their respective scopes.
+ *
+ * @param {SolAccountType | BtcAccountType} accountType - The type of account to restore
+ * @param {string} entropySource - The entropy source for account generation
+ * @returns {Promise<void>}
+ */
 export const restoreSnapAccounts = async (accountType, entropySource) => {
   let walletClientType;
   let scope;
@@ -118,9 +134,12 @@ export const restoreSnapAccounts = async (accountType, entropySource) => {
 };
 
 /**
- * Returns current vault seed phrase
- * It does it using an empty password or a password set by the user
- * depending on the state the app is currently in
+ * Returns current vault seed phrase using either an empty password or a user-set password
+ * depending on the current state of the app.
+ *
+ * @param {string} [password=''] - The password to decrypt the vault
+ * @param {string} keyringId - The ID of the keyring to export the seed phrase from
+ * @returns {Promise<string>} The seed phrase for the specified keyring
  */
 export const getSeedPhrase = async (password = '', keyringId) => {
   const { KeyringController } = Engine.context;
@@ -128,11 +147,15 @@ export const getSeedPhrase = async (password = '', keyringId) => {
 };
 
 /**
- * Recreates a vault with the new password
+ * Recreates a vault with a new password while preserving all accounts and keyrings.
+ * This includes HD keyrings, imported accounts, Ledger accounts, QR accounts, and Snap accounts.
  *
- * @param password - current password
- * @param newPassword - new password
- * @param selectedAddress
+ * @param {string} password - Current password used to decrypt the vault
+ * @param {string} newPassword - New password to encrypt the vault with
+ * @param {string} selectedAddress - The currently selected account address to restore selection
+ * @param {boolean} [skipSeedlessOnboardingPWChange=false] - Whether to skip seedless onboarding password change
+ * @returns {Promise<void>}
+ * @throws {SeedlessOnboardingControllerError} When seedless onboarding password change fails
  */
 export const recreateVaultWithNewPassword = async (
   password,
@@ -347,9 +370,12 @@ export const recreateVaultWithNewPassword = async (
 };
 
 /**
- * Recreates a vault with the same password for the purpose of using the newest encryption methods
+ * Recreates a vault with the same password for the purpose of using the newest encryption methods.
+ * This is useful for upgrading the vault encryption without changing the password.
  *
- * @param password - Password to recreate and set the vault with
+ * @param {string} [password=''] - Password to recreate and set the vault with
+ * @param {string} selectedAddress - The currently selected account address to restore selection
+ * @returns {Promise<void>}
  */
 export const recreateVaultWithSamePassword = async (
   password = '',

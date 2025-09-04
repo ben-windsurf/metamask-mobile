@@ -11,6 +11,17 @@ import { captureException } from '@sentry/react-native';
  * from the app storage
  */
 
+/**
+ * Migration 80: Update profile sync state properties to backup and sync ones
+ * Copy `isProfileSyncingEnabled` to `isBackupAndSyncEnabled`
+ * Copy `isProfileSyncingUpdateLoading` to `isBackupAndSyncUpdateLoading`
+ * Delete `isProfileSyncingEnabled` from `UserStorageController`
+ * Delete `isProfileSyncingUpdateLoading` from `UserStorageController`
+ * from the app storage
+ *
+ * @param state - The current app state to migrate
+ * @returns The migrated state with updated profile sync properties
+ */
 const migration = (state: unknown): unknown => {
   if (!ensureValidState(state, 80)) {
     return state;

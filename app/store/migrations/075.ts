@@ -10,6 +10,16 @@ import { captureException } from '@sentry/react-native';
  * from the app storage
  */
 
+/**
+ * Migration 75: Remove deprecated properties from various controllers
+ * Removes `contractBalances` from `TokenBalancesController`,
+ * `internalTransactions` from `TransactionController`,
+ * `isCustomNetwork` from `NetworkController`, and
+ * `encryptionKey` from `KeyringController` from the app storage
+ *
+ * @param state - The current app state to migrate
+ * @returns The migrated state with deprecated properties removed
+ */
 const migration = (state: unknown): unknown => {
   if (!ensureValidState(state, 75)) {
     return state;

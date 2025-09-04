@@ -1,6 +1,14 @@
 import type { UserStorageControllerMessenger } from '@metamask/profile-sync-controller/user-storage';
 import { BaseControllerMessenger } from '../../types';
 
+/**
+ * Creates a restricted messenger for the UserStorageController with specific allowed actions and events.
+ * This messenger enables the UserStorageController to communicate with other controllers in the system
+ * while maintaining proper access control and type safety.
+ *
+ * @param baseControllerMessenger - The base controller messenger to create restrictions from
+ * @returns A restricted messenger configured for UserStorageController operations
+ */
 export function getUserStorageControllerMessenger(
   baseControllerMessenger: BaseControllerMessenger,
 ): UserStorageControllerMessenger {

@@ -9,6 +9,9 @@ import messaging, {
 } from '@react-native-firebase/messaging';
 import Logger from '../../../util/Logger';
 
+/**
+ * Function type for unsubscribing from Firebase Cloud Messaging listeners
+ */
 type UnsubscribeFunc = () => void;
 
 /**
@@ -82,6 +85,10 @@ async function processAndHandleNotification(
   }
 }
 
+/**
+ * Service class for managing Firebase Cloud Messaging (FCM) operations.
+ * Handles registration tokens, push notification listeners, and notification processing.
+ */
 class FCMService {
   /**
    * Creates a registration token for Firebase Cloud Messaging
@@ -178,4 +185,7 @@ class FCMService {
     this.#hasRegisteredForeground = null;
   };
 }
+/**
+ * Singleton instance of FCMService for managing Firebase Cloud Messaging operations
+ */
 export default new FCMService();

@@ -11,13 +11,24 @@ import type {
 } from '../types';
 import { CONTROLLER_MESSENGERS } from '../messengers';
 
+/** Logger instance for controller initialization operations */
 const log = createProjectLogger('controller-init');
 
+/**
+ * Base controller initialization request type with restricted messenger types.
+ * Used as a foundation for controller initialization across the engine.
+ */
 type BaseControllerInitRequest = ControllerInitRequest<
   BaseRestrictedControllerMessenger,
   BaseRestrictedControllerMessenger | void
 >;
 
+/**
+ * Generic initialization function type for a specific controller.
+ * Maps controller names to their corresponding initialization functions with proper typing.
+ *
+ * @template Name - The controller name from ControllersToInitialize
+ */
 type InitFunction<Name extends ControllersToInitialize> =
   ControllerInitFunction<
     ControllerByName[Name],

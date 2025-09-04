@@ -2,10 +2,24 @@ import { Platform } from 'react-native';
 import { AuthConnection } from './OAuthInterface';
 import { createLoginHandler } from './OAuthLoginHandlers';
 
+/** API path for revoking OAuth tokens */
 const AUTH_SERVER_REVOKE_PATH = '/api/v1/oauth/revoke';
+/** API path for refreshing OAuth tokens */
 const AUTH_SERVER_TOKEN_PATH = '/api/v1/oauth/token';
 
+/**
+ * Handles OAuth token operations including refreshing and revoking tokens.
+ * Provides methods to interact with the authentication server for token management.
+ */
 class AuthTokenHandler {
+  /**
+   * Refreshes a JWT token using a refresh token.
+   *
+   * @param params - The parameters for token refresh
+   * @param params.connection - The OAuth connection configuration
+   * @param params.refreshToken - The refresh token to use for getting new tokens
+   * @returns Promise resolving to new token set including ID tokens, access token, and metadata access token
+   */
   async refreshJWTToken(params: {
     connection: AuthConnection;
     refreshToken: string;
@@ -46,6 +60,14 @@ class AuthTokenHandler {
     };
   }
 
+  /**
+   * Revokes a refresh token and returns new tokens.
+   *
+   * @param params - The parameters for token revocation
+   * @param params.connection - The OAuth connection configuration
+   * @param params.revokeToken - The token to revoke
+   * @returns Promise resolving to new refresh and revoke tokens
+   */
   async revokeRefreshToken(params: {
     connection: AuthConnection;
     revokeToken: string;

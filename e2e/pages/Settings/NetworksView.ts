@@ -6,6 +6,11 @@ import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 import { NetworkListModalSelectorsIDs } from '../../selectors/Network/NetworkListModal.selectors';
 
+/**
+ * Page object model for the Networks view in Settings.
+ * Provides methods to interact with network management UI elements
+ * including adding, editing, and removing custom networks.
+ */
 class NetworkView {
   get networkContainer(): DetoxElement {
     return Matchers.getElementByID(NetworksViewSelectorsIDs.NETWORK_CONTAINER);
@@ -139,9 +144,18 @@ class NetworkView {
     return Matchers.getElementByText(NetworkViewSelectorsText.SAVE_BUTTON);
   }
 
+  /**
+   * Gets a network element by its display name.
+   * @param networkName - The name of the network to find
+   * @returns Promise resolving to the network element
+   */
   async getnetworkName(networkName: string): Promise<DetoxElement> {
     return Matchers.getElementByText(networkName);
   }
+
+  /**
+   * Taps the add network button to open the network addition flow.
+   */
   async tapAddNetworkButton(): Promise<void> {
     await Gestures.waitAndTap(this.addNetworkButton);
   }

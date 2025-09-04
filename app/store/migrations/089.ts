@@ -8,10 +8,16 @@ import { isObject } from '@metamask/utils';
 // Import the user initial state
 import { userInitialState } from '../../reducers/user';
 
-// Extend ValidState to include the user state
+/**
+ * Extends ValidState to include the user state for migration 89.
+ * Used to type the state object during the EXISTING_USER flag migration.
+ */
 interface ValidStateWithUser extends ValidState {
+  /** User state containing existingUser flag and other user properties */
   user?: {
+    /** Flag indicating if the user has previously used the app */
     existingUser?: boolean;
+    /** Additional user state properties */
     [key: string]: unknown;
   };
 }
@@ -22,6 +28,9 @@ interface ValidStateWithUser extends ValidState {
  *
  * IMPORTANT: After iCloud restore, we should default to existingUser: false
  * because keychain credentials are not backed up, even if MMKV data is restored
+ *
+ * @param state - The current Redux state to migrate
+ * @returns Promise resolving to the migrated state with EXISTING_USER flag moved to Redux
  */
 const migration = async (state: unknown): Promise<unknown> => {
   if (!ensureValidState(state, 89)) {

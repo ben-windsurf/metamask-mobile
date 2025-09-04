@@ -13,7 +13,11 @@ import {
 import { captureException } from '@sentry/react-native';
 import { isBtcMainnetAddress } from '../../core/Multichain/utils';
 
-// Helper to check if a scope is a valid enum value
+/**
+ * Helper to check if a scope is a valid enum value
+ * @param scope - The scope string to validate
+ * @returns True if the scope is a valid enum value from EthScope, BtcScope, or SolScope
+ */
 function isValidScope(scope: string): boolean {
   return (
     Object.values(EthScope).includes(scope as EthScope) ||
@@ -22,6 +26,12 @@ function isValidScope(scope: string): boolean {
   );
 }
 
+/**
+ * Get the appropriate scopes for a given account type
+ * @param account - The keyring account to get scopes for
+ * @param migrationNumber - The migration number for error reporting
+ * @returns Array of CAIP chain IDs representing the account's scopes
+ */
 function getScopesForAccountType(
   account: KeyringAccount,
   migrationNumber: number,
@@ -135,6 +145,8 @@ export function migration66(state: unknown, migrationNumber: number) {
 
 /**
  * Migration for adding scopes to accounts in the AccountsController.
+ * @param state - The state to migrate
+ * @returns The migrated state
  */
 export default function migrate(state: unknown) {
   return migration66(state, 66);

@@ -1,3 +1,7 @@
+/**
+ * Selector IDs for the Import from Seed Phrase screen in end-to-end tests.
+ * Contains all the testID values used to identify UI elements during automated testing.
+ */
 export const ImportFromSeedSelectorsIDs = {
   CONTAINER_ID: 'import-from-seed-screen',
   SEED_PHRASE_INPUT_ID: 'import-from-seed-screen-seed-phrase-input-id',

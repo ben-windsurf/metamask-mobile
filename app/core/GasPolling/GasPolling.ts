@@ -25,9 +25,10 @@ import {
 import { selectGasFeeEstimates } from '../../selectors/confirmTransaction';
 
 /**
+ * Starts gas fee polling to continuously fetch updated gas estimates from the network.
  *
- * @param {string} token Expects a token and when it is not provided, a random token is generated.
- * @returns the token that is used to identify the gas polling.
+ * @param token - Optional polling token. If not provided, a random token is generated.
+ * @returns Promise that resolves to the polling token used to identify this gas polling session.
  */
 export const startGasPolling = async (token?: string) => {
   // TODO: Replace "any" with type
@@ -40,7 +41,9 @@ export const startGasPolling = async (token?: string) => {
 };
 
 /**
- * @returns clears the token array state in the GasFeeController.
+ * Stops gas fee polling and clears the token array state in the GasFeeController.
+ *
+ * @returns The result of stopping the polling operation.
  */
 export const stopGasPolling = () => {
   // TODO: Replace "any" with type
@@ -49,6 +52,12 @@ export const stopGasPolling = () => {
   return GasFeeController.stopPolling();
 };
 
+/**
+ * Custom hook that provides access to gas-related data from the Redux store.
+ * Uses shallow equality to prevent unnecessary re-renders.
+ *
+ * @returns Object containing gas fee estimates, transaction state, exchange rates, and other gas-related data.
+ */
 export const useDataStore = () => {
   const [
     gasFeeEstimates,
@@ -97,8 +106,10 @@ export const useDataStore = () => {
 };
 
 /**
- * @param {GetEIP1559TransactionDataProps} props
- * @returns parsed transaction data for EIP1559 transactions.
+ * Parses and calculates transaction data for EIP-1559 transactions with dynamic gas fees.
+ *
+ * @param props - Configuration object containing gas estimates, transaction state, and currency data.
+ * @returns Parsed transaction data object or error message if parsing fails.
  */
 export const getEIP1559TransactionData = ({
   gas,
@@ -151,9 +162,10 @@ export const getEIP1559TransactionData = ({
 };
 
 /**
+ * Parses and calculates transaction data for legacy transactions with fixed gas prices.
  *
- * @param {LegacyProps} props
- * @returns parsed transaction data for legacy transactions.
+ * @param props - Configuration object containing exchange rates, transaction state, and gas data.
+ * @returns Parsed transaction data object for legacy gas pricing model.
  */
 export const getLegacyTransactionData = ({
   contractExchangeRates,
@@ -184,8 +196,11 @@ export const getLegacyTransactionData = ({
 };
 
 /**
+ * Custom hook that provides comprehensive transaction data with gas calculations.
+ * Automatically switches between EIP-1559 and legacy transaction parsing based on network support.
  *
- * @returns {Object} the transaction data for the current transaction.
+ * @param props - Configuration object specifying gas options, legacy mode, and fee calculations.
+ * @returns Object containing complete transaction data with gas estimates and pricing.
  */
 export const useGasTransaction = ({
   onlyGas,

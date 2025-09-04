@@ -5,6 +5,13 @@ import DevLogger from '../../utils/DevLogger';
 import { waitForKeychainUnlocked } from '../../utils/wait.util';
 import { Connection } from '../Connection';
 
+/**
+ * Creates an event handler for when clients connect to the SDK connection.
+ * This handler manages the connection state and waits for keychain unlock.
+ *
+ * @param instance - The Connection instance to handle client connections for
+ * @returns An async function that handles the clients connected event
+ */
 function handleClientsConnected(instance: Connection) {
   return async () => {
     DevLogger.log(

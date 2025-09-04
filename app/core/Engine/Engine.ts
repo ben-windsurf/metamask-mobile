@@ -235,8 +235,16 @@ import { seedlessOnboardingControllerInit } from './controllers/seedless-onboard
 import { perpsControllerInit } from './controllers/perps-controller';
 import { selectUseTokenDetection } from '../../selectors/preferencesController';
 
+/**
+ * Constant used as a placeholder for non-empty string values in configuration.
+ * Used to ensure that required string fields are not empty while maintaining type safety.
+ */
 const NON_EMPTY = 'NON_EMPTY';
 
+/**
+ * Global encryptor instance used for encrypting and decrypting sensitive data.
+ * Configured with legacy derivation options for backward compatibility.
+ */
 const encryptor = new Encryptor({
   keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
 });
@@ -2303,6 +2311,13 @@ export class Engine {
  * Assert that the given Engine instance has been initialized
  *
  * @param instance - Either an Engine instance, or null
+ */
+/**
+ * Type guard function that asserts the Engine instance exists and is not null.
+ * Throws an error if the Engine instance is null or undefined.
+ *
+ * @param instance - The Engine instance to check, or null
+ * @throws {Error} When the Engine instance is null or undefined
  */
 function assertEngineExists(
   instance: Engine | null,

@@ -1,3 +1,7 @@
+/**
+ * Selector IDs for the Choose Password screen in onboarding flow.
+ * Contains test automation identifiers for password creation UI elements.
+ */
 export const ChoosePasswordSelectorsIDs = {
   TITLE_ID: 'create-password-screen-title-id',
   DESCRIPTION_ID: 'create-password-screen-description-id',

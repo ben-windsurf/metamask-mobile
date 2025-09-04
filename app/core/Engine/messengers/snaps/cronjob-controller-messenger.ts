@@ -9,8 +9,16 @@ import {
 } from '@metamask/snaps-controllers';
 import { GetPermissions } from '@metamask/permission-controller';
 
+/**
+ * Union type of all actions that the cronjob controller messenger can handle.
+ * Includes permission retrieval and snap request handling actions.
+ */
 type Actions = GetPermissions | HandleSnapRequest;
 
+/**
+ * Union type of all events that the cronjob controller messenger can listen to.
+ * Includes snap lifecycle events like installation, updates, and state changes.
+ */
 type Events =
   | SnapInstalled
   | SnapUpdated
@@ -18,6 +26,10 @@ type Events =
   | SnapEnabled
   | SnapDisabled;
 
+/**
+ * Type representing a restricted messenger specifically configured for the cronjob controller.
+ * This messenger is scoped to only the actions and events that the cronjob controller needs.
+ */
 export type CronjobControllerMessenger = ReturnType<
   typeof getCronjobControllerMessenger
 >;

@@ -10,6 +10,11 @@ export const setReactNativeDefaultHandler = (handler: ErrorHandlerCallback) => {
   reactNativeDefaultHandler = handler;
 };
 
+/**
+ * Handle custom errors with special handling for Ledger and Keystone errors
+ * @param error - The error object to handle
+ * @param isFatal - Whether the error is fatal and should crash the app
+ */
 export const handleCustomError = (error: Error, isFatal: boolean) => {
   // Check whether the error is from the Ledger native bluetooth errors.
   if (
@@ -31,4 +36,8 @@ export const handleCustomError = (error: Error, isFatal: boolean) => {
   }
 };
 
+/**
+ * Get the current React Native default error handler
+ * @returns The current default error handler callback
+ */
 export const getReactNativeDefaultHandler = () => reactNativeDefaultHandler;

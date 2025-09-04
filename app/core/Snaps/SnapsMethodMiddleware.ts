@@ -37,16 +37,31 @@ import { Json } from '@metamask/utils';
 import { SchedulableBackgroundEvent } from '@metamask/snaps-controllers';
 import { endTrace, trace } from '../../util/trace';
 
+/**
+ * Extracts the snap ID from a request object.
+ *
+ * @param request - The request object that may contain a snapId property
+ * @returns The snap ID if found and valid, null otherwise
+ */
 export function getSnapIdFromRequest(
   request: Record<string, unknown>,
 ): SnapId | null {
   const { snapId } = request;
   return typeof snapId === 'string' ? (snapId as SnapId) : null;
 }
-// Snaps middleware
-/*
-    from extension https://github.dev/MetaMask/metamask-extension/blob/1d5e8a78400d7aaaf2b3cbdb30cff9399061df34/app/scripts/metamask-controller.js#L3830-L3861
-    */
+/**
+ * Creates Snaps method middleware for handling Snap-related RPC requests.
+ * Provides a bridge between the MetaMask engine and Snaps functionality.
+ *
+ * Based on extension implementation:
+ * https://github.dev/MetaMask/metamask-extension/blob/1d5e8a78400d7aaaf2b3cbdb30cff9399061df34/app/scripts/metamask-controller.js#L3830-L3861
+ *
+ * @param engineContext - The MetaMask engine context containing controllers
+ * @param controllerMessenger - The controller messenger for inter-controller communication
+ * @param origin - The origin of the request (snap ID or dApp origin)
+ * @param subjectType - The type of subject making the request (Snap or Website)
+ * @returns Configured Snaps method middleware
+ */
 const snapMethodMiddlewareBuilder = (
   engineContext: EngineContext,
   controllerMessenger: BaseControllerMessenger,

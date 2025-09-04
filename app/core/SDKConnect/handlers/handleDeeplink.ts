@@ -12,8 +12,27 @@ import DevLogger from '../utils/DevLogger';
 import { waitForCondition, waitForKeychainUnlocked } from '../utils/wait.util';
 import handleConnectionMessage from './handleConnectionMessage';
 
+/**
+ * Pattern used to detect QR code parameters in deeplink URLs
+ */
 const QRCODE_PARAM_PATTERN = '&t=q';
 
+/**
+ * Handles deeplink connections for SDK communication, managing channel connections,
+ * reconnections, and RPC message processing.
+ *
+ * @param params - The deeplink handling parameters
+ * @param params.sdkConnect - The SDKConnect instance to manage connections
+ * @param params.channelId - Unique identifier for the communication channel
+ * @param params.origin - Origin of the deeplink request
+ * @param params.url - The complete deeplink URL
+ * @param params.originatorInfo - Optional information about the originating application
+ * @param params.rpc - Optional base64-encoded RPC message to process
+ * @param params.protocolVersion - Version of the SDK protocol being used
+ * @param params.otherPublicKey - Public key of the connecting party
+ * @param params.context - Context information for the connection
+ * @returns Promise that resolves when deeplink handling is complete
+ */
 const handleDeeplink = async ({
   sdkConnect,
   channelId,

@@ -2,6 +2,10 @@ import { captureException } from '@sentry/react-native';
 import { isObject, hasProperty } from '@metamask/utils';
 import { NetworkState, NetworkStatus } from '@metamask/network-controller';
 
+/**
+ * Mapping of Infura network types to their string identifiers.
+ * Used for network configuration and metadata initialization.
+ */
 const InfuraNetworkType = {
   mainnet: 'mainnet',
   goerli: 'goerli',

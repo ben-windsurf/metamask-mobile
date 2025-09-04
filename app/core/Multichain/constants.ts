@@ -8,7 +8,10 @@ import {
 import imageIcons from '../../images/image-icons';
 import { MultichainBlockExplorerFormatUrls } from './networks';
 
-// Image imports for React Native rendering
+/**
+ * Mapping of multichain network scopes to their corresponding token image icons.
+ * Used for displaying network-specific token icons in the React Native UI.
+ */
 export const MULTICHAIN_TOKEN_IMAGES = {
   [BtcScope.Mainnet]: imageIcons.BTC,
   [BtcScope.Testnet]: imageIcons['BTC-TESTNET'],
@@ -20,6 +23,10 @@ export const MULTICHAIN_TOKEN_IMAGES = {
   [SolScope.Testnet]: imageIcons.SOLANA,
 } as const;
 
+/**
+ * Mapping of CAIP chain IDs to their corresponding block explorer URL formats.
+ * Provides standardized URL templates for addresses and transactions across different networks.
+ */
 export const MULTICHAIN_NETWORK_BLOCK_EXPLORER_FORMAT_URLS_MAP: Record<
   CaipChainId,
   MultichainBlockExplorerFormatUrls
@@ -61,6 +68,10 @@ export const MULTICHAIN_NETWORK_BLOCK_EXPLORER_FORMAT_URLS_MAP: Record<
   },
 } as const;
 
+/**
+ * Mapping of multichain account types to their corresponding mainnet scopes.
+ * Used to determine the mainnet equivalent for different account types across Bitcoin and Solana.
+ */
 export const MULTICHAIN_ACCOUNT_TYPE_TO_MAINNET = {
   [BtcAccountType.P2pkh]: BtcScope.Mainnet,
   [BtcAccountType.P2sh]: BtcScope.Mainnet,
@@ -69,6 +80,10 @@ export const MULTICHAIN_ACCOUNT_TYPE_TO_MAINNET = {
   [SolAccountType.DataAccount]: SolScope.Mainnet,
 } as const;
 
+/**
+ * List of supported currency codes for price API requests.
+ * Includes fiat currencies and cryptocurrencies that can be used for price conversion.
+ */
 export const PRICE_API_CURRENCIES = [
   'aud',
   'hkd',

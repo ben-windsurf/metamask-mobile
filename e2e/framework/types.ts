@@ -8,6 +8,15 @@ import Ganache from '../../app/util/test/ganache';
 import { Mockttp } from 'mockttp';
 import FixtureBuilder from './fixtures/FixtureBuilder';
 
+/**
+ * Base options for gesture interactions in end-to-end tests.
+ * @interface GestureOptions
+ * @property timeout - Maximum time to wait for the gesture to complete
+ * @property checkStability - Whether to check element stability before performing gesture
+ * @property checkVisibility - Whether to check element visibility before performing gesture
+ * @property checkEnabled - Whether to check if element is enabled before performing gesture
+ * @property elemDescription - Description of the element for better error messages (e.g., "Get Started button")
+ */
 export interface GestureOptions {
   timeout?: number;
   checkStability?: boolean;
@@ -16,26 +25,61 @@ export interface GestureOptions {
   elemDescription?: string; // For better error messages - i.e "Get Started button"
 }
 
+/**
+ * Options for tap gesture interactions in end-to-end tests.
+ * @interface TapOptions
+ * @extends GestureOptions
+ * @property delay - Delay in milliseconds before performing the tap action
+ * @property waitForElementToDisappear - If true, waits for the element to disappear after tapping
+ */
 export interface TapOptions extends GestureOptions {
   delay?: number; // Delay before the tap action
   waitForElementToDisappear?: boolean; // If true, waits for the element to disappear after tapping
 }
 
+/**
+ * Options for text input interactions in end-to-end tests.
+ * @interface TypeTextOptions
+ * @extends GestureOptions
+ * @property clearFirst - Whether to clear existing text before typing
+ * @property hideKeyboard - Whether to hide the keyboard after typing
+ * @property sensitive - If true, the text will not be logged in the test report for security
+ */
 export interface TypeTextOptions extends GestureOptions {
   clearFirst?: boolean;
   hideKeyboard?: boolean;
   sensitive?: boolean; // If true, the text will not be logged in the test report
 }
 
+/**
+ * Options for swipe gesture interactions in end-to-end tests.
+ * @interface SwipeOptions
+ * @extends GestureOptions
+ * @property speed - Speed of the swipe gesture, either 'fast' or 'slow'
+ * @property percentage - Percentage of screen distance to swipe (0-100)
+ */
 export interface SwipeOptions extends GestureOptions {
   speed?: 'fast' | 'slow';
   percentage?: number;
 }
 
+/**
+ * Options for long press gesture interactions in end-to-end tests.
+ * @interface LongPressOptions
+ * @extends GestureOptions
+ * @property duration - Duration in milliseconds to hold the press
+ */
 export interface LongPressOptions extends GestureOptions {
   duration?: number;
 }
 
+/**
+ * Options for scroll gesture interactions in end-to-end tests.
+ * @interface ScrollOptions
+ * @extends GestureOptions
+ * @property direction - Direction to scroll: 'up', 'down', 'left', or 'right'
+ * @property scrollAmount - Amount to scroll in pixels
+ */
 export interface ScrollOptions extends GestureOptions {
   direction?: 'up' | 'down' | 'left' | 'right';
   scrollAmount?: number;

@@ -96,8 +96,24 @@ import migration90 from './090';
 import { validatePostMigrationState } from '../validateMigration/validateMigration';
 import { RootState } from '../../reducers';
 
+/**
+ * Synchronous migration function that transforms state from one version to another.
+ * @param state - The current state to migrate
+ * @returns The migrated state
+ */
 type MigrationFunction = (state: unknown) => unknown;
+
+/**
+ * Asynchronous migration function that transforms state from one version to another.
+ * @param state - The current state to migrate
+ * @returns Promise resolving to the migrated state
+ */
 type AsyncMigrationFunction = (state: unknown) => Promise<unknown>;
+
+/**
+ * Record mapping migration version numbers to their corresponding migration functions.
+ * Supports both synchronous and asynchronous migration functions.
+ */
 export type MigrationsList = Record<
   string,
   MigrationFunction | AsyncMigrationFunction
@@ -200,7 +216,12 @@ export const migrationList: MigrationsList = {
   90: migration90,
 };
 
-// Enable both synchronous and asynchronous migrations
+/**
+ * Converts all migrations to asynchronous functions and enables post-migration validation.
+ * @param inputMigrations - The migrations list to convert to async
+ * @param onMigrationsComplete - Optional callback to run after the final migration completes
+ * @returns Record of async migration functions
+ */
 export const asyncifyMigrations = (
   inputMigrations: MigrationsList,
   onMigrationsComplete?: (state: unknown) => void,
@@ -230,10 +251,15 @@ export const asyncifyMigrations = (
     {} as Record<string, AsyncMigrationFunction>,
   );
 
-// Convert all migrations to async
+/**
+ * All migrations converted to async functions with post-migration state validation.
+ * Used by redux-persist to handle state migrations between app versions.
+ */
 export const migrations = asyncifyMigrations(migrationList, (state) => {
   validatePostMigrationState(state as RootState);
 }) as unknown as MigrationManifest;
 
-// The latest (i.e. highest) version number.
+/**
+ * The latest migration version number, representing the current state schema version.
+ */
 export const version = Object.keys(migrations).length - 1;

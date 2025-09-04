@@ -17,16 +17,33 @@ import {
 } from '../../methods/common';
 import { formatAddress } from '../../../address';
 
+/**
+ * Type definition for ERC721 notifications (sent or received NFT transactions)
+ */
 type ERC721Notification = ExtractedNotification<
   TRIGGER_TYPES.ERC721_RECEIVED | TRIGGER_TYPES.ERC721_SENT
 >;
+
+/**
+ * Type guard function to check if a notification is an ERC721 notification
+ */
 const isERC721Notification = isOfTypeNodeGuard([
   TRIGGER_TYPES.ERC721_RECEIVED,
   TRIGGER_TYPES.ERC721_SENT,
 ]);
 
+/**
+ * Determines if an ERC721 notification is for a sent transaction
+ * @param n - The ERC721 notification to check
+ * @returns True if the notification is for a sent NFT, false if received
+ */
 const isSent = (n: ERC721Notification) => n.type === TRIGGER_TYPES.ERC721_SENT;
 
+/**
+ * Generates the title for an ERC721 notification menu item
+ * @param n - The ERC721 notification
+ * @returns Localized title string with formatted address
+ */
 const title = (n: ERC721Notification) => {
   const address = formatAddress(isSent(n) ? n.data.to : n.data.from, 'short');
   return strings(`notifications.menu_item_title.${n.type}`, {
@@ -34,6 +51,11 @@ const title = (n: ERC721Notification) => {
   });
 };
 
+/**
+ * Generates the modal title for an ERC721 notification
+ * @param n - The ERC721 notification
+ * @returns Localized modal title string for sent or received NFT
+ */
 const modalTitle = (n: ERC721Notification) =>
   isSent(n)
     ? strings('notifications.modal.title_sent', { symbol: 'NFT' })
@@ -41,6 +63,9 @@ const modalTitle = (n: ERC721Notification) =>
         symbol: 'NFT',
       });
 
+/**
+ * Notification state configuration for ERC721 (NFT) sent and received notifications
+ */
 const state: NotificationState<ERC721Notification> = {
   guardFn: isERC721Notification,
   createMenuItem: (notification) => ({

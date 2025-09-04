@@ -5,6 +5,10 @@ import {
 import Matchers from '../../../framework/Matchers';
 import Gestures from '../../../framework/Gestures';
 
+/**
+ * Page object model for the Reveal Secret Recovery Phrase screen in MetaMask settings.
+ * Provides methods to interact with elements for revealing and managing secret recovery phrases.
+ */
 class RevealSecretRecoveryPhrase {
   get container(): DetoxElement {
     return Matchers.getElementByID(
@@ -71,6 +75,10 @@ class RevealSecretRecoveryPhrase {
     );
   }
 
+  /**
+   * Enters the password required to reveal the secret recovery phrase.
+   * @param password - The user's password to authenticate the reveal action
+   */
   async enterPasswordToRevealSecretCredential(password: string): Promise<void> {
     await Gestures.typeText(this.passwordInputToRevealCredential, password, {
       hideKeyboard: true,
@@ -78,24 +86,36 @@ class RevealSecretRecoveryPhrase {
     });
   }
 
+  /**
+   * Taps the button to reveal the secret recovery phrase after password authentication.
+   */
   async tapToReveal(): Promise<void> {
     await Gestures.waitAndTap(this.revealSecretRecoveryPhraseButton, {
       elemDescription: 'Reveal secret recovery phrase button',
     });
   }
 
+  /**
+   * Taps the button to copy the revealed credential to the device clipboard.
+   */
   async tapToCopyCredentialToClipboard() {
     await Gestures.tap(this.revealCredentialCopyToClipboardButton, {
       elemDescription: 'Reveal credential copy to clipboard button',
     });
   }
 
+  /**
+   * Taps the QR code tab to switch to the QR code view of the credential.
+   */
   async tapToRevealPrivateCredentialQRCode(): Promise<void> {
     await Gestures.tap(this.revealCredentialQRCodeTab, {
       elemDescription: 'Reveal credential QR code tab',
     });
   }
 
+  /**
+   * Scrolls the view to make the Done button visible.
+   */
   async scrollToDone(): Promise<void> {
     await Gestures.scrollToElement(this.doneButton, this.scrollViewIdentifier, {
       elemDescription: 'Done button',

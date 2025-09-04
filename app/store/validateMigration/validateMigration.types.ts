@@ -7,4 +7,8 @@ import { RootState } from '../../reducers';
  */
 export type ValidationCheck = (state: RootState) => string[];
 
+/**
+ * Log tag used for migration validation state errors.
+ * Used to identify and filter migration-related validation errors in logs.
+ */
 export const LOG_TAG = 'MIGRATION_VALIDATE_STATE_ERROR';

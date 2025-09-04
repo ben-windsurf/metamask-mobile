@@ -24,6 +24,10 @@ export const isNotificationsFeatureEnabled = () => {
   );
 };
 
+/**
+ * Enum defining the different types of modal fields used in notifications.
+ * These field types determine how notification content is displayed and structured.
+ */
 export enum ModalFieldType {
   ASSET = 'ModalField-Asset',
   ADDRESS = 'ModalField-Address',
@@ -37,11 +41,19 @@ export enum ModalFieldType {
   SWAP_RATE = 'ModalField-SwapsRate',
 }
 
+/**
+ * Enum defining the different types of modal footers used in notifications.
+ * These footer types determine the action buttons and links displayed at the bottom of notification modals.
+ */
 export enum ModalFooterType {
   BLOCK_EXPLORER = 'ModalFooter-BlockExplorer',
   ANNOUNCEMENT_CTA = 'ModalFooter-AnnouncementCta',
 }
 
+/**
+ * Enum defining the different types of modal headers used in notifications.
+ * These header types determine the visual content displayed at the top of notification modals.
+ */
 export enum ModalHeaderType {
   NFT_IMAGE = 'ModalHeader-NFTImage',
   ANNOUNCEMENT_IMAGE = 'ModalHeader-AnnouncementImage',

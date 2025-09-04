@@ -27,6 +27,10 @@ import { analytics } from '@metamask/sdk-analytics';
 // eslint-disable-next-line
 const { version } = require('../../../../package.json');
 
+/**
+ * List of RPC methods that should be logged for analytics tracking.
+ * These methods are considered significant user actions that warrant detailed logging.
+ */
 const lcLogguedRPCs = [
   'eth_sendTransaction',
   'eth_signTypedData',
@@ -41,6 +45,31 @@ const lcLogguedRPCs = [
   'metamask_batch',
 ].map((method) => method.toLowerCase());
 
+/**
+ * Handles incoming connection messages from SDK clients, processing RPC requests
+ * and managing the communication flow between the mobile wallet and connected dApps.
+ *
+ * This function performs several key operations:
+ * - Validates and processes incoming messages
+ * - Handles connection termination and ping messages
+ * - Manages permissions and authorization flow
+ * - Processes RPC calls through the background bridge
+ * - Tracks analytics for significant user actions
+ *
+ * @param params - The parameters object
+ * @param params.message - The incoming communication layer message containing RPC data
+ * @param params.engine - The MetaMask engine instance providing access to controllers
+ * @param params.connection - The SDK connection instance managing the client relationship
+ *
+ * @example
+ * ```typescript
+ * await handleConnectionMessage({
+ *   message: { method: 'eth_accounts', id: '123', params: [] },
+ *   engine: Engine,
+ *   connection: sdkConnection
+ * });
+ * ```
+ */
 export const handleConnectionMessage = async ({
   message,
   engine,

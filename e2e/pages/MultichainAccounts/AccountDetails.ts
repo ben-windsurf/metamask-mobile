@@ -3,6 +3,11 @@ import Gestures from '../../framework/Gestures';
 import { AccountDetailsIds } from '../../selectors/MultichainAccounts/AccountDetails.selectors';
 import { ExportCredentialsIds } from '../../selectors/MultichainAccounts/ExportCredentials.selectors';
 
+/**
+ * Page object model for the Account Details screen in end-to-end tests.
+ * Provides methods to interact with account management features including
+ * sharing addresses, editing account/wallet names, and exporting credentials.
+ */
 class AccountDetails {
   get container(): DetoxElement {
     return Matchers.getElementByID(AccountDetailsIds.ACCOUNT_DETAILS_CONTAINER);

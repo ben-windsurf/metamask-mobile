@@ -9,6 +9,8 @@ import { getConfiguredCaipChainIds } from '../MultichainAPI/networkMetricUtils';
 /**
  * Generate user profile analytics meta data
  * To be used in the Segment identify call
+ *
+ * @returns User profile metadata object containing analytics properties like theme, token detection settings, NFT settings, and security preferences
  */
 const generateUserProfileAnalyticsMetaData = (): UserProfileMetaData => {
   const reduxState = store.getState();

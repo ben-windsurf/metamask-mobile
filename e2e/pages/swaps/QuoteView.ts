@@ -5,33 +5,65 @@ import {
   QuoteViewSelectorText,
 } from '../../selectors/swaps/QuoteView.selectors';
 
+/**
+ * Page object model for the Quote View in the swaps flow.
+ * Provides methods to interact with swap quote elements and perform swap-related actions.
+ */
 class QuoteView {
+  /**
+   * Gets the "Get Quotes" button element.
+   * @returns The DetoxElement for the get quotes button
+   */
   get getQuotes(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.GET_QUOTES);
   }
 
+  /**
+   * Gets the "Get New Quotes" button element.
+   * @returns The DetoxElement for the get new quotes button
+   */
   get getNewQuotes(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.GET_NEW_QUOTES);
   }
 
+  /**
+   * Gets the cancel button element.
+   * @returns The DetoxElement for the cancel button
+   */
   get cancelButton(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.CANCEL);
   }
 
+  /**
+   * Gets the source token selector element.
+   * @returns The DetoxElement for the source token selector
+   */
   get sourceToken(): DetoxElement {
     return Matchers.getElementByID(QuoteViewSelectorIDs.SOURCE_TOKEN);
   }
 
+  /**
+   * Gets the destination token selector element.
+   * @returns The DetoxElement for the destination token selector
+   */
   get destToken(): DetoxElement {
     return Matchers.getElementByID(QuoteViewSelectorIDs.DEST_TOKEN);
   }
 
+  /**
+   * Gets the token search input element.
+   * @returns The TypableElement for the token search input
+   */
   get searchToken(): TypableElement {
     return Matchers.getElementByID(
       QuoteViewSelectorIDs.SEARCH_TOKEN,
     ) as TypableElement;
   }
 
+  /**
+   * Gets the max slippage setting element.
+   * @returns The DetoxElement for the max slippage setting
+   */
   get maxSlippage(): DetoxElement {
     return Matchers.getElementByID(QuoteViewSelectorIDs.MAX_SLIPPAGE);
   }

@@ -1,7 +1,10 @@
-// Event name for the performance tracing:
+/**
+ * Event names for performance tracing operations.
+ * Used to track and measure the duration of specific user actions and system operations.
+ */
 export const PerformanceEventNames = {
-  // When adding a Snap account.
+  /** Event fired when adding a Snap account */
   AddSnapAccount: 'ADD_SNAP_ACCOUNT',
-  // When adding a HD account.
+  /** Event fired when adding a HD account */
   AddHdAccount: 'ADD_HD_ACCOUNT',
 };

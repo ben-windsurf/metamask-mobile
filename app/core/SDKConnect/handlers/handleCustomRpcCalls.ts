@@ -11,6 +11,19 @@ import handleSendMessage from './handleSendMessage';
 import { Connection } from '../Connection';
 import { createBuyNavigationDetails } from '../../../components/UI/Ramp/Aggregator/routes/utils';
 
+/**
+ * Handles custom RPC calls for SDK Connect, processing special MetaMask methods
+ * and routing navigation requests.
+ *
+ * @param params - The parameters object
+ * @param params.rpc - The RPC request object containing id, method, and params
+ * @param params.batchRPCManager - Manager for handling batch RPC requests
+ * @param params.selectedAddress - The currently selected wallet address
+ * @param params.selectedChainId - The currently selected chain ID
+ * @param params.connection - Optional SDK connection instance
+ * @param params.navigation - Optional navigation container for routing
+ * @returns Promise that resolves to the processed RPC message or undefined
+ */
 export const handleCustomRpcCalls = async ({
   rpc,
   batchRPCManager,

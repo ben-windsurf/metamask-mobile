@@ -1,25 +1,59 @@
+/**
+ * Configuration interface for OAuth authentication settings.
+ * Defines the structure for OAuth configuration objects used across different build environments.
+ */
 interface OAUTH_CONFIG_TYPE {
+  /** URL of the authentication server */
   AUTH_SERVER_URL: string;
+  /** Web3Auth network identifier */
   WEB3AUTH_NETWORK: string;
 
+  /** Google grouped authentication connection ID */
   GOOGLE_GROUPED_AUTH_CONNECTION_ID: string;
+  /** Apple grouped authentication connection ID */
   APPLE_GROUPED_AUTH_CONNECTION_ID: string;
+  /** Android-specific Google authentication connection ID */
   ANDROID_GOOGLE_AUTH_CONNECTION_ID: string;
+  /** Android-specific Apple authentication connection ID */
   ANDROID_APPLE_AUTH_CONNECTION_ID: string;
+  /** iOS-specific Google authentication connection ID */
   IOS_GOOGLE_AUTH_CONNECTION_ID: string;
+  /** iOS-specific Apple authentication connection ID */
   IOS_APPLE_AUTH_CONNECTION_ID: string;
 }
 
+/**
+ * Enumeration of available build types for OAuth configuration.
+ * Each build type corresponds to a different deployment environment.
+ */
 enum BUILD_TYPE {
+  /** Development environment */
   development = 'development',
+  /** Main production environment */
   main_prod = 'main_prod',
+  /** Main user acceptance testing environment */
   main_uat = 'main_uat',
+  /** Main development environment */
   main_dev = 'main_dev',
+  /** Flask production environment */
   flask_prod = 'flask_prod',
+  /** Flask user acceptance testing environment */
   flask_uat = 'flask_uat',
+  /** Flask development environment */
   flask_dev = 'flask_dev',
 }
 
+/**
+ * OAuth configuration mapping for different build environments.
+ * Contains authentication server URLs, Web3Auth network settings, and platform-specific connection IDs
+ * for each supported build type.
+ *
+ * @example
+ * ```typescript
+ * const config = OAUTH_CONFIG[BUILD_TYPE.development];
+ * const authUrl = config.AUTH_SERVER_URL;
+ * ```
+ */
 export const OAUTH_CONFIG: Record<BUILD_TYPE, OAUTH_CONFIG_TYPE> = {
   development: {
     GOOGLE_GROUPED_AUTH_CONNECTION_ID: 'mm-seedless-onboarding',

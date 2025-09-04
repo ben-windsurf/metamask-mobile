@@ -1,5 +1,9 @@
 import { SNAP_ACCOUNT_CUSTOM_NAME_ADD_ACCOUNT_BUTTON } from '../../../app/components/Approvals/SnapAccountCustomNameApproval/SnapAccountCustomNameApproval.constants';
 
+/**
+ * Selector IDs for the Solana new feature sheet component elements.
+ * Used in end-to-end tests to identify and interact with specific UI elements.
+ */
 export const SolanaNewFeatureSheetSelectorsIDs = {
   SOLANA_NEW_FEATURE_SHEET: 'solana-new-feature-sheet',
   SOLANA_IMPORT_ACCOUNT_BUTTON: 'solana-import-account-button',
@@ -10,6 +14,10 @@ export const SolanaNewFeatureSheetSelectorsIDs = {
   SOLANA_CARASOULE_LOGO: 'carousel-sixth-slide',
 };
 
+/**
+ * Text content selectors for the Solana new feature sheet component.
+ * Contains expected text values used in end-to-end tests for content verification.
+ */
 export const SolanaNewFeatureSheetSelectorsText = {
   TITLE: 'Solana is here!',
   DESCRIPTION: 'Create, send, and receive Solana tokens in MetaMask',

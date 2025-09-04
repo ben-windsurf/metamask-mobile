@@ -14,12 +14,25 @@ import { QuickCryptoLib } from './lib';
 import { getRandomBytes } from './bytes';
 
 // Add these interfaces near the top with the other types
+/**
+ * Result of a detailed decryption operation containing the decrypted vault and metadata.
+ * @interface DetailedDecryptResult
+ * @property exportedKeyString - The exported encryption key as a base64 string
+ * @property vault - The decrypted vault data
+ * @property salt - The salt used during the decryption process
+ */
 interface DetailedDecryptResult {
   exportedKeyString: string;
   vault: unknown;
   salt: string;
 }
 
+/**
+ * Result of a detailed encryption operation containing the encrypted vault and key.
+ * @interface DetailedEncryptionResult
+ * @property vault - The encrypted vault as a JSON string
+ * @property exportedKeyString - The exported encryption key as a base64 string
+ */
 interface DetailedEncryptionResult {
   vault: string;
   exportedKeyString: string;

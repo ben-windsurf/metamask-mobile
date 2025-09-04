@@ -40,6 +40,13 @@ import {
 } from './event-handlers/metrics';
 import { handleShowNotification } from './event-handlers/notification';
 
+/**
+ * Initializes the TransactionController with all necessary dependencies and configuration.
+ * Sets up transaction handling, smart transaction support, and event listeners.
+ *
+ * @param request - Controller initialization request containing messenger, state, and dependencies
+ * @returns Object containing the initialized TransactionController instance
+ */
 export const TransactionControllerInit: ControllerInitFunction<
   TransactionController,
   TransactionControllerMessenger,
@@ -134,6 +141,20 @@ export const TransactionControllerInit: ControllerInitFunction<
   }
 };
 
+/**
+ * Publishes a transaction using smart transaction hooks when appropriate.
+ * Determines whether to use smart transactions based on state and feature flags.
+ *
+ * @param params - Object containing transaction metadata and controller dependencies
+ * @param params.transactionMeta - The transaction metadata to publish
+ * @param params.getState - Function to get current Redux state
+ * @param params.transactionController - Transaction controller instance
+ * @param params.smartTransactionsController - Smart transactions controller instance
+ * @param params.approvalController - Approval controller instance
+ * @param params.initMessenger - Transaction controller messenger
+ * @param params.signedTransactionInHex - The signed transaction in hex format
+ * @returns Promise resolving to object with transaction hash
+ */
 function publishHook({
   transactionMeta,
   getState,
@@ -169,6 +190,14 @@ function publishHook({
   });
 }
 
+/**
+ * Extracts common parameters needed for smart transaction decisions.
+ * Determines if smart transactions should be used and gets relevant feature flags.
+ *
+ * @param state - Current Redux state
+ * @param chainId - Optional chain ID to check smart transaction support for
+ * @returns Object containing smart transaction enablement flag and feature flags
+ */
 function getSmartTransactionCommonParams(state: RootState, chainId?: Hex) {
   const shouldUseSmartTransaction = selectShouldUseSmartTransaction(
     state,
@@ -182,6 +211,20 @@ function getSmartTransactionCommonParams(state: RootState, chainId?: Hex) {
   };
 }
 
+/**
+ * Publishes a batch of transactions using smart transaction hooks.
+ * Validates that smart transactions are enabled and processes the batch submission.
+ *
+ * @param params - Object containing batch transaction data and controller dependencies
+ * @param params.transactionController - Transaction controller instance
+ * @param params.smartTransactionsController - Smart transactions controller instance
+ * @param params.initMessenger - Transaction controller messenger
+ * @param params.getState - Function to get current Redux state
+ * @param params.approvalController - Approval controller instance
+ * @param params.transactions - Array of transactions to publish in batch
+ * @returns Promise resolving to batch publication result
+ * @throws Error if smart transactions are not enabled or transaction not found
+ */
 function publishBatchSmartTransactionHook({
   transactionController,
   smartTransactionsController,

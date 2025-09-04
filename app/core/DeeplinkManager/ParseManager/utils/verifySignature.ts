@@ -6,6 +6,13 @@ import {
 import { toByteArray } from 'react-native-quick-base64'; // Import the Base64 decoding function
 import AppConstants from '../../../../core/AppConstants';
 
+/**
+ * Normalizes a URL-safe Base64 string to standard Base64 format.
+ * Converts URL-safe characters and adds proper padding.
+ *
+ * @param base64String - The URL-safe Base64 string to normalize
+ * @returns The normalized standard Base64 string with proper padding
+ */
 function normalizeBase64(base64String: string): string {
   // Normalize URL-safe Base64
   const standardBase64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
@@ -20,6 +27,12 @@ function normalizeBase64(base64String: string): string {
   return standardBase64;
 }
 
+/**
+ * Returns the public key data for deeplink signature verification.
+ * Uses P-256 elliptic curve cryptography with coordinates from app constants.
+ *
+ * @returns JWK (JSON Web Key) format object containing the public key data
+ */
 function getKeyData() {
   return {
     crv: 'P-256' as const,
@@ -31,6 +44,13 @@ function getKeyData() {
   };
 }
 
+/**
+ * Canonicalizes a URL for signature verification by removing the signature parameter
+ * and sorting remaining query parameters for consistent string representation.
+ *
+ * @param url - The URL to canonicalize
+ * @returns The canonicalized URL string without signature parameter
+ */
 function canonicalize(url: URL): string {
   const params = new URLSearchParams(url.searchParams);
 
@@ -46,10 +66,16 @@ function canonicalize(url: URL): string {
   return fullUrl;
 }
 
+/** Signature verification result indicating no signature was found */
 export const MISSING = 'MISSING' as const;
+
+/** Signature verification result indicating the signature is valid */
 export const VALID = 'VALID' as const;
+
+/** Signature verification result indicating the signature is invalid */
 export const INVALID = 'INVALID' as const;
 
+/** Union type representing all possible signature verification results */
 type VerificationResult = typeof MISSING | typeof VALID | typeof INVALID;
 
 let tools: {

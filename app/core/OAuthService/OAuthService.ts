@@ -20,6 +20,13 @@ import { OAuthError, OAuthErrorType } from './error';
 import { BaseLoginHandler } from './OAuthLoginHandlers/baseHandler';
 import { Platform } from 'react-native';
 
+/**
+ * Configuration interface for OAuth service setup
+ * @interface OAuthServiceConfig
+ * @property authConnectionConfig - Platform-specific authentication connection configurations
+ * @property web3AuthNetwork - Web3Auth network configuration for blockchain integration
+ * @property authServerUrl - URL of the authentication server endpoint
+ */
 export interface OAuthServiceConfig {
   authConnectionConfig: {
     [key in SupportedPlatforms]: {
@@ -33,6 +40,15 @@ export interface OAuthServiceConfig {
   authServerUrl: string;
 }
 
+/**
+ * Internal state interface for OAuth service operations
+ * @interface OAuthServiceLocalState
+ * @property userId - Unique identifier for the authenticated user
+ * @property accountName - Display name or email of the authenticated account
+ * @property loginInProgress - Flag indicating if login process is currently active
+ * @property oauthLoginSuccess - Flag indicating successful OAuth login completion
+ * @property oauthLoginError - Error message from failed OAuth operations, null if no error
+ */
 interface OAuthServiceLocalState {
   userId?: string;
   accountName?: string;
@@ -40,11 +56,30 @@ interface OAuthServiceLocalState {
   oauthLoginSuccess: boolean;
   oauthLoginError: string | null;
 }
+/**
+ * OAuth service for handling authentication flows and user management
+ * Provides methods for OAuth login, token management, and state tracking
+ *
+ * @example
+ * ```typescript
+ * const oauthService = new OAuthService({
+ *   authConnectionConfig: platformConfig,
+ *   web3AuthNetwork: Web3AuthNetwork.SAPPHIRE_MAINNET,
+ *   authServerUrl: 'https://auth.example.com'
+ * });
+ *
+ * const result = await oauthService.handleOAuthLogin(loginHandler);
+ * ```
+ */
 export class OAuthService {
   public localState: OAuthServiceLocalState;
 
   public config: OAuthServiceConfig;
 
+  /**
+   * Creates a new OAuth service instance
+   * @param config - OAuth service configuration including auth connections and server URLs
+   */
   constructor(config: OAuthServiceConfig) {
     const { authServerUrl, web3AuthNetwork, authConnectionConfig } = config;
     this.localState = {

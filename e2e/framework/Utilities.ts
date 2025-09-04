@@ -5,6 +5,10 @@ import { createLogger } from './logger';
 // eslint-disable-next-line import/no-nodejs-modules
 import { setTimeout as asyncSetTimeout } from 'node:timers/promises';
 
+/**
+ * Default configuration values for test utilities and retry mechanisms.
+ * These values provide sensible defaults for element interactions and stability checks.
+ */
 const TEST_CONFIG_DEFAULTS = {
   timeout: 15000,
   retryInterval: 500,
@@ -13,6 +17,9 @@ const TEST_CONFIG_DEFAULTS = {
   stabilityCheckCount: 3,
 };
 
+/**
+ * Logger instance for the Utilities class to provide debugging and error information.
+ */
 const logger = createLogger({ name: 'Utilities' });
 
 /**
@@ -21,6 +28,9 @@ const logger = createLogger({ name: 'Utilities' });
 export default class Utilities {
   /**
    * Formats an array of strings into a regex pattern string for exact matching.
+   *
+   * @param regexstrings - Array of strings to format into a regex pattern
+   * @returns Formatted regex pattern string for exact matching
    */
   static formatForExactMatchGroup(regexstrings: string[]): string {
     return `\\("${regexstrings.join('","')}"\\)`;
@@ -28,13 +38,19 @@ export default class Utilities {
 
   /**
    * A getter method that returns a formatted string of blacklisted URLs for exact matching in a regex pattern.
+   *
+   * @returns Formatted regex pattern string containing all blacklisted URLs
    */
   static get BlacklistURLs(): string {
     return this.formatForExactMatchGroup(blacklistURLs);
   }
 
   /**
-   * Check if element is enabled (non-retry version)
+   * Check if element is enabled (non-retry version).
+   * Throws an error if the element is not enabled with helpful debugging information.
+   *
+   * @param detoxElement - The Detox element to check for enabled state
+   * @throws Error if the element is not enabled
    */
   static async checkElementEnabled(detoxElement: DetoxElement): Promise<void> {
     const el = (await detoxElement) as Detox.IndexableNativeElement;
@@ -55,7 +71,12 @@ export default class Utilities {
   }
 
   /**
-   * Wait for element to be enabled with retry mechanism
+   * Wait for element to be enabled with retry mechanism.
+   * Uses the executeWithRetry method to repeatedly check if an element is enabled.
+   *
+   * @param detoxElement - The Detox element to wait for
+   * @param timeout - Maximum time to wait in milliseconds (default: 3500)
+   * @param interval - Interval between checks in milliseconds (default: 100)
    */
   static async waitForElementToBeEnabled(
     detoxElement: DetoxElement,
@@ -70,8 +91,11 @@ export default class Utilities {
   }
 
   /**
-   * Check if element is actually tappable (not obscured by other elements)
-   * Android-specific check for element obscuration
+   * Check if element is actually tappable (not obscured by other elements).
+   * Android-specific check for element obscuration that validates frame bounds and accessibility.
+   *
+   * @param detoxElement - The Detox element to check for obscuration
+   * @throws Error if the element is obscured or not accessible
    */
   static async checkElementNotObscured(
     detoxElement: DetoxElement,

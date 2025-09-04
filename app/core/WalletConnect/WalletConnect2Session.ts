@@ -42,18 +42,35 @@ import { rpcErrors } from '@metamask/rpc-errors';
 import { switchToNetwork } from '../RPCMethods/lib/ethereum-chain-utils';
 import { updateWC2Metadata } from '../../actions/sdk';
 
+/**
+ * Error codes used in WalletConnect session responses
+ */
 const ERROR_CODES = {
   USER_REJECT_CODE: 5000,
 };
 
+/**
+ * RPC method name for switching Ethereum chain
+ */
 const RPC_WALLET_SWITCHETHEREUMCHAIN = 'wallet_switchEthereumChain';
+
+/**
+ * RPC method name for adding Ethereum chain
+ */
 const RPC_WALLET_ADDETHEREUMCHAIN = 'wallet_addEthereumChain';
 
+/**
+ * Factory interface for creating BackgroundBridge instances
+ */
 interface BackgroundBridgeFactory {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   create: (options: any) => BackgroundBridge;
 }
 
+/**
+ * Manages a WalletConnect v2 session, handling requests, responses, and chain switching
+ * for dApp connections through the WalletConnect protocol.
+ */
 class WalletConnect2Session {
   private channelId: string;
   private backgroundBridge: BackgroundBridge;

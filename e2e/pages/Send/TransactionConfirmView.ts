@@ -10,7 +10,15 @@ import {
   TransactionConfirmViewSelectorsText,
 } from '../../selectors/SendFlow/TransactionConfirmView.selectors';
 
+/**
+ * Page object model for the Transaction Confirmation View in end-to-end tests.
+ * Provides methods to interact with transaction confirmation UI elements and perform actions.
+ */
 class TransactionConfirmationView {
+  /**
+   * Gets the confirm transaction button element.
+   * @returns The confirm button DetoxElement for the current platform
+   */
   get confirmButton(): DetoxElement {
     return device.getPlatform() === 'ios'
       ? Matchers.getElementByID(
@@ -21,6 +29,10 @@ class TransactionConfirmationView {
         );
   }
 
+  /**
+   * Gets the cancel transaction button element.
+   * @returns The cancel button DetoxElement
+   */
   get cancelButton(): DetoxElement {
     return Matchers.getElementByText(
       TransactionConfirmViewSelectorsText.CANCEL_BUTTON,
@@ -88,12 +100,20 @@ class TransactionConfirmationView {
     );
   }
 
+  /**
+   * Taps the confirm transaction button.
+   * @returns Promise that resolves when the button is tapped
+   */
   async tapConfirmButton(): Promise<void> {
     await Gestures.waitAndTap(this.confirmButton, {
       elemDescription: 'Confirm Button in Transaction Confirmation View',
     });
   }
 
+  /**
+   * Taps the cancel transaction button.
+   * @returns Promise that resolves when the button is tapped
+   */
   async tapCancelButton(): Promise<void> {
     await Gestures.waitAndTap(this.cancelButton, {
       elemDescription: 'Cancel Button in Transaction Confirmation View',
@@ -142,4 +162,7 @@ class TransactionConfirmationView {
   }
 }
 
+/**
+ * Singleton instance of TransactionConfirmationView for use in end-to-end tests.
+ */
 export default new TransactionConfirmationView();

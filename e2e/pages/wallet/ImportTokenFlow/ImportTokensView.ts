@@ -6,6 +6,11 @@ import {
 } from '../../../selectors/wallet/ImportTokenView.selectors';
 import { CellComponentSelectorsIDs } from '../../../selectors/wallet/CellComponent.selectors';
 
+/**
+ * Page object model for the Import Tokens view in the wallet flow.
+ * Provides methods to interact with token import functionality including
+ * searching for tokens, entering custom token details, and managing network selection.
+ */
 class ImportTokensView {
   get searchTokenResult(): DetoxElement {
     return Matchers.getElementByID(
@@ -49,18 +54,27 @@ class ImportTokensView {
     return Matchers.getElementByID(CellComponentSelectorsIDs.SELECT, 0);
   }
 
+  /**
+   * Taps on the token symbol input field.
+   */
   async tapSymbolInput(): Promise<void> {
     await Gestures.waitAndTap(this.symbolInput, {
       elemDescription: 'Symbol input field',
     });
   }
 
+  /**
+   * Taps on the token symbol text element.
+   */
   async tapTokenSymbolText(): Promise<void> {
     await Gestures.waitAndTap(this.tokenSymbolText, {
       elemDescription: 'Token symbol text',
     });
   }
 
+  /**
+   * Scrolls down on the Import Custom Tokens screen.
+   */
   async scrollDownOnImportCustomTokens(): Promise<void> {
     await Gestures.swipe(this.symbolInput, 'up', {
       elemDescription: 'Scroll down on Import Custom Tokens',
@@ -69,6 +83,10 @@ class ImportTokensView {
     });
   }
 
+  /**
+   * Types a token contract address into the address input field.
+   * @param address - The token contract address to enter
+   */
   async typeTokenAddress(address: string): Promise<void> {
     await Gestures.typeText(this.addressInput, address, {
       elemDescription: 'Token address input',
@@ -76,6 +94,9 @@ class ImportTokensView {
     });
   }
 
+  /**
+   * Switches to the Custom Token tab in the import flow.
+   */
   async switchToCustomTab(): Promise<void> {
     await Gestures.waitAndTap(this.customTokenTab, {
       elemDescription: 'Custom Token tab',

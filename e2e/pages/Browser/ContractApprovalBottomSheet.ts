@@ -5,6 +5,11 @@ import {
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Contract Approval Bottom Sheet in the browser.
+ * Provides methods to interact with contract approval UI elements and perform actions
+ * like approving/rejecting contracts, editing nicknames, and inputting custom amounts.
+ */
 class ContractApprovalBottomSheet {
   get container(): DetoxElement {
     return Matchers.getElementByID(
@@ -60,35 +65,53 @@ class ContractApprovalBottomSheet {
     );
   }
 
+  /**
+   * Taps the add nickname button to add a nickname for the contract.
+   */
   async tapAddNickName(): Promise<void> {
     await Gestures.waitAndTap(this.addNickName, {
       elemDescription: 'Tap on the add nickname button',
     });
   }
+  /**
+   * Taps the edit nickname button to modify an existing contract nickname.
+   */
   async tapEditNickName(): Promise<void> {
     await Gestures.waitAndTap(this.editNickName, {
       elemDescription: 'Tap on the edit nickname button',
     });
   }
 
+  /**
+   * Taps the reject button to decline the contract approval request.
+   */
   async tapRejectButton(): Promise<void> {
     await Gestures.waitAndTap(this.rejectButton, {
       elemDescription: 'Tap on the reject button',
     });
   }
 
+  /**
+   * Taps the approve button to accept the contract approval request.
+   */
   async tapApproveButton(): Promise<void> {
     await Gestures.waitAndTap(this.approveButton, {
       elemDescription: 'Tap on the approve button',
     });
   }
 
+  /**
+   * Taps the confirm button to finalize the contract approval action.
+   */
   async tapConfirmButton(): Promise<void> {
     await Gestures.waitAndTap(this.confirmButton, {
       elemDescription: 'Tap on the confirm button',
     });
   }
 
+  /**
+   * Taps on the contract address to copy it to the clipboard.
+   */
   async tapToCopyContractAddress(): Promise<void> {
     await Gestures.waitAndTap(this.contractAddress, {
       elemDescription: 'Tap on the contract address',

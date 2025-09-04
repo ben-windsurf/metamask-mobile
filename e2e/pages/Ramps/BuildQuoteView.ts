@@ -2,6 +2,10 @@ import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 import { BuildQuoteSelectors } from '../../selectors/Ramps/BuildQuote.selectors';
 
+/**
+ * Page object model for the Build Quote view in the Ramps feature.
+ * Provides methods to interact with UI elements for building cryptocurrency purchase quotes.
+ */
 class BuildQuoteView {
   get amountToBuyLabel(): DetoxElement {
     return Matchers.getElementByText(BuildQuoteSelectors.AMOUNT_TO_BUY_LABEL);
@@ -77,18 +81,28 @@ class BuildQuoteView {
     return Matchers.getElementByLabel('MAX');
   }
 
+  /**
+   * Taps the cancel button to exit the build quote flow.
+   */
   async tapCancelButton(): Promise<void> {
     await Gestures.waitAndTap(this.cancelButton, {
       elemDescription: 'Cancel Button in Build Quote View',
     });
   }
 
+  /**
+   * Taps the account picker to select a different account.
+   */
   async tapAccountPicker(): Promise<void> {
     await Gestures.waitAndTap(this.accountPicker, {
       elemDescription: 'Account Picker in Build Quote View',
     });
   }
 
+  /**
+   * Selects a specific token from the token dropdown.
+   * @param token - The name of the token to select
+   */
   async selectToken(token: string): Promise<void> {
     const tokenOption = Matchers.getElementByText(token);
     await Gestures.waitAndTap(tokenOption, {
@@ -96,6 +110,10 @@ class BuildQuoteView {
     });
   }
 
+  /**
+   * Taps on a token dropdown option.
+   * @param token - The name of the token dropdown to tap
+   */
   async tapTokenDropdown(token: string): Promise<void> {
     const tokenOption = Matchers.getElementByText(token);
     await Gestures.waitAndTap(tokenOption, {
@@ -103,12 +121,18 @@ class BuildQuoteView {
     });
   }
 
+  /**
+   * Taps the select region dropdown to choose a region.
+   */
   async tapSelectRegionDropdown(): Promise<void> {
     await Gestures.waitAndTap(this.selectRegionDropdown, {
       elemDescription: 'Select Region Dropdown in Build Quote View',
     });
   }
 
+  /**
+   * Taps the currency selector dropdown to choose a currency.
+   */
   async tapCurrencySelector(): Promise<void> {
     await Gestures.waitAndTap(this.selectCurrencyDropdown, {
       elemDescription: 'Select Currency Dropdown in Build Quote View',

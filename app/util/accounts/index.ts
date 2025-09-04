@@ -45,4 +45,8 @@ export const getAccountNameWithENS = ({
     : account?.name || '';
 };
 
+/**
+ * Default export of the getAccountNameWithENS utility function.
+ * Gets the Account nickname, ENS name, or default account name - Whichever one is available.
+ */
 export default getAccountNameWithENS;

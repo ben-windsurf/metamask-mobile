@@ -6,33 +6,61 @@ import { NetworksViewSelectorsIDs } from '../../selectors/Settings/NetworksView.
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Network List Modal in end-to-end tests.
+ * Provides methods to interact with network selection, searching, and management functionality.
+ */
 class NetworkListModal {
+  /**
+   * Gets the scrollable network list element.
+   * @returns The DetoxElement for the network scroll container
+   */
   get networkScroll(): DetoxElement {
     return Matchers.getElementByID(NetworkListModalSelectorsIDs.SCROLL);
   }
 
+  /**
+   * Gets the close icon element for dismissing the modal.
+   * @returns The DetoxElement for the close icon
+   */
   get closeIcon(): DetoxElement {
     return Matchers.getElementByID(NetworksViewSelectorsIDs.CLOSE_ICON);
   }
 
+  /**
+   * Gets the delete network button element.
+   * @returns The DetoxElement for the delete network button
+   */
   get deleteNetworkButton(): DetoxElement {
     return Matchers.getElementByText(
       NetworkListModalSelectorsText.DELETE_NETWORK,
     );
   }
 
+  /**
+   * Gets the add popular network button element.
+   * @returns The DetoxElement for the add popular network button
+   */
   get addPopularNetworkButton(): DetoxElement {
     return Matchers.getElementByText(
       NetworkListModalSelectorsText.ADD_POPULAR_NETWORK_BUTTON,
     );
   }
 
+  /**
+   * Gets the network search input field element.
+   * @returns The DetoxElement for the network search input
+   */
   get networkSearchInput(): DetoxElement {
     return Matchers.getElementByID(
       NetworksViewSelectorsIDs.SEARCH_NETWORK_INPUT_BOX_ID,
     );
   }
 
+  /**
+   * Gets the select network element.
+   * @returns The DetoxElement for the select network text
+   */
   get selectNetwork(): DetoxElement {
     return Matchers.getElementByText(
       NetworkListModalSelectorsText.SELECT_NETWORK,

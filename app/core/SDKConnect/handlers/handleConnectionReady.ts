@@ -14,6 +14,20 @@ import generateOTP from '../utils/generateOTP.util';
 import { setupBridge } from './setupBridge';
 import { HOUR_IN_MS } from '../SDKConnectConstants';
 
+/**
+ * Handles the connection ready event for SDK connections, managing approval flows,
+ * authentication, and bridge setup based on connection origin and state.
+ *
+ * @param params - Configuration object for handling connection ready
+ * @param params.originatorInfo - Information about the originating dApp
+ * @param params.engine - MetaMask engine instance
+ * @param params.connection - SDK connection instance
+ * @param params.approveHost - Function to approve host connections
+ * @param params.disapprove - Function to disapprove connections
+ * @param params.onError - Optional error handler callback
+ * @param params.updateOriginatorInfos - Function to update originator information
+ * @returns Promise that resolves when connection ready handling is complete
+ */
 export const handleConnectionReady = async ({
   originatorInfo,
   engine,

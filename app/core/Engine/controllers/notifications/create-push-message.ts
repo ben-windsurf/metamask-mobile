@@ -6,19 +6,33 @@ import type { INotification } from '@metamask/notification-services-controller/n
 import { strings } from '../../../../../locales/i18n';
 import type Translations from '../../../../../locales/languages/en.json';
 
+/** Type representing the notifications section of the translations object */
 type NotificationTranslations = (typeof Translations)['notifications'];
+
+/**
+ * Utility type that flattens nested object keys into dot-separated string literals
+ * @template TObj - The object type to flatten
+ */
 type FlattenToString<TObj> = {
   [K in keyof TObj]: TObj[K] extends string
     ? `${K & string}`
     : `${K & string}.${FlattenToString<TObj[K]>}`;
 }[keyof TObj];
 
+/** Type representing valid notification string keys with 'notifications.' prefix */
 type NotificationStrings =
   `notifications.${FlattenToString<NotificationTranslations>}`;
 
+/**
+ * Translation helper function that retrieves localized strings for notifications
+ * @param name - The notification string key
+ * @param params - Optional parameters for string interpolation
+ * @returns The localized string or empty string if not found
+ */
 const t = (name: NotificationStrings, params?: object) =>
   strings(name, params) ?? '';
 
+/** Translation keys mapping for push notification messages */
 const translations: TranslationKeys = {
   pushPlatformNotificationsFundsSentTitle: () =>
     t('notifications.push_notification_content.funds_sent_title'),
@@ -92,6 +106,11 @@ const translations: TranslationKeys = {
     ),
 };
 
+/**
+ * Creates a push notification message for on-chain notifications
+ * @param notification - The notification data to create a message for
+ * @returns The formatted push notification message
+ */
 export function createNotificationMessage(notification: INotification) {
   return createOnChainPushNotificationMessage(notification, translations);
 }

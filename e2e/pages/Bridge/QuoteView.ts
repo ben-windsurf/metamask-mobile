@@ -5,33 +5,65 @@ import {
   QuoteViewSelectorText,
 } from '../../selectors/Bridge/QuoteView.selectors';
 
+/**
+ * Page object model for the Bridge Quote View screen.
+ * Provides methods to interact with bridge quote elements and perform bridge-related actions.
+ */
 class QuoteView {
+  /**
+   * Gets the select amount label element.
+   * @returns The select amount label DetoxElement
+   */
   get selectAmountLabel(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.SELECT_AMOUNT);
   }
 
+  /**
+   * Gets the confirm bridge button element.
+   * @returns The confirm bridge button DetoxElement
+   */
   get confirmBridge(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.CONFIRM_BRIDGE);
   }
 
+  /**
+   * Gets the confirm swap button element.
+   * @returns The confirm swap button DetoxElement
+   */
   get confirmSwap(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.CONFIRM_SWAP);
   }
 
+  /**
+   * Gets the bridge to button element.
+   * @returns The bridge to button DetoxElement
+   */
   get bridgeTo(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.BRIDGE_TO);
   }
 
+  /**
+   * Gets the swap to button element.
+   * @returns The swap to button DetoxElement
+   */
   get swapTo(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.SWAP_TO);
   }
 
+  /**
+   * Gets the token search input element.
+   * @returns Promise resolving to the token search input element
+   */
   get searchToken(): Promise<Detox.IndexableNativeElement> {
     return Matchers.getElementByID(
       QuoteViewSelectorIDs.TOKEN_SEARCH_INPUT,
     ) as Promise<Detox.IndexableNativeElement>;
   }
 
+  /**
+   * Gets the cancel button element.
+   * @returns The cancel button DetoxElement
+   */
   get cancelButton(): DetoxElement {
     return Matchers.getElementByText(QuoteViewSelectorText.CANCEL);
   }

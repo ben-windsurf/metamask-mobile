@@ -1,10 +1,22 @@
+/** Time constant: one minute in milliseconds */
 export const MIN_IN_MS = 1000 * 60;
+
+/** Time constant: one hour in milliseconds */
 export const HOUR_IN_MS = MIN_IN_MS * 60;
+
+/** Time constant: one day in milliseconds */
 export const DAY_IN_MS = HOUR_IN_MS * 24;
+
+/** Default session timeout duration: 30 days in milliseconds */
 export const DEFAULT_SESSION_TIMEOUT_MS = 30 * DAY_IN_MS;
 
+/** Timeout duration for pausing connections in milliseconds */
 export const TIMEOUT_PAUSE_CONNECTIONS = 25000;
 
+/**
+ * RPC method names used in SDK Connect communication
+ * Maps method identifiers to their corresponding RPC method strings
+ */
 export const RPC_METHODS = {
   METAMASK_GETPROVIDERSTATE: 'metamask_getProviderState',
   METAMASK_CONNECTSIGN: 'metamask_connectSign',
@@ -28,8 +40,14 @@ export const RPC_METHODS = {
   ETH_ACCOUNTS: 'eth_accounts',
   ETH_CHAINID: 'eth_chainId',
 };
+
+/** Event name for connection loading state */
 export const CONNECTION_LOADING_EVENT = 'loading';
 
+/**
+ * Map of RPC methods that should trigger a redirect to the MetaMask app
+ * These methods require user interaction and cannot be handled in the background
+ */
 export const METHODS_TO_REDIRECT: { [method: string]: boolean } = {
   [RPC_METHODS.ETH_REQUESTACCOUNTS]: true,
   [RPC_METHODS.ETH_SENDTRANSACTION]: true,
@@ -48,6 +66,10 @@ export const METHODS_TO_REDIRECT: { [method: string]: boolean } = {
   [RPC_METHODS.METAMASK_BATCH]: true,
 };
 
+/**
+ * Map of RPC methods that should be delayed during processing
+ * Inherits from METHODS_TO_REDIRECT but excludes eth_requestAccounts
+ */
 export const METHODS_TO_DELAY: { [method: string]: boolean } = {
   ...METHODS_TO_REDIRECT,
   [RPC_METHODS.ETH_REQUESTACCOUNTS]: false,

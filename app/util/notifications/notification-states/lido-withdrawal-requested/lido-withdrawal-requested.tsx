@@ -10,13 +10,26 @@ import {
 } from '../../methods/common';
 import { getTokenAmount } from '../token-amounts';
 
+/**
+ * Type definition for Lido withdrawal requested notifications.
+ * Represents a notification triggered when a user requests withdrawal from Lido staking.
+ */
 type LidoWithdrawalRequestedNotification =
   ExtractedNotification<TRIGGER_TYPES.LIDO_WITHDRAWAL_REQUESTED>;
 
+/**
+ * Type guard function to check if a notification is a Lido withdrawal requested notification.
+ * @param notification - The notification to check
+ * @returns True if the notification is of type LIDO_WITHDRAWAL_REQUESTED
+ */
 const isLidoWithdrawalRequestedNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.LIDO_WITHDRAWAL_REQUESTED,
 ]);
 
+/**
+ * Notification state configuration for Lido withdrawal requested notifications.
+ * Defines how to create menu items and modal details for this notification type.
+ */
 const state: NotificationState<LidoWithdrawalRequestedNotification> = {
   guardFn: isLidoWithdrawalRequestedNotification,
   createMenuItem: (notification) => {

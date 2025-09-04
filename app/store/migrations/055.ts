@@ -5,6 +5,9 @@ import { SelectedNetworkControllerState } from '@metamask/selected-network-contr
 import { hasProperty, isObject, RuntimeObject } from '@metamask/utils';
 import { ensureValidState } from './util';
 
+/**
+ * Migration version number for this migration script.
+ */
 export const version = 55;
 
 /**
@@ -56,7 +59,13 @@ function addBuiltInInfuraNetworks(networkConfigurations: any[]) {
   ];
 }
 
-// Matches network controller validation
+/**
+ * Validates if a URL is properly formatted with http or https scheme.
+ * Matches network controller validation logic.
+ *
+ * @param url - The URL string to validate
+ * @returns True if the URL is valid with http/https scheme, false otherwise
+ */
 function isValidUrl(url: string) {
   const uri = parse(url);
   return (
@@ -64,6 +73,15 @@ function isValidUrl(url: string) {
   );
 }
 
+/**
+ * Migration function that consolidates network configurations by chain ID,
+ * adds built-in Infura networks, and updates the NetworkController state structure.
+ * This migration transforms the legacy network configuration format to support
+ * multiple RPC endpoints per chain and improved network management.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with updated NetworkController structure
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 55)) {
     return state;

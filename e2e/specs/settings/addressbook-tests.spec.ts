@@ -14,9 +14,16 @@ import enContent from '../../../locales/languages/en.json';
 import DeleteContactBottomSheet from '../../pages/Settings/Contacts/DeleteContactBottomSheet';
 import Assertions from '../../framework/Assertions';
 
+/** Invalid Ethereum address used for testing error handling */
 const INVALID_ADDRESS = '0xB8B4EE5B1b693971eB60bDa15211570df2dB221L';
+
+/** Tether (USDT) token contract address on Ethereum mainnet */
 const TETHER_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7';
+
+/** MYTH token contract address used for testing */
 const MYTH_ADDRESS = '0x1FDb169Ef12954F20A15852980e1F0C122BfC1D6';
+
+/** Test contact data object containing address, names, and network information for contact management tests */
 const TEST_CONTACT = {
   address: '0x90aF68e1ec406e77C2EA0E4e6EAc9475062d6456',
   name: 'My Contact',
@@ -24,6 +31,8 @@ const TEST_CONTACT = {
   network: 'Linea Main Network',
   editedNetwork: 'Sepolia',
 };
+
+/** Memo text used for testing ENS address addition */
 const MEMO = 'Test adding ENS';
 
 describe(SmokeWalletPlatform('Addressbook Tests'), () => {

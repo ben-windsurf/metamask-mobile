@@ -11,6 +11,11 @@ import { WalletDevice } from '@metamask/transaction-controller';
 import { toChecksumHexAddress, toHex } from '@metamask/controller-utils';
 import { Hex } from '@metamask/utils';
 
+/**
+ * Converts a string value to hexadecimal format, falling back to the original value if conversion fails.
+ * @param value - The string value to convert to hex
+ * @returns The hexadecimal representation of the value, or the original value as Hex if conversion fails
+ */
 const toHexOrFallback = (value: string) => {
   try {
     return toHex(value);
@@ -19,6 +24,15 @@ const toHexOrFallback = (value: string) => {
   }
 };
 
+/**
+ * Processes and approves a transaction from a deeplink URL, handling network switching,
+ * parameter validation, and transaction submission.
+ * @param params - The transaction approval parameters
+ * @param params.deeplinkManager - The deeplink manager instance for navigation
+ * @param params.ethUrl - Parsed Ethereum URL containing transaction parameters
+ * @param params.origin - The origin of the transaction request
+ * @throws {Error} When uint256 parameter is not a valid number or integer
+ */
 async function approveTransaction({
   deeplinkManager,
   ethUrl,

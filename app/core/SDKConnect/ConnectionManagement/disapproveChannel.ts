@@ -2,6 +2,14 @@ import AppConstants from '../../../core/AppConstants';
 import SDKConnect from '../SDKConnect';
 import DevLogger from '../utils/DevLogger';
 
+/**
+ * Disapproves a channel connection by resetting its authorization status and removing it from approved hosts.
+ * This function is used to revoke access for a previously approved SDK connection.
+ *
+ * @param params - The disapproval parameters
+ * @param params.channelId - The unique identifier of the channel to disapprove
+ * @param params.instance - The SDKConnect instance managing the connections
+ */
 function disapproveChannel({
   channelId,
   instance,

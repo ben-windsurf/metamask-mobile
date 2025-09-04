@@ -18,30 +18,43 @@ import type {
 } from '@metamask/permission-controller';
 
 // In-lined from @metamask/multichain
+/** CAIP-25 caveat type identifier for authorized scopes */
 const Caip25CaveatType = 'authorizedScopes';
+/** CAIP-25 endowment permission name for multichain authorization */
 const Caip25EndowmentPermissionName = 'endowment:caip25';
 
+/** Internal scope object containing authorized accounts for a specific chain */
 interface InternalScopeObject {
+  /** Array of CAIP account identifiers authorized for this scope */
   accounts: CaipAccountId[];
 }
 
+/** Mapping of CAIP chain IDs to their corresponding scope objects */
 type InternalScopesObject = Record<CaipChainId, InternalScopeObject>;
 
 // Locally defined types
+/** CAIP-25 caveat type with authorized scopes data */
 type Caip25Caveat = Caveat<typeof Caip25CaveatType, Json>;
 
+/** CAIP-25 permission type for multichain authorization */
 type Caip25Permission = ValidPermission<
   typeof Caip25EndowmentPermissionName,
   Caip25Caveat
 >;
 
+/** Legacy permission names used before CAIP-25 migration */
 const PermissionNames = {
+  /** Legacy Ethereum accounts permission name */
   eth_accounts: 'eth_accounts',
+  /** Legacy permitted chains endowment permission name */
   permittedChains: 'endowment:permitted-chains',
 } as const;
 
-// a map of the networks built into the extension at the time of this migration to their chain IDs
-// copied from shared/constants/network.ts (https://github.com/MetaMask/metamask-extension/blob/5b5c04a16fb7937a6e9d59b1debe4713978ef39d/shared/constants/network.ts#L535)
+/**
+ * Map of built-in networks to their chain IDs at the time of this migration.
+ * Copied from shared/constants/network.ts in MetaMask extension.
+ * @see https://github.com/MetaMask/metamask-extension/blob/5b5c04a16fb7937a6e9d59b1debe4713978ef39d/shared/constants/network.ts#L535
+ */
 const BUILT_IN_NETWORKS: ReadonlyMap<string, Hex> = new Map([
   ['sepolia', '0xaa36a7'],
   ['mainnet', '0x1'],
@@ -49,6 +62,7 @@ const BUILT_IN_NETWORKS: ReadonlyMap<string, Hex> = new Map([
   ['linea-mainnet', '0xe708'],
 ]);
 
+/** Prefixes used to identify Snap origins */
 const snapsPrefixes = ['npm:', 'local:'] as const;
 
 function isPermissionConstraint(obj: unknown): obj is PermissionConstraint {

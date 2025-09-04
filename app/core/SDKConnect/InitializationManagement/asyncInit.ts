@@ -12,6 +12,16 @@ import DevLogger from '../utils/DevLogger';
 import { wait } from '../utils/wait.util';
 import AppConstants from '../../../../app/core/AppConstants';
 
+/**
+ * Asynchronously initializes the SDKConnect instance with navigation and connection management.
+ * Handles cleanup of expired connections and restoration of valid connections from Redux store.
+ *
+ * @param params - Initialization parameters
+ * @param params.navigation - React Navigation container reference for routing
+ * @param params.instance - SDKConnect instance to initialize
+ * @param params.context - Optional context string for debugging purposes
+ * @returns Promise that resolves when initialization is complete
+ */
 const asyncInit = async ({
   navigation,
   instance,

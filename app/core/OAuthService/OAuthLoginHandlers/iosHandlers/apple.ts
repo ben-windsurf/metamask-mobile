@@ -23,14 +23,29 @@ export class IosAppleLoginHandler extends BaseLoginHandler {
 
   protected clientId: string;
 
+  /**
+   * Gets the authentication connection type for Apple login.
+   *
+   * @returns The Apple authentication connection type
+   */
   get authConnection() {
     return AuthConnection.Apple;
   }
 
+  /**
+   * Gets the authentication scopes as string array.
+   *
+   * @returns Array of scope strings for Apple authentication
+   */
   get scope() {
     return this.#scope.map((scope) => scope.toString());
   }
 
+  /**
+   * Gets the authentication server path for Apple login.
+   *
+   * @returns The API path for Apple ID token authentication
+   */
   get authServerPath() {
     return 'api/v1/oauth/id_token';
   }
@@ -96,6 +111,13 @@ export class IosAppleLoginHandler extends BaseLoginHandler {
     }
   }
 
+  /**
+   * Prepares the authentication token request data for Apple login.
+   *
+   * @param params - The flow parameters containing idToken and other auth data
+   * @returns The formatted authentication request parameters for the server
+   * @throws {OAuthError} When params don't contain required idToken
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('idToken' in params)) {
       throw new OAuthError(

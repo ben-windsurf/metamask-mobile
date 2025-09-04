@@ -22,8 +22,15 @@ import { Mockttp } from 'mockttp';
 
 let mockServer: Mockttp;
 let mockServerPort: number;
+/**
+ * Array to collect event payloads for validation in analytics tests
+ */
 const eventsToCheck: EventPayload[] = [];
 
+/**
+ * Sets up the on-ramp test environment with fixtures and mock server
+ * @param testFn - The test function to execute within the setup context
+ */
 const setupOnRampTest = async (testFn: () => Promise<void>) => {
   await withFixtures(
     {
@@ -49,6 +56,9 @@ const setupOnRampTest = async (testFn: () => Promise<void>) => {
   );
 };
 
+/**
+ * Mock configuration for Segment analytics tracking endpoints
+ */
 const segmentMock = {
   POST: [mockEvents.POST.segmentTrack],
 };

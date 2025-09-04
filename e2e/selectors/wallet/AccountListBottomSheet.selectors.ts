@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Test selector IDs for the Account List Bottom Sheet component.
+ * Contains element identifiers used in end-to-end testing.
+ */
 export const AccountListBottomSheetSelectorsIDs = {
   ACCOUNT_LIST_ID: 'account-list',
   ACCOUNT_LIST_ADD_BUTTON_ID: 'account-list-add-account-button',
@@ -7,6 +11,10 @@ export const AccountListBottomSheetSelectorsIDs = {
   ACCOUNT_BALANCE_BY_ADDRESS_TEST_ID: 'account-balance-by-address',
 };
 
+/**
+ * Test selector text values for the Account List Bottom Sheet component.
+ * Contains localized text strings used in end-to-end testing.
+ */
 export const AccountListBottomSheetSelectorsText = {
   ACCOUNTS_LIST_TITLE: enContent.accounts.accounts_title,
   REMOVE_IMPORTED_ACCOUNT: enContent.accounts.yes_remove_it,

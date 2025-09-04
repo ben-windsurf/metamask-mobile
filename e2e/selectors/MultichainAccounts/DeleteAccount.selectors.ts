@@ -1,3 +1,7 @@
+/**
+ * Selectors for the multichain delete account functionality in end-to-end tests.
+ * Contains test IDs for elements in the delete account confirmation dialog.
+ */
 export const MultichainDeleteAccountSelectors = {
   DELETE_ACCOUNT_CONTAINER: 'delete-account-container',
   DELETE_ACCOUNT_WARNING_TITLE: 'delete-account-warning-title',

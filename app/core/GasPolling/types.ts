@@ -1,5 +1,9 @@
 import { Hex } from '@metamask/utils';
 
+/**
+ * Properties for gas transaction calculations and display.
+ * Contains all necessary data for rendering gas fee information and estimates.
+ */
 export interface GasTransactionProps {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,6 +82,10 @@ export interface GasTransactionProps {
   totalMaxHex: string;
 }
 
+/**
+ * Gas fee options and estimates returned from the gas fee API.
+ * Contains base fee estimates and tiered gas fee recommendations.
+ */
 export interface GasFeeOptions {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,6 +122,10 @@ export interface GasFeeOptions {
   };
 }
 
+/**
+ * Properties for the useGasTransaction hook.
+ * Handles both EIP-1559 and legacy transaction gas calculations.
+ */
 export interface UseGasTransactionProps {
   /**
    * The gasSelected property is optional, as it is only relevant for 1559 transactions and not for legacy transactions.
@@ -146,6 +158,10 @@ export interface UseGasTransactionProps {
   multiLayerL1FeeTotal?: string;
 }
 
+/**
+ * Shared properties used across different transaction types.
+ * Contains common transaction data, currency information, and exchange rates.
+ */
 export interface TransactionSharedProps {
   /**
    * The native token exchange rate against the selected currency
@@ -191,6 +207,10 @@ export interface TransactionSharedProps {
   contractExchangeRates: Record<string, unknown>;
 }
 
+/**
+ * Properties for EIP-1559 transaction data calculation.
+ * Extends TransactionSharedProps with EIP-1559 specific gas fee estimates and options.
+ */
 export interface GetEIP1559TransactionDataProps extends TransactionSharedProps {
   gasFeeEstimates: GasFeeOptions;
   /**
@@ -214,6 +234,10 @@ export interface GetEIP1559TransactionDataProps extends TransactionSharedProps {
   onlyGas?: boolean;
 }
 
+/**
+ * Properties for legacy (pre-EIP-1559) transaction gas calculations.
+ * Contains transaction state, currency information, and legacy gas pricing data.
+ */
 export interface LegacyProps {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

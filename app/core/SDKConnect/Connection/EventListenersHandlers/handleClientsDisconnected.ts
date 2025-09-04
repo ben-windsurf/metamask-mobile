@@ -2,6 +2,16 @@ import AppConstants from '../../../AppConstants';
 import DevLogger from '../../utils/DevLogger';
 import { Connection } from '../Connection';
 
+/**
+ * Creates an event handler for client disconnection events in SDK connections.
+ * Manages connection state cleanup, security measures, and reconnection logic
+ * when clients disconnect from the MetaMask mobile app.
+ *
+ * @param params - Configuration object for the disconnect handler
+ * @param params.instance - The Connection instance to handle disconnection for
+ * @param params.disapprove - Function to disapprove/revoke channel permissions
+ * @returns Event handler function that processes client disconnection
+ */
 function handleClientsDisconnected({
   instance,
   disapprove,

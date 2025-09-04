@@ -13,6 +13,10 @@ import {
   KeyringControllerStateChangeEvent,
 } from '@metamask/keyring-controller';
 
+/**
+ * Union type of all actions that the multichain account service messenger can handle.
+ * Includes account management, snap handling, and keyring operations.
+ */
 type Actions =
   | AccountsControllerListMultichainAccountsAction
   | AccountsControllerGetAccountAction
@@ -21,11 +25,19 @@ type Actions =
   | KeyringControllerGetStateAction
   | KeyringControllerWithKeyringAction;
 
+/**
+ * Union type of all events that the multichain account service messenger can listen to.
+ * Includes keyring state changes and account lifecycle events.
+ */
 type Events =
   | KeyringControllerStateChangeEvent
   | AccountsControllerAccountAddedEvent
   | AccountsControllerAccountRemovedEvent;
 
+/**
+ * Type representing the restricted messenger for the multichain account service.
+ * This messenger is scoped to specific actions and events for security and isolation.
+ */
 export type MultichainAccountServiceMessenger = ReturnType<
   typeof getMultichainAccountServiceMessenger
 >;

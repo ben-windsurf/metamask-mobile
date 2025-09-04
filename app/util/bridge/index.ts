@@ -1,6 +1,21 @@
 import { QuoteMetadata, QuoteResponse } from '@metamask/bridge-controller';
 import { QuoteMetadataSerialized } from '@metamask/bridge-status-controller';
 
+/**
+ * Serializes quote metadata by converting BigNumber values to strings for safe storage and transmission.
+ * This function transforms numeric values in the quote response to string format to prevent precision
+ * loss and ensure compatibility with JSON serialization.
+ *
+ * @param quoteResponse - The quote response containing metadata with BigNumber values
+ * @returns The serialized quote response with string-converted numeric values
+ *
+ * @example
+ * ```typescript
+ * const quote = await getBridgeQuote(params);
+ * const serializedQuote = serializeQuoteMetadata(quote);
+ * // Now safe to store in Redux or send over network
+ * ```
+ */
 export const serializeQuoteMetadata = (
   quoteResponse: QuoteResponse & QuoteMetadata,
 ): QuoteResponse & QuoteMetadataSerialized => {

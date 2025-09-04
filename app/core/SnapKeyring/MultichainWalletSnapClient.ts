@@ -38,16 +38,26 @@ import {
   ///: END:ONLY_INCLUDE_IF
 } from '../../constants/storage';
 
+/**
+ * Enumeration of supported wallet client types for multichain wallet snaps.
+ * Each type represents a different blockchain network that can be managed by wallet snaps.
+ */
 export enum WalletClientType {
   ///: BEGIN:ONLY_INCLUDE_IF(solana)
+  /** Solana blockchain wallet client */
   Solana = 'solana',
   ///: END:ONLY_INCLUDE_IF
 
   ///: BEGIN:ONLY_INCLUDE_IF(bitcoin)
+  /** Bitcoin blockchain wallet client */
   Bitcoin = 'bitcoin',
   ///: END:ONLY_INCLUDE_IF
 }
 
+/**
+ * Mapping of wallet client types to their corresponding snap configurations.
+ * Contains snap IDs, names, discovery scopes, and storage identifiers for each supported blockchain.
+ */
 export const WALLET_SNAP_MAP = {
   ///: BEGIN:ONLY_INCLUDE_IF(bitcoin)
   [WalletClientType.Bitcoin]: {
@@ -68,17 +78,41 @@ export const WALLET_SNAP_MAP = {
   ///: END:ONLY_INCLUDE_IF
 };
 
+/**
+ * Configuration options for multichain wallet snap operations.
+ * @interface MultichainWalletSnapOptions
+ * @property scope - CAIP-2 chain ID specifying the blockchain scope
+ * @property synchronize - Whether to synchronize the account with the snap
+ * @property entropySource - Source of entropy for key generation
+ * @property accountNameSuggestion - Suggested name for the account
+ * @property derivationPath - BIP-44 derivation path for the account
+ */
 export interface MultichainWalletSnapOptions {
+  /** CAIP-2 chain ID specifying the blockchain scope */
   scope?: CaipChainId;
+  /** Whether to synchronize the account with the snap */
   synchronize?: boolean;
+  /** Source of entropy for key generation */
   entropySource?: string;
+  /** Suggested name for the account */
   accountNameSuggestion?: string;
+  /** BIP-44 derivation path for the account */
   derivationPath?: string;
 }
 
+/**
+ * Configuration options for SnapKeyring behavior.
+ * @interface SnapKeyringOptions
+ * @property displayConfirmation - Whether to display confirmation dialogs
+ * @property displayAccountNameSuggestion - Whether to show account name suggestions
+ * @property setSelectedAccount - Whether to set the account as selected after creation
+ */
 interface SnapKeyringOptions {
+  /** Whether to display confirmation dialogs */
   displayConfirmation: boolean;
+  /** Whether to show account name suggestions */
   displayAccountNameSuggestion: boolean;
+  /** Whether to set the account as selected after creation */
   setSelectedAccount: boolean;
 }
 

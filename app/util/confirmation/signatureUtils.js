@@ -14,12 +14,25 @@ import { getDecimalChainId } from '../networks';
 import Logger from '../Logger';
 import { MetricsEventBuilder } from '../../core/Analytics/MetricsEventBuilder';
 
+/**
+ * Constants for different versions of typed signature methods.
+ * Maps version identifiers to their corresponding RPC method names.
+ */
 export const typedSign = {
   V1: 'eth_signTypedData',
   V3: 'eth_signTypedData_v3',
   V4: 'eth_signTypedData_v4',
 };
 
+/**
+ * Generates analytics parameters for signature events.
+ * Extracts relevant data from message parameters and security alerts for tracking.
+ *
+ * @param messageParams - The message parameters containing signature data
+ * @param signType - The type of signature being performed
+ * @param securityAlertResponse - Optional security alert response from Blockaid
+ * @returns Object containing analytics parameters for tracking
+ */
 export const getAnalyticsParams = (
   messageParams,
   signType,
@@ -61,6 +74,13 @@ export const getAnalyticsParams = (
   return analyticsParams;
 };
 
+/**
+ * Determines the appropriate notification title for WalletConnect signature events.
+ *
+ * @param confirmation - Whether the signature was confirmed or rejected
+ * @param isError - Whether an error occurred during the signature process
+ * @returns Localized string for the notification title
+ */
 export const walletConnectNotificationTitle = (confirmation, isError) => {
   if (isError) return strings('notifications.wc_signed_failed_title');
   return confirmation
@@ -68,6 +88,14 @@ export const walletConnectNotificationTitle = (confirmation, isError) => {
     : strings('notifications.wc_signed_rejected_title');
 };
 
+/**
+ * Shows a notification for WalletConnect or SDK signature events.
+ * Only displays notifications for WalletConnect or MetaMask SDK origins.
+ *
+ * @param messageParams - Message parameters containing origin information
+ * @param confirmation - Whether the signature was confirmed
+ * @param isError - Whether an error occurred during signing
+ */
 export const showWalletConnectNotification = (
   messageParams = {},
   confirmation = false,
@@ -96,6 +124,15 @@ export const showWalletConnectNotification = (
   });
 };
 
+/**
+ * Handles signature actions by executing the action, showing notifications, and tracking analytics.
+ *
+ * @param onAction - The action function to execute
+ * @param messageParams - Message parameters for the signature
+ * @param signType - The type of signature being performed
+ * @param securityAlertResponse - Security alert response from Blockaid
+ * @param confirmation - Whether the signature was confirmed or rejected
+ */
 export const handleSignatureAction = async (
   onAction,
   messageParams,
@@ -118,6 +155,12 @@ export const handleSignatureAction = async (
   );
 };
 
+/**
+ * Adds an error listener for signature operations.
+ *
+ * @param metamaskId - The MetaMask ID for the signature request
+ * @param onSignatureError - Callback function to handle signature errors
+ */
 export const addSignatureErrorListener = (metamaskId, onSignatureError) => {
   Engine.context.SignatureController.hub.on(
     `${metamaskId}:signError`,
@@ -125,6 +168,12 @@ export const addSignatureErrorListener = (metamaskId, onSignatureError) => {
   );
 };
 
+/**
+ * Removes an error listener for signature operations.
+ *
+ * @param metamaskId - The MetaMask ID for the signature request
+ * @param onSignatureError - The callback function to remove
+ */
 export const removeSignatureErrorListener = (metamaskId, onSignatureError) => {
   Engine.context.SignatureController.hub.removeListener(
     `${metamaskId}:signError`,
@@ -132,6 +181,13 @@ export const removeSignatureErrorListener = (metamaskId, onSignatureError) => {
   );
 };
 
+/**
+ * Determines whether a message should be truncated based on its layout height.
+ * Uses platform-specific height thresholds for iOS and Android.
+ *
+ * @param e - Layout event containing nativeEvent with layout dimensions
+ * @returns True if the message should be truncated, false otherwise
+ */
 export const shouldTruncateMessage = (e) => {
   if (
     (Device.isIos() && e.nativeEvent.layout.height > 70) ||

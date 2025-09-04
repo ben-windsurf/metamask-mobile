@@ -1,4 +1,7 @@
+/** The prefix string that identifies ethjs-rpc error messages */
 const ethJsRpcSlug = 'Error: [ethjs-rpc] rpc error with payload ';
+
+/** The prefix string that identifies the start of the actual error message */
 const errorLabelPrefix = 'Error: ';
 
 /**

@@ -1,6 +1,10 @@
 import { ensureValidState } from './util';
 import { hasProperty, isObject } from '@metamask/utils';
 
+/**
+ * Default state configuration for the NotificationServicesController.
+ * Contains initial values for all notification-related feature flags and data arrays.
+ */
 export const DEFAULT_NOTIFICATION_SERVICES_CONTROLLER = {
   isCheckingAccountsPresence: false,
   isFeatureAnnouncementsEnabled: false,
@@ -14,6 +18,13 @@ export const DEFAULT_NOTIFICATION_SERVICES_CONTROLLER = {
   subscriptionAccountsSeen: [],
 };
 
+/**
+ * Migration function to ensure NotificationServicesController exists in state.
+ * Adds default NotificationServicesController configuration if missing from engine background state.
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with NotificationServicesController initialized
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 60)) {
     return state;

@@ -1,13 +1,20 @@
 import { isObject } from '@metamask/utils';
 import { captureException } from '@sentry/react-native';
 
+/**
+ * State interface for migration 068 representing the Redux store structure
+ * with PreferencesController smart transactions configuration.
+ */
 export interface State {
   engine: {
     backgroundState: {
       PreferencesController: {
+        /** Whether smart transactions are opted in by the user */
         smartTransactionsOptInStatus: boolean;
         featureFlags: {
+          /** Whether the smart transactions migration has been applied */
           smartTransactionsMigrationApplied: boolean;
+          /** Whether the smart transactions banner has been dismissed */
           smartTransactionsBannerDismissed: boolean;
         };
       };
@@ -15,6 +22,13 @@ export interface State {
   };
 }
 
+/**
+ * Migration 068: Updates smart transactions opt-in status and feature flags.
+ * Ensures users have smart transactions enabled and properly tracks migration state.
+ *
+ * @param state - The current Redux state to migrate
+ * @returns The migrated state with updated smart transactions configuration
+ */
 export default function migrate(state: unknown) {
   if (!isObject(state)) {
     captureException(

@@ -6,6 +6,14 @@ import { getUUIDFromAddressOfNormalAccount } from '@metamask/accounts-controller
 import { KeyringTypes } from '@metamask/keyring-controller';
 import { ETH_EOA_METHODS } from '../../constants/eth-methods';
 
+/**
+ * Interface representing an account identity in the migration process.
+ * @interface Identity
+ * @property name - The display name of the account
+ * @property address - The Ethereum address of the account
+ * @property lastSelected - Optional timestamp when the account was last selected
+ * @property importTime - Optional timestamp when the account was imported
+ */
 export interface Identity {
   name: string;
   address: string;
@@ -13,6 +21,13 @@ export interface Identity {
   importTime?: number;
 }
 
+/**
+ * Migration function to transform legacy account state to the new AccountsController format.
+ * Migrates from PreferencesController identities to AccountsController internal accounts.
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with AccountsController properly initialized
+ */
 export default function migrate(state: unknown) {
   if (!isObject(state)) {
     captureException(
@@ -78,6 +93,12 @@ export default function migrate(state: unknown) {
   return state;
 }
 
+/**
+ * Creates a default AccountsController structure in the state.
+ * Initializes the internal accounts object with empty accounts and selectedAccount.
+ *
+ * @param state - The application state to modify
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function createDefaultAccountsController(state: Record<string, any>) {
@@ -89,6 +110,12 @@ function createDefaultAccountsController(state: Record<string, any>) {
   };
 }
 
+/**
+ * Creates internal accounts for the AccountsController based on existing identities.
+ * Transforms PreferencesController identities into AccountsController internal accounts format.
+ *
+ * @param state - The application state containing PreferencesController identities
+ */
 function createInternalAccountsForAccountsController(
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -136,6 +163,14 @@ function createInternalAccountsForAccountsController(
     accounts;
 }
 
+/**
+ * Finds an internal account by its Ethereum address.
+ * Performs case-insensitive address matching.
+ *
+ * @param state - The application state containing AccountsController
+ * @param address - The Ethereum address to search for
+ * @returns The matching internal account or undefined if not found
+ */
 function findInternalAccountByAddress(
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -150,6 +185,12 @@ function findInternalAccountByAddress(
   );
 }
 
+/**
+ * Sets the selected account in AccountsController based on PreferencesController selectedAddress.
+ * Handles cases where selectedAddress is invalid by falling back to the first available account.
+ *
+ * @param state - The application state to modify
+ */
 function createSelectedAccountForAccountsController(
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

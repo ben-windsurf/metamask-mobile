@@ -9,6 +9,14 @@ import { InternalAccount } from '@metamask/keyring-internal-api';
 import { isDefaultAccountName } from '../../util/ENSUtils';
 import { ETH_EOA_METHODS } from '../../constants/eth-methods';
 
+/**
+ * Migration 42: Merges duplicate internal accounts with the same address.
+ * This migration consolidates accounts that have the same Ethereum address
+ * but different IDs, preserving metadata and ensuring account name consistency.
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with consolidated internal accounts
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, 42)) {
     return state;
@@ -42,6 +50,14 @@ export default function migrate(state: unknown) {
   return state;
 }
 
+/**
+ * Derives the appropriate account name when merging duplicate accounts.
+ * Prioritizes custom names over default names to preserve user customizations.
+ *
+ * @param existingName - The name of the existing account
+ * @param currentName - The name of the current account being merged
+ * @returns The name to use for the merged account
+ */
 function deriveAccountName(existingName: string, currentName: string): string {
   const isExistingNameDefault = isDefaultAccountName(existingName);
   const isCurrentNameDefault = isDefaultAccountName(currentName);
@@ -51,6 +67,13 @@ function deriveAccountName(existingName: string, currentName: string): string {
     : existingName;
 }
 
+/**
+ * Merges internal accounts that have the same Ethereum address.
+ * This function consolidates duplicate accounts by address, preserving
+ * metadata and ensuring the selected account remains valid.
+ *
+ * @param state - The validated application state containing accounts to merge
+ */
 function mergeInternalAccounts(state: ValidState) {
   const accountsController: AccountsControllerState = state.engine
     .backgroundState.AccountsController as AccountsControllerState;

@@ -20,6 +20,12 @@ import { getDecimalChainId } from '../../util/networks';
 import { RpcEndpointType } from '@metamask/network-controller';
 import { addItemToChainIdList } from '../../util/metrics/MultichainAPI/networkMetricUtils';
 
+/**
+ * Waits for React Native InteractionManager to complete all interactions.
+ * Used to ensure UI operations are finished before proceeding.
+ *
+ * @returns {Promise<void>} Promise that resolves when interactions are complete
+ */
 const waitForInteraction = async () =>
   new Promise((resolve) => {
     InteractionManager.runAfterInteractions(() => {
@@ -27,7 +33,18 @@ const waitForInteraction = async () =>
     });
   });
 
-// Utility function to find or add an item in an array and return the updated array and index
+/**
+ * Utility function to find or add an item in an array and return the updated array and index.
+ * If the item is not found, it adds the item to the array and returns the new index.
+ * If the item is found, it returns the original array and the existing index.
+ *
+ * @param {Array} array - The array to search and potentially modify
+ * @param {*} value - The value to add if not found
+ * @param {Function} comparator - Function to compare array items with the value
+ * @returns {Object} Object containing updatedArray and index
+ * @returns {Array} returns.updatedArray - The array with the item added if it wasn't found
+ * @returns {number} returns.index - The index of the item in the array
+ */
 const addOrUpdateIndex = (array, value, comparator) => {
   const index = array.findIndex(comparator);
   if (index === -1) {

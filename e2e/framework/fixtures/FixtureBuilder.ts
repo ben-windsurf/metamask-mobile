@@ -18,18 +18,33 @@ import {
 import { BackupAndSyncSettings, RampsRegion } from '../types';
 import { MULTIPLE_ACCOUNTS_ACCOUNTS_CONTROLLER } from './constants';
 
+/**
+ * Default Ethereum account address used in test fixtures.
+ */
 export const DEFAULT_FIXTURE_ACCOUNT =
   '0x76cf1CdD1fcC252442b50D6e97207228aA4aefC3';
 
+/**
+ * Second default Ethereum account address used in test fixtures.
+ */
 export const DEFAULT_FIXTURE_ACCOUNT_2 =
   '0xcdd74c6eb517f687aa2c786bc7484eb2f9bae1da';
 
+/**
+ * Default imported Ethereum account address used in test fixtures.
+ */
 export const DEFAULT_IMPORTED_FIXTURE_ACCOUNT =
   '0x43e1c289177ecfbe6ef34b5fb2b66ebce5a8e05b';
 
+/**
+ * Default Solana account address used in test fixtures.
+ */
 export const DEFAULT_SOLANA_FIXTURE_ACCOUNT =
   'CEQ87PmqFPA8cajAXYVrFT2FQobRrAT4Wd53FvfgYrrd';
 
+/**
+ * Default DApp URL used for testing.
+ */
 const DAPP_URL = 'localhost';
 
 /**
@@ -84,6 +99,10 @@ class FixtureBuilder {
     return this;
   }
 
+  /**
+   * Configures the fixture to display the Solana feature sheet by setting appropriate async state flags.
+   * @returns {FixtureBuilder} - The FixtureBuilder instance for method chaining.
+   */
   withSolanaFeatureSheetDisplayed() {
     if (!this.fixture.asyncState) {
       this.fixture.asyncState = {};

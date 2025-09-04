@@ -17,10 +17,24 @@ import {
 import { SnapCaveatType, isSnapId } from '@metamask/snaps-utils';
 import { SnapEndowments } from '@metamask/snaps-rpc-methods';
 
+/**
+ * Legacy stored job information interface for migration purposes.
+ * @interface LegacyStoredJobInformation
+ * @property lastRun - Timestamp of when the job was last executed
+ */
 interface LegacyStoredJobInformation {
   lastRun: number;
 }
 
+/**
+ * Legacy background event interface for migration purposes.
+ * @interface LegacyBackgroundEvent
+ * @property id - Unique identifier for the event
+ * @property scheduledAt - ISO string of when the event was scheduled
+ * @property snapId - The snap ID that owns this event
+ * @property date - ISO string of when the event should execute
+ * @property request - JSON-RPC request object to execute
+ */
 interface LegacyBackgroundEvent {
   id: string;
   scheduledAt: string;
@@ -34,6 +48,12 @@ interface LegacyBackgroundEvent {
   };
 }
 
+/**
+ * Legacy cronjob controller state interface for migration purposes.
+ * @interface LegacyCronjobControllerState
+ * @property jobs - Optional record of stored job information (removed during migration)
+ * @property events - Record of background events indexed by event ID
+ */
 interface LegacyCronjobControllerState {
   // `jobs` is optional to support `delete` operations in the migration.
   jobs?: Record<string, LegacyStoredJobInformation>;

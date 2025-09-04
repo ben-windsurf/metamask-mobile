@@ -2,19 +2,40 @@ const mm = 'MetaMask';
 const prefix = `@${mm}:`;
 const USE_TERMS_VERSION = 'v1.0';
 
+/** Storage key for tracking existing user status */
 export const EXISTING_USER = `${prefix}existingUser`;
+
+/** Storage key for user's biometry authentication choice */
 export const BIOMETRY_CHOICE = `${prefix}biometryChoice`;
+
+/** Storage key for disabled biometry authentication choice */
 export const BIOMETRY_CHOICE_DISABLED = `${prefix}biometryChoiceDisabled`;
 
+/** Storage key for user's passcode authentication choice */
 export const PASSCODE_CHOICE = `${prefix}passcodeChoice`;
+
+/** Storage key for disabled passcode authentication */
 export const PASSCODE_DISABLED = `${prefix}passcodeDisabled`;
 
+/** Storage key for onboarding wizard completion status */
 export const ONBOARDING_WIZARD = `${prefix}onboardingWizard`;
+
+/** Storage key for user's metrics opt-in preference */
 export const METRICS_OPT_IN = `${prefix}metricsOptIn`;
+
+/** Storage key for analytics data deletion task identifier */
 export const ANALYTICS_DATA_DELETION_TASK_ID = `${prefix}analyticsDataDeletionTaskId`;
+
+/** Storage key for analytics data deletion date */
 export const ANALYTICS_DATA_DELETION_DATE = `${prefix}analyticsDataDeletionDate`;
+
+/** Storage key for MetaMetrics deletion regulation identifier */
 export const METAMETRICS_DELETION_REGULATION_ID = `${prefix}MetaMetricsDeletionRegulationId`;
+
+/** Storage key for tracking if analytics data has been recorded */
 export const ANALYTICS_DATA_RECORDED = `${prefix}analyticsDataRecorded`;
+
+/** Storage key for MetaMetrics user identifier */
 export const METAMETRICS_ID = `${prefix}MetaMetricsId`;
 
 /**

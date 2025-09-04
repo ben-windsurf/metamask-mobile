@@ -6,21 +6,45 @@ import type {
 import Engine from '../../core/Engine';
 import { ResultType } from '../../components/Views/confirmations/legacy/components/BlockaidBanner/BlockaidBanner.types';
 
+/**
+ * Interface for transaction security alert response data.
+ * @interface TransactionSecurityAlertResponseType
+ * @property securityAlertResponses - Map of transaction IDs to their security alert responses
+ */
 interface TransactionSecurityAlertResponseType {
   securityAlertResponses: Record<string, SecurityAlertResponse>;
 }
 
+/**
+ * Combined transaction type that includes both transaction metadata and security alert responses.
+ * Extends TransactionMeta with security alert response data for Blockaid integration.
+ */
 export type TransactionType = TransactionMeta &
   TransactionSecurityAlertResponseType;
 
+/**
+ * Checks if Blockaid security alerts are enabled in user preferences.
+ * @returns True if security alerts are enabled in preferences, false otherwise
+ */
 export const isBlockaidPreferenceEnabled = (): boolean => {
   const { PreferencesController } = Engine.context;
   return PreferencesController.state.securityAlertsEnabled;
 };
 
+/**
+ * Checks if Blockaid security feature is enabled.
+ * Currently delegates to preference check but can be extended for additional feature flags.
+ * @returns Promise that resolves to true if Blockaid feature is enabled, false otherwise
+ */
 export const isBlockaidFeatureEnabled = async (): Promise<boolean> =>
   isBlockaidPreferenceEnabled();
 
+/**
+ * Extracts metrics parameters from a Blockaid security alert response.
+ * Transforms security alert data into metrics format for analytics tracking.
+ * @param securityAlertResponse - Optional security alert response from Blockaid
+ * @returns Object containing formatted metrics parameters for tracking
+ */
 export const getBlockaidMetricsParams = (
   securityAlertResponse?: SecurityAlertResponse,
 ): Record<string, unknown> => {
@@ -53,6 +77,12 @@ export const getBlockaidMetricsParams = (
   return additionalParams;
 };
 
+/**
+ * Extracts Blockaid metrics parameters from a transaction object.
+ * Retrieves security alert response for the transaction and formats it for metrics.
+ * @param transaction - Transaction object containing security alert responses
+ * @returns Object containing formatted Blockaid metrics parameters, empty object if no transaction or security response
+ */
 export const getBlockaidTransactionMetricsParams = (
   transaction: TransactionType,
 ): Record<string, unknown> => {

@@ -6,31 +6,56 @@ import EditAccountNameView from './EditAccountNameView';
 import MultichainAccountDetails from '../MultichainAccounts/AccountDetails';
 import MultichainEditAccountName from '../MultichainAccounts/EditAccountName';
 
+/**
+ * Page object model for the Account Actions Bottom Sheet in end-to-end tests.
+ * Provides methods to interact with account management actions like editing account names,
+ * showing private keys, and switching between account types.
+ */
 class AccountActionsBottomSheet {
+  /**
+   * Gets the edit account button element.
+   * @returns The DetoxElement for the edit account button
+   */
   get editAccount(): DetoxElement {
     return Matchers.getElementByID(
       AccountActionsBottomSheetSelectorsIDs.EDIT_ACCOUNT,
     );
   }
 
+  /**
+   * Gets the show private key button element.
+   * @returns The DetoxElement for the show private key button
+   */
   get showPrivateKey(): DetoxElement {
     return Matchers.getElementByID(
       AccountActionsBottomSheetSelectorsIDs.SHOW_PRIVATE_KEY,
     );
   }
 
+  /**
+   * Gets the switch to smart account button element.
+   * @returns The DetoxElement for the switch to smart account button
+   */
   get switchToSmartAccount(): DetoxElement {
     return Matchers.getElementByID(
       AccountActionsBottomSheetSelectorsIDs.SWITCH_TO_SMART_ACCOUNT,
     );
   }
 
+  /**
+   * Gets the show secret recovery phrase button element.
+   * @returns The DetoxElement for the show SRP button
+   */
   get showSrp(): DetoxElement {
     return Matchers.getElementByID(
       AccountActionsBottomSheetSelectorsIDs.SHOW_SECRET_RECOVERY_PHRASE,
     );
   }
 
+  /**
+   * Taps the edit account button.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapEditAccount(): Promise<void> {
     await Gestures.waitAndTap(this.editAccount, {
       elemDescription: 'Edit account button',

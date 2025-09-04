@@ -1,8 +1,8 @@
 /**
  * Function that checks if value is zero
  *
- * @param value number | any
- * @returns
+ * @param value - The value to check for zero (number or any type with toString method)
+ * @returns True if the value equals '0' or '0x0', false otherwise
  */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,9 +19,9 @@ export const isZero = (value: number | any): boolean => {
 /**
  * Function that checks if value is less than or equal to other
  *
- * @param value number
- * @param other number
- * @returns
+ * @param value - The first number to compare
+ * @param other - The second number to compare
+ * @returns True if value is less than or equal to other, false otherwise
  */
 export const lte = (value: number, other: number): boolean =>
   Number(value) <= Number(other);
@@ -29,9 +29,9 @@ export const lte = (value: number, other: number): boolean =>
 /**
  * Function that checks if value is greater than or equal to other
  *
- * @param value number
- * @param other number
- * @returns
+ * @param value - The first number to compare
+ * @param other - The second number to compare
+ * @returns True if value is greater than or equal to other, false otherwise
  */
 export const gte = (value: number, other: number): boolean =>
   Number(value) >= Number(other);
@@ -39,9 +39,9 @@ export const gte = (value: number, other: number): boolean =>
 /**
  * Function that checks if value is less than other
  *
- * @param value number
- * @param other number
- * @returns
+ * @param value - The first number to compare
+ * @param other - The second number to compare
+ * @returns True if value is less than other, false otherwise
  */
 export const lt = (value: number, other: number): boolean =>
   Number(value) < Number(other);
@@ -49,9 +49,9 @@ export const lt = (value: number, other: number): boolean =>
 /**
  * Function that checks if value is greater than other
  *
- * @param value number
- * @param other number
- * @returns
+ * @param value - The first number to compare
+ * @param other - The second number to compare
+ * @returns True if value is greater than other, false otherwise
  */
 export const gt = (value: number, other: number): boolean =>
   Number(value) > Number(other);
@@ -59,8 +59,8 @@ export const gt = (value: number, other: number): boolean =>
 /**
  * Gets the `toStringTag` of `value`.
  *
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
+ * @param value - The value to query
+ * @returns The `toStringTag` string representation
  */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,8 +75,8 @@ function getTag(value: any): string {
 /**
  * Checks if `value` is classified as a `String` primitive or object.
  *
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+ * @param value - The value to check
+ * @returns True if `value` is a string, false otherwise
  */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

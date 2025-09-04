@@ -26,11 +26,21 @@ import type {
   TransactionMetrics,
 } from './types';
 
+/**
+ * Message types for batched transactions
+ */
 const BATCHED_MESSAGE_TYPE = {
   WALLET_SEND_CALLS: 'wallet_sendCalls',
   ETH_SEND_TRANSACTION: 'eth_sendTransaction',
 };
 
+/**
+ * Converts a TransactionType enum value to its corresponding string representation
+ * for metrics and analytics purposes.
+ *
+ * @param transactionType - The transaction type to convert
+ * @returns The string representation of the transaction type
+ */
 export function getTransactionTypeValue(
   transactionType: TransactionType | undefined,
 ) {
@@ -86,6 +96,13 @@ export function getTransactionTypeValue(
   }
 }
 
+/**
+ * Retrieves confirmation metric properties for a specific transaction from the Redux state.
+ *
+ * @param getState - Function to get the current Redux state
+ * @param transactionId - The ID of the transaction to get metrics for
+ * @returns The transaction metrics object
+ */
 const getConfirmationMetricProperties = (
   getState: () => RootState,
   transactionId: string,
@@ -95,6 +112,12 @@ const getConfirmationMetricProperties = (
     {}) as unknown as TransactionMetrics;
 };
 
+/**
+ * Extracts method names from nested transactions within a batch transaction.
+ *
+ * @param transactionMeta - The transaction metadata containing nested transactions
+ * @returns Promise resolving to an array of method names
+ */
 async function getNestedMethodNames(
   transactionMeta: TransactionMeta,
 ): Promise<string[]> {
@@ -115,6 +138,12 @@ async function getNestedMethodNames(
   return names;
 }
 
+/**
+ * Generates batch-specific properties for transaction metrics, including EIP-7702 upgrade information.
+ *
+ * @param transactionMeta - The transaction metadata to analyze
+ * @returns Promise resolving to an object containing batch properties
+ */
 async function getBatchProperties(transactionMeta: TransactionMeta) {
   const properties: Record<string, unknown> = {};
   const { delegationAddress, nestedTransactions, origin, txParams } =
@@ -159,6 +188,15 @@ async function getBatchProperties(transactionMeta: TransactionMeta) {
   return properties;
 }
 
+/**
+ * Generates comprehensive default metrics for a transaction, including batch properties,
+ * gas fee information, and transaction details.
+ *
+ * @param metametricsEvent - The MetaMetrics event configuration
+ * @param transactionMeta - The transaction metadata
+ * @param transactionEventHandlerRequest - The transaction event handler request
+ * @returns Promise resolving to merged transaction metrics
+ */
 export async function generateDefaultTransactionMetrics(
   metametricsEvent: IMetaMetricsEvent,
   transactionMeta: TransactionMeta,
@@ -200,6 +238,15 @@ export async function generateDefaultTransactionMetrics(
   return mergedDefaultProperties;
 }
 
+/**
+ * Creates a MetaMetrics event with the provided properties and sensitive properties.
+ *
+ * @param params - The event generation parameters
+ * @param params.metametricsEvent - The MetaMetrics event configuration
+ * @param params.properties - Optional additional properties to include
+ * @param params.sensitiveProperties - Optional sensitive properties to include
+ * @returns The built MetaMetrics event
+ */
 export function generateEvent({
   metametricsEvent,
   properties,

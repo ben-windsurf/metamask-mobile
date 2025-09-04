@@ -12,6 +12,25 @@ import {
   isPushNotificationsEnabled,
 } from './push-utils';
 
+/**
+ * Creates and configures a NotificationServicesPushController instance for mobile push notifications.
+ *
+ * This factory function initializes the push notification controller with mobile-specific configuration,
+ * including platform settings, push service utilities, and automatic permission validation.
+ *
+ * @param props - Configuration object for the controller
+ * @param props.messenger - The controller messenger for inter-controller communication
+ * @param props.initialState - Optional partial initial state to override defaults
+ * @returns Configured NotificationServicesPushController instance
+ *
+ * @example
+ * ```typescript
+ * const pushController = createNotificationServicesPushController({
+ *   messenger: controllerMessenger,
+ *   initialState: { isPushEnabled: true }
+ * });
+ * ```
+ */
 export const createNotificationServicesPushController = (props: {
   messenger: NotificationServicesPushControllerMessenger;
   initialState?: Partial<NotificationServicesPushControllerState>;

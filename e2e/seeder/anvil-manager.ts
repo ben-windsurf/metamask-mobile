@@ -8,6 +8,9 @@ const logger = createLogger({
   name: 'AnvilManager',
 });
 
+/**
+ * Default port number for the Anvil Ethereum development server
+ */
 export const DEFAULT_ANVIL_PORT = 8545;
 
 /**
@@ -204,4 +207,9 @@ class AnvilManager {
     }
   }
 }
+
+/**
+ * Anvil Ethereum development server manager for end-to-end testing
+ * Provides methods to start, stop, and interact with a local Ethereum node
+ */
 export { AnvilManager };

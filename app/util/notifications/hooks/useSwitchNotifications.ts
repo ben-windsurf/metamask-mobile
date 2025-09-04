@@ -25,6 +25,10 @@ import {
 import { isNotificationsFeatureEnabled } from '../constants';
 import { strings } from '../../../../locales/i18n';
 
+/**
+ * Hook for toggling MetaMask notifications on/off
+ * @returns Object containing switchNotifications function, data, loading state, and error
+ */
 export function useNotificationsToggle() {
   const {
     enableNotifications,
@@ -51,6 +55,10 @@ export function useNotificationsToggle() {
   };
 }
 
+/**
+ * Hook for toggling feature announcements on/off
+ * @returns Object containing data and switchFeatureAnnouncements function
+ */
 export function useFeatureAnnouncementToggle() {
   const { listNotifications } = useListNotifications();
   const isEnabled = useSelector(selectIsMetamaskNotificationsEnabled);
@@ -76,6 +84,11 @@ export function useFeatureAnnouncementToggle() {
   };
 }
 
+/**
+ * Hook for fetching notification settings for specific accounts
+ * @param accounts - Array of account addresses to fetch notification settings for
+ * @returns Object containing data, loading states, error, and update function
+ */
 export function useFetchAccountNotifications(accounts: string[]) {
   const accountsBeingUpdated = useSelector(
     selectIsUpdatingMetamaskNotificationsAccount,
@@ -129,6 +142,10 @@ export function useFetchAccountNotifications(accounts: string[]) {
   };
 }
 
+/**
+ * Hook for toggling notifications for specific accounts
+ * @returns Object containing onToggle function, error state, and loading state
+ */
 export function useAccountNotificationsToggle() {
   const { listNotifications } = useListNotifications();
   const [loading, setLoading] = useState(false);
@@ -165,6 +182,10 @@ export function useAccountNotificationsToggle() {
   };
 }
 
+/**
+ * Hook that returns appropriate loading text for notification operations
+ * @returns Loading text string or undefined if not loading
+ */
 export function useSwitchNotificationLoadingText(): string | undefined {
   // Notification Settings
   const notificationsLoading = useSelector(

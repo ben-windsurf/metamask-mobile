@@ -8,9 +8,15 @@ import {
 import { EventEmitter } from 'events';
 import { CompletedRequest, Mockttp } from 'mockttp';
 
+/**
+ * Base URL pattern for user storage API endpoints used in regex matching
+ */
 const baseUrl =
   'https://user-storage\\.api\\.cx\\.metamask\\.io\\/api\\/v1\\/userstorage';
 
+/**
+ * Regular expressions for matching user storage API paths by feature type
+ */
 export const pathRegexps = {
   [USER_STORAGE_FEATURE_NAMES.accounts]: new RegExp(
     `${baseUrl}/${USER_STORAGE_FEATURE_NAMES.accounts}`,
@@ -25,20 +31,35 @@ export const pathRegexps = {
     'u',
   ),
 };
+/**
+ * Structure for user storage response data in E2E tests
+ */
 export interface UserStorageResponseData {
+  /** Hashed key identifier for the stored data */
   HashedKey: string;
+  /** Encrypted data payload */
   Data: string;
-  // E2E Specific identifier that is not present in the real API
+  /** E2E Specific identifier that is not present in the real API */
   SrpIdentifier?: string;
 }
 
+/**
+ * Configuration overrides for UserStorageMockttpController behavior
+ */
 export interface UserStorageMockttpControllerOverrides {
+  /** Override response data for GET requests */
   getResponse?: UserStorageResponseData[];
+  /** Override HTTP status code for GET requests */
   getStatusCode?: number;
+  /** Override HTTP status code for PUT requests */
   putStatusCode?: number;
+  /** Override HTTP status code for DELETE requests */
   deleteStatusCode?: number;
 }
 
+/**
+ * Event names emitted by UserStorageMockttpController for tracking operations
+ */
 export const UserStorageMockttpControllerEvents = {
   GET_NOT_FOUND: 'GET_NOT_FOUND',
   GET_SINGLE: 'GET_SINGLE',

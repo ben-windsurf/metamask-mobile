@@ -10,6 +10,9 @@ import asyncInvoke from './invoke-lib';
 // @ts-ignore
 import { html } from './ppom.html.js';
 
+/**
+ * Styles for the PPOM WebView container
+ */
 const styles = StyleSheet.create({
   webViewContainer: {
     position: 'absolute',
@@ -25,6 +28,11 @@ let invoke: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let invokeResolve: any = null;
 
+/**
+ * Converts file data to base64 format for PPOM processing
+ * @param files - Array of file entries containing key-value pairs where value is binary data
+ * @returns Array of file entries with base64-encoded values
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const convertFilesToBase64 = (files: any[][]) =>
@@ -35,6 +43,9 @@ const convertFilesToBase64 = (files: any[][]) =>
     return [key, base64];
   });
 
+/**
+ * Inner PPOM class that handles WebView communication and PPOM operations
+ */
 class PPOMInner {
   _new = invoke.bindAsync('PPOM.new');
   _free = invoke.bind('PPOM.free');
@@ -69,12 +80,19 @@ class PPOMInner {
   }
 }
 
+/**
+ * PPOM factory object for creating new PPOM instances
+ */
 export const PPOM = {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new: (arg1: any, arg2: any) => new PPOMInner(arg1, arg2),
 };
 
+/**
+ * Initializes the PPOM system by setting up WebView communication
+ * @returns Promise that resolves when PPOM is initialized
+ */
 export const ppomInit = async () => {
   if (!invoke) {
     await new Promise((resolve) => {
@@ -85,6 +103,10 @@ export const ppomInit = async () => {
   await invoke.bindAsync('ppomInit')();
 };
 
+/**
+ * React component that provides a WebView container for PPOM operations
+ * Handles communication between React Native and the PPOM WebView
+ */
 export class PPOMView extends Component {
   webViewRef: RefObject<WebView> = React.createRef();
   invoke = createInvoke(() => this.webViewRef?.current);

@@ -9,11 +9,19 @@ import { isQa, isTest } from '../../util/test/utils';
  * Service for measuring app performance
  */
 
+/**
+ * Sets performance values in storage for later retrieval
+ * @param appStartTime - The app start time in milliseconds
+ */
 async function setPerformanceValues(appStartTime: number) {
   await StorageWrapper.setItem('appStartTime', appStartTime.toString());
 }
 
+/**
+ * Performance monitoring class for measuring app startup and runtime metrics
+ */
 class Performance {
+  /** The calculated app launch time in milliseconds */
   static appLaunchTime: number;
   /**
    * Measures app start and JS bundle loading times

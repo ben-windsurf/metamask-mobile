@@ -3,6 +3,13 @@ import http from 'http';
 import path from 'path';
 import serveHandler from 'serve-handler';
 
+/**
+ * Creates a static HTTP server for serving test files and resources.
+ * Handles special routing for node_modules and test-dapp-multichain resources.
+ *
+ * @param rootDirectory - The root directory to serve static files from
+ * @returns HTTP server instance configured to serve static files
+ */
 const createStaticServer = function (rootDirectory) {
   return http.createServer((request, response) => {
     if (request.url.startsWith('/node_modules/')) {

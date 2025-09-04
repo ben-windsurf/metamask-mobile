@@ -1,4 +1,11 @@
+/**
+ * Mock balance representing 1 ETH in wei (hexadecimal format)
+ */
 export const INFURA_MOCK_BALANCE_1_ETH = '0xde0b6b3a7640000';
+
+/**
+ * Mock balance representing 0 ETH in wei (hexadecimal format)
+ */
 export const INFURA_MOCK_BALANCE_ZERO_ETH = '0x0';
 const INFURA_URL = `https://mainnet.infura.io/v3/${process.env.MM_INFURA_PROJECT_ID}`;
 

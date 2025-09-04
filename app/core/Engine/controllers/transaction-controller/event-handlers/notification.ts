@@ -6,6 +6,12 @@ import {
 import NotificationManager from '../../../../NotificationManager';
 import { REDESIGNED_TRANSACTION_TYPES } from '../../../../../components/Views/confirmations/constants/confirmations';
 
+/**
+ * Handles showing notifications for submitted transactions.
+ * Only shows notifications for redesigned transaction types that haven't failed.
+ *
+ * @param transactionMeta - The transaction metadata containing status and type information
+ */
 export function handleShowNotification(transactionMeta: TransactionMeta) {
   const { status } = transactionMeta;
   if (

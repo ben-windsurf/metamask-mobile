@@ -14,7 +14,11 @@ import {
 import type { TransactionEventHandlerRequest } from '../types';
 import Logger from '../../../../../util/Logger';
 
-// Generic handler for simple transaction events
+/**
+ * Creates a generic handler for simple transaction events that tracks metrics
+ * @param eventType - The type of transaction event to track
+ * @returns An async function that handles the transaction event and tracks metrics
+ */
 const createTransactionEventHandler =
   (eventType: (typeof TRANSACTION_EVENTS)[keyof typeof TRANSACTION_EVENTS]) =>
   async (

@@ -7,18 +7,60 @@ import { strings } from '../../../locales/i18n';
 import BN4 from 'bnjs4';
 import { estimateGas as controllerEstimateGas } from '../transaction-controller';
 
+/**
+ * Options for gas estimation
+ * @interface opts
+ * @property amount - Optional transaction amount
+ * @property data - Optional transaction data
+ * @property to - Optional recipient address
+ */
 interface opts {
   amount?: string;
   data?: string;
   to?: string;
 }
 
+/**
+ * Selected asset information for transactions
+ * @interface SelectedAsset
+ * @property address - Contract address of the asset
+ * @property decimals - Number of decimal places for the asset
+ * @property symbol - Asset symbol (e.g., ETH, DAI)
+ */
 interface SelectedAsset {
   address: string;
   decimals: string;
   symbol: string;
 }
 
+/**
+ * Complete transaction object containing all transaction details
+ * @interface Transaction
+ * @property assetType - Type of asset being transacted (ETH, ERC20, ERC721)
+ * @property data - Transaction data payload
+ * @property ensRecipient - ENS name of the recipient if available
+ * @property from - Sender address
+ * @property gas - Gas limit as BN object
+ * @property gasPrice - Gas price as BN object
+ * @property id - Unique transaction identifier
+ * @property networkClientId - Network client identifier
+ * @property nonce - Transaction nonce
+ * @property origin - Origin of the transaction request
+ * @property paymentRequest - Whether this is a payment request
+ * @property proposedNonce - Proposed nonce value
+ * @property readableValue - Human-readable transaction value
+ * @property selectedAsset - Asset being transacted
+ * @property symbol - Asset symbol
+ * @property to - Recipient address
+ * @property transaction - Raw transaction object
+ * @property transactionFromName - Human-readable sender name
+ * @property transactionTo - Recipient address (duplicate)
+ * @property transactionToName - Human-readable recipient name
+ * @property transactionValue - Transaction value as string
+ * @property type - Transaction type
+ * @property value - Transaction value
+ * @property warningGasPriceHigh - Gas price warning message
+ */
 interface Transaction {
   assetType: string;
   data: string;
@@ -52,6 +94,11 @@ interface Transaction {
   warningGasPriceHigh: string | undefined;
 }
 
+/**
+ * Gas estimation result
+ * @interface EstimatedGas
+ * @property gas - Estimated gas limit as string
+ */
 interface EstimatedGas {
   gas: string;
 }

@@ -15,10 +15,20 @@ import {
 } from './constants';
 import Logger from '../../util/Logger';
 
+/**
+ * Keychain options for vault backup storage with device-only accessibility
+ */
 const options: Options = {
   accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
 };
 
+/**
+ * Response interface for keyring backup operations
+ * @interface KeyringBackupResponse
+ * @property success - Whether the backup operation was successful
+ * @property vault - The vault data if operation was successful
+ * @property error - Error message if operation failed
+ */
 interface KeyringBackupResponse {
   success: boolean;
   vault?: string;

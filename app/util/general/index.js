@@ -1,5 +1,11 @@
 import URL from 'url-parse';
 
+/**
+ * Converts a string to lowercase using optional chaining for safe access.
+ *
+ * @param str - The string to convert to lowercase
+ * @returns The lowercase version of the string, or undefined if str is null/undefined
+ */
 export const tlc = (str) => str?.toLowerCase?.();
 
 /**
@@ -20,6 +26,14 @@ export function timeoutFetch(url, options, timeout = 500) {
   ]);
 }
 
+/**
+ * Extracts the current route name from React Navigation state.
+ * Traverses nested route states to find the active route name and applies
+ * compatibility mappings for legacy route names.
+ *
+ * @param routes - The routes array from React Navigation state
+ * @returns The name of the current active route, with legacy name mappings applied
+ */
 export function findRouteNameFromNavigatorState(routes) {
   let route = routes?.[routes.length - 1];
   if (route.state) {
@@ -41,14 +55,35 @@ export function findRouteNameFromNavigatorState(routes) {
 
   return name;
 }
+/**
+ * Capitalizes the first letter of a string.
+ *
+ * @param str - The string to capitalize
+ * @returns The string with the first letter capitalized, or false if str is falsy
+ */
 export const capitalize = (str) =>
   (str && str.charAt(0).toUpperCase() + str.slice(1)) || false;
 
+/**
+ * Compares two strings for equality after converting both to lowercase.
+ *
+ * @param a - First string to compare
+ * @param b - Second string to compare
+ * @returns True if both strings are equal when lowercased, false otherwise
+ */
 export const toLowerCaseEquals = (a, b) => {
   if (!a && !b) return false;
   return tlc(a) === tlc(b);
 };
 
+/**
+ * Performs a shallow equality comparison between two objects.
+ * Compares all enumerable properties at the first level only.
+ *
+ * @param object1 - First object to compare
+ * @param object2 - Second object to compare
+ * @returns True if objects have the same keys and values at the first level, false otherwise
+ */
 export const shallowEqual = (object1, object2) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);

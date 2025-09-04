@@ -11,6 +11,10 @@ import {
   onRPCRequestRejectedByUser,
 } from '../redux/slices/originThrottling';
 
+/**
+ * Set of RPC methods that can be blocked by the spam filter.
+ * These methods are considered potentially spammy and subject to origin throttling.
+ */
 export const BLOCKABLE_SPAM_RPC_METHODS = new Set([
   RPC_METHODS.ETH_SENDTRANSACTION,
   RPC_METHODS.ETH_SIGNTYPEDEATA,
@@ -25,13 +29,28 @@ export const BLOCKABLE_SPAM_RPC_METHODS = new Set([
   RPC_METHODS.WALLET_SEND_CALLS,
 ]);
 
-// Origin added in the createOriginMiddleware
+/**
+ * Extended JSON-RPC request that includes the origin property.
+ * The origin is added by the createOriginMiddleware.
+ */
 export type ExtendedJSONRPCRequest = JsonRpcRequest & { origin: string };
 
+/**
+ * Error thrown when a request is blocked by the spam filter.
+ */
 export const SPAM_FILTER_ACTIVATED = providerErrors.unauthorized(
   'Request blocked due to spam filter.',
 );
 
+/**
+ * Validates whether an RPC request should be throttled based on origin spam filtering.
+ * Throws SPAM_FILTER_ACTIVATED error if the origin is blocked for the requested method.
+ *
+ * @param params - The validation parameters
+ * @param params.req - The extended JSON-RPC request with origin information
+ * @param params.store - The Redux store to check throttling state
+ * @throws {Error} SPAM_FILTER_ACTIVATED if the origin is blocked
+ */
 export function validateOriginThrottling({
   req,
   store,
@@ -55,6 +74,17 @@ export function validateOriginThrottling({
   }
 }
 
+/**
+ * Processes RPC request rejections to update origin throttling state and show spam modal.
+ * Updates the store when a user rejects a blockable RPC method and navigates to spam modal if needed.
+ *
+ * @param params - The processing parameters
+ * @param params.req - The extended JSON-RPC request with origin information
+ * @param params.error - The error object containing rejection details
+ * @param params.error.message - The error message
+ * @param params.error.code - Optional error code
+ * @param params.store - The Redux store to dispatch throttling actions
+ */
 export function processOriginThrottlingRejection({
   req,
   error,

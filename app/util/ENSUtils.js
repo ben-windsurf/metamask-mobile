@@ -6,9 +6,13 @@ import {
   InfuraNetworkType,
   NetworkType,
 } from '@metamask/controller-utils';
+/** Error message when ENS name is not defined */
 const ENS_NAME_NOT_DEFINED_ERROR = 'ENS name not defined';
+
+/** Error message for invalid ENS names */
 const INVALID_ENS_NAME_ERROR = 'invalid ENS name';
-// One hour cache threshold.
+
+/** Cache refresh threshold - one hour in milliseconds */
 const CACHE_REFRESH_THRESHOLD = 60 * 60 * 1000;
 import { EMPTY_ADDRESS } from '../constants/transaction';
 import { regex } from '../../app/util/regex';
@@ -32,6 +36,7 @@ export class ENSCache {
 const ENS_SUPPORTED_CHAIN_IDS = [ChainId[NetworkType.mainnet]];
 
 /**
+ * Network IDs supported by the legacy ENS library.
  * We still need it to support the legacy ENS library that we are using.
  */
 const ENS_SUPPORTED_NETWORK_IDS = {
@@ -67,6 +72,14 @@ export function getCachedENSName(address, chainId) {
   return cacheEntry?.name;
 }
 
+/**
+ * Performs an ENS reverse lookup to get the ENS name for a given address.
+ * Results are cached to improve performance.
+ *
+ * @param {string} address - The Ethereum address to lookup
+ * @param {string} chainId - The chain ID to perform the lookup on
+ * @returns {Promise<string|undefined>} The ENS name if found, undefined otherwise
+ */
 export async function doENSReverseLookup(address, chainId) {
   const { provider } =
     Engine.context.NetworkController.getProviderAndBlockTracker();
@@ -100,6 +113,13 @@ export async function doENSReverseLookup(address, chainId) {
   }
 }
 
+/**
+ * Performs an ENS lookup to get the Ethereum address for a given ENS name.
+ *
+ * @param {string} ensName - The ENS name to resolve
+ * @param {string} chainId - The chain ID to perform the lookup on
+ * @returns {Promise<string|undefined>} The resolved Ethereum address if found, undefined otherwise
+ */
 export async function doENSLookup(ensName, chainId) {
   const { provider } =
     Engine.context.NetworkController.getProviderAndBlockTracker();
@@ -118,6 +138,12 @@ export async function doENSLookup(ensName, chainId) {
   }
 }
 
+/**
+ * Checks if the given name matches the default account name pattern.
+ *
+ * @param {string} name - The account name to check
+ * @returns {boolean} True if the name matches the default account pattern, false otherwise
+ */
 export function isDefaultAccountName(name) {
   return regex.defaultAccount.test(name);
 }

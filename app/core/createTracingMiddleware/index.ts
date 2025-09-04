@@ -6,6 +6,10 @@ import type {
 } from '@metamask/utils';
 import { trace, TraceName } from '../../util/trace';
 
+/**
+ * Message types for JSON-RPC methods that support tracing.
+ * Maps method names to their corresponding string identifiers.
+ */
 export const MESSAGE_TYPE = {
   ETH_SIGN_TYPED_DATA: 'eth_signTypedData',
   ETH_SIGN_TYPED_DATA_V1: 'eth_signTypedData_v1',
@@ -23,6 +27,9 @@ export const MESSAGE_TYPE = {
   GET_PROVIDER_STATE: 'metamask_getProviderState',
 };
 
+/**
+ * Maps message types to their corresponding trace names for performance monitoring.
+ */
 const METHOD_TYPE_TO_TRACE_NAME: Record<string, TraceName> = {
   [MESSAGE_TYPE.ETH_SIGN_TYPED_DATA]: TraceName.Signature,
   [MESSAGE_TYPE.ETH_SIGN_TYPED_DATA_V1]: TraceName.Signature,
@@ -31,6 +38,18 @@ const METHOD_TYPE_TO_TRACE_NAME: Record<string, TraceName> = {
   [MESSAGE_TYPE.PERSONAL_SIGN]: TraceName.Signature,
 };
 
+/**
+ * Creates a middleware function that adds tracing context to JSON-RPC requests.
+ * Enables performance monitoring for specific method types like signatures.
+ *
+ * @returns A middleware function that processes JSON-RPC requests and adds tracing
+ *
+ * @example
+ * ```typescript
+ * const middleware = createTracingMiddleware();
+ * // Use in JSON-RPC middleware stack
+ * ```
+ */
 export default function createTracingMiddleware() {
   return async function tracingMiddleware(
     req: JsonRpcRequest<JsonRpcParams> & { traceContext?: unknown },

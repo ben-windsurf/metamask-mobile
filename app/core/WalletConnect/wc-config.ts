@@ -1,3 +1,10 @@
+/**
+ * Configuration object that defines which WalletConnect methods should trigger
+ * a redirect to the MetaMask app for user interaction and approval.
+ *
+ * These methods require user confirmation or input and cannot be handled
+ * silently in the background, so they need to redirect to the main app UI.
+ */
 export const METHODS_TO_REDIRECT: { [method: string]: boolean } = {
   eth_requestAccounts: true,
   eth_sendTransaction: true,

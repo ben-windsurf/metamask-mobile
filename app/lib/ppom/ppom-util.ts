@@ -29,29 +29,49 @@ import { Messenger } from '@metamask/base-controller';
 import { SignatureStateChange } from '@metamask/signature-controller';
 import cloneDeep from 'lodash/cloneDeep';
 
+/**
+ * Request object for PPOM (Privacy-Preserving Oracle Machine) validation.
+ * Contains the JSON-RPC method and parameters along with optional metadata.
+ */
 export interface PPOMRequest {
+  /** The JSON-RPC method name (e.g., 'eth_sendTransaction', 'personal_sign') */
   method: string;
+  /** Array of parameters for the JSON-RPC method */
   params: unknown[];
 
   // Optional
+  /** Unique identifier for the request */
   id?: number | string;
+  /** JSON-RPC version identifier */
   jsonrpc?: string;
+  /** Origin of the request (e.g., dapp domain) */
   origin?: string;
+  /** Network client identifier for the request */
   networkClientId?: string;
 }
 
+/**
+ * Messenger type for PPOM controller communication.
+ * Handles signature state changes and transaction controller events.
+ */
 export type PPOMMessenger = Messenger<
   never,
   SignatureStateChange | TransactionControllerUnapprovedTransactionAddedEvent
 >;
 
+/** Logger instance for PPOM utility functions */
 const log = createProjectLogger('ppom-util');
 
+/** JSON-RPC method for sending transactions */
 const METHOD_SEND_TRANSACTION = 'eth_sendTransaction';
+/** Array of transaction-related JSON-RPC methods */
 const TRANSACTION_METHODS = [METHOD_SEND_TRANSACTION, 'eth_sendRawTransaction'];
+/** JSON-RPC method for signing typed data version 3 */
 export const METHOD_SIGN_TYPED_DATA_V3 = 'eth_signTypedData_v3';
+/** JSON-RPC method for signing typed data version 4 */
 export const METHOD_SIGN_TYPED_DATA_V4 = 'eth_signTypedData_v4';
 
+/** Frozen array of JSON-RPC methods that require user confirmation and security validation */
 const CONFIRMATION_METHODS = Object.freeze([
   'eth_sendRawTransaction',
   METHOD_SEND_TRANSACTION,
@@ -62,12 +82,14 @@ const CONFIRMATION_METHODS = Object.freeze([
   'personal_sign',
 ]);
 
+/** Default security alert response for failed validations */
 const SECURITY_ALERT_RESPONSE_FAILED = {
   result_type: ResultType.Failed,
   reason: Reason.failed,
   description: 'Validating the confirmation failed by throwing error.',
 };
 
+/** Default security alert response for validations in progress */
 const SECURITY_ALERT_RESPONSE_IN_PROGRESS = {
   result_type: ResultType.RequestInProgress,
   reason: Reason.requestInProgress,

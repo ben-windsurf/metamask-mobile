@@ -4,30 +4,41 @@ const InfuraKey = process.env.MM_INFURA_PROJECT_ID;
 const infuraProjectId = InfuraKey === 'null' ? '' : InfuraKey;
 
 // Support
+/** URL to MetaMask support guide for Secret Recovery Phrase, password, and private keys */
 export const SRP_GUIDE_URL =
   'https://support.metamask.io/getting-started/user-guide-secret-recovery-phrase-password-and-private-keys/';
+/** URL to MetaMask support article explaining self-custodial wallet concept */
 export const NON_CUSTODIAL_WALLET_URL =
   'https://support.metamask.io/getting-started/metamask-is-a-self-custodial-wallet/';
+/** URL to MetaMask support guide on keeping Secret Recovery Phrase safe from scams */
 export const KEEP_SRP_SAFE_URL =
   'https://support.metamask.io/privacy-and-security/staying-safe-in-web3/scammers-and-phishers-rugpulls-and-airdrop-scams/';
+/** URL to MetaMask support article with basic safety and security tips */
 export const LEARN_MORE_URL =
   'https://support.metamask.io/privacy-and-security/basic-safety-and-security-tips-for-metamask/';
+/** URL to MetaMask community article explaining gas and transaction timing */
 export const WHY_TRANSACTION_TAKE_TIME_URL =
   'https://community.metamask.io/t/what-is-gas-why-do-transactions-take-so-long/3172';
+/** URL to MetaMask support article about transaction simulations */
 export const SIMULATION_DETALS_ARTICLE_URL =
   'https://support.metamask.io/transactions-and-gas/transactions/simulations/';
 
+/** URL to MetaMask support guide on customizing token approvals with spending caps */
 export const TOKEN_APPROVAL_SPENDING_CAP = `https://support.metamask.io/privacy-and-security/how-to-customize-token-approvals-with-a-spending-cap/`;
+/** URL to MetaMask support article for troubleshooting deceptive site warnings */
 export const CONNECTING_TO_A_DECEPTIVE_SITE =
   'https://support.metamask.io/troubleshooting/deceptive-site-ahead-when-trying-to-connect-to-a-site/';
 
+/** URL to MetaMask support article about deprecated test networks */
 export const CONNECTING_TO_DEPRECATED_NETWORK =
   'https://support.metamask.io/networks-and-sidechains/eth-on-testnets/';
 
+/** URL to MetaMask support guide on managing MetaMetrics settings */
 export const HOWTO_MANAGE_METAMETRICS =
   'https://support.metamask.io/privacy-and-security/how-to-manage-your-metametrics-settings';
 
 // Policies
+/** URL to ConsenSys privacy policy */
 export const CONSENSYS_PRIVACY_POLICY = 'https://consensys.net/privacy-policy/';
 
 // Keystone

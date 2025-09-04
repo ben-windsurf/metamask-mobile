@@ -14,12 +14,41 @@ import {
   requestPushPermissions,
 } from '../services/NotificationService';
 
+/**
+ * Props for the usePushNotificationsToggle hook
+ * @interface UsePushNotificationsToggleProps
+ * @property nudgeEnablePush - Whether to nudge the user to enable push notifications.
+ * Depending on the instance, we may want to nudge to enable push notifications or skip nudging.
+ * E.g. Onboarding = nudge, settings page = don't nudge
+ */
 export interface UsePushNotificationsToggleProps {
-  // Depending on the instance, we may want to nudge to enable push notifications
-  // Or skip nudging.
-  // E.g. Onboarding = nudge, settings page = don't nudge
+  /** Whether to nudge the user to enable push notifications */
   nudgeEnablePush: boolean;
 }
+/**
+ * Hook for managing push notification toggle functionality
+ * Provides methods to enable, disable, and toggle push notifications with optional nudging behavior
+ *
+ * @param props - Configuration options for the hook
+ * @returns Object containing notification state and toggle functions
+ *
+ * @example
+ * ```tsx
+ * function NotificationSettings() {
+ *   const { data, loading, togglePushNotification } = usePushNotificationsToggle({
+ *     nudgeEnablePush: false
+ *   });
+ *
+ *   return (
+ *     <Switch
+ *       value={data}
+ *       onValueChange={togglePushNotification}
+ *       disabled={loading}
+ *     />
+ *   );
+ * }
+ * ```
+ */
 export function usePushNotificationsToggle(
   props: UsePushNotificationsToggleProps = { nudgeEnablePush: true },
 ) {

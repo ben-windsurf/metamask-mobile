@@ -4,6 +4,11 @@ import { deepJSONParse } from '../../util/general';
 import FilesystemStorage from 'redux-persist-filesystem-storage';
 import Device from '../../util/device';
 
+/**
+ * List of controllers that need to be migrated from individual persisted files
+ * to the unified engine state structure. Each controller represents a specific
+ * piece of MetaMask functionality that maintains its own state.
+ */
 export const controllerList = [
   { name: 'AccountTrackerController' },
   { name: 'AddressBookController' },
@@ -55,10 +60,12 @@ export const controllerList = [
 ];
 
 /**
- * Migrate back to use the old root architecture (Single root object)
+ * Migrate back to use the old root architecture (Single root object).
+ * This migration consolidates individual controller persisted files into
+ * a unified engine state structure for better state management.
  *
- * @param {unknown} state - Redux state
- * @returns
+ * @param state - Redux state to migrate
+ * @returns The migrated state with consolidated engine structure
  */
 export default async function migrate(state: unknown) {
   if (!isObject(state)) {

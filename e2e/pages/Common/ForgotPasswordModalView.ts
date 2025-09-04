@@ -6,6 +6,11 @@ import Matchers from '../../framework/Matchers.ts';
 import Gestures from '../../framework/Gestures.ts';
 import { OnboardingSelectorText } from '../../selectors/Onboarding/Onboarding.selectors';
 
+/**
+ * Page object model for the Forgot Password Modal view in end-to-end tests.
+ * Provides methods to interact with elements in the forgot password modal,
+ * including buttons, text elements, and user actions for wallet reset functionality.
+ */
 class ForgotPasswordModalView {
   get container(): DetoxElement {
     return Matchers.getElementByID(ForgotPasswordModalSelectorsIDs.CONTAINER);
@@ -79,26 +84,50 @@ class ForgotPasswordModalView {
     );
   }
 
+  /**
+   * Taps the reset wallet button with extended timeout.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapResetWalletButton(): Promise<void> {
     await Gestures.waitAndTap(this.resetWalletButton, { timeout: 25000 });
   }
 
+  /**
+   * Taps the confirmation button to proceed with wallet reset.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapYesResetWalletButton(): Promise<void> {
     await Gestures.waitAndTap(this.yesResetWalletButton);
   }
 
+  /**
+   * Taps the cancel button to dismiss the modal.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapCancelButton(): Promise<void> {
     await Gestures.waitAndTap(this.cancelButton);
   }
 
+  /**
+   * Taps the reset wallet button using text-based selector.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapResetWalletByText(): Promise<void> {
     await Gestures.waitAndTap(this.resetWalletText);
   }
 
+  /**
+   * Taps the confirmation button using text-based selector.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapYesResetWalletByText(): Promise<void> {
     await Gestures.waitAndTap(this.yesResetWalletText);
   }
 
+  /**
+   * Taps the cancel button using text-based selector.
+   * @returns Promise that resolves when the tap action is complete
+   */
   async tapCancelByText(): Promise<void> {
     await Gestures.waitAndTap(this.cancelText);
   }

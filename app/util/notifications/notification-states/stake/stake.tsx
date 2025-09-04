@@ -11,12 +11,20 @@ import {
 import { ModalField } from '../types/NotificationModalDetails';
 import { getTokenAmount, getTokenUSDAmount } from '../token-amounts';
 
+/**
+ * Type definition for stake-related notifications from supported staking providers.
+ * Includes both staking and unstaking completion events for Rocket Pool and Lido.
+ */
 type StakeNotification = ExtractedNotification<
   | TRIGGER_TYPES.ROCKETPOOL_STAKE_COMPLETED
   | TRIGGER_TYPES.ROCKETPOOL_UNSTAKE_COMPLETED
   | TRIGGER_TYPES.LIDO_STAKE_COMPLETED
   | TRIGGER_TYPES.LIDO_WITHDRAWAL_COMPLETED
 >;
+/**
+ * Type guard function to check if a notification is a stake-related notification.
+ * Validates against all supported staking provider trigger types.
+ */
 const isStakeNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.ROCKETPOOL_STAKE_COMPLETED,
   TRIGGER_TYPES.ROCKETPOOL_UNSTAKE_COMPLETED,
@@ -24,6 +32,10 @@ const isStakeNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.LIDO_WITHDRAWAL_COMPLETED,
 ]);
 
+/**
+ * Maps notification trigger types to their corresponding staking direction.
+ * Used to determine if a notification represents a staking or unstaking action.
+ */
 const DIRECTION_MAP = {
   [TRIGGER_TYPES.ROCKETPOOL_STAKE_COMPLETED]: 'staked',
   [TRIGGER_TYPES.ROCKETPOOL_UNSTAKE_COMPLETED]: 'unstaked',
@@ -31,6 +43,10 @@ const DIRECTION_MAP = {
   [TRIGGER_TYPES.LIDO_WITHDRAWAL_COMPLETED]: 'unstaked',
 } as const;
 
+/**
+ * Maps notification trigger types to their human-readable staking provider names.
+ * Used for displaying the staking provider information in notification modals.
+ */
 const STAKING_PROVIDER_MAP = {
   [TRIGGER_TYPES.ROCKETPOOL_STAKE_COMPLETED]: 'Rocket Pool-staked ETH',
   [TRIGGER_TYPES.ROCKETPOOL_UNSTAKE_COMPLETED]: 'Rocket Pool-staked ETH',
@@ -38,6 +54,11 @@ const STAKING_PROVIDER_MAP = {
   [TRIGGER_TYPES.LIDO_WITHDRAWAL_COMPLETED]: 'Lido-staked ETH',
 };
 
+/**
+ * Determines if a stake notification represents a staking action (vs unstaking).
+ * @param n - The stake notification to check
+ * @returns True if the notification is for a staking action, false for unstaking
+ */
 const isStaked = (n: StakeNotification) => DIRECTION_MAP[n.type] === 'staked';
 
 const descriptionStart = (n: StakeNotification) =>

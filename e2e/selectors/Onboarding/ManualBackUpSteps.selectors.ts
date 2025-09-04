@@ -1,3 +1,7 @@
+/**
+ * Selector IDs for manual backup steps during onboarding flow.
+ * Contains test automation selectors for various UI elements in the manual backup process.
+ */
 export const ManualBackUpStepsSelectorsIDs = {
   PROTECT_CONTAINER: 'protect-your-account-screen',
   STEP_1_CONTAINER: 'manual_backup_step_1-screen',

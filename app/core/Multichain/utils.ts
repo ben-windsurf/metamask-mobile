@@ -68,6 +68,12 @@ export function isNonEvmAddress(address: string): boolean {
   );
 }
 
+/**
+ * Gets the address of the last selected account for a non-EVM network chain.
+ *
+ * @param chainId - The CAIP chain ID of the non-EVM network.
+ * @returns The address of the selected multichain account, or undefined if none exists.
+ */
 export function lastSelectedAccountAddressByNonEvmNetworkChainId(
   chainId: CaipChainId,
 ): string | undefined {
@@ -76,6 +82,11 @@ export function lastSelectedAccountAddressByNonEvmNetworkChainId(
   return AccountsController.getSelectedMultichainAccount(chainId)?.address;
 }
 
+/**
+ * Gets the address of the last selected account in an EVM network.
+ *
+ * @returns The address of the selected account, or undefined if none exists.
+ */
 export function lastSelectedAccountAddressInEvmNetwork(): string | undefined {
   const { AccountsController } = Engine.context;
   // TODO: Add teh logic if there is none last selected account what to do

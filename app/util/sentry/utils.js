@@ -16,9 +16,11 @@ import { getTraceTags } from './tags';
  */
 export const AllProperties = Symbol('*');
 
-// This describes the subset of background controller state attached to errors
-// sent to Sentry These properties have some potential to be useful for
-// debugging, and they do not contain any identifiable information.
+/**
+ * Describes the subset of background controller state attached to errors
+ * sent to Sentry. These properties have some potential to be useful for
+ * debugging, and they do not contain any identifiable information.
+ */
 export const sentryStateMask = {
   accounts: true,
   alert: true,
@@ -250,9 +252,15 @@ export const sentryStateMask = {
   wizard: true,
 };
 
+/** MetaMask environment from environment variables, defaults to 'local' */
 const METAMASK_ENVIRONMENT = process.env['METAMASK_ENVIRONMENT'] || 'local'; // eslint-disable-line dot-notation
+
+/** MetaMask build type from environment variables, defaults to 'main' */
 const METAMASK_BUILD_TYPE = process.env['METAMASK_BUILD_TYPE'] || 'main'; // eslint-disable-line dot-notation
 
+/**
+ * List of allowed URLs that can appear in error messages without being sanitized
+ */
 const ERROR_URL_ALLOWLIST = [
   'cryptocompare.com',
   'coingecko.com',
@@ -277,10 +285,20 @@ export const captureSentryFeedback = ({ sentryId, comments }) => {
   Sentry.captureUserFeedback(userFeedback);
 };
 
+/**
+ * Extracts the protocol from a URL
+ * @param {string} url - The URL to extract protocol from
+ * @returns {string} The protocol portion of the URL
+ */
 function getProtocolFromURL(url) {
   return new URL(url).protocol;
 }
 
+/**
+ * Rewrites breadcrumb data to sanitize URLs by replacing them with just the protocol
+ * @param {object} breadcrumb - The Sentry breadcrumb object to rewrite
+ * @returns {object} The modified breadcrumb object
+ */
 export function rewriteBreadcrumb(breadcrumb) {
   if (breadcrumb.data?.url) {
     breadcrumb.data.url = getProtocolFromURL(breadcrumb.data.url);
@@ -295,6 +313,11 @@ export function rewriteBreadcrumb(breadcrumb) {
   return breadcrumb;
 }
 
+/**
+ * Applies a rewrite function to error messages in a Sentry report
+ * @param {object} report - The Sentry error report
+ * @param {Function} rewriteFn - Function to apply to each error message
+ */
 function rewriteErrorMessages(report, rewriteFn) {
   // rewrite top level message
   if (typeof report.message === 'string') {
@@ -311,6 +334,10 @@ function rewriteErrorMessages(report, rewriteFn) {
   }
 }
 
+/**
+ * Simplifies error messages in a Sentry report by extracting meaningful parts
+ * @param {object} report - The Sentry error report to simplify
+ */
 function simplifyErrorMessages(report) {
   rewriteErrorMessages(report, (errorMessage) => {
     // simplify ethjs error messages
@@ -328,11 +355,19 @@ function simplifyErrorMessages(report) {
   });
 }
 
+/**
+ * Removes device timezone information from a Sentry report for privacy
+ * @param {object} report - The Sentry error report
+ */
 function removeDeviceTimezone(report) {
   if (report.contexts && report.contexts.device)
     report.contexts.device.timezone = null;
 }
 
+/**
+ * Removes device name information from a Sentry report for privacy
+ * @param {object} report - The Sentry error report
+ */
 function removeDeviceName(report) {
   if (report.contexts && report.contexts.device)
     report.contexts.device.name = null;
@@ -412,6 +447,11 @@ export function maskObject(objectToMask, mask = {}) {
   }, {});
 }
 
+/**
+ * Rewrites a Sentry error report to sanitize sensitive information and add app state
+ * @param {object} report - The Sentry error report to rewrite
+ * @returns {object} The modified error report
+ */
 export function rewriteReport(report) {
   try {
     // filter out SES from error stack trace

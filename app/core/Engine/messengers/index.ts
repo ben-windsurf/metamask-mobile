@@ -39,7 +39,14 @@ import { getApprovalControllerMessenger } from './approval-controller-messenger'
 import { getPerpsControllerMessenger } from './perps-controller-messenger';
 import { getMultichainAccountServiceMessenger } from './multichain-account-service-messenger/multichain-account-service-messenger';
 /**
- * The messengers for the controllers that have been.
+ * Configuration object containing messenger factory functions for all controllers in the Engine.
+ * Each controller entry provides getMessenger and getInitMessenger functions to create
+ * the appropriate messenger instances for controller communication.
+ *
+ * @example
+ * ```typescript
+ * const accountsMessenger = CONTROLLER_MESSENGERS.AccountsController.getMessenger(baseMessenger);
+ * ```
  */
 export const CONTROLLER_MESSENGERS = {
   AccountsController: {

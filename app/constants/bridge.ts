@@ -7,7 +7,11 @@ import {
 } from '@metamask/bridge-controller';
 import { NETWORK_CHAIN_ID } from '../util/networks/customNetworks';
 
-// TODO read from feature flags
+/**
+ * List of chain IDs that are allowed for bridge operations.
+ * Includes major EVM networks and Solana mainnet.
+ * TODO read from feature flags
+ */
 export const ALLOWED_BRIDGE_CHAIN_IDS = [
   CHAIN_IDS.MAINNET,
   CHAIN_IDS.BSC,
@@ -23,10 +27,22 @@ export const ALLOWED_BRIDGE_CHAIN_IDS = [
   SolScope.Mainnet as const,
 ];
 
+/**
+ * Type representing the allowed chain IDs for bridge operations.
+ * Derived from the ALLOWED_BRIDGE_CHAIN_IDS constant.
+ */
 export type AllowedBridgeChainIds = (typeof ALLOWED_BRIDGE_CHAIN_IDS)[number];
 
+/**
+ * Ethereum mainnet USDT token contract address.
+ * Used for bridge operations involving USDT tokens.
+ */
 export const ETH_USDT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7';
 
+/**
+ * Mapping of network chain IDs to their human-readable short names.
+ * Used for displaying network names in the bridge UI.
+ */
 export const NETWORK_TO_SHORT_NETWORK_NAME_MAP: Record<
   Hex | CaipChainId,
   string

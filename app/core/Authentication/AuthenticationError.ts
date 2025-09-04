@@ -1,8 +1,22 @@
 import { AuthData } from './Authentication';
 
+/**
+ * Custom error class for authentication-related failures.
+ * Extends the standard Error class to include additional authentication context.
+ */
 class AuthenticationError extends Error {
+  /** Authentication data associated with the error */
   public authData: AuthData;
+  /** Custom error message for user-facing display */
   public customErrorMessage: string;
+
+  /**
+   * Creates a new AuthenticationError instance.
+   *
+   * @param message - The error message
+   * @param customErrorMessage - Custom error message for user display
+   * @param authData - Authentication data context
+   */
   constructor(message: string, customErrorMessage: string, authData: AuthData) {
     super(message);
     this.authData = authData;

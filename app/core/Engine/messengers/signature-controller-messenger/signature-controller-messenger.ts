@@ -11,6 +11,11 @@ import { NetworkControllerGetNetworkClientByIdAction } from '@metamask/network-c
 
 import type { SignatureControllerMessenger } from '@metamask/signature-controller';
 
+/**
+ * Union type defining all allowed messenger actions for the signature controller.
+ * Includes actions for account state, approval requests, logging, network client access,
+ * and various keyring signing operations.
+ */
 type MessengerActions =
   | AccountsControllerGetStateAction
   | AddApprovalRequest
@@ -20,8 +25,20 @@ type MessengerActions =
   | KeyringControllerSignPersonalMessageAction
   | KeyringControllerSignTypedMessageAction;
 
+/**
+ * Union type defining all allowed messenger events for the signature controller.
+ * Currently no events are allowed.
+ */
 type MessengerEvents = never;
 
+/**
+ * Creates a restricted messenger instance for the SignatureController.
+ * The messenger provides controlled access to specific controller actions
+ * needed for signature operations while maintaining security boundaries.
+ *
+ * @param messenger - The base messenger instance with full access to actions and events
+ * @returns A restricted messenger configured specifically for signature controller operations
+ */
 export function getSignatureControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): SignatureControllerMessenger {

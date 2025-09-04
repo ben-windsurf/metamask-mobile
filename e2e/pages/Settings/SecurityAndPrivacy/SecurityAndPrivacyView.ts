@@ -6,6 +6,10 @@ import {
 import Matchers from '../../../framework/Matchers';
 import Gestures from '../../../framework/Gestures';
 
+/**
+ * Page object class for the Security and Privacy settings view in end-to-end tests.
+ * Provides methods to interact with security and privacy related UI elements.
+ */
 class SecurityAndPrivacy {
   get changePasswordButton(): DetoxElement {
     return Matchers.getElementByID(

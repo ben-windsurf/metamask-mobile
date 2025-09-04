@@ -30,21 +30,32 @@ import { getNetworkConfigurationsByCaipChainId } from '../../selectors/networkCo
 import { areAddressesEqual } from '../../util/address';
 import Logger from '../../util/Logger';
 
+/**
+ * Array of internal origins that are considered trusted by the MetaMask application.
+ * These origins bypass certain permission checks and restrictions.
+ */
 const INTERNAL_ORIGINS = [process.env.MM_FOX_CODE, TransactionTypes.MMM];
 
+/**
+ * Engine instance cast to any type for compatibility.
+ * TODO: Replace "any" with proper type definition.
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Engine = ImportedEngine as any;
 
-// Error indicating that there was no CAIP-25 endowment found for the target origin
+/**
+ * Error indicating that there was no CAIP-25 endowment found for the target origin.
+ * This error is thrown when attempting to perform operations on permissions that don't exist.
+ */
 class Caip25EndowmentMissingError extends Error {}
 
 /**
  * Checks that all accounts referenced have a matching InternalAccount. Sends
  * an error to sentry for any accounts that were expected but are missing from the wallet.
  *
- * @param [internalAccounts] - The list of evm accounts the wallet knows about.
- * @param [accounts] - The list of accounts addresses that should exist.
+ * @param internalAccounts - The list of evm accounts the wallet knows about.
+ * @param accounts - The list of accounts addresses that should exist.
  */
 const captureKeyringTypesWithMissingIdentities = (
   internalAccounts: InternalAccount[] = [],
@@ -77,6 +88,10 @@ const captureKeyringTypesWithMissingIdentities = (
 /**
  * Sorts a list of addresses by most recently selected by using the lastSelected value for
  * the matching InternalAccount object from the list of internalAccounts provided.
+ *
+ * @param addresses - Array of address strings to sort.
+ * @param internalAccounts - Array of internal accounts to use for sorting reference.
+ * @returns Sorted array of addresses with most recently selected first.
  */
 const sortAddressesWithInternalAccounts = <T extends string>(
   addresses: T[],
@@ -115,6 +130,9 @@ const sortAddressesWithInternalAccounts = <T extends string>(
 /**
  * Sorts a list of evm account addresses by most recently selected by using
  * the lastSelected value for the matching InternalAccount object stored in state.
+ *
+ * @param addresses - Array of hexadecimal EVM addresses to sort.
+ * @returns Sorted array of addresses with most recently selected first.
  */
 export const sortEvmAccountsByLastSelected = (addresses: Hex[]): Hex[] => {
   const internalAccounts = Engine.context.AccountsController.listAccounts();
@@ -124,6 +142,10 @@ export const sortEvmAccountsByLastSelected = (addresses: Hex[]): Hex[] => {
 /**
  * Sorts a list of caip account id by most recently selected by using the lastSelected value for
  * the matching InternalAccount object from the list of internalAccounts provided.
+ *
+ * @param caipAccountIds - Array of CAIP account IDs to sort.
+ * @param internalAccounts - Array of internal accounts to use for sorting reference.
+ * @returns Sorted array of CAIP account IDs with most recently selected first.
  */
 const sortCaipAccountIdsWithInternalAccounts = (
   caipAccountIds: CaipAccountId[],

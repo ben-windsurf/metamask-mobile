@@ -1,5 +1,9 @@
 import enContent from '../../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for the Reveal Seed View screen elements.
+ * Contains test automation identifiers for UI elements in the seed phrase reveal flow.
+ */
 export const RevealSeedViewSelectorsIDs = {
   REVEAL_CREDENTIAL_CONTAINER_ID: 'reveal-private-credential-screen',
   REVEAL_CREDENTIAL_SCROLL_ID: 'reveal-credential-scroll',
@@ -20,6 +24,10 @@ export const RevealSeedViewSelectorsIDs = {
   TAB_SCROLL_VIEW_QR_CODE: 'tab-scroll-view-qr-code',
 };
 
+/**
+ * Text selectors for the Reveal Seed View screen elements.
+ * Contains localized text content used for element identification in tests.
+ */
 export const RevealSeedViewSelectorsText = {
   REVEAL_CREDENTIAL_SRP_TITLE_TEXT:
     enContent.reveal_credential.seed_phrase_title,

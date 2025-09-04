@@ -11,6 +11,10 @@ import {
 } from './types';
 import { createLogger } from './logger';
 
+/**
+ * Logger instance for the Gestures class to provide debug and error logging
+ * for gesture operations and element interactions.
+ */
 const logger = createLogger({ name: 'Gestures' });
 
 /**

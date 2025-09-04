@@ -4,12 +4,20 @@ import { captureException } from '@sentry/react-native';
 import { cloneDeep, escapeRegExp } from 'lodash';
 import { ensureValidState, ValidState } from './util';
 
+/** Migration version number for this migration script */
 const VERSION = 81;
 
 // Chains supported by Infura that are either built in or featured,
 // mapped to their corresponding failover URLs.
 // Copied from `PopularList` in app/util/networks/customNetworks.ts:
 // <https://github.com/MetaMask/metamask-mobile/blob/c29c22bf2ad62171c4cad3b4156500a1347aa7dc/app/util/networks/customNetworks.tsx#L12>
+/**
+ * Chains supported by Infura that are either built in or featured,
+ * mapped to their corresponding failover URLs.
+ *
+ * Each entry contains the chain ID as hex string mapped to configuration
+ * with subdomain for Infura and a function to get the failover URL.
+ */
 export const INFURA_CHAINS_WITH_FAILOVERS: Map<
   Hex,
   { subdomain: string; getFailoverUrl: () => string | undefined }
@@ -66,6 +74,13 @@ export const INFURA_CHAINS_WITH_FAILOVERS: Map<
   ],
 ]);
 
+/**
+ * Migration function to add failover URLs to Infura RPC endpoints
+ * for supported chains in the network configuration.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with failover URLs added, or original state if migration fails
+ */
 export default function migrate(state: unknown) {
   const newState = cloneDeep(state);
 
@@ -84,6 +99,12 @@ export default function migrate(state: unknown) {
   }
 }
 
+/**
+ * Updates the network controller state to add failover URLs to Infura RPC endpoints.
+ *
+ * @param state - The validated application state to update
+ * @throws Error if required state properties are missing or invalid
+ */
 function updateState(state: ValidState) {
   if (!hasProperty(state.engine.backgroundState, 'NetworkController')) {
     throw new Error('Missing state.engine.backgroundState.NetworkController');

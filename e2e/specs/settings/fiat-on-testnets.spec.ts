@@ -12,6 +12,9 @@ import AdvancedSettingsView from '../../pages/Settings/AdvancedView';
 import FiatOnTestnetsBottomSheet from '../../pages/Settings/Advanced/FiatOnTestnetsBottomSheet';
 import Assertions from '../../framework/Assertions';
 
+/**
+ * Network name constant for Sepolia testnet used in fiat on testnets testing
+ */
 const SEPOLIA = CustomNetworks.Sepolia.providerConfig.nickname;
 
 describe.skip(SmokeNetworkAbstractions('Fiat On Testnets Setting'), () => {

@@ -5,12 +5,23 @@ import { isEvmAccountType } from '@metamask/keyring-api';
 import { InternalAccount } from '@metamask/keyring-internal-api';
 import { Token } from '@metamask/assets-controllers';
 
+/**
+ * Interface representing all tokens organized by chain ID and account address.
+ */
 interface AllTokens {
   [chainId: Hex]: { [key: string]: Token[] };
 }
+
+/**
+ * Interface representing all detected tokens organized by chain ID and account address.
+ */
 interface AllDetectedTokens {
   [chainId: Hex]: { [key: string]: Token[] };
 }
+
+/**
+ * Interface representing all ignored tokens organized by chain ID and account address.
+ */
 interface AllIgnoredTokens {
   [chainId: Hex]: { [key: string]: Token[] };
 }
@@ -20,6 +31,13 @@ interface AllIgnoredTokens {
  * Also removes from TokenBalancesController all balances that belong to an EVM account that has been removed.
  */
 
+/**
+ * Migration 82: removes from the TokensController state all tokens that belong to an EVM account that has been removed.
+ * Also removes from TokenBalancesController all balances that belong to an EVM account that has been removed.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with cleaned up token data
+ */
 const migration = (state: unknown): unknown => {
   if (!ensureValidState(state, 82)) {
     return state;

@@ -1,15 +1,31 @@
 /* eslint-disable import/prefer-default-export */
 import type { SupportedCurve } from '@metamask/key-tree';
 
+/**
+ * Type definition for Snaps derivation path structure.
+ * Represents a BIP-32 derivation path starting with 'm' followed by path segments.
+ */
 export type SnapsDerivationPathType = ['m', ...string[]];
 
+/**
+ * Interface defining a Snaps derivation path configuration.
+ * Used to specify cryptographic parameters for key derivation in Snaps.
+ */
 export interface SnapsDerivationPath {
+  /** The BIP-32 derivation path array */
   path: SnapsDerivationPathType;
+  /** The cryptographic curve to use for key generation */
   curve: SupportedCurve;
+  /** Human-readable name for this derivation path */
   name: string;
 }
 
-// Copy of extension mapping: https://github.com/MetaMask/metamask-extension/blob/f37544d16cd24e85a7c36f0e067fa009f115083e/shared/constants/snaps.ts#L52
+/**
+ * Predefined derivation paths for various blockchain networks supported by Snaps.
+ * Each path defines the BIP-32 derivation path, cryptographic curve, and network name.
+ *
+ * Copy of extension mapping: https://github.com/MetaMask/metamask-extension/blob/f37544d16cd24e85a7c36f0e067fa009f115083e/shared/constants/snaps.ts#L52
+ */
 export const SNAPS_DERIVATION_PATHS: SnapsDerivationPath[] = [
   {
     path: ['m', `44'`, `0'`],

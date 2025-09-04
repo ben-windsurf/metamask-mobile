@@ -52,6 +52,12 @@ const hasProperty = <
 ): objectToCheck is ObjectToCheck & Record<Property, unknown> =>
   Object.hasOwnProperty.call(objectToCheck, name);
 
+/**
+ * Arguments for validating account and chain ID in transaction requests.
+ * @interface SendArgs
+ * @property from - The sender's Ethereum address
+ * @property chainId - Optional chain ID for the transaction
+ */
 interface SendArgs {
   from: string;
   chainId?: number;
@@ -122,4 +128,8 @@ async function eth_sendTransaction({
   res.result = await result;
 }
 
+/**
+ * Default export of the eth_sendTransaction RPC method handler.
+ * Processes Ethereum transaction requests from dApps and initiates the transaction flow.
+ */
 export default eth_sendTransaction;

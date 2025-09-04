@@ -36,15 +36,31 @@ import DevLogger from '../SDKConnect/utils/DevLogger';
 import Engine from '../Engine';
 import { isRelaySupported } from './transaction-relay.ts';
 
+/** EIP-5792 specification version supported by this implementation */
 const VERSION = '2.0.0';
+
+/** Keyring types that support EIP-5792 atomic batch transactions */
 const SUPPORTED_KEYRING_TYPES = [KeyringTypes.hd, KeyringTypes.simple];
 
+/**
+ * Retrieves all account addresses from the AccountsController.
+ *
+ * @returns Promise that resolves to an array of account addresses
+ */
 export const getAccounts = async () => {
   const { AccountsController } = Engine.context;
   const addresses = AccountsController.listAccounts().map((acc) => acc.address);
   return Promise.resolve(addresses);
 };
 
+/**
+ * Processes EIP-5792 sendCalls requests by validating and submitting transactions.
+ * Handles both single and batch transaction scenarios.
+ *
+ * @param params - The sendCalls parameters containing transaction calls and metadata
+ * @param req - The JSON-RPC request object with network and origin information
+ * @returns Promise that resolves to a SendCallsResult containing the batch ID
+ */
 export async function processSendCalls(
   params: SendCalls,
   req: JsonRpcRequest,
@@ -88,14 +104,23 @@ export async function processSendCalls(
   return { id: batchId };
 }
 
+/** Union type of all controller actions used by EIP-5792 messenger */
 type Actions =
   | AccountsControllerGetSelectedAccountAction
   | NetworkControllerGetNetworkClientByIdAction
   | TransactionControllerGetStateAction
   | PreferencesControllerGetStateAction;
 
+/** Messenger type for EIP-5792 operations with controller communication capabilities */
 export type EIP5792Messenger = Messenger<Actions, never>;
 
+/**
+ * Retrieves the status of a batch of transactions identified by batch ID.
+ *
+ * @param id - The hexadecimal batch ID to query
+ * @returns Promise that resolves to the status result including receipts and chain information
+ * @throws JsonRpcError if no matching bundle is found
+ */
 export async function getCallsStatus(id: Hex): Promise<GetCallsStatusResult> {
   const transactions = Engine.controllerMessenger
     .call('TransactionController:getState')
@@ -139,9 +164,13 @@ export async function getCallsStatus(id: Hex): Promise<GetCallsStatusResult> {
   };
 }
 
+/** Status values for atomic batch transaction capabilities */
 export enum AtomicCapabilityStatus {
+  /** Atomic batching is fully supported and available */
   Supported = 'supported',
+  /** Atomic batching can be enabled (e.g., through account upgrade) */
   Ready = 'ready',
+  /** Atomic batching is not supported on this chain/account */
   Unsupported = 'unsupported',
 }
 
@@ -194,6 +223,13 @@ async function getAlternateGasFeesCapability(
   }, {});
 }
 
+/**
+ * Retrieves the EIP-5792 capabilities for a given address across specified chains.
+ *
+ * @param address - The account address to check capabilities for
+ * @param chainIds - Optional array of chain IDs to check; defaults to all configured networks
+ * @returns Promise that resolves to capabilities object organized by chain ID
+ */
 export async function getCapabilities(address: Hex, chainIds?: Hex[]) {
   const {
     controllerMessenger,

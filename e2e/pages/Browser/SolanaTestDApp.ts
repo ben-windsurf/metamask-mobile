@@ -31,24 +31,40 @@ function getTestElement(
  * Class to interact with the Multichain Test DApp via the WebView
  */
 class SolanaTestDApp {
+  /**
+   * Get the connect button selector element
+   * @returns WebElement for the connect button
+   */
   get connectButtonSelector(): WebElement {
     return getTestElement(dataTestIds.testPage.header.connect, {
       extraXPath: '/div/button',
     });
   }
 
+  /**
+   * Get the disconnect button selector element
+   * @returns WebElement for the disconnect button
+   */
   get disconnectButtonSelector(): WebElement {
     return getTestElement(dataTestIds.testPage.header.disconnect, {
       extraXPath: '/button',
     });
   }
 
+  /**
+   * Get the endpoint input selector element
+   * @returns WebElement for the endpoint input field
+   */
   get endpointSelector(): WebElement {
     return getTestElement(dataTestIds.testPage.header.endpoint, {
       tag: 'input',
     });
   }
 
+  /**
+   * Get the wallet button selector element
+   * @returns WebElement for the wallet selection button
+   */
   get walletButtonSelector(): WebElement {
     return Matchers.getElementByCSS(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
@@ -56,22 +72,38 @@ class SolanaTestDApp {
     );
   }
 
+  /**
+   * Get the confirm transaction button selector element
+   * @returns WebElement for the confirm transaction button
+   */
   get confirmTransactionButtonSelector(): WebElement {
     return Matchers.getElementByID(
       SolanaTestDappSelectorsWebIDs.CONFIRM_TRANSACTION_BUTTON,
     );
   }
 
+  /**
+   * Get the confirm sign message button selector element
+   * @returns WebElement for the confirm sign message button
+   */
   get confirmSignMessageButtonSelector(): WebElement {
     return Matchers.getElementByID(
       SolanaTestDappSelectorsWebIDs.CONFIRM_SIGN_MESSAGE_BUTTON,
     );
   }
 
+  /**
+   * Get the cancel button selector element
+   * @returns WebElement for the cancel button
+   */
   get cancelButtonSelector() {
     return Matchers.getElementByText('Cancel');
   }
 
+  /**
+   * Navigate to the Solana Test DApp
+   * @returns Promise that resolves when navigation is complete
+   */
   async navigateToSolanaTestDApp(): Promise<void> {
     await Browser.tapUrlInputBox();
 
@@ -82,6 +114,10 @@ class SolanaTestDApp {
       .withTimeout(10000);
   }
 
+  /**
+   * Reload the Solana Test DApp page
+   * @returns Promise that resolves when reload is complete
+   */
   async reloadSolanaTestDApp(): Promise<void> {
     await Browser.reloadTab();
 
@@ -92,12 +128,18 @@ class SolanaTestDApp {
 
   /**
    * Tap a button in the WebView
+   * @param webElement - The WebElement to tap
+   * @returns Promise that resolves when the tap is complete
    */
   async tapButton(webElement: WebElement): Promise<void> {
     await Gestures.scrollToWebViewPort(webElement);
     await Gestures.tap(webElement);
   }
 
+  /**
+   * Get header interaction methods for the test DApp
+   * @returns Object containing header interaction methods
+   */
   getHeader() {
     return {
       connect: async () => {
@@ -125,6 +167,10 @@ class SolanaTestDApp {
     };
   }
 
+  /**
+   * Get sign message test interaction methods
+   * @returns Object containing sign message test methods
+   */
   getSignMessageTest() {
     return {
       signMessage: async () => {

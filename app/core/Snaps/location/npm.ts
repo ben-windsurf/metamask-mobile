@@ -11,8 +11,15 @@ import {
 
 const { RNTar } = NativeModules;
 
+/** Log tag for NPM-related Snaps operations */
 const SNAPS_NPM_LOG_TAG = 'snaps/ NPM';
 
+/**
+ * Decompresses a tar.gz file to the specified target path
+ * @param path - Path to the compressed file
+ * @param targetPath - Directory where the file should be decompressed
+ * @returns Promise resolving to the path of the decompressed data
+ */
 const decompressFile = async (
   path: string,
   targetPath: string,
@@ -28,6 +35,11 @@ const decompressFile = async (
   }
 };
 
+/**
+ * Recursively finds all file paths within a directory or returns the single file path
+ * @param path - Directory or file path to search
+ * @returns Promise resolving to array of all file paths found
+ */
 const findAllPaths = async (path: string): Promise<string[]> => {
   const isDir = await ReactNativeBlobUtil.fs.isDir(path);
   if (!isDir) {
@@ -40,6 +52,11 @@ const findAllPaths = async (path: string): Promise<string[]> => {
   ) as string[];
 };
 
+/**
+ * Reads a file at the specified path and converts its contents to bytes
+ * @param path - File path to read
+ * @returns Promise resolving to object with path and byte contents
+ */
 const readAndParseAt = async (path: string) => {
   try {
     const contents = stringToBytes(
@@ -51,6 +68,11 @@ const readAndParseAt = async (path: string) => {
   }
 };
 
+/**
+ * Fetches an NPM package tarball and stores it locally, then decompresses it
+ * @param inputRequest - URL or Request object for the NPM package tarball
+ * @returns Promise resolving to the path of the decompressed package
+ */
 const fetchAndStoreNPMPackage = async (
   inputRequest: RequestInfo,
 ): Promise<string> => {
@@ -76,6 +98,10 @@ const fetchAndStoreNPMPackage = async (
   }
 };
 
+/**
+ * Cleans up files at the specified path from the filesystem
+ * @param path - Path to clean up
+ */
 const cleanupFileSystem = async (path: string) => {
   ReactNativeBlobUtil.fs.unlink(path).catch((error) => {
     throw new Error(
@@ -84,7 +110,16 @@ const cleanupFileSystem = async (path: string) => {
   });
 };
 
+/**
+ * NPM location implementation for React Native that handles fetching and processing
+ * NPM packages for Snaps using native file system operations
+ */
 export class NpmLocation extends BaseNpmLocation {
+  /**
+   * Fetches an NPM tarball and converts it to a map of virtual files
+   * @param tarballUrl - URL of the NPM package tarball to fetch
+   * @returns Promise resolving to a map of file paths to VirtualFile objects
+   */
   async fetchNpmTarball(
     tarballUrl: URL,
   ): Promise<Map<string, VirtualFile<unknown>>> {

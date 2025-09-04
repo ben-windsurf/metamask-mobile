@@ -1,3 +1,7 @@
+/**
+ * Development logger utility for SDK Connect functionality.
+ * Only logs messages when SDK_DEV environment variable is set to 'DEV'.
+ */
 export const DevLogger = {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
