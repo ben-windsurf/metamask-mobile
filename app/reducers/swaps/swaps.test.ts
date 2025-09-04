@@ -6,7 +6,7 @@ import { NetworkClientType } from '@metamask/network-controller';
 import * as tokensControllerSelectors from '../../selectors/tokensController';
 import { NETWORKS_CHAIN_ID } from '../../constants/network';
 import { FeatureFlags } from '@metamask/swaps-controller/dist/types';
-import { SwapsAction } from './types';
+import { SwapsAction, SwapsActionType } from './types';
 import { RootState } from '../index';
 
 interface SetLivenessPayload {
@@ -58,7 +58,10 @@ import reducer, {
   getFeatureFlagChainId,
 } from './index';
 
-const emptyAction = { type: 'UNKNOWN_ACTION' } as unknown as SwapsAction;
+const emptyAction: SwapsAction = {
+  type: SwapsActionType.SWAPS_SET_LIVENESS,
+  payload: { chainId: '0x1', featureFlags: null },
+};
 
 const DEFAULT_FEATURE_FLAGS = {
   ethereum: {
@@ -777,6 +780,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
           },
         },
@@ -858,6 +862,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -921,6 +926,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -978,6 +984,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -1045,6 +1052,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -1112,6 +1120,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
@@ -1235,6 +1244,7 @@ describe('swaps reducer', () => {
               quotesLastFetched: 0,
               isInPolling: false,
               topAssets: [],
+              chainCache: {},
             },
             AccountsController: {
               internalAccounts: {
