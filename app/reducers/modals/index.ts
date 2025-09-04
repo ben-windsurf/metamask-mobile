@@ -37,7 +37,7 @@ const modalsReducer = (
         dappTransactionModalVisible:
           action.show === null
             ? !state.dappTransactionModalVisible
-            : action.show,
+            : Boolean(action.show),
       };
     case ModalsActionType.TOGGLE_INFO_NETWORK_MODAL:
       if (action.show === false) {

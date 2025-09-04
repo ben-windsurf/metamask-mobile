@@ -29,8 +29,11 @@ export const collectibleContractsSelector = createSelector(
   selectSelectedInternalAccountAddress,
   selectChainId,
   selectAllNftContracts,
-  (address, chainId, allNftContracts) =>
-    (address && allNftContracts[address])?.[chainId as `0x${string}`] || [],
+  (address, chainId, allNftContracts) => {
+    if (!address || !allNftContracts[address]) return [];
+    const addressContracts = allNftContracts[address];
+    return addressContracts[chainId as `0x${string}`] || [];
+  },
 );
 
 export const multichainCollectibleContractsSelector = createSelector(
@@ -43,8 +46,11 @@ export const collectiblesSelector = createDeepEqualSelector(
   selectSelectedInternalAccountAddress,
   selectChainId,
   selectAllNfts,
-  (address, chainId, allNfts) =>
-    (address && allNfts[address])?.[chainId as `0x${string}`] || [],
+  (address, chainId, allNfts) => {
+    if (!address || !allNfts[address]) return [];
+    const addressNfts = allNfts[address];
+    return addressNfts[chainId as `0x${string}`] || [];
+  },
 );
 
 export const multichainCollectiblesSelector = createDeepEqualSelector(
@@ -57,8 +63,11 @@ export const favoritesCollectiblesSelector = createSelector(
   selectSelectedInternalAccountAddress,
   selectChainId,
   favoritesSelector,
-  (address, chainId, favorites) =>
-    (address && favorites[address])?.[chainId as `0x${string}`] || [],
+  (address, chainId, favorites) => {
+    if (!address || !favorites[address]) return [];
+    const addressFavorites = favorites[address];
+    return addressFavorites[chainId as `0x${string}`] || [];
+  },
 );
 
 export const isCollectibleInFavoritesSelector = createSelector(

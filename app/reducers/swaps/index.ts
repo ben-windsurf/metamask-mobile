@@ -13,6 +13,7 @@ import {
 import { selectTokenList } from '../../selectors/tokenListController';
 import { selectContractBalances } from '../../selectors/tokenBalancesController';
 import { getSwapsLiveness } from './utils';
+import type { FeatureFlags as SwapsControllerFeatureFlags } from '@metamask/swaps-controller/dist/types';
 import { allowedTestnetChainIds } from '../../components/UI/Swaps/utils';
 import { NETWORKS_CHAIN_ID } from '../../constants/network';
 import { selectSelectedInternalAccountAddress } from '../../selectors/accountsController';
@@ -28,10 +29,10 @@ import {
   SwapsFeatureFlags,
   SwapsChainFeatureFlags,
   SwapsChainState,
-  FeatureFlags,
   SetSwapsLivenessAction,
   SetSwapsHasOnboardedAction,
 } from './types';
+import type { RootState as GlobalRootState } from '../index';
 
 export const getFeatureFlagChainId = (chainId: string): string =>
   typeof __DEV__ !== 'undefined' &&
@@ -118,7 +119,7 @@ function addMetadata(
   });
 }
 
-interface RootState {
+interface SwapsRootState {
   swaps: SwapsState;
   engine: {
     backgroundState: {
@@ -144,7 +145,7 @@ interface RootState {
 }
 
 const chainIdSelector = selectEvmChainId;
-const swapsStateSelector = (state: RootState) => state.swaps;
+const swapsStateSelector = (state: GlobalRootState) => state.swaps;
 
 export const swapsLivenessSelector = createSelector(
   swapsStateSelector,
@@ -156,7 +157,7 @@ export const swapsLivenessSelector = createSelector(
 export const swapsLivenessMultichainSelector = createSelector(
   [
     swapsStateSelector,
-    (state: RootState, chainId?: string) =>
+    (state: GlobalRootState, chainId?: string) =>
       chainId !== undefined ? chainId : selectChainId(state),
   ],
   (swapsState, chainId) => {
@@ -181,7 +182,7 @@ export const swapsSmartTxFlagEnabled = createSelector(
 
 export const selectSwapsChainFeatureFlags = createSelector(
   swapsStateSelector,
-  (_state: RootState, transactionChainId?: string) =>
+  (_state: GlobalRootState, transactionChainId?: string) =>
     transactionChainId || selectEvmChainId(_state),
   (swapsState, chainId) => ({
     ...((swapsState[chainId] as SwapsChainState)?.featureFlags || {}),
@@ -198,10 +199,10 @@ export const swapsHasOnboardedSelector = createSelector(
   (swapsState) => swapsState.hasOnboarded,
 );
 
-const selectSwapsControllerState = (state: RootState) =>
+const selectSwapsControllerState = (state: SwapsRootState) =>
   state.engine.backgroundState.SwapsController;
 
-export const swapsControllerTokens = (state: RootState): Token[] =>
+export const swapsControllerTokens = (state: SwapsRootState): Token[] =>
   state.engine.backgroundState.SwapsController.tokens;
 
 export const selectSwapsApprovalTransaction = createSelector(
@@ -461,7 +462,7 @@ function swapsReducer(
             featureFlags as Record<string, SwapsChainFeatureFlags>
           )[chainName];
           const chainLiveness = getSwapsLiveness(
-            featureFlags as FeatureFlags,
+            featureFlags as SwapsControllerFeatureFlags,
             chainIdForName as `0x${string}`,
           );
 
