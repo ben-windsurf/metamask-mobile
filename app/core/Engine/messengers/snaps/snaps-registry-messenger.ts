@@ -1,5 +1,9 @@
 import { Messenger } from '@metamask/base-controller';
 
+/**
+ * Type definition for the Snaps registry messenger.
+ * Represents a restricted messenger instance specifically configured for Snaps registry operations.
+ */
 export type SnapsRegistryMessenger = ReturnType<
   typeof getSnapsRegistryMessenger
 >;

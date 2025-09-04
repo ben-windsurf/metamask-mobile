@@ -8,7 +8,15 @@ import { WalletActionsBottomSheetSelectorsIDs } from '../../selectors/wallet/Wal
 import { WalletViewSelectorsIDs } from '../../selectors/wallet/WalletView.selectors';
 import { CommonSelectorsIDs } from '../../selectors/Common.selectors';
 
+/**
+ * Page object model for the Token Overview screen in end-to-end tests.
+ * Provides methods to interact with token details, charts, and action buttons.
+ */
 class TokenOverview {
+  /**
+   * Gets the main container element for the token overview screen.
+   * @returns The container DetoxElement
+   */
   get container(): DetoxElement {
     return Matchers.getElementByID(TokenOverviewSelectorsIDs.TOKEN_PRICE);
   }

@@ -16,6 +16,11 @@ const getWindowInformation = `
   ))
 `;
 
+/**
+ * JavaScript code that listens for URL changes in Single Page Applications (SPAs).
+ * Intercepts history.pushState and history.replaceState to detect navigation changes
+ * and posts messages to React Native WebView with updated URL and title information.
+ */
 export const SPA_urlChangeListener = `(function () {
   var __mmHistory = window.history;
   var __mmPushState = __mmHistory.pushState;
@@ -67,15 +72,31 @@ export const SPA_urlChangeListener = `(function () {
   })();
 `;
 
+/**
+ * JavaScript code that extracts window information including page title, URL, and favicon.
+ * Posts the collected information to React Native WebView for bookmark creation.
+ */
 export const JS_WINDOW_INFORMATION = `
   (function () {
     ${getWindowInformation}
   })();
 `;
 
+/**
+ * JavaScript code that deselects any currently selected text in the browser.
+ * Supports both modern browsers (getSelection) and legacy IE (document.selection).
+ */
 export const JS_DESELECT_TEXT = `if (window.getSelection) {window.getSelection().removeAllRanges();}
 else if (document.selection) {document.selection.empty();}`;
 
+/**
+ * Generates JavaScript code that posts a message to the MetaMask provider.
+ * Includes origin validation to ensure messages are only sent to matching origins.
+ *
+ * @param message - The message object to send to the provider
+ * @param origin - The expected origin for security validation
+ * @returns JavaScript code string that posts the message with origin validation
+ */
 export const JS_POST_MESSAGE_TO_PROVIDER = (
   message: object,
   origin: string,
@@ -92,6 +113,14 @@ export const JS_POST_MESSAGE_TO_PROVIDER = (
   }
 })();`;
 
+/**
+ * Generates JavaScript code for posting messages to iframes (currently disabled).
+ * This function is a placeholder that returns empty code for security reasons.
+ *
+ * @param _message - The message object (unused in current implementation)
+ * @param _origin - The target origin (unused in current implementation)
+ * @returns Empty JavaScript function code
+ */
 export const JS_IFRAME_POST_MESSAGE_TO_PROVIDER = (
   _message: object,
   _origin: string,

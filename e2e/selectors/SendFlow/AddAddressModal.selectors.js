@@ -1,3 +1,7 @@
+/**
+ * Selector IDs for the Add Address Modal component in end-to-end tests.
+ * Contains test identifiers for various UI elements within the modal.
+ */
 export const AddAddressModalSelectorsIDs = {
   CONTAINER: 'add-address-modal',
   ENTER_ALIAS_INPUT: 'address-alias-input',

@@ -8,7 +8,17 @@ const EventEmitter = require('events').EventEmitter;
 
 const { NOTIFICATION_NAMES } = AppConstants;
 
+/**
+ * WalletConnect port implementation that extends EventEmitter to handle
+ * communication between WalletConnect sessions and the MetaMask engine.
+ * Manages session updates for chain changes, account changes, and request approvals/rejections.
+ */
 class WalletConnectPort extends EventEmitter {
+  /**
+   * Creates a new WalletConnectPort instance.
+   *
+   * @param wcRequestActions - WalletConnect request action handlers for session management
+   */
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(wcRequestActions: any) {
@@ -16,6 +26,12 @@ class WalletConnectPort extends EventEmitter {
     this._wcRequestActions = wcRequestActions;
   }
 
+  /**
+   * Processes incoming messages from WalletConnect and handles various notification types.
+   * Updates WalletConnect sessions based on chain changes, account changes, and request responses.
+   *
+   * @param msg - The message object containing method, params, and other data
+   */
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postMessage = (msg: any) => {

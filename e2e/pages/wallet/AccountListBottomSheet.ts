@@ -8,35 +8,64 @@ import { ConnectAccountBottomSheetSelectorsIDs } from '../../selectors/Browser/C
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Account List Bottom Sheet component.
+ * Provides methods to interact with account selection, management, and navigation
+ * in the wallet's account list modal interface.
+ */
 class AccountListBottomSheet {
+  /**
+   * Gets the main account list container element.
+   * @returns The DetoxElement representing the account list container
+   */
   get accountList(): DetoxElement {
     return Matchers.getElementByID(
       AccountListBottomSheetSelectorsIDs.ACCOUNT_LIST_ID,
     );
   }
 
+  /**
+   * Gets the account type label element.
+   * @returns The DetoxElement representing the account type label
+   */
   get accountTypeLabel(): DetoxElement {
     return Matchers.getElementByID(
       AccountListBottomSheetSelectorsIDs.ACCOUNT_TYPE_LABEL,
     );
   }
 
+  /**
+   * Gets the account tag label element.
+   * @returns The DetoxElement representing the account tag label
+   */
   get accountTagLabel(): DetoxElement {
     return Matchers.getElementByID(CellComponentSelectorsIDs.TAG_LABEL);
   }
 
+  /**
+   * Gets the title element of the account list bottom sheet.
+   * @returns The DetoxElement representing the sheet title
+   */
   get title(): DetoxElement {
     return Matchers.getElementByText(
       AccountListBottomSheetSelectorsText.ACCOUNTS_LIST_TITLE,
     );
   }
 
+  /**
+   * Gets the add account button element.
+   * @returns The DetoxElement representing the add account button
+   */
   get addAccountButton(): DetoxElement {
     return Matchers.getElementByID(
       AccountListBottomSheetSelectorsIDs.ACCOUNT_LIST_ADD_BUTTON_ID,
     );
   }
 
+  /**
+   * Gets the add Ethereum account button element.
+   * @returns The DetoxElement representing the add Ethereum account button
+   */
   get addEthereumAccountButton(): DetoxElement {
     return Matchers.getElementByText(
       AccountListBottomSheetSelectorsText.ADD_ETHEREUM_ACCOUNT,

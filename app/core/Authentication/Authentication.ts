@@ -77,6 +77,11 @@ export interface AuthData {
   oauth2Login?: boolean;
 }
 
+/**
+ * Service class that handles all authentication-related operations for the MetaMask mobile app.
+ * Manages user login, logout, password storage, biometric authentication, and wallet creation/restoration.
+ * Supports multiple authentication types including biometric, passcode, remember me, and manual password entry.
+ */
 class AuthenticationService {
   private authData: AuthData = { currentAuthType: AUTHENTICATION_TYPE.UNKNOWN };
 
@@ -1118,4 +1123,8 @@ class AuthenticationService {
   };
 }
 
+/**
+ * Singleton instance of the AuthenticationService.
+ * Provides centralized access to all authentication functionality throughout the app.
+ */
 export const Authentication = new AuthenticationService();

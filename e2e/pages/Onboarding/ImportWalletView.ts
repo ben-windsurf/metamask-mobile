@@ -3,6 +3,11 @@ import { ImportFromSeedSelectorsIDs } from '../../selectors/Onboarding/ImportFro
 import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 
+/**
+ * Page object model for the Import Wallet view in the onboarding flow.
+ * Provides methods to interact with wallet import UI elements including
+ * password fields, seed phrase input, and navigation controls.
+ */
 class ImportWalletView {
   get container(): DetoxElement {
     return Matchers.getElementByID(ImportFromSeedSelectorsIDs.CONTAINER_ID);
@@ -36,23 +41,38 @@ class ImportWalletView {
     );
   }
 
+  /**
+   * Enters a password in the new password input field.
+   * @param password - The password to enter
+   */
   async enterPassword(password: string): Promise<void> {
     await Gestures.typeText(this.newPasswordInput, password, {
       hideKeyboard: true,
     });
   }
 
+  /**
+   * Re-enters a password in the confirm password input field.
+   * @param password - The password to confirm
+   */
   async reEnterPassword(password: string): Promise<void> {
     await Gestures.typeText(this.confirmPasswordInput, password, {
       hideKeyboard: true,
     });
   }
 
+  /**
+   * Enters a secret recovery phrase in the seed phrase input field.
+   * @param secretRecoveryPhrase - The recovery phrase to enter
+   */
   async enterSecretRecoveryPhrase(secretRecoveryPhrase: string): Promise<void> {
     await Gestures.replaceText(this.seedPhraseInput, secretRecoveryPhrase, {
       elemDescription: 'Import Wallet Secret Recovery Phrase Input Box',
     });
   }
+  /**
+   * Clears the secret recovery phrase input field.
+   */
   async clearSecretRecoveryPhraseInputBox(): Promise<void> {
     await Gestures.typeText(this.seedPhraseInput, '', {
       elemDescription: 'Import Wallet Secret Recovery Phrase Input Box',
@@ -60,6 +80,9 @@ class ImportWalletView {
     });
   }
 
+  /**
+   * Taps the continue button to proceed with wallet import.
+   */
   async tapContinueButton(): Promise<void> {
     await Gestures.tap(this.continueButton, {
       elemDescription: 'Import Wallet Continue Button',

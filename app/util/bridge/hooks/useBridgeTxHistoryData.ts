@@ -7,14 +7,27 @@ import { selectBridgeHistoryForAccount } from '../../../selectors/bridgeStatusCo
 import { Transaction } from '@metamask/keyring-api';
 import { BridgeHistoryItem } from '@metamask/bridge-status-controller';
 
+/**
+ * Array of transaction statuses that represent final non-confirmed states.
+ * These statuses indicate that a transaction has reached a terminal state
+ * without being successfully confirmed on the blockchain.
+ */
 export const FINAL_NON_CONFIRMED_STATUSES = [
   TransactionStatus.failed,
   TransactionStatus.dropped,
   TransactionStatus.rejected,
 ];
 
+/**
+ * Props interface for the useBridgeTxHistoryData hook.
+ * @interface UseBridgeTxHistoryDataProps
+ * @property evmTxMeta - Optional EVM transaction metadata to look up bridge history
+ * @property multiChainTx - Optional multi-chain transaction to look up bridge history
+ */
 export interface UseBridgeTxHistoryDataProps {
+  /** Optional EVM transaction metadata to look up bridge history */
   evmTxMeta?: TransactionMeta;
+  /** Optional multi-chain transaction to look up bridge history */
   multiChainTx?: Transaction;
 }
 

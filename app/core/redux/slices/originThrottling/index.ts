@@ -1,21 +1,38 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../../reducers';
 
+/** Maximum number of RPC request rejections before blocking an origin */
 export const NUMBER_OF_REJECTIONS_THRESHOLD = 3;
+
+/** Time window in milliseconds for counting rejections (30 seconds) */
 export const REJECTION_THRESHOLD_IN_MS = 30000;
+
+/** Time window in milliseconds for blocking an origin after threshold is reached (60 seconds) */
 const BLOCKING_THRESHOLD_IN_MS = 60000;
 
+/**
+ * State tracking for a specific origin's RPC request rejections
+ * @interface OriginState
+ * @property rejections - Number of consecutive rejections within the threshold window
+ * @property lastRejection - Timestamp of the most recent rejection
+ */
 export interface OriginState {
   rejections: number;
   lastRejection: number;
 }
 
+/**
+ * Redux state for origin throttling functionality
+ * @interface OriginThrottlingState
+ * @property origins - Map of origin URLs to their rejection state
+ */
 export interface OriginThrottlingState {
   origins: {
     [key: string]: OriginState;
   };
 }
 
+/** Initial state for the origin throttling slice */
 export const initialState: OriginThrottlingState = {
   origins: {},
 };
@@ -65,9 +82,22 @@ export default reducer;
 export const { onRPCRequestRejectedByUser, resetOriginSpamState } = actions;
 
 // Selectors
+/**
+ * Selects the rejection state for a specific origin
+ * @param state - Redux root state
+ * @param origin - Origin URL to get state for
+ * @returns Origin state or undefined if not found
+ */
 const selectOriginState = (state: RootState, origin: string) =>
   state[name].origins[origin];
 
+/**
+ * Determines if an origin should be blocked from making RPC requests
+ * based on recent rejection history
+ * @param state - Redux root state
+ * @param origin - Origin URL to check
+ * @returns True if origin should be blocked, false otherwise
+ */
 export const selectIsOriginBlockedForRPCRequests = (
   state: RootState,
   origin: string,

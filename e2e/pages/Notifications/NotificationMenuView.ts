@@ -5,6 +5,11 @@ import {
 import Gestures from '../../framework/Gestures';
 import Matchers from '../../framework/Matchers';
 
+/**
+ * Page object model for the Enable Notifications Modal in end-to-end tests.
+ * Provides methods to interact with notification menu elements including tabs,
+ * notification items, and scrolling functionality.
+ */
 class EnableNotificationsModal {
   get title() {
     return Matchers.getElementByID(NotificationMenuViewSelectorsIDs.TITLE);
@@ -28,23 +33,45 @@ class EnableNotificationsModal {
     );
   }
 
+  /**
+   * Selects a notification item by its ID.
+   * @param id - The unique identifier of the notification item
+   * @returns Promise that resolves to the notification item element
+   */
   selectNotificationItem(id: string) {
     return Matchers.getElementByID(
       NotificationMenuViewSelectorsIDs.ITEM(id),
     ) as Promise<IndexableNativeElement>;
   }
 
+  /**
+   * Taps on the wallet tab in the notification menu.
+   */
   async tapOnWalletTab() {
     await Gestures.waitAndTap(this.wallet_tab);
   }
+
+  /**
+   * Taps on the announcements tab in the notification menu.
+   */
   async tapOnAnnouncementsTab() {
     await Gestures.waitAndTap(this.announcements_tab);
   }
+
+  /**
+   * Taps on a specific notification item by its ID.
+   * @param id - The unique identifier of the notification item to tap
+   */
   async tapOnNotificationItem(id: string) {
     await Gestures.waitAndTap(this.selectNotificationItem(id), {
       elemDescription: `Notification Menu - Notification Item with ID: ${id}`,
     });
   }
+
+  /**
+   * Scrolls to a specific notification item by its ID.
+   * @param id - The unique identifier of the notification item to scroll to
+   */
   async scrollToNotificationItem(id: string) {
     await Gestures.scrollToElement(
       this.selectNotificationItem(id),

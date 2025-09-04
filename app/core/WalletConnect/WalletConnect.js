@@ -30,11 +30,29 @@ import { selectEvmChainId } from '../../selectors/networkController';
 import ppomUtil from '../../../app/lib/ppom/ppom-util';
 import { toFormattedAddress } from '../../util/address';
 
+/**
+ * Event hub for WalletConnect communication
+ */
 const hub = new EventEmitter();
+
+/**
+ * Array of active WalletConnect connector instances
+ */
 let connectors = [];
+
+/**
+ * Flag indicating whether WalletConnect has been initialized
+ */
 let initialized = false;
+
+/**
+ * Temporary storage for call IDs to prevent duplicate processing
+ */
 const tempCallIds = [];
 
+/**
+ * Map of RPC methods that require redirecting back to the dApp after completion
+ */
 const METHODS_TO_REDIRECT = {
   eth_requestAccounts: true,
   eth_sendTransaction: true,
@@ -48,6 +66,10 @@ const METHODS_TO_REDIRECT = {
   wallet_switchEthereumChain: true,
 };
 
+/**
+ * Persists active WalletConnect sessions to storage
+ * Filters connected sessions and saves their metadata for restoration
+ */
 const persistSessions = async () => {
   const sessions = connectors
     .filter((connector) => connector?.walletConnector?.connected)
@@ -65,6 +87,10 @@ const persistSessions = async () => {
   );
 };
 
+/**
+ * Waits for WalletConnect initialization to complete
+ * Times out after 5 seconds and forces initialization
+ */
 const waitForInitialization = async () => {
   let i = 0;
   while (!initialized) {
@@ -73,6 +99,10 @@ const waitForInitialization = async () => {
   }
 };
 
+/**
+ * Waits for the keychain to be unlocked before proceeding
+ * Times out after 60 seconds to prevent infinite waiting
+ */
 const waitForKeychainUnlocked = async () => {
   let i = 0;
   const { KeyringController } = Engine.context;

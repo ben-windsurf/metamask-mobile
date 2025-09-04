@@ -1,15 +1,26 @@
 import { captureException } from '@sentry/react-native';
 import { isObject, hasProperty } from '@metamask/utils';
 
+/**
+ * Network state interface for migration 034.
+ * Defines the structure of NetworkController state with provider configuration.
+ */
 interface NetworkState {
+  /** Provider configuration for the network */
   providerConfig: {
+    /** Chain ID of the network */
     chainId: string;
+    /** Ticker symbol for the network's native currency */
     ticker: string;
+    /** Type of the network provider */
     type: string;
+    /** RPC preferences for the network */
     rpcPrefs: {
+      /** URL of the block explorer for this network */
       blockExplorerUrl: string;
     };
   };
+  /** ID of the currently selected network client */
   selectedNetworkClientId: string;
 }
 

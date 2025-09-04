@@ -13,6 +13,15 @@ import { RootState } from '../../reducers';
 import Device from '../../util/device';
 import { MetaMetrics } from '../../core/Analytics';
 
+/**
+ * Generates sanitized state logs by removing sensitive data from the application state.
+ * Removes controller data that may contain sensitive information while preserving
+ * essential debugging information.
+ *
+ * @param state - The application state to generate logs from
+ * @param loggedIn - Whether the user is logged in, affects keyring data inclusion
+ * @returns JSON string representation of the sanitized state
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, import/prefer-default-export
 export const generateStateLogs = (state: any, loggedIn = true): string => {
@@ -51,6 +60,15 @@ export const generateStateLogs = (state: any, loggedIn = true): string => {
   return JSON.stringify(newState);
 };
 
+/**
+ * Downloads sanitized state logs as a shareable file for debugging purposes.
+ * Creates a JSON file containing application state with sensitive data removed,
+ * including app version and build information for debugging context.
+ *
+ * @param fullState - The complete application state from Redux store
+ * @param loggedIn - Whether the user is logged in, affects data inclusion
+ * @returns Promise that resolves when the share dialog is presented
+ */
 export const downloadStateLogs = async (
   fullState: RootState,
   loggedIn = true,

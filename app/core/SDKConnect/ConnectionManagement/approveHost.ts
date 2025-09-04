@@ -8,6 +8,15 @@ import SDKConnect, { approveHostProps } from '../SDKConnect';
 import { DEFAULT_SESSION_TIMEOUT_MS } from '../SDKConnectConstants';
 import DevLogger from '../utils/DevLogger';
 
+/**
+ * Approves a host for SDK connection and updates the connection state.
+ * Sets an expiration time for the approval and updates both approved hosts
+ * and connection records in the Redux store.
+ *
+ * @param params - The approval parameters
+ * @param params.host - The host URL to approve for SDK connections
+ * @param params.instance - The SDKConnect instance managing the connections
+ */
 function approveHost({
   host,
   instance,

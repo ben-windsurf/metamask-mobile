@@ -3,6 +3,13 @@ import SDKConnect from '../SDKConnect';
 import DevLogger from '../utils/DevLogger';
 import { store } from '../../../../app/store';
 
+/**
+ * Pauses all active SDK connections and sets the instance to paused state.
+ * This function iterates through all connected instances, pauses active connections,
+ * and dispatches a disconnectAll action to update the Redux store.
+ *
+ * @param instance - The SDKConnect instance to pause
+ */
 function pause(instance: SDKConnect) {
   if (instance.state.paused) return;
 
@@ -26,4 +33,9 @@ function pause(instance: SDKConnect) {
   store.dispatch(disconnectAll());
 }
 
+/**
+ * Pauses all active SDK connections and sets the instance to paused state.
+ * This function iterates through all connected instances, pauses active connections,
+ * and dispatches a disconnectAll action to update the Redux store.
+ */
 export default pause;

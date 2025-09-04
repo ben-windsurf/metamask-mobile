@@ -6,6 +6,17 @@ import { ApprovalTypes } from '../../../RPCMethods/RPCMethodMiddleware';
 import { type ApprovalControllerMessenger } from '../../messengers/approval-controller-messenger';
 import type { ControllerInitFunction } from '../../types';
 
+/**
+ * Initializes the ApprovalController for managing user approval requests.
+ *
+ * The ApprovalController handles user confirmation flows for various operations
+ * like transactions, asset watching, and smart transaction status updates.
+ * It provides rate limiting for certain approval types to prevent spam.
+ *
+ * @param request - The controller initialization request containing messenger and state
+ * @returns Object containing the initialized ApprovalController instance
+ * @throws Error if controller initialization fails
+ */
 export const ApprovalControllerInit: ControllerInitFunction<
   ApprovalController,
   ApprovalControllerMessenger

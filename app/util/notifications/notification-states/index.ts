@@ -12,6 +12,10 @@ import LidoStakeReadyToBeWithdrawnState from './lido-stake-ready-to-be-withdrawn
 import { NotificationState } from './types/NotificationState';
 
 const { TRIGGER_TYPES } = NotificationServicesController.Constants;
+/**
+ * Type alias for notification trigger types from the NotificationServicesController.
+ * Used to define the various types of notifications that can be triggered in the system.
+ */
 type TRIGGER_TYPES = NotificationServicesController.Constants.TRIGGER_TYPES;
 
 /**
@@ -28,6 +32,16 @@ const expandComponentsType = <C extends NotificationState<any>>(
   components: C,
 ) => components as NotificationState;
 
+/**
+ * Mapping of notification trigger types to their corresponding component states.
+ * Each trigger type is associated with a specific notification component that handles
+ * the display and behavior for that type of notification.
+ *
+ * @example
+ * ```typescript
+ * const erc20Component = NotificationComponentState[TRIGGER_TYPES.ERC20_SENT];
+ * ```
+ */
 export const NotificationComponentState = {
   [TRIGGER_TYPES.ERC20_SENT]: expandComponentsType(ERC20SentReceivedState),
   [TRIGGER_TYPES.ERC20_RECEIVED]: expandComponentsType(ERC20SentReceivedState),
@@ -59,11 +73,23 @@ export const NotificationComponentState = {
   ),
 };
 
+/**
+ * Type guard function to check if a trigger type has associated notification components.
+ *
+ * @param t - The trigger type to check
+ * @returns True if the trigger type has notification components, false otherwise
+ */
 export const hasNotificationComponents = (
   t: TRIGGER_TYPES,
 ): t is keyof typeof NotificationComponentState =>
   t in NotificationComponentState;
 
+/**
+ * Checks if a notification trigger type has an associated modal component.
+ *
+ * @param t - The trigger type to check for modal support
+ * @returns True if the trigger type has modal details, false otherwise
+ */
 export const hasNotificationModal = (t: TRIGGER_TYPES) => {
   if (!hasNotificationComponents(t)) {
     return false;

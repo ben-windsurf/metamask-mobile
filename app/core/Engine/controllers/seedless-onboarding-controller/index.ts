@@ -11,6 +11,10 @@ import { EncryptionKey } from '../../../Encryptor/types';
 import { web3AuthNetwork } from '../../../OAuthService/OAuthLoginHandlers/constants';
 import AuthTokenHandler from '../../../OAuthService/AuthTokenHandler';
 
+/**
+ * Encryptor instance configured with legacy derivation options for seedless onboarding.
+ * Used to encrypt and decrypt sensitive data during the OAuth-based onboarding process.
+ */
 const encryptor = new Encryptor({
   keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
 });

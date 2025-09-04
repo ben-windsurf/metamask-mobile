@@ -1,24 +1,42 @@
 import { NetworkType, toHex } from '@metamask/controller-utils';
 
+/** Infura project ID from environment variables */
 export const INFURA_PROJECT_ID = process.env.MM_INFURA_PROJECT_ID;
 
+/** Ethereum mainnet network identifier */
 export const MAINNET = 'mainnet';
+/** Ethereum homestead network identifier (alias for mainnet) */
 export const HOMESTEAD = 'homestead';
+/** Goerli testnet network identifier */
 export const GOERLI = 'goerli';
+/** Sepolia testnet network identifier */
 export const SEPOLIA = 'sepolia';
+/** Linea Goerli testnet network identifier */
 export const LINEA_GOERLI = 'linea-goerli';
+/** Linea Sepolia testnet network identifier */
 export const LINEA_SEPOLIA = 'linea-sepolia';
+/** Linea mainnet network identifier */
 export const LINEA_MAINNET = 'linea-mainnet';
+/** Base mainnet network identifier */
 export const BASE_MAINNET = 'base-mainnet';
+/** MegaETH testnet network identifier */
 export const MEGAETH_TESTNET = 'megaeth-testnet';
+/** Monad testnet network identifier */
 export const MONAD_TESTNET = 'monad-testnet';
+/** Bitcoin testnet network identifier */
 export const BITCOIN_TESTNET = 'bitcoin-testnet';
+/** Bitcoin Mutinynet network identifier */
 export const BITCOIN_MUTINYNET = 'bitcoin-mutinynet';
 
+/** RPC network type constant */
 export const RPC = NetworkType.rpc;
+/** Constant indicating no block explorer is available */
 export const NO_RPC_BLOCK_EXPLORER = 'NO_BLOCK_EXPLORER';
+/** Private network identifier */
 export const PRIVATENETWORK = 'PRIVATENETWORK';
+/** Default custom name for Ethereum mainnet */
 export const DEFAULT_MAINNET_CUSTOM_NAME = 'Ethereum Main Custom';
+/** Default IPFS gateway URL for content resolution */
 export const IPFS_DEFAULT_GATEWAY_URL = 'https://dweb.link/ipfs/';
 
 /**
@@ -54,7 +72,10 @@ export const NETWORKS_CHAIN_ID = {
   MONAD_TESTNET: toHex('10143'),
 };
 
-// To add a deprecation warning to a network, add it to the array
+/**
+ * Array of deprecated network chain IDs that should show deprecation warnings.
+ * To add a deprecation warning to a network, add its chain ID to this array.
+ */
 export const DEPRECATED_NETWORKS = [
   NETWORKS_CHAIN_ID.GOERLI,
   NETWORKS_CHAIN_ID.ARBITRUM_GOERLI,

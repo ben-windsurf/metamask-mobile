@@ -11,10 +11,18 @@ import type {
   NativeElement,
   IndexableSystemElement,
 } from 'detox/detox';
+
+/**
+ * Type alias for Detox element promises used in page object methods
+ */
 type DetoxElement = Promise<
   IndexableNativeElement | NativeElement | IndexableSystemElement
 >;
 
+/**
+ * Page object model for the Connected Accounts Modal in the browser
+ * Provides methods to interact with account connection and permission management UI
+ */
 class ConnectedAccountsModal {
   get container(): DetoxElement {
     return Matchers.getElementByID(ConnectedAccountsSelectorsIDs.CONTAINER);

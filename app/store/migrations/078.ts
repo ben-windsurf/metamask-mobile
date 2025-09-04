@@ -8,6 +8,9 @@ import { captureException } from '@sentry/react-native';
  * This migration resets only the phishingLists array in the PhishingController state
  * while preserving all other state properties. This allows the app to rebuild the lists
  * while maintaining user preferences and configuration.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with reset PhishingController phishingLists
  */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 78;

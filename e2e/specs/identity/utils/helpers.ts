@@ -22,6 +22,11 @@ export interface UserStorageAccount {
   nlu?: number;
 }
 
+/**
+ * Determines if a URL represents a feature entry in user storage
+ * @param url - The URL to check
+ * @returns True if the URL represents a feature entry, false otherwise
+ */
 export const determineIfFeatureEntryFromURL = (url: string) => {
   const decodedUrl = decodeURIComponent(url);
   return (
@@ -30,9 +35,19 @@ export const determineIfFeatureEntryFromURL = (url: string) => {
   );
 };
 
+/**
+ * Extracts and decodes the proxied URL from a URL's search parameters
+ * @param url - The URL containing the proxied URL parameter
+ * @returns The decoded proxied URL
+ */
 export const getDecodedProxiedURL = (url: string) =>
   decodeURIComponent(String(new URL(url).searchParams.get('url')));
 
+/**
+ * Extracts the SRP identifier from authorization headers
+ * @param headers - The request headers containing authorization information
+ * @returns The SRP identifier from the auth header or a default mock identifier
+ */
 export const getSrpIdentifierFromHeaders = (
   headers: Record<string, unknown>,
 ) => {
@@ -43,6 +58,11 @@ export const getSrpIdentifierFromHeaders = (
   );
 };
 
+/**
+ * Creates test utility functions for managing user storage mock operations
+ * @param userStorageMockttpController - The user storage mockttp controller instance
+ * @returns Object containing utility functions for testing user storage operations
+ */
 export const arrangeTestUtils = (
   userStorageMockttpController: UserStorageMockttpController,
 ) => {
@@ -144,6 +164,11 @@ export const arrangeTestUtils = (
       })();
     });
 
+  /**
+   * Waits until the number of synced contacts equals the expected number
+   * @param expectedNumber - The expected number of contacts
+   * @returns Promise that resolves when the condition is met, rejects on timeout
+   */
   const waitUntilSyncedContactsNumberEquals = (
     expectedNumber: number,
   ): Promise<void> =>

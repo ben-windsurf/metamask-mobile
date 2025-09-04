@@ -13,7 +13,10 @@ import { LocalNodeType } from '../../framework/types';
 import { Hardfork } from '../../seeder/anvil-manager';
 import { RampsRegions, RampsRegionsEnum } from '../../framework/Constants';
 
-// Anvil configuration for local blockchain node
+/**
+ * Anvil configuration for local blockchain node used in ramps account switching tests.
+ * Configures the local Ethereum node with London hardfork and a test mnemonic.
+ */
 const anvilLocalNodeOptions = {
   hardfork: 'London' as Hardfork,
   mnemonic:
@@ -21,9 +24,18 @@ const anvilLocalNodeOptions = {
   chainId: 1,
 };
 
-// Get ramps API mocks from the dedicated mock file
+/**
+ * Ramps API mocks for testing account switching functionality.
+ * Retrieved from the dedicated mock responses file.
+ */
 const rampsApiMocks = getRampsApiMocks();
 
+/**
+ * Sets up the test environment for ramps account switching tests.
+ * Configures fixtures with multiple accounts, local blockchain node, and API mocks.
+ *
+ * @param testFunction - The test function to execute within the configured environment
+ */
 const setupRampsAccountSwitchTest = async (
   testFunction: () => Promise<void>,
 ) => {

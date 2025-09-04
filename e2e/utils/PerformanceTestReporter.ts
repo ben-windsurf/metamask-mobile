@@ -2,10 +2,18 @@
 import fs from 'fs';
 import path from 'path';
 
-// Custom error that carries performance data
+/**
+ * Custom error that carries performance data for failed performance tests.
+ * Extends the standard Error class to include performance metrics.
+ */
 export class PerformanceTestError extends Error {
   public readonly performanceData: Partial<TestResult>;
 
+  /**
+   * Creates a new PerformanceTestError with performance data.
+   * @param message - The error message describing the failure
+   * @param performanceData - Partial test result data containing performance metrics
+   */
   constructor(message: string, performanceData: Partial<TestResult>) {
     super(message);
     this.name = 'PerformanceTestError';
@@ -13,40 +21,76 @@ export class PerformanceTestError extends Error {
   }
 }
 
-// Test results storage
+/**
+ * Interface representing the results of a single performance test.
+ * Contains all metrics and metadata for test execution and performance analysis.
+ */
 export interface TestResult {
+  /** Name of the test that was executed */
   testName: string;
+  /** User profile used during the test (e.g., 'new user', 'existing user') */
   userProfile: string;
+  /** Platform where the test was executed (iOS/Android) */
   platform: string;
+  /** Total execution time in seconds */
   totalTime: number;
+  /** Test execution status */
   status: 'PASSED' | 'FAILED';
+  /** Error message if the test failed */
   error?: string;
+  /** ISO timestamp when the test was executed */
   timestamp: string;
+  /** Performance thresholds used for pass/fail criteria */
   thresholds: {
+    /** Maximum acceptable total time in seconds */
     totalTime: number;
   };
+  /** Optional metadata about the test execution */
   metadata?: {
+    /** Type of performance test (e.g., 'navigation', 'render') */
     testType?: string;
+    /** Which metrics were actually measured during the test */
     measuredMetrics?: {
+      /** Whether total time was measured */
       totalTime: boolean;
     };
   };
 }
 
+/**
+ * Interface representing the aggregated results of a complete test suite.
+ * Contains summary statistics and individual test results.
+ */
 export interface TestSuiteResults {
+  /** Name of the test suite */
   suiteName: string;
+  /** ISO timestamp when the test suite started */
   startTime: string;
+  /** ISO timestamp when the test suite ended */
   endTime: string;
+  /** Platform where the test suite was executed */
   platform: string;
+  /** Total number of tests executed */
   totalTests: number;
+  /** Number of tests that passed */
   passedTests: number;
+  /** Number of tests that failed */
   failedTests: number;
+  /** Array of individual test results */
   results: TestResult[];
 }
 
+/**
+ * Performance test reporter that collects, aggregates, and saves performance test results.
+ * Provides methods to track test execution, measure performance metrics, and generate reports.
+ */
 export class PerformanceTestReporter {
   private testSuiteResults: TestSuiteResults;
 
+  /**
+   * Creates a new PerformanceTestReporter for a test suite.
+   * @param suiteName - Name of the test suite being executed
+   */
   constructor(suiteName: string) {
     this.testSuiteResults = {
       suiteName,

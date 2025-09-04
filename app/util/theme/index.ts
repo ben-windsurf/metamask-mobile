@@ -13,8 +13,10 @@ import { lightTheme, darkTheme, brandColor } from '@metamask/design-tokens';
 import Device from '../device';
 
 /**
- * This is needed to make our unit tests pass since Enzyme doesn't support contextType
- * TODO: Convert classes into functional components and remove contextType
+ * Mock theme object used for unit testing when Enzyme doesn't support contextType.
+ * Provides a default light theme configuration for test environments.
+ *
+ * @todo Convert classes into functional components and remove contextType
  */
 export const mockTheme = {
   colors: lightTheme.colors,
@@ -24,18 +26,25 @@ export const mockTheme = {
   brandColors: brandColor,
 };
 
+/**
+ * React context for providing theme data throughout the component tree.
+ * Used to share theme configuration between components.
+ *
+ * @todo Replace "any" with proper Theme type
+ */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ThemeContext = React.createContext<any>(undefined);
 
 /**
- * Utility function for getting asset from theme (Class components)
+ * Utility function for selecting the appropriate asset based on theme configuration.
+ * Used primarily by class components to get theme-appropriate assets.
  *
- * @param appTheme Theme from app
- * @param osColorScheme Theme from OS
- * @param light Light asset
- * @param dark Dark asset
- * @returns
+ * @param appTheme - The application's theme setting (light, dark, or os)
+ * @param osColorScheme - The operating system's color scheme preference
+ * @param light - Asset to use for light theme
+ * @param dark - Asset to use for dark theme
+ * @returns The appropriate asset based on theme configuration
  */
 export const getAssetFromTheme = (
   appTheme: AppThemeKey,
@@ -102,6 +111,13 @@ const useColorSchemeCustom = (
 };
 /* eslint-enable */
 
+/**
+ * Hook that provides the current application theme configuration.
+ * Combines app theme settings with OS color scheme to determine the active theme.
+ * Also manages status bar styling based on the selected theme.
+ *
+ * @returns Complete theme object with colors, typography, shadows, and brand colors
+ */
 export const useAppTheme = (): Theme => {
   const osThemeName = useColorSchemeCustom();
   const appTheme: AppThemeKey = useSelector(
@@ -182,22 +198,35 @@ export const useAppTheme = (): Theme => {
   return { colors, themeAppearance, typography, shadows, brandColors };
 };
 
+/**
+ * Hook that retrieves theme configuration from React context.
+ * Used when theme is provided via ThemeContext.Provider.
+ *
+ * @returns Theme object from context
+ */
 export const useAppThemeFromContext = (): Theme => {
   const theme = useContext<Theme>(ThemeContext);
   return theme;
 };
 
+/**
+ * Primary hook for accessing theme configuration in functional components.
+ * Falls back to mockTheme if no theme is available from context.
+ *
+ * @returns Theme object from context or mock theme as fallback
+ */
 export const useTheme = (): Theme => {
   const theme = useAppThemeFromContext() || mockTheme;
   return theme;
 };
 
 /**
- * Hook that returns asset based on theme (Functional components)
+ * Hook that returns the appropriate asset based on current theme configuration.
+ * Used by functional components to get theme-appropriate assets.
  *
- * @param light Light asset
- * @param dark Dark asset
- * @returns Asset based on theme
+ * @param light - Asset to use for light theme
+ * @param dark - Asset to use for dark theme
+ * @returns The appropriate asset based on current theme settings
  */
 // TODO: Replace "any" with type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

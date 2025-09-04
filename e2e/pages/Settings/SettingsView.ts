@@ -6,27 +6,55 @@ import {
 } from '../../selectors/Settings/SettingsView.selectors';
 import { CommonSelectorsText } from '../../selectors/Common.selectors';
 
+/**
+ * Page object model for the Settings view in the MetaMask mobile app.
+ * Provides methods to interact with various settings sections and buttons.
+ */
 class SettingsView {
+  /**
+   * Gets the General Settings button element.
+   * @returns The DetoxElement for the general settings button
+   */
   get generalSettingsButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.GENERAL);
   }
 
+  /**
+   * Gets the Advanced Settings button element.
+   * @returns The DetoxElement for the advanced settings button
+   */
   get advancedButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.ADVANCED);
   }
 
+  /**
+   * Gets the Contacts Settings button element.
+   * @returns The DetoxElement for the contacts settings button
+   */
   get contactsSettingsButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.CONTACTS);
   }
 
+  /**
+   * Gets the Security and Privacy Settings button element.
+   * @returns The DetoxElement for the security and privacy settings button
+   */
   get securityAndPrivacyButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.SECURITY);
   }
 
+  /**
+   * Gets the Networks Settings button element.
+   * @returns The DetoxElement for the networks settings button
+   */
   get networksButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.NETWORKS);
   }
 
+  /**
+   * Gets the Notifications Settings button element.
+   * @returns The DetoxElement for the notifications settings button
+   */
   get notificationsButton(): DetoxElement {
     return Matchers.getElementByID(SettingsViewSelectorsIDs.NOTIFICATIONS);
   }

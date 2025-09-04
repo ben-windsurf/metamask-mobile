@@ -7,11 +7,24 @@ import {
 } from 'react-native-keychain';
 import Logger from '../../../../util/Logger';
 
+/** Service identifier for local key persistence in the keychain */
 const LOCAL_KEY_PERSISTENCE = 'com.metamask.local-key-cache';
+
+/** Default keychain options for secure key storage */
 const defaultKeychainOptions = {
   accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
 };
 
+/**
+ * Generates a unique cache key from scrypt parameters for keychain storage
+ * @param passwd - The password bytes
+ * @param salt - The salt bytes
+ * @param N - CPU/memory cost parameter
+ * @param r - Block size parameter
+ * @param p - Parallelization parameter
+ * @param size - The size of the derived key in bytes
+ * @returns A unique string identifier for caching the derived key
+ */
 const cacheKeyFromParams = (
   passwd: Uint8Array,
   salt: Uint8Array,

@@ -13,12 +13,19 @@ import AddAccountBottomSheet from '../../pages/wallet/AddAccountBottomSheet';
 import AddNewHdAccountComponent from '../../pages/wallet/MultiSrp/AddAccountToSrp/AddNewHdAccountComponent';
 
 // Test constants
+/** Invalid address string used for testing address validation */
 const INVALID_ADDRESS = 'invalid address';
+/** Expected error message when an invalid Solana address is provided */
 const INVALID_ADDRESS_ERROR = 'Invalid Solana address or domain name';
+/** Valid Solana recipient address for testing successful transfers */
 const RECIPIENT_ADDRESS = 'EjiyBUWeEXPBJT5cB2jzbm6pmbBxWuyVyVBGasSGgtXt';
+/** Amount of SOL to transfer in test scenarios */
 const TRANSFER_AMOUNT = '0.002';
+/** Expected confirmation message after successful SOL transfer */
 const EXPECTED_CONFIRMATION = '0.002 SOL was successfully sent';
+/** Shortened version of recipient address as displayed in UI */
 const RECIPIENT_SHORT_ADDRESS = 'EjiyBUW...GgtXt';
+/** Index of the most recent transaction in the activities list */
 const RECENT_TRANSACTION_INDEX = 0;
 
 describe(SmokeNetworkExpansion('Solana Token Transfer Functionality'), () => {

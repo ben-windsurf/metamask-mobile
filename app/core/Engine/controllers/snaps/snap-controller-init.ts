@@ -53,7 +53,13 @@ export const snapControllerInit: ControllerInitFunction<
     keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
   });
 
-  // Async because `SnapController` expects a promise.
+  /**
+   * Retrieves the mnemonic seed from the primary HD keyring.
+   * Async because `SnapController` expects a promise.
+   *
+   * @returns The mnemonic seed as a Uint8Array from the primary keyring
+   * @throws Error when primary keyring mnemonic is unavailable
+   */
   async function getMnemonicSeed() {
     const keyrings = initMessenger.call(
       'KeyringController:getKeyringsByType',

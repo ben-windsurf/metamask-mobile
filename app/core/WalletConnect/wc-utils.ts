@@ -18,19 +18,36 @@ import DevLogger from '../SDKConnect/utils/DevLogger';
 import { wait } from '../SDKConnect/utils/wait.util';
 import { WalletKitTypes } from '@reown/walletkit';
 
+/**
+ * Parameters for WalletConnect multi-version URI parsing.
+ * Supports both WalletConnect v1 and v2 protocols.
+ */
 export interface WCMultiVersionParams {
+  /** The protocol identifier (e.g., 'wc') */
   protocol: string;
+  /** WalletConnect protocol version (1 or 2) */
   version: number;
+  /** Connection topic identifier */
   topic: string;
-  // v2 params
+  /** Symmetric key for v2 connections */
   symKey?: string;
+  /** Relay protocol options for v2 connections */
   relay?: RelayerTypes.ProtocolOptions;
-  // v1 params
+  /** Bridge URL for v1 connections */
   bridge?: string;
+  /** Encryption key for v1 connections */
   key?: string;
+  /** Handshake topic for v1 connections */
   handshakeTopic?: string;
 }
 
+/**
+ * Extracts the hostname or protocol from a URI string.
+ * Handles standard URLs and protocol-based URIs like wc: or ethereum:.
+ *
+ * @param uri - The URI string to parse
+ * @returns The hostname or protocol identifier
+ */
 export const getHostname = (uri: string): string => {
   try {
     // Handle empty or invalid URIs
@@ -60,6 +77,13 @@ export const getHostname = (uri: string): string => {
   }
 };
 
+/**
+ * Parses a WalletConnect URI string into its component parameters.
+ * Supports both v1 and v2 WalletConnect URI formats.
+ *
+ * @param uri - The WalletConnect URI string to parse
+ * @returns Parsed WalletConnect parameters including version-specific fields
+ */
 export const parseWalletConnectUri = (uri: string): WCMultiVersionParams => {
   // Handle wc:{} and wc://{} format
   const str = uri.startsWith('wc://') ? uri.replace('wc://', 'wc:') : uri;
@@ -87,6 +111,13 @@ export const parseWalletConnectUri = (uri: string): WCMultiVersionParams => {
   return result;
 };
 
+/**
+ * Hides the WalletConnect loading state by navigating back from loading screens.
+ * Handles both SDK loading modal and return to dApp modal.
+ *
+ * @param params - Navigation parameters
+ * @param params.navigation - React Navigation container reference
+ */
 export const hideWCLoadingState = ({
   navigation,
 }: {
@@ -104,6 +135,12 @@ export const hideWCLoadingState = ({
   }
 };
 
+/**
+ * Shows the WalletConnect loading state by navigating to the SDK loading screen.
+ *
+ * @param params - Navigation parameters
+ * @param params.navigation - React Navigation container reference
+ */
 export const showWCLoadingState = ({
   navigation,
 }: {
@@ -114,6 +151,14 @@ export const showWCLoadingState = ({
   });
 };
 
+/**
+ * Validates a WalletConnect URI by checking for required parameters based on version.
+ * For v1: requires handshakeTopic, bridge, and key
+ * For v2: requires topic, symKey, and relay
+ *
+ * @param uri - The WalletConnect URI string to validate
+ * @returns True if the URI contains all required parameters for its version
+ */
 export const isValidWCURI = (uri: string): boolean => {
   const result = parseWalletConnectUri(uri);
   if (result.version === 1) {
@@ -124,8 +169,12 @@ export const isValidWCURI = (uri: string): boolean => {
   return false;
 };
 
-// Export a config object that can be modified for testing
+/**
+ * Configuration object for network modal onboarding timeout behavior.
+ * Can be modified for testing purposes.
+ */
 export const networkModalOnboardingConfig = {
+  /** Maximum number of loop iterations before timeout (60 seconds at 1s intervals) */
   MAX_LOOP_COUNTER: 60,
 };
 

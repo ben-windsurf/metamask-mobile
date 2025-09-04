@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for network view elements in end-to-end tests.
+ * Contains test identifiers for network configuration UI components.
+ */
 export const NetworksViewSelectorsIDs = {
   RPC_CONTAINER: 'new-rpc-screen',
   ADD_CUSTOM_NETWORK_BUTTON: 'add-custom-network-button',
@@ -26,11 +30,19 @@ export const NetworksViewSelectorsIDs = {
   RPC_NAME_INPUT: 'input-rpc-name',
 };
 
+/**
+ * Selector IDs for network selector elements in end-to-end tests.
+ * Contains test identifiers for network selection UI components.
+ */
 export const NetworksSelectorSelectorsIDs = {
   CLOSE_ICON: 'network-selector-close-network-icon',
   SEARCH_NETWORK_INPUT_BOX_ID: 'network-selector-network-search-input',
 };
 
+/**
+ * Text selectors for network view elements in end-to-end tests.
+ * Contains localized text content used to identify UI elements by their display text.
+ */
 export const NetworkViewSelectorsText = {
   BLOCK_EXPLORER: enContent.app_settings.network_block_explorer_label,
   CHAIN_ID_LABEL: enContent.app_settings.network_chain_id_label,

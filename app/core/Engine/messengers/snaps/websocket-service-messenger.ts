@@ -4,6 +4,10 @@ import {
   WebSocketServiceAllowedActions,
 } from '@metamask/snaps-controllers';
 
+/**
+ * Type definition for the WebSocket service messenger.
+ * Represents a restricted messenger scoped to WebSocket service actions and events.
+ */
 export type WebSocketServiceMessenger = ReturnType<
   typeof getWebSocketServiceMessenger
 >;

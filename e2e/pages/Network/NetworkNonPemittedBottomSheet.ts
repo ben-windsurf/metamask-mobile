@@ -5,31 +5,55 @@ import {
   NetworkNonPemittedBottomSheetSelectorsText,
 } from '../../selectors/Network/NetworkNonPemittedBottomSheet.selectors';
 
+/**
+ * Page object model for the Network Non-Permitted Bottom Sheet component.
+ * Provides methods to interact with network selection and permission management UI elements.
+ */
 class NetworkNonPemittedBottomSheet {
+  /**
+   * Gets the "Add this network" title element.
+   * @returns The DetoxElement for the add network title
+   */
   get addThisNetworkTitle(): DetoxElement {
     return Matchers.getElementByText(
       NetworkNonPemittedBottomSheetSelectorsText.ADD_THIS_NETWORK_TITLE,
     );
   }
 
+  /**
+   * Gets the Sepolia network name element.
+   * @returns The DetoxElement for the Sepolia network name
+   */
   get sepoliaNetworkName(): DetoxElement {
     return Matchers.getElementByText(
       NetworkNonPemittedBottomSheetSelectorsText.SEPOLIA_NETWORK_NAME,
     );
   }
 
+  /**
+   * Gets the Ethereum MainNet network name element.
+   * @returns The DetoxElement for the Ethereum MainNet network name
+   */
   get ethereumMainNetNetworkName(): DetoxElement {
     return Matchers.getElementByText(
       NetworkNonPemittedBottomSheetSelectorsText.ETHEREUM_MAIN_NET_NETWORK_NAME,
     );
   }
 
+  /**
+   * Gets the "Add this network" button element.
+   * @returns The DetoxElement for the add network button
+   */
   get addThisNetworkButton(): DetoxElement {
     return Matchers.getElementByID(
       NetworkNonPemittedBottomSheetSelectorsIDs.ADD_THIS_NETWORK_BUTTON,
     );
   }
 
+  /**
+   * Gets the Linea Sepolia network name element.
+   * @returns The DetoxElement for the Linea Sepolia network name
+   */
   get lineaSepoliaNetworkName(): DetoxElement {
     return Matchers.getElementByText(
       NetworkNonPemittedBottomSheetSelectorsText.LINEA_SEPOLIA_NETWORK_NAME,

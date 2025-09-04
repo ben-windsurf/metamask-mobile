@@ -3,9 +3,19 @@ import Logger from '../Logger';
 
 const LOG_PREFIX = 'Swaps Transactions';
 
+/**
+ * Type definition for a swaps transaction record.
+ * Contains transaction data with flexible key-value pairs.
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SwapsTransaction = Record<string, any>;
 
+/**
+ * Adds a new swaps transaction to the TransactionController state.
+ *
+ * @param transactionId - Unique identifier for the transaction
+ * @param data - Transaction data to store
+ */
 export function addSwapsTransaction(
   transactionId: string,
   data: SwapsTransaction,
@@ -24,6 +34,13 @@ export function addSwapsTransaction(
   Logger.log(LOG_PREFIX, 'Added transaction', transactionId);
 }
 
+/**
+ * Updates an existing swaps transaction using a callback function.
+ *
+ * @param transactionId - Unique identifier for the transaction to update
+ * @param callback - Function that receives the existing transaction data for modification
+ * @throws {Error} When the specified transaction ID is not found
+ */
 export function updateSwapsTransaction(
   transactionId: string,
   callback: (transaction: SwapsTransaction) => void,

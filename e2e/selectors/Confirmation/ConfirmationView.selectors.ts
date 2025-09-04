@@ -1,6 +1,10 @@
 import { ApprovalType } from '@metamask/controller-utils';
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for confirmation top sheet components used in end-to-end testing.
+ * Contains test identifiers for security alert banners and related UI elements.
+ */
 export const ConfirmationTopSheetSelectorsIDs = {
   SECURITY_ALERT_BANNER: 'security-alert-banner',
   SECURITY_ALERT_RESPONSE_FAILED_BANNER:
@@ -8,6 +12,10 @@ export const ConfirmationTopSheetSelectorsIDs = {
   SECURITY_ALERT_BANNER_REDESIGNED: 'security-alert-banner-0',
 } as const;
 
+/**
+ * Text selectors for confirmation top sheet components used in end-to-end testing.
+ * Contains localized text content for security alert banners and error messages.
+ */
 export const ConfirmationTopSheetSelectorsText = {
   BANNER_FAILED_TITLE: enContent.blockaid_banner.failed_title,
   BANNER_FAILED_DESCRIPTION: enContent.blockaid_banner.failed_description,
@@ -16,12 +24,20 @@ export const ConfirmationTopSheetSelectorsText = {
     enContent.blockaid_banner.malicious_domain_description,
 } as const;
 
+/**
+ * Request type identifiers for different confirmation types used in end-to-end testing.
+ * Maps to approval types from the MetaMask controller utilities.
+ */
 export const ConfirmationRequestTypeIDs = {
   PERSONAL_SIGN_REQUEST: ApprovalType.PersonalSign,
   TYPED_SIGN_REQUEST: ApprovalType.EthSignTypedData,
   TRANSACTION_REQUEST: ApprovalType.Transaction,
 } as const;
 
+/**
+ * UI type identifiers for different confirmation container layouts used in end-to-end testing.
+ * Distinguishes between modal and flat confirmation interfaces.
+ */
 export const ConfirmationUIType = {
   MODAL: 'modal-confirmation-container',
   FLAT: 'flat-confirmation-container',

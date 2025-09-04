@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for wallet view elements used in end-to-end testing.
+ * Contains test identifiers for various UI components in the wallet interface.
+ */
 export const WalletViewSelectorsIDs = {
   WALLET_CONTAINER: 'wallet-screen',
   NETWORK_NAME: 'network-name',
@@ -80,6 +84,10 @@ export const WalletViewSelectorsIDs = {
   WALLET_RECEIVE_BUTTON: 'wallet-receive-button',
 } as const;
 
+/**
+ * Text selectors for wallet view elements used in end-to-end testing.
+ * Contains localized text strings used to identify UI elements by their content.
+ */
 export const WalletViewSelectorsText = {
   IMPORT_TOKENS: `${enContent.wallet.no_available_tokens} ${enContent.wallet.add_tokens}`,
   NFTS_TAB: enContent.wallet.collectibles,
@@ -97,6 +105,14 @@ export const WalletViewSelectorsText = {
   DEFI_ERROR_VISIT_AGAIN: enContent.defi_positions.error_visit_again,
 } as const;
 
-// Type definitions for the selectors
+/**
+ * Type definition for wallet view selector IDs.
+ * Provides type safety for accessing wallet view element selectors.
+ */
 export type WalletViewSelectorsIDsType = typeof WalletViewSelectorsIDs;
+
+/**
+ * Type definition for wallet view selector text strings.
+ * Provides type safety for accessing wallet view text-based selectors.
+ */
 export type WalletViewSelectorsTextType = typeof WalletViewSelectorsText;

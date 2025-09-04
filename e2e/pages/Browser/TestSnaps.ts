@@ -20,34 +20,66 @@ import Utilities from '../../framework/Utilities';
 import LegacyGestures from '../../utils/Gestures';
 import { ConfirmationFooterSelectorIDs } from '../../selectors/Confirmation/ConfirmationView.selectors';
 
+/**
+ * URL for the test snaps application used in end-to-end testing
+ */
 export const TEST_SNAPS_URL =
   'https://metamask.github.io/snaps/test-snaps/2.25.0/';
 
+/**
+ * Page object model for interacting with the test snaps application in end-to-end tests.
+ * Provides methods for installing snaps, interacting with snap UI elements, and validating results.
+ */
 class TestSnaps {
+  /**
+   * Gets the connect snap button element for snap installation
+   * @returns DetoxElement for the connect snap button
+   */
   get getConnectSnapButton(): DetoxElement {
     return Matchers.getElementByID(SNAP_INSTALL_CONNECT);
   }
 
+  /**
+   * Gets the approve snap permissions request button element
+   * @returns DetoxElement for the approve permissions button
+   */
   get getApproveSnapPermissionsRequestButton(): DetoxElement {
     return Matchers.getElementByID(SNAP_INSTALL_PERMISSIONS_REQUEST_APPROVE);
   }
 
+  /**
+   * Gets the OK button element for completing snap installation
+   * @returns DetoxElement for the install OK button
+   */
   get getConnectSnapInstallOkButton(): DetoxElement {
     return Matchers.getElementByID(SNAP_INSTALL_OK);
   }
 
+  /**
+   * Gets the approve sign request button element from the bottom sheet
+   * @returns DetoxElement for the approve sign request button
+   */
   get getApproveSignRequestButton(): DetoxElement {
     return Matchers.getElementByID(
       TestSnapBottomSheetSelectorWebIDS.BOTTOMSHEET_FOOTER_BUTTON_ID,
     );
   }
 
+  /**
+   * Gets the confirm signature button element
+   * @returns DetoxElement for the confirm signature button
+   */
   get confirmSignatureButton(): DetoxElement {
     return Matchers.getElementByID(
       ConfirmationFooterSelectorIDs.CONFIRM_BUTTON,
     );
   }
 
+  /**
+   * Checks if a result span element contains the expected message text
+   * @param selector - The selector key for the result span element
+   * @param expectedMessage - The expected message text to match
+   */
   async checkResultSpan(
     selector: keyof typeof TestSnapResultSelectorWebIDS,
     expectedMessage: string,

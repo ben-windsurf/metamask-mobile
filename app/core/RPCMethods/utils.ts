@@ -7,6 +7,11 @@ import { PermittedHandlerExport } from '@metamask/permission-controller';
 import { Json, JsonRpcParams, hasProperty } from '@metamask/utils';
 import EthQuery from '@metamask/eth-query';
 
+/**
+ * Set of RPC methods that are not supported by the MetaMask mobile UI.
+ * These methods may be implemented elsewhere in the middleware stack but
+ * are not available through the mobile interface.
+ */
 export const UNSUPPORTED_RPC_METHODS = new Set([
   // This is implemented later in our middleware stack – specifically, in
   // eth-json-rpc-middleware – but our UI does not support it.
@@ -17,7 +22,7 @@ export const UNSUPPORTED_RPC_METHODS = new Set([
  * Asserts that the specified hooks object only has all expected hooks and no extraneous ones.
  *
  * @param hooks - Required "hooks" into our controllers.
- * @param - The expected hook names.
+ * @param expectedHookNames - The expected hook names.
  */
 function assertExpectedHook(
   hooks: Record<string, unknown>,
@@ -117,6 +122,15 @@ export function makeMethodMiddlewareMaker<U>(
   return makeMethodMiddleware;
 }
 
+/**
+ * Polyfills gasPrice field in transaction data by using maxFeePerGas when gasPrice is not present.
+ * This is needed for EIP-1559 transactions that use maxFeePerGas instead of gasPrice.
+ *
+ * @param method - The RPC method name to query.
+ * @param origin - The origin domain making the request.
+ * @param params - The parameters to pass to the RPC method.
+ * @returns The transaction data with gasPrice polyfilled if needed.
+ */
 export const polyfillGasPrice = async (
   method: string,
   origin: string,

@@ -17,8 +17,17 @@ import { MetaMetrics, MetaMetricsEvents } from '../../../core/Analytics';
 import { MetricsEventBuilder } from '../../../core/Analytics/MetricsEventBuilder';
 import Engine from '../../Engine';
 
+/**
+ * The standard number of decimals for EVM native tokens
+ */
 const EVM_NATIVE_TOKEN_DECIMALS = 18;
 
+/**
+ * Validates and normalizes a chain ID parameter
+ * @param {string} chainId - The chain ID to validate (should be 0x-prefixed hex)
+ * @returns {string} The validated and normalized chain ID
+ * @throws {Error} If the chain ID is invalid or unsafe
+ */
 export function validateChainId(chainId) {
   const _chainId = typeof chainId === 'string' && chainId.toLowerCase();
 
@@ -37,6 +46,12 @@ export function validateChainId(chainId) {
   return _chainId;
 }
 
+/**
+ * Validates parameters for adding a new Ethereum chain
+ * @param {Array} params - Array containing the chain parameters object
+ * @returns {Object} Validated chain parameters including chainId, chainName, firstValidRPCUrl, firstValidBlockExplorerUrl, and ticker
+ * @throws {Error} If any parameter is invalid or missing required fields
+ */
 export function validateAddEthereumChainParams(params) {
   if (!params || !params?.[0] || typeof params[0] !== 'object') {
     throw rpcErrors.invalidParams({
@@ -91,6 +106,12 @@ export function validateAddEthereumChainParams(params) {
   };
 }
 
+/**
+ * Validates RPC URLs and returns the first valid HTTPS URL
+ * @param {Array} rpcUrls - Array of RPC URL strings to validate
+ * @returns {string} The first valid HTTPS RPC URL with trailing slashes removed
+ * @throws {Error} If no valid HTTPS URLs are found
+ */
 function validateRpcUrls(rpcUrls) {
   const dirtyFirstValidRPCUrl = Array.isArray(rpcUrls)
     ? rpcUrls.find((rpcUrl) => validUrl.isHttpsUri(rpcUrl))
@@ -109,6 +130,12 @@ function validateRpcUrls(rpcUrls) {
   return firstValidRPCUrl;
 }
 
+/**
+ * Validates block explorer URLs and returns the first valid HTTPS URL
+ * @param {Array|null} blockExplorerUrls - Array of block explorer URL strings to validate, or null
+ * @returns {string|null} The first valid HTTPS block explorer URL, or null if none provided
+ * @throws {Error} If blockExplorerUrls is provided but contains no valid HTTPS URLs
+ */
 function validateBlockExplorerUrls(blockExplorerUrls) {
   const firstValidBlockExplorerUrl =
     blockExplorerUrls !== null && Array.isArray(blockExplorerUrls)
@@ -126,6 +153,12 @@ function validateBlockExplorerUrls(blockExplorerUrls) {
   return firstValidBlockExplorerUrl;
 }
 
+/**
+ * Validates and truncates a chain name to acceptable length
+ * @param {string} rawChainName - The raw chain name to validate
+ * @returns {string} The validated chain name, truncated to 100 characters if necessary
+ * @throws {Error} If the chain name is not a non-empty string
+ */
 function validateChainName(rawChainName) {
   if (typeof rawChainName !== 'string' || !rawChainName) {
     throw rpcErrors.invalidParams({
@@ -137,6 +170,12 @@ function validateChainName(rawChainName) {
     : rawChainName;
 }
 
+/**
+ * Validates native currency parameters and returns the ticker symbol
+ * @param {Object|null} nativeCurrency - The native currency object with symbol and decimals, or null
+ * @returns {string} The validated ticker symbol (defaults to 'ETH' if not provided)
+ * @throws {Error} If the native currency object is invalid or has incorrect decimals
+ */
 function validateNativeCurrency(nativeCurrency) {
   if (nativeCurrency !== null) {
     if (typeof nativeCurrency !== 'object' || Array.isArray(nativeCurrency)) {
@@ -167,6 +206,12 @@ function validateNativeCurrency(nativeCurrency) {
   return ticker;
 }
 
+/**
+ * Validates that an RPC endpoint returns the expected chain ID
+ * @param {string} rpcUrl - The RPC URL to validate
+ * @param {string} chainId - The expected chain ID
+ * @throws {Error} If the RPC request fails or returns a different chain ID
+ */
 export async function validateRpcEndpoint(rpcUrl, chainId) {
   let endpointChainId;
   try {
@@ -185,6 +230,12 @@ export async function validateRpcEndpoint(rpcUrl, chainId) {
   }
 }
 
+/**
+ * Finds an existing network configuration by chain ID
+ * @param {string} chainId - The chain ID to search for
+ * @param {Object} networkConfigurations - Object containing network configurations
+ * @returns {Array|undefined} Array containing [networkConfigurationId, networkConfiguration] if found, undefined otherwise
+ */
 export function findExistingNetwork(chainId, networkConfigurations) {
   const existingEntry = Object.entries(networkConfigurations).find(
     ([, networkConfiguration]) => networkConfiguration.chainId === chainId,

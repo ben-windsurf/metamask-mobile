@@ -5,6 +5,15 @@ import {
 import ContractAddressRegistry from '../../app/util/test/contract-address-registry';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+/**
+ * Options for deploying a smart contract
+ * @interface DeployOptions
+ * @property abi - The contract's ABI (Application Binary Interface)
+ * @property account - The account address to deploy from
+ * @property args - Constructor arguments for the contract
+ * @property bytecode - The contract's compiled bytecode
+ * @property gasPrice - Optional gas price for legacy transactions
+ */
 interface DeployOptions {
   abi: any;
   account: string;
@@ -13,6 +22,16 @@ interface DeployOptions {
   gasPrice?: number;
 }
 
+/**
+ * Options for interacting with a deployed smart contract
+ * @interface ContractOptions
+ * @property address - The deployed contract's address
+ * @property abi - The contract's ABI (Application Binary Interface)
+ * @property functionName - The name of the contract function to call
+ * @property args - Arguments to pass to the contract function
+ * @property account - The account address to call from
+ * @property gasPrice - Optional gas price for legacy transactions
+ */
 interface ContractOptions {
   address: string;
   abi: any;
@@ -22,13 +41,19 @@ interface ContractOptions {
   gasPrice?: number;
 }
 
-/*
- * Local network seeder is used to seed initial smart contract or set initial blockchain state.
+/**
+ * Local network seeder used to deploy smart contracts and set initial blockchain state for e2e tests.
+ * This class provides utilities to deploy test contracts, transfer funds, and manage contract addresses
+ * in a local Anvil test environment.
  */
 export class AnvilSeeder {
   private smartContractRegistry: InstanceType<typeof ContractAddressRegistry>;
   private provider: any;
 
+  /**
+   * Creates a new AnvilSeeder instance
+   * @param provider - The blockchain provider instance with publicClient, testClient, and walletClient
+   */
   constructor(provider: any) {
     this.smartContractRegistry = new ContractAddressRegistry();
     this.provider = provider;
@@ -36,10 +61,11 @@ export class AnvilSeeder {
 
   /**
    * Deploy initial smart contracts that can be used later within the e2e tests.
+   * Handles special cases for NFT and ERC1155 contracts by minting initial tokens.
    *
-   * @param contractName
+   * @param contractName - The name of the contract to deploy
+   * @param hardfork - The Ethereum hardfork to use (affects gas pricing)
    */
-
   async deploySmartContract(contractName: string, hardfork: string) {
     const { publicClient, testClient, walletClient } = this.provider;
     const fromAddress = (await walletClient.getAddresses())[0];
@@ -107,6 +133,11 @@ export class AnvilSeeder {
     this.storeSmartContractAddress(contractName, receipt.contractAddress);
   }
 
+  /**
+   * Transfer ETH from the default account to a specified address
+   * @param to - The recipient address
+   * @param value - The amount of ETH to transfer (in wei)
+   */
   async transfer(to: string, value: string) {
     const { publicClient, walletClient, testClient } = this.provider;
     const fromAddress = (await walletClient.getAddresses())[0];
@@ -129,8 +160,8 @@ export class AnvilSeeder {
    * Store deployed smart contract address within the environment variables
    * to make it available everywhere.
    *
-   * @param contractName
-   * @param contractAddress
+   * @param contractName - The name of the deployed contract
+   * @param contractAddress - The deployed contract's address
    */
   storeSmartContractAddress(contractName: string, contractAddress: string) {
     this.smartContractRegistry.storeNewContractAddress(

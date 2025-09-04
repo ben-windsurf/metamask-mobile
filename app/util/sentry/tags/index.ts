@@ -6,6 +6,19 @@ import { getNotificationsList } from '../../../selectors/notifications';
 import { selectTransactions } from '../../../selectors/transactionController';
 import { selectPendingApprovals } from '../../../selectors/approvalController';
 
+/**
+ * Generates trace tags for Sentry error reporting based on the current application state.
+ * Extracts wallet metrics and state information to provide context for error tracking.
+ *
+ * @param state - The root Redux state containing all application data
+ * @returns Object containing key-value pairs of trace tags for Sentry
+ *
+ * @example
+ * ```typescript
+ * const tags = getTraceTags(store.getState());
+ * // Returns: { 'wallet.unlocked': true, 'wallet.account_count': 3, ... }
+ * ```
+ */
 export function getTraceTags(state: RootState) {
   const tags: Record<string, number | string | boolean> = {};
 

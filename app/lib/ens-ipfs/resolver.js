@@ -8,6 +8,25 @@ import multihash from 'multihashes';
 import Engine from '../../core/Engine';
 import { IPFS_GATEWAY_DISABLED_ERROR } from '../../components/Views/BrowserTab/constants';
 
+/**
+ * Resolves an ENS name to an IPFS content ID by querying the ENS registry and resolver contracts.
+ * Supports both EIP-1577 compliant resolvers (contenthash) and legacy resolvers (content).
+ *
+ * @param {Object} params - The resolution parameters
+ * @param {Object} params.provider - The Ethereum provider to use for contract calls
+ * @param {string} params.name - The ENS name to resolve (e.g., 'example.eth')
+ * @param {string} params.chainId - The chain ID to determine which ENS registry to use
+ * @returns {Promise<Object>} Object containing the content type and hash
+ * @throws {Error} When no registry is found for the chain, no resolver exists, or IPFS gateway is disabled
+ *
+ * @example
+ * const result = await resolveEnsToIpfsContentId({
+ *   provider: web3Provider,
+ *   name: 'example.eth',
+ *   chainId: '0x1'
+ * });
+ * // Returns: { type: 'ipfs-ns', hash: 'QmHash...' }
+ */
 export default async function resolveEnsToIpfsContentId({
   provider,
   name,
@@ -70,6 +89,13 @@ export default async function resolveEnsToIpfsContentId({
   );
 }
 
+/**
+ * Checks if a hexadecimal value represents an empty or null value.
+ * Used to determine if ENS resolver addresses or content hashes are empty.
+ *
+ * @param {string|undefined|null} value - The hexadecimal value to check
+ * @returns {boolean} True if the value is considered empty, false otherwise
+ */
 function hexValueIsEmpty(value) {
   return [
     undefined,
@@ -80,6 +106,13 @@ function hexValueIsEmpty(value) {
   ].includes(value);
 }
 
+/**
+ * Gets the ENS registry contract address for a given chain ID.
+ * Currently supports Ethereum mainnet and Sepolia testnet.
+ *
+ * @param {string} chainId - The chain ID in hexadecimal format (e.g., '0x1' for mainnet)
+ * @returns {string|null} The ENS registry contract address, or null if unsupported chain
+ */
 function getRegistryForChainId(chainId) {
   switch (chainId) {
     // mainnet

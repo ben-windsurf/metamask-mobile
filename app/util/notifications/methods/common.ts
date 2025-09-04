@@ -29,8 +29,8 @@ import { ImageSourcePropType } from 'react-native';
 /**
  * Checks if 2 date objects are on the same day
  *
- * @param currentDate
- * @param dateToCheck
+ * @param currentDate - The current date to compare against
+ * @param dateToCheck - The date to check if it's the same day
  * @returns boolean if dates are same day.
  */
 const isSameDay = (currentDate: Date, dateToCheck: Date) =>
@@ -41,8 +41,8 @@ const isSameDay = (currentDate: Date, dateToCheck: Date) =>
 /**
  * Checks if a date is "yesterday" from the current date
  *
- * @param currentDate
- * @param dateToCheck
+ * @param currentDate - The current date to compare against
+ * @param dateToCheck - The date to check if it was yesterday
  * @returns boolean if dates were "yesterday"
  */
 const isYesterday = (currentDate: Date, dateToCheck: Date) => {
@@ -55,6 +55,14 @@ const isYesterday = (currentDate: Date, dateToCheck: Date) => {
 dayjs.extend(localeData);
 dayjs.extend(relativeTime);
 
+/**
+ * Formats a date relative to the current date using dayjs
+ *
+ * @param date - The date to format
+ * @param currentDate - The current date to compare against
+ * @param locale - The locale to use for formatting (defaults to 'en')
+ * @returns The formatted relative date string
+ */
 function formatRelative(
   date: Dayjs,
   currentDate: Dayjs,
@@ -71,6 +79,7 @@ function formatRelative(
  * Formats a given date into different formats based on how much time has elapsed since that date.
  *
  * @param date - The date to be formatted.
+ * @param locale - The locale to use for formatting (defaults to 'en')
  * @returns The formatted date.
  */
 export function formatMenuItemDate(date?: Date, locale: string = 'en'): string {
@@ -103,10 +112,20 @@ export function formatMenuItemDate(date?: Date, locale: string = 'en'): string {
   return dayjsDate.format('MMM D, YYYY');
 }
 
+/**
+ * Options for formatting numeric amounts
+ * @interface FormatOptions
+ * @property decimalPlaces - Number of decimal places to display
+ * @property shouldEllipse - Whether to add ellipsis for overflow
+ */
 interface FormatOptions {
   decimalPlaces?: number;
   shouldEllipse?: boolean;
 }
+
+/**
+ * Default formatting options for numeric amounts
+ */
 const defaultFormatOptions = {
   decimalPlaces: 4,
 };
@@ -137,11 +156,10 @@ export const getLeadingZeroCount = (num: number | string) => {
  * - Will format up to 4 decimal places
  * - Will ellipse the number if longer than given decimal places
  *
- * @param numericAmount
- * @param opts
- * @returns
+ * @param numericAmount - The numeric amount to format
+ * @param opts - Optional formatting options
+ * @returns The formatted amount as a string
  */
-
 export const formatAmount = (numericAmount: number, opts?: FormatOptions) => {
   // create options with defaults
   const options = { ...defaultFormatOptions, ...opts };

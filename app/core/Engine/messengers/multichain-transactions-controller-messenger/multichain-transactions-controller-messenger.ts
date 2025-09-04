@@ -1,5 +1,10 @@
 import { BaseControllerMessenger } from '../../types';
 
+/**
+ * Type definition for the MultichainTransactionsController messenger.
+ * This messenger provides restricted access to specific controller events and actions
+ * needed for multichain transaction management.
+ */
 export type MultichainTransactionsControllerMessenger = ReturnType<
   typeof getMultichainTransactionsControllerMessenger
 >;

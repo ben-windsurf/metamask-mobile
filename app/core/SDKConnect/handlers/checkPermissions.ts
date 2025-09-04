@@ -20,6 +20,26 @@ import {
 } from '../utils/wait.util';
 import { Platform } from 'react-native';
 
+/**
+ * Checks and manages permissions for SDK connections, handling user authentication
+ * and permission requests through the MetaMask permission system.
+ *
+ * @param connection - The SDK connection instance
+ * @param engine - The MetaMask engine instance
+ * @param message - Optional communication layer message
+ * @param lastAuthorized - Optional timestamp of last authorization
+ * @returns Promise that resolves to true if permissions are granted, false otherwise
+ *
+ * @example
+ * ```typescript
+ * const hasPermissions = await checkPermissions({
+ *   connection: sdkConnection,
+ *   engine: Engine,
+ *   message: rpcMessage,
+ *   lastAuthorized: Date.now()
+ * });
+ * ```
+ */
 // TODO: should be more generic and be used in wallet connect and android service as well
 export const checkPermissions = async ({
   connection,
@@ -147,4 +167,7 @@ export const checkPermissions = async ({
   }
 };
 
+/**
+ * Default export of the checkPermissions function for SDK connection permission management.
+ */
 export default checkPermissions;

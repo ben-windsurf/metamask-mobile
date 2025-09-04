@@ -2,6 +2,10 @@
 // PERPS CANDLESTICK CHART SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps candlestick chart components and states.
+ * Contains identifiers for chart elements, loading states, and interval controls.
+ */
 export const PerpsCandlestickChartSelectorsIDs = {
   // Chart components
   PROVIDER: 'candlestick-provider',
@@ -22,7 +26,10 @@ export const PerpsCandlestickChartSelectorsIDs = {
   INTERVAL_SELECTOR_NO_DATA: 'perps-chart-interval-selector-no-data',
 };
 
-// Helper functions for dynamic selectors
+/**
+ * Helper functions for generating dynamic candlestick chart selectors.
+ * Provides methods to create selectors for chart elements with dynamic identifiers.
+ */
 export const getCandlestickChartSelector = {
   intervalButton: (baseTestID: string, interval: string) =>
     `${baseTestID}-${interval}`,
@@ -35,6 +42,10 @@ export const getCandlestickChartSelector = {
 // PERPS POSITION CARD SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps position card components.
+ * Contains identifiers for position card elements including coin, size, PnL, and action buttons.
+ */
 export const PerpsPositionCardSelectorsIDs = {
   CARD: 'PerpsPositionCard',
   // Test mock selectors (for component testing)
@@ -49,6 +60,10 @@ export const PerpsPositionCardSelectorsIDs = {
 // PERPS POSITION HEADER SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps position header components.
+ * Contains identifiers for header elements including coin info, PnL display, and navigation.
+ */
 export const PerpsPositionHeaderSelectorsIDs = {
   HEADER: 'position-header',
   COIN: 'position-header-coin',
@@ -60,6 +75,10 @@ export const PerpsPositionHeaderSelectorsIDs = {
 // PERPS LOADER SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps loader components.
+ * Contains identifiers for different loader states including fullscreen, inline, and spinner elements.
+ */
 export const PerpsLoaderSelectorsIDs = {
   FULLSCREEN: 'perps-loader-fullscreen',
   INLINE: 'perps-loader-inline',
@@ -71,6 +90,10 @@ export const PerpsLoaderSelectorsIDs = {
 // PERPS DEPOSIT PROCESSING VIEW SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps deposit processing view components.
+ * Contains identifiers for processing states, animations, status messages, and action buttons.
+ */
 export const PerpsDepositProcessingViewSelectorsIDs = {
   HEADER_TITLE: 'header-title',
   CLOSE_BUTTON: 'close-button',
@@ -88,12 +111,19 @@ export const PerpsDepositProcessingViewSelectorsIDs = {
 // PERPS PAY WITH ROW SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps pay with row components.
+ * Contains identifiers for payment row elements and USD equivalent displays.
+ */
 export const PerpsPayWithRowSelectorsIDs = {
   MAIN: 'perps-pay-with-row',
   USD_EQUIVALENT: 'perps-pay-with-row-usd-equivalent',
 };
 
-// Helper functions for dynamic PerpsPayWithRow selectors
+/**
+ * Helper functions for generating dynamic PerpsPayWithRow selectors.
+ * Provides methods to create selectors for payment row elements with dynamic base test IDs.
+ */
 export const getPerpsPayWithRowSelector = {
   usdEquivalent: (baseTestID: string) => `${baseTestID}-usd-equivalent`,
 };
@@ -102,6 +132,10 @@ export const getPerpsPayWithRowSelector = {
 // PERPS MARKET LIST VIEW SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps market list view components.
+ * Contains identifiers for search functionality and navigation elements.
+ */
 export const PerpsMarketListViewSelectorsIDs = {
   SEARCH_TOGGLE_BUTTON: 'search-toggle-button',
   CLOSE_BUTTON: 'close-button',
@@ -112,6 +146,10 @@ export const PerpsMarketListViewSelectorsIDs = {
 // PERPS ORDER HEADER SELECTORS
 // ========================================
 
+/**
+ * Test selectors for Perps order header components.
+ * Contains identifiers for order header elements including asset information.
+ */
 export const PerpsOrderHeaderSelectorsIDs = {
   HEADER: 'perps-order-header',
   ASSET_TITLE: 'perps-order-header-asset-title',

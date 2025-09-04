@@ -4,6 +4,13 @@ import { ensureValidState } from './util';
 /**
  * Migration 77: Remove `KeyringController.keyringsMetadata`
  */
+/**
+ * Removes the deprecated `keyringsMetadata` property from KeyringController state.
+ * This migration cleans up legacy metadata that is no longer needed in the keyring system.
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with keyringsMetadata removed from KeyringController
+ */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 77;
 
@@ -29,4 +36,7 @@ const migration = (state: unknown): unknown => {
   return state;
 };
 
+/**
+ * Migration function that removes deprecated KeyringController.keyringsMetadata property
+ */
 export default migration;

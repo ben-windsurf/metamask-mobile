@@ -62,6 +62,13 @@ export default async function migrate(stateAsync: unknown) {
   return state;
 }
 
+/**
+ * Validates that the NetworkController state exists and has the required structure.
+ * @param networkControllerState - The NetworkController state to validate
+ * @param state - The complete Redux state
+ * @param migrationVersion - The migration version number for error reporting
+ * @returns True if the NetworkController state is valid, false otherwise
+ */
 function isValidNetworkControllerState(
   networkControllerState: NetworkState,
   state: RootState,
@@ -94,6 +101,13 @@ function isValidNetworkControllerState(
   return true;
 }
 
+/**
+ * Checks if the selected network client ID exists in any network configuration.
+ * @param selectedNetworkClientId - The network client ID to search for
+ * @param networkConfigurationsByChainId - Map of network configurations by chain ID
+ * @param migrationVersion - The migration version number for error reporting
+ * @returns True if the network client ID exists in any configuration, false otherwise
+ */
 function doesNetworkClientIdExist(
   selectedNetworkClientId: NetworkClientId,
   networkConfigurationsByChainId: Record<Hex, NetworkConfiguration>,
@@ -129,6 +143,11 @@ function doesNetworkClientIdExist(
   return false;
 }
 
+/**
+ * Checks if a mainnet RPC endpoint is configured in the network configurations.
+ * @param networkConfigurationsByChainId - Map of network configurations by chain ID
+ * @returns True if a mainnet RPC endpoint exists, false otherwise
+ */
 function isMainnetRpcConfigured(
   networkConfigurationsByChainId: Record<Hex, NetworkConfiguration>,
 ) {
@@ -139,6 +158,15 @@ function isMainnetRpcConfigured(
   );
 }
 
+/**
+ * Ensures that a valid selectedNetworkClientId is set in the NetworkController state.
+ * Sets it to mainnet or the default mainnet endpoint if invalid or missing.
+ * @param networkControllerState - The NetworkController state to modify
+ * @param networkClientIdExists - Whether the current network client ID exists
+ * @param isMainnetRpcExists - Whether a mainnet RPC endpoint is configured
+ * @param networkConfigurationsByChainId - Map of network configurations by chain ID
+ * @param mainnetChainId - The chain ID for mainnet
+ */
 function ensureSelectedNetworkClientId(
   networkControllerState: NetworkState,
   networkClientIdExists: boolean,

@@ -1,8 +1,17 @@
+/**
+ * Caveat types used in permission system to restrict certain behaviors.
+ * These caveats can be applied to permissions to limit their scope.
+ */
 export const CaveatTypes = Object.freeze({
   restrictReturnedAccounts: 'restrictReturnedAccounts',
   restrictNetworkSwitching: 'restrictNetworkSwitching',
 });
 
+/**
+ * Restricted methods that require explicit permission from users.
+ * These methods are gated behind the permission system and cannot be called
+ * without proper authorization.
+ */
 export const RestrictedMethods = Object.freeze({
   eth_accounts: 'eth_accounts',
   ///: BEGIN:ONLY_INCLUDE_IF(preinstalled-snaps,external-snaps)

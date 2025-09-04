@@ -1,5 +1,9 @@
 import { BaseControllerMessenger } from '../../types';
 
+/**
+ * Type definition for the SeedlessOnboardingController messenger.
+ * Provides restricted access to controller events and actions for seedless onboarding functionality.
+ */
 export type SeedlessOnboardingControllerMessenger = ReturnType<
   typeof getSeedlessOnboardingControllerMessenger
 >;

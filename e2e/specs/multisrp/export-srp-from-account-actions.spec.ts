@@ -5,10 +5,14 @@ import { loginToApp } from '../../viewHelper';
 import { goToAccountActions, completeSrpQuiz } from './utils';
 import { defaultOptions } from '../../seeder/anvil-manager';
 
+/** Index of the first default HD keyring account for testing */
 const FIRST_DEFAULT_HD_KEYRING_ACCOUNT = 0;
+/** Index of the first imported HD keyring account for testing */
 const FIRST_IMPORTED_HD_KEYRING_ACCOUNT = 2;
 
+/** Default seed recovery phrase from anvil manager options */
 const DEFAULT_SRP = defaultOptions.mnemonic;
+/** Test seed recovery phrase for imported HD keyring validation */
 const IMPORTED_SRP =
   'lazy youth dentist air relief leave neither liquid belt aspect bone frame';
 

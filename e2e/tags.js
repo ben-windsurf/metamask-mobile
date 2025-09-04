@@ -1,3 +1,6 @@
+/**
+ * Test tag prefixes used for categorizing and organizing e2e tests
+ */
 const tags = {
   regression: 'Regression:',
   smokeAccounts: 'SmokeAccounts:',

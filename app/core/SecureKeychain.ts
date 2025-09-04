@@ -13,10 +13,15 @@ import {
 } from '../constants/storage';
 import Device from '../util/device';
 
+/** WeakMap to store private data for SecureKeychainEncryptor instances */
 const privates = new WeakMap();
+
+/** Encryptor instance configured with legacy derivation options for backward compatibility */
 const encryptor = new Encryptor({
   keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
 });
+
+/** Default keychain options with authentication prompts and service configuration */
 const defaultOptions = {
   service: 'com.metamask',
   authenticationPromptTitle: strings('authentication.auth_prompt_title'),
@@ -30,9 +35,15 @@ import AUTHENTICATION_TYPE from '../constants/userProperties';
 import { UserProfileProperty } from '../util/metrics/UserSettingsAnalyticsMetaData/UserProfileAnalyticsMetaData.types';
 import { MetricsEventBuilder } from './Analytics/MetricsEventBuilder';
 
+/**
+ * Enumeration of secure keychain authentication types supported by MetaMask Mobile
+ */
 enum SecureKeychainTypes {
+  /** Biometric authentication (fingerprint, face recognition, etc.) */
   BIOMETRICS = 'BIOMETRICS',
+  /** Device passcode authentication */
   PASSCODE = 'PASSCODE',
+  /** Remember me option for password storage without additional authentication */
   REMEMBER_ME = 'REMEMBER_ME',
 }
 
@@ -50,15 +61,30 @@ class SecureKeychainEncryptor {
     privates.set(this, { code });
   }
 
+  /**
+   * Gets the singleton instance of SecureKeychainEncryptor
+   * @param code - The encryption code to use for the instance
+   * @returns The singleton SecureKeychainEncryptor instance
+   */
   static getInstance(code: string): SecureKeychainEncryptor {
     SecureKeychainEncryptor.instance ??= new SecureKeychainEncryptor(code);
     return SecureKeychainEncryptor.instance;
   }
 
+  /**
+   * Encrypts a password using the instance's encryption code
+   * @param password - The password to encrypt
+   * @returns Promise that resolves to the encrypted password string
+   */
   encryptPassword(password: string) {
     return encryptor.encrypt(privates.get(this).code, { password });
   }
 
+  /**
+   * Decrypts encrypted password data using the instance's encryption code
+   * @param data - The encrypted password data to decrypt
+   * @returns Promise that resolves to an object containing the decrypted password
+   */
   decryptPassword(data: string): Promise<{
     password: string;
   }> {

@@ -1,3 +1,7 @@
+/**
+ * Mock bridge API quotes for testing scenarios that don't require token approval.
+ * Contains sample quote responses for various cross-chain bridge operations.
+ */
 export const DummyQuotesNoApproval = {
   OP_0_005_ETH_TO_ARB: [
     {
@@ -480,6 +484,10 @@ export const DummyQuotesNoApproval = {
   ],
 };
 
+/**
+ * Mock bridge API quotes for testing scenarios that require token approval.
+ * Contains sample quote responses for cross-chain bridge operations involving ERC-20 tokens.
+ */
 export const DummyQuotesWithApproval = {
   ETH_11_USDC_TO_ARB: [
     {
@@ -1005,6 +1013,10 @@ export const DummyQuotesWithApproval = {
   ],
 };
 
+/**
+ * Mock metadata for bridge quote testing.
+ * Contains sample metadata including sent amounts and currency values for bridge operations.
+ */
 export const DummyQuoteMetadata = {
   sentAmount: {
     amount: '0.005',

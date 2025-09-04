@@ -7,6 +7,9 @@ import {
   ModalHeaderType,
 } from '../../constants';
 
+/**
+ * Type alias for feature announcement raw notification from the notification services controller.
+ */
 type FeatureAnnouncementRawNotification =
   NotificationServicesController.Types.FeatureAnnouncementRawNotification;
 
@@ -15,6 +18,10 @@ type FeatureAnnouncementRawNotification =
 // These fields are all unique, any new field will correspond to a unique UI field.
 // (gives us future composition for new fields)
 
+/**
+ * Modal field interface for displaying address information in notification modals.
+ * Used to show account addresses with labels like "From", "To", "Account", etc.
+ */
 export interface ModalFieldAddress {
   type: ModalFieldType.ADDRESS;
 
@@ -29,6 +36,10 @@ export interface ModalFieldAddress {
   address: string;
 }
 
+/**
+ * Modal field interface for displaying transaction information in notification modals.
+ * Contains transaction hash for linking to block explorers or transaction details.
+ */
 export interface ModalFieldTransaction {
   type: ModalFieldType.TRANSACTION;
 
@@ -38,6 +49,10 @@ export interface ModalFieldTransaction {
   txHash: string;
 }
 
+/**
+ * Modal field interface for displaying network information in notification modals.
+ * Shows network name and icon for blockchain network identification.
+ */
 export interface ModalFieldNetwork {
   type: ModalFieldType.NETWORK;
 
@@ -52,6 +67,10 @@ export interface ModalFieldNetwork {
   name?: string;
 }
 
+/**
+ * Modal field interface for displaying asset/token information in notification modals.
+ * Includes token details, amounts, USD values, and visual elements like icons.
+ */
 export interface ModalFieldAsset {
   type: ModalFieldType.ASSET;
 
@@ -87,6 +106,10 @@ export interface ModalFieldAsset {
   usdAmount: string;
 }
 
+/**
+ * Modal field interface for displaying NFT collection information in notification modals.
+ * Shows collection image, network badge, and collection name for NFT-related notifications.
+ */
 export interface ModalFieldNFTCollectionImage {
   type: ModalFieldType.NFT_COLLECTION_IMAGE;
 
@@ -106,6 +129,10 @@ export interface ModalFieldNFTCollectionImage {
   collectionName: string;
 }
 
+/**
+ * Modal field interface for displaying staking provider information in notification modals.
+ * Shows staking provider details and token icons for staking-related notifications.
+ */
 export interface ModalFieldStakingProvider {
   // This is unique, it is similar to a Transaction UI
   type: ModalFieldType.STAKING_PROVIDER;
@@ -121,6 +148,10 @@ export interface ModalFieldStakingProvider {
   stakingProvider: string;
 }
 
+/**
+ * Modal field interface for displaying swap rate information in notification modals.
+ * Contains exchange rate data for token swap notifications.
+ */
 export interface ModalFieldSwapsRate {
   type: ModalFieldType.SWAP_RATE;
 
@@ -130,12 +161,20 @@ export interface ModalFieldSwapsRate {
   rate: string;
 }
 
+/**
+ * Modal field interface for displaying network fee information in notification modals.
+ * Provides access to network fee calculation functions for transaction cost display.
+ */
 export interface ModalFieldNetworkFee {
   type: ModalFieldType.NETWORK_FEE;
 
   getNetworkFees: () => ReturnType<typeof getNetworkFees>;
 }
 
+/**
+ * Modal field interface for displaying announcement descriptions in notification modals.
+ * Contains HTML content for feature announcements and product updates.
+ */
 export interface ModalFieldAnnouncementDescription {
   type: ModalFieldType.ANNOUNCEMENT_DESCRIPTION;
 

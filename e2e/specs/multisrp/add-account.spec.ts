@@ -9,16 +9,34 @@ import AddAccountBottomSheet from '../../pages/wallet/AddAccountBottomSheet';
 import SRPListItemComponent from '../../pages/wallet/MultiSrp/Common/SRPListItemComponent';
 import AddNewHdAccountComponent from '../../pages/wallet/MultiSrp/AddAccountToSrp/AddNewHdAccountComponent';
 
+/**
+ * Configuration for the first SRP (Secret Recovery Phrase) used in multi-SRP tests.
+ * Contains the index and unique identifier for SRP selection.
+ */
 const SRP_1 = {
   index: 1,
   id: '01JX9NJ15HPNS6RRRYBCKDK33R',
 };
 
+/**
+ * Configuration for the second SRP (Secret Recovery Phrase) used in multi-SRP tests.
+ * Contains the index and unique identifier for SRP selection.
+ */
 const SRP_2 = {
   index: 2,
   id: '01JX9NZWRAVQKES02TWSN8GD91',
 };
 
+/**
+ * Adds a new account to a specific SRP (Secret Recovery Phrase) in the multi-SRP wallet.
+ * Navigates through the account creation flow, selects the specified SRP, and creates
+ * an account with the given name.
+ *
+ * @param srp - The SRP configuration object containing index and ID
+ * @param srp.index - The 1-based index of the SRP to add the account to
+ * @param srp.id - The unique identifier of the SRP
+ * @param accountName - The name to assign to the new account
+ */
 const addAccountToSrp = async (
   srp: { index: number; id: string },
   accountName: string,

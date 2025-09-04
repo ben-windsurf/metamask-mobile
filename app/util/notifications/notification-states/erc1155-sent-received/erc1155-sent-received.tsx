@@ -18,17 +18,37 @@ import {
 import { ModalField } from '../types/NotificationModalDetails';
 import { formatAddress } from '../../../address';
 
+/**
+ * Type definition for ERC1155 notification data structure.
+ * Represents notifications for ERC1155 token transfers (sent or received).
+ */
 type ERC1155Notification = ExtractedNotification<
   TRIGGER_TYPES.ERC1155_RECEIVED | TRIGGER_TYPES.ERC1155_SENT
 >;
+
+/**
+ * Type guard function to check if a notification is an ERC1155 notification.
+ * @param notification - The notification to check
+ * @returns True if the notification is an ERC1155 sent or received notification
+ */
 const isERC1155Notification = isOfTypeNodeGuard([
   TRIGGER_TYPES.ERC1155_RECEIVED,
   TRIGGER_TYPES.ERC1155_SENT,
 ]);
 
+/**
+ * Determines if an ERC1155 notification represents a sent transaction.
+ * @param n - The ERC1155 notification to check
+ * @returns True if the notification is for a sent ERC1155 token
+ */
 const isSent = (n: ERC1155Notification) =>
   n.type === TRIGGER_TYPES.ERC1155_SENT;
 
+/**
+ * Generates the title text for an ERC1155 notification menu item.
+ * @param n - The ERC1155 notification
+ * @returns Localized title string with formatted address
+ */
 const title = (n: ERC1155Notification) => {
   const address = formatAddress(isSent(n) ? n.data.to : n.data.from, 'short');
   return strings(`notifications.menu_item_title.${n.type}`, {
@@ -36,6 +56,11 @@ const title = (n: ERC1155Notification) => {
   });
 };
 
+/**
+ * Generates the modal title for an ERC1155 notification.
+ * @param n - The ERC1155 notification
+ * @returns Localized modal title string for sent or received NFT
+ */
 const modalTitle = (n: ERC1155Notification) =>
   isSent(n)
     ? strings('notifications.modal.title_sent', { symbol: 'NFT' })
@@ -43,6 +68,10 @@ const modalTitle = (n: ERC1155Notification) =>
         symbol: 'NFT',
       });
 
+/**
+ * Notification state configuration for ERC1155 token transfers.
+ * Defines how ERC1155 notifications are displayed in menu items and modal details.
+ */
 const state: NotificationState<ERC1155Notification> = {
   guardFn: isERC1155Notification,
   createMenuItem: (notification) => ({

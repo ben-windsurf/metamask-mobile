@@ -18,8 +18,15 @@ import TabBarComponent from '../wallet/TabBarComponent';
 import Assertions from '../../framework/Assertions';
 import { isCaipChainId } from '@metamask/utils';
 
-// Use the same port as the regular test dapp - the multichainDapp flag controls which dapp is served
+/**
+ * Local URL for the multichain test dapp using the same port as the regular test dapp.
+ * The multichainDapp flag controls which dapp is served.
+ */
 export const MULTICHAIN_TEST_DAPP_LOCAL_URL = `http://localhost:${getLocalTestDappPort()}`;
+
+/**
+ * Default production URL for the multichain test dapp hosted on GitHub Pages.
+ */
 export const DEFAULT_MULTICHAIN_TEST_DAPP_URL =
   'https://metamask.github.io/test-dapp-multichain/';
 
@@ -54,24 +61,37 @@ export function getMultichainTestDappUrl(): string {
 }
 
 /**
- * Response object for getSession method
+ * Response object for getSession method containing session data and status.
+ * @interface SessionResponse
+ * @property success - Whether the session operation was successful
+ * @property sessionScopes - Optional mapping of chain IDs to their session data
  */
 interface SessionResponse {
+  /** Whether the session operation was successful */
   success: boolean;
+  /** Optional mapping of chain IDs to their session data */
   sessionScopes?: {
     [chainId: string]: {
+      /** Array of account addresses for this chain */
       accounts: string[];
+      /** Optional array of supported methods for this chain */
       methods?: string[];
     };
   };
 }
 
 /**
- * Class to interact with the Multichain Test DApp via WebView
+ * Class to interact with the Multichain Test DApp via WebView.
+ * Provides methods for connecting to the dapp, managing sessions, and testing multichain functionality.
  */
 class MultichainTestDApp {
   /**
-   * WebView element getters
+   * WebView element getters for interacting with dapp UI elements
+   */
+
+  /**
+   * Gets the extension ID input element in the WebView.
+   * @returns WebView element for the extension ID input field
    */
   get extensionIdInput() {
     return Matchers.getElementByWebID(
@@ -80,6 +100,10 @@ class MultichainTestDApp {
     );
   }
 
+  /**
+   * Gets the connect button element in the WebView.
+   * @returns WebView element for the connect button
+   */
   get connectButton() {
     return Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
@@ -87,6 +111,10 @@ class MultichainTestDApp {
     );
   }
 
+  /**
+   * Gets the create session button element in the WebView.
+   * @returns WebView element for the create session button
+   */
   get createSessionButton() {
     return Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
@@ -94,6 +122,10 @@ class MultichainTestDApp {
     );
   }
 
+  /**
+   * Gets the get session button element in the WebView.
+   * @returns WebView element for the get session button
+   */
   get getSessionButton() {
     return Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
@@ -101,6 +133,10 @@ class MultichainTestDApp {
     );
   }
 
+  /**
+   * Gets the revoke session button element in the WebView.
+   * @returns WebView element for the revoke session button
+   */
   get revokeSessionButton() {
     return Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,
@@ -108,6 +144,10 @@ class MultichainTestDApp {
     );
   }
 
+  /**
+   * Gets the clear extension button element in the WebView.
+   * @returns WebView element for the clear extension button
+   */
   get clearExtensionButton() {
     return Matchers.getElementByWebID(
       BrowserViewSelectorsIDs.BROWSER_WEBVIEW_ID,

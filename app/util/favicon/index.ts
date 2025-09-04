@@ -90,6 +90,11 @@ const originToUrl = (origin: string) => {
   }
 };
 
+/**
+ * Extracts the host portion from an origin string
+ * @param origin - the origin string to extract host from
+ * @returns the host portion of the URL or undefined if invalid
+ */
 const originToHost = (origin: string) => {
   const normalisedOrigin = originToUrl(origin);
   if (normalisedOrigin) {

@@ -9,6 +9,8 @@ import { ensureValidState } from './util';
  * This migration add Seedless Onboarding default state to the seedless onboarding controller
  * as a default Seedless Onboarding State.
  *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with SeedlessOnboardingController default values
  */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 87;

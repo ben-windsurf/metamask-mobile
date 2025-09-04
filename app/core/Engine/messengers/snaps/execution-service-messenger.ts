@@ -1,5 +1,9 @@
 import { Messenger } from '@metamask/base-controller';
 
+/**
+ * Type definition for the execution service messenger.
+ * Represents a restricted messenger instance specifically configured for the execution service.
+ */
 export type ExecutionServiceMessenger = ReturnType<
   typeof getExecutionServiceMessenger
 >;

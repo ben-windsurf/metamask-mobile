@@ -20,9 +20,15 @@ import SoftAssert from '../../utils/SoftAssert';
 import { Mockttp } from 'mockttp';
 import { RampsRegions, RampsRegionsEnum } from '../../framework/Constants';
 
+/**
+ * Payment method constants for off-ramp testing
+ */
 const PaymentMethods = {
   SEPA_BANK_TRANSFER: 'SEPA Bank Transfer',
 };
+/**
+ * Expected analytics events for off-ramp flow validation
+ */
 const expectedEvents = {
   OFFRAMP_PAYMENT_METHOD_SELECTED: 'Off-ramp Payment Method Selected',
 };

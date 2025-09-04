@@ -1,3 +1,7 @@
+/**
+ * Selectors for the Login View screen in end-to-end tests.
+ * Contains test IDs and selectors for all interactive elements on the login screen.
+ */
 export const LoginViewSelectors = {
   CONTAINER: 'login',
   PASSWORD_ERROR: 'invalid-password-error',

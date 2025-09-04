@@ -4,6 +4,16 @@ import { store } from '../../../../app/store';
 import SDKConnect from '../SDKConnect';
 import DevLogger from '../utils/DevLogger';
 
+/**
+ * Updates the originator information for a specific SDK connection channel.
+ * This function modifies the connection state to include updated originator info
+ * and marks the connection as active.
+ *
+ * @param params - The update parameters
+ * @param params.channelId - The unique identifier for the connection channel
+ * @param params.originatorInfo - The updated originator information from the SDK
+ * @param params.instance - The SDKConnect instance managing the connections
+ */
 function updateOriginatorInfos({
   channelId,
   originatorInfo,

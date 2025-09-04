@@ -317,16 +317,22 @@ export type StatefulControllers = Omit<
   (typeof STATELESS_NON_CONTROLLER_NAMES)[number]
 >;
 
+/** Type representing permissions organized by RPC method */
 type PermissionsByRpcMethod = ReturnType<typeof getPermissionSpecifications>;
+
+/** Union type of all available permission types */
 type Permissions = PermissionsByRpcMethod[keyof PermissionsByRpcMethod];
 
 ///: BEGIN:ONLY_INCLUDE_IF(preinstalled-snaps,external-snaps)
 // TODO: Abstract this into controller utils for SnapsController
+/** Union type of all Snaps-related controller actions */
 type SnapsGlobalActions =
   | SnapControllerActions
   | SnapsRegistryActions
   | SubjectMetadataControllerActions
   | PhishingControllerActions;
+
+/** Union type of all Snaps-related controller events */
 type SnapsGlobalEvents =
   | SnapControllerEvents
   | SnapsRegistryEvents
@@ -334,6 +340,7 @@ type SnapsGlobalEvents =
   | PhishingControllerEvents;
 ///: END:ONLY_INCLUDE_IF
 
+/** Union type of all controller actions available globally in the Engine */
 type GlobalActions =
   | AccountTrackerControllerActions
   | NftControllerActions
@@ -390,6 +397,7 @@ type GlobalActions =
   | DeFiPositionsControllerActions
   | ErrorReportingServiceActions;
 
+/** Union type of all controller events available globally in the Engine */
 type GlobalEvents =
   | ComposableControllerEvents<EngineState>
   | AccountTrackerControllerEvents
@@ -659,6 +667,10 @@ export type ControllerMessengerCallback = (
   baseControllerMessenger: BaseControllerMessenger,
 ) => BaseRestrictedControllerMessenger;
 
+/**
+ * Persisted state for all controllers.
+ * e.g. `{ TransactionController: { transactions: [] } }`.
+ */
 /**
  * Persisted state for all controllers.
  * e.g. `{ TransactionController: { transactions: [] } }`.

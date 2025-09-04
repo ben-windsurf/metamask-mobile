@@ -25,8 +25,16 @@ import TestDApp from './pages/Browser/TestDApp';
 import SolanaNewFeatureSheet from './pages/wallet/SolanaNewFeatureSheet';
 import OnboardingSheet from './pages/Onboarding/OnboardingSheet';
 
+/** The localhost URL for connecting to the local Ganache test network */
 const LOCALHOST_URL = `http://localhost:${getGanachePort()}/`;
+
+/** A valid test account with seed phrase and password for testing purposes */
 const validAccount = Accounts.getValidAccount();
+
+/**
+ * Flag indicating whether seedless onboarding is enabled.
+ * Defaults to true if the environment variable is undefined.
+ */
 const SEEDLESS_ONBOARDING_ENABLED =
   process.env.SEEDLESS_ONBOARDING_ENABLED === 'true' ||
   process.env.SEEDLESS_ONBOARDING_ENABLED === undefined;

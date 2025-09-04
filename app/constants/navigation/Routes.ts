@@ -1,3 +1,18 @@
+/**
+ * Navigation route constants for the MetaMask Mobile application.
+ * Contains all screen and modal route names organized by feature area.
+ *
+ * @example
+ * ```typescript
+ * import Routes from './Routes';
+ *
+ * // Navigate to wallet view
+ * navigation.navigate(Routes.WALLET_VIEW);
+ *
+ * // Navigate to settings
+ * navigation.navigate(Routes.SETTINGS_VIEW);
+ * ```
+ */
 const Routes = {
   WALLET_VIEW: 'WalletView',
   BROWSER_TAB_HOME: 'BrowserTabHome',

@@ -1,11 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+/** Constant indicating that the network ID is currently being loaded */
 export const NETWORK_ID_LOADING = 'loading';
 
+/**
+ * State interface for the inpage provider Redux slice
+ * @interface InpageProviderState
+ * @property networkId - The current network ID or loading state
+ */
 export interface InpageProviderState {
   networkId: string;
 }
 
+/** Initial state for the inpage provider slice with network ID set to loading */
 export const initialState: InpageProviderState = {
   networkId: NETWORK_ID_LOADING,
 };

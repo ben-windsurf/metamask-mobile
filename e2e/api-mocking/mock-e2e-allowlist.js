@@ -1,6 +1,11 @@
 // Please do not add any more items to this list.
 // This list is temporary and the goal is to reduce it to 0, meaning all requests are mocked in our e2e tests.
 
+/**
+ * List of hosts that are allowed to make live network requests during E2E tests.
+ * This is a temporary allowlist that should be reduced to zero over time as all
+ * requests are properly mocked in E2E tests.
+ */
 export const ALLOWLISTED_HOSTS = [
   'localhost',
   '127.0.0.1',
@@ -9,6 +14,11 @@ export const ALLOWLISTED_HOSTS = [
   'rpc.tenderly.co',
 ];
 
+/**
+ * List of specific URLs that are allowed to make live network requests during E2E tests.
+ * These are temporarily allowed during the migration to fully mocked E2E tests.
+ * The goal is to eventually mock all these requests and remove them from this list.
+ */
 export const ALLOWLISTED_URLS = [
   // Temporarily allow existing live requests during migration
   'https://client-config.api.cx.metamask.io/v1/flags?client=mobile&distribution=main&environment=dev',

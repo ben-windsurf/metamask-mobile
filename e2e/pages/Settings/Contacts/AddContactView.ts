@@ -5,6 +5,10 @@ import {
 } from '../../../selectors/Settings/Contacts/AddContactView.selectors';
 import Gestures from '../../../framework/Gestures';
 
+/**
+ * Page object model for the Add Contact view in end-to-end tests.
+ * Provides methods to interact with contact creation and editing functionality.
+ */
 class AddContactView {
   get container(): DetoxElement {
     return Matchers.getElementByID(AddContactViewSelectorsIDs.CONTAINER);
@@ -48,30 +52,46 @@ class AddContactView {
     return Matchers.getElementByID(AddContactViewSelectorsIDs.ADDRESS_INPUT);
   }
 
+  /**
+   * Taps the add contact button to create a new contact.
+   */
   async tapAddContactButton(): Promise<void> {
     await Gestures.waitAndTap(this.addButton, {
       elemDescription: 'Add Contact Button',
     });
   }
 
+  /**
+   * Taps the edit button to modify an existing contact.
+   */
   async tapEditButton(): Promise<void> {
     await Gestures.waitAndTap(this.editButton, {
       elemDescription: 'Edit Button',
     });
   }
 
+  /**
+   * Taps the edit contact call-to-action button.
+   */
   async tapEditContactCTA(): Promise<void> {
     await Gestures.waitAndTap(this.editContact, {
       elemDescription: 'Edit Contact CTA',
     });
   }
 
+  /**
+   * Taps the delete contact call-to-action button.
+   */
   async tapDeleteContactCTA(): Promise<void> {
     await Gestures.waitAndTap(this.deleteButton, {
       elemDescription: 'Delete Contact CTA',
     });
   }
 
+  /**
+   * Types a name into the contact name input field.
+   * @param name - The contact name to enter
+   */
   async typeInName(name: string): Promise<void> {
     await Gestures.replaceText(this.nameInput, name, {
       elemDescription: 'Name Input',

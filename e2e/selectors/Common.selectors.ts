@@ -1,5 +1,9 @@
 import enContent from '../../locales/languages/en.json';
 
+/**
+ * Common selector IDs used across end-to-end tests for identifying UI elements.
+ * These selectors provide consistent access to frequently used interface components.
+ */
 export const CommonSelectorsIDs = {
   ERROR_MESSAGE: 'error-message-warning',
   BACK_ARROW_BUTTON: 'back-arrow-button',
@@ -17,6 +21,10 @@ export const CommonSelectorsIDs = {
   ANDROID_PROGRESS_BAR: 'android.widget.ProgressBar',
 };
 
+/**
+ * Common text-based selectors used in end-to-end tests for identifying UI elements by their text content.
+ * These selectors reference localized strings to ensure tests work across different languages.
+ */
 export const CommonSelectorsText = {
   OK_ALERT_BUTTON: enContent.template_confirmation.ok,
   CANCEL_BUTTON: enContent.template_confirmation.cancel,

@@ -4,6 +4,9 @@ import { PRICE_API_CURRENCIES } from '../../core/Multichain/constants';
 import { ensureValidState } from './util';
 import { hasProperty } from '@metamask/utils';
 
+/**
+ * Default currency code used when the current currency is invalid or missing.
+ */
 const DEFAULT_CURRENCY = 'usd';
 
 /**

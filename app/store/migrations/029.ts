@@ -18,17 +18,31 @@ import {
   TokensControllerState,
 } from '@metamask/assets-controllers';
 
+/**
+ * Network state interface for migration 029.
+ * Represents the structure of network configuration data during the migration
+ * from decimal to hexadecimal chain IDs.
+ */
 interface NetworkState {
+  /** The currently selected network client identifier */
   selectedNetworkClientId: string;
+  /** Record of network configurations keyed by network ID */
   networkConfigurations: Record<
     string,
     {
+      /** Unique identifier for the network configuration */
       id: string;
+      /** RPC URL for the network */
       rpcUrl: string;
+      /** Chain ID in string format (will be converted to hex) */
       chainId: string;
+      /** Network ticker symbol */
       ticker: string;
+      /** Human-readable network name */
       nickname: string;
+      /** RPC preferences including block explorer configuration */
       rpcPrefs: {
+        /** URL of the block explorer for this network */
         blockExplorerUrl: string;
       };
     }

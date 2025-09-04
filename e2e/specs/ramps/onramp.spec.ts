@@ -19,8 +19,13 @@ import { RampsRegions, RampsRegionsEnum } from '../../framework/Constants';
 
 let mockServer: Mockttp;
 let mockServerPort: number;
+/** Array to collect event payloads for validation during onramp testing */
 const eventsToCheck: EventPayload[] = [];
 
+/**
+ * Sets up the test environment for onramp testing with fixtures and mock server
+ * @param testFn - The test function to execute within the setup context
+ */
 const setupOnRampTest = async (testFn: () => Promise<void>) => {
   await withFixtures(
     {

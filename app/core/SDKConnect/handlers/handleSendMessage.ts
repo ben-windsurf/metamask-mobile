@@ -9,6 +9,23 @@ import DevLogger from '../utils/DevLogger';
 import { wait } from '../utils/wait.util';
 import handleBatchRpcResponse from './handleBatchRpcResponse';
 
+/**
+ * Handles sending messages through SDK connections, managing RPC responses, analytics tracking,
+ * and navigation flow control for dApp interactions.
+ *
+ * @param params - The message handling parameters
+ * @param params.msg - The message object containing RPC data and metadata
+ * @param params.connection - The SDK connection instance managing the communication
+ * @returns Promise that resolves when message handling is complete
+ *
+ * @example
+ * ```typescript
+ * await handleSendMessage({
+ *   msg: { data: { id: '123', method: 'eth_sendTransaction' } },
+ *   connection: sdkConnection
+ * });
+ * ```
+ */
 export const handleSendMessage = async ({
   msg,
   connection,
@@ -171,4 +188,8 @@ export const handleSendMessage = async ({
   }
 };
 
+/**
+ * Default export of the handleSendMessage function for SDK message handling.
+ * Manages RPC message processing, analytics tracking, and navigation flow.
+ */
 export default handleSendMessage;

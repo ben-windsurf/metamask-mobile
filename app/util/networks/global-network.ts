@@ -6,6 +6,13 @@ import {
 import { Hex } from '@metamask/utils';
 import Engine from '../../core/Engine';
 
+/**
+ * Gets an EthQuery instance for the globally selected network.
+ *
+ * @param networkController - Optional NetworkController instance. If not provided, uses the Engine's NetworkController.
+ * @returns An EthQuery instance configured for the selected network provider.
+ * @throws Error if no selected network client is available.
+ */
 export function getGlobalEthQuery(
   networkController?: NetworkController,
 ): EthQuery {
@@ -19,6 +26,12 @@ export function getGlobalEthQuery(
   return new EthQuery(provider);
 }
 
+/**
+ * Gets the chain ID of the globally selected network.
+ *
+ * @param networkController - Optional NetworkController instance. If not provided, uses the Engine's NetworkController.
+ * @returns The chain ID as a hex string.
+ */
 export function getGlobalChainId(networkController?: NetworkController): Hex {
   const finalController = networkController ?? Engine.context.NetworkController;
 
@@ -27,6 +40,12 @@ export function getGlobalChainId(networkController?: NetworkController): Hex {
   ).configuration.chainId;
 }
 
+/**
+ * Gets the network client ID of the globally selected network.
+ *
+ * @param networkController - Optional NetworkController instance. If not provided, uses the Engine's NetworkController.
+ * @returns The network client ID of the selected network.
+ */
 export function getGlobalNetworkClientId(
   networkController?: NetworkController,
 ): NetworkClientId {

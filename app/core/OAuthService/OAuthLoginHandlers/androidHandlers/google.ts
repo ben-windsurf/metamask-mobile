@@ -17,14 +17,26 @@ export class AndroidGoogleLoginHandler extends BaseLoginHandler {
 
   protected clientId: string;
 
+  /**
+   * Gets the authentication connection type for Google OAuth.
+   * @returns The Google authentication connection type
+   */
   get authConnection() {
     return AuthConnection.Google;
   }
 
+  /**
+   * Gets the OAuth scope array for Google authentication.
+   * @returns Array of OAuth scopes including email, profile, and openid
+   */
   get scope() {
     return this.#scope;
   }
 
+  /**
+   * Gets the authentication server path for token requests.
+   * @returns The API path for OAuth ID token requests
+   */
   get authServerPath() {
     return 'api/v1/oauth/id_token';
   }
@@ -88,6 +100,12 @@ export class AndroidGoogleLoginHandler extends BaseLoginHandler {
     }
   }
 
+  /**
+   * Constructs authentication token request data from flow parameters.
+   * @param params - The flow parameters containing idToken, clientId, and web3AuthNetwork
+   * @returns Formatted authentication request parameters for the OAuth server
+   * @throws {OAuthError} When params don't contain required idToken
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('idToken' in params)) {
       throw new OAuthError(

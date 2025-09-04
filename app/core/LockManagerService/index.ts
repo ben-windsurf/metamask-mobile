@@ -14,6 +14,10 @@ import {
 } from '../../actions/user';
 import ReduxService from '../redux';
 
+/**
+ * Service that manages app locking behavior based on app state changes.
+ * Handles automatic locking when the app goes to background and manages lock timers.
+ */
 export class LockManagerService {
   #appState?: AppStateStatus;
   #appStateListener?: NativeEventSubscription;
@@ -98,6 +102,7 @@ export class LockManagerService {
 
   /**
    * Listen to AppState events to control lock state.
+   * Sets up event listener for app state changes to manage automatic locking.
    */
   startListening = () => {
     if (this.#appStateListener) {
@@ -110,7 +115,10 @@ export class LockManagerService {
     );
   };
 
-  // Pause listening to AppState events.
+  /**
+   * Pause listening to AppState events.
+   * Removes the app state change event listener and cleans up resources.
+   */
   stopListening = () => {
     if (!this.#appStateListener) {
       Logger.log('App state listener is not set.');
@@ -121,4 +129,8 @@ export class LockManagerService {
   };
 }
 
+/**
+ * Default singleton instance of LockManagerService.
+ * Provides app-wide access to lock management functionality.
+ */
 export default new LockManagerService();

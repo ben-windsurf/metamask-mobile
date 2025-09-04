@@ -9,6 +9,7 @@ let initPromise: Promise<void> | null = null;
 
 /**
  * Get module state - encapsulates access to internal state
+ * @returns Object containing the current module state and setter functions
  */
 export function getModuleState() {
   return {
@@ -26,6 +27,7 @@ export function getModuleState() {
 /**
  * Get the list of safe chains from cache only
  * This allows us to use chain data without making network requests
+ * @returns Promise that resolves to an array of SafeChain objects from cache
  */
 export async function getSafeChainsListFromCacheOnly(): Promise<SafeChain[]> {
   try {
@@ -47,6 +49,7 @@ export async function getSafeChainsListFromCacheOnly(): Promise<SafeChain[]> {
 
 /**
  * Initialize the set of known domains from the chains list
+ * @returns Promise that resolves when initialization is complete
  */
 export async function initializeRpcProviderDomains(): Promise<void> {
   const state = getModuleState();
@@ -90,23 +93,34 @@ export function getKnownDomains(): Set<string> | null {
 
 /**
  * Check if a domain is in the known domains list
- *
  * @param domain - The domain to check
+ * @returns True if the domain is known, false otherwise
  */
 export function isKnownDomain(domain: string): boolean {
   const state = getModuleState();
   return state.knownDomainsSet?.has(domain?.toLowerCase()) ?? false;
 }
 
+/**
+ * Status constants for RPC domain validation results
+ */
 export const RpcDomainStatus = {
   Invalid: 'invalid',
   Private: 'private',
   Unknown: 'unknown',
 } as const;
 
+/**
+ * Type representing the possible RPC domain status values
+ */
 export type RpcDomainStatus =
   (typeof RpcDomainStatus)[keyof typeof RpcDomainStatus];
 
+/**
+ * Parse and extract the hostname from a URL string
+ * @param url - The URL string to parse
+ * @returns The lowercase hostname, or undefined if parsing fails
+ */
 function parseDomain(url: string): string | undefined {
   try {
     const normalizedUrl = url.includes('://') ? url : `https://${url}`;
@@ -116,7 +130,9 @@ function parseDomain(url: string): string | undefined {
   }
 }
 
-// Allowed provider domains for RPC endpoint validation
+/**
+ * Allowed provider domains for RPC endpoint validation
+ */
 const ALLOWED_PROVIDER_DOMAINS = new Set(['infura.io', 'alchemyapi.io']);
 
 /**

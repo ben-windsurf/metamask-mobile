@@ -10,26 +10,61 @@ import { PostMessageEvent } from '@metamask/post-message-stream';
 import WebViewHTML from '@metamask/snaps-execution-environments/dist/webpack/webview/index.html';
 import { EmptyObject } from '@metamask/snaps-sdk';
 
+/**
+ * Styles for the SnapsExecutionWebView component
+ */
 const styles = createStyles();
 
 // This is a hack to allow us to asynchronously await the creation of the WebView.
+/**
+ * Creates a new WebView for Snaps execution
+ * @param jobId - Unique identifier for the WebView job
+ * @returns Promise that resolves to a WebViewInterface
+ */
 // eslint-disable-next-line import/no-mutable-exports
 export let createWebView: (jobId: string) => Promise<WebViewInterface>;
+
+/**
+ * Removes a WebView by job ID
+ * @param jobId - Unique identifier for the WebView job to remove
+ */
 // eslint-disable-next-line import/no-mutable-exports
 export let removeWebView: (jobId: string) => void;
 
+/**
+ * State interface for managing individual WebView instances
+ * @interface WebViewState
+ * @property ref - Reference to the WebView component
+ * @property listener - Message event listener function
+ * @property props - WebView component properties and event handlers
+ */
 interface WebViewState {
+  /** Reference to the WebView component */
   ref?: WebView;
+  /** Message event listener function */
   listener?: (event: PostMessageEvent) => void;
+  /** WebView component properties and event handlers */
   props: {
+    /** Handler for WebView message events */
     onWebViewMessage: (data: WebViewMessageEvent) => void;
+    /** Handler for WebView load completion */
     onWebViewLoad: () => void;
+    /** Handler for WebView error events */
     onWebViewError: (error: NativeSyntheticEvent<WebViewError>) => void;
+    /** Callback to set WebView reference */
     ref: (ref: WebView) => void;
   };
 }
 
-// This is a class component because storing the references we are don't work in functional components.
+/**
+ * React component for managing WebView instances used in Snaps execution.
+ * This is a class component because storing the references we need don't work in functional components.
+ *
+ * @example
+ * ```tsx
+ * <SnapsExecutionWebView />
+ * ```
+ */
 export class SnapsExecutionWebView extends Component {
   webViews: Record<string, WebViewState> = {};
 

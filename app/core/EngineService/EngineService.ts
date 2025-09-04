@@ -20,6 +20,11 @@ import { MetaMetrics } from '../Analytics';
 import { VaultBackupResult } from './types';
 import { INIT_BG_STATE_KEY, UPDATE_BG_STATE_KEY, LOG_TAG } from './constants';
 
+/**
+ * Service class responsible for managing the MetaMask Engine lifecycle.
+ * Handles engine initialization, controller state synchronization with Redux,
+ * and vault backup/recovery operations.
+ */
 export class EngineService {
   private engineInitialized = false;
 
@@ -93,6 +98,11 @@ export class EngineService {
     endTrace({ name: TraceName.EngineInitialization });
   };
 
+  /**
+   * Sets up controller state change subscriptions to keep Redux store synchronized.
+   *
+   * @param engine - The initialized Engine instance with controller context
+   */
   private updateControllers = (engine: TypedEngine) => {
     if (!engine.context) {
       Logger.error(
@@ -183,6 +193,7 @@ export class EngineService {
 }
 
 /**
- * EngineService class used for initializing and subscribing to the engine controllers
+ * Default singleton instance of EngineService for managing the MetaMask Engine lifecycle.
+ * Used for initializing and subscribing to the engine controllers throughout the application.
  */
 export default new EngineService();

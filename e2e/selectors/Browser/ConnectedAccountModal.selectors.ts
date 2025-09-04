@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Text selectors for the Connected Account Modal using localized content.
+ * Contains all text-based selectors for UI elements in the connected accounts modal.
+ */
 export const ConnectedAccountModalSelectorsText = {
   PERMISSION_LINK: enContent.accounts.permissions,
   DISCONNECT_ALL: enContent.accounts.disconnect_all_accounts,
@@ -8,6 +12,10 @@ export const ConnectedAccountModalSelectorsText = {
   SELECT_ALL: enContent.networks.select_all,
 } as const;
 
+/**
+ * ID-based selectors for Connected Accounts Modal elements.
+ * Contains testID and element ID selectors for automated testing of connected accounts functionality.
+ */
 export const ConnectedAccountsSelectorsIDs = {
   CONNECT_ACCOUNTS_BUTTON: 'connect-accounts-buttons',
   NETWORK_PICKER: 'accounts-connected-network-picker',
@@ -25,15 +33,32 @@ export const ConnectedAccountsSelectorsIDs = {
   ACCOUNT_LIST_BOTTOM_SHEET: 'account-list-bottom-sheet',
 } as const;
 
+/**
+ * ID-based selectors for Permissions Summary Modal elements.
+ * Contains testID selectors for the permissions summary tab navigation.
+ */
 export const PermissionsSummarySelectorsIDs = {
   ACCOUNTS_TAB: 'accounts-tab',
   PERMISSIONS_TAB: 'permissions-tab',
 } as const;
 
-// Type definitions for the selectors
+/**
+ * Type definition for ConnectedAccountModalSelectorsText object.
+ * Provides type safety for text-based selectors in connected account modal.
+ */
 export type ConnectedAccountModalSelectorsTextType =
   typeof ConnectedAccountModalSelectorsText;
+
+/**
+ * Type definition for ConnectedAccountsSelectorsIDs object.
+ * Provides type safety for ID-based selectors in connected accounts functionality.
+ */
 export type ConnectedAccountsSelectorsIDsType =
   typeof ConnectedAccountsSelectorsIDs;
+
+/**
+ * Type definition for PermissionsSummarySelectorsIDs object.
+ * Provides type safety for ID-based selectors in permissions summary modal.
+ */
 export type PermissionsSummarySelectorsIDsType =
   typeof PermissionsSummarySelectorsIDs;

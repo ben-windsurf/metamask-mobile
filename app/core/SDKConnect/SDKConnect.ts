@@ -35,18 +35,37 @@ import {
 } from './StateManagement';
 import DevLogger from './utils/DevLogger';
 
+/**
+ * Map of connected SDK sessions indexed by connection ID.
+ * Each entry represents an active connection to a dApp or external service.
+ */
 export interface ConnectedSessions {
   [id: string]: Connection;
 }
 
+/**
+ * Map of SDK session configurations indexed by channel ID.
+ * Contains connection properties and metadata for each SDK session.
+ */
 export interface SDKSessions {
   [chanelId: string]: ConnectionProps;
 }
 
+/**
+ * Map of approved hosts with their approval timestamps.
+ * Used to track which hosts have been granted permission to connect.
+ */
 export interface ApprovedHosts {
   [host: string]: number;
 }
 
+/**
+ * Properties required for approving a host connection.
+ * @interface approveHostProps
+ * @property host - The full host URL to approve
+ * @property hostname - The hostname portion of the URL
+ * @property context - Optional context information for the approval
+ */
 export interface approveHostProps {
   host: string;
   hostname: string;

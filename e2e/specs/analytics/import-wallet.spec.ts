@@ -23,6 +23,10 @@ import { withFixtures } from '../../framework/fixtures/FixtureHelper';
 import FixtureBuilder from '../../framework/fixtures/FixtureBuilder';
 import { TestSpecificMock } from '../../framework';
 
+/**
+ * Mock balance configuration for test wallet address.
+ * Creates balance mocks for the test wallet with 1 ETH balance.
+ */
 const balanceMock = getBalanceMocks([
   {
     address: '0xAa4179E7f103701e904D27DF223a39Aa9c27405a',
@@ -30,6 +34,10 @@ const balanceMock = getBalanceMocks([
   },
 ]);
 
+/**
+ * Test-specific mock configuration for API endpoints.
+ * Combines balance mocks with segment tracking events for POST requests.
+ */
 const testSpecificMock = {
   POST: [...balanceMock, mockEvents.POST.segmentTrack],
 } as TestSpecificMock;

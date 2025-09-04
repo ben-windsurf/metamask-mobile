@@ -2,12 +2,24 @@
 import { getLocal } from 'mockttp';
 import portfinder from 'portfinder';
 
+/**
+ * Represents a mock event configuration for API endpoints
+ * @interface MockEvent
+ * @property urlEndpoint - The URL endpoint to mock
+ * @property responseCode - The HTTP response code to return
+ * @property response - The response data to return
+ */
 interface MockEvent {
   urlEndpoint: string;
   responseCode: number;
   response: unknown;
 }
 
+/**
+ * Collection of mock events organized by HTTP method
+ * @interface MockEvents
+ * @property [key: string] - HTTP method name mapped to array of mock events
+ */
 interface MockEvents {
   [key: string]: MockEvent[];
 }

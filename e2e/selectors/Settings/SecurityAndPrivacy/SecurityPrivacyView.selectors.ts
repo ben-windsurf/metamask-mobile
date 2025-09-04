@@ -1,5 +1,9 @@
 import enContent from '../../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for Security and Privacy view elements in end-to-end tests.
+ * Contains test identifiers for various security and privacy settings components.
+ */
 export const SecurityPrivacyViewSelectorsIDs = {
   SECURITY_SETTINGS_SCROLL: 'security-settings-scrollview',
   REVEAL_SEED_BUTTON: 'reveal-seed-button',
@@ -16,6 +20,10 @@ export const SecurityPrivacyViewSelectorsIDs = {
   PROTECT_YOUR_WALLET: 'protect-your-wallet',
 };
 
+/**
+ * Text selectors for Security and Privacy view elements in end-to-end tests.
+ * Contains localized text content used to identify UI elements by their display text.
+ */
 export const SecurityPrivacyViewSelectorsText = {
   SHOW_PRIVATE_KEY: enContent.reveal_credential.show_private_key,
   SECURITY_AND_PRIVACY_HEADING: enContent.app_settings.security_title,

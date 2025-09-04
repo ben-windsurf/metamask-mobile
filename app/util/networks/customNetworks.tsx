@@ -9,6 +9,10 @@ import { BtcScope, SolScope } from '@metamask/keyring-api';
 const InfuraKey = process.env.MM_INFURA_PROJECT_ID;
 const infuraProjectId = InfuraKey === 'null' ? '' : InfuraKey;
 
+/**
+ * Mapping of Infura network names to their corresponding QuickNode endpoint URLs.
+ * Each network returns a function that retrieves the URL from environment variables.
+ */
 export const QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME = {
   'ethereum-mainnet': () => process.env.QUICKNODE_MAINNET_URL,
   'linea-mainnet': () => process.env.QUICKNODE_LINEA_MAINNET_URL,
@@ -20,6 +24,12 @@ export const QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME = {
   'bsc-mainnet': () => process.env.QUICKNODE_BSC_URL,
 };
 
+/**
+ * Gets failover URLs for a given Infura network from QuickNode endpoints.
+ *
+ * @param infuraNetwork - The Infura network name to get failover URLs for
+ * @returns Array of failover URLs if available, empty array otherwise
+ */
 export function getFailoverUrlsForInfuraNetwork(
   infuraNetwork: keyof typeof QUICKNODE_ENDPOINT_URLS_BY_INFURA_NETWORK_NAME,
 ) {
@@ -30,6 +40,10 @@ export function getFailoverUrlsForInfuraNetwork(
   return [];
 }
 
+/**
+ * List of popular blockchain networks with their configuration details.
+ * Includes mainnet networks that are commonly used and supported by MetaMask Mobile.
+ */
 export const PopularList = [
   {
     chainId: toHex('43114'),
@@ -154,6 +168,12 @@ export const PopularList = [
   },
 ];
 
+/**
+ * Gets the image source for non-EVM networks based on chain ID.
+ *
+ * @param chainId - The CAIP chain ID to get the image source for
+ * @returns The require() path to the network image, or undefined if not found
+ */
 export const getNonEvmNetworkImageSourceByChainId = (chainId: CaipChainId) => {
   switch (chainId) {
     case SolScope.Mainnet:
@@ -171,6 +191,10 @@ export const getNonEvmNetworkImageSourceByChainId = (chainId: CaipChainId) => {
   }
 };
 
+/**
+ * Chain IDs for Infura-supported testnet networks.
+ * Maps testnet names to their hexadecimal chain ID values.
+ */
 export const INFURA_TESTNET_CHAIN_IDS = {
   GOERLI: '0x5',
   LINEA_GOERLI: '0xe704',
@@ -192,6 +216,10 @@ export const INFURA_TESTNET_CHAIN_IDS = {
   UNICHAIN_SEPOLIA: '0x515',
 } as const;
 
+/**
+ * Array of all Infura testnet chain IDs as strings.
+ * Used for validation and filtering of testnet networks.
+ */
 export const infuraChainIdsTestNets: string[] = [
   INFURA_TESTNET_CHAIN_IDS.GOERLI,
   INFURA_TESTNET_CHAIN_IDS.LINEA_GOERLI,
@@ -213,6 +241,10 @@ export const infuraChainIdsTestNets: string[] = [
   INFURA_TESTNET_CHAIN_IDS.UNICHAIN_SEPOLIA,
 ];
 
+/**
+ * List of allowed Infura host URLs for various blockchain networks.
+ * Used for validating and filtering network requests to trusted Infura endpoints.
+ */
 export const allowedInfuraHosts = [
   // Ethereum
   'mainnet.infura.io',
@@ -251,6 +283,10 @@ export const allowedInfuraHosts = [
  * seeing the logo of the network anymore.
  * We can keep this new list updated with any network removed from the popular list so we keep returning the logo of the network.
  */
+/**
+ * List of networks that were previously popular but have been moved to unpopular status.
+ * Maintained to preserve network logos and configuration for existing users.
+ */
 export const UnpopularNetworkList = [
   {
     chainId: toHex('250'),
@@ -278,6 +314,10 @@ export const UnpopularNetworkList = [
   },
 ];
 
+/**
+ * Comprehensive mapping of network names to their chain IDs.
+ * Extends the base CHAIN_IDS with additional custom networks supported by MetaMask Mobile.
+ */
 export const NETWORK_CHAIN_ID: {
   readonly FLARE_MAINNET: '0xe';
   readonly SONGBIRD_TESTNET: '0x13';

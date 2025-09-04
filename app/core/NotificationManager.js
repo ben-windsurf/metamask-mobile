@@ -19,6 +19,14 @@ import Logger from '../util/Logger';
 import { TransactionStatus } from '@metamask/transaction-controller';
 import { endTrace, trace, TraceName } from '../util/trace';
 
+/**
+ * Constructs localized title and message strings for different notification types.
+ *
+ * @param notification - The notification object containing type and transaction data
+ * @param notification.type - The type of notification (pending, success, error, etc.)
+ * @param notification.transaction - Transaction data including nonce, amount, and assetType
+ * @returns Object containing localized title and message strings
+ */
 export const constructTitleAndMessage = (notification) => {
   let title, message;
   switch (notification.type) {
@@ -291,6 +299,12 @@ class NotificationManager {
 
   /**
    * Creates a NotificationManager instance
+   *
+   * @param _navigation - Navigation object from react-navigation
+   * @param _showTransactionNotification - Function to show transaction notifications
+   * @param _hideTransactionNotification - Function to hide transaction notifications
+   * @param _showSimpleNotification - Function to show simple notifications
+   * @param _removeNotificationById - Function to remove notifications by ID
    */
   constructor(
     _navigation,
@@ -316,11 +330,18 @@ class NotificationManager {
 
   /**
    * Navigates to a specific view
+   *
+   * @param view - The view name to navigate to
    */
   goTo(view) {
     this._navigation.navigate(view);
   }
 
+  /**
+   * Handles received notification messages
+   *
+   * @param data - The notification data to process
+   */
   onMessageReceived(data) {
     this._showNotification(data);
   }
@@ -341,6 +362,13 @@ class NotificationManager {
 
   /**
    * Shows a notification with title and description
+   *
+   * @param data - Notification data object
+   * @param data.title - The notification title
+   * @param data.description - The notification description
+   * @param data.status - The notification status
+   * @param data.duration - Auto-dismiss duration in milliseconds
+   * @returns The notification ID
    */
   showSimpleNotification = (data) => {
     const id = Date.now();
@@ -358,6 +386,12 @@ class NotificationManager {
    * Listen for events of a submitted transaction
    * and generates the corresponding notification
    * based on the status of the transaction (failed or confirmed)
+   *
+   * @param transaction - The transaction object to watch
+   * @param transaction.id - The transaction ID
+   * @param transaction.silent - Whether to suppress notifications
+   * @param speedUp - Whether this is a speed-up transaction
+   * @returns False if transaction is silent, undefined otherwise
    */
   watchSubmittedTransaction(transaction, speedUp = false) {
     if (transaction.silent) return false;
@@ -442,6 +476,9 @@ class NotificationManager {
 
   /**
    * Generates a notification for an incoming transaction
+   *
+   * @param incomingTransactions - Array of incoming transaction objects
+   * @returns Promise that resolves when notification processing is complete
    */
   gotIncomingTransaction = async (incomingTransactions) => {
     try {

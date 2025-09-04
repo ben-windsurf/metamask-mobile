@@ -8,6 +8,27 @@ import handleConnectionReady from '../../handlers/handleConnectionReady';
 import DevLogger from '../../utils/DevLogger';
 import { Connection } from '../Connection';
 
+/**
+ * Creates a handler function for processing clients ready events in SDK connections.
+ * This function manages the connection establishment process when clients signal they are ready.
+ *
+ * @param params - Configuration object for the handler
+ * @param params.instance - The connection instance to handle
+ * @param params.disapprove - Function to disapprove a connection by channel ID
+ * @param params.updateOriginatorInfos - Function to update originator information
+ * @param params.approveHost - Function to approve host connections
+ * @returns A handler function that processes clients ready messages
+ *
+ * @example
+ * ```typescript
+ * const handler = handleClientsReady({
+ *   instance: connectionInstance,
+ *   disapprove: (channelId) => console.log('Disapproved:', channelId),
+ *   updateOriginatorInfos: ({ channelId, originatorInfo }) => updateInfo(channelId, originatorInfo),
+ *   approveHost: (props) => approveConnection(props)
+ * });
+ * ```
+ */
 function handleClientsReady({
   instance,
   disapprove,

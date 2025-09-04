@@ -9,13 +9,25 @@ import {
   getNotificationBadge,
 } from '../../methods/common';
 
+/**
+ * Type definition for Lido stake ready to be withdrawn notification.
+ * Represents a notification when staked ETH is ready for withdrawal from Lido.
+ */
 type LidoReadyWithDrawnNotification =
   ExtractedNotification<TRIGGER_TYPES.LIDO_STAKE_READY_TO_BE_WITHDRAWN>;
 
+/**
+ * Type guard function to check if a notification is a Lido ready to withdraw notification.
+ * @returns Function that validates notification type
+ */
 const isLidoReadyWithDrawnNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.LIDO_STAKE_READY_TO_BE_WITHDRAWN,
 ]);
 
+/**
+ * Notification state configuration for Lido stake ready to be withdrawn notifications.
+ * Defines how to display and handle notifications when staked ETH is ready for withdrawal.
+ */
 const state: NotificationState<LidoReadyWithDrawnNotification> = {
   guardFn: isLidoReadyWithDrawnNotification,
   createMenuItem: (notification) => ({

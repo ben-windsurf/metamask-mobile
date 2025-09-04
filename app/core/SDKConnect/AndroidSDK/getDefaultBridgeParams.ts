@@ -3,6 +3,14 @@ import AppConstants from '../../AppConstants';
 import getRpcMethodMiddleware from '../../RPCMethods/RPCMethodMiddleware';
 import { DappClient } from './dapp-sdk-types';
 
+/**
+ * Creates default bridge parameters for SDK connection with dApp clients.
+ * Configures RPC middleware, host approval, and connection metadata for secure
+ * communication between MetaMask Mobile and external dApps via the SDK.
+ *
+ * @param clientInfo - The dApp client information containing originator details
+ * @returns Bridge configuration object with RPC middleware and connection settings
+ */
 const getDefaultBridgeParams = (clientInfo: DappClient) => ({
   getApprovedHosts: (host: string) => ({
     [host]: true,

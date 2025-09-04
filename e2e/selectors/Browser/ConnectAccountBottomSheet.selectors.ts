@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for the Connect Account Bottom Sheet component used in end-to-end tests.
+ * Contains test identifiers for various UI elements within the connect account modal.
+ */
 export const ConnectAccountBottomSheetSelectorsIDs = {
   CONTAINER: 'connect-account-modal',
   SELECT_MULTI_BUTTON: 'multiconnect-connect-button',
@@ -8,6 +12,10 @@ export const ConnectAccountBottomSheetSelectorsIDs = {
   SELECT_ALL_BUTTON: 'select-all-button',
 };
 
+/**
+ * Text selectors for the Connect Account Bottom Sheet component used in end-to-end tests.
+ * Contains localized text content for various UI elements within the connect account modal.
+ */
 export const ConnectAccountBottomSheetSelectorsText = {
   CONNECT: enContent.accounts.connect,
   CONNECT_ACCOUNTS: enContent.accounts.connect_multiple_accounts,

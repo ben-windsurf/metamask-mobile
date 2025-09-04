@@ -1,10 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import StorageWrapper from './storage-wrapper';
 
+/**
+ * Configuration options for the useStorageValue hook
+ */
 interface UseStorageValueOptions {
+  /** Default value to use before storage value is loaded */
   defaultValue?: string | null;
 }
 
+/**
+ * Return value from the useStorageValue hook
+ */
 interface UseStorageValueReturn {
   /** Current value from storage */
   value: string | null;

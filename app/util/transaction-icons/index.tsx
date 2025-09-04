@@ -18,6 +18,8 @@ import { AppThemeKey } from '../theme/models';
  * Returns the appropriate transaction icon based on type and status
  * @param transactionType - The type of transaction (send, receive, swap, etc.)
  * @param isFailed - Whether the transaction failed
+ * @param appTheme - The current app theme key
+ * @param osColorScheme - The operating system color scheme
  * @returns The appropriate icon for the transaction
  */
 export function getTransactionIcon(

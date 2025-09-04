@@ -10,19 +10,26 @@ import {
 } from '@metamask/network-controller';
 import { Messenger, RestrictedMessenger } from '@metamask/base-controller';
 
+/** Controller name identifier for the GasFeeController */
 const name = 'GasFeeController';
 
+/** Union type of all actions that the GasFeeController messenger can handle */
 type MessengerActions =
   | NetworkControllerGetEIP1559CompatibilityAction
   | NetworkControllerGetNetworkClientByIdAction
   | NetworkControllerGetStateAction
   | GasFeeControllerActions;
 
+/** Union type of all events that the GasFeeController messenger can listen to */
 type MessengerEvents =
   | NetworkControllerNetworkDidChangeEvent
   | GasFeeControllerEvents;
 
-// This is not exported from the gas-fee-controller package right now
+/**
+ * Restricted messenger type for the GasFeeController.
+ * This messenger provides controlled access to network-related actions and events
+ * needed for gas fee estimation and management.
+ */
 export type GasFeeControllerMessenger = RestrictedMessenger<
   typeof name,
   MessengerActions,
@@ -31,6 +38,14 @@ export type GasFeeControllerMessenger = RestrictedMessenger<
   MessengerEvents['type']
 >;
 
+/**
+ * Creates a restricted messenger instance for the GasFeeController.
+ * The messenger provides access to network controller actions and events
+ * required for gas fee calculations and EIP-1559 compatibility checks.
+ *
+ * @param messenger - The base messenger instance to create restrictions from
+ * @returns A restricted messenger configured for GasFeeController operations
+ */
 export function getGasFeeControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): GasFeeControllerMessenger {

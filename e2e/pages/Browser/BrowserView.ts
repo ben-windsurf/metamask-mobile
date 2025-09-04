@@ -14,10 +14,19 @@ import {
 import { DEFAULT_TAB_ID } from '../../framework/Constants';
 import { Assertions, Utilities, Gestures, Matchers } from '../../framework';
 
+/**
+ * Parameters for test dapp transactions
+ * @interface TransactionParams
+ * @property {string | number | boolean} [key] - Transaction parameter value
+ */
 interface TransactionParams {
   [key: string]: string | number | boolean;
 }
 
+/**
+ * Browser page object for end-to-end testing
+ * Provides methods to interact with the MetaMask mobile browser interface
+ */
 class Browser {
   get searchButton(): DetoxElement {
     return Matchers.getElementByID(BrowserViewSelectorsIDs.SEARCH_BUTTON);

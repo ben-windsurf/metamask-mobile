@@ -16,6 +16,21 @@ import {
   validateOriginThrottling,
 } from './spam';
 
+/**
+ * Creates a JSON-RPC middleware that implements origin-based request throttling
+ * to prevent spam and abuse from malicious dApps or origins.
+ *
+ * This middleware validates incoming requests against throttling rules and
+ * processes rejections when rate limits are exceeded.
+ *
+ * @returns A JSON-RPC middleware function that handles origin throttling
+ *
+ * @example
+ * ```typescript
+ * const throttlingMiddleware = createOriginThrottlingMiddleware();
+ * engine.push(throttlingMiddleware);
+ * ```
+ */
 export function createOriginThrottlingMiddleware(): JsonRpcMiddleware<
   JsonRpcParams,
   Json

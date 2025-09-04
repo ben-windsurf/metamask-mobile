@@ -5,35 +5,63 @@ import {
 import Matchers from '../../../framework/Matchers';
 import Gestures from '../../../framework/Gestures';
 
+/**
+ * Page object model for the Reveal Private Key view in the Security and Privacy settings.
+ * Provides methods to interact with UI elements for revealing and managing private keys.
+ */
 class RevealPrivateKey {
+  /**
+   * Gets the main container element for the reveal private key view.
+   * @returns The container DetoxElement
+   */
   get container(): DetoxElement {
     return Matchers.getElementByID(
       RevealSeedViewSelectorsIDs.REVEAL_CREDENTIAL_CONTAINER_ID,
     );
   }
+  /**
+   * Gets the password input field element for revealing credentials.
+   * @returns The password input DetoxElement
+   */
   get passwordInputToRevealCredential(): DetoxElement {
     return Matchers.getElementByID(
       RevealSeedViewSelectorsIDs.PASSWORD_INPUT_BOX_ID,
     );
   }
 
+  /**
+   * Gets the password warning element that displays validation messages.
+   * @returns The password warning DetoxElement
+   */
   get passwordWarning(): DetoxElement {
     return Matchers.getElementByID(
       RevealSeedViewSelectorsIDs.PASSWORD_WARNING_ID,
     );
   }
 
+  /**
+   * Gets the scroll view identifier for scrolling operations.
+   * @returns Promise resolving to the scroll view DetoxMatcher
+   */
   get scrollViewIdentifier(): Promise<DetoxMatcher> {
     return Matchers.getIdentifier(
       RevealSeedViewSelectorsIDs.REVEAL_CREDENTIAL_SCROLL_ID,
     );
   }
 
+  /**
+   * Gets the private key text element that displays the revealed private key.
+   * @returns The private key text DetoxElement
+   */
   get privateKey(): DetoxElement {
     return Matchers.getElementByText(
       RevealSeedViewSelectorsIDs.REVEAL_CREDENTIAL_TEXT,
     );
   }
+  /**
+   * Gets the reveal private key button element.
+   * @returns The reveal private key button DetoxElement
+   */
   get revealPrivateKeyButton(): DetoxElement {
     return Matchers.getElementByID(
       RevealSeedViewSelectorsIDs.REVEAL_CREDENTIAL_BUTTON_ID,

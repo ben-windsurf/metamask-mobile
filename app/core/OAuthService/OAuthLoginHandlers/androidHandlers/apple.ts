@@ -9,6 +9,12 @@ import {
 import { BaseHandlerOptions, BaseLoginHandler } from '../baseHandler';
 import { OAuthError, OAuthErrorType } from '../../error';
 
+/**
+ * Configuration parameters for Android Apple login handler.
+ * @interface AndroidAppleLoginHandlerParams
+ * @property clientId - The Service ID from the Apple developer account for the app
+ * @property appRedirectUri - The Android App redirectUri for the customChromeTab to handle auth-session login
+ */
 export interface AndroidAppleLoginHandlerParams extends BaseHandlerOptions {
   clientId: string;
   appRedirectUri: string;
@@ -130,6 +136,13 @@ export class AndroidAppleLoginHandler
     );
   }
 
+  /**
+   * Generates auth token request data for the Apple login flow.
+   *
+   * @param params - The flow parameters containing authorization code and related data
+   * @returns Auth request parameters formatted for the token exchange
+   * @throws {OAuthError} When params don't contain required 'code' property
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('code' in params)) {
       throw new OAuthError(

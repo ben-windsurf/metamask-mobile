@@ -4,7 +4,16 @@ import { ensureValidState } from './util';
 import { hasProperty, isObject } from '@metamask/utils';
 
 // In-lined from @metamask/multichain
+/**
+ * The caveat type identifier for CAIP-25 authorized scopes.
+ * Used to identify permission caveats that contain authorized scope information.
+ */
 const Caip25CaveatType = 'authorizedScopes';
+
+/**
+ * The permission name for CAIP-25 endowment permissions.
+ * This permission allows dApps to access multi-chain functionality.
+ */
 const Caip25EndowmentPermissionName = 'endowment:caip25';
 
 /**

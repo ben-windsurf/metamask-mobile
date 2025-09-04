@@ -5,6 +5,14 @@
 
 import { IMetaMetricsEvent } from './MetaMetrics.types';
 
+/**
+ * Generates a MetaMetrics event object with optional action and description properties.
+ *
+ * @param name - The event name from the EVENT_NAME enum
+ * @param action - Optional action from the ACTIONS enum
+ * @param description - Optional description from the DESCRIPTION enum
+ * @returns A formatted MetaMetrics event object
+ */
 export const generateOpt = (
   name: EVENT_NAME,
   action?: ACTIONS,
@@ -22,6 +30,10 @@ export const generateOpt = (
   return { category: name };
 };
 
+/**
+ * Mapping of onboarding wizard step numbers to their descriptive names.
+ * Used for tracking user progress through the onboarding flow.
+ */
 const ONBOARDING_WIZARD_STEP_DESCRIPTION: { [key: number]: string } = {
   1: 'Welcome',
   2: 'Accounts',
@@ -33,7 +45,8 @@ const ONBOARDING_WIZARD_STEP_DESCRIPTION: { [key: number]: string } = {
 };
 
 /**
- * Analytics Tracking Events
+ * Enumeration of all analytics tracking event names used throughout the MetaMask Mobile app.
+ * These events are tracked when MetaMetrics is enabled to understand user behavior and app usage patterns.
  */
 enum EVENT_NAME {
   // App
@@ -516,6 +529,10 @@ enum EVENT_NAME {
   WHATS_NEW_LINK_CLICKED = "What's New Link Clicked",
 }
 
+/**
+ * Enumeration of action types that can be associated with analytics events.
+ * Actions provide additional context about how an event was triggered.
+ */
 enum ACTIONS {
   // Navigation Drawer
   NAVIGATION_DRAWER = 'Navigation Drawer',
@@ -551,6 +568,10 @@ enum ACTIONS {
   SELECTS_ANNOUCEMENTS_NOTIFICATIONS = 'Selects Annoucements Notifications',
 }
 
+/**
+ * Collection of analytics events mapped to their generated MetaMetrics event objects.
+ * Each event is created using the generateOpt function with appropriate parameters.
+ */
 const events = {
   APP_OPENED: generateOpt(EVENT_NAME.APP_OPENED),
   ERROR_SCREEN_VIEWED: generateOpt(EVENT_NAME.ERROR_SCREEN_VIEWED),
@@ -1283,6 +1304,10 @@ const events = {
  * Legacy Analytics Tracking Events
  */
 
+/**
+ * Enumeration of legacy event descriptions used for backward compatibility.
+ * These descriptions provide detailed context for legacy analytics events.
+ */
 enum DESCRIPTION {
   // Navigation Drawer
   NAVIGATION_TAPS_ACCOUNT_NAME = 'Tapped Account Name / Profile',
@@ -1344,6 +1369,10 @@ enum DESCRIPTION {
   NOTIFICATIONS = 'Notifications',
 }
 
+/**
+ * Collection of legacy MetaMetrics events for backward compatibility.
+ * These events maintain compatibility with older analytics tracking patterns.
+ */
 const legacyMetaMetricsEvents = {
   // Navigation Drawer
   NAVIGATION_TAPS_ACCOUNT_NAME: generateOpt(
@@ -1658,6 +1687,10 @@ const legacyMetaMetricsEvents = {
   ),
 };
 
+/**
+ * Combined collection of all MetaMetrics events, merging current and legacy events.
+ * This is the main export used throughout the app for analytics tracking.
+ */
 const MetaMetricsEvents = { ...events, ...legacyMetaMetricsEvents };
 
 export { MetaMetricsEvents, ONBOARDING_WIZARD_STEP_DESCRIPTION, EVENT_NAME };

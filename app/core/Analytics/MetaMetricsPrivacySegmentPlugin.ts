@@ -20,12 +20,22 @@ class MetaMetricsPrivacySegmentPlugin extends Plugin {
   type = PluginType.enrichment;
   userId: string;
 
+  /**
+   * Creates a new MetaMetricsPrivacySegmentPlugin instance.
+   *
+   * @param userId - The user ID to use for non-anonymous events
+   */
   constructor(userId: string) {
     super();
     // Default userId to our own anonymous id if empty, which should not happen but...
     this.userId = userId.trim() || METAMETRICS_ANONYMOUS_ID;
   }
 
+  /**
+   * Configures the plugin with the Segment analytics client.
+   *
+   * @param analytics - The Segment analytics client instance
+   */
   configure(analytics: SegmentClient) {
     super.configure(analytics);
   }

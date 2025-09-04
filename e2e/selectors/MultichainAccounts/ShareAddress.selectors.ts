@@ -1,3 +1,7 @@
+/**
+ * Test selectors for the Share Address screen components.
+ * Contains element IDs used for end-to-end testing of address sharing functionality.
+ */
 export const ShareAddressIds = {
   SHARE_ADDRESS_CONTAINER: 'share-address-container',
   SHARE_ADDRESS_QR_CODE: 'share-address-qr-code',

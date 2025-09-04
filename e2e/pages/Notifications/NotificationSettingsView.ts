@@ -6,45 +6,86 @@ import Gestures from '../../framework/Gestures';
 import Matchers from '../../framework/Matchers';
 import { Assertions, Utilities } from '../../framework';
 
+/**
+ * Represents the state of a toggle element
+ */
 type ToggleState = 'on' | 'off';
 
+/**
+ * Configuration object for toggle operations
+ * @interface ToggleConfig
+ * @property element - The Detox element to interact with
+ * @property description - Human-readable description of the toggle action
+ * @property elemDescription - Element description for debugging purposes
+ */
 interface ToggleConfig {
   element: DetoxElement;
   description: string;
   elemDescription: string;
 }
 
+/**
+ * Page object for the Notifications Settings view in end-to-end tests.
+ * Provides methods to interact with notification toggles and verify their states.
+ */
 class NotificationsSettingsView {
+  /**
+   * Gets the main notification toggle element
+   * @returns The notification toggle element
+   */
   get notificationToggle() {
     return Matchers.getElementByID(
       NotificationSettingsViewSelectorsIDs.NOTIFICATIONS_TOGGLE,
     );
   }
 
+  /**
+   * Gets the push notifications toggle element
+   * @returns The push notifications toggle element
+   */
   get pushNotificationsToggle() {
     return Matchers.getElementByID(
       NotificationSettingsViewSelectorsIDs.PUSH_NOTIFICATIONS_TOGGLE,
     );
   }
 
+  /**
+   * Gets the feature announcements toggle element
+   * @returns The feature announcements toggle element
+   */
   get featureAnnouncementsToggle() {
     return Matchers.getElementByID(
       NotificationSettingsViewSelectorsIDs.FEATURE_ANNOUNCEMENTS_TOGGLE,
     );
   }
 
+  /**
+   * Gets the account activity section element
+   * @returns The account activity section element
+   */
   get accountActivitySection() {
     return Matchers.getElementByText(
       NotificationSettingsViewSelectorsText.ACCOUNT_ACTIVITY_SECTION,
     );
   }
 
+  /**
+   * Gets the account notification toggle element for a specific address
+   * @param address - The account address to get the toggle for
+   * @returns The account notification toggle element
+   */
   accountNotificationToggle(address: string) {
     return Matchers.getElementByID(
       NotificationSettingsViewSelectorsIDs.ACCOUNT_NOTIFICATION_TOGGLE(address),
     );
   }
 
+  /**
+   * Private method to toggle an element and verify its state
+   * @param config - Configuration object containing element and descriptions
+   * @param expectedToggleState - Expected state after toggle ('on' or 'off')
+   * @returns Promise that resolves when toggle operation is complete
+   */
   private async toggleElement(
     config: ToggleConfig,
     expectedToggleState: ToggleState = 'on',

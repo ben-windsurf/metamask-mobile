@@ -1,10 +1,18 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Text selectors for the Settings view in end-to-end tests.
+ * Contains localized text content used to identify UI elements.
+ */
 export const SettingsViewSelectorsText = {
   ADVANCE_TITLE_TEXT: enContent.app_settings.advanced_title,
   CONTACT_SUPPORT_TITLE: enContent.app_settings.contact_support,
 };
 
+/**
+ * ID selectors for the Settings view in end-to-end tests.
+ * Contains testID values used to identify UI elements during automated testing.
+ */
 export const SettingsViewSelectorsIDs = {
   SETTINGS_SCROLL_ID: 'settings-scroll',
   GENERAL: 'general-settings',

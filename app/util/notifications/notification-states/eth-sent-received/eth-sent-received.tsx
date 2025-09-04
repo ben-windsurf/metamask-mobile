@@ -14,17 +14,34 @@ import {
 } from '../../methods/common';
 import { formatAddress } from '../../../address';
 
+/**
+ * Type definition for native ETH sent/received notifications
+ */
 type NativeSentReceiveNotification = ExtractedNotification<
   TRIGGER_TYPES.ETH_RECEIVED | TRIGGER_TYPES.ETH_SENT
 >;
+
+/**
+ * Type guard function to check if a notification is a native token (ETH) notification
+ */
 const isNativeTokenNotification = isOfTypeNodeGuard([
   TRIGGER_TYPES.ETH_RECEIVED,
   TRIGGER_TYPES.ETH_SENT,
 ]);
 
+/**
+ * Determines if a notification represents a sent transaction
+ * @param n - The native sent/receive notification to check
+ * @returns True if the notification is for a sent transaction, false otherwise
+ */
 const isSent = (n: NativeSentReceiveNotification) =>
   n.type === TRIGGER_TYPES.ETH_SENT;
 
+/**
+ * Generates a localized title for the notification based on transaction type and address
+ * @param n - The native sent/receive notification
+ * @returns Formatted title string with address information
+ */
 const title = (n: NativeSentReceiveNotification) => {
   const address = formatAddress(isSent(n) ? n.data.to : n.data.from, 'short');
   return strings(`notifications.menu_item_title.${n.type}`, {
@@ -32,6 +49,10 @@ const title = (n: NativeSentReceiveNotification) => {
   });
 };
 
+/**
+ * Notification state configuration for ETH sent/received notifications
+ * Defines how to create menu items and modal details for native token transactions
+ */
 const state: NotificationState<NativeSentReceiveNotification> = {
   guardFn: isNativeTokenNotification,
   createMenuItem: (notification) => {

@@ -109,6 +109,13 @@ export class IosGoogleLoginHandler extends BaseLoginHandler {
     );
   }
 
+  /**
+   * Constructs the authentication token request data for Google OAuth flow.
+   *
+   * @param params - The flow parameters containing authorization code and related data
+   * @returns The formatted authentication request parameters for the token exchange
+   * @throws {OAuthError} When params don't contain required 'code' property
+   */
   getAuthTokenRequestData(params: HandleFlowParams): AuthRequestParams {
     if (!('code' in params)) {
       throw new OAuthError(

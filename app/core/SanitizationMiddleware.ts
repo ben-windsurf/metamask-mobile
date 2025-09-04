@@ -18,6 +18,12 @@ import { addHexPrefix } from 'ethereumjs-util';
 // - engine_newPayloadV1
 // - engine_newPayloadV2
 // - engine_exchangeTransitionConfigurationV1
+
+/**
+ * List of permitted keys for RPC parameter sanitization.
+ * These keys are allowed in transaction parameters and eth_getLogs filter objects.
+ * Any other keys will be stripped from the parameters during sanitization.
+ */
 export const permittedKeys = [
   'from',
   'to',

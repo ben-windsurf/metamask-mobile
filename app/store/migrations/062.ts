@@ -8,8 +8,13 @@ import {
 } from '../../util/networks/customNetworks';
 import { CHAIN_IDS } from '@metamask/transaction-controller';
 
+/** Chain ID for the Base network */
 const BASE_CHAIN_ID = '0x2105';
+
+/** Infura project ID from environment variables */
 const INFURA_KEY = process.env.MM_INFURA_PROJECT_ID;
+
+/** Processed Infura project ID, empty string if null */
 const infuraProjectId = INFURA_KEY === 'null' ? '' : INFURA_KEY;
 
 /**

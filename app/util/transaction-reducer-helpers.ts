@@ -1,6 +1,19 @@
 import { SecurityAlertResponse } from '@metamask/transaction-controller';
 import type BN from 'bnjs4';
 
+/**
+ * Transaction metadata interface containing standard transaction properties.
+ * @interface TxMeta
+ * @property data - Transaction data payload
+ * @property from - Sender address
+ * @property gas - Gas limit for the transaction
+ * @property gasPrice - Gas price in wei
+ * @property to - Recipient address
+ * @property value - Transaction value in wei
+ * @property maxFeePerGas - Maximum fee per gas for EIP-1559 transactions
+ * @property maxPriorityFeePerGas - Maximum priority fee per gas for EIP-1559 transactions
+ * @property securityAlertResponse - Security alert response from transaction analysis
+ */
 interface TxMeta {
   data?: string;
   from?: string;
@@ -13,6 +26,12 @@ interface TxMeta {
   securityAlertResponse?: SecurityAlertResponse;
 }
 
+/**
+ * Filters out undefined properties from an object, returning only defined properties.
+ * @template T - The type of the input object
+ * @param object - The object to filter
+ * @returns A partial object containing only the defined properties
+ */
 function getDefinedProperties<T extends object>(object: T): Partial<T> {
   return Object.entries(object).reduce(
     (obj, [key, val]) => (val !== undefined ? { ...obj, [key]: val } : obj),

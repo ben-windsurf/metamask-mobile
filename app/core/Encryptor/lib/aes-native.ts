@@ -30,10 +30,25 @@ enum CipherAlgorithmAesCrypto {
   Ctr = 'aes-ctr-pkcs5padding',
 }
 
-// Actual native libraries
+/**
+ * Native AES encryption module from react-native-aes-crypto library.
+ * Provides standard AES encryption/decryption functionality.
+ */
 const Aes = NativeModules.Aes;
+
+/**
+ * Forked version of the native AES encryption module.
+ * Used for legacy compatibility with different iteration parameters.
+ */
 const AesForked = NativeModules.AesForked;
 
+/**
+ * Type guard function that asserts the provided algorithm is a supported KDF algorithm.
+ * Throws an error if the algorithm is not supported.
+ *
+ * @param algorithm - The algorithm string to validate
+ * @throws {Error} When the algorithm is not supported
+ */
 export function assertIsKdfAlgorithm(
   algorithm: string,
 ): asserts algorithm is typeof KDF_ALGORITHM {

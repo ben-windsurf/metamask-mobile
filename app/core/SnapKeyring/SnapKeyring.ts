@@ -35,6 +35,10 @@ export interface SnapKeyringHelpers {
   removeAccountHelper: (address: string) => Promise<void>;
 }
 
+/**
+ * Implementation of SnapKeyringCallbacks for handling Snap keyring operations.
+ * Manages account creation, removal, and user interactions for Snap-based accounts.
+ */
 class SnapKeyringImpl implements SnapKeyringCallbacks {
   readonly #messenger: SnapKeyringBuilderMessenger;
 
@@ -42,6 +46,12 @@ class SnapKeyringImpl implements SnapKeyringCallbacks {
 
   readonly #removeAccountHelper: SnapKeyringHelpers['removeAccountHelper'];
 
+  /**
+   * Creates a new SnapKeyringImpl instance.
+   *
+   * @param messenger - The messenger instance for controller communication
+   * @param helpers - Helper functions for keyring operations
+   */
   constructor(
     messenger: SnapKeyringBuilderMessenger,
     { persistKeyringHelper, removeAccountHelper }: SnapKeyringHelpers,
@@ -51,6 +61,12 @@ class SnapKeyringImpl implements SnapKeyringCallbacks {
     this.#removeAccountHelper = removeAccountHelper;
   }
 
+  /**
+   * Checks if an address already exists in the keyring.
+   *
+   * @param address - The address to check for existence
+   * @returns Promise that resolves to true if the address exists, false otherwise
+   */
   async addressExists(address: string) {
     const addresses = await this.#messenger.call(
       'KeyringController:getAccounts',
@@ -58,10 +74,21 @@ class SnapKeyringImpl implements SnapKeyringCallbacks {
     return addresses.some((addr) => areAddressesEqual(addr, address));
   }
 
+  /**
+   * Saves the current keyring state using the persist helper.
+   *
+   * @returns Promise that resolves when the state is saved
+   */
   async saveState() {
     await this.#persistKeyringHelper();
   }
 
+  /**
+   * Executes a function within an approval flow context.
+   *
+   * @param run - Function to execute within the approval flow
+   * @returns Promise that resolves to the result of the run function
+   */
   private async withApprovalFlow<Return>(
     run: (flowId: string) => Promise<Return>,
   ): Promise<Return> {

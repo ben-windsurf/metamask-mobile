@@ -27,6 +27,10 @@ import {
 } from '@metamask/smart-transactions-controller';
 import { KeyringControllerSignEip7702AuthorizationAction } from '@metamask/keyring-controller';
 
+/**
+ * Union type of all allowed messenger actions for the transaction controller.
+ * Includes actions from accounts, approval, network, keyring, and remote feature flag controllers.
+ */
 type MessengerActions =
   | AccountsControllerGetStateAction
   | AccountsControllerGetSelectedAccountAction
@@ -37,6 +41,10 @@ type MessengerActions =
   | NetworkControllerGetNetworkClientByIdAction
   | RemoteFeatureFlagControllerGetStateAction;
 
+/**
+ * Union type of all allowed messenger events for the transaction controller.
+ * Includes transaction lifecycle events, network state changes, and smart transaction events.
+ */
 type MessengerEvents =
   | TransactionControllerTransactionApprovedEvent
   | TransactionControllerTransactionConfirmedEvent
@@ -49,10 +57,21 @@ type MessengerEvents =
   | SmartTransactionsControllerSmartTransactionEvent
   | SmartTransactionsControllerSmartTransactionConfirmationDoneEvent;
 
+/**
+ * Type representing the restricted messenger instance for transaction controller initialization.
+ * This messenger is used during the initialization phase of the transaction controller.
+ */
 export type TransactionControllerInitMessenger = ReturnType<
   typeof getTransactionControllerInitMessenger
 >;
 
+/**
+ * Creates a restricted messenger instance for the transaction controller.
+ * This messenger provides access to specific actions and events needed by the transaction controller.
+ *
+ * @param messenger - The base messenger instance with full access to actions and events
+ * @returns A restricted messenger instance configured for the transaction controller
+ */
 export function getTransactionControllerMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ): TransactionControllerMessenger {
@@ -72,6 +91,14 @@ export function getTransactionControllerMessenger(
   });
 }
 
+/**
+ * Creates a restricted messenger instance for transaction controller initialization.
+ * This messenger is used during the initialization phase and provides access to
+ * transaction lifecycle events and approval controller actions.
+ *
+ * @param messenger - The base messenger instance with full access to actions and events
+ * @returns A restricted messenger instance configured for transaction controller initialization
+ */
 export function getTransactionControllerInitMessenger(
   messenger: Messenger<MessengerActions, MessengerEvents>,
 ) {

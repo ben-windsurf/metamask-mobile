@@ -30,6 +30,25 @@ import {
 import handleClientsWaiting from './EventListenersHandlers/handleClientsWaiting';
 import setupBridge from '../handlers/setupBridge';
 
+/**
+ * Configuration properties for establishing a connection between the wallet and a dApp.
+ * @interface ConnectionProps
+ * @property id - Unique identifier for the connection channel
+ * @property otherPublicKey - Public key of the connecting dApp
+ * @property privateKey - Optional private key for encryption
+ * @property relayPersistence - Whether to persist the relay connection
+ * @property protocolVersion - Version of the communication protocol to use
+ * @property origin - Origin URL of the connecting dApp
+ * @property reconnect - Whether this is a reconnection attempt
+ * @property trigger - What triggered this connection (deeplink, resume, or reconnect)
+ * @property initialConnection - Whether this is the first connection attempt
+ * @property navigation - React Navigation container reference for routing
+ * @property originatorInfo - Information about the originating dApp
+ * @property connected - Current connection status
+ * @property validUntil - Timestamp when the connection expires
+ * @property scheme - URL scheme used for the connection
+ * @property lastAuthorized - Timestamp of last received activity
+ */
 export interface ConnectionProps {
   id: string;
   otherPublicKey: string;
@@ -52,6 +71,25 @@ export interface ConnectionProps {
 import packageJSON from '../../../../package.json';
 const { version: walletVersion } = packageJSON;
 
+/**
+ * Manages a connection between the MetaMask Mobile wallet and a dApp using the SDK communication layer.
+ * Handles authentication, message routing, lifecycle management, and maintains connection state.
+ *
+ * @extends EventEmitter2
+ * @example
+ * ```typescript
+ * const connection = new Connection({
+ *   id: 'channel-123',
+ *   otherPublicKey: 'dapp-public-key',
+ *   origin: 'https://example-dapp.com',
+ *   socketServerUrl: 'wss://socket.server.com',
+ *   rpcQueueManager: queueManager,
+ *   // ... other required props
+ * });
+ *
+ * connection.connect({ authorized: true, withKeyExchange: true });
+ * ```
+ */
 export class Connection extends EventEmitter2 {
   channelId;
   remote: RemoteCommunication;

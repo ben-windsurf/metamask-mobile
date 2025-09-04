@@ -1,5 +1,19 @@
 import { INFURA_PROJECT_ID } from '../constants/network';
 
+/**
+ * Strips the Infura project ID from an Infura URL endpoint for privacy/security purposes.
+ * Removes both placeholder and actual project ID patterns from the URL.
+ *
+ * @param endpoint - The Infura endpoint URL to strip the key from
+ * @returns The modified endpoint URL with the project ID removed, or undefined if input is undefined
+ *
+ * @example
+ * ```typescript
+ * const url = 'https://mainnet.infura.io/v3/abc123';
+ * const stripped = stripKeyFromInfuraUrl(url);
+ * // Returns: 'https://mainnet.infura.io'
+ * ```
+ */
 const stripKeyFromInfuraUrl = (endpoint: string | undefined) => {
   if (!endpoint) return endpoint;
 

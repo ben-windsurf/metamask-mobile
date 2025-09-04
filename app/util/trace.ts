@@ -15,7 +15,9 @@ import { AGREED, METRICS_OPT_IN } from '../constants/storage';
 import StorageWrapper from '../store/storage-wrapper';
 
 // Cannot create this 'sentry' logger in Sentry util file because of circular dependency
+/** Project logger instance for Sentry-related logging */
 const projectLogger = createProjectLogger('sentry');
+/** Module logger for trace operations */
 const log = createModuleLogger(projectLogger, 'trace');
 /**
  * The supported trace names.
@@ -117,6 +119,10 @@ export enum TraceName {
   EarnPooledStakingClaimTxConfirmed = 'Earn Pooled Staking Claim Tx Confirmed',
 }
 
+/**
+ * Enumeration of supported trace operation types for categorizing traces.
+ * These operations provide semantic meaning to traces for better organization and filtering.
+ */
 export enum TraceOperation {
   LoadScripts = 'load.scripts',
   BiometricAuthentication = 'biometrics.authentication',
@@ -142,12 +148,17 @@ export enum TraceOperation {
   OnboardingError = 'onboarding.error',
 }
 
+/** Default trace identifier used when no ID is provided */
 const ID_DEFAULT = 'default';
+/** Default operation name for custom traces */
 const OP_DEFAULT = 'custom';
+/** Interval in milliseconds for cleaning up stale traces (5 minutes) */
 export const TRACES_CLEANUP_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
+/** Map storing active pending traces by their unique key */
 const tracesByKey: Map<string, PendingTrace> = new Map();
 
+/** Local buffer for traces when consent is not yet determined */
 const localBufferedTraces: BufferedTrace[] = [];
 
 export interface PendingTrace {
@@ -238,14 +249,26 @@ export interface EndTraceRequest {
   data?: Record<string, TraceValue>;
 }
 
+/**
+ * Extended Sentry span interface that includes an optional name property.
+ * Used internally to track span names for parent-child relationships.
+ */
 interface SentrySpanWithName extends Span {
+  /** Optional name property for identifying spans */
   _name?: string;
 }
 
+/**
+ * Represents a buffered trace that is stored locally when consent is not yet determined.
+ * Buffered traces are replayed once user consent is obtained.
+ */
 interface BufferedTrace<T = TraceRequest | EndTraceRequest> {
+  /** Type of trace operation - either starting or ending a trace */
   type: 'start' | 'end';
+  /** The trace request data */
   request: T;
-  parentTraceName?: string; // Track parent trace name for reconnecting during flush
+  /** Track parent trace name for reconnecting during flush */
+  parentTraceName?: string;
 }
 
 export function trace<T>(request: TraceRequest, fn: TraceCallback<T>): T;
@@ -439,10 +462,22 @@ export function updateCachedConsent(consent: boolean) {
   cachedConsent = consent;
 }
 
+/**
+ * Discards all buffered traces without processing them.
+ * Used when user denies consent or when clearing trace data.
+ */
 export function discardBufferedTraces() {
   localBufferedTraces.length = 0; // Clear local buffer as well
 }
 
+/**
+ * Internal function to handle tracing with a callback function.
+ * Manages the complete lifecycle of a trace including error handling and cleanup.
+ *
+ * @param request - The trace request configuration
+ * @param fn - The callback function to trace
+ * @returns The result of the callback function
+ */
 function traceCallback<T>(request: TraceRequest, fn: TraceCallback<T>): T {
   const { name } = request;
 
@@ -493,6 +528,13 @@ function traceCallback<T>(request: TraceRequest, fn: TraceCallback<T>): T {
   );
 }
 
+/**
+ * Internal function to start a manual trace that must be ended explicitly.
+ * Creates a pending trace entry and sets up automatic cleanup.
+ *
+ * @param request - The trace request configuration
+ * @returns The trace context for the started trace
+ */
 function startTrace(request: TraceRequest): TraceContext {
   const { name, startTime: requestStartTime } = request;
   const startTime = requestStartTime ?? getPerformanceTimestamp();

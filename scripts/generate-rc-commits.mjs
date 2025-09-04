@@ -6,6 +6,9 @@ import simpleGit from 'simple-git';
 import { Octokit } from '@octokit/rest';
 
 // "GITHUB_TOKEN" is an automatically generated, repository-specific access token provided by GitHub Actions.
+/**
+ * GitHub token for API authentication
+ */
 const githubToken = process.env.GITHUB_TOKEN;
 if (!githubToken) {
   console.log('GITHUB_TOKEN not found');
@@ -13,8 +16,16 @@ if (!githubToken) {
 }
 
 // Initialize Octokit with your GitHub token
+/**
+ * Octokit instance for GitHub API interactions
+ */
 const octokit = new Octokit({ auth: githubToken});
 
+/**
+ * Retrieves team labels from a GitHub pull request
+ * @param {Array} prNumber - Array containing PR number match from regex
+ * @returns {Promise<Array<string>>} Array of team labels or ['Unknown'] if none found
+ */
 async function getPRLabels(prNumber) {
   try {
     const { data } = await octokit.pulls.get({
@@ -39,7 +50,12 @@ async function getPRLabels(prNumber) {
   }
 }
 
-// Function to filter commits based on unique commit messages and group by teams
+/**
+ * Filters commits between two branches and groups them by team labels
+ * @param {string} branchA - Target branch (newer)
+ * @param {string} branchB - Source branch (older)
+ * @returns {Promise<Object>} Object with team names as keys and commit arrays as values
+ */
 async function filterCommitsByTeam(branchA, branchB) {
   try {
     const git = simpleGit();
@@ -92,6 +108,11 @@ async function filterCommitsByTeam(branchA, branchB) {
   }
 }
 
+/**
+ * Formats commits grouped by team into CSV format
+ * @param {Object} commitsByTeam - Object with team names as keys and commit arrays as values
+ * @returns {Array<string>} Array of CSV rows including header
+ */
 function formatAsCSV(commitsByTeam) {
   const csvContent = [];
   for (const [team, commits] of Object.entries(commitsByTeam)) {
@@ -111,14 +132,22 @@ function formatAsCSV(commitsByTeam) {
   return csvContent;
 }
 
-// Helper function to escape CSV fields
+/**
+ * Escapes CSV fields by wrapping in quotes and escaping internal quotes
+ * @param {string} field - Field value to escape
+ * @returns {string} Escaped field value safe for CSV format
+ */
 function escapeCSV(field) {
   if (field.includes(',') || field.includes('"') || field.includes('\n')) {
     return `"${field.replace(/"/g, '""')}"`; // Encapsulate in double quotes and escape existing quotes
   }
   return field;
 }
-// Helper function to create change type
+/**
+ * Assigns change type based on commit message keywords
+ * @param {string} field - Commit message to analyze
+ * @returns {string} Change type category (Added, Fixed, Changed, Ops, or Unknown)
+ */
 function assignChangeType(field) {
   if (field.includes('feat'))
     return 'Added';
@@ -132,6 +161,10 @@ function assignChangeType(field) {
   return 'Unknown';
 }
 
+/**
+ * Main function that processes command line arguments and generates CSV file
+ * @returns {Promise<void>}
+ */
 async function main() {
   const args = process.argv.slice(2);
   const fileTitle = 'commits.csv';

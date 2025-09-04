@@ -20,6 +20,9 @@ import { ensureValidState } from './util';
  *
  * This migration add MegaETH Testnet to the network controller
  * as a default Testnet.
+ *
+ * @param state - The current Redux state to migrate
+ * @returns The migrated state with MegaETH Testnet configuration added
  */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 72;

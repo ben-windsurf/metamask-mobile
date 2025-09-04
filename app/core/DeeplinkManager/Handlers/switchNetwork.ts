@@ -8,6 +8,15 @@ import { selectEvmChainId } from '../../../selectors/networkController';
 import { store } from '../../../store';
 import { toHex } from '@metamask/controller-utils';
 
+/**
+ * Switches the active network to the specified chain ID via deeplink.
+ * Shows an alert notification when the network switch is successful.
+ *
+ * @param params - The switch network parameters
+ * @param params.deeplinkManager - The deeplink manager instance to dispatch actions
+ * @param params.switchToChainId - The chain ID to switch to, as a string representation of a number
+ * @throws {Error} When unable to find a network with the specified chain ID
+ */
 function switchNetwork({
   deeplinkManager,
   switchToChainId,

@@ -16,7 +16,12 @@ import { toggleBasicFunctionality } from '../actions/settings';
 import Logger from '../util/Logger';
 import devToolsEnhancer from 'redux-devtools-expo-dev-plugin';
 
-// TODO: Improve type safety by using real Action types instead of `AnyAction`
+/**
+ * Persisted reducer that combines the root reducer with persistence configuration.
+ * Handles state hydration and dehydration for Redux store persistence.
+ *
+ * TODO: Improve type safety by using real Action types instead of `AnyAction`
+ */
 const pReducer = persistReducer<RootState, AnyAction>(
   persistConfig,
   rootReducer,
@@ -24,6 +29,12 @@ const pReducer = persistReducer<RootState, AnyAction>(
 
 // eslint-disable-next-line import/no-mutable-exports
 let store: ReduxStore, persistor: Persistor;
+/**
+ * Creates and configures the Redux store with persistence capabilities.
+ * Initializes middleware, sagas, and handles E2E test state loading.
+ *
+ * @returns Promise that resolves when store and persistor are created
+ */
 const createStoreAndPersistor = async () => {
   trace({
     name: TraceName.StoreInit,

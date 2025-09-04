@@ -5,6 +5,11 @@ import {
 } from '@metamask/utils';
 import NavigationService from '../../../core/NavigationService';
 
+/**
+ * Parameters for handling swap URL deeplinks
+ * @interface HandleSwapUrlParams
+ * @property swapPath - The swap URL path containing query parameters for token swap
+ */
 interface HandleSwapUrlParams {
   swapPath: string;
 }

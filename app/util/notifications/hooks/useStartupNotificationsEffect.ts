@@ -20,8 +20,15 @@ import {
 import { useStorageValue } from '../../../store/storage-wrapper-hooks';
 import { SOLANA_FEATURE_MODAL_SHOWN } from '../../../constants/storage';
 
+/**
+ * Configuration object for enabling push notifications with nudge.
+ */
 const showPushNush = { nudgeEnablePush: true };
 
+/**
+ * Custom hook that provides a callback to enable notifications and refresh the notification list.
+ * @returns A callback function that enables notifications and refreshes the list
+ */
 const useEnableAndRefresh = () => {
   const { enableNotifications } = useEnableNotifications(showPushNush);
   const { listNotifications } = useListNotifications();
@@ -34,6 +41,10 @@ const useEnableAndRefresh = () => {
   );
 };
 
+/**
+ * Custom hook that provides notification-related selectors for startup logic.
+ * @returns Object containing notification state flags and requirements
+ */
 const useNotificationStartupSelectors = () => {
   // Base requirements
   const isUnlocked = Boolean(useSelector(selectIsUnlocked));
@@ -58,6 +69,10 @@ const useNotificationStartupSelectors = () => {
   };
 };
 
+/**
+ * Custom hook that registers and fetches notifications on app startup.
+ * Automatically enables notifications and refreshes the list when conditions are met.
+ */
 export function useRegisterAndFetchNotifications() {
   const { isUnlocked, isBasicFunctionalityEnabled, notificationsEnabled } =
     useNotificationStartupSelectors();
@@ -90,6 +105,10 @@ export function useRegisterAndFetchNotifications() {
   ]);
 }
 
+/**
+ * Custom hook that automatically enables notifications by default for new users.
+ * Only enables notifications if the user hasn't previously turned them off and all conditions are met.
+ */
 export function useEnableNotificationsByDefaultEffect() {
   const {
     isUnlocked,

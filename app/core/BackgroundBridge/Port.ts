@@ -6,9 +6,22 @@ import {
 const EventEmitter = require('events').EventEmitter;
 
 /**
- * Module that listens for and responds to messages from an InpageBridge using postMessage for in-app browser
+ * Port class that facilitates communication between the background bridge and in-app browser.
+ * Extends EventEmitter to handle message passing using postMessage for secure cross-frame communication.
+ *
+ * @example
+ * ```typescript
+ * const port = new Port(webView, true);
+ * port.postMessage({ type: 'connect' }, 'https://example.com');
+ * ```
  */
 class Port extends EventEmitter {
+  /**
+   * Creates a new Port instance for browser communication.
+   *
+   * @param browserWindow - The browser window or WebView instance to inject JavaScript into
+   * @param isMainFrame - Whether this port is for the main frame (true) or an iframe (false)
+   */
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(browserWindow: any, isMainFrame: boolean) {
@@ -17,6 +30,13 @@ class Port extends EventEmitter {
     this._isMainFrame = isMainFrame;
   }
 
+  /**
+   * Posts a message to the browser window using JavaScript injection.
+   * Prevents wildcard origins for security and uses appropriate script based on frame type.
+   *
+   * @param msg - The message object to send to the provider
+   * @param origin - The target origin for the message (wildcard '*' not allowed)
+   */
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postMessage = (msg: any, origin: string) => {

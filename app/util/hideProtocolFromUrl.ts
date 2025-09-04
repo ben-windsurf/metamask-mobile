@@ -1,3 +1,17 @@
+/**
+ * Removes the protocol (http://, https://, etc.) from a URL string.
+ *
+ * @param url - The URL string to process, or undefined
+ * @returns The URL without the protocol, or the original input if invalid or undefined
+ *
+ * @example
+ * ```typescript
+ * hideProtocolFromUrl('https://example.com/path') // Returns 'example.com/path'
+ * hideProtocolFromUrl('http://localhost:3000') // Returns 'localhost:3000'
+ * hideProtocolFromUrl(undefined) // Returns undefined
+ * hideProtocolFromUrl('invalid-url') // Returns 'invalid-url'
+ * ```
+ */
 const hideProtocolFromUrl = (url: string | undefined) => {
   if (!url) return url;
 

@@ -1,3 +1,10 @@
+/**
+ * Generates a random integer within the specified range (inclusive).
+ *
+ * @param min - The minimum value (inclusive)
+ * @param max - The maximum value (inclusive)
+ * @returns A random integer between min and max
+ */
 const generateRandomIntegerInRange = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -19,4 +26,8 @@ const generateOTP = (): number[] => {
   return otps;
 };
 
+/**
+ * Default export of the OTP generation utility function.
+ * Generates an array of 3 unique random numbers for OTP verification.
+ */
 export default generateOTP;

@@ -6,36 +6,64 @@ import Matchers from '../../framework/Matchers';
 import Gestures from '../../framework/Gestures';
 import { CommonSelectorsIDs } from '../../selectors/Common.selectors';
 
+/**
+ * Page object model for the Connect Bottom Sheet component in browser interactions.
+ * Provides methods to interact with account connection UI elements during dApp connections.
+ */
 class ConnectBottomSheet {
+  /**
+   * Gets the main container element of the connect bottom sheet.
+   * @returns The container DetoxElement for the connect bottom sheet
+   */
   get container(): DetoxElement {
     return Matchers.getElementByID(
       ConnectAccountBottomSheetSelectorsIDs.CONTAINER,
     );
   }
+  /**
+   * Gets the connect button element with platform-specific selector logic.
+   * @returns The connect button DetoxElement (uses label on Android, ID on iOS)
+   */
   get connectButton(): DetoxElement {
     return device.getPlatform() === 'android'
       ? Matchers.getElementByLabel(CommonSelectorsIDs.CONNECT_BUTTON)
       : Matchers.getElementByID(CommonSelectorsIDs.CONNECT_BUTTON);
   }
 
+  /**
+   * Gets the connect accounts button for connecting multiple accounts.
+   * @returns The connect accounts button DetoxElement
+   */
   get connectAccountsButton(): DetoxElement {
     return Matchers.getElementByText(
       ConnectAccountBottomSheetSelectorsText.CONNECT_ACCOUNTS,
     );
   }
 
+  /**
+   * Gets the import account button for importing accounts or hardware wallets.
+   * @returns The import button DetoxElement
+   */
   get importButton(): DetoxElement {
     return Matchers.getElementByText(
       ConnectAccountBottomSheetSelectorsText.IMPORT_ACCOUNT,
     );
   }
 
+  /**
+   * Gets the select all button for selecting all available accounts.
+   * @returns The select all button DetoxElement
+   */
   get selectAllButton(): DetoxElement {
     return Matchers.getElementByText(
       ConnectAccountBottomSheetSelectorsText.SELECT_ALL,
     );
   }
 
+  /**
+   * Gets the multi-select button for account selection.
+   * @returns The multi-select button DetoxElement
+   */
   get selectMultiButton(): DetoxElement {
     return Matchers.getElementByID(
       ConnectAccountBottomSheetSelectorsIDs.SELECT_MULTI_BUTTON,

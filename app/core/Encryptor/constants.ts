@@ -1,6 +1,9 @@
 import type { KeyDerivationOptions } from './types';
 
+/** Number of bytes used for salt generation in encryption operations */
 export const SALT_BYTES_COUNT = 32;
+
+/** Length of SHA256 digest in bits */
 export const SHA256_DIGEST_LENGTH = 256;
 
 /**
@@ -43,6 +46,10 @@ export const LEGACY_DERIVATION_OPTIONS: KeyDerivationOptions = {
   },
 };
 
+/**
+ * Key derivation options using OWASP 2023 minimum recommended iterations.
+ * Provides baseline security for password-based key derivation.
+ */
 export const DERIVATION_OPTIONS_MINIMUM_OWASP2023: KeyDerivationOptions = {
   algorithm: KDF_ALGORITHM,
   params: {
@@ -50,6 +57,10 @@ export const DERIVATION_OPTIONS_MINIMUM_OWASP2023: KeyDerivationOptions = {
   },
 };
 
+/**
+ * Key derivation options using OWASP 2023 default recommended iterations.
+ * Provides enhanced security for password-based key derivation.
+ */
 export const DERIVATION_OPTIONS_DEFAULT_OWASP2023: KeyDerivationOptions = {
   algorithm: KDF_ALGORITHM,
   params: {

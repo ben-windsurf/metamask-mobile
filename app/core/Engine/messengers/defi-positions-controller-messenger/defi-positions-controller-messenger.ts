@@ -11,8 +11,14 @@ import { TransactionControllerTransactionConfirmedEvent } from '@metamask/transa
 import { Messenger } from '@metamask/base-controller';
 import { RemoteFeatureFlagControllerGetStateAction } from '@metamask/remote-feature-flag-controller';
 
+/**
+ * Actions that the DeFi Positions Controller messenger can dispatch.
+ */
 type Actions = AccountsControllerListAccountsAction;
 
+/**
+ * Events that the DeFi Positions Controller messenger can subscribe to.
+ */
 type Events =
   | KeyringControllerUnlockEvent
   | KeyringControllerLockEvent
@@ -40,12 +46,24 @@ export function getDeFiPositionsControllerMessenger(
   });
 }
 
+/**
+ * Actions that the DeFi Positions Controller initialization messenger can dispatch.
+ */
 type InitActions = RemoteFeatureFlagControllerGetStateAction;
 
+/**
+ * Type for the DeFi Positions Controller initialization messenger.
+ */
 export type DeFiPositionsControllerInitMessenger = ReturnType<
   typeof getDeFiPositionsControllerInitMessenger
 >;
 
+/**
+ * Get a restricted messenger for DeFi Positions Controller initialization.
+ *
+ * @param messenger - The base messenger to restrict.
+ * @returns The restricted initialization messenger.
+ */
 export function getDeFiPositionsControllerInitMessenger(
   messenger: Messenger<InitActions, never>,
 ) {

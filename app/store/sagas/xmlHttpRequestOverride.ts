@@ -26,9 +26,21 @@ if (process.env.JEST_WORKER_ID !== undefined) {
   global.XMLHttpRequest = FakeXMLHttpRequest as any;
 }
 
+/** Original XMLHttpRequest send method before override */
 const originalSend = global.XMLHttpRequest.prototype.send;
+/** Original XMLHttpRequest open method before override */
 const originalOpen = global.XMLHttpRequest.prototype.open;
 
+/**
+ * Overrides the global XMLHttpRequest to block requests to URLs in the basic functionality block list.
+ * This is used to prevent certain network requests that could compromise user privacy or security.
+ *
+ * @example
+ * ```typescript
+ * overrideXMLHttpRequest();
+ * // Now all XMLHttpRequest calls will be filtered through the block list
+ * ```
+ */
 export function overrideXMLHttpRequest() {
   // Store the URL of the current request - only valid under assumption of no new requests being initiated between `open` and `send` of one
   let currentUrl = '';
@@ -80,6 +92,16 @@ export function overrideXMLHttpRequest() {
   };
 }
 
+/**
+ * Restores the original XMLHttpRequest methods, removing the blocking override.
+ * This should be called to clean up after overrideXMLHttpRequest().
+ *
+ * @example
+ * ```typescript
+ * restoreXMLHttpRequest();
+ * // XMLHttpRequest is now back to its original behavior
+ * ```
+ */
 export function restoreXMLHttpRequest() {
   global.XMLHttpRequest.prototype.open = originalOpen;
   global.XMLHttpRequest.prototype.send = originalSend;

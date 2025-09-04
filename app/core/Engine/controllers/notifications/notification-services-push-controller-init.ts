@@ -8,6 +8,11 @@ import { ControllerInitFunction } from '../../types';
 import Logger from '../../../../util/Logger';
 import { createNotificationServicesPushController } from './create-notification-services-push-controller';
 
+/**
+ * Logs the creation of the NotificationServicesPushController with appropriate state information.
+ *
+ * @param initialState - Optional partial state to initialize the controller with
+ */
 const logControllerCreation = (
   initialState?: Partial<NotificationServicesPushControllerState>,
 ) => {
@@ -25,6 +30,13 @@ const logControllerCreation = (
   }
 };
 
+/**
+ * Initializes the NotificationServicesPushController with the provided configuration.
+ * Creates and configures the controller instance for handling push notification services.
+ *
+ * @param request - Controller initialization request containing messenger and persisted state
+ * @returns Object containing the initialized NotificationServicesPushController instance
+ */
 export const notificationServicesPushControllerInit: ControllerInitFunction<
   NotificationServicesPushController,
   NotificationServicesPushControllerMessenger

@@ -3,6 +3,29 @@ import BatchRPCManager, { BatchRPCState } from '../BatchRPCManager';
 import DevLogger from '../utils/DevLogger';
 import { wait } from '../utils/wait.util';
 
+/**
+ * Handles batch RPC response processing for SDK Connect.
+ * Manages the sequential execution of batched RPC calls and aggregates responses.
+ *
+ * @param params - Configuration object for batch RPC response handling
+ * @param params.chainRpcs - Current state of the batch RPC chain
+ * @param params.batchRPCManager - Manager instance for batch RPC operations
+ * @param params.backgroundBridge - Optional background bridge for message handling
+ * @param params.msg - The RPC response message to process
+ * @param params.sendMessage - Function to send messages back to the client
+ * @returns Promise that resolves to true if this was the last RPC or an error occurred
+ *
+ * @example
+ * ```typescript
+ * const isComplete = await handleBatchRpcResponse({
+ *   chainRpcs: batchState,
+ *   batchRPCManager: manager,
+ *   backgroundBridge: bridge,
+ *   msg: responseMessage,
+ *   sendMessage: ({ msg }) => sendToClient(msg)
+ * });
+ * ```
+ */
 export const handleBatchRpcResponse = async ({
   chainRpcs,
   batchRPCManager,

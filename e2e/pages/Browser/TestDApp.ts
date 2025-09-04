@@ -8,15 +8,28 @@ import { TestDappSelectorsWebIDs } from '../../selectors/Browser/TestDapp.select
 import Browser from '../Browser/BrowserView';
 import { TapOptions, Utilities } from '../../framework';
 
+/** Text for the confirm button from localization */
 const CONFIRM_BUTTON_TEXT = enContent.confirmation_modal.confirm_cta;
+/** Text for the approve button from localization */
 const APPROVE_BUTTON_TEXT = enContent.transactions.tx_review_approve;
+/** Text for the connect button */
 const CONNECT_BUTTON_TEXT = 'Connect';
+/** Text prefix for displaying connected accounts */
 const DAPP_ACCOUNTS_TEXT = 'Accounts:';
 
+/**
+ * Parameters for navigating to a contract in the test dApp
+ * @interface ContractNavigationParams
+ * @property contractAddress - The address of the contract to navigate to
+ */
 interface ContractNavigationParams {
   contractAddress: string;
 }
 
+/**
+ * Page object model for interacting with the MetaMask test dApp
+ * Provides methods for connecting to the dApp and performing various blockchain operations
+ */
 class TestDApp {
   get confirmButtonText(): DetoxElement {
     return Matchers.getElementByText(CONFIRM_BUTTON_TEXT);
@@ -251,7 +264,7 @@ class TestDApp {
 
   /**
    * Checks if the user is connected to the test dapp by checking if there are connected accounts
-   * @returns true if connected, false otherwise
+   * @returns Promise that resolves to true if connected, false otherwise
    */
   async isConnectedToTestDapp(): Promise<boolean> {
     return Utilities.executeWithRetry(
@@ -272,6 +285,10 @@ class TestDApp {
     );
   }
 
+  /**
+   * Connects to the test dApp by tapping the connect button
+   * @returns Promise that resolves when the connection is initiated
+   */
   async connect(): Promise<void> {
     await Gestures.waitAndTap(this.DappConnectButton, {
       elemDescription: 'Dapp connect button',
@@ -410,6 +427,12 @@ class TestDApp {
     });
   }
 
+  /**
+   * Generic method to tap a button element in the test dApp
+   * @param elementId - The web element to tap
+   * @param options - Optional tap configuration options
+   * @returns Promise that resolves when the tap is completed
+   */
   async tapButton(
     elementId: WebElement,
     options: TapOptions = {},
@@ -418,6 +441,11 @@ class TestDApp {
     await Gestures.tap(elementId, options);
   }
 
+  /**
+   * Navigates to the test dApp with a specific contract address
+   * @param params - Navigation parameters containing the contract address
+   * @returns Promise that resolves when navigation is complete
+   */
   async navigateToTestDappWithContract({
     contractAddress,
   }: ContractNavigationParams): Promise<void> {

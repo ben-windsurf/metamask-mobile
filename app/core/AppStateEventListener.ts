@@ -8,6 +8,10 @@ import ReduxService from './redux';
 import generateDeviceAnalyticsMetaData from '../util/metrics';
 import generateUserSettingsAnalyticsMetaData from '../util/metrics/UserSettingsAnalyticsMetaData/generateUserProfileAnalyticsMetaData';
 
+/**
+ * Manages app state changes and handles analytics tracking when the app becomes active.
+ * Processes deeplinks and attribution data, and tracks user engagement metrics.
+ */
 export class AppStateEventListener {
   private appStateSubscription:
     | ReturnType<typeof AppState.addEventListener>
@@ -17,10 +21,18 @@ export class AppStateEventListener {
   public pendingDeeplink: string | null = null;
   private lastAppState: AppStateStatus = AppState.currentState;
 
+  /**
+   * Creates a new AppStateEventListener instance.
+   * Initializes the last app state to the current state.
+   */
   constructor() {
     this.lastAppState = AppState.currentState;
   }
 
+  /**
+   * Starts listening for app state changes.
+   * Sets up an event listener that triggers analytics processing when the app becomes active.
+   */
   start() {
     if (this.appStateSubscription) {
       // Already started
@@ -32,11 +44,19 @@ export class AppStateEventListener {
     );
   }
 
+  /**
+   * Sets the current deeplink for attribution tracking.
+   *
+   * @param deeplink - The deeplink URL to track, or null to clear
+   */
   public setCurrentDeeplink(deeplink: string | null) {
     this.currentDeeplink = deeplink;
     this.pendingDeeplink = deeplink;
   }
 
+  /**
+   * Clears the pending deeplink after it has been processed.
+   */
   public clearPendingDeeplink() {
     this.pendingDeeplink = null;
   }
@@ -89,10 +109,18 @@ export class AppStateEventListener {
     }
   };
 
+  /**
+   * Cleans up the app state event listener.
+   * Removes the event subscription and resets the subscription reference.
+   */
   public cleanup() {
     this.appStateSubscription?.remove();
     this.appStateSubscription = undefined;
   }
 }
 
+/**
+ * Global instance of the AppStateEventListener for managing app state changes
+ * and analytics tracking throughout the application.
+ */
 export const AppStateEventProcessor = new AppStateEventListener();

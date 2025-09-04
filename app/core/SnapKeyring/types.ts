@@ -20,6 +20,11 @@ import type {
 } from '@metamask/approval-controller';
 import { SnapKeyringAllowedActions } from '@metamask/eth-snap-keyring';
 
+/**
+ * Union type of all allowed actions for the SnapKeyring builder messenger.
+ * Combines approval controller actions, phishing controller actions, keyring actions,
+ * permission actions, and accounts controller actions that the SnapKeyring can perform.
+ */
 export type SnapKeyringBuilderAllowActions =
   | StartFlow
   | EndFlow
@@ -39,6 +44,11 @@ export type SnapKeyringBuilderAllowActions =
   | AccountsControllerSetAccountNameAndSelectAccountAction
   | SnapKeyringAllowedActions;
 
+/**
+ * Restricted messenger type for the SnapKeyring builder.
+ * Provides controlled communication interface for SnapKeyring operations
+ * with specific allowed actions and no allowed events.
+ */
 export type SnapKeyringBuilderMessenger = RestrictedMessenger<
   'SnapKeyring',
   SnapKeyringBuilderAllowActions,

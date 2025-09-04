@@ -1,5 +1,9 @@
 import enContent from '../../../locales/languages/en.json';
 
+/**
+ * Selector IDs for the Forgot Password Modal elements used in end-to-end testing.
+ * Contains test identifiers for all interactive elements within the forgot password flow.
+ */
 export const ForgotPasswordModalSelectorsIDs = {
   CONTAINER: 'forgot-password-modal-container',
   TITLE: 'forgot-password-modal-title',
@@ -11,6 +15,10 @@ export const ForgotPasswordModalSelectorsIDs = {
   BACK_BUTTON: 'forgot-password-modal-back-button',
 };
 
+/**
+ * Text selectors for the Forgot Password Modal elements used in end-to-end testing.
+ * Contains localized text content for validation and interaction in automated tests.
+ */
 export const ForgotPasswordModalSelectorsText = {
   TITLE: enContent.login.forgot_password_desc, // 'Forgot your password?',
   DESCRIPTION: enContent.login.forgot_password_desc_2, // 'MetaMask can\'t recover your password for you.',

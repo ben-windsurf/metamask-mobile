@@ -1,8 +1,14 @@
+/**
+ * Ethereum action types for deep link handling
+ */
 export enum ETH_ACTIONS {
   TRANSFER = 'transfer',
   APPROVE = 'approve',
 }
 
+/**
+ * Supported protocols for deep link parsing and handling
+ */
 export enum PROTOCOLS {
   HTTP = 'http',
   HTTPS = 'https',
@@ -12,6 +18,9 @@ export enum PROTOCOLS {
   METAMASK = 'metamask',
 }
 
+/**
+ * Available deep link actions that can be triggered from external sources
+ */
 export enum ACTIONS {
   DAPP = 'dapp',
   SEND = 'send',
@@ -32,6 +41,9 @@ export enum ACTIONS {
   OAUTH_REDIRECT = 'oauth-redirect',
 }
 
+/**
+ * URL prefixes mapped to each deep link action type for proper URL construction
+ */
 export const PREFIXES = {
   [ACTIONS.DAPP]: 'https://',
   [ACTIONS.SEND]: 'ethereum:',

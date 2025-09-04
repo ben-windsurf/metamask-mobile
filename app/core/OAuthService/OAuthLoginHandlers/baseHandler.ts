@@ -50,6 +50,13 @@ export async function getAuthTokens(
   );
 }
 
+/**
+ * Configuration options for OAuth login handlers.
+ * @interface BaseHandlerOptions
+ * @property authServerUrl - The URL of the authentication server
+ * @property clientId - The client ID for the OAuth application (Google client ID, Apple Service ID, etc.)
+ * @property web3AuthNetwork - The Web3Auth network identifier (sapphire_mainnet, sapphire_devnet, etc.)
+ */
 export interface BaseHandlerOptions {
   authServerUrl: string;
   clientId: string;

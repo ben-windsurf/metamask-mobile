@@ -21,6 +21,13 @@ import { ensureValidState } from './util';
  * This migration add Monad Testnet to the network controller
  * as a default Testnet.
  */
+/**
+ * Migrates the state to add Monad Testnet network configuration to the NetworkController.
+ * This migration ensures that Monad Testnet is available as a default testnet option.
+ *
+ * @param state - The current application state to migrate
+ * @returns The migrated state with Monad Testnet configuration added
+ */
 const migration = (state: unknown): unknown => {
   const migrationVersion = 83;
 

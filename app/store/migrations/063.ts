@@ -7,18 +7,36 @@ import {
 } from '@metamask/smart-transactions-controller/dist/types';
 import { TransactionStatus, CHAIN_IDS } from '@metamask/transaction-controller';
 
+/**
+ * Migration version number for this migration script.
+ */
 const migrationVersion = 63;
 
+/**
+ * State structure for smart transactions organized by chain ID.
+ */
 interface SmartTransactionsState {
+  /** Smart transactions mapped by chain ID */
   smartTransactions: {
     [chainId: string]: SmartTransaction[];
   };
 }
 
+/**
+ * Controller state structure for the SmartTransactionsController.
+ */
 interface SmartTransactionsControllerState {
+  /** The smart transactions state */
   smartTransactionsState: SmartTransactionsState;
 }
 
+/**
+ * Migration function to update smart transaction statuses to failed when they are cancelled, unknown, or resolved.
+ * This migration addresses smart transactions that should be marked as failed in the transaction controller.
+ *
+ * @param state - The application state to migrate
+ * @returns The migrated state with updated transaction statuses
+ */
 export default function migrate(state: unknown) {
   if (!ensureValidState(state, migrationVersion)) {
     return state;

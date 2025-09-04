@@ -7,39 +7,53 @@ import Matchers from '../../framework/Matchers';
 import TestHelpers from '../../helpers.js';
 import Assertions from '../../framework/Assertions';
 
+/**
+ * Page object model for the main wallet view in MetaMask mobile app.
+ * Provides methods to interact with wallet elements including tokens, NFTs, DeFi positions,
+ * and various wallet actions like buy, swap, send, and receive.
+ */
 class WalletView {
+  /** Maximum number of scroll iterations when scrolling through token lists */
   static readonly MAX_SCROLL_ITERATIONS = 8;
 
+  /** Gets the main wallet container element */
   get container(): DetoxElement {
     return Matchers.getElementByID(WalletViewSelectorsIDs.WALLET_CONTAINER);
   }
 
+  /** Gets the earn/stake button element */
   get earnButton(): DetoxElement {
     return Matchers.getElementByID(WalletViewSelectorsIDs.STAKE_BUTTON);
   }
 
+  /** Gets the staked Ethereum label element */
   get stakedEthereumLabel(): DetoxElement {
     return Matchers.getElementByText(WalletViewSelectorsText.STAKED_ETHEREUM);
   }
 
+  /** Gets the stake more button element */
   get stakeMoreButton(): DetoxElement {
     return Matchers.getElementByID(WalletViewSelectorsIDs.STAKE_MORE_BUTTON);
   }
 
+  /** Gets the token detection link button element */
   get tokenDetectionLinkButton(): DetoxElement {
     return Matchers.getElementByID(
       WalletViewSelectorsIDs.WALLET_TOKEN_DETECTION_LINK_BUTTON,
     );
   }
 
+  /** Gets the account icon element */
   get accountIcon(): DetoxElement {
     return Matchers.getElementByID(WalletViewSelectorsIDs.ACCOUNT_ICON);
   }
 
+  /** Gets the eye slash icon element for toggling balance visibility */
   get eyeSlashIcon(): DetoxElement {
     return Matchers.getElementByID(WalletViewSelectorsIDs.EYE_SLASH_ICON);
   }
 
+  /** Gets the notification bell icon element */
   get notificationBellIcon(): DetoxElement {
     return Matchers.getElementByID(
       WalletViewSelectorsIDs.WALLET_NOTIFICATIONS_BUTTON,

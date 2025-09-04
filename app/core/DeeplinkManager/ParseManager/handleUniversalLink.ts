@@ -20,6 +20,10 @@ const {
   MM_IO_UNIVERSAL_LINK_TEST_HOST,
 } = AppConstants;
 
+/**
+ * Supported actions for universal link handling.
+ * Maps to corresponding deeplink actions for different app features.
+ */
 enum SUPPORTED_ACTIONS {
   DAPP = ACTIONS.DAPP,
   BUY = ACTIONS.BUY,
@@ -31,6 +35,19 @@ enum SUPPORTED_ACTIONS {
   SEND = ACTIONS.SEND,
 }
 
+/**
+ * Handles universal link processing for MetaMask mobile app.
+ * Validates the URL, checks signatures for private links, and routes to appropriate handlers.
+ *
+ * @param params - Configuration object for universal link handling
+ * @param params.instance - DeeplinkManager instance to handle the routing
+ * @param params.handled - Callback to mark the link as handled
+ * @param params.urlObj - Parsed URL object containing hostname and path information
+ * @param params.browserCallBack - Optional callback for browser URL handling
+ * @param params.url - Original URL string to process
+ * @param params.source - Source identifier for the link origin
+ * @returns Promise that resolves to false if user cancels, undefined otherwise
+ */
 async function handleUniversalLink({
   instance,
   handled,
@@ -166,4 +183,8 @@ async function handleUniversalLink({
   }
 }
 
+/**
+ * Default export of the universal link handler function.
+ * Processes MetaMask universal links and routes them to appropriate app features.
+ */
 export default handleUniversalLink;

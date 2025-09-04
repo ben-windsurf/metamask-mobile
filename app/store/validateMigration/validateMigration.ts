@@ -7,6 +7,10 @@ import { validateAccountsController } from './accountsController';
 import { validateKeyringController } from './keyringController';
 import { validateEngineInitialized } from './engineBackgroundState';
 
+/**
+ * Array of validation checks to run after migration.
+ * Each check validates a specific part of the application state.
+ */
 const checks: ValidationCheck[] = [
   validateEngineInitialized,
   validateAccountsController,
@@ -14,8 +18,10 @@ const checks: ValidationCheck[] = [
 ];
 
 /**
- * Runs all validations and logs any errors, but doesn’t throw.
+ * Runs all validations and logs any errors, but doesn't throw.
  * This makes sure your app keeps running even if some data is unexpected.
+ *
+ * @param state - The root Redux state to validate after migration
  */
 export function validatePostMigrationState(state: RootState): void {
   Logger.log('Migration validation started');

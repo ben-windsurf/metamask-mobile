@@ -1,5 +1,9 @@
 import { merge } from 'lodash';
 
+/**
+ * Mock state configuration with smart transactions enabled.
+ * Used for testing scenarios where smart transactions are active.
+ */
 export const enabledSmartTransactionsState = {
   engine: {
     backgroundState: {
@@ -56,6 +60,10 @@ export const enabledSmartTransactionsState = {
   },
 };
 
+/**
+ * Mock state configuration with smart transactions disabled.
+ * Merges the enabled state with overrides to disable smart transactions.
+ */
 export const disabledSmartTransactionsState = merge(
   {},
   enabledSmartTransactionsState,

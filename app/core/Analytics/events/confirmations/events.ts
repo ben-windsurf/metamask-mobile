@@ -3,6 +3,10 @@ import {
   EVENT_NAME as METRICS_EVENT_NAME,
 } from '../../MetaMetrics.events';
 
+/**
+ * Event names for confirmation-related analytics tracking.
+ * These events are used to track user interactions within confirmation screens.
+ */
 enum EVENT_NAME {
   ADVANCED_DETAILS_CLICKED = 'Confirmation Advanced Details Clicked',
   BLOCKAID_ALERT_LINK_CLICKED = 'Blockaid Alert Link Clicked',
@@ -10,6 +14,10 @@ enum EVENT_NAME {
   SCREEN_VIEWED = 'Confirmation Screen Viewed',
 }
 
+/**
+ * Event names for transaction lifecycle analytics tracking.
+ * These events track the various states and actions of transactions.
+ */
 enum TRANSACTION_EVENT_NAMES {
   TRANSACTION_ADDED = 'Transaction Added',
   TRANSACTION_APPROVED = 'Transaction Approved',
@@ -20,10 +28,20 @@ enum TRANSACTION_EVENT_NAMES {
   TRANSACTION_SUBMITTED = 'Transaction Submitted',
 }
 
-// This function helps prevent repeat of type conversions
+/**
+ * Creates a MetaMetrics event object from an event name.
+ * This function helps prevent repeat of type conversions.
+ *
+ * @param name - The event name from either EVENT_NAME or TRANSACTION_EVENT_NAMES enum
+ * @returns A MetaMetrics event object ready for tracking
+ */
 const createEvent = (name: EVENT_NAME | TRANSACTION_EVENT_NAMES) =>
   generateOpt(name as unknown as METRICS_EVENT_NAME);
 
+/**
+ * Pre-configured confirmation events for MetaMetrics tracking.
+ * These events track user interactions within confirmation screens.
+ */
 export const CONFIRMATION_EVENTS = {
   ADVANCED_DETAILS_CLICKED: createEvent(EVENT_NAME.ADVANCED_DETAILS_CLICKED),
   BLOCKAID_ALERT_LINK_CLICKED: createEvent(
@@ -33,6 +51,10 @@ export const CONFIRMATION_EVENTS = {
   TOOLTIP_CLICKED: createEvent(EVENT_NAME.TOOLTIP_CLICKED),
 };
 
+/**
+ * Pre-configured transaction events for MetaMetrics tracking.
+ * These events track the lifecycle and state changes of transactions.
+ */
 export const TRANSACTION_EVENTS = {
   TRANSACTION_ADDED: createEvent(TRANSACTION_EVENT_NAMES.TRANSACTION_ADDED),
   TRANSACTION_APPROVED: createEvent(

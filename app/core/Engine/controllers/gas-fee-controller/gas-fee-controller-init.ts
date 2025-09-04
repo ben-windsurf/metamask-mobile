@@ -11,11 +11,21 @@ import { addHexPrefix } from '../../../../util/number';
 import { isMainnetByChainId } from '../../../../util/networks';
 import { type GasFeeControllerMessenger } from '../../messengers/gas-fee-controller-messenger/gas-fee-controller-messenger';
 
+/** API endpoint for legacy gas price estimation */
 const LEGACY_GAS_API_ENDPOINT =
   'https://gas.api.cx.metamask.io/networks/<chain_id>/gasPrices';
+
+/** API endpoint for EIP-1559 gas fee estimation */
 const EIP1559_API_ENDPOINT =
   'https://gas.api.cx.metamask.io/networks/<chain_id>/suggestedGasFees';
 
+/**
+ * Initializes the GasFeeController with network-specific gas estimation capabilities.
+ * Configures API endpoints for both legacy and EIP-1559 gas fee estimation.
+ *
+ * @param request - Controller initialization request containing messenger and dependencies
+ * @returns Object containing the initialized GasFeeController instance
+ */
 export const GasFeeControllerInit: ControllerInitFunction<
   GasFeeController,
   GasFeeControllerMessenger
@@ -52,6 +62,12 @@ export const GasFeeControllerInit: ControllerInitFunction<
   }
 };
 
+/**
+ * Retrieves required controller dependencies for GasFeeController initialization.
+ *
+ * @param request - Controller initialization request
+ * @returns Object containing NetworkController instance
+ */
 function getControllers(
   request: ControllerInitRequest<GasFeeControllerMessenger>,
 ) {

@@ -7,6 +7,18 @@ import Browser from '../../pages/Browser/BrowserView';
 import TabBarComponent from '../../pages/wallet/TabBarComponent';
 import Assertions from '../../framework/Assertions';
 
+/**
+ * Extracts the host portion from a URL string.
+ *
+ * @param url - The URL string to extract the host from
+ * @returns The host portion of the URL, or the original URL if parsing fails
+ *
+ * @example
+ * ```typescript
+ * const host = getHostFromURL('https://example.com/path');
+ * // Returns: 'example.com'
+ * ```
+ */
 const getHostFromURL = (url: string): string => {
   try {
     const urlObj = new URL(url);
@@ -18,6 +30,20 @@ const getHostFromURL = (url: string): string => {
   }
 };
 
+/**
+ * Test helper function that sets up browser testing environment with fixtures.
+ * Handles app login, navigation to browser tab, and executes the provided test function.
+ *
+ * @param fn - The test function to execute within the browser context
+ *
+ * @example
+ * ```typescript
+ * await withBrowser(async () => {
+ *   await Browser.navigateToURL('https://example.com');
+ *   // Test browser functionality
+ * });
+ * ```
+ */
 const withBrowser = async (fn: () => Promise<void>) => {
   await withFixtures(
     {

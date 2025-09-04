@@ -8,6 +8,11 @@ import { ControllerInitFunction } from '../../types';
 import Logger from '../../../../util/Logger';
 import { createNotificationServicesController } from './create-notification-services-controller';
 
+/**
+ * Logs the creation of the NotificationServicesController with appropriate state information.
+ *
+ * @param initialState - Optional partial initial state for the controller
+ */
 const logControllerCreation = (
   initialState?: Partial<NotificationServicesControllerState>,
 ) => {
@@ -20,6 +25,13 @@ const logControllerCreation = (
   }
 };
 
+/**
+ * Initializes the NotificationServicesController with the provided configuration.
+ * Creates and configures the controller instance with persisted state or default state.
+ *
+ * @param request - Controller initialization request containing messenger and persisted state
+ * @returns Object containing the initialized NotificationServicesController instance
+ */
 export const notificationServicesControllerInit: ControllerInitFunction<
   NotificationServicesController,
   NotificationServicesControllerMessenger

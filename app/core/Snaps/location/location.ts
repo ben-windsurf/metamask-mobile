@@ -8,6 +8,10 @@ import {
   type NpmOptions,
 } from '@metamask/snaps-controllers';
 
+/**
+ * Options for detecting snap location, combining package detection options with NPM-specific options.
+ * Extends the base detection options with NPM registry configuration.
+ */
 export type DetectSnapLocationOptions = DetectSnapLocationOptionsFromPackage &
   NpmOptions;
 

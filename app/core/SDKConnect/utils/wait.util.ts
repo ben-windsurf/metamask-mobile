@@ -7,12 +7,25 @@ import { Connection } from '../Connection';
 import { isE2E } from '../../../util/test/utils';
 import { store } from '../../../../app/store/index';
 
+/** Maximum number of iterations for queue loops before timing out */
 export const MAX_QUEUE_LOOP = Infinity;
+
+/**
+ * Creates a promise that resolves after a specified delay
+ * @param ms - The number of milliseconds to wait
+ * @returns A promise that resolves after the specified delay
+ */
 export const wait = (ms: number) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 
+/**
+ * Waits for a client with the specified ID to become ready in the connected clients map
+ * @param id - The client ID to wait for
+ * @param connectedClients - Map of connected clients by their IDs
+ * @param waitTime - Time to wait between checks in milliseconds (default: 200)
+ */
 export const waitForReadyClient = async (
   id: string,
   connectedClients: {
@@ -66,6 +79,11 @@ export const waitForCondition = async ({
 
 /**
  * Similar to `waitForCondition`, but for asynchronous conditions that return a promise.
+ * Repeatedly polls an async function until it returns true.
+ * @param params - Configuration object for the async wait condition
+ * @param params.fn - An async function that returns a boolean promise
+ * @param params.context - Optional context information for logging
+ * @param params.waitTime - Time to wait between polls in milliseconds (default: 1000)
  */
 export const waitForAsyncCondition = async ({
   fn,
@@ -86,6 +104,13 @@ export const waitForAsyncCondition = async ({
   }
 };
 
+/**
+ * Waits for a connection to reach ready state
+ * @param params - Configuration object
+ * @param params.connection - The connection to wait for
+ * @param params.waitTime - Time to wait between checks in milliseconds (default: 1000)
+ * @throws Error if connection timeout occurs
+ */
 export const waitForConnectionReadiness = async ({
   connection,
   waitTime = 1000,
@@ -103,6 +128,14 @@ export const waitForConnectionReadiness = async ({
   }
 };
 
+/**
+ * Waits for the keychain to be unlocked by polling the keyring controller
+ * @param params - Configuration object
+ * @param params.keyringController - The keyring controller to check unlock status
+ * @param params.context - Optional context information for logging
+ * @param params.waitTime - Time to wait between checks in milliseconds (default: 1000)
+ * @returns Promise that resolves to true when keychain is unlocked
+ */
 export const waitForKeychainUnlocked = async ({
   context,
   keyringController,
@@ -140,6 +173,13 @@ export const waitForKeychainUnlocked = async ({
   return unlocked;
 };
 
+/**
+ * Waits for the user to be logged in by checking the Redux store state
+ * @param params - Configuration object
+ * @param params.context - Optional context information for logging
+ * @param params.waitTime - Time to wait between checks in milliseconds (default: 1000)
+ * @returns Promise that resolves to true when user is logged in
+ */
 export const waitForUserLoggedIn = async ({
   context,
   waitTime = 1000,

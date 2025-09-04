@@ -1,4 +1,9 @@
 // Only keep selectors that are actually used in tests
+
+/**
+ * Web element IDs for TestSnap view components used in end-to-end testing.
+ * Contains selectors for various BIP32/BIP44 operations, network access, and signing functions.
+ */
 export const TestSnapViewSelectorWebIDS = {
   connectBip32Button: 'connectbip32',
   connectBip44Button: 'connectbip44',
@@ -21,6 +26,10 @@ export const TestSnapViewSelectorWebIDS = {
   signTypedDataButton: 'signTypedDataButton',
 };
 
+/**
+ * Web element IDs for TestSnap input fields used in end-to-end testing.
+ * Contains selectors for message inputs across different cryptographic operations.
+ */
 export const TestSnapInputSelectorWebIDS = {
   messageBip44Input: 'bip44Message',
   messageEd25519Bip32Input: 'bip32Message-ed25519Bip32',
@@ -31,12 +40,20 @@ export const TestSnapInputSelectorWebIDS = {
   signTypedDataMessageInput: 'signTypedData',
 };
 
+/**
+ * Web element IDs for entropy dropdown selectors used in TestSnap end-to-end testing.
+ * Contains selectors for BIP32/BIP44 entropy selection and network dropdown components.
+ */
 export const EntropyDropDownSelectorWebIDS = {
   bip32EntropyDropDown: 'bip32-entropy-selector',
   bip44EntropyDropDown: 'bip44-entropy-selector',
   networkDropDown: 'select-chain',
 };
 
+/**
+ * Web element IDs for TestSnap result display elements used in end-to-end testing.
+ * Contains selectors for result spans that display outcomes of various cryptographic operations.
+ */
 export const TestSnapResultSelectorWebIDS = {
   bip44ResultSpan: 'bip44Result',
   bip44SignResultSpan: 'bip44SignResult',
@@ -50,6 +67,10 @@ export const TestSnapResultSelectorWebIDS = {
   signTypedDataResultSpan: 'signTypedDataResult',
 };
 
+/**
+ * Web element IDs for TestSnap bottom sheet components used in end-to-end testing.
+ * Contains selectors for bottom sheet footer buttons and related UI elements.
+ */
 export const TestSnapBottomSheetSelectorWebIDS = {
   BOTTOMSHEET_FOOTER_BUTTON_ID: 'bottomsheetfooter-button-subsequent',
 };

@@ -148,4 +148,9 @@ class QuickCryptoEncryptionLibrary implements EncryptionLibrary {
   };
 }
 
+/**
+ * Singleton instance of the QuickCrypto encryption library.
+ * Provides encryption, decryption, key derivation, and IV generation functionality
+ * using the react-native-quick-crypto library.
+ */
 export const QuickCryptoLib = new QuickCryptoEncryptionLibrary();

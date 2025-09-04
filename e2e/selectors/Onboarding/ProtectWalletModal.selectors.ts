@@ -1,3 +1,7 @@
+/**
+ * Selector IDs for the Protect Wallet Modal component used in end-to-end testing.
+ * Contains all the testID values needed to interact with wallet protection modal elements.
+ */
 export const ProtectWalletModalSelectorsIDs = {
   CONTAINER: 'protect-wallet-modal',
   REMIND_ME_LATER_BUTTON: 'notification-remind-later-button',

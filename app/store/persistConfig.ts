@@ -10,9 +10,15 @@ import { UserState } from '../reducers/user';
 import Engine, { EngineContext } from '../core/Engine';
 import { getPersistentState } from './getPersistentState/getPersistentState';
 
+/** Timeout duration for storage operations in milliseconds */
 const TIMEOUT = 40000;
+/** Delay for throttling storage operations in milliseconds */
 const STORAGE_THROTTLE_DELAY = 200;
 
+/**
+ * Storage adapter that handles migration from AsyncStorage to FilesystemStorage.
+ * Attempts to read from the new filesystem storage first, then falls back to AsyncStorage for migration.
+ */
 const MigratedStorage = {
   async getItem(key: string) {
     try {
@@ -111,6 +117,10 @@ const persistTransform = createTransform(
   { whitelist: ['engine'] },
 );
 
+/**
+ * Transform middleware for user state persistence.
+ * Excludes transient UI state fields that should not be persisted across app sessions.
+ */
 const persistUserTransform = createTransform(
   (inboundState: UserState) => {
     const { initialScreen, isAuthChecked, appServicesReady, ...state } =
@@ -122,6 +132,10 @@ const persistUserTransform = createTransform(
   { whitelist: ['user'] },
 );
 
+/**
+ * Transform middleware for onboarding state persistence.
+ * Excludes event data that should not be persisted across app sessions.
+ */
 const persistOnboardingTransform = createTransform(
   (inboundState: RootState['onboarding']) => {
     const { events, ...state } = inboundState;
@@ -132,6 +146,10 @@ const persistOnboardingTransform = createTransform(
   { whitelist: ['onboarding'] },
 );
 
+/**
+ * Redux persist configuration for the MetaMask Mobile app.
+ * Handles state persistence, migrations, and storage transforms.
+ */
 const persistConfig = {
   key: 'root',
   version,
