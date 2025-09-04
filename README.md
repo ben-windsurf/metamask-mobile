@@ -26,6 +26,34 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
 
+## TypeScript Migration
+
+MetaMask Mobile is actively migrating from JavaScript to TypeScript to improve type safety and developer experience. Recent progress includes:
+
+### Redux Reducers Migration
+
+The following Redux reducers have been migrated from JavaScript to TypeScript with proper type definitions:
+
+- **Privacy Reducer** (`app/reducers/privacy/`) - Manages hostname approval and SRP reveal timestamps
+- **Settings Reducer** (`app/reducers/settings/`) - Handles app settings like search engine, lock time, and token sorting
+- **Browser Reducer** (`app/reducers/browser/`) - Controls browser tabs, history, and navigation state
+
+**Key improvements:**
+
+- Eliminated `any` types from the root Redux state interface
+- Added comprehensive TypeScript interfaces for all state properties and actions
+- Resolved type conflicts (e.g., `BrowserTab` → `BrowserTabState`)
+- Enhanced type safety throughout the application
+- Maintained full backward compatibility with existing Redux state structure
+
+**Files migrated:**
+
+- `app/reducers/{privacy,settings,browser}/index.js` → `.ts`
+- `app/actions/{privacy,settings,browser}/index.js` → `.ts`
+- Updated root state interface in `app/reducers/index.ts`
+
+The migration follows established TypeScript patterns in the codebase and includes proper action type definitions with discriminated unions for improved type checking.
+
 ## Getting started
 
 ### Using Expo (recommended)
