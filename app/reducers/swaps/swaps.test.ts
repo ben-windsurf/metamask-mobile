@@ -6,6 +6,7 @@ import { NetworkClientType } from '@metamask/network-controller';
 import * as tokensControllerSelectors from '../../selectors/tokensController';
 import { NETWORKS_CHAIN_ID } from '../../constants/network';
 import { FeatureFlags } from '@metamask/swaps-controller/dist/types';
+import type { RootState } from '../index';
 
 // Type definitions for the swaps reducer
 // Note: The reducer is written in JavaScript without proper TypeScript types,
@@ -486,7 +487,9 @@ describe('swaps reducer', () => {
         },
       } as unknown as typeof rootState.swaps;
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(
+        rootState as unknown as RootState,
+      );
       expect(enabled).toEqual(true);
     });
 
@@ -513,7 +516,7 @@ describe('swaps reducer', () => {
           },
         },
         swaps: cloneDeep(initialState),
-      };
+      } as unknown as RootState;
 
       rootState.swaps = {
         featureFlags: {
@@ -539,7 +542,9 @@ describe('swaps reducer', () => {
         },
       } as unknown as typeof rootState.swaps;
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(
+        rootState as unknown as RootState,
+      );
       expect(enabled).toEqual(false);
     });
 
@@ -568,7 +573,9 @@ describe('swaps reducer', () => {
         swaps: initialState,
       };
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(
+        rootState as unknown as RootState,
+      );
       expect(enabled).toEqual(false);
     });
   });
@@ -633,7 +640,9 @@ describe('swaps reducer', () => {
         chainFeatureFlags: chainFlags,
       });
 
-      const result = selectSwapsChainFeatureFlags(rootState);
+      const result = selectSwapsChainFeatureFlags(
+        rootState as unknown as RootState,
+      );
       expect(result).toEqual({
         fallbackToV1: false,
         mobileActive: true,
@@ -666,7 +675,10 @@ describe('swaps reducer', () => {
         },
       });
 
-      const chainFlags = selectSwapsChainFeatureFlags(rootState, '0x5');
+      const chainFlags = selectSwapsChainFeatureFlags(
+        rootState as unknown as RootState,
+        '0x5',
+      );
       expect(chainFlags).toEqual({
         goerliFlag: true,
         smartTransactions: {
@@ -688,7 +700,9 @@ describe('swaps reducer', () => {
         },
       });
 
-      const chainFlags = selectSwapsChainFeatureFlags(rootState);
+      const chainFlags = selectSwapsChainFeatureFlags(
+        rootState as unknown as RootState,
+      );
       expect(chainFlags).toEqual({
         smartTransactions: {
           globalSetting: true,
@@ -707,7 +721,9 @@ describe('swaps reducer', () => {
         // No chain feature flags for 0x89
       });
 
-      const chainFlags = selectSwapsChainFeatureFlags(rootState);
+      const chainFlags = selectSwapsChainFeatureFlags(
+        rootState as unknown as RootState,
+      );
       expect(chainFlags).toEqual({
         smartTransactions: {
           globalSetting: true,
@@ -756,7 +772,9 @@ describe('swaps reducer', () => {
           },
         },
       };
-      expect(swapsTokensObjectSelector(state)).toStrictEqual({
+      expect(
+        swapsTokensObjectSelector(state as unknown as RootState),
+      ).toStrictEqual({
         '0x0000000000000000000000000000000000000000': undefined,
         '0x0000000000000000000000000000000000000001': undefined,
         '0x0000000000000000000000000000000000000010': undefined,
@@ -775,7 +793,9 @@ describe('swaps reducer', () => {
           },
         },
       };
-      expect(swapsTokensObjectSelector(state)).toStrictEqual({});
+      expect(
+        swapsTokensObjectSelector(state as unknown as RootState),
+      ).toStrictEqual({});
     });
   });
 
@@ -854,7 +874,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns all unique token addresses with undefined values
       expect(result).toStrictEqual({
@@ -903,7 +925,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns only the user tokens
       expect(result).toStrictEqual({
@@ -946,7 +970,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns only the SwapsController tokens
       expect(result).toStrictEqual({
@@ -999,7 +1025,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns only one entry for the duplicated address
       expect(result).toStrictEqual({
@@ -1052,7 +1080,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then addresses are normalized to lowercase
       expect(result).toStrictEqual({
@@ -1088,7 +1118,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns an empty object
       expect(result).toStrictEqual({});
@@ -1160,7 +1192,9 @@ describe('swaps reducer', () => {
       };
 
       // When the selector is called
-      const result = swapsTokensMultiChainObjectSelector(mockState);
+      const result = swapsTokensMultiChainObjectSelector(
+        mockState as unknown as RootState,
+      );
 
       // Then it returns tokens from all chains plus SwapsController
       expect(result).toStrictEqual({

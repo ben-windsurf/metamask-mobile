@@ -183,18 +183,46 @@ export const selectSwapsChainFeatureFlags = createSelector(
   swapsStateSelector,
   (_state: RootState, transactionChainId?: string) =>
     transactionChainId || selectEvmChainId(_state),
-  (swapsState, chainId) => ({
-    ...((swapsState[chainId] as SwapsChainState)?.featureFlags || {}),
-    smartTransactions: {
-      ...((
-        (swapsState[chainId] as SwapsChainState)?.featureFlags as Record<
-          string,
-          unknown
-        >
-      )?.smartTransactions || {}),
-      ...(swapsState.featureFlags?.smartTransactions || {}),
-    },
-  }),
+  (swapsState, chainId) => {
+    const chainFeatureFlags =
+      (swapsState[chainId] as SwapsChainState)?.featureFlags || {};
+    const globalFeatureFlags = swapsState.featureFlags || {};
+
+    const chainFlags = chainFeatureFlags as Record<string, unknown>;
+    const globalFlags = globalFeatureFlags as Record<string, unknown>;
+
+    return {
+      mobile_active: Boolean(
+        chainFlags?.mobile_active || globalFlags?.mobile_active,
+      ),
+      extension_active: Boolean(
+        chainFlags?.extension_active || globalFlags?.extension_active,
+      ),
+      fallback_to_v1: Boolean(
+        chainFlags?.fallback_to_v1 || globalFlags?.fallback_to_v1,
+      ),
+      fallbackToV1: Boolean(
+        chainFlags?.fallbackToV1 || globalFlags?.fallbackToV1,
+      ),
+      mobileActive: Boolean(
+        chainFlags?.mobileActive || globalFlags?.mobileActive,
+      ),
+      extensionActive: Boolean(
+        chainFlags?.extensionActive || globalFlags?.extensionActive,
+      ),
+      mobileActiveIOS: Boolean(
+        chainFlags?.mobileActiveIOS || globalFlags?.mobileActiveIOS,
+      ),
+      mobileActiveAndroid: Boolean(
+        chainFlags?.mobileActiveAndroid || globalFlags?.mobileActiveAndroid,
+      ),
+      smartTransactions: {
+        ...(chainFlags?.smartTransactions || {}),
+        ...(globalFeatureFlags?.smartTransactions || {}),
+      },
+      ...chainFeatureFlags,
+    };
+  },
 );
 
 /**

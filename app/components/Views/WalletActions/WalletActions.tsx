@@ -74,7 +74,9 @@ const WalletActions = () => {
 
   const chainId = useSelector(selectChainId);
   const ticker = useSelector(selectEvmTicker);
-  const swapsIsLive = useSelector(swapsLivenessMultichainSelector);
+  const swapsIsLive = useSelector((state: RootState) =>
+    swapsLivenessMultichainSelector(state, chainId),
+  );
   const isStablecoinLendingEnabled = useSelector(
     selectStablecoinLendingEnabledFlag,
   );

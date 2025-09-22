@@ -8,6 +8,7 @@ import AppConstants from '../../../../../../core/AppConstants';
 import Text from '../../../../../../component-library/components/Texts/Text';
 import { useStyles } from '../../../../../../component-library/hooks/useStyles';
 import styleSheet from './SmartTransactionsMigrationBanner.styles';
+import type { RootState } from '../../../../../../reducers';
 import { SmartTransactionsMigrationBannerProps } from './SmartTransactionsMigrationBanner.types';
 import { selectShouldUseSmartTransaction } from '../../../../../../selectors/smartTransactionsController';
 import { selectEvmChainId } from '../../../../../../selectors/networkController';
@@ -29,7 +30,7 @@ const SmartTransactionsMigrationBanner = ({
   const chainId = useSelector(selectEvmChainId);
 
   const shouldUseSmartTransaction = useSelector((state) =>
-    selectShouldUseSmartTransaction(state, chainId),
+    selectShouldUseSmartTransaction(state as RootState, chainId),
   );
 
   const dismissBanner = useCallback(async () => {

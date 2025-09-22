@@ -145,7 +145,17 @@ describe('Transaction Controller Init', () => {
   beforeEach(() => {
     jest.resetAllMocks();
     selectShouldUseSmartTransactionMock.mockReturnValue(true);
-    selectSwapsChainFeatureFlagsMock.mockReturnValue({});
+    selectSwapsChainFeatureFlagsMock.mockReturnValue({
+      mobile_active: false,
+      extension_active: false,
+      fallback_to_v1: false,
+      fallbackToV1: false,
+      mobileActive: false,
+      extensionActive: false,
+      mobileActiveIOS: false,
+      mobileActiveAndroid: false,
+      smartTransactions: {},
+    });
     getGlobalChainIdMock.mockReturnValue('0x1');
   });
 
