@@ -27,7 +27,7 @@ import {
   selectStablecoinLendingEnabledFlag,
 } from '../../../Earn/selectors/featureFlags';
 import createStyles from '../../../Tokens/styles';
-import { BrowserTab, TokenI } from '../../../Tokens/types';
+import { TokenI } from '../../../Tokens/types';
 import { EVENT_LOCATIONS } from '../../constants/events';
 import useStakingChain from '../../hooks/useStakingChain';
 import useStakingEligibility from '../../hooks/useStakingEligibility';
@@ -80,7 +80,7 @@ const StakeButtonContent = ({ asset }: StakeButtonProps) => {
         },
       });
     } else {
-      const existingStakeTab = browserTabs.find((tab: BrowserTab) =>
+      const existingStakeTab = browserTabs.find((tab) =>
         tab.url.includes(AppConstants.STAKE.URL),
       );
       let existingTabId;

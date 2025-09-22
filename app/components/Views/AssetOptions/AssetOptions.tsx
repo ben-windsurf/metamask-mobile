@@ -30,7 +30,7 @@ import {
   isPortfolioViewEnabled,
 } from '../../../util/networks';
 import { isPortfolioUrl } from '../../../util/url';
-import { BrowserTab, TokenI } from '../../../components/UI/Tokens/types';
+import { TokenBrowserTab, TokenI } from '../../../components/UI/Tokens/types';
 import { RootState } from '../../../reducers';
 import { Hex } from '@metamask/utils';
 import { appendURLParams } from '../../../util/browser';
@@ -140,7 +140,7 @@ const AssetOptions = (props: Props) => {
   };
 
   const openPortfolio = () => {
-    const existingPortfolioTab = browserTabs.find(({ url }: BrowserTab) =>
+    const existingPortfolioTab = browserTabs.find(({ url }: TokenBrowserTab) =>
       isPortfolioUrl(url),
     );
 

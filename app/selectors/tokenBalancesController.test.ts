@@ -153,6 +153,7 @@ describe('TokenBalancesController Selectors', () => {
         useBlockieIcon: false,
         hideZeroBalanceTokens: false,
         basicFunctionalityEnabled: true,
+        deepLinkModalDisabled: false,
         showFiatOnTestnets: true,
       };
 
