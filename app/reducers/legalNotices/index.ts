@@ -1,24 +1,44 @@
 import { RootState } from '..';
-import { Action } from 'redux';
 import ACTIONS from './types';
 
 const currentDate = new Date(Date.now());
 const newPrivacyPolicyDate = new Date('2024-06-18T12:00:00Z');
 export const isPastPrivacyPolicyDate = currentDate >= newPrivacyPolicyDate;
 
-const initialState = {
+export interface LegalNoticesState {
+  newPrivacyPolicyToastClickedOrClosed: boolean;
+  newPrivacyPolicyToastShownDate: number | null;
+}
+
+const initialState: LegalNoticesState = {
   newPrivacyPolicyToastClickedOrClosed: false,
   newPrivacyPolicyToastShownDate: null,
 };
 
-export const storePrivacyPolicyShownDate = (timestamp: number) => ({
+export interface StorePrivacyPolicyShownDateAction {
+  type: typeof ACTIONS.STORE_PRIVACY_POLICY_SHOWN_DATE;
+  payload: number;
+}
+
+export interface StorePrivacyPolicyClickedOrClosedAction {
+  type: typeof ACTIONS.STORE_PRIVACY_POLICY_CLICKED_OR_CLOSED;
+}
+
+export type LegalNoticesAction =
+  | StorePrivacyPolicyShownDateAction
+  | StorePrivacyPolicyClickedOrClosedAction;
+
+export const storePrivacyPolicyShownDate = (
+  timestamp: number,
+): StorePrivacyPolicyShownDateAction => ({
   type: ACTIONS.STORE_PRIVACY_POLICY_SHOWN_DATE,
   payload: timestamp,
 });
 
-export const storePrivacyPolicyClickedOrClosed = () => ({
-  type: ACTIONS.STORE_PRIVACY_POLICY_CLICKED_OR_CLOSED,
-});
+export const storePrivacyPolicyClickedOrClosed =
+  (): StorePrivacyPolicyClickedOrClosedAction => ({
+    type: ACTIONS.STORE_PRIVACY_POLICY_CLICKED_OR_CLOSED,
+  });
 
 export const shouldShowNewPrivacyToastSelector = (
   state: RootState,
@@ -30,6 +50,10 @@ export const shouldShowNewPrivacyToastSelector = (
 
   if (newPrivacyPolicyToastClickedOrClosed) return false;
 
+  if (newPrivacyPolicyToastShownDate === null) {
+    return currentDate.getTime() >= newPrivacyPolicyDate.getTime();
+  }
+
   const shownDate = new Date(newPrivacyPolicyToastShownDate);
 
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
@@ -38,33 +62,26 @@ export const shouldShowNewPrivacyToastSelector = (
 
   return (
     currentDate.getTime() >= newPrivacyPolicyDate.getTime() &&
-    (!newPrivacyPolicyToastShownDate ||
-      (isRecent && !newPrivacyPolicyToastClickedOrClosed))
+    isRecent &&
+    !newPrivacyPolicyToastClickedOrClosed
   );
 };
 
-export interface LegalNoticesAction extends Action {
-  newPrivacyPolicyToastShownDate: boolean;
-  payload: number;
-}
-
 const legalNoticesReducer = (
-  state = initialState,
-  action: LegalNoticesAction = {
-    type: '',
-    newPrivacyPolicyToastShownDate: false,
-    payload: 0,
-  },
-) => {
+  // eslint-disable-next-line @typescript-eslint/default-param-last
+  state: LegalNoticesState = initialState,
+  action: LegalNoticesAction,
+): LegalNoticesState => {
   switch (action.type) {
     case ACTIONS.STORE_PRIVACY_POLICY_SHOWN_DATE: {
+      const typedAction = action as StorePrivacyPolicyShownDateAction;
       if (state.newPrivacyPolicyToastShownDate !== null) {
         return state;
       }
 
       return {
         ...state,
-        newPrivacyPolicyToastShownDate: action.payload,
+        newPrivacyPolicyToastShownDate: typedAction.payload,
       };
     }
 
