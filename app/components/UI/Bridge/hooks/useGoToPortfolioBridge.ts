@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { selectEvmChainId } from '../../../../selectors/networkController';
 
-import type { BrowserTab } from '../../Tokens/types';
+import type { TokenBrowserTab } from '../../Tokens/types';
 import type { BrowserParams } from '../../../Views/Browser/Browser.types';
 import { getDecimalChainId } from '../../../../util/networks';
 import { useMetrics } from '../../../hooks/useMetrics';
@@ -25,7 +25,7 @@ export default function useGoToPortfolioBridge(location: string) {
   const { navigate } = useNavigation();
   const { trackEvent, createEventBuilder } = useMetrics();
   return (address?: string) => {
-    const existingBridgeTab = browserTabs.find((tab: BrowserTab) =>
+    const existingBridgeTab = browserTabs.find((tab: TokenBrowserTab) =>
       isBridgeUrl(tab.url),
     );
 

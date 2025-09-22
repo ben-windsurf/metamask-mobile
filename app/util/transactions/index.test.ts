@@ -110,7 +110,7 @@ interface TransactionStateData {
   };
 }
 
-interface BrowserTab {
+interface TokenBrowserTab {
   id: string;
   url: string;
 }
@@ -118,7 +118,7 @@ interface BrowserTab {
 interface BrowserState {
   browser?: {
     activeTab: string | null;
-    tabs: BrowserTab[];
+    tabs: TokenBrowserTab[];
   };
 }
 

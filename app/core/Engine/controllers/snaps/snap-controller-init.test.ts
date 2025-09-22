@@ -1,4 +1,5 @@
 import { SnapController } from '@metamask/snaps-controllers';
+import type { RootState } from '../../../../reducers';
 import { ControllerInitRequest } from '../../types';
 import {
   getSnapControllerInitMessenger,
@@ -130,12 +131,18 @@ describe('SnapControllerInit', () => {
       const controllerMock = jest.mocked(SnapController);
       const getFeatureFlags = controllerMock.mock.calls[0][0].getFeatureFlags;
 
-      // @ts-expect-error: Partial mock.
       jest.mocked(store.getState).mockReturnValue({
         settings: {
+          searchEngine: 'DuckDuckGo',
+          primaryCurrency: 'usd',
+          lockTime: 30000,
+          useBlockieIcon: false,
+          hideZeroBalanceTokens: false,
           basicFunctionalityEnabled: true,
+          deepLinkModalDisabled: false,
+          showFiatOnTestnets: false,
         },
-      });
+      } as unknown as RootState);
 
       expect(getFeatureFlags()).toEqual({
         disableSnaps: false,

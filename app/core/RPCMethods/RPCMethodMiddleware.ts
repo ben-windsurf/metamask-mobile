@@ -120,7 +120,7 @@ export interface RPCMethodsMiddleParameters {
   isWalletConnect: boolean;
   // For MM SDK
   isMMSDK: boolean;
-  injectHomePageScripts: (bookmarks?: []) => void;
+  injectHomePageScripts: (bookmarks?: string[]) => void;
   analytics: { [key: string]: string | boolean };
 }
 
@@ -939,18 +939,20 @@ export const getRpcMethodMiddleware = ({
               {
                 text: strings('browser.yes'),
                 onPress: () => {
-                  const bookmark = { url: req.params[0] };
+                  const bookmarkToRemove = { url: req.params[0] };
 
-                  store.dispatch(removeBookmark(bookmark));
+                  store.dispatch(removeBookmark(bookmarkToRemove));
 
                   const { bookmarks: updatedBookmarks } = store.getState();
 
                   if (isHomepage()) {
-                    injectHomePageScripts(updatedBookmarks);
+                    injectHomePageScripts(
+                      updatedBookmarks.map((item) => item.url),
+                    );
                   }
 
                   res.result = {
-                    favorites: bookmarks,
+                    favorites: updatedBookmarks,
                   };
                   resolve();
                 },

@@ -1,4 +1,4 @@
-export interface BrowserTab {
+export interface TokenBrowserTab {
   id: string;
   url: string;
 }
