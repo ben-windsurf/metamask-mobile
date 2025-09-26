@@ -32,7 +32,14 @@ const initialRootState: RootState = {
   wizard: undefined,
   onboarding: initialOnboardingState,
   notification: undefined,
-  swaps: undefined,
+  swaps: {
+    isLive: true,
+    hasOnboarded: true,
+    featureFlags: {
+      smart_transactions: {},
+      smartTransactions: {},
+    },
+  },
   fiatOrders: initialFiatOrdersState,
   infuraAvailability: undefined,
   navigation: initialNavigationState,

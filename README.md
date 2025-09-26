@@ -26,6 +26,44 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
 
+## TypeScript Migration
+
+MetaMask Mobile is undergoing a gradual migration from JavaScript to TypeScript to improve type safety and developer experience. This section documents completed migrations and patterns to follow.
+
+### Redux State Management Migration
+
+#### Swaps Reducer (Completed)
+
+The swaps reducer has been successfully migrated from JavaScript to TypeScript using Redux Toolkit's `createSlice` pattern:
+
+**Key Changes:**
+
+- **File Migration**: `app/reducers/swaps/index.js` → `app/reducers/swaps/index.ts`
+- **Redux Toolkit Adoption**: Converted from traditional Redux reducer to `createSlice` pattern
+- **Type Safety**: Introduced structured TypeScript interfaces:
+  - `SwapsState`: Main state interface for swaps functionality
+  - `SwapsChainState`: Chain-specific swaps configuration
+  - `SwapsGlobalFeatureFlags`: Global feature flag structure
+- **RootState Update**: Replaced `any` type with proper `SwapsState` interface
+- **Selector Enhancement**: Restructured `selectSwapsChainFeatureFlags` for better type safety
+- **Template Consistency**: Followed the existing `bridge` reducer pattern for consistency
+
+**Migration Benefits:**
+
+- Improved type safety and IntelliSense support
+- Better error detection at compile time
+- Consistent Redux Toolkit patterns across the codebase
+- Enhanced maintainability and developer experience
+
+**Pattern for Future Migrations:**
+When migrating other reducers to TypeScript, follow the established pattern:
+
+1. Create proper state interfaces
+2. Use Redux Toolkit's `createSlice`
+3. Update RootState interface to replace `any` types
+4. Follow the bridge reducer template for consistency
+5. Ensure all selectors and components are properly typed
+
 ## Getting started
 
 ### Using Expo (recommended)
