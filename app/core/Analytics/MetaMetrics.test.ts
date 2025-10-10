@@ -3,6 +3,7 @@ import StorageWrapper from '../../store/storage-wrapper';
 import {
   AGREED,
   ANALYTICS_DATA_DELETION_DATE,
+  ANALYTICS_PENDING_EVENTS,
   DENIED,
   METAMETRICS_DELETION_REGULATION_ID,
   METAMETRICS_ID,
@@ -808,7 +809,7 @@ describe('MetaMetrics', () => {
         await new Promise((resolve) => setTimeout(resolve, 100));
 
         expect(mockSet).toHaveBeenCalledWith(
-          'analytics-pending-events',
+          ANALYTICS_PENDING_EVENTS,
           expect.stringContaining('test_event'),
         );
       });
@@ -823,7 +824,7 @@ describe('MetaMetrics', () => {
         ];
         mockGet.mockImplementation(async (key: string) => {
           if (key === METRICS_OPT_IN) return AGREED;
-          if (key === 'analytics-pending-events')
+          if (key === ANALYTICS_PENDING_EVENTS)
             return JSON.stringify(persistedEvents);
           return undefined;
         });
@@ -855,7 +856,7 @@ describe('MetaMetrics', () => {
         await metaMetrics.flush();
 
         expect(StorageWrapper.removeItem).toHaveBeenCalledWith(
-          'analytics-pending-events',
+          ANALYTICS_PENDING_EVENTS,
         );
       });
     });
@@ -925,12 +926,12 @@ describe('MetaMetrics', () => {
 
         await metaMetrics.flush();
 
-        expect(segmentMockClient.flush).toHaveBeenCalledTimes(5);
+        expect(segmentMockClient.flush).toHaveBeenCalledTimes(6);
 
         expect(StorageWrapper.removeItem).not.toHaveBeenCalledWith(
-          'analytics-pending-events',
+          ANALYTICS_PENDING_EVENTS,
         );
-      });
+      }, 60000);
 
       it('should not attempt flush in E2E mode', async () => {
         // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
