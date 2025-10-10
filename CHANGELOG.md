@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - feat: implement privacy screen when app is inactive ([#17303](https://github.com/MetaMask/metamask-mobile/pull/17303)) 
 
+### Fixed
+
+- chore: Fix Critical security vulnerabilities - upgraded axios to 1.12.2 in CI scripts (fixes form-data CVE SNYK-JS-FORMDATA-10841150) and fastlane to 2.120.0+ in iOS WebViewExample (fixes json CVE SNYK-RUBY-JSON-560838)
+
 ## [7.51.1]
 
 ### Added
