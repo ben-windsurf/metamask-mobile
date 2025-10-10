@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- feat: implement privacy screen when app is inactive ([#17303](https://github.com/MetaMask/metamask-mobile/pull/17303)) 
+- feat: implement privacy screen when app is inactive ([#17303](https://github.com/MetaMask/metamask-mobile/pull/17303))
+
+### Changed
+
+- chore: update react-native-aes-crypto-forked to v1.2.2 and suppress false positive Snyk vulnerability
 
 ## [7.51.1]
 
