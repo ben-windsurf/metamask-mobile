@@ -1,6 +1,6 @@
 import { InternalAccount } from '@metamask/keyring-internal-api';
 
-interface SelectedAsset {
+export interface SelectedAsset {
   isETH: boolean;
   tokenId?: string;
   address: string;

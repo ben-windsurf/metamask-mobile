@@ -11,14 +11,14 @@ export const selectCurrentTransactionSecurityAlertResponse = (
   state: RootState,
 ) => {
   const { id, securityAlertResponses } = state.transaction;
-  return securityAlertResponses?.[id];
+  return id ? securityAlertResponses?.[id] : undefined;
 };
 
 export const selectCurrentTransactionMetadata = createSelector(
   selectTransactions,
   selectCurrentTransactionId,
   (transactions, currentTransactionId) =>
-    transactions.find((tx) => tx.id === currentTransactionId),
+    transactions.find((tx: { id: string }) => tx.id === currentTransactionId),
 );
 
 const selectCurrentTransactionGasFeeEstimatesStrict = createSelector(
