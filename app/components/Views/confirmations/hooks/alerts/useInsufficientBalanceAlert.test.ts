@@ -9,7 +9,9 @@ import { RowAlertKey } from '../../components/UI/info-row/alert-row/constants';
 import { Severity } from '../../types/alerts';
 import { selectNetworkConfigurations } from '../../../../../selectors/networkController';
 import { selectTransactionState } from '../../../../../reducers/transaction';
+import type { TransactionState } from '../../../../../reducers/transaction/types';
 import { useConfirmActions } from '../useConfirmActions';
+import { SelectedAsset } from '../../../../../components/UI/AccountFromToInfoCard/AccountFromToInfoCard.types';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
@@ -56,6 +58,14 @@ describe('useInsufficientBalanceAlert', () => {
     },
   } as unknown as TransactionMeta;
 
+  const createMockTransactionState = (maxValueMode: boolean): TransactionState => ({
+    selectedAsset: {} as SelectedAsset,
+    transaction: {},
+    securityAlertResponses: {},
+    useMax: false,
+    maxValueMode,
+  });
+
   beforeEach(() => {
     jest.clearAllMocks();
     mockUseAccountNativeBalance.mockReturnValue({
@@ -80,9 +90,7 @@ describe('useInsufficientBalanceAlert', () => {
       }
       return key;
     });
-    mockSelectTransactionState.mockReturnValue({
-      maxValueMode: false,
-    });
+    mockSelectTransactionState.mockReturnValue(createMockTransactionState(false));
     mockUseConfirmActions.mockReturnValue({
       onReject: jest.fn(),
       onConfirm: jest.fn(),
@@ -97,9 +105,7 @@ describe('useInsufficientBalanceAlert', () => {
   });
 
   it('return empty array when max value mode is enabled', () => {
-    mockSelectTransactionState.mockReturnValue({
-      maxValueMode: true,
-    });
+    mockSelectTransactionState.mockReturnValue(createMockTransactionState(true));
 
     const { result } = renderHook(() => useInsufficientBalanceAlert());
     expect(result.current).toEqual([]);
