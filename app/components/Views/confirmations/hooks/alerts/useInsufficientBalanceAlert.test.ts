@@ -81,8 +81,12 @@ describe('useInsufficientBalanceAlert', () => {
       return key;
     });
     mockSelectTransactionState.mockReturnValue({
+      selectedAsset: {} as any,
+      transaction: {},
+      securityAlertResponses: {},
+      useMax: false,
       maxValueMode: false,
-    });
+    } as any);
     mockUseConfirmActions.mockReturnValue({
       onReject: jest.fn(),
       onConfirm: jest.fn(),
@@ -98,8 +102,12 @@ describe('useInsufficientBalanceAlert', () => {
 
   it('return empty array when max value mode is enabled', () => {
     mockSelectTransactionState.mockReturnValue({
+      selectedAsset: {} as any,
+      transaction: {},
+      securityAlertResponses: {},
+      useMax: false,
       maxValueMode: true,
-    });
+    } as any);
 
     const { result } = renderHook(() => useInsufficientBalanceAlert());
     expect(result.current).toEqual([]);
