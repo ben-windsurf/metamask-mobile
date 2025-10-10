@@ -26,6 +26,29 @@ To learn how to contribute to the MetaMask codebase, visit our [Contributor Docs
 - [Miscellaneous](./docs/readme/miscellaneous.md)
 - [E2E Testing Segment Events](./docs/testing/e2e/segment-events.md)
 
+## Security
+
+### Dependency Security: react-native-aes-crypto-forked
+
+MetaMask Mobile uses `react-native-aes-crypto-forked@v1.2.2` installed directly from the [MetaMask GitHub fork](https://github.com/MetaMask/react-native-aes-crypto-forked) rather than from NPM. This package is essential for maintaining backward compatibility with legacy vaults that use AesForkedLib encryption.
+
+#### Snyk Vulnerability Mitigation
+
+The Snyk vulnerability `SNYK-JS-REACTNATIVEAESCRYPTOFORKED-3018868` reported for this package is a **false positive**. This vulnerability refers to a dependency confusion attack where a malicious package was uploaded to the public NPM registry. However, MetaMask Mobile does not use the compromised NPM package - we install directly from our secure Git repository.
+
+**Key points:**
+- **Safe source**: Installed from `git+https://github.com/MetaMask/react-native-aes-crypto-forked.git#v1.2.2`
+- **Not from NPM**: The malicious package exists only on the NPM registry, which we don't use
+- **Suppressed in .snyk**: The false positive is documented and suppressed in the `.snyk` policy file
+- **Required for compatibility**: Cannot be removed as it's needed to decrypt legacy vaults encrypted with AesForkedLib
+
+For new encryptions, the app uses `QuickCryptoLib` (via `react-native-quick-crypto`), but `react-native-aes-crypto-forked` must remain available for decrypting older vaults.
+
+**References:**
+- Snyk advisory: https://security.snyk.io/vuln/SNYK-JS-REACTNATIVEAESCRYPTOFORKED-3018868
+- MetaMask fork repository: https://github.com/MetaMask/react-native-aes-crypto-forked
+- Suppression policy: [.snyk](./.snyk)
+
 ## Getting started
 
 ### Using Expo (recommended)
