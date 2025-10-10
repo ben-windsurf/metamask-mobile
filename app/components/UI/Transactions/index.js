@@ -44,7 +44,7 @@ import {
 import { selectPrimaryCurrency } from '../../../selectors/settings';
 import { baseStyles, fontStyles } from '../../../styles/common';
 import { isHardwareAccount } from '../../../util/address';
-import { decGWEIToHexWEI } from '../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../util/conversions.ts';
 import Device from '../../../util/device';
 import Logger from '../../../util/Logger';
 import {

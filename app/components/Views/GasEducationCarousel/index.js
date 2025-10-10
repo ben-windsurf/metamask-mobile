@@ -21,14 +21,14 @@ import Device from '../../../util/device';
 import { useTheme } from '../../../util/theme';
 import { GAS_ESTIMATE_TYPES } from '@metamask/gas-fee-controller';
 import AppConstants from '../../../core/AppConstants';
-import { decGWEIToHexWEI } from '../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../util/conversions.ts';
 import { BNToHex, hexToBN } from '../../../util/number';
 import {
   calculateEIP1559GasFeeHexes,
   getTicker,
 } from '../../../util/transactions';
 import Engine from '../../../core/Engine';
-import TransactionTypes from '../../../core/TransactionTypes';
+import TransactionTypes from '../../../core/TransactionTypes.ts';
 import { formatCurrency, getTransactionFee } from '../../../util/confirm-tx';
 import Logger from '../../../util/Logger';
 import { selectEvmTicker } from '../../../selectors/networkController';

@@ -1,5 +1,5 @@
 import { Hex, add0x } from '@metamask/utils';
-import { decimalToHex, multiplyHexes } from '../../../../../util/conversions';
+import { decimalToHex, multiplyHexes } from '../../../../../util/conversions.ts';
 import { useTransactionMetadataRequest } from '../transactions/useTransactionMetadataRequest';
 
 export const useTransactionMaxGasCost = () => {

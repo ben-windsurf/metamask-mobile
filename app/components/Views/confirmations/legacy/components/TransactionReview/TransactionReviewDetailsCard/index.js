@@ -9,7 +9,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { ThemeContext, mockTheme } from '../../../../../../../util/theme';
 import ConnectHeader from '../../../../../../UI/ConnectHeader';
 import formatNumber from '../../../../../../../util/formatNumber';
-import TransactionTypes from '../../../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../../../core/TransactionTypes.ts';
 import { renderShortAddress } from '../../../../../../../util/address';
 
 const {

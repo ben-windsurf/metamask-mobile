@@ -2,7 +2,7 @@
 import { StyleSheet } from 'react-native';
 import type { Theme } from '@metamask/design-tokens';
 import Device from '../../../../util/device';
-import scaling from '../../../../util/scaling';
+import scaling from '../../../../util/scaling.ts';
 
 const HEIGHT = scaling.scale(240);
 

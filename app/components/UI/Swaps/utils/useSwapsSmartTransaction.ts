@@ -4,7 +4,7 @@ import {
 } from '@metamask/transaction-controller';
 import { useSelector } from 'react-redux';
 import Engine from '../../../../core/Engine';
-import { decimalToHex } from '../../../../util/conversions';
+import { decimalToHex } from '../../../../util/conversions.ts';
 import { selectSwapsApprovalTransaction } from '../../../../reducers/swaps';
 import { Quote, TxParams } from '@metamask/swaps-controller/dist/types';
 import {

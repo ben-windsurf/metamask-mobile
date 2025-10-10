@@ -1,7 +1,7 @@
 import * as permissions from '.'; // eslint-disable-line import/no-namespace
 import { captureException } from '@sentry/react-native';
 import Logger from '../../util/Logger';
-import TransactionTypes from '../TransactionTypes';
+import TransactionTypes from '../TransactionTypes.ts';
 import Engine from '../Engine';
 import {
   Caip25CaveatType,

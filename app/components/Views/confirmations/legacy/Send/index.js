@@ -64,7 +64,7 @@ import { withMetricsAwareness } from '../../../../../components/hooks/useMetrics
 import { selectShouldUseSmartTransaction } from '../../../../../selectors/smartTransactionsController';
 import { STX_NO_HASH_ERROR } from '../../../../../util/smart-transactions/smart-publish-hook';
 import { selectAddressBook } from '../../../../../selectors/addressBookController';
-import TransactionTypes from '../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../core/TransactionTypes.ts';
 import {
   // Pending updated multichain UX to specify the send chain.
   /* eslint-disable no-restricted-syntax */

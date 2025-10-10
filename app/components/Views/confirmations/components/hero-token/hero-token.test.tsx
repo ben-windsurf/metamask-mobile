@@ -11,7 +11,7 @@ import { HeroToken } from './hero-token';
 import { fireEvent, waitFor } from '@testing-library/react-native';
 import { merge } from 'lodash';
 import { RootState } from '../../../../../reducers';
-import { decGWEIToHexWEI } from '../../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../../util/conversions.ts';
 
 describe('HeroToken', () => {
   it('displays avatar, amount, and fiat values for a simple send transfer', async () => {

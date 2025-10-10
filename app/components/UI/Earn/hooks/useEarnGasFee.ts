@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Engine from '../../../../core/Engine';
 import { selectSelectedInternalAccountFormattedAddress } from '../../../../selectors/accountsController';
-import { decGWEIToHexWEI } from '../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../util/conversions.ts';
 import { hexToBN } from '../../../../util/number';
 import { useStakeContext } from '../../Stake/hooks/useStakeContext';
 import { EARN_EXPERIENCES } from '../constants/experiences';

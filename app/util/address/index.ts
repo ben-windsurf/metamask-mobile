@@ -32,7 +32,7 @@ import {
   SYMBOL_ERROR,
 } from '../../../app/constants/error';
 import { PROTOCOLS } from '../../constants/deeplinks';
-import TransactionTypes from '../../core/TransactionTypes';
+import TransactionTypes from '../../core/TransactionTypes.ts';
 import { selectChainId } from '../../selectors/networkController';
 import { store } from '../../store';
 import { regex } from '../../../app/util/regex';

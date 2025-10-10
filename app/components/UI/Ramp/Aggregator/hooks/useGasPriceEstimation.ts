@@ -7,7 +7,7 @@ import {
 
 import BN from 'bnjs4';
 import Engine from '../../../../../core/Engine';
-import { decGWEIToHexWEI } from '../../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../../util/conversions.ts';
 import { selectGasFeeControllerState } from '../../../../../selectors/gasFeeController';
 
 const defaultGasLimit = 21000;

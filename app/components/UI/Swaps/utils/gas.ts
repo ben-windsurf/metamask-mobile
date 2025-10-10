@@ -5,7 +5,7 @@ import type {
 import { Hex } from '@metamask/utils';
 import { estimateGasFee } from '../../../../util/transaction-controller';
 import { addHexPrefix } from '../../../../util/number';
-import { decGWEIToHexWEI } from '../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../util/conversions.ts';
 import AppConstants from '../../../../core/AppConstants';
 
 export const DEFAULT_GAS_FEE_OPTION_LEGACY = AppConstants.GAS_OPTIONS.MEDIUM;

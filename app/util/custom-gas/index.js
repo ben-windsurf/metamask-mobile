@@ -1,7 +1,7 @@
 import BN from 'bnjs4';
 import { renderFromWei, weiToFiat, toWei, conversionUtil } from '../number';
 import { strings } from '../../../locales/i18n';
-import TransactionTypes from '../../core/TransactionTypes';
+import TransactionTypes from '../../core/TransactionTypes.ts';
 import { estimateGas } from '../transaction-controller';
 import { hexToBN } from '@metamask/controller-utils';
 

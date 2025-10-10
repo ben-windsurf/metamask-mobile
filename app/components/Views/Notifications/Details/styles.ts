@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import type { Theme } from '@metamask/design-tokens';
 import Device from '../../../../util/device';
 import { fontStyles } from '../../../../styles/common';
-import scaling from '../../../../util/scaling';
+import scaling from '../../../../util/scaling.ts';
 import {
   getFontFamily,
   TextVariant,

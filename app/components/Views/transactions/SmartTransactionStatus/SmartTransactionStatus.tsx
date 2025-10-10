@@ -23,7 +23,7 @@ import Routes from '../../../../constants/navigation/Routes';
 import TransactionBackgroundTop from '../../../../images/transaction-background-top.svg';
 import TransactionBackgroundBottom from '../../../../images/transaction-background-bottom.svg';
 import LoopingScrollAnimation from './LoopingScrollAnimation';
-import { hexToDecimal } from '../../../../util/conversions';
+import { hexToDecimal } from '../../../../util/conversions.ts';
 import useRemainingTime from './useRemainingTime';
 import { ThemeColors } from '@metamask/design-tokens';
 import { selectSmartTransactionsForCurrentChain } from '../../../../selectors/smartTransactionsController';

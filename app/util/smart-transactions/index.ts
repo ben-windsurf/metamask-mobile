@@ -1,6 +1,6 @@
 import { TransactionMeta } from '@metamask/transaction-controller';
 import { Hex } from '@metamask/utils';
-import TransactionTypes from '../../core/TransactionTypes';
+import TransactionTypes from '../../core/TransactionTypes.ts';
 import {
   getIsSwapApproveTransaction,
   getIsSwapApproveOrSwapTransaction,
