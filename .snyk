@@ -1,0 +1,23 @@
+# Snyk (https://snyk.io) policy file
+
+version: v1.25.0
+
+ignore:
+  'SNYK-JS-REACTNATIVEAESCRYPTOFORKED-3018868':
+    - '*':
+        reason: >-
+          False positive: This vulnerability applies to the malicious public NPM package,
+          not MetaMask's legitimate git fork. We install directly from MetaMask's secure
+          git repository (github.com/MetaMask/react-native-aes-crypto-forked), not from NPM.
+          This is a dependency confusion attack on the public NPM registry.
+          
+          The package is required for backward compatibility with legacy vaults that used
+          AesForkedLib for encryption. New encryptions use QuickCryptoLib, but we must
+          maintain the ability to decrypt older vaults.
+          
+          References:
+          - Snyk vulnerability: https://security.snyk.io/vuln/SNYK-JS-REACTNATIVEAESCRYPTOFORKED-3018868
+          - MetaMask fork: https://github.com/MetaMask/react-native-aes-crypto-forked
+        expires: 2026-12-31T00:00:00.000Z
+
+patch: {}
