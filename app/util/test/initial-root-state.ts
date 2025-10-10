@@ -12,6 +12,8 @@ import { initialNavigationState } from '../../reducers/navigation';
 import { initialOnboardingState } from '../../reducers/onboarding';
 import { initialState as initialPerformanceState } from '../../core/redux/slices/performance';
 import { isTest } from './utils';
+import bookmarksReducer from '../../reducers/bookmarks';
+import browserReducer from '../../reducers/browser';
 // A cast is needed here because we use enums in some controllers, and TypeScript doesn't consider
 // the string value of an enum as satisfying an enum type.
 export const backgroundState: EngineState =
@@ -22,8 +24,8 @@ const initialRootState: RootState = {
   collectibles: undefined,
   engine: { backgroundState },
   privacy: undefined,
-  bookmarks: undefined,
-  browser: undefined,
+  bookmarks: bookmarksReducer(undefined, { type: '@@INIT' } as any),
+  browser: browserReducer(undefined, { type: '@@INIT' } as any),
   modals: undefined,
   settings: undefined,
   alert: undefined,
