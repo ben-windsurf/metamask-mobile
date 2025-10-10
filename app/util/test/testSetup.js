@@ -353,6 +353,8 @@ const initializeMockClient = () => {
     alias: jest.fn(),
     reset: jest.fn(),
     add: jest.fn(),
+    addFlushPolicy: jest.fn(),
+    removeFlushPolicy: jest.fn(),
   };
   return global.segmentMockClient;
 };
@@ -367,6 +369,20 @@ jest.mock('@segment/analytics-react-native', () => {
     }
   }
 
+  class Observable {
+    constructor(value) {
+      this._value = value;
+    }
+
+    get value() {
+      return this._value;
+    }
+
+    set value(newValue) {
+      this._value = newValue;
+    }
+  }
+
   return {
     createClient: jest.fn(() => initializeMockClient()),
     PluginType: {
@@ -378,6 +394,7 @@ jest.mock('@segment/analytics-react-native', () => {
       IdentifyEvent: 'identify',
     },
     Plugin,
+    Observable,
   };
 });
 
@@ -404,6 +421,8 @@ jest.mock('redux-persist', () => ({
 jest.mock('../../store/storage-wrapper', () => ({
   getItem: jest.fn(),
   setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clearAll: jest.fn(),
 }));
 
 // eslint-disable-next-line import/no-commonjs
