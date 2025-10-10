@@ -3,6 +3,7 @@ import StorageWrapper from '../../store/storage-wrapper';
 import {
   AGREED,
   ANALYTICS_DATA_DELETION_DATE,
+  ANALYTICS_PENDING_EVENTS,
   DENIED,
   METAMETRICS_DELETION_REGULATION_ID,
   METAMETRICS_ID,
@@ -780,6 +781,179 @@ describe('MetaMetrics', () => {
 
     it('does not call MetaMetricsTestUtils.trackEvent when isE2E is false', async () => {
       await testE2EMode(false);
+    });
+  });
+
+  describe('Performance Optimizations', () => {
+    beforeEach(() => {
+      TestMetaMetrics.resetInstance();
+      mockGet.mockReset();
+      mockSet.mockReset();
+    });
+
+    describe('Event Queue Persistence', () => {
+      it('should persist events when tracking', async () => {
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+        await metaMetrics.enable();
+
+        const event = MetricsEventBuilder.createEventBuilder({
+          category: 'test_event',
+        })
+          .addProperties({ prop: 'value' })
+          .build();
+
+        metaMetrics.trackEvent(event);
+
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        expect(mockSet).toHaveBeenCalledWith(
+          ANALYTICS_PENDING_EVENTS,
+          expect.stringContaining('test_event'),
+        );
+      });
+
+      it('should restore persisted events on configure', async () => {
+        const persistedEvents = [
+          {
+            type: 'track',
+            event: 'restored_event',
+            properties: { restored: true },
+          },
+        ];
+        mockGet.mockImplementation(async (key: string) => {
+          if (key === METRICS_OPT_IN) return AGREED;
+          if (key === ANALYTICS_PENDING_EVENTS)
+            return JSON.stringify(persistedEvents);
+          return undefined;
+        });
+
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        expect(segmentMockClient.track).toHaveBeenCalledWith(
+          'restored_event',
+          { restored: true },
+        );
+      });
+
+      it('should clear persisted events after successful flush', async () => {
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+        await metaMetrics.enable();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        segmentMockClient.flush = jest.fn().mockResolvedValue(undefined);
+
+        await metaMetrics.flush();
+
+        expect(StorageWrapper.removeItem).toHaveBeenCalledWith(
+          ANALYTICS_PENDING_EVENTS,
+        );
+      });
+    });
+
+    describe('Network-Aware Flush Policy', () => {
+      it('should add network-aware flush policy on configure', async () => {
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        expect(segmentMockClient.addFlushPolicy).toHaveBeenCalled();
+      });
+
+      it('should not add flush policy in E2E mode', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+        const utils = require('../../util/test/utils');
+        const originalIsE2E = utils.isE2E;
+        utils.isE2E = true;
+
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        expect(segmentMockClient.addFlushPolicy).not.toHaveBeenCalled();
+
+        utils.isE2E = originalIsE2E;
+      });
+    });
+
+    describe('Retry Logic with Exponential Backoff', () => {
+      it('should retry flush with exponential backoff on failure', async () => {
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+        await metaMetrics.enable();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        let callCount = 0;
+        segmentMockClient.flush = jest.fn().mockImplementation(async () => {
+          callCount++;
+          if (callCount < 3) {
+            throw new Error('Network error');
+          }
+        });
+
+        await metaMetrics.flush();
+
+        expect(segmentMockClient.flush).toHaveBeenCalledTimes(3);
+      });
+
+      it('should keep events persisted after max retries', async () => {
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+        await metaMetrics.enable();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        segmentMockClient.flush = jest
+          .fn()
+          .mockRejectedValue(new Error('Network error'));
+
+        await metaMetrics.flush();
+
+        expect(segmentMockClient.flush).toHaveBeenCalledTimes(6);
+
+        expect(StorageWrapper.removeItem).not.toHaveBeenCalledWith(
+          ANALYTICS_PENDING_EVENTS,
+        );
+      }, 60000);
+
+      it('should not attempt flush in E2E mode', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+        const utils = require('../../util/test/utils');
+        const originalIsE2E = utils.isE2E;
+        utils.isE2E = true;
+
+        mockGet.mockResolvedValue(AGREED);
+        const metaMetrics = TestMetaMetrics.getInstance();
+        await metaMetrics.configure();
+        await metaMetrics.enable();
+
+        const { segmentMockClient } =
+          global as unknown as GlobalWithSegmentClient;
+        segmentMockClient.flush = jest.fn();
+
+        await metaMetrics.flush();
+
+        expect(segmentMockClient.flush).not.toHaveBeenCalled();
+
+        utils.isE2E = originalIsE2E;
+      });
     });
   });
 });

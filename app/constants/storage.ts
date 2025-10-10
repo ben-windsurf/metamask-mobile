@@ -16,6 +16,8 @@ export const ANALYTICS_DATA_DELETION_DATE = `${prefix}analyticsDataDeletionDate`
 export const METAMETRICS_DELETION_REGULATION_ID = `${prefix}MetaMetricsDeletionRegulationId`;
 export const ANALYTICS_DATA_RECORDED = `${prefix}analyticsDataRecorded`;
 export const METAMETRICS_ID = `${prefix}MetaMetricsId`;
+export const ANALYTICS_PENDING_EVENTS = `${prefix}analyticsPendingEvents`;
+export const ANALYTICS_NETWORK_TYPE = `${prefix}analyticsNetworkType`;
 
 /**
  * @deprecated, use {@link METAMETRICS_ID} instead

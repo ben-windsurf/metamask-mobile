@@ -10,7 +10,7 @@ import { PublicInterface } from '@metamask/utils';
  */
 export type ISegmentClient = Pick<
   PublicInterface<SegmentClient>,
-  'track' | 'identify' | 'group' | 'screen' | 'flush' | 'reset' | 'add'
+  'track' | 'identify' | 'group' | 'screen' | 'flush' | 'reset' | 'add' | 'addFlushPolicy'
 >;
 
 /**

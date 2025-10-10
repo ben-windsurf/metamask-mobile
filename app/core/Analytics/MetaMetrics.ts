@@ -3,7 +3,7 @@ import {
   GroupTraits,
   JsonMap,
   UserTraits,
-} from '@segment/analytics-react-native';
+ EventType } from '@segment/analytics-react-native';
 import axios, { AxiosHeaderValue } from 'axios';
 import StorageWrapper from '../../store/storage-wrapper';
 import Logger from '../../util/Logger';
@@ -37,6 +37,9 @@ import generateUserSettingsAnalyticsMetaData from '../../util/metrics/UserSettin
 import { isE2E } from '../../util/test/utils';
 import MetaMetricsPrivacySegmentPlugin from './MetaMetricsPrivacySegmentPlugin';
 import MetaMetricsTestUtils from './MetaMetricsTestUtils';
+import { NetworkAwareFlushPolicy } from './NetworkAwareFlushPolicy';
+import { EventQueuePersistence } from './EventQueuePersistence';
+import { retryWithExponentialDelay } from '../../util/exponential-retry';
 
 /**
  * MetaMetrics using Segment as the analytics provider.
@@ -176,6 +179,18 @@ class MetaMetrics implements IMetaMetrics {
    * @private
    */
   private deleteRegulationDate: DataDeleteDate;
+
+  /**
+   * Network-aware flush policy instance
+   * @private
+   */
+  private networkAwareFlushPolicy: NetworkAwareFlushPolicy | undefined;
+
+  /**
+   * Event queue persistence manager
+   * @private
+   */
+  private eventPersistence = EventQueuePersistence.getInstance();
 
   /**
    * Retrieve state of metrics from the preference
@@ -346,13 +361,20 @@ class MetaMetrics implements IMetaMetrics {
     properties: JsonMap,
     saveDataRecording = true,
   ): void => {
+    if (!isE2E) {
+      this.eventPersistence.addEvent({
+        type: EventType.TrackEvent,
+        event,
+        properties,
+      }).catch((error: unknown) => {
+        Logger.error(error as Error, 'MetaMetrics: Error persisting event');
+      });
+    }
+
     this.segmentClient?.track(event, properties);
     saveDataRecording &&
       !this.dataRecorded &&
       this.#setIsDataRecorded(true).catch((error) => {
-        // here we don't want to handle the error, there's nothing we can do
-        // so we just catch and log it async and do not await for return
-        // as this must not block the event tracking
         Logger.error(error, 'Analytics Data Record Error');
       });
   };
@@ -531,6 +553,8 @@ class MetaMetrics implements IMetaMetrics {
             flush: () => Promise.resolve(),
             reset: () => Promise.resolve(),
             add: () => Promise.resolve(),
+            addFlushPolicy: () => Promise.resolve(),
+            removeFlushPolicy: () => Promise.resolve(),
           }
         : createClient(config);
 
@@ -555,7 +579,6 @@ class MetaMetrics implements IMetaMetrics {
     if (this.#isConfigured) return true;
     try {
       this.enabled = await this.#isMetaMetricsEnabled();
-      // get the user unique id when initializing
       this.metametricsId = await this.#getMetaMetricsId();
       this.deleteRegulationId = await this.#getDeleteRegulationIdFromPrefs();
       this.deleteRegulationDate =
@@ -566,10 +589,15 @@ class MetaMetrics implements IMetaMetrics {
         plugin: new MetaMetricsPrivacySegmentPlugin(this.metametricsId),
       });
 
+      if (!isE2E) {
+        this.networkAwareFlushPolicy = new NetworkAwareFlushPolicy();
+        this.segmentClient?.addFlushPolicy(this.networkAwareFlushPolicy);
+      }
+
+      await this.#restorePersistedEvents();
+
       this.#isConfigured = true;
 
-      // identify user with the latest traits
-      // run only after the MetaMetrics is configured
       const consolidatedTraits = {
         ...generateDeviceAnalyticsMetaData(),
         ...generateUserSettingsAnalyticsMetaData(),
@@ -578,12 +606,44 @@ class MetaMetrics implements IMetaMetrics {
 
       if (__DEV__)
         Logger.log(`MetaMetrics configured with ID: ${this.metametricsId}`);
-      // TODO: Replace "any" with type
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      Logger.error(error, 'Error initializing MetaMetrics');
+    } catch (error: unknown) {
+      Logger.error(error as Error, 'Error initializing MetaMetrics');
     }
     return this.#isConfigured;
+  };
+
+  /**
+   * Restore persisted events from previous sessions and retry sending them
+   * @private
+   */
+  #restorePersistedEvents = async (): Promise<void> => {
+    if (!this.enabled || isE2E) {
+      return;
+    }
+
+    try {
+      const persistedEvents = await this.eventPersistence.loadEvents();
+
+      if (persistedEvents.length === 0) {
+        return;
+      }
+
+      if (__DEV__) {
+        Logger.log(`MetaMetrics: Restoring ${persistedEvents.length} persisted events`);
+      }
+
+      for (const event of persistedEvents) {
+        try {
+          await this.segmentClient?.track(event.event, event.properties);
+        } catch (error) {
+          Logger.error(error as Error, `MetaMetrics: Error restoring persisted event ${event.event}`);
+        }
+      }
+
+      await this.eventPersistence.clearEvents();
+    } catch (error) {
+      Logger.error(error as Error, 'MetaMetrics: Error restoring persisted events');
+    }
   };
 
   /**
@@ -732,8 +792,33 @@ class MetaMetrics implements IMetaMetrics {
    *
    * This will send all events to Segment without waiting for
    * the queue to be full or the timeout to be reached
+   *
+   * Uses exponential backoff retry strategy for failed flushes
    */
-  flush = async (): Promise<void> => this.segmentClient?.flush();
+  flush = async (): Promise<void> => {
+    if (isE2E || !this.segmentClient) {
+      return;
+    }
+
+    try {
+      await retryWithExponentialDelay(
+        async () => {
+          await this.segmentClient?.flush();
+          await this.eventPersistence.clearEvents();
+        },
+        5,
+        1000,
+        30000,
+        true,
+      );
+
+      if (__DEV__) {
+        Logger.log('MetaMetrics: Successfully flushed events');
+      }
+    } catch (error) {
+      Logger.error(error as Error, 'MetaMetrics: Failed to flush events after retries');
+    }
+  };
 
   /**
    * Create a new delete regulation for the user
