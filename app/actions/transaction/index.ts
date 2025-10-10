@@ -19,7 +19,7 @@ import {
   SetTransactionValueAction,
   TransactionObject,
 } from './types';
-import { SecurityAlertResponse } from '@metamask/transaction-controller';
+import { SecurityAlertResponse } from '../../components/Views/confirmations/legacy/components/BlockaidBanner/BlockaidBanner.types';
 
 const {
   ASSET: { ETH, ERC20, ERC721 },

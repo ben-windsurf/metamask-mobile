@@ -1,6 +1,6 @@
 import { type Action } from 'redux';
 import { SelectedAsset } from '../../components/UI/AccountFromToInfoCard/AccountFromToInfoCard.types';
-import { SecurityAlertResponse } from '@metamask/transaction-controller';
+import { SecurityAlertResponse } from '../../components/Views/confirmations/legacy/components/BlockaidBanner/BlockaidBanner.types';
 
 /**
  * Transaction action type enum

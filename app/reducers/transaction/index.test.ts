@@ -17,6 +17,8 @@ import {
 } from '../../actions/transaction';
 import { SelectedAsset } from '../../components/UI/AccountFromToInfoCard/AccountFromToInfoCard.types';
 import { REHYDRATE } from 'redux-persist';
+import { ResultType } from '../../components/Views/confirmations/constants/signatures';
+import { Reason } from '../../components/Views/confirmations/legacy/components/BlockaidBanner/BlockaidBanner.types';
 
 describe('transaction reducer', () => {
   const initialState: TransactionState = {
@@ -228,8 +230,8 @@ describe('transaction reducer', () => {
 
   it('should handle SET_TRANSACTION_SECURITY_ALERT_RESPONSE', () => {
     const securityAlertResponse = {
-      result_type: 'Malicious' as const,
-      reason: 'Test reason',
+      result_type: ResultType.Malicious,
+      reason: Reason.maliciousDomain,
     };
     const state = transactionReducer(
       initialState,
@@ -265,8 +267,8 @@ describe('transaction reducer', () => {
     const stateWithAlerts = transactionReducer(
       initialState,
       setTransactionSecurityAlertResponse('tx-1', {
-        result_type: 'Benign' as const,
-        reason: 'Safe',
+        result_type: ResultType.Benign,
+        reason: Reason.notApplicable,
       }),
     );
 
