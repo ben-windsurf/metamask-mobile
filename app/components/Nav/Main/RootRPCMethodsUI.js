@@ -27,7 +27,7 @@ import {
 } from '../../../util/transactions';
 import BN from 'bnjs4';
 import Logger from '../../../util/Logger';
-import TransactionTypes from '../../../core/TransactionTypes';
+import TransactionTypes from '../../../core/TransactionTypes.ts';
 import { swapsUtils } from '@metamask/swaps-controller';
 import { query } from '@metamask/controller-utils';
 import BigNumber from 'bignumber.js';

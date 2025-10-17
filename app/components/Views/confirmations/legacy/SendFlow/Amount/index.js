@@ -65,7 +65,7 @@ import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
 import NetworkMainAssetLogo from '../../../../../UI/NetworkMainAssetLogo';
 import { renderShortText } from '../../../../../../util/general';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { decGWEIToHexWEI } from '../../../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../../../util/conversions.ts';
 import AppConstants from '../../../../../../core/AppConstants';
 import {
   collectibleContractsSelector,

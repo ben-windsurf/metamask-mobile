@@ -9,7 +9,7 @@ import {
   decimalToHex,
   getValueFromWeiHex,
   multiplyHexes,
-} from '../../../../util/conversions';
+} from '../../../../util/conversions.ts';
 
 const HEX_ZERO = '0x0';
 

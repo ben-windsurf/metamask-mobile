@@ -8,7 +8,7 @@ import {
   GasFeeEstimateType,
 } from '@metamask/transaction-controller';
 import Engine from '../../../../core/Engine';
-import { decGWEIToHexWEI } from '../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../util/conversions.ts';
 import { estimateGasFee } from '../../../../util/transaction-controller';
 
 jest.mock('../../../../util/transaction-controller', () => {
@@ -29,7 +29,7 @@ jest.mock('../../../../core/Engine', () => ({
   },
 }));
 
-jest.mock('../../../../util/conversions', () => ({
+jest.mock('../../../../util/conversions.ts', () => ({
   decGWEIToHexWEI: jest.fn().mockReturnValue('123456'),
 }));
 

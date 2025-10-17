@@ -1,7 +1,7 @@
 import { HistoricLendingMarketApys } from '@metamask/stake-sdk';
 import { useState, useCallback, useEffect } from 'react';
 import Engine from '../../../../core/Engine';
-import { hexToDecimal } from '../../../../util/conversions';
+import { hexToDecimal } from '../../../../util/conversions.ts';
 import { EarnTokenDetails } from '../types/lending.types';
 
 const useLendingMarketApys = ({

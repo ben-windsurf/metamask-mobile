@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { decGWEIToHexWEI } from '../../../../../../util/conversions';
+import { decGWEIToHexWEI } from '../../../../../../util/conversions.ts';
 import { stakingDepositConfirmationState } from '../../../../../../util/test/confirm-data-helpers';
 import { renderHookWithProvider } from '../../../../../../util/test/renderWithProvider';
 import { useStakingDetails } from './useStakingDetails';

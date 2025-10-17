@@ -8,7 +8,7 @@ import Text, {
   TextVariant,
 } from '../../../../../../component-library/components/Texts/Text';
 import { strings } from '../../../../../../../locales/i18n';
-import { hexWEIToDecGWEI } from '../../../../../../util/conversions';
+import { hexWEIToDecGWEI } from '../../../../../../util/conversions.ts';
 import { limitToMaximumDecimalPlaces } from '../../../../../../util/number';
 import { useGasFeeEstimates } from '../../../hooks/gas/useGasFeeEstimates';
 import { useTransactionMetadataRequest } from '../../../hooks/transactions/useTransactionMetadataRequest';

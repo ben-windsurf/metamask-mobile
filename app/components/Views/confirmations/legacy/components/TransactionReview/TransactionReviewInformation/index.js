@@ -28,7 +28,7 @@ import {
   calculateEthEIP1559,
   calculateERC20EIP1559,
 } from '../../../../../../../util/transactions';
-import { sumHexWEIs } from '../../../../../../../util/conversions';
+import { sumHexWEIs } from '../../../../../../../util/conversions.ts';
 import { MetaMetricsEvents } from '../../../../../../../core/Analytics';
 import {
   TESTNET_FAUCETS,

@@ -4,7 +4,7 @@ import {
   CaipNamespace,
 } from '@metamask/utils';
 import { useSelector } from 'react-redux';
-import { decimalToHex } from '../../../util/conversions';
+import { decimalToHex } from '../../../util/conversions.ts';
 import { RootState } from '../../../reducers';
 import { selectInternalAccounts } from '../../../selectors/accountsController';
 import { areAddressesEqual } from '../../../util/address';

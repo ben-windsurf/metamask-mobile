@@ -44,7 +44,7 @@ import {
   getValueFromWeiHex,
   formatETHFee,
   sumHexWEIs,
-} from '../conversions';
+} from '../conversions.ts';
 import {
   addEth,
   addFiat,

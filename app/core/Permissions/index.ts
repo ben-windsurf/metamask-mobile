@@ -1,5 +1,5 @@
 import ImportedEngine from '../Engine';
-import TransactionTypes from '../TransactionTypes';
+import TransactionTypes from '../TransactionTypes.ts';
 import {
   CaipAccountId,
   CaipChainId,

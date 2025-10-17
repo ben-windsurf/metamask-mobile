@@ -1,4 +1,4 @@
-import TransactionTypes from '../../core/TransactionTypes';
+import TransactionTypes from '../../core/TransactionTypes.ts';
 
 const {
   ASSET: { ETH, ERC20, ERC721 },

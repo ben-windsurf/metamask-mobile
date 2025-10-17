@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { protectWalletModalNotVisible } from '../../../actions/user';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { strings } from '../../../../locales/i18n';
-import scaling from '../../../util/scaling';
+import scaling from '../../../util/scaling.ts';
 import { MetaMetricsEvents } from '../../../core/Analytics';
 
 import { ThemeContext, mockTheme } from '../../../util/theme';

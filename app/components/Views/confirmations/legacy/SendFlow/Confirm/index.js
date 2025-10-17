@@ -48,7 +48,7 @@ import { strings } from '../../../../../../../locales/i18n';
 import CollectibleMedia from '../../../../../UI/CollectibleMedia';
 import Modal from 'react-native-modal';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
-import TransactionTypes from '../../../../../../core/TransactionTypes';
+import TransactionTypes from '../../../../../../core/TransactionTypes.ts';
 import { MetaMetricsEvents } from '../../../../../../core/Analytics';
 import { shallowEqual, renderShortText } from '../../../../../../util/general';
 import {
