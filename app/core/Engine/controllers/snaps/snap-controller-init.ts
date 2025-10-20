@@ -13,7 +13,7 @@ import {
 } from '../../../Snaps';
 import {
   Encryptor,
-  LEGACY_DERIVATION_OPTIONS,
+  DERIVATION_OPTIONS_DEFAULT_OWASP2023,
   pbkdf2,
 } from '../../../Encryptor';
 import { KeyringTypes } from '@metamask/keyring-controller';
@@ -50,7 +50,7 @@ export const snapControllerInit: ControllerInitFunction<
   ///: END:ONLY_INCLUDE_IF
 
   const encryptor = new Encryptor({
-    keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
+    keyDerivationOptions: DERIVATION_OPTIONS_DEFAULT_OWASP2023,
   });
 
   // Async because `SnapController` expects a promise.
