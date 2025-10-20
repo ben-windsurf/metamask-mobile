@@ -6,13 +6,16 @@ import {
   getDefaultSeedlessOnboardingControllerState,
   type SeedlessOnboardingControllerMessenger,
 } from '@metamask/seedless-onboarding-controller';
-import { Encryptor, LEGACY_DERIVATION_OPTIONS } from '../../../Encryptor';
+import {
+  Encryptor,
+  DERIVATION_OPTIONS_DEFAULT_OWASP2023,
+} from '../../../Encryptor';
 import { EncryptionKey } from '../../../Encryptor/types';
 import { web3AuthNetwork } from '../../../OAuthService/OAuthLoginHandlers/constants';
 import AuthTokenHandler from '../../../OAuthService/AuthTokenHandler';
 
 const encryptor = new Encryptor({
-  keyDerivationOptions: LEGACY_DERIVATION_OPTIONS,
+  keyDerivationOptions: DERIVATION_OPTIONS_DEFAULT_OWASP2023,
 });
 
 /**
