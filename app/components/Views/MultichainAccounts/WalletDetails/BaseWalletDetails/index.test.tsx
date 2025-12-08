@@ -73,11 +73,11 @@ const mockWallet = {
   groups: {},
 } as unknown as AccountWalletObject;
 
-const mockInitialState: Partial<RootState> = {
+const mockInitialState = {
   settings: {
     useBlockieIcon: false,
   },
-};
+} as unknown as Partial<RootState>;
 
 describe('BaseWalletDetails', () => {
   beforeEach(() => {
