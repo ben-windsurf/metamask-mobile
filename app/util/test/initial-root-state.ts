@@ -1,5 +1,8 @@
 import type { RootState } from '../../reducers';
 import type { EngineState } from '../../core/Engine';
+import type { AlertState } from '../../reducers/alert';
+import type { WizardState } from '../../reducers/wizard';
+import type { SettingsState } from '../../reducers/settings';
 import { initialState as initialFiatOrdersState } from '../../reducers/fiatOrders';
 import { initialState as initialSecurityState } from '../../reducers/security';
 import { initialState as initialInpageProvider } from '../../core/redux/slices/inpageProvider';
@@ -12,10 +15,35 @@ import { initialNavigationState } from '../../reducers/navigation';
 import { initialOnboardingState } from '../../reducers/onboarding';
 import { initialState as initialPerformanceState } from '../../core/redux/slices/performance';
 import { isTest } from './utils';
+import AppConstants from '../../core/AppConstants';
 // A cast is needed here because we use enums in some controllers, and TypeScript doesn't consider
 // the string value of an enum as satisfying an enum type.
 export const backgroundState: EngineState =
   initialBackgroundState as unknown as EngineState;
+
+// Initial state for alert reducer
+const initialAlertState: AlertState = {
+  isVisible: false,
+  autodismiss: null,
+  content: null,
+  data: null,
+};
+
+// Initial state for wizard reducer
+const initialWizardState: WizardState = {
+  step: 0,
+};
+
+// Initial state for settings reducer
+const initialSettingsState: SettingsState = {
+  searchEngine: AppConstants.DEFAULT_SEARCH_ENGINE,
+  primaryCurrency: 'ETH',
+  lockTime: -1,
+  useBlockieIcon: true,
+  hideZeroBalanceTokens: false,
+  basicFunctionalityEnabled: true,
+  deepLinkModalDisabled: false,
+};
 
 const initialRootState: RootState = {
   legalNotices: undefined,
@@ -25,11 +53,11 @@ const initialRootState: RootState = {
   bookmarks: undefined,
   browser: undefined,
   modals: undefined,
-  settings: undefined,
-  alert: undefined,
+  settings: initialSettingsState,
+  alert: initialAlertState,
   transaction: undefined,
   user: userInitialState,
-  wizard: undefined,
+  wizard: initialWizardState,
   onboarding: initialOnboardingState,
   notification: undefined,
   swaps: undefined,
