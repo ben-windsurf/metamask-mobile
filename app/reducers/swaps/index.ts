@@ -12,7 +12,7 @@ import {
 } from '../../selectors/tokensController';
 import { selectTokenList } from '../../selectors/tokenListController';
 import { selectContractBalances } from '../../selectors/tokenBalancesController';
-import { getChainFeatureFlags, getSwapsLiveness } from './utils';
+import { getSwapsLiveness } from './utils';
 import { allowedTestnetChainIds } from '../../components/UI/Swaps/utils';
 import { NETWORKS_CHAIN_ID } from '../../constants/network';
 import { selectSelectedInternalAccountAddress } from '../../selectors/accountsController';
@@ -21,13 +21,82 @@ import { invert, omit } from 'lodash';
 import { createDeepEqualSelector } from '../../selectors/util';
 import { toHex } from '@metamask/controller-utils';
 import { SolScope } from '@metamask/keyring-api';
+import { RootState } from '..';
+import { SwapsState, SwapsFeatureFlags, SwapsChainState } from '../types';
+
+declare const __DEV__: boolean | undefined;
+
+interface Token {
+  address: string;
+  decimals: number | string;
+  symbol?: string;
+  name?: string;
+  hasBalanceError?: boolean;
+  image?: string;
+  occurrences?: number;
+}
+
+interface ProcessedToken {
+  address: string;
+  decimals: number;
+  symbol?: string;
+  name?: string;
+  occurrences: number;
+}
+
+interface TokenList {
+  [address: string]: {
+    name?: string;
+    symbol?: string;
+    decimals?: number;
+  };
+}
+
+interface TopAsset {
+  address: string;
+}
+
+interface SwapsControllerState {
+  tokens?: Token[];
+  approvalTransaction?: unknown;
+  quoteValues?: unknown;
+  quotes?: unknown;
+  aggregatorMetadata?: unknown;
+  error?: unknown;
+  quoteRefreshSeconds?: number;
+  usedGasEstimate?: unknown;
+  usedCustomGas?: unknown;
+  topAggId?: string;
+  pollingCyclesLeft?: number;
+  quotesLastFetched?: number;
+  isInPolling?: boolean;
+  topAssets?: TopAsset[];
+  chainCache?: unknown;
+}
+
+interface AllTokens {
+  [chainId: string]: {
+    [address: string]: Token[];
+  };
+}
+
+interface SwapsAction {
+  type: string;
+  payload?: {
+    chainId?: string;
+    featureFlags?: SwapsFeatureFlags & {
+      [chainName: string]: SwapsFeatureFlags | unknown;
+    };
+  } | boolean;
+}
 
 // If we are in dev and on a testnet, just use mainnet feature flags,
 // since we don't have feature flags for testnets in the API
-export const getFeatureFlagChainId = (chainId) =>
+export const getFeatureFlagChainId = (chainId: string): string =>
   typeof __DEV__ !== 'undefined' &&
   __DEV__ &&
-  allowedTestnetChainIds.includes(chainId)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  allowedTestnetChainIds.includes(chainId as any)
     ? NETWORKS_CHAIN_ID.MAINNET
     : chainId;
 
@@ -37,11 +106,15 @@ export const SWAPS_SET_HAS_ONBOARDED = 'SWAPS_SET_HAS_ONBOARDED';
 const MAX_TOKENS_WITH_BALANCE = 5;
 
 // * Action Creator
-export const setSwapsLiveness = (chainId, featureFlags) => ({
+export const setSwapsLiveness = (
+  chainId: string,
+  featureFlags: SwapsFeatureFlags,
+) => ({
   type: SWAPS_SET_LIVENESS,
   payload: { chainId, featureFlags },
 });
-export const setSwapsHasOnboarded = (hasOnboarded) => ({
+
+export const setSwapsHasOnboarded = (hasOnboarded: boolean) => ({
   type: SWAPS_SET_HAS_ONBOARDED,
   payload: hasOnboarded,
 });
@@ -52,7 +125,7 @@ export const setSwapsHasOnboarded = (hasOnboarded) => ({
  * Processes and normalizes a token by removing unwanted properties
  * and ensuring consistent data types
  */
-function processToken(token) {
+function processToken(token: Token | null): ProcessedToken | null {
   if (!token) return null;
   const { hasBalanceError, image, ...tokenData } = token;
   return {
@@ -67,8 +140,10 @@ function processToken(token) {
  * Combines tokens from multiple sources with deduplication
  * Maintains first-occurrence-wins behavior
  */
-function combineTokens(tokenSources) {
-  const tokenMap = new Map();
+function combineTokens(
+  tokenSources: (Token[] | undefined)[],
+): ProcessedToken[] {
+  const tokenMap = new Map<string, ProcessedToken>();
 
   for (const tokens of tokenSources) {
     if (!tokens) continue;
@@ -84,12 +159,17 @@ function combineTokens(tokenSources) {
   return Array.from(tokenMap.values());
 }
 
-function addMetadata(chainId, tokens, tokenList) {
+function addMetadata(
+  chainId: string,
+  tokens: ProcessedToken[],
+  tokenList: TokenList,
+): ProcessedToken[] {
   if (!isMainnetByChainId(chainId)) {
     return tokens;
   }
   return tokens.map((token) => {
-    const tokenMetadata = tokenList[safeToChecksumAddress(token.address)];
+    const checksumAddress = safeToChecksumAddress(token.address);
+    const tokenMetadata = checksumAddress ? tokenList[checksumAddress] : undefined;
     if (tokenMetadata) {
       return { ...token, name: tokenMetadata.name };
     }
@@ -100,22 +180,26 @@ function addMetadata(chainId, tokens, tokenList) {
 
 // * Selectors
 const chainIdSelector = selectEvmChainId;
-const swapsStateSelector = (state) => state.swaps;
+const swapsStateSelector = (state: RootState): SwapsState => state.swaps;
+
 /**
  * Returns the swaps liveness state
  */
-
 export const swapsLivenessSelector = createSelector(
   swapsStateSelector,
   chainIdSelector,
-  (swapsState, chainId) => swapsState[chainId]?.isLive || false,
+  (swapsState, chainId) => {
+    const chainState = swapsState[chainId] as SwapsChainState | undefined;
+    return chainState?.isLive || false;
+  },
 );
 
 export const swapsLivenessMultichainSelector = createSelector(
   [
     swapsStateSelector,
-    (state, chainId) =>
-      chainId !== undefined ? chainId : selectChainId(state),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state: RootState, chainId?: string): string | undefined =>
+      chainId !== undefined ? chainId : selectChainId(state) as string | undefined,
   ],
   (swapsState, chainId) => {
     ///: BEGIN:ONLY_INCLUDE_IF(keyring-snaps)
@@ -124,7 +208,11 @@ export const swapsLivenessMultichainSelector = createSelector(
     }
     ///: END:ONLY_INCLUDE_IF(keyring-snaps)
 
-    return swapsState?.[chainId]?.isLive || false;
+    if (!chainId) return false;
+    const chainState = swapsState?.[chainId] as
+      | SwapsChainState
+      | undefined;
+    return chainState?.isLive || false;
   },
 );
 
@@ -145,34 +233,37 @@ export const swapsSmartTxFlagEnabled = createSelector(
  */
 export const selectSwapsChainFeatureFlags = createSelector(
   swapsStateSelector,
-  (_state, transactionChainId) =>
+  (_state: RootState, transactionChainId?: string) =>
     transactionChainId || selectEvmChainId(_state),
-  (swapsState, chainId) => ({
-    ...(swapsState[chainId]?.featureFlags || {}),
-    smartTransactions: {
-      ...(swapsState[chainId]?.featureFlags?.smartTransactions || {}),
-      ...(swapsState.featureFlags?.smartTransactions || {}),
-    },
-  }),
+  (swapsState, chainId) => {
+    const chainState = swapsState[chainId] as SwapsChainState | undefined;
+    return {
+      ...(chainState?.featureFlags || {}),
+      smartTransactions: {
+        ...(chainState?.featureFlags?.smartTransactions || {}),
+        ...(swapsState.featureFlags?.smartTransactions || {}),
+      },
+    };
+  },
 );
 
 /**
  * Returns the swaps onboarded state
  */
-
 export const swapsHasOnboardedSelector = createSelector(
   swapsStateSelector,
   (swapsState) => swapsState.hasOnboarded,
 );
 
-const selectSwapsControllerState = (state) =>
-  state.engine.backgroundState.SwapsController;
+const selectSwapsControllerState = (state: RootState): SwapsControllerState =>
+  state.engine.backgroundState.SwapsController as SwapsControllerState;
 
 /**
  * Returns the swaps tokens from the state
  */
-export const swapsControllerTokens = (state) =>
-  state.engine.backgroundState.SwapsController.tokens;
+export const swapsControllerTokens = (state: RootState): Token[] | undefined =>
+  (state.engine.backgroundState.SwapsController as SwapsControllerState)
+    .tokens;
 
 export const selectSwapsApprovalTransaction = createSelector(
   selectSwapsControllerState,
@@ -226,7 +317,8 @@ export const selectSwapsIsInPolling = createSelector(
 const swapsControllerAndUserTokens = createSelector(
   swapsControllerTokens,
   selectTokens,
-  (swapsTokens, tokens) => combineTokens([swapsTokens, tokens]),
+  (swapsTokens, tokens) =>
+    combineTokens([swapsTokens as Token[], tokens as Token[]]),
 );
 
 const swapsControllerAndUserTokensMultichain = createDeepEqualSelector(
@@ -235,10 +327,11 @@ const swapsControllerAndUserTokensMultichain = createDeepEqualSelector(
   selectSelectedInternalAccountAddress,
   (swapsTokens, allTokens, currentUserAddress) => {
     // Flatten user tokens from all chains
-    const userTokensFlat = [];
+    const userTokensFlat: Token[] = [];
     if (allTokens && currentUserAddress) {
-      for (const chainId in allTokens) {
-        const chainTokens = allTokens[chainId];
+      const typedAllTokens = allTokens as AllTokens;
+      for (const chainId in typedAllTokens) {
+        const chainTokens = typedAllTokens[chainId];
         if (!chainTokens || !chainTokens[currentUserAddress]) continue;
 
         const userTokensForChain = chainTokens[currentUserAddress];
@@ -248,7 +341,7 @@ const swapsControllerAndUserTokensMultichain = createDeepEqualSelector(
       }
     }
 
-    return combineTokens([swapsTokens, userTokensFlat]);
+    return combineTokens([swapsTokens as Token[], userTokensFlat]);
   },
 );
 
@@ -261,7 +354,7 @@ export const swapsTokensSelector = createSelector(
       return [];
     }
 
-    return addMetadata(chainId, tokens, tokenList);
+    return addMetadata(chainId, tokens, tokenList as TokenList);
   },
 );
 
@@ -286,7 +379,7 @@ export const swapsTokensObjectSelector = createSelector(
       return {};
     }
 
-    const result = {};
+    const result: Record<string, undefined> = {};
     for (const token of tokens) {
       result[token.address] = undefined;
     }
@@ -305,7 +398,7 @@ export const swapsTokensMultiChainObjectSelector = createSelector(
       return {};
     }
 
-    const result = {};
+    const result: Record<string, undefined> = {};
     for (const token of tokens) {
       result[token.address] = undefined;
     }
@@ -327,12 +420,14 @@ export const swapsTokensWithBalanceSelector = createSelector(
       return [];
     }
     const baseTokens = tokens;
-    const tokensAddressesWithBalance = Object.entries(balances)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const typedBalances = balances as unknown as Record<string, number>;
+    const tokensAddressesWithBalance = Object.entries(typedBalances)
       .filter(([, balance]) => balance !== 0)
       .sort(([, balanceA], [, balanceB]) => (lte(balanceB, balanceA) ? -1 : 1))
       .map(([address]) => address.toLowerCase());
-    const tokensWithBalance = [];
-    const originalTokens = [];
+    const tokensWithBalance: ProcessedToken[] = [];
+    const originalTokens: ProcessedToken[] = [];
 
     for (let i = 0; i < baseTokens.length; i++) {
       if (tokensAddressesWithBalance.includes(baseTokens[i].address)) {
@@ -354,7 +449,7 @@ export const swapsTokensWithBalanceSelector = createSelector(
       0,
       Math.max(tokensWithBalance.length, MAX_TOKENS_WITH_BALANCE),
     );
-    return addMetadata(chainId, result, tokenList);
+    return addMetadata(chainId, result, tokenList as TokenList);
   },
 );
 
@@ -367,24 +462,23 @@ export const swapsTopAssetsSelector = createSelector(
   swapsControllerAndUserTokens,
   selectTokenList,
   topAssets,
-  (chainId, tokens, tokenList, topAssets) => {
-    if (!topAssets || !tokens) {
+  (chainId, tokens, tokenList, topAssetsData) => {
+    if (!topAssetsData || !tokens) {
       return [];
     }
-    const result = topAssets
+    const result = topAssetsData
       .map(({ address }) =>
         tokens?.find((token) => areAddressesEqual(token.address, address)),
       )
-      .filter(Boolean);
-    return addMetadata(chainId, result, tokenList);
+      .filter((token): token is ProcessedToken => Boolean(token));
+    return addMetadata(chainId, result, tokenList as TokenList);
   },
 );
 
 // * Reducer
-export const initialState = {
-  isLive: true, // TODO: should we remove it?
-  hasOnboarded: true, // TODO: Once we have updated UI / content for the modal, we should enable it again.
-
+export const initialState: SwapsState = {
+  isLive: true,
+  hasOnboarded: true,
   featureFlags: undefined,
   '0x1': {
     isLive: true,
@@ -392,15 +486,24 @@ export const initialState = {
   },
 };
 
-function swapsReducer(state = initialState, action) {
+function swapsReducer(
+  state: SwapsState = initialState,
+  action: SwapsAction = { type: '' },
+): SwapsState {
   switch (action.type) {
     case SWAPS_SET_LIVENESS: {
-      const { chainId: rawChainId, featureFlags } = action.payload;
+      const payload = action.payload as {
+        chainId: string;
+        featureFlags?: SwapsFeatureFlags & {
+          [chainName: string]: SwapsFeatureFlags | unknown;
+        };
+      };
+      const { chainId: rawChainId, featureFlags } = payload;
       const chainId = getFeatureFlagChainId(rawChainId);
 
-      const data = state[chainId];
+      const data = state[chainId] as SwapsChainState | undefined;
 
-      const chainNoFlags = {
+      const chainNoFlags: SwapsChainState = {
         ...data,
         featureFlags: undefined,
         isLive: false,
@@ -415,7 +518,7 @@ function swapsReducer(state = initialState, action) {
         };
       }
 
-      const newState = {
+      const newState: SwapsState = {
         ...state,
         featureFlags: {
           smart_transactions: featureFlags.smart_transactions,
@@ -431,7 +534,11 @@ function swapsReducer(state = initialState, action) {
       );
       // Invert CHAIN_ID_TO_NAME_MAP to get chain name to ID mapping
       // It will be e.g. { 'ethereum': '0x1', 'bsc': '0x38' }
-      const chainNameToIdMap = invert(noTestnetChainIdToNameMap);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const chainNameToIdMap = invert(noTestnetChainIdToNameMap as any) as Record<
+        string,
+        string
+      >;
 
       // Save chain-specific feature flags for each chain
       Object.keys(featureFlags).forEach((chainName) => {
@@ -442,11 +549,15 @@ function swapsReducer(state = initialState, action) {
           featureFlags[chainName] &&
           typeof featureFlags[chainName] === 'object'
         ) {
-          const chainFeatureFlags = featureFlags[chainName];
-          const chainLiveness = getSwapsLiveness(featureFlags, chainIdForName);
+          const chainFeatureFlags = featureFlags[chainName] as SwapsFeatureFlags;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const chainLiveness = getSwapsLiveness(featureFlags as any, chainIdForName as `0x${string}`);
 
+          const existingChainState = state[chainIdForName] as
+            | SwapsChainState
+            | undefined;
           newState[chainIdForName] = {
-            ...state[chainIdForName],
+            ...existingChainState,
             featureFlags: chainFeatureFlags,
             isLive: chainLiveness,
           };
