@@ -1,34 +1,60 @@
+import { ReactNode } from 'react';
+
+/**
+ * Gas object containing legacy gas parameters
+ */
+export interface LegacyGasObject {
+  legacyGasLimit?: string;
+  suggestedGasPrice?: string;
+  suggestedMaxFeePerGas?: string;
+}
+
+/**
+ * New gas price object returned when saving
+ */
+export interface NewGasPriceObject {
+  suggestedGasPrice?: string;
+  legacyGasLimit?: string;
+}
+
+/**
+ * Analytics parameters for gas fee tracking
+ */
+export interface GasAnalyticsParams {
+  [key: string]: string | number | boolean | undefined;
+}
+
+/**
+ * Extended options that can be spread into the component
+ */
+export interface ExtendOptions {
+  [key: string]: unknown;
+}
+
 export interface EditGasFeeLegacyUpdateProps {
   /**
    * Function called when user cancels
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onCancel: any;
+  onCancel: () => void;
   /**
    * Function called when user saves the new gas
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSave: (gasTxn: any, newGasObject: any) => void;
+  onSave: (
+    gasTxn: EditLegacyGasTransaction,
+    newGasObject: NewGasPriceObject,
+  ) => void;
   /**
    * Error message to show
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: any;
+  error: string | ReactNode | null;
   /**
    * Warning message to show
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  warning?: any;
+  warning?: string | ReactNode | null;
   /**
    * Extend options object. Object has option keys and properties will be spread
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extendOptions?: any;
+  extendOptions?: ExtendOptions;
   /**
    * Function to call when update animation starts
    */
@@ -48,14 +74,13 @@ export interface EditGasFeeLegacyUpdateProps {
   /**
    * Extra analytics params to be send with the gas analytics
    */
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  analyticsParams: any;
+  analyticsParams: GasAnalyticsParams;
   view: string;
   onlyGas?: boolean;
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  selectedGasObject: any;
+  /**
+   * Selected gas object containing legacy gas parameters
+   */
+  selectedGasObject: LegacyGasObject;
   hasDappSuggestedGas?: boolean;
   chainId: string;
 }
