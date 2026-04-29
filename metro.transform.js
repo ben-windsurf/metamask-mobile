@@ -56,7 +56,7 @@ const experimentalFeatureSet = new Set([...mainFeatureSet, 'experimental']);
  *
  * @returns {Set<string>} The set of features to be included in the build.
  */
-function getBuildTypeFeatures() {
+const getBuildTypeFeatures = () => {
   const buildType = process.env.METAMASK_BUILD_TYPE ?? 'main';
   const envType = process.env.METAMASK_ENVIRONMENT ?? 'production';
   switch (buildType) {
@@ -79,7 +79,7 @@ function getBuildTypeFeatures() {
         `Invalid METAMASK_BUILD_TYPE of ${buildType} was passed to metro transform`,
       );
   }
-}
+};
 
 /**
  * The Metro transformer function. Notably, handles code fence removal.
@@ -129,7 +129,7 @@ let eslintInstance;
  *
  * @returns {ESLint} The singleton ESLint instance.
  */
-function getESLintInstance() {
+const getESLintInstance = () => {
   if (!eslintInstance) {
     const eslintrc = require('./.eslintrc.js');
 
@@ -157,16 +157,16 @@ function getESLintInstance() {
       (override) =>
         !(
           (override.extends &&
-            override.extends.find(
+            override.extends.some(
               (configName) =>
                 configName.includes('jest') || configName.includes('mocha'),
             )) ||
           (override.plugins &&
-            override.plugins.find((pluginName) => pluginName.includes('jest')))
+            override.plugins.some((pluginName) => pluginName.includes('jest')))
         ),
     );
 
     eslintInstance = new ESLint({ baseConfig: eslintrc, useEslintrc: false });
   }
   return eslintInstance;
-}
+};
