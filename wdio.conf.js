@@ -1,6 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: '.e2e.env' });
-
+import dotenv from 'dotenv';
 import generateTestReports from './wdio/utils/generateTestReports';
 import ADB from 'appium-adb';
 import { gasApiDown, cleanAllMocks } from './wdio/utils/mocks';
@@ -14,7 +12,9 @@ import {
 import FixtureBuilder from './e2e/framework/fixtures/FixtureBuilder';
 import { loadFixture, startFixtureServer, stopFixtureServer } from './e2e/framework/fixtures/FixtureHelper';
 import FixtureServer from './e2e/framework/fixtures/FixtureServer';
-const { removeSync } = require('fs-extra');
+import { removeSync } from 'fs-extra';
+
+dotenv.config({ path: '.e2e.env' });
 
 const fixtureServer = new FixtureServer();
 
@@ -218,10 +218,8 @@ export const config = {
       'junit',
       {
         outputDir: './wdio/reports/junit-results',
-        outputFileFormat: function (options) {
-          // optional
-          return `results-${options.cid}.${options.capabilities.platformName}.xml`;
-        },
+        outputFileFormat: (options) =>
+          `results-${options.cid}.${options.capabilities.platformName}.xml`,
       },
     ],
   ],
@@ -266,7 +264,7 @@ export const config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  onPrepare: function (config, capabilities) {
+  onPrepare: (_config, _capabilities) => {
     removeSync('./wdio/reports');
   },
   /**
@@ -306,10 +304,8 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {Object}         browser      instance of created browser/device session
    */
-  before: async function (capabilities) {
-    driver.getPlatform = function getPlatform() {
-      return capabilities.platformName;
-    };
+  before: async (capabilities) => {
+    driver.getPlatform = () => capabilities.platformName;
 
     if (await driver.getPlatform() === 'Android') {
       const adb = await ADB.createADB();
@@ -331,44 +327,41 @@ export const config = {
    * @param {String}                   uri      path to feature file
    * @param {GherkinDocument.IFeature} feature  Cucumber feature object
    */
-  beforeFeature: function (uri, feature) { },
+  beforeFeature: (_uri, _feature) => { },
   /**
    *
    * Runs before a Cucumber Scenario.
    * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
    * @param {Object}                 context  Cucumber World object
    */
-  beforeScenario: async function (world, context) {
+  beforeScenario: async (world, context) => {
     const tags = world.pickle.tags;
 
-    if (tags.filter((e) => e.name === GANACHE).length > 0) {
+    if (tags.some((e) => e.name === GANACHE)) {
       await startGanache();
     }
 
-    if (tags.filter((e) => e.name === MULTISIG).length > 0) {
-      const multisig = await deployMultisig();
-      context.multisig = multisig;
+    if (tags.some((e) => e.name === MULTISIG)) {
+      context.multisig = await deployMultisig();
     }
 
-    if (tags.filter((e) => e.name === ERC20).length > 0) {
+    if (tags.some((e) => e.name === ERC20)) {
       context.erc20 = await deployErc20();
     }
 
-    if (tags.filter((e) => e.name === ERC721).length > 0) {
+    if (tags.some((e) => e.name === ERC721)) {
       context.erc721 = await deployErc721();
     }
 
-    if (tags.filter((e) => e.name === GAS_API_DOWN).length > 0) {
+    if (tags.some((e) => e.name === GAS_API_DOWN)) {
       context.mock = gasApiDown();
     }
 
-    if (tags.filter((e) => e.name === FIXTURES_SKIP_ONBOARDING).length > 0) {
-      // Start the fixture server
+    if (tags.some((e) => e.name === FIXTURES_SKIP_ONBOARDING)) {
       await startFixtureServer(fixtureServer);
       const state = new FixtureBuilder().build();
       await loadFixture(fixtureServer, { fixture: state });
     }
-
   },
   /**
    *
@@ -402,14 +395,14 @@ export const config = {
    * @param {number}                 result.duration  duration of scenario in milliseconds
    * @param {Object}                 context          Cucumber World object
    */
-  afterScenario: async function (world, context) {
+  afterScenario: async (world, context) => {
     const tags = world.pickle.tags;
 
-    if (tags.filter((e) => e.name === GANACHE).length > 0) {
+    if (tags.some((e) => e.name === GANACHE)) {
       await stopGanache();
     }
 
-    if (tags.filter((e) => e.name === MOCK).length > 0) {
+    if (tags.some((e) => e.name === MOCK)) {
       cleanAllMocks();
     }
   },
@@ -419,7 +412,7 @@ export const config = {
    * @param {String}                   uri      path to feature file
    * @param {GherkinDocument.IFeature} feature  Cucumber feature object
    */
-  afterFeature: function (uri, feature) { },
+  afterFeature: (_uri, _feature) => { },
 
   /**
    * Runs after a WebdriverIO command gets executed
@@ -437,8 +430,7 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  after: async function (result, capabilities) {
-    // Stop the fixture server
+  after: async (_result, capabilities) => {
     await stopFixtureServer(fixtureServer);
 
     if (capabilities.bundleId) {
@@ -461,7 +453,7 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: async function (exitCode, config, capabilities) {
+  onComplete: async (_exitCode, _config, _capabilities) => {
     generateTestReports();
   },
   /**
